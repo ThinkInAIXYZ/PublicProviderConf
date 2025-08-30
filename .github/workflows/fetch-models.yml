@@ -1,9 +1,6 @@
 name: Fetch AI Models
 
 on:
-  schedule:
-    # Run daily at 06:00 UTC
-    - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
       providers:
@@ -26,6 +23,9 @@ env:
 jobs:
   fetch-and-update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     
     steps:
     - name: Checkout repository
@@ -102,8 +102,67 @@ jobs:
         echo "timestamp=$(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_OUTPUT
         echo "date_short=$(date -u '+%Y%m%d')" >> $GITHUB_OUTPUT
         
-    - name: Commit and push updates
-      if: github.ref_type != 'tag'
+    - name: Create Pull Request with updates
+      if: github.ref_type != 'tag' && github.event_name != 'push'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Copy generated files to provider_configs for direct access
+        cp -r dist/* provider_configs/ || true
+        
+        # Check if there are changes
+        git add provider_configs/
+        if ! git diff --staged --quiet; then
+          # Create a new branch for the PR
+          BRANCH_NAME="update-models-$(date -u +%Y%m%d-%H%M%S)"
+          git checkout -b "$BRANCH_NAME"
+          
+          # Commit changes
+          git commit -m "🤖 Update model configurations - $(date -u +%Y-%m-%d)"
+          
+          # Push to remote
+          git push origin "$BRANCH_NAME"
+          
+          # Create PR using GitHub CLI
+          gh pr create \
+            --title "🤖 Update AI Model Configurations" \
+            --body "$(cat <<'EOF'
+## 🤖 Automated Model Configuration Update
+
+**Generated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+**Total Models:** ${{ steps.release_info.outputs.total_models }}
+**Providers:** ${{ steps.release_info.outputs.provider_count }} (${{ steps.release_info.outputs.providers }})
+
+### 📋 Changes
+- Updated model configurations from provider APIs
+- Refreshed capability detection (vision, function calling, reasoning)
+- Generated standardized JSON format files
+
+### 🔍 Files Updated
+- `provider_configs/*.json` - Individual provider configurations
+- `provider_configs/all.json` - Aggregated model data
+
+### ✅ Validation
+- [x] JSON syntax validation passed
+- [x] Model data structure validation passed
+- [x] Provider capability detection completed
+
+---
+
+*This PR was automatically created by GitHub Actions.*
+EOF
+)" \
+            --head "$BRANCH_NAME" \
+            --base main
+        else
+          echo "No changes to commit"
+        fi
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Direct commit (for push events)
+      if: github.ref_type != 'tag' && github.event_name == 'push'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -120,24 +179,19 @@ jobs:
         fi
         
     - name: Create Release Assets
+      if: github.ref_type == 'tag'
       run: |
         # Create tarball of all JSON files with proper naming
         cd dist
-        if [ "${{ github.ref_type }}" = "tag" ]; then
-          # For tag releases, use the tag name
-          TAG_NAME="${{ github.ref_name }}"
-          tar -czf "../provider-configs-${TAG_NAME}.tar.gz" *.json
-          # Also create individual provider archives
-          for file in *.json; do
-            if [ "$file" != "all.json" ]; then
-              provider_name=$(basename "$file" .json)
-              tar -czf "../${provider_name}-${TAG_NAME}.tar.gz" "$file"
-            fi
-          done
-        else
-          # For scheduled/manual runs, use date
-          tar -czf "../provider-configs-${{ steps.release_info.outputs.date_short }}.tar.gz" *.json
-        fi
+        TAG_NAME="${{ github.ref_name }}"
+        tar -czf "../provider-configs-${TAG_NAME}.tar.gz" *.json
+        # Also create individual provider archives
+        for file in *.json; do
+          if [ "$file" != "all.json" ]; then
+            provider_name=$(basename "$file" .json)
+            tar -czf "../${provider_name}-${TAG_NAME}.tar.gz" "$file"
+          fi
+        done
         cd ..
         
     - name: Upload Artifacts (non-tag)
@@ -147,41 +201,7 @@ jobs:
         name: provider-configs-${{ steps.release_info.outputs.date_short }}
         path: |
           dist/*.json
-          provider-configs-*.tar.gz
         retention-days: 30
-        
-    - name: Create Release (scheduled)
-      if: github.event_name == 'schedule'
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: auto-${{ steps.release_info.outputs.date_short }}
-        name: Daily Auto Release ${{ steps.release_info.outputs.date_short }}
-        body: |
-          🤖 **Automated Daily Release of AI Model Configurations**
-          
-          **Generated:** ${{ steps.release_info.outputs.timestamp }}
-          **Total Models:** ${{ steps.release_info.outputs.total_models }}
-          **Providers:** ${{ steps.release_info.outputs.provider_count }} (${{ steps.release_info.outputs.providers }})
-          
-          ## 📦 What's Included
-          
-          This release contains the latest model information from all configured providers:
-          - `provider-configs-${{ steps.release_info.outputs.date_short }}.tar.gz` - Complete package with all provider data
-          - Individual JSON files for each provider
-          - Aggregated JSON with all models combined
-          
-          ## 🔄 How to Use
-          
-          Download and extract the files to access standardized AI model configurations for your applications.
-          
-          ```bash
-          # Download and extract
-          wget https://github.com/${{ github.repository }}/releases/download/auto-${{ steps.release_info.outputs.date_short }}/provider-configs-${{ steps.release_info.outputs.date_short }}.tar.gz
-          tar -xzf provider-configs-${{ steps.release_info.outputs.date_short }}.tar.gz
-          ```
-        files: provider-configs-*.tar.gz
-        draft: false
-        prerelease: false
         
     - name: Create Release (tagged)
       if: github.ref_type == 'tag'

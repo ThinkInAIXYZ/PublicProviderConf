@@ -143,21 +143,19 @@ export OPENROUTER_API_KEY="your-key-here"
 The project includes GitHub Actions workflow with multiple trigger methods:
 
 ### 🕰️ Automated Triggers
-- **Daily Schedule**: Runs automatically at UTC 06:00
-- **Code Changes**: Triggers on pushes to main branch (src/**, Cargo.toml, workflow file)
+- **Code Changes**: Triggers on pushes to main branch (src/**, Cargo.toml, workflow file) - Direct commit to main
 - **Release Tags**: Automatically triggered by `release-*.*.*` tags
 
 ### 🖱️ Manual Triggers
-- **Workflow Dispatch**: Manual trigger with optional provider selection
+- **Workflow Dispatch**: Manual trigger with optional provider selection - Creates PR for review
 - **Tag Release**: Create and push a `release-x.y.z` tag for versioned releases
 
-### 📦 Release Types
+### 🔄 Update Mechanism
+- **Manual/Workflow Dispatch**: Creates a Pull Request for review and manual merge
+- **Code Push Events**: Direct commit to main branch (to avoid infinite loops)
+- **Tag Events**: No commits, only creates releases
 
-#### Daily Auto Releases
-```bash
-# Automatic daily releases with date-based tags
-git tag auto-20250130  # Created automatically
-```
+### 📦 Release Types
 
 #### Versioned Releases
 ```bash
@@ -173,11 +171,11 @@ git push origin release-1.0.0
 ```
 
 ### 📄 Release Content
-Each release includes:
+Each tagged release includes:
 - 📊 **Total model count** and **provider statistics**
 - 🕐 **Generation timestamp**
 - 📦 **Complete package** (`provider-configs-{version}.tar.gz`)
-- 🔗 **Individual provider archives** (for tagged releases)
+- 🔗 **Individual provider archives**
 - 📋 **Direct JSON file access**
 - 💻 **Integration examples**
 
