@@ -122,23 +122,36 @@ Options:
 ## 🔧 Configuration
 
 ### Provider Configuration (Optional)
-Create `config/providers.toml` file:
+
+**Step 1: Create your configuration file**
+```bash
+# Copy the example configuration file
+cp config/providers.toml.example config/providers.toml
+
+# Edit with your settings
+nano config/providers.toml  # or use your preferred editor
+```
+
+**Step 2: Configuration file format**
 ```toml
-[ppinfra]
+# config/providers.toml
+[providers.ppinfra]
 api_url = "https://api.ppinfra.com/openai/v1/models"
 rate_limit = 10
 timeout = 30
 
-[openrouter]
+[providers.openrouter]
 api_url = "https://openrouter.ai/api/v1/models"
-api_key_env = "OPENROUTER_API_KEY"
 rate_limit = 5
 
-[openai]
-api_url = "https://api.openai.com/v1/models" 
-api_key_env = "OPENAI_API_KEY"  # OpenAI requires API key
-rate_limit = 20
+[providers.gemini]
+api_url = "https://generativelanguage.googleapis.com/v1beta/openai/models"
+api_key_env = "GEMINI_API_KEY"  # or use api_key = "your-key"
+rate_limit = 10
+timeout = 60
 ```
+
+**🔒 Security Note**: The actual `config/providers.toml` file is ignored by git to prevent accidental API key commits. Always use the example file as a template.
 
 ### API Key Configuration
 
@@ -154,8 +167,13 @@ export GEMINI_API_KEY="your-key-here"
 ```
 
 **Method 2: Configuration File**
+```bash
+# First, copy the example configuration
+cp config/providers.toml.example config/providers.toml
+```
+
 ```toml
-# config/providers.toml
+# config/providers.toml (ignored by git for security)
 [providers.gemini]
 api_url = "https://generativelanguage.googleapis.com/v1beta/openai/models"
 # Option A: Use default environment variable

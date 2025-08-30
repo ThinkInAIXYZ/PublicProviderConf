@@ -175,8 +175,17 @@ fn load_config(config_path: &str) -> AppConfig {
             config
         },
         Err(_) => {
-            println!("⚠️  Config file not found at {}, using default configuration", config_path);
-            println!("💡 You can create a config file to customize provider settings and API keys");
+            if config_path.contains("providers.toml") && std::path::Path::new("config/providers.toml.example").exists() {
+                println!("⚠️  Config file not found at {}", config_path);
+                println!("💡 To create your config file:");
+                println!("   cp config/providers.toml.example config/providers.toml");
+                println!("   # Then edit config/providers.toml with your settings");
+                println!("🔒 Note: config/providers.toml is ignored by git for security");
+                println!("📋 Using default configuration for now");
+            } else {
+                println!("⚠️  Config file not found at {}, using default configuration", config_path);
+                println!("💡 You can create a config file to customize provider settings and API keys");
+            }
             AppConfig::default()
         }
     }
