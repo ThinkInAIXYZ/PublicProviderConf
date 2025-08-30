@@ -1,0 +1,129 @@
+name: Fetch AI Models
+
+on:
+  schedule:
+    # Run daily at 06:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      providers:
+        description: 'Comma-separated list of providers to fetch (leave empty for all)'
+        required: false
+        default: ''
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'Cargo.toml'
+      - '.github/workflows/fetch-models.yml'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  fetch-and-update:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      
+    - name: Cache Cargo dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target/
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+        
+    - name: Build project
+      run: cargo build --release
+      
+    - name: Run tests
+      run: cargo test
+      
+    - name: Create dist directory
+      run: mkdir -p dist
+      
+    - name: Fetch model data
+      run: |
+        if [ -n "${{ github.event.inputs.providers }}" ]; then
+          cargo run --release -- fetch-providers -p "${{ github.event.inputs.providers }}" -o dist
+        else
+          cargo run --release -- fetch-all -o dist
+        fi
+      env:
+        # Add API keys as secrets if needed
+        # OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        # OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        
+    - name: Validate generated JSON files
+      run: |
+        echo "Validating JSON files..."
+        for file in dist/*.json; do
+          if [ -f "$file" ]; then
+            echo "Validating $file"
+            jq empty "$file" || (echo "Invalid JSON in $file" && exit 1)
+          fi
+        done
+        
+    - name: List generated files
+      run: |
+        echo "Generated files:"
+        ls -la dist/
+        echo "File sizes:"
+        du -h dist/*.json
+        
+    - name: Commit and push updates
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Copy generated files to provider_configs for direct access
+        cp -r dist/* provider_configs/ || true
+        
+        git add provider_configs/
+        if ! git diff --staged --quiet; then
+          git commit -m "🤖 Update model configurations - $(date -u +%Y-%m-%d)"
+          git push
+        else
+          echo "No changes to commit"
+        fi
+        
+    - name: Create Release Assets
+      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      run: |
+        # Create tarball of all JSON files
+        cd dist
+        tar -czf ../provider-configs-$(date +%Y%m%d).tar.gz *.json
+        cd ..
+        
+    - name: Upload Release Assets
+      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      uses: actions/upload-artifact@v4
+      with:
+        name: provider-configs
+        path: |
+          dist/*.json
+          provider-configs-*.tar.gz
+        retention-days: 30
+        
+    - name: Create Release (on schedule)
+      if: github.event_name == 'schedule'
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: auto-${{ github.run_number }}
+        name: Auto Release ${{ github.run_number }}
+        body: |
+          🤖 Automated release of AI model configurations
+          
+          Generated on: ${{ github.run_date }}
+          
+          This release contains the latest model information from all configured providers.
+        files: provider-configs-*.tar.gz
+        draft: false
+        prerelease: false
