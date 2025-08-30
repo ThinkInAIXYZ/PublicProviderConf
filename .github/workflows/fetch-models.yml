@@ -16,6 +16,9 @@ on:
       - 'src/**'
       - 'Cargo.toml'
       - '.github/workflows/fetch-models.yml'
+  push:
+    tags:
+      - 'release-*.*.*'
 
 env:
   CARGO_TERM_COLOR: always
@@ -78,7 +81,29 @@ jobs:
         echo "File sizes:"
         du -h dist/*.json
         
+    - name: Generate release info
+      id: release_info
+      run: |
+        # Extract provider information from all.json
+        if [ -f "dist/all.json" ]; then
+          TOTAL_MODELS=$(jq -r '.totalModels' dist/all.json)
+          PROVIDERS=$(jq -r '.providers | keys | join(", ")' dist/all.json)
+          PROVIDER_COUNT=$(jq -r '.providers | keys | length' dist/all.json)
+          echo "total_models=$TOTAL_MODELS" >> $GITHUB_OUTPUT
+          echo "providers=$PROVIDERS" >> $GITHUB_OUTPUT
+          echo "provider_count=$PROVIDER_COUNT" >> $GITHUB_OUTPUT
+        else
+          echo "total_models=0" >> $GITHUB_OUTPUT
+          echo "providers=none" >> $GITHUB_OUTPUT
+          echo "provider_count=0" >> $GITHUB_OUTPUT
+        fi
+        
+        # Generate timestamp
+        echo "timestamp=$(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_OUTPUT
+        echo "date_short=$(date -u '+%Y%m%d')" >> $GITHUB_OUTPUT
+        
     - name: Commit and push updates
+      if: github.ref_type != 'tag'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -95,35 +120,119 @@ jobs:
         fi
         
     - name: Create Release Assets
-      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
       run: |
-        # Create tarball of all JSON files
+        # Create tarball of all JSON files with proper naming
         cd dist
-        tar -czf ../provider-configs-$(date +%Y%m%d).tar.gz *.json
+        if [ "${{ github.ref_type }}" = "tag" ]; then
+          # For tag releases, use the tag name
+          TAG_NAME="${{ github.ref_name }}"
+          tar -czf "../provider-configs-${TAG_NAME}.tar.gz" *.json
+          # Also create individual provider archives
+          for file in *.json; do
+            if [ "$file" != "all.json" ]; then
+              provider_name=$(basename "$file" .json)
+              tar -czf "../${provider_name}-${TAG_NAME}.tar.gz" "$file"
+            fi
+          done
+        else
+          # For scheduled/manual runs, use date
+          tar -czf "../provider-configs-${{ steps.release_info.outputs.date_short }}.tar.gz" *.json
+        fi
         cd ..
         
-    - name: Upload Release Assets
-      if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    - name: Upload Artifacts (non-tag)
+      if: github.ref_type != 'tag'
       uses: actions/upload-artifact@v4
       with:
-        name: provider-configs
+        name: provider-configs-${{ steps.release_info.outputs.date_short }}
         path: |
           dist/*.json
           provider-configs-*.tar.gz
         retention-days: 30
         
-    - name: Create Release (on schedule)
+    - name: Create Release (scheduled)
       if: github.event_name == 'schedule'
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: auto-${{ github.run_number }}
-        name: Auto Release ${{ github.run_number }}
+        tag_name: auto-${{ steps.release_info.outputs.date_short }}
+        name: Daily Auto Release ${{ steps.release_info.outputs.date_short }}
         body: |
-          🤖 Automated release of AI model configurations
+          🤖 **Automated Daily Release of AI Model Configurations**
           
-          Generated on: ${{ github.run_date }}
+          **Generated:** ${{ steps.release_info.outputs.timestamp }}
+          **Total Models:** ${{ steps.release_info.outputs.total_models }}
+          **Providers:** ${{ steps.release_info.outputs.provider_count }} (${{ steps.release_info.outputs.providers }})
           
-          This release contains the latest model information from all configured providers.
+          ## 📦 What's Included
+          
+          This release contains the latest model information from all configured providers:
+          - `provider-configs-${{ steps.release_info.outputs.date_short }}.tar.gz` - Complete package with all provider data
+          - Individual JSON files for each provider
+          - Aggregated JSON with all models combined
+          
+          ## 🔄 How to Use
+          
+          Download and extract the files to access standardized AI model configurations for your applications.
+          
+          ```bash
+          # Download and extract
+          wget https://github.com/${{ github.repository }}/releases/download/auto-${{ steps.release_info.outputs.date_short }}/provider-configs-${{ steps.release_info.outputs.date_short }}.tar.gz
+          tar -xzf provider-configs-${{ steps.release_info.outputs.date_short }}.tar.gz
+          ```
         files: provider-configs-*.tar.gz
+        draft: false
+        prerelease: false
+        
+    - name: Create Release (tagged)
+      if: github.ref_type == 'tag'
+      uses: softprops/action-gh-release@v1
+      with:
+        name: Release ${{ github.ref_name }}
+        body: |
+          🏷️ **Tagged Release of AI Model Configurations**
+          
+          **Release Version:** ${{ github.ref_name }}
+          **Generated:** ${{ steps.release_info.outputs.timestamp }}
+          **Total Models:** ${{ steps.release_info.outputs.total_models }}
+          **Providers:** ${{ steps.release_info.outputs.provider_count }} (${{ steps.release_info.outputs.providers }})
+          
+          ## 📦 Available Downloads
+          
+          ### Complete Package
+          - `provider-configs-${{ github.ref_name }}.tar.gz` - All provider configurations
+          
+          ### Individual Provider Packages
+          Available individual provider archives for selective downloading.
+          
+          ### Raw JSON Files
+          Individual JSON files are also available as release assets for direct access.
+          
+          ## 📊 Provider Details
+          
+          | Provider | Models Available |
+          |----------|-----------------|
+          ${{ steps.release_info.outputs.providers != 'none' && '| Multiple providers | See all.json |' || '| No providers | 0 |' }}
+          
+          ## 🔄 Integration
+          
+          ### Direct JSON Access
+          ```javascript
+          // Access aggregated data
+          const response = await fetch('https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/all.json');
+          const modelData = await response.json();
+          ```
+          
+          ### Complete Package Download
+          ```bash
+          wget https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/provider-configs-${{ github.ref_name }}.tar.gz
+          tar -xzf provider-configs-${{ github.ref_name }}.tar.gz
+          ```
+          
+          ---
+          
+          *This release was automatically generated from the latest provider data.*
+        files: |
+          dist/*.json
+          *.tar.gz
         draft: false
         prerelease: false

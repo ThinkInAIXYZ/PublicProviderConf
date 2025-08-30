@@ -35,22 +35,31 @@ Provider APIs → Rust Fetcher Modules → Unified JSON Format → Provider JSON
 }
 ```
 
-#### Aggregated JSON Format
+#### Aggregated JSON Format (all.json)
 ```json
 {
   "version": "1.0.0",
   "generatedAt": "2025-01-15T10:30:00Z",
+  "totalModels": 150,
   "providers": {
     "ppinfra": {
+      "providerId": "ppinfra",
       "providerName": "PPInfra",
-      "modelCount": 25,
-      "lastUpdated": "2025-01-15T10:30:00Z"
+      "models": [
+        {
+          "id": "deepseek/deepseek-v3.1",
+          "name": "Deepseek V3.1",
+          "contextLength": 163840,
+          "maxTokens": 163840,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": true,
+          "type": "chat",
+          "description": "Brief description"
+        }
+      ]
     }
-  },
-  "totalModels": 150,
-  "allModels": [
-    // Flattened list of all models, each containing providerId field
-  ]
+  }
 }
 ```
 
@@ -153,7 +162,7 @@ provider_configs/
 ├── openrouter.json
 ├── openai.json
 ├── gemini.json
-└── aggregated.json
+└── all.json
 ```
 
 ## Configuration Management

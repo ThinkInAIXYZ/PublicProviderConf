@@ -82,22 +82,31 @@ Options:
 }
 ```
 
-### Aggregated JSON
+### Aggregated JSON (all.json)
 ```json
 {
   "version": "1.0.0",
   "generatedAt": "2025-01-15T10:30:00Z",
+  "totalModels": 38,
   "providers": {
     "ppinfra": {
+      "providerId": "ppinfra",
       "providerName": "PPInfra",
-      "modelCount": 38,
-      "lastUpdated": "2025-01-15T10:30:00Z"
+      "models": [
+        {
+          "id": "deepseek/deepseek-v3.1",
+          "name": "Deepseek V3.1",
+          "contextLength": 163840,
+          "maxTokens": 163840,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": true,
+          "type": "chat",
+          "description": "DeepSeek-V3.1 latest model..."
+        }
+      ]
     }
-  },
-  "totalModels": 38,
-  "allModels": [
-    // Flattened list of all models with providerId
-  ]
+  }
 }
 ```
 
@@ -131,16 +140,46 @@ export OPENROUTER_API_KEY="your-key-here"
 
 ## 🤖 GitHub Actions Automation
 
-The project includes GitHub Actions workflow with support for:
-- ⏰ Daily automated runs at UTC 06:00
-- 🖱️ Manual trigger
-- 📤 Auto commit updates to `provider_configs/`
-- 🗜️ Create packaged releases
+The project includes GitHub Actions workflow with multiple trigger methods:
 
-Manual trigger:
+### 🕰️ Automated Triggers
+- **Daily Schedule**: Runs automatically at UTC 06:00
+- **Code Changes**: Triggers on pushes to main branch (src/**, Cargo.toml, workflow file)
+- **Release Tags**: Automatically triggered by `release-*.*.*` tags
+
+### 🖱️ Manual Triggers
+- **Workflow Dispatch**: Manual trigger with optional provider selection
+- **Tag Release**: Create and push a `release-x.y.z` tag for versioned releases
+
+### 📦 Release Types
+
+#### Daily Auto Releases
 ```bash
-# Click "Run workflow" in the Actions tab of the GitHub repository
+# Automatic daily releases with date-based tags
+git tag auto-20250130  # Created automatically
 ```
+
+#### Versioned Releases
+```bash
+# Create a versioned release
+git tag release-1.0.0
+git push origin release-1.0.0
+
+# This will automatically:
+# 1. Fetch latest model data
+# 2. Generate JSON files
+# 3. Create GitHub release with comprehensive assets
+# 4. Upload individual provider archives
+```
+
+### 📄 Release Content
+Each release includes:
+- 📊 **Total model count** and **provider statistics**
+- 🕐 **Generation timestamp**
+- 📦 **Complete package** (`provider-configs-{version}.tar.gz`)
+- 🔗 **Individual provider archives** (for tagged releases)
+- 📋 **Direct JSON file access**
+- 💻 **Integration examples**
 
 ## 📁 Project Structure
 
@@ -215,17 +254,31 @@ cargo clippy
 ### Chatbot Integration Example
 ```javascript
 // Fetch all models
-const response = await fetch('https://your-domain.com/provider_configs/aggregated.json');
+const response = await fetch('https://your-domain.com/provider_configs/all.json');
 const data = await response.json();
 
-// Filter models that support function calling
-const toolModels = data.allModels.filter(model => model.functionCall);
+// Filter models that support function calling from all providers
+const toolModels = [];
+Object.values(data.providers).forEach(provider => {
+  provider.models.forEach(model => {
+    if (model.functionCall) {
+      toolModels.push({...model, providerId: provider.providerId});
+    }
+  });
+});
 
-// Sort by context length
-const sortedModels = data.allModels.sort((a, b) => b.contextLength - a.contextLength);
+// Get models from specific provider
+const ppinfraModels = data.providers.ppinfra?.models || [];
 
-// Find models from specific provider
-const ppinfraModels = data.allModels.filter(model => model.providerId === 'ppinfra');
+// Find models with reasoning capability across all providers
+const reasoningModels = [];
+Object.values(data.providers).forEach(provider => {
+  provider.models.forEach(model => {
+    if (model.reasoning) {
+      reasoningModels.push({...model, providerId: provider.providerId});
+    }
+  });
+});
 ```
 
 ### Data Analysis
