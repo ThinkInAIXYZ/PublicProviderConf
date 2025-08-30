@@ -6,6 +6,9 @@ use public_provider_conf::{
     providers::ppinfra::PPInfraProvider,
     providers::openrouter::OpenRouterProvider,
     providers::gemini::GeminiProvider,
+    providers::vercel::VercelProvider,
+    providers::github_ai::GithubAiProvider,
+    providers::tokenflux::TokenfluxProvider,
     fetcher::DataFetcher,
     output::OutputManager,
     config::AppConfig,
@@ -93,6 +96,30 @@ async fn fetch_all_providers(output_dir: String, config_path: String) -> Result<
     let gemini = Arc::new(GeminiProvider::new(gemini_api_key));
     fetcher.add_provider(gemini);
     
+    // Add Vercel provider (no API key required)
+    let vercel_config = config.providers.get("vercel");
+    let vercel_url = vercel_config
+        .map(|c| c.api_url.clone())
+        .unwrap_or_else(|| "https://ai-gateway.vercel.sh/v1/models".to_string());
+    let vercel = Arc::new(VercelProvider::new(vercel_url));
+    fetcher.add_provider(vercel);
+    
+    // Add GitHub AI provider (no API key required)
+    let github_ai_config = config.providers.get("github_ai");
+    let github_ai_url = github_ai_config
+        .map(|c| c.api_url.clone())
+        .unwrap_or_else(|| "https://models.inference.ai.azure.com/models".to_string());
+    let github_ai = Arc::new(GithubAiProvider::new(github_ai_url));
+    fetcher.add_provider(github_ai);
+    
+    // Add Tokenflux provider (no API key required)
+    let tokenflux_config = config.providers.get("tokenflux");
+    let tokenflux_url = tokenflux_config
+        .map(|c| c.api_url.clone())
+        .unwrap_or_else(|| "https://tokenflux.ai/v1/models".to_string());
+    let tokenflux = Arc::new(TokenfluxProvider::new(tokenflux_url));
+    fetcher.add_provider(tokenflux);
+    
     let provider_data = fetcher.fetch_all().await?;
     
     let output_manager = OutputManager::new(output_dir);
@@ -141,6 +168,30 @@ async fn fetch_specific_providers(
                     .or_else(|| std::env::var("GEMINI_API_KEY").ok());
                 let gemini = Arc::new(GeminiProvider::new(gemini_api_key));
                 fetcher.add_provider(gemini);
+            }
+            "vercel" => {
+                let vercel_config = config.providers.get("vercel");
+                let vercel_url = vercel_config
+                    .map(|c| c.api_url.clone())
+                    .unwrap_or_else(|| "https://ai-gateway.vercel.sh/v1/models".to_string());
+                let vercel = Arc::new(VercelProvider::new(vercel_url));
+                fetcher.add_provider(vercel);
+            }
+            "github_ai" => {
+                let github_ai_config = config.providers.get("github_ai");
+                let github_ai_url = github_ai_config
+                    .map(|c| c.api_url.clone())
+                    .unwrap_or_else(|| "https://models.inference.ai.azure.com/models".to_string());
+                let github_ai = Arc::new(GithubAiProvider::new(github_ai_url));
+                fetcher.add_provider(github_ai);
+            }
+            "tokenflux" => {
+                let tokenflux_config = config.providers.get("tokenflux");
+                let tokenflux_url = tokenflux_config
+                    .map(|c| c.api_url.clone())
+                    .unwrap_or_else(|| "https://tokenflux.ai/v1/models".to_string());
+                let tokenflux = Arc::new(TokenfluxProvider::new(tokenflux_url));
+                fetcher.add_provider(tokenflux);
             }
             _ => {
                 eprintln!("⚠️  Unknown provider: {}", provider_name);

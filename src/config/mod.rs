@@ -48,6 +48,30 @@ impl AppConfig {
             timeout: Some(60),  // Web scraping might take longer
         });
         
+        providers.insert("vercel".to_string(), ProviderConfig {
+            api_url: "https://ai-gateway.vercel.sh/v1/models".to_string(),
+            api_key_env: None,  // No API key required
+            api_key: None,
+            rate_limit: Some(10),
+            timeout: Some(30),
+        });
+        
+        providers.insert("github_ai".to_string(), ProviderConfig {
+            api_url: "https://models.inference.ai.azure.com/models".to_string(),
+            api_key_env: None,  // No API key required
+            api_key: None,
+            rate_limit: Some(5),
+            timeout: Some(30),
+        });
+        
+        providers.insert("tokenflux".to_string(), ProviderConfig {
+            api_url: "https://tokenflux.ai/v1/models".to_string(),
+            api_key_env: None,  // No API key required
+            api_key: None,
+            rate_limit: Some(10),
+            timeout: Some(30),
+        });
+        
         Self { providers }
     }
 }
