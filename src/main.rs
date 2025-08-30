@@ -4,6 +4,7 @@ use anyhow::Result;
 
 use public_provider_conf::{
     providers::ppinfra::PPInfraProvider,
+    providers::openrouter::OpenRouterProvider,
     fetcher::DataFetcher,
     output::OutputManager,
 };
@@ -63,11 +64,17 @@ async fn fetch_all_providers(output_dir: String, _config_path: String) -> Result
     
     let mut fetcher = DataFetcher::new();
     
-    // Add PPInfra provider as example
+    // Add PPInfra provider
     let ppinfra = Arc::new(PPInfraProvider::new(
         "https://api.ppinfra.com/openai/v1/models".to_string()
     ));
     fetcher.add_provider(ppinfra);
+    
+    // Add OpenRouter provider
+    let openrouter = Arc::new(OpenRouterProvider::new(
+        "https://openrouter.ai/api/v1/models".to_string()
+    ));
+    fetcher.add_provider(openrouter);
     
     let provider_data = fetcher.fetch_all().await?;
     

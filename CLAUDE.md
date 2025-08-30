@@ -82,10 +82,110 @@ Single provider JSON:
 
 ## Adding New Providers
 
-1. Create new provider file in `src/providers/`
-2. Implement the `Provider` trait
-3. Add to `src/providers/mod.rs`
-4. Register in `src/main.rs`
+### Step-by-Step Guide
+
+1. **Create Provider Implementation**
+   - Create new file in `src/providers/` (e.g., `src/providers/newprovider.rs`)
+   - Implement the `Provider` trait with required methods:
+     - `async fn fetch_models(&self) -> Result<Vec<ModelInfo>>`
+     - `fn provider_id(&self) -> &str`
+     - `fn provider_name(&self) -> &str`
+   
+2. **Add Module Reference**
+   - Add `pub mod newprovider;` to `src/providers/mod.rs`
+   
+3. **Register in Main**
+   - Import the provider in `src/main.rs`: `providers::newprovider::NewProviderProvider`
+   - Add provider initialization in `fetch_all_providers()` function
+   
+4. **Update Documentation**
+   - Add JSON link to README.md "Available Model Data" section
+   - Update "Currently Supported Providers" section with provider status
+
+### Template for New Provider
+
+```rust
+use async_trait::async_trait;
+use anyhow::Result;
+use serde::Deserialize;
+use crate::models::{ModelInfo, ModelType};
+use crate::providers::Provider;
+
+#[derive(Debug, Deserialize)]
+struct NewProviderModel {
+    // Define API response structure
+}
+
+#[derive(Debug, Deserialize)]  
+struct NewProviderResponse {
+    // Define API response wrapper
+}
+
+pub struct NewProviderProvider {
+    api_url: String,
+    client: reqwest::Client,
+}
+
+impl NewProviderProvider {
+    pub fn new(api_url: String) -> Self {
+        Self {
+            api_url,
+            client: reqwest::Client::new(),
+        }
+    }
+
+    fn convert_model(&self, model: NewProviderModel) -> ModelInfo {
+        // Convert API model to standardized ModelInfo
+        // Detect capabilities: vision, function_call, reasoning
+        ModelInfo::new(
+            model.id,
+            model.name,
+            context_length,
+            max_tokens,
+            vision,
+            function_call,
+            reasoning,
+            ModelType::Chat,
+            description,
+        )
+    }
+}
+
+#[async_trait]
+impl Provider for NewProviderProvider {
+    async fn fetch_models(&self) -> Result<Vec<ModelInfo>> {
+        let response = self.client
+            .get(&self.api_url)
+            .send()
+            .await?
+            .json::<NewProviderResponse>()
+            .await?;
+
+        let models = response.data
+            .into_iter()
+            .map(|model| self.convert_model(model))
+            .collect();
+
+        Ok(models)
+    }
+
+    fn provider_id(&self) -> &str {
+        "newprovider"
+    }
+
+    fn provider_name(&self) -> &str {
+        "New Provider"
+    }
+}
+```
+
+### After Adding Provider
+
+The system will automatically:
+- Generate `{provider_id}.json` file in `dist/` directory
+- Include provider data in `all.json` aggregated file
+- Update GitHub Actions to fetch from new provider
+- Create downloadable JSON links in releases
 
 ## GitHub Actions
 

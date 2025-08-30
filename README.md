@@ -11,6 +11,14 @@ Automated tool to fetch AI model information from various providers (PPInfra, Op
 - 🎯 **Aggregated Output**: Generate both individual provider files and complete aggregated files
 - 🚀 **GitHub Actions**: Automated scheduled updates for model information
 
+### 📄 Available Model Data
+
+Access the latest AI model information in JSON format:
+
+- **All Providers Combined**: [all.json](https://github.com/zerob13/PublicProviderConf/raw/main/provider_configs/all.json) - Complete aggregated data from all providers
+- **PPInfra**: [ppinfra.json](https://github.com/zerob13/PublicProviderConf/raw/main/provider_configs/ppinfra.json) - PPInfra provider models
+- **OpenRouter**: [openrouter.json](https://github.com/zerob13/PublicProviderConf/raw/main/provider_configs/openrouter.json) - OpenRouter provider models
+
 ## 📦 Installation
 
 ### Prerequisites
@@ -217,7 +225,7 @@ For detailed development guide, see [Architecture Documentation](docs/architectu
 ## 📊 Currently Supported Providers
 
 - ✅ **PPInfra** - 38 models with reasoning, function calling, and vision capability detection
-- 🚧 **OpenRouter** - Planned
+- ✅ **OpenRouter** - 600+ models with comprehensive capability detection and metadata
 - 🚧 **OpenAI** - Planned  
 - 🚧 **Google Gemini** - Planned
 

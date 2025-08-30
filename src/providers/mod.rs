@@ -1,4 +1,5 @@
 pub mod ppinfra;
+pub mod openrouter;
 
 use async_trait::async_trait;
 use anyhow::Result;
