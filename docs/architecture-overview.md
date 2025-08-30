@@ -133,7 +133,7 @@ cargo run -- --all
 cargo run -- --providers ppinfra,openai
 
 # Specify output directory
-cargo run -- --output ./provider_configs
+cargo run -- --output ./dist
 
 # Generate aggregated file
 cargo run -- --aggregate
@@ -152,12 +152,12 @@ cargo run -- --aggregate
 3. Compile project
 4. Run data fetching
 5. Validate generated JSON
-6. Commit updates to provider_configs/
+6. Commit updates to dist/
 7. Create Release and package JSON files
 
 ### Output Directory Structure
 ```
-provider_configs/
+dist/
 ├── ppinfra.json
 ├── openrouter.json
 ├── openai.json

@@ -46,7 +46,6 @@ du -h dist/*.json
 │   ├── output/          # Output handling
 │   └── config/          # Configuration management
 ├── dist/                # Generated JSON output files
-├── provider_configs/    # Git-tracked JSON files
 └── docs/                # Documentation
 ```
 
@@ -192,7 +191,7 @@ The system will automatically:
 The workflow automatically:
 - Runs daily at 06:00 UTC
 - Fetches latest model data
-- Commits updates to `provider_configs/`
+- Commits updates to `dist/`
 - Creates releases with downloadable JSON files
 
 ## Environment Variables

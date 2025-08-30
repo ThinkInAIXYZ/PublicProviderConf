@@ -15,9 +15,9 @@ Automated tool to fetch AI model information from various providers (PPInfra, Op
 
 Access the latest AI model information in JSON format:
 
-- **All Providers Combined**: [all.json](https://github.com/zerob13/PublicProviderConf/raw/main/provider_configs/all.json) - Complete aggregated data from all providers
-- **PPInfra**: [ppinfra.json](https://github.com/zerob13/PublicProviderConf/raw/main/provider_configs/ppinfra.json) - PPInfra provider models
-- **OpenRouter**: [openrouter.json](https://github.com/zerob13/PublicProviderConf/raw/main/provider_configs/openrouter.json) - OpenRouter provider models
+- **All Providers Combined**: [all.json](dist/all.json) - Complete aggregated data from all providers
+- **PPInfra**: [ppinfra.json](dist/ppinfra.json) - PPInfra provider models
+- **OpenRouter**: [openrouter.json](dist/openrouter.json) - OpenRouter provider models
 
 ## 📦 Installation
 
@@ -197,7 +197,6 @@ Each tagged release includes:
 │   ├── output/          # Output processing
 │   └── config/          # Configuration management
 ├── dist/                # Generated JSON files
-├── provider_configs/    # Git-tracked JSON files
 ├── docs/                # Detailed documentation
 └── .claude/            # Claude Code configuration
 ```
@@ -260,7 +259,7 @@ cargo clippy
 ### Chatbot Integration Example
 ```javascript
 // Fetch all models
-const response = await fetch('https://your-domain.com/provider_configs/all.json');
+const response = await fetch('https://raw.githubusercontent.com/ThinkInAIXYZ/PublicProviderConf/refs/heads/dev/dist/all.json');
 const data = await response.json();
 
 // Filter models that support function calling from all providers
