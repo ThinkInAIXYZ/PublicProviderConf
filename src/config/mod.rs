@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct ProviderConfig {
     pub api_url: String,
     pub api_key_env: Option<String>,
+    pub api_key: Option<String>,  // Direct API key configuration
     pub rate_limit: Option<u32>,
     pub timeout: Option<u64>,
 }
@@ -26,10 +27,41 @@ impl AppConfig {
         providers.insert("ppinfra".to_string(), ProviderConfig {
             api_url: "https://api.ppinfra.com/openai/v1/models".to_string(),
             api_key_env: None,
+            api_key: None,
             rate_limit: Some(10),
             timeout: Some(30),
         });
         
+        providers.insert("openrouter".to_string(), ProviderConfig {
+            api_url: "https://openrouter.ai/api/v1/models".to_string(),
+            api_key_env: None,  // No API key required for model listing
+            api_key: None,
+            rate_limit: Some(5),
+            timeout: Some(30),
+        });
+        
+        providers.insert("gemini".to_string(), ProviderConfig {
+            api_url: "https://generativelanguage.googleapis.com/v1beta/openai/models".to_string(),
+            api_key_env: Some("GEMINI_API_KEY".to_string()),
+            api_key: None,
+            rate_limit: Some(10),
+            timeout: Some(60),  // Web scraping might take longer
+        });
+        
         Self { providers }
+    }
+}
+
+impl ProviderConfig {
+    /// Get API key from config (direct) or environment variable
+    pub fn get_api_key(&self) -> Option<String> {
+        // Priority: direct config > environment variable
+        if let Some(ref key) = self.api_key {
+            Some(key.clone())
+        } else if let Some(ref env_var) = self.api_key_env {
+            std::env::var(env_var).ok()
+        } else {
+            None
+        }
     }
 }

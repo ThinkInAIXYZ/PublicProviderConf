@@ -1,0 +1,35 @@
+# PublicProviderConf Configuration File
+# This file allows you to customize provider settings and API keys
+
+[providers.ppinfra]
+api_url = "https://api.ppinfra.com/openai/v1/models"
+# PPInfra doesn't require an API key
+rate_limit = 10
+timeout = 30
+
+[providers.openrouter]
+api_url = "https://openrouter.ai/api/v1/models"
+# OpenRouter provides public model listing API - no API key required
+rate_limit = 5
+timeout = 30
+
+[providers.gemini]
+api_url = "https://generativelanguage.googleapis.com/v1beta/openai/models"
+# Option 1: Use environment variable (recommended for security)
+api_key_env = "GEMINI_API_KEY"
+# Option 2: Direct API key (not recommended for production)
+# api_key = "your-gemini-key-here"
+# Option 3: Use custom environment variable name
+# api_key_env = "MY_CUSTOM_GEMINI_KEY"
+rate_limit = 10
+timeout = 60  # Web scraping might take longer
+
+# API Key Configuration Notes:
+# - PPInfra: Uses public API, no key required
+# - OpenRouter: Uses public model listing API, no key required  
+# - Gemini: Optional API key for complete model list
+#
+# API Key Priority (when applicable):
+# 1. Direct API key in config file (api_key)
+# 2. Environment variable specified in config (api_key_env)  
+# 3. Default environment variable (e.g., GEMINI_API_KEY)

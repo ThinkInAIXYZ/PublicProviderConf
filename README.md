@@ -18,6 +18,7 @@ Access the latest AI model information in JSON format:
 - **All Providers Combined**: [all.json](dist/all.json) - Complete aggregated data from all providers
 - **PPInfra**: [ppinfra.json](dist/ppinfra.json) - PPInfra provider models
 - **OpenRouter**: [openrouter.json](dist/openrouter.json) - OpenRouter provider models
+- **Google Gemini**: [gemini.json](dist/gemini.json) - Google Gemini API models with web-scraped details
 
 ## 📦 Installation
 
@@ -135,16 +136,67 @@ rate_limit = 5
 
 [openai]
 api_url = "https://api.openai.com/v1/models" 
-api_key_env = "OPENAI_API_KEY"
+api_key_env = "OPENAI_API_KEY"  # OpenAI requires API key
 rate_limit = 20
 ```
 
-### Environment Variables
-If providers require API keys, set corresponding environment variables:
+### API Key Configuration
+
+The tool supports flexible API key configuration with multiple methods and clear priority ordering:
+
+#### Configuration Methods
+
+**Method 1: Environment Variables (Recommended)**
 ```bash
-export OPENAI_API_KEY="your-key-here"
-export OPENROUTER_API_KEY="your-key-here"
+# Only for providers that require API keys
+export GEMINI_API_KEY="your-key-here"
+# export OPENAI_API_KEY="your-key-here"  # When OpenAI provider is added
 ```
+
+**Method 2: Configuration File**
+```toml
+# config/providers.toml
+[providers.gemini]
+api_url = "https://generativelanguage.googleapis.com/v1beta/openai/models"
+# Option A: Use default environment variable
+api_key_env = "GEMINI_API_KEY"
+# Option B: Use custom environment variable name
+# api_key_env = "MY_CUSTOM_GEMINI_KEY" 
+# Option C: Direct API key (not recommended for production)
+# api_key = "your-gemini-key-here"
+```
+
+#### API Key Priority (High to Low)
+
+1. **Direct API key in config file** (`api_key` field)
+2. **Environment variable specified in config** (`api_key_env` field)
+3. **Default environment variable** (e.g., `GEMINI_API_KEY`)
+
+This allows you to:
+- Use environment variables for security (recommended)
+- Override per-environment using config files
+- Mix different approaches for different providers
+
+#### Provider-Specific Notes
+
+- **PPInfra**: ✅ No API key required - uses public API
+- **OpenRouter**: ✅ No API key required - uses public model listing API  
+- **Gemini**: ⚠️ Optional API key - uses hybrid web scraping + API approach
+
+### Gemini Provider Details
+
+The Gemini provider implements a unique **hybrid approach**:
+
+**How It Works:**
+1. **API Call**: Fetches model list from Gemini API (model names only)
+2. **Web Scraping**: Scrapes Google's documentation for detailed capabilities
+3. **Data Merging**: Combines API data with scraped metadata
+
+**Behavior by API Key Status:**
+- **With API Key**: Complete model list from API + enriched capabilities from scraping
+- **Without API Key**: Model list and capabilities from web scraping + fallback known models
+
+**Why Hybrid?** The official Gemini API only provides model names, so web scraping is always required to get comprehensive capability information (vision, function calling, reasoning, context lengths, etc.).
 
 ## 🤖 GitHub Actions Automation
 
@@ -225,8 +277,8 @@ For detailed development guide, see [Architecture Documentation](docs/architectu
 
 - ✅ **PPInfra** - 38 models with reasoning, function calling, and vision capability detection
 - ✅ **OpenRouter** - 600+ models with comprehensive capability detection and metadata
-- 🚧 **OpenAI** - Planned  
-- 🚧 **Google Gemini** - Planned
+- ✅ **Google Gemini** - Gemini models with hybrid API + web scraping approach for complete metadata
+- 🚧 **OpenAI** - Planned
 
 ## 🛠️ Development
 

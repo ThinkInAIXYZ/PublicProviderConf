@@ -5,8 +5,10 @@ use anyhow::Result;
 use public_provider_conf::{
     providers::ppinfra::PPInfraProvider,
     providers::openrouter::OpenRouterProvider,
+    providers::gemini::GeminiProvider,
     fetcher::DataFetcher,
     output::OutputManager,
+    config::AppConfig,
 };
 
 #[derive(Parser)]
@@ -59,22 +61,37 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-async fn fetch_all_providers(output_dir: String, _config_path: String) -> Result<()> {
+async fn fetch_all_providers(output_dir: String, config_path: String) -> Result<()> {
     println!("Fetching models from all providers...");
+    
+    // Load configuration
+    let config = load_config(&config_path);
     
     let mut fetcher = DataFetcher::new();
     
-    // Add PPInfra provider
-    let ppinfra = Arc::new(PPInfraProvider::new(
-        "https://api.ppinfra.com/openai/v1/models".to_string()
-    ));
+    // Add PPInfra provider (no API key required)
+    let ppinfra_config = config.providers.get("ppinfra");
+    let ppinfra_url = ppinfra_config
+        .map(|c| c.api_url.clone())
+        .unwrap_or_else(|| "https://api.ppinfra.com/openai/v1/models".to_string());
+    let ppinfra = Arc::new(PPInfraProvider::new(ppinfra_url));
     fetcher.add_provider(ppinfra);
     
-    // Add OpenRouter provider
-    let openrouter = Arc::new(OpenRouterProvider::new(
-        "https://openrouter.ai/api/v1/models".to_string()
-    ));
+    // Add OpenRouter provider (no API key required)
+    let openrouter_config = config.providers.get("openrouter");
+    let openrouter_url = openrouter_config
+        .map(|c| c.api_url.clone())
+        .unwrap_or_else(|| "https://openrouter.ai/api/v1/models".to_string());
+    let openrouter = Arc::new(OpenRouterProvider::new(openrouter_url));
     fetcher.add_provider(openrouter);
+    
+    // Add Gemini provider (optional API key for complete model list)
+    let gemini_config = config.providers.get("gemini");
+    let gemini_api_key = gemini_config
+        .and_then(|c| c.get_api_key())
+        .or_else(|| std::env::var("GEMINI_API_KEY").ok());
+    let gemini = Arc::new(GeminiProvider::new(gemini_api_key));
+    fetcher.add_provider(gemini);
     
     let provider_data = fetcher.fetch_all().await?;
     
@@ -88,11 +105,79 @@ async fn fetch_all_providers(output_dir: String, _config_path: String) -> Result
 }
 
 async fn fetch_specific_providers(
-    _provider_names: Vec<&str>, 
-    _output_dir: String, 
-    _config_path: String
+    provider_names: Vec<&str>, 
+    output_dir: String, 
+    config_path: String
 ) -> Result<()> {
-    // TODO: Implement specific provider fetching
-    println!("Specific provider fetching not yet implemented");
+    println!("Fetching models from providers: {}", provider_names.join(", "));
+    
+    // Load configuration
+    let config = load_config(&config_path);
+    
+    let mut fetcher = DataFetcher::new();
+    
+    for provider_name in provider_names {
+        match provider_name.trim().to_lowercase().as_str() {
+            "ppinfra" => {
+                let ppinfra_config = config.providers.get("ppinfra");
+                let ppinfra_url = ppinfra_config
+                    .map(|c| c.api_url.clone())
+                    .unwrap_or_else(|| "https://api.ppinfra.com/openai/v1/models".to_string());
+                let ppinfra = Arc::new(PPInfraProvider::new(ppinfra_url));
+                fetcher.add_provider(ppinfra);
+            }
+            "openrouter" => {
+                let openrouter_config = config.providers.get("openrouter");
+                let openrouter_url = openrouter_config
+                    .map(|c| c.api_url.clone())
+                    .unwrap_or_else(|| "https://openrouter.ai/api/v1/models".to_string());
+                let openrouter = Arc::new(OpenRouterProvider::new(openrouter_url));
+                fetcher.add_provider(openrouter);
+            }
+            "gemini" => {
+                let gemini_config = config.providers.get("gemini");
+                let gemini_api_key = gemini_config
+                    .and_then(|c| c.get_api_key())
+                    .or_else(|| std::env::var("GEMINI_API_KEY").ok());
+                let gemini = Arc::new(GeminiProvider::new(gemini_api_key));
+                fetcher.add_provider(gemini);
+            }
+            _ => {
+                eprintln!("⚠️  Unknown provider: {}", provider_name);
+            }
+        }
+    }
+    
+    let provider_data = fetcher.fetch_all().await?;
+    
+    if provider_data.is_empty() {
+        eprintln!("❌ No valid providers found or no data fetched");
+        return Ok(());
+    }
+    
+    let output_manager = OutputManager::new(output_dir);
+    output_manager.write_provider_files(&provider_data).await?;
+    
+    println!("✅ Successfully fetched and wrote {} providers", provider_data.len());
+    
+    // Print summary for each provider
+    for provider_info in &provider_data {
+        println!("   📋 {}: {} models", provider_info.provider_name, provider_info.models.len());
+    }
+    
     Ok(())
+}
+
+fn load_config(config_path: &str) -> AppConfig {
+    match AppConfig::load_from_file(config_path) {
+        Ok(config) => {
+            println!("📄 Loaded configuration from: {}", config_path);
+            config
+        },
+        Err(_) => {
+            println!("⚠️  Config file not found at {}, using default configuration", config_path);
+            println!("💡 You can create a config file to customize provider settings and API keys");
+            AppConfig::default()
+        }
+    }
 }
