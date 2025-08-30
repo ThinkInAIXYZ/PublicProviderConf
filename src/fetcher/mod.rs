@@ -26,6 +26,7 @@ impl DataFetcher {
         for provider in &self.providers {
             match provider.fetch_models().await {
                 Ok(models) => {
+                    println!("Fetched {} models from {}", models.len(), provider.provider_id());
                     let provider_info = ProviderInfo::new(
                         provider.provider_id().to_string(),
                         provider.provider_name().to_string(),

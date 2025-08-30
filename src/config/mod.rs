@@ -72,6 +72,22 @@ impl AppConfig {
             timeout: Some(30),
         });
         
+        providers.insert("groq".to_string(), ProviderConfig {
+            api_url: "https://api.groq.com/openai/v1/models".to_string(),
+            api_key_env: Some("GROQ_API_KEY".to_string()),
+            api_key: None,
+            rate_limit: Some(10),
+            timeout: Some(30),
+        });
+        
+        providers.insert("deepseek".to_string(), ProviderConfig {
+            api_url: "https://api-docs.deepseek.com/quick_start/pricing".to_string(),
+            api_key_env: None,  // No API key required, uses web scraping
+            api_key: None,
+            rate_limit: Some(5),
+            timeout: Some(60),  // Web scraping might take longer
+        });
+        
         Self { providers }
     }
 }

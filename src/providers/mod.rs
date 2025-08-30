@@ -4,6 +4,8 @@ pub mod gemini;
 pub mod vercel;
 pub mod github_ai;
 pub mod tokenflux;
+pub mod groq;
+pub mod deepseek;
 
 use async_trait::async_trait;
 use anyhow::Result;

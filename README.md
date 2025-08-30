@@ -19,6 +19,11 @@ Access the latest AI model information in JSON format:
 - **PPInfra**: [ppinfra.json](dist/ppinfra.json) - PPInfra provider models
 - **OpenRouter**: [openrouter.json](dist/openrouter.json) - OpenRouter provider models
 - **Google Gemini**: [gemini.json](dist/gemini.json) - Google Gemini API models with web-scraped details
+- **Vercel AI Gateway**: [vercel.json](dist/vercel.json) - Vercel AI Gateway hosted models
+- **GitHub AI Models**: [github_ai.json](dist/github_ai.json) - GitHub AI Models marketplace
+- **Tokenflux**: [tokenflux.json](dist/tokenflux.json) - Tokenflux marketplace models
+- **Groq**: [groq.json](dist/groq.json) - Groq hosted models (API key required)
+- **DeepSeek**: [deepseek.json](dist/deepseek.json) - DeepSeek models with documentation parsing
 
 ## 📦 Installation
 
@@ -49,7 +54,7 @@ cargo run -- fetch-all -o ./output
 
 Fetch from specific providers:
 ```bash
-cargo run -- fetch-providers -p ppinfra,openai
+cargo run -- fetch-providers -p ppinfra,openrouter,groq
 ```
 
 ### CLI Options
@@ -149,6 +154,12 @@ api_url = "https://generativelanguage.googleapis.com/v1beta/openai/models"
 api_key_env = "GEMINI_API_KEY"  # or use api_key = "your-key"
 rate_limit = 10
 timeout = 60
+
+[providers.groq]
+api_url = "https://api.groq.com/openai/v1/models"
+api_key_env = "GROQ_API_KEY"
+rate_limit = 10
+timeout = 30
 ```
 
 **🔒 Security Note**: The actual `config/providers.toml` file is ignored by git to prevent accidental API key commits. Always use the example file as a template.
@@ -162,8 +173,8 @@ The tool supports flexible API key configuration with multiple methods and clear
 **Method 1: Environment Variables (Recommended)**
 ```bash
 # Only for providers that require API keys
-export GEMINI_API_KEY="your-key-here"
-# export OPENAI_API_KEY="your-key-here"  # When OpenAI provider is added
+export GEMINI_API_KEY="your-key-here"    # Optional for Gemini (enhances model list)
+export GROQ_API_KEY="your-key-here"      # Required for Groq
 ```
 
 **Method 2: Configuration File**
@@ -182,6 +193,12 @@ api_key_env = "GEMINI_API_KEY"
 # api_key_env = "MY_CUSTOM_GEMINI_KEY" 
 # Option C: Direct API key (not recommended for production)
 # api_key = "your-gemini-key-here"
+
+[providers.groq]
+api_url = "https://api.groq.com/openai/v1/models"
+api_key_env = "GROQ_API_KEY"
+# Or use direct API key (not recommended)
+# api_key = "your-groq-key-here"
 ```
 
 #### API Key Priority (High to Low)
@@ -199,7 +216,12 @@ This allows you to:
 
 - **PPInfra**: ✅ No API key required - uses public API
 - **OpenRouter**: ✅ No API key required - uses public model listing API  
+- **Vercel AI Gateway**: ✅ No API key required - uses public AI Gateway API
+- **GitHub AI Models**: ✅ No API key required - uses public model listing API
+- **Tokenflux**: ✅ No API key required - uses public marketplace API
+- **DeepSeek**: ✅ No API key required - uses web scraping from documentation
 - **Gemini**: ⚠️ Optional API key - uses hybrid web scraping + API approach
+- **Groq**: ❌ API key required - private API access only
 
 ### Gemini Provider Details
 
@@ -215,6 +237,21 @@ The Gemini provider implements a unique **hybrid approach**:
 - **Without API Key**: Model list and capabilities from web scraping + fallback known models
 
 **Why Hybrid?** The official Gemini API only provides model names, so web scraping is always required to get comprehensive capability information (vision, function calling, reasoning, context lengths, etc.).
+
+### DeepSeek Provider Details
+
+The DeepSeek provider uses **pure web scraping** from the official [DeepSeek API documentation](https://api-docs.deepseek.com/quick_start/pricing):
+
+**How It Works:**
+1. **Documentation Scraping**: Parses model tables from the pricing/models page
+2. **Fallback Models**: Uses known model definitions if scraping fails
+3. **Capability Detection**: Analyzes model descriptions for feature detection
+
+**Supported Models:**
+- **deepseek-chat**: DeepSeek-V3.1 (Non-thinking Mode) with function calling support
+- **deepseek-reasoner**: DeepSeek-V3.1 (Thinking Mode) with advanced reasoning capabilities
+
+**Why Web Scraping?** DeepSeek doesn't provide a public model listing API, so documentation parsing ensures we capture the latest model information and specifications.
 
 ## 🤖 GitHub Actions Automation
 
@@ -293,9 +330,14 @@ For detailed development guide, see [Architecture Documentation](docs/architectu
 
 ## 📊 Currently Supported Providers
 
-- ✅ **PPInfra** - 38 models with reasoning, function calling, and vision capability detection
+- ✅ **PPInfra** - 38+ models with reasoning, function calling, and vision capability detection
 - ✅ **OpenRouter** - 600+ models with comprehensive capability detection and metadata
 - ✅ **Google Gemini** - Gemini models with hybrid API + web scraping approach for complete metadata
+- ✅ **Vercel AI Gateway** - 200+ hosted models with pricing and capability information
+- ✅ **GitHub AI Models** - 50+ models from GitHub's AI marketplace
+- ✅ **Tokenflux** - 274+ marketplace models with detailed specifications
+- ✅ **Groq** - 22+ high-performance models (API key required)
+- ✅ **DeepSeek** - 2 models (deepseek-chat, deepseek-reasoner) with documentation parsing
 - 🚧 **OpenAI** - Planned
 
 ## 🛠️ Development

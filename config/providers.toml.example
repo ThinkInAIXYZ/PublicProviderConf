@@ -50,6 +50,23 @@ api_url = "https://tokenflux.ai/v1/models"
 rate_limit = 10
 timeout = 30
 
+[providers.groq]
+api_url = "https://api.groq.com/openai/v1/models"
+# Option 1: Use environment variable (recommended for security)
+api_key_env = "GROQ_API_KEY"
+# Option 2: Direct API key (not recommended for production)
+# api_key = "your-groq-key-here"
+# Option 3: Use custom environment variable name
+# api_key_env = "MY_CUSTOM_GROQ_KEY"
+rate_limit = 10
+timeout = 30
+
+[providers.deepseek]
+api_url = "https://api-docs.deepseek.com/quick_start/pricing"
+# DeepSeek uses web scraping from documentation - no API key required
+rate_limit = 5
+timeout = 60  # Web scraping might take longer
+
 # API Key Configuration Notes:
 # - PPInfra: Uses public API, no key required
 # - OpenRouter: Uses public model listing API, no key required  
@@ -57,8 +74,10 @@ timeout = 30
 # - GitHub AI: Uses public model listing API, no key required
 # - Tokenflux: Uses public API, no key required
 # - Gemini: Optional API key for complete model list
+# - Groq: Requires API key for access
+# - DeepSeek: Uses web scraping from documentation, no key required
 #
 # API Key Priority (when applicable):
 # 1. Direct API key in config file (api_key)
 # 2. Environment variable specified in config (api_key_env)  
-# 3. Default environment variable (e.g., GEMINI_API_KEY)
+# 3. Default environment variable (e.g., GEMINI_API_KEY, GROQ_API_KEY)

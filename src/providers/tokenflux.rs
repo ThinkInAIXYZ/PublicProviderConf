@@ -6,44 +6,22 @@ use crate::providers::Provider;
 
 #[derive(Debug, Deserialize)]
 struct TokenfluxArchitecture {
-    modality: String,
-    input_modalities: Vec<String>,
-    output_modalities: Vec<String>,
-    tokenizer: String,
-    instruct_type: Option<String>,
-}
-
-#[derive(Debug, Deserialize)]
-struct TokenfluxPricing {
-    prompt: String,
-    completion: String,
     #[serde(default)]
-    input_cache_read: String,
-    #[serde(default)]
-    input_cache_write: String,
-    request: String,
-    image: String,
-    web_search: String,
-    internal_reasoning: String,
-    unit: i32,
-    currency: String,
+    input_modalities: Option<Vec<String>>,
 }
 
 #[derive(Debug, Deserialize)]
 struct TokenfluxModel {
     id: String,
-    canonical_slug: String,
-    hugging_face_id: String,
     name: String,
     #[serde(rename = "type")]
     model_type: String,
-    created: i64,
     description: String,
     context_length: u32,
-    architecture: TokenfluxArchitecture,
-    pricing: TokenfluxPricing,
-    supported_parameters: Vec<String>,
-    model_provider: String,
+    #[serde(default)]
+    architecture: Option<TokenfluxArchitecture>,
+    #[serde(default)]
+    supported_parameters: Option<Vec<String>>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -65,29 +43,41 @@ impl TokenfluxProvider {
     }
 
     fn convert_model(&self, model: TokenfluxModel) -> ModelInfo {
-        // Detect vision capability from architecture input modalities
-        let vision = model.architecture.input_modalities.iter()
-            .any(|m| m.contains("image") || m.contains("vision"))
-            || model.id.to_lowercase().contains("vision")
-            || model.name.to_lowercase().contains("vision")
-            || model.description.to_lowercase().contains("vision")
-            || model.description.to_lowercase().contains("image");
+        let id_lower = model.id.to_lowercase();
+        let name_lower = model.name.to_lowercase();
+        let desc_lower = model.description.to_lowercase();
 
-        // Detect function call capability from supported parameters
-        let function_call = model.supported_parameters.iter()
-            .any(|p| p.contains("tool") || p.contains("function"))
-            || model.id.to_lowercase().contains("function")
-            || model.name.to_lowercase().contains("function")
-            || model.description.to_lowercase().contains("function")
-            || model.description.to_lowercase().contains("tool");
+        // Detect vision capability from architecture input modalities and text analysis
+        let vision = model.architecture
+            .as_ref()
+            .and_then(|arch| arch.input_modalities.as_ref())
+            .map(|modalities| modalities.iter().any(|m| m.contains("image") || m.contains("vision")))
+            .unwrap_or(false)
+            || id_lower.contains("vision")
+            || name_lower.contains("vision")
+            || desc_lower.contains("vision")
+            || desc_lower.contains("image");
+
+        // Detect function call capability from supported parameters and text analysis
+        let function_call = model.supported_parameters
+            .as_ref()
+            .map(|params| params.iter().any(|p| p.contains("tool") || p.contains("function")))
+            .unwrap_or(false)
+            || id_lower.contains("function")
+            || name_lower.contains("function")
+            || desc_lower.contains("function")
+            || desc_lower.contains("tool");
 
         // Detect reasoning capability from supported parameters and description
-        let reasoning = model.supported_parameters.iter()
-            .any(|p| p.contains("reasoning") || p.contains("include_reasoning"))
-            || model.id.to_lowercase().contains("reasoning")
-            || model.name.to_lowercase().contains("reasoning")
-            || model.description.to_lowercase().contains("reasoning")
-            || model.description.to_lowercase().contains("thinking");
+        let reasoning = model.supported_parameters
+            .as_ref()
+            .map(|params| params.iter().any(|p| p.contains("reasoning") || p.contains("include_reasoning")))
+            .unwrap_or(false)
+            || id_lower.contains("reasoning")
+            || name_lower.contains("reasoning")
+            || desc_lower.contains("reasoning")
+            || desc_lower.contains("thinking")
+            || id_lower.contains("r1"); // DeepSeek R1 models
 
         // Determine model type
         let model_type = match model.model_type.as_str() {
@@ -126,11 +116,20 @@ impl Provider for TokenfluxProvider {
         let response = self.client
             .get(&self.api_url)
             .send()
-            .await?
-            .json::<TokenfluxResponse>()
             .await?;
 
-        let models = response.data
+        // Get response text for debugging
+        let response_text = response.text().await?;
+        
+        // Try to parse JSON with better error handling
+        let response_data: TokenfluxResponse = serde_json::from_str(&response_text)
+            .map_err(|e| {
+                println!("❌ JSON parsing error: {}", e);
+                println!("🔍 Response text (first 500 chars): {}", &response_text[..std::cmp::min(500, response_text.len())]);
+                anyhow::anyhow!("Failed to parse Tokenflux response: {}", e)
+            })?;
+
+        let models = response_data.data
             .into_iter()
             .map(|model| self.convert_model(model))
             .collect();

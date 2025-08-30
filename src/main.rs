@@ -9,6 +9,8 @@ use public_provider_conf::{
     providers::vercel::VercelProvider,
     providers::github_ai::GithubAiProvider,
     providers::tokenflux::TokenfluxProvider,
+    providers::groq::GroqProvider,
+    providers::deepseek::DeepSeekProvider,
     fetcher::DataFetcher,
     output::OutputManager,
     config::AppConfig,
@@ -120,6 +122,23 @@ async fn fetch_all_providers(output_dir: String, config_path: String) -> Result<
     let tokenflux = Arc::new(TokenfluxProvider::new(tokenflux_url));
     fetcher.add_provider(tokenflux);
     
+    // Add Groq provider (requires API key)
+    let groq_config = config.providers.get("groq");
+    let groq_api_key = groq_config
+        .and_then(|c| c.get_api_key())
+        .or_else(|| std::env::var("GROQ_API_KEY").ok());
+    
+    if groq_api_key.is_some() {
+        let groq = Arc::new(GroqProvider::new(groq_api_key));
+        fetcher.add_provider(groq);
+    } else {
+        println!("⚠️  Skipping Groq: No API key found (set GROQ_API_KEY or configure in providers.toml)");
+    }
+    
+    // Add DeepSeek provider (no API key required, uses web scraping)
+    let deepseek = Arc::new(DeepSeekProvider::new());
+    fetcher.add_provider(deepseek);
+    
     let provider_data = fetcher.fetch_all().await?;
     
     let output_manager = OutputManager::new(output_dir);
@@ -192,6 +211,23 @@ async fn fetch_specific_providers(
                     .unwrap_or_else(|| "https://tokenflux.ai/v1/models".to_string());
                 let tokenflux = Arc::new(TokenfluxProvider::new(tokenflux_url));
                 fetcher.add_provider(tokenflux);
+            }
+            "groq" => {
+                let groq_config = config.providers.get("groq");
+                let groq_api_key = groq_config
+                    .and_then(|c| c.get_api_key())
+                    .or_else(|| std::env::var("GROQ_API_KEY").ok());
+                
+                if let Some(api_key) = groq_api_key {
+                    let groq = Arc::new(GroqProvider::new(Some(api_key)));
+                    fetcher.add_provider(groq);
+                } else {
+                    eprintln!("❌ Groq requires an API key. Set GROQ_API_KEY environment variable or configure in providers.toml");
+                }
+            }
+            "deepseek" => {
+                let deepseek = Arc::new(DeepSeekProvider::new());
+                fetcher.add_provider(deepseek);
             }
             _ => {
                 eprintln!("⚠️  Unknown provider: {}", provider_name);
