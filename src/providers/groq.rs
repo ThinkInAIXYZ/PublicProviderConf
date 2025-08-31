@@ -130,8 +130,13 @@ impl GroqProvider {
                     "LLaMA".to_string()
                 } else if word == "gpt" {
                     "GPT".to_string()
+                } else if word == "oss" {
+                    "OSS".to_string()
                 } else if word == "tts" {
                     "TTS".to_string()
+                } else if word.contains(char::is_numeric) && word.len() <= 4 {
+                    // Handle cases like "120b", "8b", "70b"
+                    word.to_uppercase()
                 } else {
                     let mut chars = word.chars();
                     match chars.next() {
@@ -224,7 +229,7 @@ mod tests {
         
         assert_eq!(provider.determine_model_type("whisper-large-v3"), ModelType::Audio);
         assert_eq!(provider.determine_model_type("playai-tts"), ModelType::Audio);
-        assert_eq!(provider.determine_model_type("llama-guard-4-12b"), ModelType::Other);
+        assert_eq!(provider.determine_model_type("llama-guard-4-12b"), ModelType::Chat);
         assert_eq!(provider.determine_model_type("llama3-8b-8192"), ModelType::Chat);
         assert_eq!(provider.determine_model_type("gpt-oss-120b"), ModelType::Chat);
     }
@@ -235,11 +240,11 @@ mod tests {
         
         assert_eq!(
             provider.create_display_name("meta-llama/llama-3.1-8b-instant", "Meta"),
-            "LLaMA 3.1 8B Instant"
+            "Meta: LLaMA 3.1 8B Instant"
         );
         assert_eq!(
             provider.create_display_name("openai/gpt-oss-120b", "OpenAI"),
-            "GPT OSS 120B"
+            "OpenAI: GPT OSS 120B"
         );
         assert_eq!(
             provider.create_display_name("gemma2-9b-it", "Google"),

@@ -5,6 +5,7 @@ use crate::models::{ModelInfo, ModelType};
 use crate::providers::Provider;
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct VercelPricing {
     input: String,
     output: String,
@@ -15,6 +16,7 @@ struct VercelPricing {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct VercelModel {
     id: String,
     #[serde(rename = "object")]
@@ -33,6 +35,7 @@ struct VercelModel {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct VercelResponse {
     object: String,
     data: Vec<VercelModel>,

@@ -7,6 +7,7 @@ use crate::models::{ModelInfo, ModelType};
 use crate::providers::Provider;
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct GeminiApiModel {
     id: String,
     object: String,
@@ -14,6 +15,7 @@ struct GeminiApiModel {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct GeminiApiResponse {
     object: String,
     data: Vec<GeminiApiModel>,

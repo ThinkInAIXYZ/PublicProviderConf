@@ -5,6 +5,7 @@ use crate::models::{ModelInfo, ModelType};
 use crate::providers::Provider;
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct OpenRouterArchitecture {
     modality: Option<String>,
     #[serde(rename = "input_modalities")]
@@ -17,6 +18,7 @@ struct OpenRouterArchitecture {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct OpenRouterTopProvider {
     #[serde(rename = "is_moderated")]
     is_moderated: Option<bool>,
@@ -27,6 +29,7 @@ struct OpenRouterTopProvider {
 }
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct OpenRouterModel {
     id: String,
     #[serde(rename = "canonical_slug")]

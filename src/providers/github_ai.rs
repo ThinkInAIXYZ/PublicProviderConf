@@ -5,6 +5,7 @@ use crate::models::{ModelInfo, ModelType};
 use crate::providers::Provider;
 
 #[derive(Debug, Deserialize)]
+#[allow(dead_code)]
 struct GithubAiModel {
     id: String,
     name: String,
