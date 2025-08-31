@@ -8,12 +8,6 @@ on:
         required: false
         default: ''
   push:
-    branches: [ main ]
-    paths:
-      - 'src/**'
-      - 'Cargo.toml'
-      - '.github/workflows/fetch-models.yml'
-  push:
     tags:
       - 'release-*.*.*'
 
@@ -61,8 +55,10 @@ jobs:
         fi
       env:
         # Add API keys as secrets if needed
-        # OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        # OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         
     - name: Validate generated JSON files
       run: |
@@ -103,7 +99,7 @@ jobs:
         echo "date_short=$(date -u '+%Y%m%d')" >> $GITHUB_OUTPUT
         
     - name: Create Pull Request with updates
-      if: github.ref_type != 'tag' && github.event_name != 'push'
+      if: github.ref_type != 'tag' && github.event_name == 'workflow_dispatch'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -125,14 +121,18 @@ jobs:
           git push origin "$BRANCH_NAME"
           
           # Create PR using GitHub CLI
+          TIMESTAMP="${{ steps.release_info.outputs.timestamp }}"
+          TOTAL_MODELS="${{ steps.release_info.outputs.total_models }}"
+          PROVIDER_COUNT="${{ steps.release_info.outputs.provider_count }}"
+          PROVIDERS="${{ steps.release_info.outputs.providers }}"
+          
           gh pr create \
             --title "🤖 Update AI Model Configurations" \
-            --body "$(cat <<'EOF'
-## 🤖 Automated Model Configuration Update
+            --body "## 🤖 Automated Model Configuration Update
 
-**Generated:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')
-**Total Models:** ${{ steps.release_info.outputs.total_models }}
-**Providers:** ${{ steps.release_info.outputs.provider_count }} (${{ steps.release_info.outputs.providers }})
+**Generated:** ${TIMESTAMP}
+**Total Models:** ${TOTAL_MODELS}
+**Providers:** ${PROVIDER_COUNT} (${PROVIDERS})
 
 ### 📋 Changes
 - Updated model configurations from provider APIs
@@ -140,8 +140,8 @@ jobs:
 - Generated standardized JSON format files
 
 ### 🔍 Files Updated
-- `provider_configs/*.json` - Individual provider configurations
-- `provider_configs/all.json` - Aggregated model data
+- \`provider_configs/*.json\` - Individual provider configurations
+- \`provider_configs/all.json\` - Aggregated model data
 
 ### ✅ Validation
 - [x] JSON syntax validation passed
@@ -150,9 +150,7 @@ jobs:
 
 ---
 
-*This PR was automatically created by GitHub Actions.*
-EOF
-)" \
+*This PR was automatically created by GitHub Actions.*" \
             --head "$BRANCH_NAME" \
             --base main
         else
@@ -160,23 +158,6 @@ EOF
         fi
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
-    - name: Direct commit (for push events)
-      if: github.ref_type != 'tag' && github.event_name == 'push'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        
-        # Copy generated files to provider_configs for direct access
-        cp -r dist/* provider_configs/ || true
-        
-        git add provider_configs/
-        if ! git diff --staged --quiet; then
-          git commit -m "🤖 Update model configurations - $(date -u +%Y-%m-%d)"
-          git push
-        else
-          echo "No changes to commit"
-        fi
         
     - name: Create Release Assets
       if: github.ref_type == 'tag'
