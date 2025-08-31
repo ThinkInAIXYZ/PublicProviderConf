@@ -126,31 +126,35 @@ jobs:
           PROVIDER_COUNT="${{ steps.release_info.outputs.provider_count }}"
           PROVIDERS="${{ steps.release_info.outputs.providers }}"
           
+          cat > pr_body.md << EOF
+          ## 🤖 Automated Model Configuration Update
+
+          **Generated:** ${TIMESTAMP}
+          **Total Models:** ${TOTAL_MODELS}
+          **Providers:** ${PROVIDER_COUNT} (${PROVIDERS})
+
+          ### 📋 Changes
+          - Updated model configurations from provider APIs
+          - Refreshed capability detection (vision, function calling, reasoning)
+          - Generated standardized JSON format files
+
+          ### 🔍 Files Updated
+          - provider_configs/*.json - Individual provider configurations
+          - provider_configs/all.json - Aggregated model data
+
+          ### ✅ Validation
+          - [x] JSON syntax validation passed
+          - [x] Model data structure validation passed
+          - [x] Provider capability detection completed
+
+          ---
+
+          *This PR was automatically created by GitHub Actions.*
+          EOF
+          
           gh pr create \
             --title "🤖 Update AI Model Configurations" \
-            --body "## 🤖 Automated Model Configuration Update
-
-**Generated:** ${TIMESTAMP}
-**Total Models:** ${TOTAL_MODELS}
-**Providers:** ${PROVIDER_COUNT} (${PROVIDERS})
-
-### 📋 Changes
-- Updated model configurations from provider APIs
-- Refreshed capability detection (vision, function calling, reasoning)
-- Generated standardized JSON format files
-
-### 🔍 Files Updated
-- provider_configs/*.json - Individual provider configurations
-- provider_configs/all.json - Aggregated model data
-
-### ✅ Validation
-- [x] JSON syntax validation passed
-- [x] Model data structure validation passed
-- [x] Provider capability detection completed
-
----
-
-*This PR was automatically created by GitHub Actions.*" \
+            --body-file pr_body.md \
             --head "$BRANCH_NAME" \
             --base main
         else
@@ -210,9 +214,9 @@ jobs:
           
           ## 📊 Provider Details
           
-          | Provider | Models Available |
-          |----------|-----------------|
-          ${{ steps.release_info.outputs.providers != 'none' && '| Multiple providers | See all.json |' || '| No providers | 0 |' }}
+          - **Total Models:** ${{ steps.release_info.outputs.total_models }}
+          - **Providers:** ${{ steps.release_info.outputs.providers }}
+          - **Provider Count:** ${{ steps.release_info.outputs.provider_count }}
           
           ## 🔄 Integration
           
