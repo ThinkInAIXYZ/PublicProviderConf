@@ -16,8 +16,10 @@ Automated tool to fetch AI model information from various providers (PPInfra, Op
 Access the latest AI model information in JSON format:
 
 - **All Providers Combined**: [all.json](dist/all.json) - Complete aggregated data from all providers
+- **OpenAI**: [openai.json](dist/openai.json) - OpenAI models with comprehensive template matching (65+ models including GPT-5, o1/o3/o4 series)
+- **Anthropic**: [anthropic.json](dist/anthropic.json) - Anthropic Claude models (8 models including Opus 4.1)
 - **PPInfra**: [ppinfra.json](dist/ppinfra.json) - PPInfra provider models
-- **OpenRouter**: [openrouter.json](dist/openrouter.json) - OpenRouter provider models
+- **OpenRouter**: [openrouter.json](dist/openrouter.json) - OpenRouter provider models  
 - **Google Gemini**: [gemini.json](dist/gemini.json) - Google Gemini API models with web-scraped details
 - **Vercel AI Gateway**: [vercel.json](dist/vercel.json) - Vercel AI Gateway hosted models
 - **GitHub AI Models**: [github_ai.json](dist/github_ai.json) - GitHub AI Models marketplace
@@ -54,7 +56,7 @@ cargo run -- fetch-all -o ./output
 
 Fetch from specific providers:
 ```bash
-cargo run -- fetch-providers -p ppinfra,openrouter,groq
+cargo run -- fetch-providers -p openai,anthropic,ppinfra,openrouter
 ```
 
 ### CLI Options
@@ -222,6 +224,8 @@ This allows you to:
 - **DeepSeek**: ✅ No API key required - uses web scraping from documentation
 - **Gemini**: ⚠️ Optional API key - uses hybrid web scraping + API approach
 - **Groq**: ❌ API key required - private API access only
+- **OpenAI**: ❌ API key required - private API access only
+- **Anthropic**: ❌ API key required - private API access only
 
 ### Gemini Provider Details
 
@@ -310,23 +314,64 @@ Each tagged release includes:
 
 ## 🔌 Adding New Providers
 
-1. Create a new file in `src/providers/` (e.g., `openai.rs`)
-2. Implement the `Provider` trait:
+The system supports two provider implementation patterns:
+
+### Template-Based Providers (Recommended for providers with minimal API metadata)
+
+1. **Create template file** in `templates/{provider}.json`:
+```json
+[{
+  "id": "model-id",
+  "name": "Model Name",
+  "contextLength": 128000,
+  "maxTokens": 8192,
+  "vision": true,
+  "functionCall": true,
+  "reasoning": false,
+  "type": "chat",
+  "description": "Model description",
+  "match": ["model-id", "versioned-model-id", "alias"]
+}]
+```
+
+2. **Implement provider** in `src/providers/{provider}.rs`:
 ```rust
 #[async_trait]
-impl Provider for OpenAIProvider {
+impl Provider for NewProvider {
     async fn fetch_models(&self) -> Result<Vec<ModelInfo>> {
-        // Implement API calls and data conversion
+        // Load templates and match with API response
+        let templates = Self::load_templates()?;
+        let api_models = self.fetch_api_models().await?;
+        
+        // Match API models with templates
+        for api_model in api_models {
+            if let Some(template) = templates.get(&api_model.id) {
+                models.push(template.to_model_info());
+            } else {
+                models.push(self.create_auto_model(&api_model.id));
+            }
+        }
     }
-    
-    fn provider_id(&self) -> &str { "openai" }
-    fn provider_name(&self) -> &str { "OpenAI" }
 }
 ```
-3. Add the module in `src/providers/mod.rs`
-4. Register the provider in `src/main.rs`
 
-For detailed development guide, see [Architecture Documentation](docs/architecture-overview.md).
+### Direct Conversion Providers (For APIs with rich metadata)
+
+```rust
+#[async_trait] 
+impl Provider for NewProvider {
+    async fn fetch_models(&self) -> Result<Vec<ModelInfo>> {
+        // Direct API to ModelInfo conversion
+        let response = self.client.get(&self.api_url).send().await?;
+        let models = response.models.into_iter()
+            .map(|m| self.convert_model(m))
+            .collect();
+        Ok(models)
+    }
+}
+```
+
+For detailed implementation guide, see [Provider Implementation Guide](.claude/provider_implementer.md) and [Architecture Documentation](docs/architecture-overview.md).
 
 ## 📊 Currently Supported Providers
 
@@ -338,7 +383,8 @@ For detailed development guide, see [Architecture Documentation](docs/architectu
 - ✅ **Tokenflux** - 274+ marketplace models with detailed specifications
 - ✅ **Groq** - 22+ high-performance models (API key required)
 - ✅ **DeepSeek** - 2 models (deepseek-chat, deepseek-reasoner) with documentation parsing
-- 🚧 **OpenAI** - Planned
+- ✅ **OpenAI** - 65+ models including GPT-5 series, o1/o3/o4 reasoning models, DALL-E, Whisper, TTS, embeddings with template matching
+- ✅ **Anthropic** - 8 Claude models (Opus 4.1, Opus 4, Sonnet 4, 3.7 Sonnet, 3.5 variants, Haiku) with API key support
 
 ## 🛠️ Development
 

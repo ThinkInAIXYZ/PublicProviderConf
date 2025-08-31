@@ -43,17 +43,26 @@ This project generates standardized JSON files describing AI models from various
 {
   "version": "string",       // Schema version
   "generatedAt": "ISO8601",  // Generation timestamp
+  "totalModels": number,     // Total across all providers
   "providers": {
     "providerId": {
-      "providerName": "string",
-      "modelCount": number,
-      "lastUpdated": "ISO8601"
+      "providerId": "string",    // Provider ID (matches key)
+      "providerName": "string",  // Human-readable provider name
+      "models": [
+        {
+          "id": "string",          // Model identifier
+          "name": "string",        // Display name
+          "contextLength": number, // Max context tokens
+          "maxTokens": number,     // Max output tokens
+          "vision": boolean,       // Image input support
+          "functionCall": boolean, // Tool/function calling support
+          "reasoning": boolean,    // Reasoning capabilities
+          "type": "string",        // Model type
+          "description": "string?" // Optional description
+        }
+      ]
     }
-  },
-  "totalModels": number,     // Total across all providers
-  "allModels": [
-    // Array of all models with additional providerId/providerName fields
-  ]
+  }
 }
 ```
 
@@ -123,14 +132,23 @@ jq '.' file.json
 
 ### Data Validation
 ```bash
-# Check required fields
+# Check required fields in single provider files
 jq '.models[] | select(.id == null or .name == null)' file.json
+
+# Check required fields in aggregated files
+jq '.providers[].models[] | select(.id == null or .name == null)' all.json
 
 # Verify token counts are positive
 jq '.models[] | select(.contextLength <= 0 or .maxTokens <= 0)' file.json
 
-# Check for duplicates
+# Check for duplicates within provider
 jq '.models | group_by(.id) | map(select(length > 1))' file.json
+
+# Validate template matching (for OpenAI/Anthropic)
+jq '.models[] | select(.description and (.description | contains("Auto:")))' openai.json
+
+# Check model counts in aggregated file
+jq '.totalModels == ([.providers[].models[]] | length)' all.json
 ```
 
 ## Automated Validation Script

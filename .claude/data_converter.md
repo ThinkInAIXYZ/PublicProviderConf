@@ -46,17 +46,69 @@ Different providers return model information in varying formats and structures. 
 }
 ```
 
-### OpenAI API  
+### OpenAI API (with Template Matching)
 ```json
+// API Response (minimal metadata)
 {
   "id": "gpt-4o",
   "object": "model",
   "created": 1687882411,
   "owned_by": "openai"
 }
+
+// Template Definition (rich metadata)
+{
+  "id": "gpt-4o",
+  "name": "GPT-4o",
+  "contextLength": 128000,
+  "maxTokens": 8192,
+  "vision": true,
+  "functionCall": true,
+  "reasoning": true,
+  "type": "chat",
+  "description": "Omnimodal model with native audio, vision, and text capabilities",
+  "match": ["gpt-4o", "gpt-4o-2024-05-13", "gpt-4o-2024-08-06"]
+}
+```
+
+### Anthropic API (with Template Matching)
+```json
+// API Response
+{
+  "id": "claude-3-5-sonnet-20241022",
+  "type": "model"
+}
+
+// Template Definition
+{
+  "id": "claude-3-5-sonnet-20241022",
+  "name": "Claude 3.5 Sonnet",
+  "contextLength": 204800,
+  "maxTokens": 8192,
+  "vision": true,
+  "functionCall": true,
+  "reasoning": false,
+  "type": "chat",
+  "description": "Balanced model with strong performance across most tasks"
+}
 ```
 
 ## Data Mapping Strategies
+
+### Template-Based vs Direct Conversion
+
+**Template-Based Providers** (OpenAI, Anthropic):
+- API provides minimal metadata (ID, object type only)
+- Rich metadata stored in template files (`templates/{provider}.json`)
+- Multi-pattern matching via `match` arrays handles versioned model IDs
+- Auto-configuration for unmatched models using intelligent detection
+- Provides consistent, comprehensive model information
+
+**Direct Conversion Providers** (PPInfra, OpenRouter, etc.):
+- API provides rich metadata directly
+- Map API fields to ModelInfo structure
+- Extract capabilities from response features/tags
+- Handle provider-specific data formats
 
 ### Model Capabilities Detection
 
@@ -138,12 +190,37 @@ context_length: 4096, // conservative default
 max_tokens: context_length / 4,
 ```
 
-### Capability Detection
+### Capability Detection (Auto-Configuration)
 ```rust
-// Infer from model ID patterns
-vision: id.contains("vision") || id.contains("image"),
-function_call: id.contains("gpt-4") || id.contains("claude-3"),
-reasoning: id.contains("o1") || id.contains("reasoning"),
+// For unmatched models in template-based providers
+fn create_default_model(&self, model_id: &str) -> ModelInfo {
+    // OpenAI pattern detection
+    let is_reasoning = model_id.contains("o1") || model_id.contains("o3") || model_id.contains("o4");
+    let has_vision = model_id.contains("4o") || model_id.contains("gpt-4") || model_id.contains("vision");
+    let has_function_call = !model_id.contains("instruct") && !model_id.contains("embedding");
+    
+    // Anthropic pattern detection  
+    let is_claude = model_id.starts_with("claude-");
+    let has_vision = is_claude && !model_id.contains("text-");
+    
+    // Set appropriate defaults
+    ModelInfo::new(
+        model_id.to_string(),
+        format!("Auto: {}", model_id),
+        default_context_length,
+        default_max_tokens, 
+        has_vision,
+        has_function_call,
+        is_reasoning,
+        ModelType::Chat,
+        Some(format!("Auto-configured model: {}", model_id)),
+    )
+}
+
+// For direct conversion providers
+vision: id.contains("vision") || id.contains("image") || features.contains("vision"),
+function_call: id.contains("gpt-4") || features.contains("function-calling"),
+reasoning: id.contains("o1") || features.contains("reasoning"),
 ```
 
 ## Quality Assurance

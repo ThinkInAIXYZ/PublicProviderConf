@@ -15,7 +15,7 @@ cargo build
 cargo run -- fetch-all
 
 # Run with specific providers  
-cargo run -- fetch-providers -p ppinfra,openai
+cargo run -- fetch-providers -p ppinfra,openai,anthropic
 
 # Run tests
 cargo test
@@ -53,6 +53,10 @@ du -h dist/*.json
 
 - `src/main.rs` - CLI entry point
 - `src/providers/ppinfra.rs` - PPInfra API implementation
+- `src/providers/openai.rs` - OpenAI API implementation with template matching
+- `src/providers/anthropic.rs` - Anthropic API implementation
+- `templates/openai.json` - OpenAI model template definitions
+- `templates/anthropic.json` - Anthropic model template definitions
 - `docs/architecture-overview.md` - Complete architecture documentation
 - `.github/workflows/fetch-models.yml` - Automated fetching workflow
 
@@ -197,8 +201,10 @@ The workflow automatically:
 ## Environment Variables
 
 Optional API keys can be set as GitHub secrets:
-- `OPENAI_API_KEY`
-- `OPENROUTER_API_KEY`
+- `OPENAI_API_KEY` - Required for OpenAI provider
+- `ANTHROPIC_API_KEY` - Required for Anthropic provider
+- `GROQ_API_KEY` - Required for Groq provider
+- `GEMINI_API_KEY` - Optional for Gemini provider (enhances model list)
 - Add others as needed
 
 ## Common Issues
@@ -210,9 +216,12 @@ Optional API keys can be set as GitHub secrets:
 
 ## Next Steps
 
+- [x] Add OpenAI provider implementation (65+ models with template matching)
+- [x] Add Anthropic provider implementation (8 Claude models with API key support)
+- [x] Implement configuration file loading
 - [ ] Add OpenRouter provider implementation
-- [ ] Add OpenAI provider implementation  
 - [ ] Add Google Gemini provider implementation
-- [ ] Implement configuration file loading
 - [ ] Add rate limiting and retry logic
 - [ ] Add comprehensive error handling
+- [ ] Implement template validation system
+- [ ] Add provider health check endpoints
