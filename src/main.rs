@@ -11,6 +11,8 @@ use public_provider_conf::{
     providers::tokenflux::TokenfluxProvider,
     providers::groq::GroqProvider,
     providers::deepseek::DeepSeekProvider,
+    providers::openai::OpenAIProvider,
+    providers::anthropic::AnthropicProvider,
     fetcher::DataFetcher,
     output::OutputManager,
     config::AppConfig,
@@ -138,6 +140,22 @@ async fn fetch_all_providers(output_dir: String, config_path: String) -> Result<
     // Add DeepSeek provider (no API key required, uses web scraping)
     let deepseek = Arc::new(DeepSeekProvider::new());
     fetcher.add_provider(deepseek);
+
+    // Add OpenAI provider (optional API key for complete model list)
+    let openai_config = config.providers.get("openai");
+    let openai_api_key = openai_config
+        .and_then(|c| c.get_api_key())
+        .or_else(|| std::env::var("OPENAI_API_KEY").ok());
+    let openai = Arc::new(OpenAIProvider::new(openai_api_key));
+    fetcher.add_provider(openai);
+
+    // Add Anthropic provider (optional API key for complete model list)
+    let anthropic_config = config.providers.get("anthropic");
+    let anthropic_api_key = anthropic_config
+        .and_then(|c| c.get_api_key())
+        .or_else(|| std::env::var("ANTHROPIC_API_KEY").ok());
+    let anthropic = Arc::new(AnthropicProvider::new(anthropic_api_key));
+    fetcher.add_provider(anthropic);
     
     let provider_data = fetcher.fetch_all().await?;
     
@@ -228,6 +246,22 @@ async fn fetch_specific_providers(
             "deepseek" => {
                 let deepseek = Arc::new(DeepSeekProvider::new());
                 fetcher.add_provider(deepseek);
+            }
+            "openai" => {
+                let openai_config = config.providers.get("openai");
+                let openai_api_key = openai_config
+                    .and_then(|c| c.get_api_key())
+                    .or_else(|| std::env::var("OPENAI_API_KEY").ok());
+                let openai = Arc::new(OpenAIProvider::new(openai_api_key));
+                fetcher.add_provider(openai);
+            }
+            "anthropic" => {
+                let anthropic_config = config.providers.get("anthropic");
+                let anthropic_api_key = anthropic_config
+                    .and_then(|c| c.get_api_key())
+                    .or_else(|| std::env::var("ANTHROPIC_API_KEY").ok());
+                let anthropic = Arc::new(AnthropicProvider::new(anthropic_api_key));
+                fetcher.add_provider(anthropic);
             }
             _ => {
                 eprintln!("⚠️  Unknown provider: {}", provider_name);
