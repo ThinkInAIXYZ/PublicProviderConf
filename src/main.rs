@@ -14,6 +14,7 @@ use public_provider_conf::{
     providers::openai::OpenAIProvider,
     providers::anthropic::AnthropicProvider,
     providers::ollama::OllamaProvider,
+    providers::siliconflow::SiliconFlowProvider,
     fetcher::DataFetcher,
     output::OutputManager,
     config::AppConfig,
@@ -162,6 +163,10 @@ async fn fetch_all_providers(output_dir: String, config_path: String) -> Result<
     let ollama = Arc::new(OllamaProvider::new());
     fetcher.add_provider(ollama);
     
+    // Add SiliconFlow provider (template-based, no API key required)
+    let siliconflow = Arc::new(SiliconFlowProvider::new());
+    fetcher.add_provider(siliconflow);
+    
     let provider_data = fetcher.fetch_all().await?;
     
     let output_manager = OutputManager::new(output_dir);
@@ -271,6 +276,10 @@ async fn fetch_specific_providers(
             "ollama" => {
                 let ollama = Arc::new(OllamaProvider::new());
                 fetcher.add_provider(ollama);
+            }
+            "siliconflow" => {
+                let siliconflow = Arc::new(SiliconFlowProvider::new());
+                fetcher.add_provider(siliconflow);
             }
             _ => {
                 eprintln!("⚠️  Unknown provider: {}", provider_name);
