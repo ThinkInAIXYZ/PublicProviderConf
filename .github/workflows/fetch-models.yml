@@ -19,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
     
     steps:
     - name: Checkout repository
@@ -98,72 +97,6 @@ jobs:
         echo "timestamp=$(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_OUTPUT
         echo "date_short=$(date -u '+%Y%m%d')" >> $GITHUB_OUTPUT
         
-    - name: Create Pull Request with updates
-      if: github.ref_type != 'tag' && github.event_name == 'workflow_dispatch'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        
-        # Copy generated files to provider_configs for direct access
-        mkdir -p provider_configs
-        cp -r dist/* provider_configs/ || true
-        
-        # Check if there are changes
-        git add provider_configs/
-        if ! git diff --staged --quiet; then
-          # Create a new branch for the PR
-          BRANCH_NAME="update-models-$(date -u +%Y%m%d-%H%M%S)"
-          git checkout -b "$BRANCH_NAME"
-          
-          # Commit changes
-          git commit -m "🤖 Update model configurations - $(date -u +%Y-%m-%d)"
-          
-          # Push to remote
-          git push origin "$BRANCH_NAME"
-          
-          # Create PR using GitHub CLI
-          TIMESTAMP="${{ steps.release_info.outputs.timestamp }}"
-          TOTAL_MODELS="${{ steps.release_info.outputs.total_models }}"
-          PROVIDER_COUNT="${{ steps.release_info.outputs.provider_count }}"
-          PROVIDERS="${{ steps.release_info.outputs.providers }}"
-          
-          cat > pr_body.md << EOF
-          ## 🤖 Automated Model Configuration Update
-
-          **Generated:** ${TIMESTAMP}
-          **Total Models:** ${TOTAL_MODELS}
-          **Providers:** ${PROVIDER_COUNT} (${PROVIDERS})
-
-          ### 📋 Changes
-          - Updated model configurations from provider APIs
-          - Refreshed capability detection (vision, function calling, reasoning)
-          - Generated standardized JSON format files
-
-          ### 🔍 Files Updated
-          - provider_configs/*.json - Individual provider configurations
-          - provider_configs/all.json - Aggregated model data
-
-          ### ✅ Validation
-          - [x] JSON syntax validation passed
-          - [x] Model data structure validation passed
-          - [x] Provider capability detection completed
-
-          ---
-
-          *This PR was automatically created by GitHub Actions.*
-          EOF
-          
-          gh pr create \
-            --title "🤖 Update AI Model Configurations" \
-            --body-file pr_body.md \
-            --head "$BRANCH_NAME" \
-            --base main
-        else
-          echo "No changes to commit"
-        fi
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
     - name: Create Release Assets
       if: github.ref_type == 'tag'
       run: |
@@ -180,8 +113,8 @@ jobs:
         done
         cd ..
         
-    - name: Upload Artifacts (non-tag)
-      if: github.ref_type != 'tag'
+    - name: Upload Artifacts (workflow dispatch)
+      if: github.event_name == 'workflow_dispatch'
       uses: actions/upload-artifact@v4
       with:
         name: provider-configs-${{ steps.release_info.outputs.date_short }}
