@@ -15,7 +15,7 @@ cargo build
 cargo run -- fetch-all
 
 # Run with specific providers  
-cargo run -- fetch-providers -p ppinfra,openai,anthropic
+cargo run -- fetch-providers -p ppinfra,openai,anthropic,openrouter,gemini,vercel,github_ai,tokenflux,groq,deepseek
 
 # Run tests
 cargo test
@@ -44,8 +44,11 @@ du -h dist/*.json
 │   ├── providers/       # Provider implementations  
 │   ├── fetcher/         # Data fetching logic
 │   ├── output/          # Output handling
+│   ├── processor/       # Data processing logic
 │   └── config/          # Configuration management
 ├── dist/                # Generated JSON output files
+├── templates/           # Model template definitions
+├── config/             # Configuration files
 └── docs/                # Documentation
 ```
 
@@ -55,6 +58,13 @@ du -h dist/*.json
 - `src/providers/ppinfra.rs` - PPInfra API implementation
 - `src/providers/openai.rs` - OpenAI API implementation with template matching
 - `src/providers/anthropic.rs` - Anthropic API implementation
+- `src/providers/openrouter.rs` - OpenRouter API implementation
+- `src/providers/gemini.rs` - Google Gemini API implementation with web scraping
+- `src/providers/vercel.rs` - Vercel AI Gateway implementation
+- `src/providers/github_ai.rs` - GitHub AI Models implementation
+- `src/providers/tokenflux.rs` - Tokenflux implementation
+- `src/providers/groq.rs` - Groq API implementation
+- `src/providers/deepseek.rs` - DeepSeek web scraping implementation
 - `templates/openai.json` - OpenAI model template definitions
 - `templates/anthropic.json` - Anthropic model template definitions
 - `docs/architecture-overview.md` - Complete architecture documentation
@@ -193,19 +203,32 @@ The system will automatically:
 ## GitHub Actions
 
 The workflow automatically:
-- Runs daily at 06:00 UTC
+- Runs on workflow dispatch (manual trigger)
+- Runs on tag push (`release-*.*.*`)
 - Fetches latest model data
-- Commits updates to `dist/`
-- Creates releases with downloadable JSON files
+- Uploads artifacts for manual triggers
+- Creates releases with downloadable JSON files for tag triggers
 
 ## Environment Variables
 
 Optional API keys can be set as GitHub secrets:
-- `OPENAI_API_KEY` - Required for OpenAI provider
-- `ANTHROPIC_API_KEY` - Required for Anthropic provider
-- `GROQ_API_KEY` - Required for Groq provider
+- `OPENAI_API_KEY` - Required for OpenAI provider (complete model list)
+- `ANTHROPIC_API_KEY` - Required for Anthropic provider (complete model list)
+- `GROQ_API_KEY` - Required for Groq provider (API access)
 - `GEMINI_API_KEY` - Optional for Gemini provider (enhances model list)
 - Add others as needed
+
+### Provider API Key Requirements
+- **PPInfra**: ✅ No API key required - public API
+- **OpenRouter**: ✅ No API key required - public model listing API
+- **Vercel AI Gateway**: ✅ No API key required - public AI Gateway API
+- **GitHub AI Models**: ✅ No API key required - public model listing API
+- **Tokenflux**: ✅ No API key required - public marketplace API
+- **DeepSeek**: ✅ No API key required - web scraping from documentation
+- **Gemini**: ⚠️ Optional API key - hybrid web scraping + API approach
+- **Groq**: ❌ API key required - private API access only
+- **OpenAI**: ❌ API key required - private API access only
+- **Anthropic**: ❌ API key required - private API access only
 
 ## Common Issues
 
@@ -219,9 +242,24 @@ Optional API keys can be set as GitHub secrets:
 - [x] Add OpenAI provider implementation (65+ models with template matching)
 - [x] Add Anthropic provider implementation (8 Claude models with API key support)
 - [x] Implement configuration file loading
-- [ ] Add OpenRouter provider implementation
-- [ ] Add Google Gemini provider implementation
-- [ ] Add rate limiting and retry logic
-- [ ] Add comprehensive error handling
-- [ ] Implement template validation system
-- [ ] Add provider health check endpoints
+- [x] Add OpenRouter provider implementation
+- [x] Add Google Gemini provider implementation
+- [x] Add Vercel AI Gateway provider implementation
+- [x] Add GitHub AI Models provider implementation
+- [x] Add Tokenflux provider implementation
+- [x] Add Groq provider implementation
+- [x] Add DeepSeek provider implementation
+- [x] Add rate limiting and retry logic
+- [x] Add comprehensive error handling
+- [x] Implement template validation system
+- [x] Add provider health check endpoints
+- [ ] Add Azure OpenAI provider implementation
+- [ ] Add AWS Bedrock provider implementation
+- [ ] Add Cohere provider implementation
+- [ ] Add Mistral AI provider implementation
+- [ ] Add Stability AI provider implementation
+- [ ] Add Replicate provider implementation
+- [ ] Add Hugging Face provider implementation
+- [ ] Add advanced caching system
+- [ ] Add provider status monitoring
+- [ ] Add web UI for model browsing
