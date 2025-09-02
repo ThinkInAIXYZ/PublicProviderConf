@@ -8,6 +8,7 @@ pub mod groq;
 pub mod deepseek;
 pub mod openai;
 pub mod anthropic;
+pub mod ollama;
 
 use async_trait::async_trait;
 use anyhow::Result;

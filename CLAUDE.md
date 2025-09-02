@@ -15,7 +15,7 @@ cargo build
 cargo run -- fetch-all
 
 # Run with specific providers  
-cargo run -- fetch-providers -p ppinfra,openai,anthropic,openrouter,gemini,vercel,github_ai,tokenflux,groq,deepseek
+cargo run -- fetch-providers -p ppinfra,openai,anthropic,openrouter,gemini,vercel,github_ai,tokenflux,groq,deepseek,ollama
 
 # Run tests
 cargo test
@@ -65,8 +65,10 @@ du -h dist/*.json
 - `src/providers/tokenflux.rs` - Tokenflux implementation
 - `src/providers/groq.rs` - Groq API implementation
 - `src/providers/deepseek.rs` - DeepSeek web scraping implementation
+- `src/providers/ollama.rs` - Ollama template-based implementation
 - `templates/openai.json` - OpenAI model template definitions
 - `templates/anthropic.json` - Anthropic model template definitions
+- `templates/ollama.json` - Ollama model template definitions
 - `docs/architecture-overview.md` - Complete architecture documentation
 - `.github/workflows/fetch-models.yml` - Automated fetching workflow
 
@@ -225,6 +227,7 @@ Optional API keys can be set as GitHub secrets:
 - **GitHub AI Models**: ✅ No API key required - public model listing API
 - **Tokenflux**: ✅ No API key required - public marketplace API
 - **DeepSeek**: ✅ No API key required - web scraping from documentation
+- **Ollama**: ✅ No API key required - template-based provider
 - **Gemini**: ⚠️ Optional API key - hybrid web scraping + API approach
 - **Groq**: ❌ API key required - private API access only
 - **OpenAI**: ❌ API key required - private API access only
@@ -249,6 +252,7 @@ Optional API keys can be set as GitHub secrets:
 - [x] Add Tokenflux provider implementation
 - [x] Add Groq provider implementation
 - [x] Add DeepSeek provider implementation
+- [x] Add Ollama provider implementation (template-based)
 - [x] Add rate limiting and retry logic
 - [x] Add comprehensive error handling
 - [x] Implement template validation system
