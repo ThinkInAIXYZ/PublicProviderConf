@@ -29,7 +29,6 @@ struct TemplateModel {
     reasoning: bool,
     #[serde(rename = "type")]
     model_type: String,
-    description: Option<String>,
     #[serde(rename = "match", default)]
     match_patterns: Vec<String>,
 }
@@ -122,7 +121,6 @@ impl OpenAIProvider {
             has_function_call,
             is_reasoning,
             model_type,
-            Some(format!("OpenAI model {} (auto-configured)", model_id)),
         )
     }
     
@@ -145,8 +143,7 @@ impl OpenAIProvider {
             template.function_call,
             template.reasoning,
             model_type,
-            template.description.clone(),
-        )
+ )
     }
 
     async fn fetch_available_model_ids(&self) -> Result<Vec<String>> {

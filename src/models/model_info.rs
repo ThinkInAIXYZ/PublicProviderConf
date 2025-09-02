@@ -22,7 +22,6 @@ pub struct ModelInfo {
     pub reasoning: bool,
     #[serde(rename = "type")]
     pub model_type: ModelType,
-    pub description: Option<String>,
 }
 
 impl ModelInfo {
@@ -35,7 +34,6 @@ impl ModelInfo {
         function_call: bool,
         reasoning: bool,
         model_type: ModelType,
-        description: Option<String>,
     ) -> Self {
         Self {
             id,
@@ -46,7 +44,6 @@ impl ModelInfo {
             function_call,
             reasoning,
             model_type,
-            description,
         }
     }
 }

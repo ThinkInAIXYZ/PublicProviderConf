@@ -24,7 +24,6 @@ struct VercelModel {
     created: i64,
     owned_by: String,
     name: String,
-    description: String,
     context_window: u32,
     max_tokens: u32,
     #[serde(rename = "type")]
@@ -55,25 +54,19 @@ impl VercelProvider {
     }
 
     fn convert_model(&self, model: VercelModel) -> ModelInfo {
-        // Detect vision capability from model id and description
+        // Detect vision capability from model id and tags
         let vision = model.id.to_lowercase().contains("vision") 
             || model.name.to_lowercase().contains("vision")
-            || model.description.to_lowercase().contains("vision")
-            || model.description.to_lowercase().contains("image")
             || model.tags.iter().any(|tag| tag.contains("image") || tag.contains("vision"));
 
         // Detect function call capability
         let function_call = model.id.to_lowercase().contains("function")
             || model.name.to_lowercase().contains("function")
-            || model.description.to_lowercase().contains("function")
-            || model.description.to_lowercase().contains("tool")
             || model.tags.iter().any(|tag| tag.contains("function") || tag.contains("tool"));
 
         // Detect reasoning capability
         let reasoning = model.id.to_lowercase().contains("reasoning")
             || model.name.to_lowercase().contains("reasoning")
-            || model.description.to_lowercase().contains("reasoning")
-            || model.description.to_lowercase().contains("thinking")
             || model.tags.iter().any(|tag| tag.contains("reasoning") || tag.contains("thinking"));
 
         // Determine model type
@@ -93,7 +86,6 @@ impl VercelProvider {
             function_call,
             reasoning,
             model_type,
-            Some(model.description),
         )
     }
 }

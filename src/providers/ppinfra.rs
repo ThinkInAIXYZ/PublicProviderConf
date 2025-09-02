@@ -9,7 +9,6 @@ struct PPInfraModel {
     id: String,
     #[serde(rename = "display_name")]
     display_name: String,
-    description: String,
     context_size: u32,
     max_output_tokens: u32,
     #[serde(default)]
@@ -57,8 +56,7 @@ impl PPInfraProvider {
             function_call,
             reasoning,
             model_type,
-            Some(model.description),
-        )
+ )
     }
 }
 

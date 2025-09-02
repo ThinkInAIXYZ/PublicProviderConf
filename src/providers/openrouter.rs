@@ -38,7 +38,6 @@ struct OpenRouterModel {
     hugging_face_id: Option<String>,
     name: String,
     created: Option<i64>,
-    description: Option<String>,
     architecture: Option<OpenRouterArchitecture>,
     #[serde(rename = "top_provider")]
     top_provider: Option<OpenRouterTopProvider>,
@@ -104,7 +103,6 @@ impl OpenRouterProvider {
             function_call,
             reasoning,
             ModelType::Chat,
-            model.description,
         )
     }
 }

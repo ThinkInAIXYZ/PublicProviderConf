@@ -16,7 +16,6 @@ struct TokenfluxModel {
     name: String,
     #[serde(rename = "type")]
     model_type: String,
-    description: String,
     context_length: u32,
     #[serde(default)]
     architecture: Option<TokenfluxArchitecture>,
@@ -45,7 +44,6 @@ impl TokenfluxProvider {
     fn convert_model(&self, model: TokenfluxModel) -> ModelInfo {
         let id_lower = model.id.to_lowercase();
         let name_lower = model.name.to_lowercase();
-        let desc_lower = model.description.to_lowercase();
 
         // Detect vision capability from architecture input modalities and text analysis
         let vision = model.architecture
@@ -54,9 +52,7 @@ impl TokenfluxProvider {
             .map(|modalities| modalities.iter().any(|m| m.contains("image") || m.contains("vision")))
             .unwrap_or(false)
             || id_lower.contains("vision")
-            || name_lower.contains("vision")
-            || desc_lower.contains("vision")
-            || desc_lower.contains("image");
+            || name_lower.contains("vision");
 
         // Detect function call capability from supported parameters and text analysis
         let function_call = model.supported_parameters
@@ -64,19 +60,15 @@ impl TokenfluxProvider {
             .map(|params| params.iter().any(|p| p.contains("tool") || p.contains("function")))
             .unwrap_or(false)
             || id_lower.contains("function")
-            || name_lower.contains("function")
-            || desc_lower.contains("function")
-            || desc_lower.contains("tool");
+            || name_lower.contains("function");
 
-        // Detect reasoning capability from supported parameters and description
+        // Detect reasoning capability from supported parameters
         let reasoning = model.supported_parameters
             .as_ref()
             .map(|params| params.iter().any(|p| p.contains("reasoning") || p.contains("include_reasoning")))
             .unwrap_or(false)
             || id_lower.contains("reasoning")
             || name_lower.contains("reasoning")
-            || desc_lower.contains("reasoning")
-            || desc_lower.contains("thinking")
             || id_lower.contains("r1"); // DeepSeek R1 models
 
         // Determine model type
@@ -105,7 +97,6 @@ impl TokenfluxProvider {
             function_call,
             reasoning,
             model_type,
-            Some(model.description),
         )
     }
 }

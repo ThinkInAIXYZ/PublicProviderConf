@@ -10,7 +10,6 @@ struct DeepSeekModelDetails {
     name: String,
     context_length: u32,
     max_tokens: u32,
-    description: String,
     vision: bool,
     function_call: bool,
     reasoning: bool,
@@ -123,30 +122,22 @@ impl DeepSeekProvider {
         }
     }
 
-    fn create_deepseek_chat_details(&self, details: &str) -> DeepSeekModelDetails {
+    fn create_deepseek_chat_details(&self, _details: &str) -> DeepSeekModelDetails {
         DeepSeekModelDetails {
             name: "DeepSeek Chat".to_string(),
             context_length: 128000, // 128K context
             max_tokens: 8192, // Maximum 8K output
-            description: format!(
-                "DeepSeek-V3.1 (Non-thinking Mode) - High-performance conversational AI model with 128K context window. {}",
-                details
-            ),
             vision: false, // Based on documentation, no vision support mentioned
             function_call: true, // Supports function calling
             reasoning: false, // Non-thinking mode
         }
     }
 
-    fn create_deepseek_reasoner_details(&self, details: &str) -> DeepSeekModelDetails {
+    fn create_deepseek_reasoner_details(&self, _details: &str) -> DeepSeekModelDetails {
         DeepSeekModelDetails {
             name: "DeepSeek Reasoner".to_string(),
             context_length: 128000, // 128K context
             max_tokens: 65536, // Maximum 64K output
-            description: format!(
-                "DeepSeek-V3.1 (Thinking Mode) - Advanced reasoning model with extended output capabilities. {}",
-                details
-            ),
             vision: false, // Based on documentation, no vision support mentioned
             function_call: false, // Does not support function calling (switches to chat mode if tools are provided)
             reasoning: true, // Thinking mode with reasoning capabilities
@@ -161,7 +152,6 @@ impl DeepSeekProvider {
             name: "DeepSeek Chat".to_string(),
             context_length: 128000,
             max_tokens: 8192,
-            description: "DeepSeek-V3.1 (Non-thinking Mode) - High-performance conversational AI model with function calling support and 128K context window. Supports JSON output, function calling, chat prefix completion, and FIM completion.".to_string(),
             vision: false,
             function_call: true,
             reasoning: false,
@@ -171,11 +161,10 @@ impl DeepSeekProvider {
             name: "DeepSeek Reasoner".to_string(),
             context_length: 128000,
             max_tokens: 65536,
-            description: "DeepSeek-V3.1 (Thinking Mode) - Advanced reasoning model with extended output capabilities up to 64K tokens. Supports JSON output and chat prefix completion. Automatically switches to deepseek-chat when function calling is needed.".to_string(),
             vision: false,
             function_call: false,
             reasoning: true,
-        });
+ });
     }
 
     fn convert_model(&self, model_id: String, details: &DeepSeekModelDetails) -> ModelInfo {
@@ -191,7 +180,6 @@ impl DeepSeekProvider {
             details.function_call,
             details.reasoning,
             model_type,
-            Some(details.description.clone()),
         )
     }
 }

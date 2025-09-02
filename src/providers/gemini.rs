@@ -26,7 +26,6 @@ struct GeminiModelDetails {
     name: String,
     context_length: u32,
     max_tokens: u32,
-    description: String,
     vision: bool,
     function_call: bool,
     reasoning: bool,
@@ -155,18 +154,17 @@ impl GeminiProvider {
     fn add_fallback_models(&self, models: &mut HashMap<String, GeminiModelDetails>) {
         // Add known Gemini models as fallback
         let fallback_models = vec![
-            ("models/gemini-1.5-pro-latest", "Gemini 1.5 Pro", "Most capable model for complex tasks", 2097152, 8192, true, true, true),
-            ("models/gemini-1.5-flash-latest", "Gemini 1.5 Flash", "Fast and efficient model", 1048576, 8192, true, true, false),
-            ("models/gemini-1.0-pro", "Gemini 1.0 Pro", "Previous generation model", 32768, 2048, false, true, false),
-            ("models/embedding-gecko-001", "Embedding Gecko", "Text embedding model", 2048, 0, false, false, false),
+            ("models/gemini-1.5-pro-latest", "Gemini 1.5 Pro", 2097152, 8192, true, true, true),
+            ("models/gemini-1.5-flash-latest", "Gemini 1.5 Flash", 1048576, 8192, true, true, false),
+            ("models/gemini-1.0-pro", "Gemini 1.0 Pro", 32768, 2048, false, true, false),
+            ("models/embedding-gecko-001", "Embedding Gecko", 2048, 0, false, false, false),
         ];
 
-        for (id, name, desc, context, max_tokens, vision, func, reasoning) in fallback_models {
+        for (id, name, context, max_tokens, vision, func, reasoning) in fallback_models {
             models.insert(id.to_string(), GeminiModelDetails {
                 name: name.to_string(),
                 context_length: context,
                 max_tokens,
-                description: desc.to_string(),
                 vision,
                 function_call: func,
                 reasoning,
@@ -243,24 +241,15 @@ impl GeminiProvider {
             (32768, 4096)
         };
 
-        let full_description = if description.is_empty() && optimized_for.is_empty() {
-            format!("Google {} model", display_name)
-        } else if optimized_for.is_empty() {
-            description.to_string()
-        } else {
-            format!("{} - {}", description, optimized_for)
-        };
-
         GeminiModelDetails {
             name: format!("Google: {}", display_name),
             context_length,
             max_tokens,
-            description: full_description,
             vision,
             function_call,
             reasoning,
         }
-    }
+ }
 
     fn create_display_name(&self, model_name: &str) -> String {
         // Convert kebab-case model name to display name
@@ -297,7 +286,6 @@ impl GeminiProvider {
             details.function_call,
             details.reasoning,
             model_type,
-            Some(details.description.clone()),
         )
     }
 }

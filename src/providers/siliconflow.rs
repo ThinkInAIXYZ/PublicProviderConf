@@ -19,7 +19,6 @@ struct TemplateModel {
     reasoning: bool,
     #[serde(rename = "type")]
     model_type: String,
-    description: Option<String>,
     #[serde(rename = "match", default)]
     match_patterns: Vec<String>,
 }
@@ -50,8 +49,7 @@ impl SiliconFlowProvider {
             template.function_call,
             template.reasoning,
             model_type,
-            template.description.clone(),
-        )
+ )
     }
 }
 

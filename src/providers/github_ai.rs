@@ -16,7 +16,6 @@ struct GithubAiModel {
     model_registry: String,
     license: String,
     task: String,
-    description: String,
     summary: String,
     #[serde(default)]
     tags: Vec<String>,
@@ -36,27 +35,21 @@ impl GithubAiProvider {
     }
 
     fn convert_model(&self, model: GithubAiModel) -> ModelInfo {
-        // Detect vision capability from model id, name, description and tags
+        // Detect vision capability from model id, name, and tags
         let vision = model.id.to_lowercase().contains("vision") 
             || model.name.to_lowercase().contains("vision")
-            || model.description.to_lowercase().contains("vision")
-            || model.description.to_lowercase().contains("image")
             || model.tags.iter().any(|tag| tag.to_lowercase().contains("image") 
                 || tag.to_lowercase().contains("vision"));
 
         // Detect function call capability
         let function_call = model.id.to_lowercase().contains("function")
             || model.name.to_lowercase().contains("function")
-            || model.description.to_lowercase().contains("function")
-            || model.description.to_lowercase().contains("tool")
             || model.tags.iter().any(|tag| tag.to_lowercase().contains("function") 
                 || tag.to_lowercase().contains("tool"));
 
         // Detect reasoning capability
         let reasoning = model.id.to_lowercase().contains("reasoning")
             || model.name.to_lowercase().contains("reasoning")
-            || model.description.to_lowercase().contains("reasoning")
-            || model.description.to_lowercase().contains("thinking")
             || model.tags.iter().any(|tag| tag.to_lowercase().contains("reasoning") 
                 || tag.to_lowercase().contains("thinking"));
 
@@ -88,7 +81,6 @@ impl GithubAiProvider {
             function_call,
             reasoning,
             model_type,
-            Some(model.description),
         )
     }
 }

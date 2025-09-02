@@ -29,7 +29,6 @@ struct TemplateModel {
     reasoning: bool,
     #[serde(rename = "type")]
     model_type: String,
-    description: Option<String>,
 }
 
 pub struct AnthropicProvider {
@@ -66,7 +65,6 @@ impl AnthropicProvider {
             template.function_call,
             template.reasoning,
             model_type,
-            template.description.clone(),
         )
     }
 

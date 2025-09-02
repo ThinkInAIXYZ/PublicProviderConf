@@ -56,21 +56,16 @@ impl GroqProvider {
         let model_type = self.determine_model_type(&groq_model.id);
         let display_name = self.create_display_name(&groq_model.id, &groq_model.owned_by);
         
-        ModelInfo {
-            id: groq_model.id.clone(),
-            name: display_name,
+        ModelInfo::new(
+            groq_model.id.clone(),
+            display_name,
+            groq_model.context_window as u32,
+            groq_model.max_completion_tokens.unwrap_or(groq_model.context_window) as u32,
+            self.has_vision_capability(&groq_model.id),
+            self.has_function_call_capability(&groq_model.id),
+            self.has_reasoning_capability(&groq_model.id),
             model_type,
-            context_length: groq_model.context_window as u32,
-            max_tokens: groq_model.max_completion_tokens.unwrap_or(groq_model.context_window) as u32,
-            vision: self.has_vision_capability(&groq_model.id),
-            function_call: self.has_function_call_capability(&groq_model.id),
-            reasoning: self.has_reasoning_capability(&groq_model.id),
-            description: Some(format!(
-                "Model by {} with {}K context window",
-                groq_model.owned_by,
-                groq_model.context_window / 1024
-            )),
-        }
+        )
     }
 
     /// Determine model type based on model ID
