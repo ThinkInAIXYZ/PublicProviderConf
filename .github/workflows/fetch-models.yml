@@ -12,7 +12,7 @@ on:
       - 'release-*.*.*'
 
 env:
-  CARGO_TERM_COLOR: always
+  NODE_ENV: production
 
 jobs:
   fetch-and-update:
@@ -24,23 +24,31 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       
-    - name: Install Rust
-      uses: dtolnay/rust-toolchain@stable
-      
-    - name: Cache Cargo dependencies
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Cache npm dependencies
       uses: actions/cache@v4
       with:
         path: |
-          ~/.cargo/registry
-          ~/.cargo/git
-          target/
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          ~/.npm
+          node_modules/
+          .npm/
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-
+        
+    - name: Install dependencies
+      run: npm ci
         
     - name: Build project
-      run: cargo build --release
+      run: npm run build
       
     - name: Run tests
-      run: cargo test
+      run: npm test
       
     - name: Create dist directory
       run: mkdir -p dist
@@ -48,9 +56,9 @@ jobs:
     - name: Fetch model data
       run: |
         if [ -n "${{ github.event.inputs.providers }}" ]; then
-          cargo run --release -- fetch-providers -p "${{ github.event.inputs.providers }}" -o dist
+          npm start fetch-providers -- -p "${{ github.event.inputs.providers }}" -o dist
         else
-          cargo run --release -- fetch-all -o dist
+          npm start fetch-all -- -o dist
         fi
       env:
         # Add API keys as secrets if needed

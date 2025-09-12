@@ -30,14 +30,19 @@ Access the latest AI model information in JSON format:
 ## 📦 Installation
 
 ### Prerequisites
-- Rust 1.70+ 
-- Cargo
+- Node.js 18+ 
+- npm or yarn
 
-### Build
+### Install Dependencies
 ```bash
 git clone https://github.com/your-repo/PublicProviderConf.git
 cd PublicProviderConf
-cargo build --release
+npm install
+```
+
+### Build
+```bash
+npm run build
 ```
 
 ## 🚀 Usage
@@ -46,27 +51,33 @@ cargo build --release
 
 Fetch model information from all providers:
 ```bash
-cargo run -- fetch-all
+npm start fetch-all
 ```
 
 Specify output directory:
 ```bash
-cargo run -- fetch-all -o ./output
+npm start fetch-all -o ./output
 ```
 
 Fetch from specific providers:
 ```bash
-cargo run -- fetch-providers -p openai,anthropic,ppinfra,openrouter
+npm start fetch-providers -p openai,anthropic,ppinfra,openrouter
+```
+
+### Development Mode
+```bash
+npm run dev fetch-all
+npm run dev fetch-providers -p openai,anthropic
 ```
 
 ### CLI Options
 
 ```bash
 # Fetch from all providers
-cargo run -- fetch-all [OPTIONS]
+npm start fetch-all [OPTIONS]
 
 # Fetch from specific providers
-cargo run -- fetch-providers -p <PROVIDERS> [OPTIONS]
+npm start fetch-providers -p <PROVIDERS> [OPTIONS]
 
 Options:
   -o, --output <OUTPUT>    Output directory [default: dist]
@@ -390,18 +401,22 @@ For detailed implementation guide, see [Provider Implementation Guide](.claude/p
 
 ### Run Tests
 ```bash
-cargo test
+npm test
+```
+
+### Type Checking
+```bash
+npm run typecheck
+```
+
+### Linting
+```bash
+npm run lint
 ```
 
 ### Debug Mode
 ```bash
-RUST_LOG=debug cargo run -- fetch-all
-```
-
-### Code Formatting
-```bash
-cargo fmt
-cargo clippy
+DEBUG=true npm run dev fetch-all
 ```
 
 ## 📄 Documentation

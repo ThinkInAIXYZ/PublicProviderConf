@@ -2,26 +2,38 @@
 
 ## Project Information
 
-**Public Provider Configuration Tool** - A Rust-based tool to automatically fetch and standardize AI model information from various providers.
+**Public Provider Configuration Tool** - A TypeScript/Node.js-based tool to automatically fetch and standardize AI model information from various providers.
 
 ## Quick Commands
 
 ### Development
 ```bash
+# Install dependencies
+npm install
+
 # Build the project
-cargo build
+npm run build
 
 # Run with all providers
-cargo run -- fetch-all
+npm start fetch-all
 
 # Run with specific providers  
-cargo run -- fetch-providers -p ppinfra,openai,anthropic,openrouter,gemini,vercel,github_ai,tokenflux,groq,deepseek,ollama
+npm start fetch-providers -p ppinfra,openai,anthropic,openrouter,gemini,vercel,github_ai,tokenflux,groq,deepseek,ollama
 
 # Run tests
-cargo test
+npm test
+
+# Type checking
+npm run typecheck
+
+# Linting
+npm run lint
+
+# Development mode
+npm run dev fetch-all
 
 # Run with custom output directory
-cargo run -- fetch-all -o custom_output
+npm start fetch-all -o custom_output
 ```
 
 ### Testing
@@ -40,37 +52,40 @@ du -h dist/*.json
 
 ```
 ├── src/
-│   ├── models/          # Data structures
+│   ├── models/          # TypeScript interfaces and types
 │   ├── providers/       # Provider implementations  
 │   ├── fetcher/         # Data fetching logic
 │   ├── output/          # Output handling
 │   ├── processor/       # Data processing logic
-│   └── config/          # Configuration management
-├── dist/                # Generated JSON output files
+│   ├── config/          # Configuration management
+│   └── cli.ts           # CLI entry point
+├── dist/                # Generated JSON output files & compiled JS
 ├── templates/           # Model template definitions
 ├── config/             # Configuration files
-└── docs/                # Documentation
+├── docs/                # Documentation
+└── dist_rust_backup/    # Backup of Rust version output for comparison
 ```
 
 ## Key Files
 
-- `src/main.rs` - CLI entry point
-- `src/providers/ppinfra.rs` - PPInfra API implementation
-- `src/providers/openai.rs` - OpenAI API implementation with template matching
-- `src/providers/anthropic.rs` - Anthropic API implementation
-- `src/providers/openrouter.rs` - OpenRouter API implementation
-- `src/providers/gemini.rs` - Google Gemini API implementation with web scraping
-- `src/providers/vercel.rs` - Vercel AI Gateway implementation
-- `src/providers/github_ai.rs` - GitHub AI Models implementation
-- `src/providers/tokenflux.rs` - Tokenflux implementation
-- `src/providers/groq.rs` - Groq API implementation
-- `src/providers/deepseek.rs` - DeepSeek web scraping implementation
-- `src/providers/ollama.rs` - Ollama template-based implementation
+- `src/cli.ts` - CLI entry point with Commander.js
+- `src/providers/ppinfra.ts` - PPInfra API implementation
+- `src/providers/openai.ts` - OpenAI API implementation with template matching
+- `src/providers/anthropic.ts` - Anthropic API implementation
+- `src/providers/openrouter.ts` - OpenRouter API implementation
+- `src/providers/gemini.ts` - Google Gemini API implementation with web scraping
+- `src/providers/vercel.ts` - Vercel AI Gateway implementation
+- `src/providers/github-ai.ts` - GitHub AI Models implementation
+- `src/providers/tokenflux.ts` - Tokenflux implementation
+- `src/providers/groq.ts` - Groq API implementation
+- `src/providers/deepseek.ts` - DeepSeek web scraping implementation
+- `src/providers/ollama.ts` - Ollama template-based implementation
+- `src/providers/siliconflow.ts` - SiliconFlow template-based implementation
 - `templates/openai.json` - OpenAI model template definitions
 - `templates/anthropic.json` - Anthropic model template definitions
 - `templates/ollama.json` - Ollama model template definitions
 - `docs/architecture-overview.md` - Complete architecture documentation
-- `.github/workflows/fetch-models.yml` - Automated fetching workflow
+- `.github/workflows/fetch-models.yml` - Automated fetching workflow (Node.js)
 
 ## Output Format
 
@@ -100,18 +115,18 @@ Single provider JSON:
 ### Step-by-Step Guide
 
 1. **Create Provider Implementation**
-   - Create new file in `src/providers/` (e.g., `src/providers/newprovider.rs`)
-   - Implement the `Provider` trait with required methods:
-     - `async fn fetch_models(&self) -> Result<Vec<ModelInfo>>`
-     - `fn provider_id(&self) -> &str`
-     - `fn provider_name(&self) -> &str`
+   - Create new file in `src/providers/` (e.g., `src/providers/newprovider.ts`)
+   - Implement the `Provider` interface with required methods:
+     - `async fetchModels(): Promise<ModelInfo[]>`
+     - `providerId(): string`
+     - `providerName(): string`
    
-2. **Add Module Reference**
-   - Add `pub mod newprovider;` to `src/providers/mod.rs`
+2. **Add Module Export**
+   - Add export to `src/providers/index.ts`: `export { NewProviderProvider } from './newprovider';`
    
-3. **Register in Main**
-   - Import the provider in `src/main.rs`: `providers::newprovider::NewProviderProvider`
-   - Add provider initialization in `fetch_all_providers()` function
+3. **Register in CLI**
+   - Import the provider in `src/cli.ts`: `import { NewProviderProvider } from './providers/newprovider';`
+   - Add provider initialization in the appropriate command handler
    
 4. **Update Documentation**
    - Add JSON link to README.md "Available Model Data" section
@@ -119,77 +134,72 @@ Single provider JSON:
 
 ### Template for New Provider
 
-```rust
-use async_trait::async_trait;
-use anyhow::Result;
-use serde::Deserialize;
-use crate::models::{ModelInfo, ModelType};
-use crate::providers::Provider;
+```typescript
+import { Provider } from './provider';
+import { ModelInfo, ModelType, createModelInfo } from '../models/model-info';
+import axios from 'axios';
 
-#[derive(Debug, Deserialize)]
-struct NewProviderModel {
-    // Define API response structure
+interface NewProviderModel {
+    id: string;
+    name: string;
+    contextSize: number;
+    maxOutputTokens: number;
+    features: string[];
+    modelType: string;
 }
 
-#[derive(Debug, Deserialize)]  
-struct NewProviderResponse {
-    // Define API response wrapper
+interface NewProviderResponse {
+    data: NewProviderModel[];
 }
 
-pub struct NewProviderProvider {
-    api_url: String,
-    client: reqwest::Client,
-}
+export class NewProviderProvider implements Provider {
+    private apiUrl: string;
+    private client = axios.create();
 
-impl NewProviderProvider {
-    pub fn new(api_url: String) -> Self {
-        Self {
-            api_url,
-            client: reqwest::Client::new(),
+    constructor(apiUrl: string) {
+        this.apiUrl = apiUrl;
+    }
+
+    private convertModel(model: NewProviderModel): ModelInfo {
+        const vision = model.features.some(f => f.includes('vision') || f.includes('image'));
+        const functionCall = model.features.some(f => f.includes('function') || f.includes('tool'));
+        const reasoning = model.features.some(f => f.includes('reasoning') || f.includes('thinking'));
+        
+        const modelType = model.modelType.toLowerCase() === 'chat' ? ModelType.Chat :
+                         model.modelType.toLowerCase() === 'completion' ? ModelType.Completion :
+                         model.modelType.toLowerCase() === 'embedding' ? ModelType.Embedding :
+                         ModelType.Chat;
+
+        return createModelInfo(
+            model.id,
+            model.name,
+            model.contextSize,
+            model.maxOutputTokens,
+            vision,
+            functionCall,
+            reasoning,
+            modelType
+        );
+    }
+
+    async fetchModels(): Promise<ModelInfo[]> {
+        try {
+            const response = await this.client.get<NewProviderResponse>(this.apiUrl);
+            const models = response.data.data
+                .map(model => this.convertModel(model));
+            
+            return models;
+        } catch (error) {
+            throw new Error(`Failed to fetch models from NewProvider: ${error instanceof Error ? error.message : String(error)}`);
         }
     }
 
-    fn convert_model(&self, model: NewProviderModel) -> ModelInfo {
-        // Convert API model to standardized ModelInfo
-        // Detect capabilities: vision, function_call, reasoning
-        ModelInfo::new(
-            model.id,
-            model.name,
-            context_length,
-            max_tokens,
-            vision,
-            function_call,
-            reasoning,
-            ModelType::Chat,
-            description,
-        )
-    }
-}
-
-#[async_trait]
-impl Provider for NewProviderProvider {
-    async fn fetch_models(&self) -> Result<Vec<ModelInfo>> {
-        let response = self.client
-            .get(&self.api_url)
-            .send()
-            .await?
-            .json::<NewProviderResponse>()
-            .await?;
-
-        let models = response.data
-            .into_iter()
-            .map(|model| self.convert_model(model))
-            .collect();
-
-        Ok(models)
+    providerId(): string {
+        return 'newprovider';
     }
 
-    fn provider_id(&self) -> &str {
-        "newprovider"
-    }
-
-    fn provider_name(&self) -> &str {
-        "New Provider"
+    providerName(): string {
+        return 'New Provider';
     }
 }
 ```
@@ -213,7 +223,7 @@ The workflow automatically:
 
 ## Environment Variables
 
-Optional API keys can be set as GitHub secrets:
+Optional API keys can be set as GitHub secrets or local environment variables:
 - `OPENAI_API_KEY` - Required for OpenAI provider (complete model list)
 - `ANTHROPIC_API_KEY` - Required for Anthropic provider (complete model list)
 - `GROQ_API_KEY` - Required for Groq provider (API access)
@@ -228,6 +238,7 @@ Optional API keys can be set as GitHub secrets:
 - **Tokenflux**: ✅ No API key required - public marketplace API
 - **DeepSeek**: ✅ No API key required - web scraping from documentation
 - **Ollama**: ✅ No API key required - template-based provider
+- **SiliconFlow**: ✅ No API key required - template-based provider
 - **Gemini**: ⚠️ Optional API key - hybrid web scraping + API approach
 - **Groq**: ❌ API key required - private API access only
 - **OpenAI**: ❌ API key required - private API access only
@@ -235,13 +246,15 @@ Optional API keys can be set as GitHub secrets:
 
 ## Common Issues
 
-- **Build failures**: Run `cargo clean && cargo build`
+- **Build failures**: Run `npm run build` or check TypeScript compilation
 - **JSON validation errors**: Check API response format changes  
 - **Rate limiting**: Adjust rate limits in provider configurations
 - **Network timeouts**: Increase timeout values in HTTP client
+- **TypeScript errors**: Run `npm run typecheck` to identify type issues
 
 ## Next Steps
 
+- [x] Migrate from Rust to TypeScript/Node.js
 - [x] Add OpenAI provider implementation (65+ models with template matching)
 - [x] Add Anthropic provider implementation (8 Claude models with API key support)
 - [x] Implement configuration file loading
@@ -253,6 +266,7 @@ Optional API keys can be set as GitHub secrets:
 - [x] Add Groq provider implementation
 - [x] Add DeepSeek provider implementation
 - [x] Add Ollama provider implementation (template-based)
+- [x] Add SiliconFlow provider implementation (template-based)
 - [x] Add rate limiting and retry logic
 - [x] Add comprehensive error handling
 - [x] Implement template validation system
