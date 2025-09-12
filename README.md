@@ -31,18 +31,18 @@ Access the latest AI model information in JSON format:
 
 ### Prerequisites
 - Node.js 18+ 
-- npm or yarn
+- pnpm (recommended) or npm
 
 ### Install Dependencies
 ```bash
 git clone https://github.com/your-repo/PublicProviderConf.git
 cd PublicProviderConf
-npm install
+pnpm install
 ```
 
 ### Build
 ```bash
-npm run build
+pnpm build
 ```
 
 ## 🚀 Usage
@@ -51,33 +51,33 @@ npm run build
 
 Fetch model information from all providers:
 ```bash
-npm start fetch-all
+pnpm start fetch-all
 ```
 
 Specify output directory:
 ```bash
-npm start fetch-all -o ./output
+pnpm start fetch-all -o ./output
 ```
 
 Fetch from specific providers:
 ```bash
-npm start fetch-providers -p openai,anthropic,ppinfra,openrouter
+pnpm start fetch-providers -p openai,anthropic,ppinfra,openrouter
 ```
 
 ### Development Mode
 ```bash
-npm run dev fetch-all
-npm run dev fetch-providers -p openai,anthropic
+pnpm run dev fetch-all
+pnpm run dev fetch-providers -p openai,anthropic
 ```
 
 ### CLI Options
 
 ```bash
 # Fetch from all providers
-npm start fetch-all [OPTIONS]
+pnpm start fetch-all [OPTIONS]
 
 # Fetch from specific providers
-npm start fetch-providers -p <PROVIDERS> [OPTIONS]
+pnpm start fetch-providers -p <PROVIDERS> [OPTIONS]
 
 Options:
   -o, --output <OUTPUT>    Output directory [default: dist]
@@ -401,22 +401,22 @@ For detailed implementation guide, see [Provider Implementation Guide](.claude/p
 
 ### Run Tests
 ```bash
-npm test
+pnpm test
 ```
 
 ### Type Checking
 ```bash
-npm run typecheck
+pnpm run typecheck
 ```
 
 ### Linting
 ```bash
-npm run lint
+pnpm run lint
 ```
 
 ### Debug Mode
 ```bash
-DEBUG=true npm run dev fetch-all
+DEBUG=true pnpm run dev fetch-all
 ```
 
 ## 📄 Documentation

@@ -28,27 +28,31 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
+        cache: 'pnpm'
         
-    - name: Cache npm dependencies
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: latest
+        
+    - name: Cache pnpm dependencies
       uses: actions/cache@v4
       with:
         path: |
-          ~/.npm
+          ~/.pnpm-store
           node_modules/
-          .npm/
-        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-npm-
+          ${{ runner.os }}-pnpm-
         
     - name: Install dependencies
-      run: npm ci
+      run: pnpm install --frozen-lockfile
         
     - name: Build project
-      run: npm run build
+      run: pnpm build
       
     - name: Run tests
-      run: npm test
+      run: pnpm test
       
     - name: Create dist directory
       run: mkdir -p dist
@@ -56,9 +60,9 @@ jobs:
     - name: Fetch model data
       run: |
         if [ -n "${{ github.event.inputs.providers }}" ]; then
-          npm start fetch-providers -- -p "${{ github.event.inputs.providers }}" -o dist
+          pnpm start fetch-providers -p "${{ github.event.inputs.providers }}" -o dist
         else
-          npm start fetch-all -- -o dist
+          pnpm start fetch-all -o dist
         fi
       env:
         # Add API keys as secrets if needed

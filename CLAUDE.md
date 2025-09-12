@@ -9,31 +9,31 @@
 ### Development
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Build the project
-npm run build
+pnpm build
 
 # Run with all providers
-npm start fetch-all
+pnpm start fetch-all
 
 # Run with specific providers  
-npm start fetch-providers -p ppinfra,openai,anthropic,openrouter,gemini,vercel,github_ai,tokenflux,groq,deepseek,ollama
+pnpm start fetch-providers -p ppinfra,openai,anthropic,openrouter,gemini,vercel,github_ai,tokenflux,groq,deepseek,ollama
 
 # Run tests
-npm test
+pnpm test
 
 # Type checking
-npm run typecheck
+pnpm run typecheck
 
 # Linting
-npm run lint
+pnpm run lint
 
 # Development mode
-npm run dev fetch-all
+pnpm run dev fetch-all
 
 # Run with custom output directory
-npm start fetch-all -o custom_output
+pnpm start fetch-all -o custom_output
 ```
 
 ### Testing
