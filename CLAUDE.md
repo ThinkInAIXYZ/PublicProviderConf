@@ -11,7 +11,7 @@
 # Install dependencies
 pnpm install
 
-# Build the project
+# Build the project (uses Vite for bundling)
 pnpm build
 
 # Run with all providers
@@ -20,20 +20,23 @@ pnpm start fetch-all
 # Run with specific providers  
 pnpm start fetch-providers -p ppinfra,openai,anthropic,openrouter,gemini,vercel,github_ai,tokenflux,groq,deepseek,ollama
 
-# Run tests
+# Run tests (using Vitest)
 pnpm test
 
-# Type checking
-pnpm run typecheck
+# Run tests in watch mode
+pnpm test:watch
 
-# Linting
-pnpm run lint
+# Run tests with coverage
+pnpm coverage
 
 # Development mode
 pnpm run dev fetch-all
 
 # Run with custom output directory
 pnpm start fetch-all -o custom_output
+
+# Clean build artifacts
+pnpm clean
 ```
 
 ### Testing
@@ -59,7 +62,8 @@ du -h dist/*.json
 │   ├── processor/       # Data processing logic
 │   ├── config/          # Configuration management
 │   └── cli.ts           # CLI entry point
-├── dist/                # Generated JSON output files & compiled JS
+├── dist/                # Generated JSON output files
+├── build/               # Compiled JavaScript build output (Vite)
 ├── templates/           # Model template definitions
 ├── config/             # Configuration files
 ├── docs/                # Documentation
@@ -84,6 +88,8 @@ du -h dist/*.json
 - `templates/openai.json` - OpenAI model template definitions
 - `templates/anthropic.json` - Anthropic model template definitions
 - `templates/ollama.json` - Ollama model template definitions
+- `vite.config.ts` - Vite build configuration for library bundling
+- `vitest.config.ts` - Vitest test configuration
 - `docs/architecture-overview.md` - Complete architecture documentation
 - `.github/workflows/fetch-models.yml` - Automated fetching workflow (Node.js)
 
@@ -246,11 +252,12 @@ Optional API keys can be set as GitHub secrets or local environment variables:
 
 ## Common Issues
 
-- **Build failures**: Run `npm run build` or check TypeScript compilation
+- **Build failures**: Run `pnpm build` or check Vite configuration and TypeScript compilation
+- **Test failures**: Run `pnpm test` or use `pnpm test:watch` for interactive testing with Vitest
 - **JSON validation errors**: Check API response format changes  
 - **Rate limiting**: Adjust rate limits in provider configurations
 - **Network timeouts**: Increase timeout values in HTTP client
-- **TypeScript errors**: Run `npm run typecheck` to identify type issues
+- **Coverage issues**: Use `pnpm coverage` to generate test coverage reports
 
 ## Next Steps
 
