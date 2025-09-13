@@ -68,10 +68,8 @@ node build/cli.js fetch-providers -p openai,anthropic,ppinfra,openrouter
 ### Development Mode
 ```bash
 pnpm run dev
-# watch & reload on changes
-pnpm run dev:watch
-# or run specific commands directly via vite-node
-vite-node src/cli.ts fetch-providers -p openai,anthropic
+# or run specific commands directly
+ts-node src/cli.ts fetch-providers -p openai,anthropic
 ```
 
 ### CLI Options

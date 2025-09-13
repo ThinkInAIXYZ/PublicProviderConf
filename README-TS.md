@@ -16,13 +16,11 @@ pnpm build
 
 ## Usage
 
-### Development (using vite-node)
+### Development (using ts-node)
 ```bash
 pnpm run dev
-# watch & reload on changes
-pnpm run dev:watch
-# or run specific commands directly via vite-node
-vite-node src/cli.ts fetch-providers -p ppinfra,openai,anthropic
+# or run specific commands directly
+ts-node src/cli.ts fetch-providers -p ppinfra,openai,anthropic
 ```
 
 ### Production (using Vite build)
