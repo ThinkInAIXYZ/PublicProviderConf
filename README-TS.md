@@ -6,32 +6,33 @@ This is the TypeScript version of the Public Provider Configuration Tool CLI, mi
 
 1. Install dependencies:
 ```bash
-npm install
+pnpm install
 ```
 
-2. Build the project:
+2. Build the project (Vite):
 ```bash
-npm run build
+pnpm build
 ```
 
 ## Usage
 
 ### Development (using ts-node)
 ```bash
-npm run dev -- fetch-all
-npm run dev -- fetch-providers -p ppinfra,openai,anthropic
+pnpm run dev
+# or run specific commands directly
+ts-node src/cli.ts fetch-providers -p ppinfra,openai,anthropic
 ```
 
-### Production (using compiled JavaScript)
+### Production (using Vite build)
 ```bash
-npm run build
-npm start -- fetch-all
-npm start -- fetch-providers -p ppinfra,openai,anthropic
+pnpm build
+pnpm start
+node build/cli.js fetch-providers -p ppinfra,openai,anthropic
 ```
 
 ### Global Installation
 ```bash
-npm install -g .
+pnpm install -g .
 public-provider-conf fetch-all
 public-provider-conf fetch-providers -p ppinfra,openai,anthropic
 ```
@@ -118,7 +119,7 @@ src/
 
 ### Building
 ```bash
-npm run build
+pnpm build
 ```
 
 ### Development Mode
@@ -129,9 +130,9 @@ npm run dev -- fetch-all
 ### Testing
 ```bash
 # Test CLI parsing
-node dist/cli.js --help
-node dist/cli.js fetch-all --help
-node dist/cli.js fetch-providers --help
+node build/cli.js --help
+node build/cli.js fetch-all --help
+node build/cli.js fetch-providers --help
 ```
 
 ## Notes

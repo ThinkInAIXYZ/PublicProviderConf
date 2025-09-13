@@ -40,10 +40,11 @@ cd PublicProviderConf
 pnpm install
 ```
 
-### Build
+### Build (Vite)
 ```bash
 pnpm build
 ```
+This runs two Vite builds: library bundles to `build/index.(mjs|cjs)` and the CLI to `build/cli.js`.
 
 ## 🚀 Usage
 
@@ -51,23 +52,24 @@ pnpm build
 
 Fetch model information from all providers:
 ```bash
-pnpm start fetch-all
+pnpm start
 ```
 
 Specify output directory:
 ```bash
-pnpm start fetch-all -o ./output
+pnpm start -o ./output
 ```
 
 Fetch from specific providers:
 ```bash
-pnpm start fetch-providers -p openai,anthropic,ppinfra,openrouter
+node build/cli.js fetch-providers -p openai,anthropic,ppinfra,openrouter
 ```
 
 ### Development Mode
 ```bash
-pnpm run dev fetch-all
-pnpm run dev fetch-providers -p openai,anthropic
+pnpm run dev
+# or run specific commands directly
+ts-node src/cli.ts fetch-providers -p openai,anthropic
 ```
 
 ### CLI Options
