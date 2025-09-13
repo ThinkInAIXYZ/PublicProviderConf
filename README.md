@@ -30,15 +30,21 @@ Access the latest AI model information in JSON format:
 ## 📦 Installation
 
 ### Prerequisites
-- Rust 1.70+ 
-- Cargo
+- Node.js 18+ 
+- pnpm (recommended) or npm
 
-### Build
+### Install Dependencies
 ```bash
 git clone https://github.com/your-repo/PublicProviderConf.git
 cd PublicProviderConf
-cargo build --release
+pnpm install
 ```
+
+### Build (Vite)
+```bash
+pnpm build
+```
+This runs two Vite builds: library bundles to `build/index.(mjs|cjs)` and the CLI to `build/cli.js`.
 
 ## 🚀 Usage
 
@@ -46,27 +52,34 @@ cargo build --release
 
 Fetch model information from all providers:
 ```bash
-cargo run -- fetch-all
+pnpm start
 ```
 
 Specify output directory:
 ```bash
-cargo run -- fetch-all -o ./output
+pnpm start -o ./output
 ```
 
 Fetch from specific providers:
 ```bash
-cargo run -- fetch-providers -p openai,anthropic,ppinfra,openrouter
+node build/cli.js fetch-providers -p openai,anthropic,ppinfra,openrouter
+```
+
+### Development Mode
+```bash
+pnpm run dev
+# or run specific commands directly
+ts-node src/cli.ts fetch-providers -p openai,anthropic
 ```
 
 ### CLI Options
 
 ```bash
 # Fetch from all providers
-cargo run -- fetch-all [OPTIONS]
+pnpm start fetch-all [OPTIONS]
 
 # Fetch from specific providers
-cargo run -- fetch-providers -p <PROVIDERS> [OPTIONS]
+pnpm start fetch-providers -p <PROVIDERS> [OPTIONS]
 
 Options:
   -o, --output <OUTPUT>    Output directory [default: dist]
@@ -390,18 +403,22 @@ For detailed implementation guide, see [Provider Implementation Guide](.claude/p
 
 ### Run Tests
 ```bash
-cargo test
+pnpm test
+```
+
+### Type Checking
+```bash
+pnpm run typecheck
+```
+
+### Linting
+```bash
+pnpm run lint
 ```
 
 ### Debug Mode
 ```bash
-RUST_LOG=debug cargo run -- fetch-all
-```
-
-### Code Formatting
-```bash
-cargo fmt
-cargo clippy
+DEBUG=true pnpm run dev fetch-all
 ```
 
 ## 📄 Documentation
