@@ -87,25 +87,38 @@ Options:
   -h, --help              Show help information
 ```
 
+### models.dev Source Configuration
+
+The CLI downloads the upstream catalog from [models.dev](https://models.dev/api.json) before merging in the extra providers that
+this project maintains. You can override the source with the `MODELS_DEV_API_URL` environment variable (it also accepts `file://` or relative paths to cached snapshots).
+
+Manual provider definitions and overrides now live in the `templates/` directory. Each template is stored in the models.dev schema so it can be merged directly with the upstream dataset without additional conversions.
+
 ## 📋 Output Format
 
 ### Individual Provider JSON
 ```json
 {
-  "provider": "ppinfra",
-  "providerName": "PPInfra", 
-  "lastUpdated": "2025-01-15T10:30:00Z",
+  "id": "ppinfra",
+  "name": "PPInfra",
+  "display_name": "PPInfra",
+  "updated_at": "2025-01-15T10:30:00Z",
   "models": [
     {
       "id": "deepseek/deepseek-v3.1",
       "name": "Deepseek V3.1",
-      "contextLength": 163840,
-      "maxTokens": 163840,
-      "vision": false,
-      "functionCall": true,
-      "reasoning": true,
+      "display_name": "Deepseek V3.1",
       "type": "chat",
-      "description": "DeepSeek-V3.1 latest model with mixed reasoning modes..."
+      "context_length": 163840,
+      "max_output_tokens": 163840,
+      "capabilities": {
+        "vision": false,
+        "function_calling": true,
+        "reasoning": true
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      }
     }
   ]
 }
@@ -114,24 +127,30 @@ Options:
 ### Aggregated JSON (all.json)
 ```json
 {
-  "version": "1.0.0",
-  "generatedAt": "2025-01-15T10:30:00Z",
-  "totalModels": 38,
+  "version": "offline-snapshot",
+  "updated_at": "2025-01-15T10:30:00Z",
   "providers": {
     "ppinfra": {
-      "providerId": "ppinfra",
-      "providerName": "PPInfra",
+      "id": "ppinfra",
+      "name": "PPInfra",
+      "display_name": "PPInfra",
+      "updated_at": "2025-01-15T10:30:00Z",
       "models": [
         {
           "id": "deepseek/deepseek-v3.1",
           "name": "Deepseek V3.1",
-          "contextLength": 163840,
-          "maxTokens": 163840,
-          "vision": false,
-          "functionCall": true,
-          "reasoning": true,
+          "display_name": "Deepseek V3.1",
           "type": "chat",
-          "description": "DeepSeek-V3.1 latest model..."
+          "context_length": 163840,
+          "max_output_tokens": 163840,
+          "capabilities": {
+            "vision": false,
+            "function_calling": true,
+            "reasoning": true
+          },
+          "metadata": {
+            "source": "public-provider-conf"
+          }
         }
       ]
     }

@@ -12,6 +12,14 @@ export class DataFetcher {
     this.providers.push(provider);
   }
 
+  getProviderCount(): number {
+    return this.providers.length;
+  }
+
+  hasProviders(): boolean {
+    return this.providers.length > 0;
+  }
+
   async fetchAll(): Promise<ProviderInfo[]> {
     const results: ProviderInfo[] = [];
     

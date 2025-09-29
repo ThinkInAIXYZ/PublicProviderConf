@@ -8,7 +8,5 @@ export { GithubAiProvider } from './GithubAiProvider';
 export { TokenfluxProvider } from './TokenfluxProvider';
 export { GroqProvider } from './GroqProvider';
 export { DeepSeekProvider } from './DeepSeekProvider';
-export { OllamaProvider } from './OllamaProvider';
-export { SiliconFlowProvider } from './SiliconFlowProvider';
 
 export type { Provider } from './Provider';

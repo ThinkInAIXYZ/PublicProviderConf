@@ -59,10 +59,9 @@ export class PPInfraProvider implements Provider {
   async fetchModels(): Promise<ModelInfo[]> {
     try {
       const response = await this.client.get<PPInfraResponse>(this.apiUrl);
-      
       return response.data.data.map(model => this.convertModel(model));
     } catch (error) {
-      throw new Error(`Failed to fetch PPInfra models: ${error}`);
+      throw new Error(`Failed to fetch PPInfra models: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 

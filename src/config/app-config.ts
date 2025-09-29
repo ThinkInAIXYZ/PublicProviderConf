@@ -140,7 +140,21 @@ export function getDefaultConfig(): AppConfig {
     10,
     30
   );
-  
+
+  providers['ollama'] = createProviderConfig(
+    'templates/ollama.json',
+    undefined,
+    5,
+    30
+  );
+
+  providers['siliconflow'] = createProviderConfig(
+    'templates/siliconflow.json',
+    undefined,
+    5,
+    30
+  );
+
   providers['groq'] = createProviderConfig(
     'https://api.groq.com/openai/v1/models',
     'GROQ_API_KEY',

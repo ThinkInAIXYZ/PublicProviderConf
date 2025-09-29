@@ -68,15 +68,15 @@ export class TokenfluxProvider implements Provider {
   async fetchModels(): Promise<ModelInfo[]> {
     try {
       const response = await this.client.get<any>(this.apiUrl);
-      
+
       // Handle different response structures
       const models = response.data.models || response.data.data || response.data;
-      
+
       if (!Array.isArray(models)) {
         console.warn('⚠️  Tokenflux API response structure unexpected, returning empty model list');
         return [];
       }
-      
+
       return models.map(model => this.convertModel(model));
     } catch (error) {
       console.warn('⚠️  Failed to fetch Tokenflux models, returning empty list');
