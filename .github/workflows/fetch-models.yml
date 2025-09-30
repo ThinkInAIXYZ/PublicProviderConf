@@ -84,6 +84,37 @@ jobs:
         ls -la dist/
         echo "File sizes:"
         du -h dist/*.json
+
+    - name: Prepare CDN upload payload
+      run: |
+        rm -rf cdn_upload
+        mkdir -p cdn_upload/models
+        if compgen -G "dist/*" > /dev/null; then
+          cp -r dist/* cdn_upload/models/
+        fi
+        echo "CDN payload contents:"
+        find cdn_upload -type f | sort
+
+    - name: Upload dist to Qiniu CDN
+      id: upload_cdn
+      if: ${{ secrets.QINIU_CDN_AK != '' && secrets.QINIU_CDN_SK != '' && secrets.QINIU_BUCKET != '' }}
+      uses: hujiulong/action-qiniu-upload@master
+      with:
+        access_key: ${{ secrets.QINIU_CDN_AK }}
+        secret_key: ${{ secrets.QINIU_CDN_SK }}
+        bucket: ${{ secrets.QINIU_BUCKET }}
+        source_dir: 'cdn_upload/models'
+        dest_dir: '/models'
+        ignore_source_map: false
+
+    - name: CDN Upload Summary
+      if: steps.upload_cdn.outcome == 'success'
+      run: |
+        echo "✅ 模型配置已同步至 Qiniu CDN"
+        echo "📂 源目录: dist"
+        echo "🚀 目标目录: /models"
+        echo "🗂️ 同步文件列表:"
+        find cdn_upload/models -type f | sort
         
     - name: Generate release info
       id: release_info
