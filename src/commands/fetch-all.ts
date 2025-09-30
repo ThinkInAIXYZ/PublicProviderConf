@@ -1,105 +1,109 @@
 import { DataFetcher } from '../fetcher/data-fetcher';
-import { OutputManager } from '../output/output-manager';
+import { DataProcessor } from '../processor/data-processor';
+import { ModelsDevOutputManager } from '../output/models-dev-output-manager';
 import { loadConfig } from '../config/app-config';
 import {
-  PPInfraProvider,
-  OpenRouterProvider,
-  GeminiProvider,
-  VercelProvider,
-  GithubAiProvider,
-  TokenfluxProvider,
-  GroqProvider,
-  DeepSeekProvider,
-  OpenAIProvider,
-  AnthropicProvider,
-  OllamaProvider,
-  SiliconFlowProvider,
-} from '../providers';
+  ModelsDevApiResponse,
+  createModelsDevProvider,
+  mergeProviders,
+} from '../models/models-dev';
+import { mergeProviderWithTemplate } from '../templates/models-dev-template-manager';
+import {
+  loadBaseContext,
+  createProvidersFromConfig,
+  normalizeProviderId,
+} from './models-dev-shared';
 
-export async function fetchAllProviders(outputDir: string, configPath: string): Promise<void> {
-  console.log('Fetching models from all providers...');
-  
-  // Load configuration
+export async function fetchAllProviders(outputDir: string, configPath: string): Promise<ModelsDevApiResponse> {
+  console.log('🚀 Fetching models from all providers...');
+
   const config = loadConfig(configPath);
-  
+  console.log(`📋 Loaded configuration with ${Object.keys(config.providers).length} providers`);
+
+  const { baseDataWithTemplates, templatesById, existingProviderIds } = await loadBaseContext();
+  console.log(`🌐 models.dev already provides ${existingProviderIds.size} providers`);
+
   const fetcher = new DataFetcher();
-  
-  // Add PPInfra provider (no API key required)
-  const ppinfraConfig = config.providers['ppinfra'];
-  const ppinfraUrl = ppinfraConfig?.apiUrl || 'https://api.ppinfra.com/openai/v1/models';
-  const ppinfra = new PPInfraProvider(ppinfraUrl);
-  fetcher.addProvider(ppinfra);
-  
-  // Add OpenRouter provider (no API key required)
-  const openrouterConfig = config.providers['openrouter'];
-  const openrouterUrl = openrouterConfig?.apiUrl || 'https://openrouter.ai/api/v1/models';
-  const openrouter = new OpenRouterProvider(openrouterUrl);
-  fetcher.addProvider(openrouter);
-  
-  // Add Gemini provider (optional API key for complete model list)
-  const geminiConfig = config.providers['gemini'];
-  const geminiApiKey = geminiConfig?.getApiKey() || process.env.GEMINI_API_KEY;
-  const gemini = new GeminiProvider(geminiApiKey);
-  fetcher.addProvider(gemini);
-  
-  // Add Vercel provider (no API key required)
-  const vercelConfig = config.providers['vercel'];
-  const vercelUrl = vercelConfig?.apiUrl || 'https://ai-gateway.vercel.sh/v1/models';
-  const vercel = new VercelProvider(vercelUrl);
-  fetcher.addProvider(vercel);
-  
-  // Add GitHub AI provider (no API key required)
-  const githubAiConfig = config.providers['github_ai'];
-  const githubAiUrl = githubAiConfig?.apiUrl || 'https://models.inference.ai.azure.com/models';
-  const githubAi = new GithubAiProvider(githubAiUrl);
-  fetcher.addProvider(githubAi);
-  
-  // Add Tokenflux provider (no API key required)
-  const tokenfluxConfig = config.providers['tokenflux'];
-  const tokenfluxUrl = tokenfluxConfig?.apiUrl || 'https://tokenflux.ai/v1/models';
-  const tokenflux = new TokenfluxProvider(tokenfluxUrl);
-  fetcher.addProvider(tokenflux);
-  
-  // Add Groq provider (requires API key)
-  const groqConfig = config.providers['groq'];
-  const groqApiKey = groqConfig?.getApiKey() || process.env.GROQ_API_KEY;
-  
-  if (groqApiKey) {
-    const groq = new GroqProvider(groqApiKey);
-    fetcher.addProvider(groq);
-  } else {
-    console.log('⚠️  Skipping Groq: No API key found (set GROQ_API_KEY or configure in providers.toml)');
+  const processor = new DataProcessor();
+  const outputManager = new ModelsDevOutputManager(outputDir);
+
+  const providerInstances = createProvidersFromConfig(config, existingProviderIds);
+  for (const provider of providerInstances) {
+    fetcher.addProvider(provider);
   }
-  
-  // Add DeepSeek provider (no API key required, uses web scraping)
-  const deepseek = new DeepSeekProvider();
-  fetcher.addProvider(deepseek);
 
-  // Add OpenAI provider (optional API key for complete model list)
-  const openaiConfig = config.providers['openai'];
-  const openaiApiKey = openaiConfig?.getApiKey() || process.env.OPENAI_API_KEY;
-  const openai = new OpenAIProvider(openaiApiKey);
-  fetcher.addProvider(openai);
+  try {
+    const providerInfos = fetcher.hasProviders() ? await fetcher.fetchAll() : [];
+    if (!fetcher.hasProviders()) {
+      console.log('ℹ️  No additional live providers configured; relying on templates only.');
+    } else {
+      console.log(`✅ Successfully fetched ${providerInfos.length} providers`);
+    }
 
-  // Add Anthropic provider (optional API key for complete model list)
-  const anthropicConfig = config.providers['anthropic'];
-  const anthropicApiKey = anthropicConfig?.getApiKey() || process.env.ANTHROPIC_API_KEY;
-  const anthropic = new AnthropicProvider(anthropicApiKey);
-  fetcher.addProvider(anthropic);
-  
-  // Add Ollama provider (template-based, no API key required)
-  const ollama = new OllamaProvider();
-  fetcher.addProvider(ollama);
-  
-  // Add SiliconFlow provider (template-based, no API key required)
-  const siliconflow = new SiliconFlowProvider();
-  fetcher.addProvider(siliconflow);
-  
-  const providerData = await fetcher.fetchAll();
-  
-  const outputManager = new OutputManager(outputDir);
-  await outputManager.writeProviderFiles(providerData);
-  await outputManager.writeAggregatedFile(providerData);
-  
-  console.log(`✅ Successfully fetched and wrote ${providerData.length} providers`);
+    const processedProviders = await processor.processProviders(providerInfos, {
+      normalize: true,
+      deduplicate: true,
+      sort: true,
+      validate: true,
+      minModelsPerProvider: 1,
+    });
+
+    console.log(`📊 Processed ${processedProviders.length} providers with data validation`);
+
+    const additionalProviders = processedProviders
+      .map(createModelsDevProvider)
+      .map(provider => {
+        const normalizedId = normalizeProviderId(provider.id);
+        const template = templatesById.get(normalizedId);
+        if (template) {
+          templatesById.delete(normalizedId);
+        }
+        return mergeProviderWithTemplate(provider, template);
+      })
+      .filter(provider => provider.models.length > 0);
+
+    const templateOnlyProviders = Array.from(templatesById.values()).filter(
+      provider => provider.models.length > 0,
+    );
+
+    const mergedProviders = mergeProviders(baseDataWithTemplates.providers, [
+      ...additionalProviders,
+      ...templateOnlyProviders,
+    ]);
+
+    const aggregatedData: ModelsDevApiResponse = {
+      ...baseDataWithTemplates,
+      providers: mergedProviders,
+      updated_at: new Date().toISOString(),
+    };
+
+    await outputManager.writeAllFiles(aggregatedData);
+
+    console.log(`📁 Output files written to: ${outputDir}`);
+
+    for (const provider of additionalProviders) {
+      console.log(`   📋 Added ${provider.name}: ${provider.models.length} models`);
+    }
+
+    for (const provider of templateOnlyProviders) {
+      console.log(`   📋 Added template-only ${provider.name}: ${provider.models.length} models`);
+    }
+
+    const totalAdditionalModels = additionalProviders.reduce((sum, p) => sum + p.models.length, 0);
+    const totalTemplateModels = templateOnlyProviders.reduce((sum, p) => sum + p.models.length, 0);
+
+    console.log(
+      `\n🎉 Added ${totalAdditionalModels + totalTemplateModels} new models from ${
+        additionalProviders.length + templateOnlyProviders.length
+      } providers`,
+    );
+
+    const totalProviders = outputManager.getProviderCount(aggregatedData);
+    console.log(`📦 Combined dataset now includes ${totalProviders} providers`);
+
+    return aggregatedData;
+  } catch (error) {
+    console.error('❌ Failed to fetch providers:', error instanceof Error ? error.message : 'Unknown error');
+    throw error;
+  }
 }

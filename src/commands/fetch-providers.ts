@@ -1,141 +1,121 @@
 import { DataFetcher } from '../fetcher/data-fetcher';
-import { OutputManager } from '../output/output-manager';
+import { DataProcessor } from '../processor/data-processor';
+import { ModelsDevOutputManager } from '../output/models-dev-output-manager';
 import { loadConfig } from '../config/app-config';
 import {
-  PPInfraProvider,
-  OpenRouterProvider,
-  GeminiProvider,
-  VercelProvider,
-  GithubAiProvider,
-  TokenfluxProvider,
-  GroqProvider,
-  DeepSeekProvider,
-  OpenAIProvider,
-  AnthropicProvider,
-  OllamaProvider,
-  SiliconFlowProvider,
-} from '../providers';
+  ModelsDevApiResponse,
+  createModelsDevProvider,
+  mergeProviders,
+} from '../models/models-dev';
+import { mergeProviderWithTemplate } from '../templates/models-dev-template-manager';
+import {
+  loadBaseContext,
+  findProviderConfig,
+  normalizeProviderId,
+  createProvider,
+} from './models-dev-shared';
 
 export async function fetchSpecificProviders(
   providerNames: string[],
   outputDir: string,
-  configPath: string
-): Promise<void> {
-  console.log(`Fetching models from providers: ${providerNames.join(', ')}`);
-  
-  // Load configuration
+  configPath: string,
+): Promise<ModelsDevApiResponse> {
+  console.log(`🚀 Fetching models from providers: ${providerNames.join(', ')}`);
+
   const config = loadConfig(configPath);
-  
+  const targetProviders = new Set(providerNames.map(name => normalizeProviderId(name)));
+
+  const { baseDataWithTemplates, templatesById, existingProviderIds } = await loadBaseContext();
+
   const fetcher = new DataFetcher();
-  
+  const processor = new DataProcessor();
+  const outputManager = new ModelsDevOutputManager(outputDir);
+
   for (const providerName of providerNames) {
-    const normalizedName = providerName.trim().toLowerCase();
-    
-    switch (normalizedName) {
-      case 'ppinfra': {
-        const ppinfraConfig = config.providers['ppinfra'];
-        const ppinfraUrl = ppinfraConfig?.apiUrl || 'https://api.ppinfra.com/openai/v1/models';
-        const ppinfra = new PPInfraProvider(ppinfraUrl);
-        fetcher.addProvider(ppinfra);
-        break;
+    const normalizedName = normalizeProviderId(providerName);
+
+    if (existingProviderIds.has(normalizedName)) {
+      console.log(`ℹ️  Skipping ${providerName}: already available via models.dev or templates`);
+      continue;
+    }
+
+    const providerConfigEntry = findProviderConfig(config.providers, normalizedName);
+
+    if (providerConfigEntry) {
+      const provider = createProvider(providerConfigEntry.key, providerConfigEntry.config);
+      if (provider) {
+        fetcher.addProvider(provider);
+        console.log(`✅ Added provider: ${providerName}`);
+      } else {
+        console.log(`⚠️  Could not create provider: ${providerName}`);
       }
-      case 'openrouter': {
-        const openrouterConfig = config.providers['openrouter'];
-        const openrouterUrl = openrouterConfig?.apiUrl || 'https://openrouter.ai/api/v1/models';
-        const openrouter = new OpenRouterProvider(openrouterUrl);
-        fetcher.addProvider(openrouter);
-        break;
-      }
-      case 'gemini': {
-        const geminiConfig = config.providers['gemini'];
-        const geminiApiKey = geminiConfig?.getApiKey() || process.env.GEMINI_API_KEY;
-        const gemini = new GeminiProvider(geminiApiKey);
-        fetcher.addProvider(gemini);
-        break;
-      }
-      case 'vercel': {
-        const vercelConfig = config.providers['vercel'];
-        const vercelUrl = vercelConfig?.apiUrl || 'https://ai-gateway.vercel.sh/v1/models';
-        const vercel = new VercelProvider(vercelUrl);
-        fetcher.addProvider(vercel);
-        break;
-      }
-      case 'github_ai': {
-        const githubAiConfig = config.providers['github_ai'];
-        const githubAiUrl = githubAiConfig?.apiUrl || 'https://models.inference.ai.azure.com/models';
-        const githubAi = new GithubAiProvider(githubAiUrl);
-        fetcher.addProvider(githubAi);
-        break;
-      }
-      case 'tokenflux': {
-        const tokenfluxConfig = config.providers['tokenflux'];
-        const tokenfluxUrl = tokenfluxConfig?.apiUrl || 'https://tokenflux.ai/v1/models';
-        const tokenflux = new TokenfluxProvider(tokenfluxUrl);
-        fetcher.addProvider(tokenflux);
-        break;
-      }
-      case 'groq': {
-        const groqConfig = config.providers['groq'];
-        const groqApiKey = groqConfig?.getApiKey() || process.env.GROQ_API_KEY;
-        
-        if (groqApiKey) {
-          const groq = new GroqProvider(groqApiKey);
-          fetcher.addProvider(groq);
-        } else {
-          console.error('❌ Groq requires an API key. Set GROQ_API_KEY environment variable or configure in providers.toml');
-        }
-        break;
-      }
-      case 'deepseek': {
-        const deepseek = new DeepSeekProvider();
-        fetcher.addProvider(deepseek);
-        break;
-      }
-      case 'openai': {
-        const openaiConfig = config.providers['openai'];
-        const openaiApiKey = openaiConfig?.getApiKey() || process.env.OPENAI_API_KEY;
-        const openai = new OpenAIProvider(openaiApiKey);
-        fetcher.addProvider(openai);
-        break;
-      }
-      case 'anthropic': {
-        const anthropicConfig = config.providers['anthropic'];
-        const anthropicApiKey = anthropicConfig?.getApiKey() || process.env.ANTHROPIC_API_KEY;
-        const anthropic = new AnthropicProvider(anthropicApiKey);
-        fetcher.addProvider(anthropic);
-        break;
-      }
-      case 'ollama': {
-        const ollama = new OllamaProvider();
-        fetcher.addProvider(ollama);
-        break;
-      }
-      case 'siliconflow': {
-        const siliconflow = new SiliconFlowProvider();
-        fetcher.addProvider(siliconflow);
-        break;
-      }
-      default: {
-        console.error(`⚠️  Unknown provider: ${providerName}`);
-        break;
-      }
+    } else {
+      console.log(`⚠️  Provider not found in config: ${providerName}`);
     }
   }
-  
-  const providerData = await fetcher.fetchAll();
-  
-  if (providerData.length === 0) {
-    console.error('❌ No valid providers found or no data fetched');
-    return;
-  }
-  
-  const outputManager = new OutputManager(outputDir);
-  await outputManager.writeProviderFiles(providerData);
-  
-  console.log(`✅ Successfully fetched and wrote ${providerData.length} providers`);
-  
-  // Print summary for each provider
-  for (const providerInfo of providerData) {
-    console.log(`   📋 ${providerInfo.providerName}: ${providerInfo.models.length} models`);
+
+  try {
+    const providerInfos = fetcher.hasProviders() ? await fetcher.fetchAll() : [];
+    if (fetcher.hasProviders()) {
+      console.log(`✅ Successfully fetched ${providerInfos.length} providers`);
+    } else {
+      console.log('ℹ️  No live providers fetched; relying on templates where available.');
+    }
+
+    const processedProviders = await processor.processProviders(providerInfos, {
+      normalize: true,
+      deduplicate: true,
+      sort: true,
+      validate: true,
+    });
+
+    console.log(`📊 Processed ${processedProviders.length} providers with data validation`);
+
+    const additionalProviders = processedProviders
+      .map(createModelsDevProvider)
+      .map(provider => {
+        const normalizedId = normalizeProviderId(provider.id);
+        const template = templatesById.get(normalizedId);
+        if (template) {
+          templatesById.delete(normalizedId);
+        }
+        return mergeProviderWithTemplate(provider, template);
+      })
+      .filter(provider => targetProviders.has(normalizeProviderId(provider.id)));
+
+    const templateOnlyProviders = Array.from(templatesById.values()).filter(provider =>
+      targetProviders.has(normalizeProviderId(provider.id)) && provider.models.length > 0,
+    );
+
+    const mergedProviders = mergeProviders(baseDataWithTemplates.providers, [
+      ...additionalProviders,
+      ...templateOnlyProviders,
+    ]);
+
+    const aggregatedData: ModelsDevApiResponse = {
+      ...baseDataWithTemplates,
+      providers: mergedProviders,
+      updated_at: new Date().toISOString(),
+    };
+
+    await outputManager.writeAllFiles(aggregatedData);
+
+    console.log(`📁 Output files written to: ${outputDir}`);
+
+    for (const provider of additionalProviders) {
+      console.log(`   📋 Added ${provider.name}: ${provider.models.length} models`);
+    }
+
+    for (const provider of templateOnlyProviders) {
+      console.log(`   📋 Added template-only ${provider.name}: ${provider.models.length} models`);
+    }
+
+    const totalProviders = outputManager.getProviderCount(aggregatedData);
+    console.log(`\n🎉 Combined dataset now includes ${totalProviders} providers`);
+
+    return aggregatedData;
+  } catch (error) {
+    console.error('❌ Failed to fetch providers:', error instanceof Error ? error.message : 'Unknown error');
+    throw error;
   }
 }
