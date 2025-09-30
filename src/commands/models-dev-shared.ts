@@ -71,16 +71,43 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
   }
 }
 
+export interface ExclusionSources {
+  modelsDev: Set<string>;
+  templates: Set<string>;
+}
+
+export function getExclusionReason(providerId: string, sources: ExclusionSources): string {
+  const inModelsDev = sources.modelsDev.has(providerId);
+  const inTemplates = sources.templates.has(providerId);
+
+  if (inModelsDev && inTemplates) {
+    return 'covered by models.dev dataset and manual template';
+  }
+  if (inModelsDev) {
+    return 'already provided by models.dev dataset';
+  }
+  if (inTemplates) {
+    return 'served via manual template';
+  }
+  return 'already included in combined dataset';
+}
+
 export function createProvidersFromConfig(
   config: AppConfig,
   excludedProviders: Set<string> = new Set(),
+  exclusionSources?: ExclusionSources,
 ): Provider[] {
   const providerInstances: Provider[] = [];
 
   for (const [providerId, providerConfig] of Object.entries(config.providers)) {
     const normalizedId = normalizeProviderId(providerId);
     if (excludedProviders.has(normalizedId)) {
-      console.log(`ℹ️  Skipping ${providerId}: already available via models.dev or templates`);
+      if (exclusionSources) {
+        const reason = getExclusionReason(normalizedId, exclusionSources);
+        console.log(`ℹ️  Skipping ${providerId}: ${reason}`);
+      } else {
+        console.log(`ℹ️  Skipping ${providerId}: already available via models.dev or templates`);
+      }
       continue;
     }
 
@@ -110,6 +137,7 @@ export interface BaseContext {
   baseDataWithTemplates: ModelsDevApiResponse;
   templatesById: Map<string, ModelsDevProvider>;
   existingProviderIds: Set<string>;
+  exclusionSources: ExclusionSources;
 }
 
 export async function loadBaseContext(): Promise<BaseContext> {
@@ -129,12 +157,23 @@ export async function loadBaseContext(): Promise<BaseContext> {
   }
 
   const baseProvidersRecord = providersToRecord(baseData.providers);
+  const modelsDevIds = new Set<string>();
   for (const [key, provider] of Object.entries(baseProvidersRecord)) {
     const normalizedId = normalizeProviderId(getModelsDevProviderId(provider));
+    modelsDevIds.add(normalizedId);
     const template = templatesById.get(normalizedId);
     if (template) {
       baseProvidersRecord[key] = mergeProviderWithTemplate(provider, template);
       templatesById.delete(normalizedId);
+    }
+  }
+
+  const templatesRemaining = new Map(templatesById);
+
+  for (const template of templatesRemaining.values()) {
+    const providerId = template.id;
+    if (providerId && !baseProvidersRecord[providerId]) {
+      baseProvidersRecord[providerId] = mergeProviderWithTemplate(template);
     }
   }
 
@@ -158,9 +197,15 @@ export async function loadBaseContext(): Promise<BaseContext> {
     existingProviderIds.add(id);
   }
 
+  const exclusionSources: ExclusionSources = {
+    modelsDev: modelsDevIds,
+    templates: new Set(templateIds),
+  };
+
   return {
     baseDataWithTemplates,
     templatesById,
     existingProviderIds,
+    exclusionSources,
   };
 }

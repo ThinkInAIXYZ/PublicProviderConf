@@ -17,7 +17,7 @@ export class ModelsDevOutputManager {
   constructor(private outputDir: string) {}
 
   async writeAggregatedFile(data: ModelsDevApiResponse, filename: string = 'all.json'): Promise<void> {
-    await JsonWriter.writeToFile(data, join(this.outputDir, filename));
+    await JsonWriter.writeToFileCompact(data, join(this.outputDir, filename));
   }
 
   async writeProviderFiles(data: ModelsDevApiResponse): Promise<void> {
@@ -27,7 +27,7 @@ export class ModelsDevOutputManager {
     for (const [providerId, provider] of Object.entries(providersRecord)) {
       const safeId = sanitizeProviderId(providerId || getProviderId(provider));
       const filePath = join(this.outputDir, `${safeId}.json`);
-      await JsonWriter.writeToFile(provider, filePath);
+      await JsonWriter.writeToFileCompact(provider, filePath);
     }
   }
 

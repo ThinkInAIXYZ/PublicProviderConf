@@ -20,14 +20,23 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
   const config = loadConfig();
   console.log(`📋 Loaded configuration with ${Object.keys(config.providers).length} providers`);
 
-  const { baseDataWithTemplates, templatesById, existingProviderIds } = await loadBaseContext();
+  const {
+    baseDataWithTemplates,
+    templatesById,
+    existingProviderIds,
+    exclusionSources,
+  } = await loadBaseContext();
   console.log(`🌐 models.dev already provides ${existingProviderIds.size} providers`);
 
   const fetcher = new DataFetcher();
   const processor = new DataProcessor();
   const outputManager = new ModelsDevOutputManager(outputDir);
 
-  const providerInstances = createProvidersFromConfig(config, existingProviderIds);
+  const providerInstances = createProvidersFromConfig(
+    config,
+    existingProviderIds,
+    exclusionSources,
+  );
   for (const provider of providerInstances) {
     fetcher.addProvider(provider);
   }

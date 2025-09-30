@@ -22,7 +22,7 @@ export class OutputManager {
       }
       
       const filename = join(this.outputDir, `${provider.provider}.json`);
-      await JsonWriter.writeToFile(provider, filename);
+      await JsonWriter.writeToFileCompact(provider, filename);
     }
   }
 
@@ -37,7 +37,7 @@ export class OutputManager {
     }
     
     const filename = join(this.outputDir, 'all.json');
-    await JsonWriter.writeToFile(aggregated, filename);
+    await JsonWriter.writeToFileCompact(aggregated, filename);
   }
 
   createAggregatedOutput(providers: ProviderInfo[]): AggregatedOutput {
