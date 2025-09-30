@@ -2,7 +2,6 @@ import { promises as fs } from 'fs';
 import { join } from 'path';
 import {
   ModelsDevApiResponse,
-  ModelsDevProvider,
   normalizeProvidersList,
   providersToRecord,
   getProviderId,
@@ -33,7 +32,19 @@ export class ModelsDevOutputManager {
 
   async writeAllFiles(data: ModelsDevApiResponse): Promise<void> {
     await this.clearJsonFiles();
+
+    const updatedAtIso = data.updated_at ?? new Date().toISOString();
+    if (!data.updated_at) {
+      data.updated_at = updatedAtIso;
+    }
+
+    const updatedAtMs = Date.parse(updatedAtIso);
+    if (Number.isNaN(updatedAtMs)) {
+      throw new Error(`Invalid updated_at timestamp: ${updatedAtIso}`);
+    }
+
     await this.writeAggregatedFile(data);
+    await this.writeSyncVersionFile(updatedAtMs);
     await this.writeProviderFiles(data);
   }
 
@@ -49,5 +60,10 @@ export class ModelsDevOutputManager {
         .filter(entry => entry.isFile() && entry.name.endsWith('.json'))
         .map(entry => fs.unlink(join(this.outputDir, entry.name)))
     );
+  }
+
+  private async writeSyncVersionFile(updatedAt: number): Promise<void> {
+    const filePath = join(this.outputDir, 'dc_sync_version.json');
+    await JsonWriter.writeToFileCompact({ updated_at: updatedAt }, filePath);
   }
 }
