@@ -158,10 +158,11 @@ export class ModelsDevClient {
     }
 
     const record = provider as Record<string, unknown>;
-    const normalizedModels = this.normalizeModels(record['models'], fallbackId);
+    const { env: _env, npm: _npm, models, ...rest } = record;
+    const normalizedModels = this.normalizeModels(models, fallbackId);
 
     const normalizedProvider: ModelsDevProvider = {
-      ...(provider as ModelsDevProvider),
+      ...(rest as ModelsDevProvider),
       models: normalizedModels,
     };
 

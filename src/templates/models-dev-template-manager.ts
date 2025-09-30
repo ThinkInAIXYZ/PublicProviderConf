@@ -69,15 +69,23 @@ export function mergeProviderWithTemplate(
   template?: ModelsDevProvider
 ): ModelsDevProvider {
   if (!template) {
-    return provider;
+    const sanitized = { ...provider } as ModelsDevProvider & Record<string, unknown>;
+    delete sanitized.env;
+    delete sanitized.npm;
+    return sanitized;
   }
 
-  return {
+  const merged = {
     ...provider,
     ...template,
     metadata: mergeObjects(provider.metadata, template.metadata),
     models: mergeModels(provider.models, template.models),
-  };
+  } as ModelsDevProvider & Record<string, unknown>;
+
+  delete merged.env;
+  delete merged.npm;
+
+  return merged;
 }
 
 function ensureProviderDefaults(providerId: string, template: Partial<ModelsDevProvider>): ModelsDevProvider {
@@ -91,6 +99,9 @@ function ensureProviderDefaults(providerId: string, template: Partial<ModelsDevP
     display_name: template.display_name?.trim() || name,
     description: template.description,
     updated_at: template.updated_at,
+    api: template.api,
+    doc: template.doc,
+    tags: template.tags ? [...template.tags] : undefined,
     metadata: template.metadata ? { ...template.metadata } : undefined,
     models,
   };

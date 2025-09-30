@@ -13,7 +13,13 @@ export class DataAggregator {
       const aggregatedProvider: AggregatedProvider = {
         providerId: provider.provider,
         providerName: provider.providerName,
+        lastUpdated: provider.lastUpdated,
         models: provider.models,
+        api: provider.api,
+        doc: provider.doc,
+        description: provider.description,
+        tags: provider.tags,
+        metadata: provider.metadata,
       };
       
       totalModels += provider.models.length;

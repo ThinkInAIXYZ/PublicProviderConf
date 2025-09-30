@@ -10,5 +10,11 @@ export interface AggregatedOutput {
 export interface AggregatedProvider {
   providerId: string;
   providerName: string;
+  lastUpdated: Date;
   models: ModelInfo[];
+  api?: string;
+  doc?: string;
+  description?: string;
+  tags?: string[];
+  metadata?: Record<string, unknown>;
 }

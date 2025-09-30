@@ -5,7 +5,31 @@ export interface ModelsDevCapabilities {
   vision?: boolean;
   function_calling?: boolean;
   reasoning?: boolean;
+  tool_calling?: boolean;
+  attachments?: boolean;
   [key: string]: unknown;
+}
+
+export interface ModelsDevModalities {
+  input?: string[];
+  output?: string[];
+  [key: string]: string[] | undefined;
+}
+
+export interface ModelsDevCost {
+  input?: number;
+  output?: number;
+  cache_read?: number;
+  cache_write?: number;
+  [key: string]: number | undefined;
+}
+
+export interface ModelsDevLimit {
+  context?: number;
+  output?: number;
+  requests_per_minute?: number;
+  requests_per_day?: number;
+  [key: string]: number | undefined;
 }
 
 export interface ModelsDevModel {
@@ -17,7 +41,21 @@ export interface ModelsDevModel {
   context_length?: number;
   max_output_tokens?: number;
   capabilities?: ModelsDevCapabilities;
+  attachment?: boolean;
+  reasoning?: boolean;
+  temperature?: boolean;
+  tool_call?: boolean;
+  knowledge?: string;
+  release_date?: string;
+  last_updated?: string;
+  open_weights?: boolean;
+  experimental?: boolean;
+  modalities?: ModelsDevModalities;
+  cost?: ModelsDevCost;
+  limit?: ModelsDevLimit;
   metadata?: Record<string, unknown>;
+  provider?: string;
+  vision?: boolean;
 }
 
 export interface ModelsDevProvider {
@@ -27,7 +65,10 @@ export interface ModelsDevProvider {
   description?: string;
   updated_at?: string;
   models: ModelsDevModel[];
+  api?: string;
+  doc?: string;
   metadata?: Record<string, unknown>;
+  tags?: string[];
 }
 
 export interface ModelsDevApiResponse {
@@ -55,6 +96,8 @@ export function convertModelType(modelType: ModelType): string {
 }
 
 export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
+  const toolCall = model.toolCall ?? model.functionCall;
+
   return {
     id: model.id,
     name: model.name,
@@ -66,10 +109,44 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
       vision: model.vision,
       function_calling: model.functionCall,
       reasoning: model.reasoning,
+      tool_calling: toolCall,
+      attachments: model.attachment,
     },
+    attachment: model.attachment,
+    reasoning: model.reasoning,
+    temperature: model.temperature,
+    tool_call: toolCall,
+    knowledge: model.knowledge,
+    release_date: model.releaseDate,
+    last_updated: model.lastUpdated,
+    open_weights: model.openWeights,
+    experimental: model.experimental,
+    modalities: model.modalities
+      ? {
+          ...model.modalities,
+        }
+      : undefined,
+    cost: model.cost
+      ? {
+          input: model.cost.input,
+          output: model.cost.output,
+          cache_read: model.cost.cacheRead,
+          cache_write: model.cost.cacheWrite,
+        }
+      : undefined,
+    limit: model.limit
+      ? {
+          context: model.limit.context,
+          output: model.limit.output,
+          requests_per_minute: model.limit.requestsPerMinute,
+          requests_per_day: model.limit.requestsPerDay,
+        }
+      : undefined,
     metadata: {
+      ...model.metadata,
       source: 'public-provider-conf',
     },
+    vision: model.vision,
   };
 }
 
@@ -78,9 +155,14 @@ export function createModelsDevProvider(provider: ProviderInfo): ModelsDevProvid
     id: provider.provider,
     name: provider.providerName,
     display_name: provider.providerName,
+    description: provider.description,
     updated_at: provider.lastUpdated.toISOString(),
+    api: provider.api,
+    doc: provider.doc,
+    tags: provider.tags,
     models: provider.models.map(createModelsDevModel),
     metadata: {
+      ...provider.metadata,
       source: 'public-provider-conf',
     },
   };
