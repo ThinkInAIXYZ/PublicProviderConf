@@ -13,6 +13,9 @@ on:
 
 env:
   NODE_ENV: production
+  QINIU_CDN_AK: ${{ secrets.QINIU_CDN_AK }}
+  QINIU_CDN_SK: ${{ secrets.QINIU_CDN_SK }}
+  QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
 
 jobs:
   fetch-and-update:
@@ -97,12 +100,12 @@ jobs:
 
     - name: Upload dist to Qiniu CDN
       id: upload_cdn
-      if: ${{ secrets.QINIU_CDN_AK != '' && secrets.QINIU_CDN_SK != '' && secrets.QINIU_BUCKET != '' }}
+      if: ${{ env.QINIU_CDN_AK != '' && env.QINIU_CDN_SK != '' && env.QINIU_BUCKET != '' }}
       uses: hujiulong/action-qiniu-upload@master
       with:
-        access_key: ${{ secrets.QINIU_CDN_AK }}
-        secret_key: ${{ secrets.QINIU_CDN_SK }}
-        bucket: ${{ secrets.QINIU_BUCKET }}
+        access_key: ${{ env.QINIU_CDN_AK }}
+        secret_key: ${{ env.QINIU_CDN_SK }}
+        bucket: ${{ env.QINIU_BUCKET }}
         source_dir: 'cdn_upload/models'
         dest_dir: '/models'
         ignore_source_map: false
