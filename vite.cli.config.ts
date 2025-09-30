@@ -16,8 +16,6 @@ export default defineConfig({
         ...builtinModules,
         ...builtinModules.map((m) => `node:${m}`),
         'commander',
-        // also externalize project internals imported by cli
-        /^(\.\.\/|\.\/|public-provider-conf)/,
       ],
       output: {
         entryFileNames: 'cli.js',

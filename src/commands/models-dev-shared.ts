@@ -18,6 +18,17 @@ export const PROVIDER_ALIASES: Record<string, string> = {
   'github-ai': 'github-models',
 };
 
+const MODELS_DEV_ONLY_PROVIDERS = new Set([
+  'openrouter',
+  'vercel',
+  'anthropic',
+  'deepseek',
+  'github_ai',
+  'github-models',
+  'gemini',
+  'openai',
+]);
+
 export function normalizeProviderId(providerId: string): string {
   const normalized = providerId.trim().toLowerCase().replace(/_/g, '-');
   return PROVIDER_ALIASES[normalized] ?? normalized;
@@ -25,21 +36,15 @@ export function normalizeProviderId(providerId: string): string {
 
 export function createProvider(providerId: string, config: ProviderConfig): Provider | null {
   try {
+    const normalizedId = normalizeProviderId(providerId);
+    if (MODELS_DEV_ONLY_PROVIDERS.has(providerId) || MODELS_DEV_ONLY_PROVIDERS.has(normalizedId)) {
+      console.log(`ℹ️  Skipping ${providerId}: models.dev dataset already covers this provider.`);
+      return null;
+    }
+
     switch (providerId) {
       case 'ppinfra':
         return new providers.PPInfraProvider(config.apiUrl);
-
-      case 'openrouter':
-        return new providers.OpenRouterProvider(config.apiUrl);
-
-      case 'gemini':
-        return new providers.GeminiProvider(config.getApiKey());
-
-      case 'vercel':
-        return new providers.VercelProvider(config.apiUrl);
-
-      case 'github_ai':
-        return new providers.GithubAiProvider(config.apiUrl);
 
       case 'tokenflux':
         return new providers.TokenfluxProvider(config.apiUrl);
@@ -52,15 +57,6 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
         console.log('⚠️  Skipping Groq: No API key found (set GROQ_API_KEY environment variable)');
         return null;
       }
-
-      case 'deepseek':
-        return new providers.DeepSeekProvider();
-
-      case 'openai':
-        return new providers.OpenAIProvider(config.getApiKey());
-
-      case 'anthropic':
-        return new providers.AnthropicProvider(config.getApiKey());
 
       default:
         console.log(`⚠️  Unknown provider: ${providerId}`);

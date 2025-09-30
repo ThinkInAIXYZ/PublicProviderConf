@@ -4,82 +4,39 @@ This document outlines the complete migration of all Rust provider implementatio
 
 ## Migration Overview
 
-Successfully migrated **ALL** 12 provider implementations from Rust to TypeScript:
+Current TypeScript provider implementations focus on the integrations that are not covered by models.dev:
 
 ### Core Architecture
-- **Provider Interface**: `src/providers/Provider.ts` - Equivalent of Rust trait
-- **Model Types**: `src/types/ModelInfo.ts` - TypeScript interfaces and enums
+- **Provider Interface**: `src/providers/Provider.ts` - Equivalent of the Rust trait
+- **Model Types**: `src/models/model-info.ts` - TypeScript interfaces and enums
 - **HTTP Client**: Replaced `reqwest` with `axios`
-- **Web Scraping**: Replaced `scraper` crate with `cheerio`
 
-### Migrated Providers
+### Maintained Providers
 
-#### 1. HTTP API Providers
+#### 1. HTTP API Providers (no API key required)
 - **PPInfraProvider**: `src/providers/PPInfraProvider.ts`
   - Simple HTTP API client
   - Feature detection from response data
-  - No API key required
-
-- **OpenRouterProvider**: `src/providers/OpenRouterProvider.ts`
-  - Public API with rich model metadata
-  - Capability detection from API response
-  - No API key required
-
-- **VercelProvider**: `src/providers/VercelProvider.ts`
-  - Vercel AI Gateway API
-  - Model capability parsing
-  - No API key required
-
-- **GithubAiProvider**: `src/providers/GithubAiProvider.ts`
-  - GitHub AI Models API
-  - Context length estimation based on model families
-  - No API key required
 
 - **TokenfluxProvider**: `src/providers/TokenfluxProvider.ts`
   - Tokenflux marketplace API
   - Pricing information parsing
-  - No API key required
 
 #### 2. API Key Required Providers
 - **GroqProvider**: `src/providers/GroqProvider.ts`
   - Requires `GROQ_API_KEY` environment variable
   - OpenAI-compatible API format
-  - Advanced model name formatting
   - Model type detection
 
-#### 3. Template-Based Providers with API Integration
-- **OpenAIProvider**: `src/providers/OpenAIProvider.ts`
-  - Optional `OPENAI_API_KEY` for complete model list
-  - Template matching system with fallback logic
-  - Sophisticated model capability detection
-  - Default model creation for unmatched API models
+#### 3. models.dev-sourced Providers (legacy fetchers)
+The bespoke provider implementations for OpenAI, Anthropic, OpenRouter, Gemini, Vercel, GitHub Models, and DeepSeek were removed. The CLI now consumes the upstream models.dev catalog for those providers and applies optional template overrides.
 
-- **AnthropicProvider**: `src/providers/AnthropicProvider.ts`
-  - Optional `ANTHROPIC_API_KEY` for complete model list
-  - Template-based model definitions
-  - API validation of available models
-
-#### 4. Hybrid API/Scraping Providers
-- **GeminiProvider**: `src/providers/GeminiProvider.ts`
-  - Optional `GEMINI_API_KEY` for authoritative model list
-  - Web scraping from documentation as fallback
-  - Complex HTML parsing (table and list formats)
-  - Model name normalization
-
-#### 5. Web Scraping Providers
-- **DeepSeekProvider**: `src/providers/DeepSeekProvider.ts`
-  - Pure web scraping from documentation
-  - Table parsing with fallback models
-  - No API key required
-
-#### 6. Template-Only Providers
-- **OllamaProvider**: `src/providers/OllamaProvider.ts`
-  - Reads from `templates/ollama.json`
+#### 4. Template-Only Providers
+- **Ollama**: defined in `templates/ollama.json`
   - No API calls or scraping
-  - Pattern matching system
+  - Injected during template merge
 
-- **SiliconFlowProvider**: `src/providers/SiliconFlowProvider.ts`
-  - Reads from `templates/siliconflow.json`
+- **SiliconFlow**: defined in `templates/siliconflow.json`
   - Template-based model definitions
   - No external dependencies
 
@@ -167,7 +124,7 @@ async fetchModels(): Promise<ModelInfo[]> {
 ```bash
 # Development
 npm run dev fetch-all
-npm run dev fetch-providers -p ppinfra,openai,anthropic
+npm run dev fetch-providers -p ppinfra,tokenflux
 
 # Production
 npm run build
@@ -197,35 +154,24 @@ Created `src/test.ts` to validate the migration:
 ## Environment Variables
 
 All providers respect the same environment variables as the Rust version:
-- `OPENAI_API_KEY`: Optional for OpenAI provider
-- `ANTHROPIC_API_KEY`: Optional for Anthropic provider
 - `GROQ_API_KEY`: Required for Groq provider
-- `GEMINI_API_KEY`: Optional for Gemini provider
+- models.dev supplies OpenAI, Anthropic, OpenRouter, Gemini, Vercel, GitHub Models, and DeepSeek data without extra credentials.
 
 ## File Structure
 
 ```
 src/
-├── types/
-│   ├── ModelInfo.ts        # Core model types
-│   └── index.ts           # Type exports
+├── models/
+│   ├── model-info.ts      # Core model types
+│   ├── provider-info.ts   # Provider metadata
+│   └── models-dev.ts      # models.dev helpers
 ├── providers/
 │   ├── Provider.ts        # Provider interface
 │   ├── PPInfraProvider.ts
-│   ├── OpenAIProvider.ts
-│   ├── AnthropicProvider.ts
-│   ├── OpenRouterProvider.ts
-│   ├── GeminiProvider.ts
-│   ├── VercelProvider.ts
-│   ├── GithubAiProvider.ts
 │   ├── TokenfluxProvider.ts
 │   ├── GroqProvider.ts
-│   ├── DeepSeekProvider.ts
-│   ├── OllamaProvider.ts
-│   ├── SiliconFlowProvider.ts
 │   └── index.ts           # Provider exports
 ├── cli.ts                 # CLI entry point
-└── test.ts               # Testing utility
 ```
 
 ## Functional Equivalence

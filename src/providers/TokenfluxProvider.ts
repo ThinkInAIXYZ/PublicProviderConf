@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { Provider } from './Provider';
-import { ModelInfo, ModelInfoBuilder, ModelType } from '../types/ModelInfo';
+import { createModelInfo, ModelInfo, ModelType } from '../models/model-info';
 
 interface TokenfluxModel {
   id: string;
@@ -53,7 +53,7 @@ export class TokenfluxProvider implements Provider {
     const contextLength = model.context_window || 4096;
     const maxTokens = model.max_completion_tokens || Math.min(contextLength, 4096);
 
-    return ModelInfoBuilder.create(
+    return createModelInfo(
       model.id,
       model.name,
       contextLength,

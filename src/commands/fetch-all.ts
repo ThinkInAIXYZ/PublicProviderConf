@@ -14,10 +14,10 @@ import {
   normalizeProviderId,
 } from './models-dev-shared';
 
-export async function fetchAllProviders(outputDir: string, configPath: string): Promise<ModelsDevApiResponse> {
+export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApiResponse> {
   console.log('🚀 Fetching models from all providers...');
 
-  const config = loadConfig(configPath);
+  const config = loadConfig();
   console.log(`📋 Loaded configuration with ${Object.keys(config.providers).length} providers`);
 
   const { baseDataWithTemplates, templatesById, existingProviderIds } = await loadBaseContext();

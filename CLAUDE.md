@@ -18,16 +18,7 @@ pnpm build
 pnpm start fetch-all
 
 # Run with specific providers  
-pnpm start fetch-providers -p ppinfra,openai,anthropic,openrouter,gemini,vercel,github_ai,tokenflux,groq,deepseek,ollama
-
-# Run tests (using Vitest)
-pnpm test
-
-# Run tests in watch mode
-pnpm test:watch
-
-# Run tests with coverage
-pnpm coverage
+pnpm start fetch-providers -p ppinfra,tokenflux,groq,ollama,siliconflow
 
 # Development mode
 pnpm run dev fetch-all
@@ -39,7 +30,7 @@ pnpm start fetch-all -o custom_output
 pnpm clean
 ```
 
-### Testing
+### Manual Checks
 ```bash
 # Test PPInfra API endpoint
 curl --request GET --url https://api.ppinfra.com/openai/v1/models
@@ -73,23 +64,12 @@ du -h dist/*.json
 ## Key Files
 
 - `src/cli.ts` - CLI entry point with Commander.js
-- `src/providers/ppinfra.ts` - PPInfra API implementation
-- `src/providers/openai.ts` - OpenAI API implementation with template matching
-- `src/providers/anthropic.ts` - Anthropic API implementation
-- `src/providers/openrouter.ts` - OpenRouter API implementation
-- `src/providers/gemini.ts` - Google Gemini API implementation with web scraping
-- `src/providers/vercel.ts` - Vercel AI Gateway implementation
-- `src/providers/github-ai.ts` - GitHub AI Models implementation
-- `src/providers/tokenflux.ts` - Tokenflux implementation
-- `src/providers/groq.ts` - Groq API implementation
-- `src/providers/deepseek.ts` - DeepSeek web scraping implementation
-- `src/providers/ollama.ts` - Ollama template-based implementation
-- `src/providers/siliconflow.ts` - SiliconFlow template-based implementation
-- `templates/openai.json` - OpenAI model template definitions
-- `templates/anthropic.json` - Anthropic model template definitions
-- `templates/ollama.json` - Ollama model template definitions
+- `src/providers/PPInfraProvider.ts` - PPInfra API implementation
+- `src/providers/TokenfluxProvider.ts` - Tokenflux implementation
+- `src/providers/GroqProvider.ts` - Groq API implementation
+- `templates/ollama.json` - Ollama template definitions
+- `templates/siliconflow.json` - SiliconFlow template definitions
 - `vite.config.ts` - Vite build configuration for library bundling
-- `vitest.config.ts` - Vitest test configuration
 - `docs/architecture-overview.md` - Complete architecture documentation
 - `.github/workflows/fetch-models.yml` - Automated fetching workflow (Node.js)
 
@@ -230,30 +210,26 @@ The workflow automatically:
 ## Environment Variables
 
 Optional API keys can be set as GitHub secrets or local environment variables:
-- `OPENAI_API_KEY` - Required for OpenAI provider (complete model list)
-- `ANTHROPIC_API_KEY` - Required for Anthropic provider (complete model list)
 - `GROQ_API_KEY` - Required for Groq provider (API access)
-- `GEMINI_API_KEY` - Optional for Gemini provider (enhances model list)
 - Add others as needed
 
 ### Provider API Key Requirements
 - **PPInfra**: ✅ No API key required - public API
-- **OpenRouter**: ✅ No API key required - public model listing API
-- **Vercel AI Gateway**: ✅ No API key required - public AI Gateway API
-- **GitHub AI Models**: ✅ No API key required - public model listing API
+- **OpenRouter**: ✅ Supplied by models.dev - no live fetch
+- **Vercel AI Gateway**: ✅ Supplied by models.dev - no live fetch
+- **GitHub AI Models**: ✅ Supplied by models.dev - no live fetch
 - **Tokenflux**: ✅ No API key required - public marketplace API
-- **DeepSeek**: ✅ No API key required - web scraping from documentation
+- **DeepSeek**: ✅ Supplied by models.dev - no live fetch
 - **Ollama**: ✅ No API key required - template-based provider
 - **SiliconFlow**: ✅ No API key required - template-based provider
-- **Gemini**: ⚠️ Optional API key - hybrid web scraping + API approach
+- **Gemini**: ✅ Supplied by models.dev - no live fetch
 - **Groq**: ❌ API key required - private API access only
-- **OpenAI**: ❌ API key required - private API access only
-- **Anthropic**: ❌ API key required - private API access only
+- **OpenAI**: ✅ Supplied by models.dev - no live fetch
+- **Anthropic**: ✅ Supplied by models.dev - no live fetch
 
 ## Common Issues
 
 - **Build failures**: Run `pnpm build` or check Vite configuration and TypeScript compilation
-- **Test failures**: Run `pnpm test` or use `pnpm test:watch` for interactive testing with Vitest
 - **JSON validation errors**: Check API response format changes  
 - **Rate limiting**: Adjust rate limits in provider configurations
 - **Network timeouts**: Increase timeout values in HTTP client

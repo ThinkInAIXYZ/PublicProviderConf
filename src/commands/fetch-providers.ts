@@ -18,11 +18,10 @@ import {
 export async function fetchSpecificProviders(
   providerNames: string[],
   outputDir: string,
-  configPath: string,
 ): Promise<ModelsDevApiResponse> {
   console.log(`🚀 Fetching models from providers: ${providerNames.join(', ')}`);
 
-  const config = loadConfig(configPath);
+  const config = loadConfig();
   const targetProviders = new Set(providerNames.map(name => normalizeProviderId(name)));
 
   const { baseDataWithTemplates, templatesById, existingProviderIds } = await loadBaseContext();
@@ -50,7 +49,7 @@ export async function fetchSpecificProviders(
         console.log(`⚠️  Could not create provider: ${providerName}`);
       }
     } else {
-      console.log(`⚠️  Provider not found in config: ${providerName}`);
+      console.log(`⚠️  Provider not found in default config: ${providerName}`);
     }
   }
 
