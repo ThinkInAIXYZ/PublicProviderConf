@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { Provider } from './Provider';
-import { ModelInfo, ModelInfoBuilder, ModelType } from '../types/ModelInfo';
+import { createModelInfo, ModelInfo, ModelType } from '../models/model-info';
 
 interface PPInfraModel {
   id: string;
@@ -44,7 +44,7 @@ export class PPInfraProvider implements Provider {
         modelType = ModelType.Chat;
     }
 
-    return ModelInfoBuilder.create(
+    return createModelInfo(
       model.id,
       model.display_name,
       model.context_size,
@@ -59,10 +59,9 @@ export class PPInfraProvider implements Provider {
   async fetchModels(): Promise<ModelInfo[]> {
     try {
       const response = await this.client.get<PPInfraResponse>(this.apiUrl);
-      
       return response.data.data.map(model => this.convertModel(model));
     } catch (error) {
-      throw new Error(`Failed to fetch PPInfra models: ${error}`);
+      throw new Error(`Failed to fetch PPInfra models: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 

@@ -1,4 +1,4 @@
-import { ModelInfo } from '../types/ModelInfo';
+import { ModelInfo } from '../models/model-info';
 
 export interface Provider {
   fetchModels(): Promise<ModelInfo[]>;

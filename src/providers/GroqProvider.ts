@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { Provider } from './Provider';
-import { ModelInfo, ModelInfoBuilder, ModelType } from '../types/ModelInfo';
+import { createModelInfo, ModelInfo, ModelType } from '../models/model-info';
 
 interface GroqModel {
   id: string;
@@ -39,7 +39,7 @@ export class GroqProvider implements Provider {
     const modelType = this.determineModelType(groqModel.id);
     const displayName = this.createDisplayName(groqModel.id, groqModel.owned_by);
     
-    return ModelInfoBuilder.create(
+    return createModelInfo(
       groqModel.id,
       displayName,
       groqModel.context_window,
@@ -124,7 +124,7 @@ export class GroqProvider implements Provider {
   async fetchModels(): Promise<ModelInfo[]> {
     // Check if API key is provided
     if (!this.apiKey) {
-      throw new Error('Groq API key is required. Please set GROQ_API_KEY environment variable or configure in providers.toml');
+      throw new Error('Groq API key is required. Please set GROQ_API_KEY environment variable.');
     }
 
     console.log('🔄 Fetching models from Groq API...');

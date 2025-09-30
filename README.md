@@ -1,6 +1,6 @@
 # PublicProviderConf
 
-Automated tool to fetch AI model information from various providers (PPInfra, OpenRouter, OpenAI, Google, etc.) and generate standardized JSON files for easy consumption by chatbots and other applications.
+Automated tool to merge the upstream models.dev catalog with a handful of custom providers (PPInfra, Tokenflux, Groq, etc.) and generate standardized JSON files for easy consumption by chatbots and other applications.
 
 ## ✨ Features
 
@@ -19,13 +19,13 @@ Access the latest AI model information in JSON format:
 - **OpenAI**: [openai.json](dist/openai.json) - OpenAI models with comprehensive template matching (65+ models including GPT-5, o1/o3/o4 series)
 - **Anthropic**: [anthropic.json](dist/anthropic.json) - Anthropic Claude models (8 models including Opus 4.1)
 - **PPInfra**: [ppinfra.json](dist/ppinfra.json) - PPInfra provider models
-- **OpenRouter**: [openrouter.json](dist/openrouter.json) - OpenRouter provider models  
-- **Google Gemini**: [gemini.json](dist/gemini.json) - Google Gemini API models with web-scraped details
-- **Vercel AI Gateway**: [vercel.json](dist/vercel.json) - Vercel AI Gateway hosted models
-- **GitHub AI Models**: [github_ai.json](dist/github_ai.json) - GitHub AI Models marketplace
+- **OpenRouter**: [openrouter.json](dist/openrouter.json) - models.dev sourced OpenRouter catalog  
+- **Google Gemini**: [gemini.json](dist/gemini.json) - models.dev sourced Google Gemini API catalog
+- **Vercel AI Gateway**: [vercel.json](dist/vercel.json) - models.dev sourced Vercel AI Gateway catalog
+- **GitHub AI Models**: [github_ai.json](dist/github_ai.json) - models.dev sourced GitHub Models marketplace
 - **Tokenflux**: [tokenflux.json](dist/tokenflux.json) - Tokenflux marketplace models
 - **Groq**: [groq.json](dist/groq.json) - Groq hosted models (API key required)
-- **DeepSeek**: [deepseek.json](dist/deepseek.json) - DeepSeek models with documentation parsing
+- **DeepSeek**: [deepseek.json](dist/deepseek.json) - models.dev sourced DeepSeek catalog
 
 ## 📦 Installation
 
@@ -60,16 +60,16 @@ Specify output directory:
 pnpm start -o ./output
 ```
 
-Fetch from specific providers:
+Fetch from specific providers (only needed for providers not already covered by models.dev, e.g. ppinfra/tokenflux):
 ```bash
-node build/cli.js fetch-providers -p openai,anthropic,ppinfra,openrouter
+node build/cli.js fetch-providers -p ppinfra,tokenflux
 ```
 
 ### Development Mode
 ```bash
 pnpm run dev
 # or run specific commands directly
-ts-node src/cli.ts fetch-providers -p openai,anthropic
+ts-node src/cli.ts fetch-providers -p ppinfra
 ```
 
 ### CLI Options
@@ -83,29 +83,43 @@ pnpm start fetch-providers -p <PROVIDERS> [OPTIONS]
 
 Options:
   -o, --output <OUTPUT>    Output directory [default: dist]
-  -c, --config <CONFIG>    Config file path [default: config/providers.toml]
   -h, --help              Show help information
 ```
+
+### models.dev Source Configuration
+
+The CLI downloads the upstream catalog from [models.dev](https://models.dev/api.json) before merging in the extra providers that
+this project maintains. You can point to an alternate source (or an offline snapshot) via the `MODELS_DEV_API_URL`
+environment variable. When the primary source fails, the CLI will fall back to `MODELS_DEV_SNAPSHOT_PATH` if set, and finally to
+`manual-templates/models-dev-snapshot.json` when that file exists.
+
+Manual provider definitions and overrides now live in the `manual-templates/` directory. Each template is stored in the models.dev schema so it can be merged directly with the upstream dataset without additional conversions.
 
 ## 📋 Output Format
 
 ### Individual Provider JSON
 ```json
 {
-  "provider": "ppinfra",
-  "providerName": "PPInfra", 
-  "lastUpdated": "2025-01-15T10:30:00Z",
+  "id": "ppinfra",
+  "name": "PPInfra",
+  "display_name": "PPInfra",
+  "updated_at": "2025-01-15T10:30:00Z",
   "models": [
     {
       "id": "deepseek/deepseek-v3.1",
       "name": "Deepseek V3.1",
-      "contextLength": 163840,
-      "maxTokens": 163840,
-      "vision": false,
-      "functionCall": true,
-      "reasoning": true,
+      "display_name": "Deepseek V3.1",
       "type": "chat",
-      "description": "DeepSeek-V3.1 latest model with mixed reasoning modes..."
+      "context_length": 163840,
+      "max_output_tokens": 163840,
+      "capabilities": {
+        "vision": false,
+        "function_calling": true,
+        "reasoning": true
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      }
     }
   ]
 }
@@ -114,24 +128,30 @@ Options:
 ### Aggregated JSON (all.json)
 ```json
 {
-  "version": "1.0.0",
-  "generatedAt": "2025-01-15T10:30:00Z",
-  "totalModels": 38,
+  "version": "offline-snapshot",
+  "updated_at": "2025-01-15T10:30:00Z",
   "providers": {
     "ppinfra": {
-      "providerId": "ppinfra",
-      "providerName": "PPInfra",
+      "id": "ppinfra",
+      "name": "PPInfra",
+      "display_name": "PPInfra",
+      "updated_at": "2025-01-15T10:30:00Z",
       "models": [
         {
           "id": "deepseek/deepseek-v3.1",
           "name": "Deepseek V3.1",
-          "contextLength": 163840,
-          "maxTokens": 163840,
-          "vision": false,
-          "functionCall": true,
-          "reasoning": true,
+          "display_name": "Deepseek V3.1",
           "type": "chat",
-          "description": "DeepSeek-V3.1 latest model..."
+          "context_length": 163840,
+          "max_output_tokens": 163840,
+          "capabilities": {
+            "vision": false,
+            "function_calling": true,
+            "reasoning": true
+          },
+          "metadata": {
+            "source": "public-provider-conf"
+          }
         }
       ]
     }
@@ -141,134 +161,24 @@ Options:
 
 ## 🔧 Configuration
 
-### Provider Configuration (Optional)
+Provider endpoints, timeouts, and rate limits are bundled with the CLI (see `src/config/app-config.ts`). You only need to supply credentials for providers that still perform live API calls:
 
-**Step 1: Create your configuration file**
 ```bash
-# Copy the example configuration file
-cp config/providers.toml.example config/providers.toml
-
-# Edit with your settings
-nano config/providers.toml  # or use your preferred editor
+# Required for Groq requests to succeed
+export GROQ_API_KEY="your-key-here"
 ```
 
-**Step 2: Configuration file format**
-```toml
-# config/providers.toml
-[providers.ppinfra]
-api_url = "https://api.ppinfra.com/openai/v1/models"
-rate_limit = 10
-timeout = 30
+You can tweak any of the built-in defaults by editing `src/config/app-config.ts` directly (for example, to point at staging endpoints or change rate limits).
 
-[providers.openrouter]
-api_url = "https://openrouter.ai/api/v1/models"
-rate_limit = 5
+#### Provider Notes
 
-[providers.gemini]
-api_url = "https://generativelanguage.googleapis.com/v1beta/openai/models"
-api_key_env = "GEMINI_API_KEY"  # or use api_key = "your-key"
-rate_limit = 10
-timeout = 60
+- **PPInfra**, **Tokenflux**, **Ollama**, and **SiliconFlow** are fetched directly by this CLI without credentials.
+- **Groq** requires `GROQ_API_KEY` if you enable live fetching.
+- **OpenAI**, **Anthropic**, **OpenRouter**, **Gemini**, **Vercel**, **GitHub Models**, and **DeepSeek** now come from the upstream models.dev dataset—no live fetchers are maintained for them anymore.
 
-[providers.groq]
-api_url = "https://api.groq.com/openai/v1/models"
-api_key_env = "GROQ_API_KEY"
-rate_limit = 10
-timeout = 30
-```
+### models.dev-sourced Providers
 
-**🔒 Security Note**: The actual `config/providers.toml` file is ignored by git to prevent accidental API key commits. Always use the example file as a template.
-
-### API Key Configuration
-
-The tool supports flexible API key configuration with multiple methods and clear priority ordering:
-
-#### Configuration Methods
-
-**Method 1: Environment Variables (Recommended)**
-```bash
-# Only for providers that require API keys
-export GEMINI_API_KEY="your-key-here"    # Optional for Gemini (enhances model list)
-export GROQ_API_KEY="your-key-here"      # Required for Groq
-```
-
-**Method 2: Configuration File**
-```bash
-# First, copy the example configuration
-cp config/providers.toml.example config/providers.toml
-```
-
-```toml
-# config/providers.toml (ignored by git for security)
-[providers.gemini]
-api_url = "https://generativelanguage.googleapis.com/v1beta/openai/models"
-# Option A: Use default environment variable
-api_key_env = "GEMINI_API_KEY"
-# Option B: Use custom environment variable name
-# api_key_env = "MY_CUSTOM_GEMINI_KEY" 
-# Option C: Direct API key (not recommended for production)
-# api_key = "your-gemini-key-here"
-
-[providers.groq]
-api_url = "https://api.groq.com/openai/v1/models"
-api_key_env = "GROQ_API_KEY"
-# Or use direct API key (not recommended)
-# api_key = "your-groq-key-here"
-```
-
-#### API Key Priority (High to Low)
-
-1. **Direct API key in config file** (`api_key` field)
-2. **Environment variable specified in config** (`api_key_env` field)
-3. **Default environment variable** (e.g., `GEMINI_API_KEY`)
-
-This allows you to:
-- Use environment variables for security (recommended)
-- Override per-environment using config files
-- Mix different approaches for different providers
-
-#### Provider-Specific Notes
-
-- **PPInfra**: ✅ No API key required - uses public API
-- **OpenRouter**: ✅ No API key required - uses public model listing API  
-- **Vercel AI Gateway**: ✅ No API key required - uses public AI Gateway API
-- **GitHub AI Models**: ✅ No API key required - uses public model listing API
-- **Tokenflux**: ✅ No API key required - uses public marketplace API
-- **DeepSeek**: ✅ No API key required - uses web scraping from documentation
-- **Gemini**: ⚠️ Optional API key - uses hybrid web scraping + API approach
-- **Groq**: ❌ API key required - private API access only
-- **OpenAI**: ❌ API key required - private API access only
-- **Anthropic**: ❌ API key required - private API access only
-
-### Gemini Provider Details
-
-The Gemini provider implements a unique **hybrid approach**:
-
-**How It Works:**
-1. **API Call**: Fetches model list from Gemini API (model names only)
-2. **Web Scraping**: Scrapes Google's documentation for detailed capabilities
-3. **Data Merging**: Combines API data with scraped metadata
-
-**Behavior by API Key Status:**
-- **With API Key**: Complete model list from API + enriched capabilities from scraping
-- **Without API Key**: Model list and capabilities from web scraping + fallback known models
-
-**Why Hybrid?** The official Gemini API only provides model names, so web scraping is always required to get comprehensive capability information (vision, function calling, reasoning, context lengths, etc.).
-
-### DeepSeek Provider Details
-
-The DeepSeek provider uses **pure web scraping** from the official [DeepSeek API documentation](https://api-docs.deepseek.com/quick_start/pricing):
-
-**How It Works:**
-1. **Documentation Scraping**: Parses model tables from the pricing/models page
-2. **Fallback Models**: Uses known model definitions if scraping fails
-3. **Capability Detection**: Analyzes model descriptions for feature detection
-
-**Supported Models:**
-- **deepseek-chat**: DeepSeek-V3.1 (Non-thinking Mode) with function calling support
-- **deepseek-reasoner**: DeepSeek-V3.1 (Thinking Mode) with advanced reasoning capabilities
-
-**Why Web Scraping?** DeepSeek doesn't provide a public model listing API, so documentation parsing ensures we capture the latest model information and specifications.
+For providers delivered by models.dev (OpenAI, Anthropic, OpenRouter, Gemini, Vercel, GitHub Models, DeepSeek, etc.), this repo now acts as a pass-through. We merge the upstream dataset with any local templates/overrides and emit the normalized JSON without making additional HTTP calls. To customize their metadata, update the corresponding `manual-templates/*.json` files.
 
 ## 🤖 GitHub Actions Automation
 
@@ -331,7 +241,7 @@ The system supports two provider implementation patterns:
 
 ### Template-Based Providers (Recommended for providers with minimal API metadata)
 
-1. **Create template file** in `templates/{provider}.json`:
+1. **Create template file** in `manual-templates/{provider}.json`:
 ```json
 [{
   "id": "model-id",
@@ -388,32 +298,19 @@ For detailed implementation guide, see [Provider Implementation Guide](.claude/p
 
 ## 📊 Currently Supported Providers
 
-- ✅ **PPInfra** - 38+ models with reasoning, function calling, and vision capability detection
-- ✅ **OpenRouter** - 600+ models with comprehensive capability detection and metadata
-- ✅ **Google Gemini** - Gemini models with hybrid API + web scraping approach for complete metadata
-- ✅ **Vercel AI Gateway** - 200+ hosted models with pricing and capability information
-- ✅ **GitHub AI Models** - 50+ models from GitHub's AI marketplace
-- ✅ **Tokenflux** - 274+ marketplace models with detailed specifications
-- ✅ **Groq** - 22+ high-performance models (API key required)
-- ✅ **DeepSeek** - 2 models (deepseek-chat, deepseek-reasoner) with documentation parsing
-- ✅ **OpenAI** - 65+ models including GPT-5 series, o1/o3/o4 reasoning models, DALL-E, Whisper, TTS, embeddings with template matching
-- ✅ **Anthropic** - 8 Claude models (Opus 4.1, Opus 4, Sonnet 4, 3.7 Sonnet, 3.5 variants, Haiku) with API key support
+- ✅ **PPInfra** – Live API fetcher with capability detection
+- ✅ **Tokenflux** – Marketplace fetcher with detailed specifications
+- ✅ **Groq** – Optional live API fetcher (requires `GROQ_API_KEY`)
+- ☑️ **models.dev catalog** – Provides OpenAI, Anthropic, OpenRouter, Gemini, Vercel, GitHub Models, DeepSeek, and many others; this project simply merges templates/overrides on top of the upstream dataset
 
 ## 🛠️ Development
 
-### Run Tests
+### Core Commands
 ```bash
-pnpm test
-```
-
-### Type Checking
-```bash
-pnpm run typecheck
-```
-
-### Linting
-```bash
-pnpm run lint
+pnpm install      # Install dependencies
+pnpm build        # Build library + CLI bundles
+pnpm start        # Run built CLI (fetch-all)
+pnpm run dev      # Run CLI via ts-node (fetch-all)
 ```
 
 ### Debug Mode

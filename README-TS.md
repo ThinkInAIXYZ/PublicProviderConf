@@ -20,21 +20,21 @@ pnpm build
 ```bash
 pnpm run dev
 # or run specific commands directly
-ts-node src/cli.ts fetch-providers -p ppinfra,openai,anthropic
+ts-node src/cli.ts fetch-providers -p ppinfra,tokenflux
 ```
 
 ### Production (using Vite build)
 ```bash
 pnpm build
 pnpm start
-node build/cli.js fetch-providers -p ppinfra,openai,anthropic
+node build/cli.js fetch-providers -p ppinfra,tokenflux
 ```
 
 ### Global Installation
 ```bash
 pnpm install -g .
 public-provider-conf fetch-all
-public-provider-conf fetch-providers -p ppinfra,openai,anthropic
+public-provider-conf fetch-providers -p ppinfra,tokenflux
 ```
 
 ## Commands
@@ -46,7 +46,6 @@ public-provider-conf fetch-all [options]
 
 Options:
 - `-o, --output <output>`: Output directory for generated JSON files (default: "dist")
-- `-c, --config <config>`: Configuration file path (default: "config/providers.toml")
 
 ### Fetch Specific Providers
 ```bash
@@ -56,35 +55,26 @@ public-provider-conf fetch-providers [options]
 Options:
 - `-p, --providers <providers>`: Comma-separated list of provider names (required)
 - `-o, --output <output>`: Output directory for generated JSON files (default: "dist")
-- `-c, --config <config>`: Configuration file path (default: "config/providers.toml")
 
 ## Supported Providers
 
-The CLI supports the same providers as the Rust version:
+Live-fetch providers:
 - `ppinfra` - PPInfra API
-- `openrouter` - OpenRouter API
-- `gemini` - Google Gemini (web scraping + API)
-- `vercel` - Vercel AI Gateway
-- `github_ai` - GitHub AI Models
-- `tokenflux` - Tokenflux
+- `tokenflux` - Tokenflux API
 - `groq` - Groq API (requires API key)
-- `deepseek` - DeepSeek (web scraping)
-- `openai` - OpenAI (requires API key)
-- `anthropic` - Anthropic (requires API key)
-- `ollama` - Ollama (template-based)
-- `siliconflow` - SiliconFlow (template-based)
+- `ollama` - Ollama (template-based snapshot)
+- `siliconflow` - SiliconFlow (template-based snapshot)
+
+Providers such as `openai`, `anthropic`, `openrouter`, `gemini`, `vercel`, `github_ai`, and `deepseek` are now sourced directly from models.dev and no longer have bespoke fetchers in this CLI.
 
 ## Configuration
 
-Create a `config/providers.toml` file based on `config/providers.toml.example` to customize provider settings and API keys.
+Provider defaults live in `src/config/app-config.ts`. Update that file if you need to change endpoints or rate limits.
 
 ## Environment Variables
 
 Set API keys as environment variables:
-- `OPENAI_API_KEY` - For OpenAI provider
-- `ANTHROPIC_API_KEY` - For Anthropic provider
 - `GROQ_API_KEY` - For Groq provider
-- `GEMINI_API_KEY` - For Gemini provider (optional)
 
 ## Project Structure
 

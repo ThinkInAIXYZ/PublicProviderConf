@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { Provider } from './Provider';
-import { ModelInfo, ModelInfoBuilder, ModelType } from '../types/ModelInfo';
+import { createModelInfo, ModelInfo, ModelType } from '../models/model-info';
 
 interface TokenfluxModel {
   id: string;
@@ -53,7 +53,7 @@ export class TokenfluxProvider implements Provider {
     const contextLength = model.context_window || 4096;
     const maxTokens = model.max_completion_tokens || Math.min(contextLength, 4096);
 
-    return ModelInfoBuilder.create(
+    return createModelInfo(
       model.id,
       model.name,
       contextLength,
@@ -68,15 +68,15 @@ export class TokenfluxProvider implements Provider {
   async fetchModels(): Promise<ModelInfo[]> {
     try {
       const response = await this.client.get<any>(this.apiUrl);
-      
+
       // Handle different response structures
       const models = response.data.models || response.data.data || response.data;
-      
+
       if (!Array.isArray(models)) {
         console.warn('⚠️  Tokenflux API response structure unexpected, returning empty model list');
         return [];
       }
-      
+
       return models.map(model => this.convertModel(model));
     } catch (error) {
       console.warn('⚠️  Failed to fetch Tokenflux models, returning empty list');
