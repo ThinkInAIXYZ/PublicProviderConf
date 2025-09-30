@@ -4,7 +4,7 @@
 - `src/`: TypeScript source. Key areas: `providers/` (provider integrations), `fetcher/`, `processor/`, `output/`, `config/`, `models/`, `commands/`.
 - `build/` and `dist/`: build outputs (library + CLI).
 - `config/`: default provider configuration definitions.
-- `templates/`: provider JSON templates used by normalizers/writers.
+- `manual-templates/`: provider JSON templates used by normalizers/writers.
 
 ## Architecture & Data Flow
 - CLI (`src/cli.ts`) loads config → instantiates `providers/*` → `fetcher/` pulls data → `processor/` normalizes/dedupes/validates → `output/` writes `{provider}.json` and aggregates.
@@ -31,7 +31,7 @@ Examples:
 ## Add a Provider (Quick Steps)
 - Implement `Provider` in `src/providers/yourprovider.ts` with `fetchModels()`, `providerId()`, `providerName()`.
 - Export in `src/providers/index.ts`, register in `src/cli.ts#createProvider`.
-- Add templates (if needed) under `templates/`, update docs/README sections, and manually verify via CLI commands.
+- Add templates (if needed) under `manual-templates/`, update docs/README sections, and manually verify via CLI commands.
 
 ## Commit & Pull Request Guidelines
 - Use Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `ci:`). Optional scopes: `feat(providers): ...`, `ci(actions): ...`.
@@ -73,6 +73,6 @@ Examples:
 ```
 
 ## Templates & Validation
-- Templates: add/update under `templates/*.json` when normalizing names or capabilities.
+- Templates: add/update under `manual-templates/*.json` when normalizing names or capabilities.
 - Normalization: `processor/` trims, dedupes, sorts; keep IDs stable across runs.
 - Validation: `output/json-validator.ts` enforces schema before write; prefer failing fast.

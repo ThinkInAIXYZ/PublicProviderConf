@@ -9,7 +9,7 @@ import {
 } from '../models/models-dev';
 
 const DEFAULT_MODELS_DEV_API_URL = 'https://models.dev/api.json';
-const SNAPSHOT_FALLBACK_PATH = 'templates/models-dev-snapshot.json';
+const SNAPSHOT_FALLBACK_PATH = 'manual-templates/models-dev-snapshot.json';
 
 function resolvePrimarySource(): string {
   return process.env.MODELS_DEV_API_URL?.trim() || DEFAULT_MODELS_DEV_API_URL;

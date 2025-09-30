@@ -115,7 +115,7 @@ function ensureModelDefaults(model: Partial<ModelsDevModel>): ModelsDevModel {
 }
 
 export class ModelsDevTemplateManager {
-  constructor(private readonly templatesDir: string = 'templates') {}
+  constructor(private readonly templatesDir: string = 'manual-templates') {}
 
   async loadAllTemplates(): Promise<Map<string, ModelsDevProvider>> {
     try {

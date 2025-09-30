@@ -91,9 +91,9 @@ Options:
 The CLI downloads the upstream catalog from [models.dev](https://models.dev/api.json) before merging in the extra providers that
 this project maintains. You can point to an alternate source (or an offline snapshot) via the `MODELS_DEV_API_URL`
 environment variable. When the primary source fails, the CLI will fall back to `MODELS_DEV_SNAPSHOT_PATH` if set, and finally to
-`templates/models-dev-snapshot.json` when that file exists.
+`manual-templates/models-dev-snapshot.json` when that file exists.
 
-Manual provider definitions and overrides now live in the `templates/` directory. Each template is stored in the models.dev schema so it can be merged directly with the upstream dataset without additional conversions.
+Manual provider definitions and overrides now live in the `manual-templates/` directory. Each template is stored in the models.dev schema so it can be merged directly with the upstream dataset without additional conversions.
 
 ## 📋 Output Format
 
@@ -178,7 +178,7 @@ You can tweak any of the built-in defaults by editing `src/config/app-config.ts`
 
 ### models.dev-sourced Providers
 
-For providers delivered by models.dev (OpenAI, Anthropic, OpenRouter, Gemini, Vercel, GitHub Models, DeepSeek, etc.), this repo now acts as a pass-through. We merge the upstream dataset with any local templates/overrides and emit the normalized JSON without making additional HTTP calls. To customize their metadata, update the corresponding `templates/*.json` files.
+For providers delivered by models.dev (OpenAI, Anthropic, OpenRouter, Gemini, Vercel, GitHub Models, DeepSeek, etc.), this repo now acts as a pass-through. We merge the upstream dataset with any local templates/overrides and emit the normalized JSON without making additional HTTP calls. To customize their metadata, update the corresponding `manual-templates/*.json` files.
 
 ## 🤖 GitHub Actions Automation
 
@@ -241,7 +241,7 @@ The system supports two provider implementation patterns:
 
 ### Template-Based Providers (Recommended for providers with minimal API metadata)
 
-1. **Create template file** in `templates/{provider}.json`:
+1. **Create template file** in `manual-templates/{provider}.json`:
 ```json
 [{
   "id": "model-id",

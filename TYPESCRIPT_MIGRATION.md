@@ -32,11 +32,11 @@ Current TypeScript provider implementations focus on the integrations that are n
 The bespoke provider implementations for OpenAI, Anthropic, OpenRouter, Gemini, Vercel, GitHub Models, and DeepSeek were removed. The CLI now consumes the upstream models.dev catalog for those providers and applies optional template overrides.
 
 #### 4. Template-Only Providers
-- **Ollama**: defined in `templates/ollama.json`
+- **Ollama**: defined in `manual-templates/ollama.json`
   - No API calls or scraping
   - Injected during template merge
 
-- **SiliconFlow**: defined in `templates/siliconflow.json`
+- **SiliconFlow**: defined in `manual-templates/siliconflow.json`
   - Template-based model definitions
   - No external dependencies
 

@@ -60,14 +60,14 @@ export function getDefaultConfig(): AppConfig {
   );
 
   providers['ollama'] = createProviderConfig(
-    'templates/ollama.json',
+    'manual-templates/ollama.json',
     undefined,
     5,
     30
   );
 
   providers['siliconflow'] = createProviderConfig(
-    'templates/siliconflow.json',
+    'manual-templates/siliconflow.json',
     undefined,
     5,
     30

@@ -55,7 +55,7 @@ du -h dist/*.json
 │   └── cli.ts           # CLI entry point
 ├── dist/                # Generated JSON output files
 ├── build/               # Compiled JavaScript build output (Vite)
-├── templates/           # Model template definitions
+├── manual-templates/    # Manually maintained provider templates
 ├── config/             # Configuration files
 ├── docs/                # Documentation
 └── dist_rust_backup/    # Backup of Rust version output for comparison
@@ -67,8 +67,8 @@ du -h dist/*.json
 - `src/providers/PPInfraProvider.ts` - PPInfra API implementation
 - `src/providers/TokenfluxProvider.ts` - Tokenflux implementation
 - `src/providers/GroqProvider.ts` - Groq API implementation
-- `templates/ollama.json` - Ollama template definitions
-- `templates/siliconflow.json` - SiliconFlow template definitions
+- `manual-templates/ollama.json` - Ollama template definitions
+- `manual-templates/siliconflow.json` - SiliconFlow template definitions
 - `vite.config.ts` - Vite build configuration for library bundling
 - `docs/architecture-overview.md` - Complete architecture documentation
 - `.github/workflows/fetch-models.yml` - Automated fetching workflow (Node.js)
