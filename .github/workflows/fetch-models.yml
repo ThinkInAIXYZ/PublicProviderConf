@@ -111,9 +111,13 @@ jobs:
       run: |
         rm -rf cdn_upload
         mkdir -p cdn_upload/models
-        if compgen -G "dist/*" > /dev/null; then
-          cp -r dist/* cdn_upload/models/
-        fi
+        for filename in all.json dc_sync_version.json; do
+          if [ -f "dist/${filename}" ]; then
+            cp "dist/${filename}" "cdn_upload/models/${filename}"
+          else
+            echo "Warning: dist/${filename} not found"
+          fi
+        done
         echo "CDN payload contents:"
         find cdn_upload -type f | sort
 

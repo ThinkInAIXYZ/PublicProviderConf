@@ -1,4 +1,3 @@
-import { existsSync } from 'fs';
 import { promises as fs } from 'fs';
 import { HttpClient } from './http-client';
 import {

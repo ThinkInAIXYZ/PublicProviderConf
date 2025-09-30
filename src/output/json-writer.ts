@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs';
-import { join, dirname } from 'path';
+import { dirname } from 'path';
 import { JsonValidator } from './json-validator';
 
 export class JsonWriter {

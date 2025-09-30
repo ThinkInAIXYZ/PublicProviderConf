@@ -19,10 +19,6 @@ interface TokenfluxModel {
   };
 }
 
-interface TokenfluxResponse {
-  models: TokenfluxModel[];
-}
-
 export class TokenfluxProvider implements Provider {
   private apiUrl: string;
   private client: AxiosInstance;
@@ -79,7 +75,8 @@ export class TokenfluxProvider implements Provider {
 
       return models.map(model => this.convertModel(model));
     } catch (error) {
-      console.warn('⚠️  Failed to fetch Tokenflux models, returning empty list');
+      const reason = error instanceof Error ? error.message : String(error);
+      console.warn('⚠️  Failed to fetch Tokenflux models, returning empty list', reason);
       return [];
     }
   }
