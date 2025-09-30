@@ -13,6 +13,7 @@ import {
   findProviderConfig,
   normalizeProviderId,
   createProvider,
+  getExclusionReason,
 } from './models-dev-shared';
 
 export async function fetchSpecificProviders(
@@ -24,7 +25,12 @@ export async function fetchSpecificProviders(
   const config = loadConfig();
   const targetProviders = new Set(providerNames.map(name => normalizeProviderId(name)));
 
-  const { baseDataWithTemplates, templatesById, existingProviderIds } = await loadBaseContext();
+  const {
+    baseDataWithTemplates,
+    templatesById,
+    existingProviderIds,
+    exclusionSources,
+  } = await loadBaseContext();
 
   const fetcher = new DataFetcher();
   const processor = new DataProcessor();
@@ -34,7 +40,8 @@ export async function fetchSpecificProviders(
     const normalizedName = normalizeProviderId(providerName);
 
     if (existingProviderIds.has(normalizedName)) {
-      console.log(`ℹ️  Skipping ${providerName}: already available via models.dev or templates`);
+      const reason = getExclusionReason(normalizedName, exclusionSources);
+      console.log(`ℹ️  Skipping ${providerName}: ${reason}`);
       continue;
     }
 

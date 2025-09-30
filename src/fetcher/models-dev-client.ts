@@ -9,7 +9,6 @@ import {
 } from '../models/models-dev';
 
 const DEFAULT_MODELS_DEV_API_URL = 'https://models.dev/api.json';
-const SNAPSHOT_FALLBACK_PATH = 'manual-templates/models-dev-snapshot.json';
 
 function resolvePrimarySource(): string {
   return process.env.MODELS_DEV_API_URL?.trim() || DEFAULT_MODELS_DEV_API_URL;
@@ -20,9 +19,6 @@ function resolveFallbackSources(primary: string): string[] {
   const snapshotEnv = process.env.MODELS_DEV_SNAPSHOT_PATH?.trim();
   if (snapshotEnv && snapshotEnv !== primary) {
     sources.push(snapshotEnv);
-  }
-  if (existsSync(SNAPSHOT_FALLBACK_PATH) && SNAPSHOT_FALLBACK_PATH !== primary && !sources.includes(SNAPSHOT_FALLBACK_PATH)) {
-    sources.push(SNAPSHOT_FALLBACK_PATH);
   }
   return sources;
 }
@@ -160,27 +156,35 @@ export class ModelsDevClient {
     const record = provider as Record<string, unknown>;
     const { env: _env, npm: _npm, models, ...rest } = record;
     const normalizedModels = this.normalizeModels(models, fallbackId);
+    const partialProvider = rest as Partial<ModelsDevProvider>;
+
+    const normalizedId =
+      typeof partialProvider.id === 'string' && partialProvider.id.trim()
+        ? partialProvider.id
+        : fallbackId;
+
+    const fallbackDisplayName =
+      typeof record['display_name'] === 'string' && (record['display_name'] as string).trim()
+        ? (record['display_name'] as string)
+        : undefined;
+
+    const normalizedName =
+      typeof partialProvider.name === 'string' && partialProvider.name.trim()
+        ? partialProvider.name
+        : fallbackDisplayName ?? normalizedId;
+
+    const normalizedDisplayName =
+      typeof partialProvider.display_name === 'string' && partialProvider.display_name.trim()
+        ? partialProvider.display_name
+        : fallbackDisplayName ?? normalizedName;
 
     const normalizedProvider: ModelsDevProvider = {
-      ...(rest as ModelsDevProvider),
+      ...partialProvider,
+      id: normalizedId,
+      name: normalizedName,
+      display_name: normalizedDisplayName,
       models: normalizedModels,
     };
-
-    if (!normalizedProvider.id || typeof normalizedProvider.id !== 'string') {
-      normalizedProvider.id = fallbackId;
-    }
-
-    if (!normalizedProvider.name || typeof normalizedProvider.name !== 'string') {
-      const fallbackName = (record['display_name'] as string) || normalizedProvider.id;
-      normalizedProvider.name = fallbackName;
-      if (!normalizedProvider.display_name) {
-        normalizedProvider.display_name = fallbackName;
-      }
-    }
-
-    if (!normalizedProvider.display_name || typeof normalizedProvider.display_name !== 'string') {
-      normalizedProvider.display_name = normalizedProvider.name;
-    }
 
     return normalizedProvider;
   }
