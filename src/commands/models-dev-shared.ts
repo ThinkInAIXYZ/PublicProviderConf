@@ -13,6 +13,7 @@ import {
   mergeProviderWithTemplate,
 } from '../templates/models-dev-template-manager';
 import { AppConfig, ProviderConfig } from '../config/app-config';
+import { ExternalProviderManager } from '../templates/external-provider-manager';
 
 export const PROVIDER_ALIASES: Record<string, string> = {
   'github-ai': 'github-models',
@@ -74,22 +75,31 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
 export interface ExclusionSources {
   modelsDev: Set<string>;
   templates: Set<string>;
+  externals: Set<string>;
 }
 
 export function getExclusionReason(providerId: string, sources: ExclusionSources): string {
-  const inModelsDev = sources.modelsDev.has(providerId);
-  const inTemplates = sources.templates.has(providerId);
+  const reasons: string[] = [];
 
-  if (inModelsDev && inTemplates) {
-    return 'covered by models.dev dataset and manual template';
+  if (sources.modelsDev.has(providerId)) {
+    reasons.push('models.dev dataset');
   }
-  if (inModelsDev) {
-    return 'already provided by models.dev dataset';
+  if (sources.templates.has(providerId)) {
+    reasons.push('manual template');
   }
-  if (inTemplates) {
-    return 'served via manual template';
+  if (sources.externals.has(providerId)) {
+    reasons.push('external source');
   }
-  return 'already included in combined dataset';
+
+  if (reasons.length === 0) {
+    return 'already included in combined dataset';
+  }
+  if (reasons.length === 1) {
+    return `covered by ${reasons[0]}`;
+  }
+
+  const lastReason = reasons.pop();
+  return `covered by ${reasons.join(', ')} and ${lastReason}`;
 }
 
 export function createProvidersFromConfig(
@@ -147,8 +157,12 @@ export async function loadBaseContext(): Promise<BaseContext> {
   const templateManager = new ModelsDevTemplateManager();
   const loadedTemplates = await templateManager.loadAllTemplates();
 
+  const externalManager = new ExternalProviderManager();
+  const externalProviders = await externalManager.loadAllProviders();
+
   const templatesById = new Map<string, ModelsDevProvider>();
   const templateIds: string[] = [];
+  const externalIds = new Set<string>();
 
   for (const template of loadedTemplates.values()) {
     const normalizedId = normalizeProviderId(template.id);
@@ -164,6 +178,17 @@ export async function loadBaseContext(): Promise<BaseContext> {
     const template = templatesById.get(normalizedId);
     if (template) {
       baseProvidersRecord[key] = mergeProviderWithTemplate(provider, template);
+      templatesById.delete(normalizedId);
+    }
+  }
+
+  for (const provider of externalProviders.values()) {
+    const normalizedId = normalizeProviderId(getModelsDevProviderId(provider));
+    externalIds.add(normalizedId);
+    const template = templatesById.get(normalizedId);
+    const merged = mergeProviderWithTemplate(provider, template);
+    baseProvidersRecord[provider.id] = merged;
+    if (template) {
       templatesById.delete(normalizedId);
     }
   }
@@ -200,6 +225,7 @@ export async function loadBaseContext(): Promise<BaseContext> {
   const exclusionSources: ExclusionSources = {
     modelsDev: modelsDevIds,
     templates: new Set(templateIds),
+    externals: externalIds,
   };
 
   return {
