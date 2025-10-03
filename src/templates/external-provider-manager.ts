@@ -181,29 +181,11 @@ function buildModelMetadata(
   if (typeof model.completion_ratio === 'number') {
     metadata.completionRatio = model.completion_ratio;
   }
-  if (model.desc) {
-    metadata.description = model.desc;
-  }
-  if (model.desc_en) {
-    metadata.descriptionEn = model.desc_en;
-  }
   if (typeof model.order === 'number') {
     metadata.order = model.order;
   }
   if (typeof model.flag === 'number') {
     metadata.flag = model.flag;
-  }
-  if (model.usage) {
-    metadata.usage = model.usage;
-  }
-  if (model.usage_en) {
-    metadata.usageEn = model.usage_en;
-  }
-  if (model.display_input) {
-    metadata.displayInput = model.display_input;
-  }
-  if (model.display_output) {
-    metadata.displayOutput = model.display_output;
   }
   if (model.billing_config) {
     metadata.billingConfig = model.billing_config;
