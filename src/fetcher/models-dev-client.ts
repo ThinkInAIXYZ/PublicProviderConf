@@ -8,6 +8,8 @@ import {
 } from '../models/models-dev';
 
 const DEFAULT_MODELS_DEV_API_URL = 'https://models.dev/api.json';
+const HTTP_MAX_ATTEMPTS = 3;
+const HTTP_RETRY_DELAY_MS = 2_000;
 
 function resolvePrimarySource(): string {
   return process.env.MODELS_DEV_API_URL?.trim() || DEFAULT_MODELS_DEV_API_URL;
@@ -54,26 +56,40 @@ export class ModelsDevClient {
     for (const source of sources) {
       const isFile = isFileSource(source);
       const descriptor = isFile ? `snapshot (${source})` : `API ${source}`;
+      const attempts = isFile ? 1 : HTTP_MAX_ATTEMPTS;
 
-      try {
-        const rawData = isFile
-          ? await this.loadFromFile(normalizeFilePath(source))
-          : await this.client.getJson<unknown>(source);
+      for (let attempt = 1; attempt <= attempts; attempt += 1) {
+        try {
+          const rawData = isFile
+            ? await this.loadFromFile(normalizeFilePath(source))
+            : await this.client.getJson<unknown>(source);
 
-        const data = this.normalizeApiResponse(rawData);
-        this.ensureValidResponse(data);
-        this.logProviderCount(data, isFile ? `Loaded` : 'Fetched');
-        return data;
-      } catch (error) {
-        lastError = error;
-        const message = error instanceof Error ? error.message : String(error);
-        console.warn(`⚠️  Failed to load models.dev dataset from ${descriptor}: ${message}`);
+          const data = this.normalizeApiResponse(rawData);
+          this.ensureValidResponse(data);
+          this.logProviderCount(data, isFile ? `Loaded` : 'Fetched');
+          return data;
+        } catch (error) {
+          lastError = error;
+          const message = error instanceof Error ? error.message : String(error);
+          const attemptInfo = attempts > 1 ? ` (attempt ${attempt}/${attempts})` : '';
+          console.warn(
+            `⚠️  Failed to load models.dev dataset from ${descriptor}${attemptInfo}: ${message}`,
+          );
+
+          if (!isFile && attempt < attempts) {
+            await this.delay(HTTP_RETRY_DELAY_MS * attempt);
+          }
+        }
       }
     }
 
     throw lastError instanceof Error
       ? lastError
       : new Error('Failed to load models.dev dataset from all configured sources');
+  }
+
+  private async delay(ms: number): Promise<void> {
+    await new Promise(resolve => setTimeout(resolve, ms));
   }
 
   private async loadFromFile(filePath: string): Promise<unknown> {
