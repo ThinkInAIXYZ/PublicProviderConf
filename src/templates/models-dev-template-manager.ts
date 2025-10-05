@@ -57,6 +57,58 @@ function sanitizeProviderLike(
   return sanitized;
 }
 
+type ModelsDevModelRecord = ModelsDevModel & Record<string, unknown>;
+
+function applyCapabilitiesToFlags(model: ModelsDevModelRecord): void {
+  const capabilities = model.capabilities;
+  if (!capabilities || typeof capabilities !== 'object') {
+    delete model.capabilities;
+    return;
+  }
+
+  const caps = capabilities as Record<string, unknown>;
+
+  if (model.vision === undefined && typeof caps.vision === 'boolean') {
+    model.vision = caps.vision;
+  }
+
+  if (model.reasoning === undefined && typeof caps.reasoning === 'boolean') {
+    model.reasoning = caps.reasoning;
+  }
+
+  if (model.attachment === undefined && typeof caps.attachments === 'boolean') {
+    model.attachment = caps.attachments;
+  }
+
+  if (model.tool_call === undefined) {
+    const toolCall =
+      typeof caps.tool_calling === 'boolean'
+        ? caps.tool_calling
+        : typeof caps.function_calling === 'boolean'
+          ? caps.function_calling
+          : undefined;
+
+    if (typeof toolCall === 'boolean') {
+      model.tool_call = toolCall;
+    }
+  }
+
+  delete model.capabilities;
+}
+
+function cloneModel(model: ModelsDevModel): ModelsDevModelRecord {
+  const cloned = { ...model } as ModelsDevModelRecord;
+
+  cloned.metadata = model.metadata ? { ...model.metadata } : undefined;
+  cloned.modalities = model.modalities ? { ...model.modalities } : undefined;
+  cloned.cost = model.cost ? { ...model.cost } : undefined;
+  cloned.limit = model.limit ? { ...model.limit } : undefined;
+
+  applyCapabilitiesToFlags(cloned);
+
+  return cloned;
+}
+
 function mergeModels(base: ModelsDevModel[] = [], override: ModelsDevModel[] = []): ModelsDevModel[] {
   if (!override.length) {
     return base.slice();
@@ -68,14 +120,7 @@ function mergeModels(base: ModelsDevModel[] = [], override: ModelsDevModel[] = [
     if (!model.id) {
       continue;
     }
-    merged.set(model.id, {
-      ...model,
-      capabilities: model.capabilities ? { ...model.capabilities } : undefined,
-      metadata: model.metadata ? { ...model.metadata } : undefined,
-      modalities: model.modalities ? { ...model.modalities } : undefined,
-      cost: model.cost ? { ...model.cost } : undefined,
-      limit: model.limit ? { ...model.limit } : undefined,
-    });
+    merged.set(model.id, cloneModel(model));
   }
 
   for (const model of override) {
@@ -87,24 +132,18 @@ function mergeModels(base: ModelsDevModel[] = [], override: ModelsDevModel[] = [
       const combined = {
         ...existing,
         ...model,
-      } as ModelsDevModel & Record<string, unknown>;
+      } as ModelsDevModelRecord;
 
-      combined.capabilities = mergeObjects(existing.capabilities, model.capabilities);
       combined.metadata = mergeObjects(existing.metadata, model.metadata);
       combined.modalities = mergeObjects(existing.modalities, model.modalities);
       combined.cost = mergeObjects(existing.cost, model.cost);
       combined.limit = mergeObjects(existing.limit, model.limit);
 
+      applyCapabilitiesToFlags(combined);
+
       merged.set(model.id, combined as ModelsDevModel);
     } else {
-      merged.set(model.id, {
-        ...model,
-        capabilities: model.capabilities ? { ...model.capabilities } : undefined,
-        metadata: model.metadata ? { ...model.metadata } : undefined,
-        modalities: model.modalities ? { ...model.modalities } : undefined,
-        cost: model.cost ? { ...model.cost } : undefined,
-        limit: model.limit ? { ...model.limit } : undefined,
-      });
+      merged.set(model.id, cloneModel(model));
     }
   }
 
@@ -178,13 +217,14 @@ function ensureModelDefaults(model: Partial<ModelsDevModel>, providerId: string)
     id,
     name,
     display_name: model.display_name?.trim() || name,
-  } as ModelsDevModel & Record<string, unknown>;
+  } as ModelsDevModelRecord;
 
-  normalized.capabilities = model.capabilities ? { ...model.capabilities } : undefined;
   normalized.metadata = model.metadata ? { ...model.metadata } : undefined;
   normalized.modalities = model.modalities ? { ...model.modalities } : undefined;
   normalized.cost = model.cost ? { ...model.cost } : undefined;
   normalized.limit = model.limit ? { ...model.limit } : undefined;
+
+  applyCapabilitiesToFlags(normalized);
 
   return normalized as ModelsDevModel;
 }
