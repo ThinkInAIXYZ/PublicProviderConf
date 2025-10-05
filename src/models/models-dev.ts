@@ -1,15 +1,6 @@
 import { ModelInfo, ModelType } from './model-info';
 import { ProviderInfo } from './provider-info';
 
-export interface ModelsDevCapabilities {
-  vision?: boolean;
-  function_calling?: boolean;
-  reasoning?: boolean;
-  tool_calling?: boolean;
-  attachments?: boolean;
-  [key: string]: unknown;
-}
-
 export interface ModelsDevModalities {
   input?: string[];
   output?: string[];
@@ -40,7 +31,6 @@ export interface ModelsDevModel {
   type?: string;
   context_length?: number;
   max_output_tokens?: number;
-  capabilities?: ModelsDevCapabilities;
   attachment?: boolean;
   reasoning?: boolean;
   temperature?: boolean;
@@ -105,13 +95,6 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
     type: convertModelType(model.type),
     context_length: model.contextLength,
     max_output_tokens: model.maxTokens,
-    capabilities: {
-      vision: model.vision,
-      function_calling: model.functionCall,
-      reasoning: model.reasoning,
-      tool_calling: toolCall,
-      attachments: model.attachment,
-    },
     attachment: model.attachment,
     reasoning: model.reasoning,
     temperature: model.temperature,
