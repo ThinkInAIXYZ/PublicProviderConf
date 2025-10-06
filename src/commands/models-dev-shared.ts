@@ -14,6 +14,7 @@ import {
 } from '../templates/models-dev-template-manager';
 import { AppConfig, ProviderConfig } from '../config/app-config';
 import { ExternalProviderManager } from '../templates/external-provider-manager';
+import { OpenRouterSource } from '../templates/openrouter-source';
 
 export const PROVIDER_ALIASES: Record<string, string> = {
   'github-ai': 'github-models',
@@ -152,6 +153,9 @@ export interface BaseContext {
 
 export async function loadBaseContext(): Promise<BaseContext> {
   const modelsDevClient = new ModelsDevClient();
+
+  await new OpenRouterSource().load();
+
   const baseData = await modelsDevClient.fetchProviders();
 
   const templateManager = new ModelsDevTemplateManager();
