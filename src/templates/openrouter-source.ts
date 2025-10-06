@@ -76,7 +76,7 @@ function mapOpenRouterModel(m: OpenRouterModel): ModelsDevModel | null {
     name,
     display_name: name,
     attachment: hasAttachment,
-    reasoning: reasoning,
+    reasoning: { enabled: reasoning },
     temperature: temperature,
     tool_call: toolCall,
     modalities: {

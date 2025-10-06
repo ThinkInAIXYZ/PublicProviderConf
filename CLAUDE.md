@@ -89,7 +89,9 @@ Single provider JSON:
       "maxTokens": 4096,
       "vision": false,
       "functionCall": true,
-      "reasoning": true,
+      "reasoning": {
+        "enabled": true
+      },
       "type": "chat"
     }
   ]

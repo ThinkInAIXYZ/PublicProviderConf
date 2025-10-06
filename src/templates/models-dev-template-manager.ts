@@ -72,8 +72,12 @@ function applyCapabilitiesToFlags(model: ModelsDevModelRecord): void {
     model.vision = caps.vision;
   }
 
-  if (model.reasoning === undefined && typeof caps.reasoning === 'boolean') {
-    model.reasoning = caps.reasoning;
+  if (typeof caps.reasoning === 'boolean') {
+    if (!model.reasoning) {
+      model.reasoning = { enabled: caps.reasoning };
+    } else if (typeof model.reasoning === 'object' && model.reasoning.enabled === undefined) {
+      model.reasoning.enabled = caps.reasoning;
+    }
   }
 
   if (model.attachment === undefined && typeof caps.attachments === 'boolean') {
