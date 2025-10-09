@@ -241,6 +241,11 @@ export class ModelsDevClient {
       normalized.display_name = normalized.name;
     }
 
+    const rawReasoning = (model as { reasoning?: unknown }).reasoning;
+    if (typeof rawReasoning === 'boolean') {
+      normalized.reasoning = { supported: rawReasoning };
+    }
+
     return normalized;
   }
 

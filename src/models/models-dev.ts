@@ -23,6 +23,25 @@ export interface ModelsDevLimit {
   [key: string]: number | undefined;
 }
 
+export interface ReasoningBudget {
+  default?: number;
+  min?: number;
+  max?: number;
+}
+
+export interface ReasoningConfig {
+  supported?: boolean;
+  budget?: ReasoningBudget;
+  effort?: 'minimal' | 'low' | 'medium' | 'high';
+  verbosity?: 'low' | 'medium' | 'high';
+}
+
+export interface SearchConfig {
+  supported?: boolean;
+  forced_search?: boolean;
+  search_strategy?: 'turbo' | 'max';
+}
+
 export interface ModelsDevModel {
   id: string;
   name: string;
@@ -32,7 +51,7 @@ export interface ModelsDevModel {
   context_length?: number;
   max_output_tokens?: number;
   attachment?: boolean;
-  reasoning?: boolean;
+  reasoning?: ReasoningConfig;
   temperature?: boolean;
   tool_call?: boolean;
   knowledge?: string;
@@ -46,6 +65,7 @@ export interface ModelsDevModel {
   metadata?: Record<string, unknown>;
   provider?: string;
   vision?: boolean;
+  search?: SearchConfig;
 }
 
 export interface ModelsDevProvider {
@@ -96,7 +116,7 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
     context_length: model.contextLength,
     max_output_tokens: model.maxTokens,
     attachment: model.attachment,
-    reasoning: model.reasoning,
+    reasoning: { supported: model.reasoning },
     temperature: model.temperature,
     tool_call: toolCall,
     knowledge: model.knowledge,
