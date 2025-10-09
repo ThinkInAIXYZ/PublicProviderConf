@@ -30,14 +30,14 @@ export interface ReasoningBudget {
 }
 
 export interface ReasoningConfig {
-  enabled?: boolean;
+  supported?: boolean;
   budget?: ReasoningBudget;
   effort?: 'minimal' | 'low' | 'medium' | 'high';
   verbosity?: 'low' | 'medium' | 'high';
 }
 
 export interface SearchConfig {
-  enabled?: boolean;
+  supported?: boolean;
   forced_search?: boolean;
   search_strategy?: 'turbo' | 'max';
 }
@@ -116,7 +116,7 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
     context_length: model.contextLength,
     max_output_tokens: model.maxTokens,
     attachment: model.attachment,
-    reasoning: { enabled: model.reasoning },
+    reasoning: { supported: model.reasoning },
     temperature: model.temperature,
     tool_call: toolCall,
     knowledge: model.knowledge,

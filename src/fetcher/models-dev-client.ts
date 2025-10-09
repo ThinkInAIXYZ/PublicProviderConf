@@ -243,7 +243,7 @@ export class ModelsDevClient {
 
     const rawReasoning = (model as { reasoning?: unknown }).reasoning;
     if (typeof rawReasoning === 'boolean') {
-      normalized.reasoning = { enabled: rawReasoning };
+      normalized.reasoning = { supported: rawReasoning };
     }
 
     return normalized;
