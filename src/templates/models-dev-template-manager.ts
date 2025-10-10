@@ -5,6 +5,7 @@ import {
   ModelsDevModel,
   ModelsDevProvider,
 } from '../models/models-dev';
+import { normalizeModelToggles } from '../utils/toggles';
 
 function mergeObjects<T extends Record<string, any> | undefined>(
   base: T,
@@ -61,43 +62,45 @@ type ModelsDevModelRecord = ModelsDevModel & Record<string, unknown>;
 
 function applyCapabilitiesToFlags(model: ModelsDevModelRecord): void {
   const capabilities = model.capabilities;
-  if (!capabilities || typeof capabilities !== 'object') {
-    delete model.capabilities;
-    return;
-  }
+  if (capabilities && typeof capabilities === 'object') {
+    const caps = capabilities as Record<string, unknown>;
 
-  const caps = capabilities as Record<string, unknown>;
+    if (model.vision === undefined && typeof caps.vision === 'boolean') {
+      model.vision = caps.vision;
+    }
 
-  if (model.vision === undefined && typeof caps.vision === 'boolean') {
-    model.vision = caps.vision;
-  }
+    if (typeof caps.reasoning === 'boolean') {
+      if (!model.reasoning) {
+        model.reasoning = { supported: caps.reasoning };
+      } else if (
+        typeof model.reasoning === 'object' && model.reasoning.supported === undefined
+      ) {
+        model.reasoning.supported = caps.reasoning;
+      }
+    }
 
-  if (typeof caps.reasoning === 'boolean') {
-    if (!model.reasoning) {
-      model.reasoning = { supported: caps.reasoning };
-    } else if (typeof model.reasoning === 'object' && model.reasoning.supported === undefined) {
-      model.reasoning.supported = caps.reasoning;
+    if (model.attachment === undefined && typeof caps.attachments === 'boolean') {
+      model.attachment = caps.attachments;
+    }
+
+    if (model.tool_call === undefined) {
+      const toolCall =
+        typeof caps.tool_calling === 'boolean'
+          ? caps.tool_calling
+          : typeof caps.function_calling === 'boolean'
+            ? caps.function_calling
+            : undefined;
+
+      if (typeof toolCall === 'boolean') {
+        model.tool_call = toolCall;
+      }
     }
   }
 
-  if (model.attachment === undefined && typeof caps.attachments === 'boolean') {
-    model.attachment = caps.attachments;
-  }
+  // Normalize toggle fields (reasoning/search) based on supported/default rule
+  normalizeModelToggles(model as unknown as Record<string, unknown>);
 
-  if (model.tool_call === undefined) {
-    const toolCall =
-      typeof caps.tool_calling === 'boolean'
-        ? caps.tool_calling
-        : typeof caps.function_calling === 'boolean'
-          ? caps.function_calling
-          : undefined;
-
-    if (typeof toolCall === 'boolean') {
-      model.tool_call = toolCall;
-    }
-  }
-
-  delete model.capabilities;
+  delete (model as any).capabilities;
 }
 
 function cloneModel(model: ModelsDevModel): ModelsDevModelRecord {

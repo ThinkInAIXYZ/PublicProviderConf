@@ -90,7 +90,8 @@ Single provider JSON:
       "vision": false,
       "functionCall": true,
       "reasoning": {
-        "supported": true
+        "supported": true,
+        "default": true
       },
       "type": "chat"
     }
