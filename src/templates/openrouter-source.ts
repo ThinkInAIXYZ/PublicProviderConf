@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { JsonWriter } from '../output/json-writer';
 import { ModelsDevModel, ModelsDevProvider } from '../models/models-dev';
+import { normalizeModelToggles } from '../utils/toggles';
 
 interface OpenRouterModel {
   id?: string;
@@ -88,6 +89,9 @@ function mapOpenRouterModel(m: OpenRouterModel): ModelsDevModel | null {
       output: typeof limitOutput === 'number' ? limitOutput : undefined,
     },
   };
+
+  // Ensure toggle fields follow supported/default rules
+  normalizeModelToggles(model as unknown as Record<string, unknown>);
 
   if (model.modalities && !model.modalities.input && !model.modalities.output) {
     delete model.modalities;

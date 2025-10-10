@@ -66,7 +66,8 @@ Examples:
       "vision": false,
       "functionCall": true,
       "reasoning": {
-        "supported": true
+        "supported": true,
+        "default": true
       },
       "type": "chat"
     }

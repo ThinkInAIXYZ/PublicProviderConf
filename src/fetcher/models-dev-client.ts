@@ -6,6 +6,7 @@ import {
   ModelsDevProvider,
   normalizeProvidersList,
 } from '../models/models-dev';
+import { normalizeModelToggles } from '../utils/toggles';
 
 const DEFAULT_MODELS_DEV_API_URL = 'https://models.dev/api.json';
 const HTTP_MAX_ATTEMPTS = 3;
@@ -243,8 +244,11 @@ export class ModelsDevClient {
 
     const rawReasoning = (model as { reasoning?: unknown }).reasoning;
     if (typeof rawReasoning === 'boolean') {
-      normalized.reasoning = { supported: rawReasoning };
+      normalized.reasoning = { supported: rawReasoning, default: rawReasoning ? true : undefined };
     }
+
+    // Ensure toggle fields follow supported/default rules
+    normalizeModelToggles(normalized as unknown as Record<string, unknown>);
 
     return normalized;
   }
