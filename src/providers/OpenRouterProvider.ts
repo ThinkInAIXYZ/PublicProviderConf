@@ -76,6 +76,22 @@ function needsOpenAIEffort(id: string): boolean {
   return !!suffix && OPENAI_EFFORT_SUFFIXES.has(suffix);
 }
 
+function applyOpenAIReasoningTuning(config: ToggleConfig, id: string): void {
+  const addVerbosity = needsOpenAIVerbosity(id);
+  const addEffort = needsOpenAIEffort(id);
+  if (!addVerbosity && !addEffort) return;
+
+  // Ensure reasoning is marked supported when adding OpenAI-specific params
+  config.supported = true;
+
+  if (addVerbosity) {
+    config.verbosity = 'medium';
+  }
+  if (addEffort) {
+    config.effort = 'medium';
+  }
+}
+
 function normalizeModalities(list?: string[] | null): string[] | undefined {
   if (!Array.isArray(list)) return undefined;
   const seen = new Set<string>();
@@ -153,31 +169,10 @@ function mapOpenRouterModel(model: OpenRouterModel): ModelInfo | null {
   const toolCall = supportedParameters.some(parameter => String(parameter || '').toLowerCase() === 'tool_choice');
   const hasReasoningParameter = supportedParameters.some(parameter => String(parameter || '').toLowerCase() === 'reasoning');
 
-  const addVerbosity = needsOpenAIVerbosity(id);
-  const addEffort = needsOpenAIEffort(id);
-
-  let reasoning: boolean | ToggleConfig = { supported: false };
-
-  if (addVerbosity || addEffort || hasReasoningParameter) {
-    const reasoningConfig: ToggleConfig = { supported: hasReasoningParameter || addVerbosity || addEffort };
-
-    if (hasReasoningParameter) {
-      reasoningConfig.supported = true;
-    }
-
-    if (addVerbosity && reasoningConfig.verbosity === undefined) {
-      reasoningConfig.verbosity = 'medium';
-    }
-
-    if (addEffort && reasoningConfig.effort === undefined) {
-      reasoningConfig.effort = 'medium';
-    }
-
-    normalizeToggleInPlace(reasoningConfig);
-    reasoning = reasoningConfig;
-  } else {
-    reasoning = { supported: false };
-  }
+  const reasoningConfig: ToggleConfig = { supported: hasReasoningParameter };
+  applyOpenAIReasoningTuning(reasoningConfig, id);
+  normalizeToggleInPlace(reasoningConfig);
+  const reasoning: ToggleConfig = reasoningConfig;
 
   const defaultTemperature = model.default_parameters?.temperature;
   const hasTemperatureControl = typeof defaultTemperature === 'number' && Number.isFinite(defaultTemperature);
