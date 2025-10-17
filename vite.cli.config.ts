@@ -16,6 +16,7 @@ export default defineConfig({
         ...builtinModules,
         ...builtinModules.map((m) => `node:${m}`),
         'commander',
+        'undici',
       ],
       output: {
         entryFileNames: 'cli.js',

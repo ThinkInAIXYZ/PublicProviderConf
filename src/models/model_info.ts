@@ -1,3 +1,5 @@
+import type { ToggleConfig } from "../utils/toggles";
+
 export enum ModelType {
   Chat = "chat",
   Completion = "completion",
@@ -35,7 +37,7 @@ export interface ModelInfo {
   maxTokens: number;
   vision: boolean;
   functionCall: boolean;
-  reasoning: boolean;
+  reasoning: boolean | ToggleConfig;
   type: ModelType;
   attachment?: boolean;
   temperature?: boolean;
@@ -58,7 +60,7 @@ export function createModelInfo(
   maxTokens: number,
   vision: boolean,
   functionCall: boolean,
-  reasoning: boolean,
+  reasoning: boolean | ToggleConfig,
   modelType: ModelType,
   overrides: Partial<Omit<ModelInfo, 'id' | 'name' | 'contextLength' | 'maxTokens' | 'vision' | 'functionCall' | 'reasoning' | 'type'>> = {},
 ): ModelInfo {
