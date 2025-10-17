@@ -35,6 +35,70 @@ function toNumber(value: unknown): number | undefined {
   return undefined;
 }
 
+// OpenAI models on OpenRouter that support special reasoning parameters.
+// Maintain separate sets for parameters since support can differ by model.
+const OPENAI_VERBOSITY_SUFFIXES = new Set<string>([
+  // Seed with GPT‑5 family (extend as needed)
+  'gpt-5',
+  'gpt-5-mini',
+  'gpt-5-nano',
+  'gpt-5-pro',
+  'gpt-5-codex',
+]);
+
+const OPENAI_EFFORT_SUFFIXES = new Set<string>([
+  // Seed similarly; can diverge from verbosity support later
+  'o1-pro',
+  'o3',
+  'o3-pro',
+  'o4-mini',
+  'gpt-5',
+  'gpt-5-mini',
+  'gpt-5-nano',
+  'gpt-5-pro',
+  'gpt-5-codex',
+]);
+
+function isOpenAIModel(id: string): boolean {
+  return (id || '').trim().toLowerCase().startsWith('openai/');
+}
+
+function openaiSuffix(id: string): string | null {
+  if (!isOpenAIModel(id)) return null;
+  const v = (id || '').trim().toLowerCase();
+  return v.substring('openai/'.length);
+}
+
+function needsOpenAIVerbosity(id: string): boolean {
+  const suffix = openaiSuffix(id);
+  return !!suffix && OPENAI_VERBOSITY_SUFFIXES.has(suffix);
+}
+
+function needsOpenAIEffort(id: string): boolean {
+  const suffix = openaiSuffix(id);
+  return !!suffix && OPENAI_EFFORT_SUFFIXES.has(suffix);
+}
+
+function applyOpenAIReasoningTuning(model: ModelsDevModel): void {
+  const addVerbosity = needsOpenAIVerbosity(model.id);
+  const addEffort = needsOpenAIEffort(model.id);
+  if (!addVerbosity && !addEffort) return;
+
+  if (!model.reasoning || typeof model.reasoning !== 'object') {
+    model.reasoning = { supported: true };
+  }
+
+  // Ensure reasoning is marked supported when adding OpenAI-specific params
+  model.reasoning.supported = true;
+
+  if (addVerbosity) {
+    model.reasoning.verbosity = 'medium';
+  }
+  if (addEffort) {
+    model.reasoning.effort = 'medium';
+  }
+}
+
 function normalizeModalities(list?: string[] | null): string[] | undefined {
   if (!Array.isArray(list)) return undefined;
   const seen = new Set<string>();
@@ -89,6 +153,9 @@ function mapOpenRouterModel(m: OpenRouterModel): ModelsDevModel | null {
       output: typeof limitOutput === 'number' ? limitOutput : undefined,
     },
   };
+
+  // Apply OpenAI-specific reasoning parameter defaults (verbosity/effort)
+  applyOpenAIReasoningTuning(model);
 
   // Ensure toggle fields follow supported/default rules
   normalizeModelToggles(model as unknown as Record<string, unknown>);
