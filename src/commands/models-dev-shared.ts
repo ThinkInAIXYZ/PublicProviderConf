@@ -14,14 +14,13 @@ import {
 } from '../templates/models-dev-template-manager';
 import { AppConfig, ProviderConfig } from '../config/app-config';
 import { ExternalProviderManager } from '../templates/external-provider-manager';
-import { OpenRouterSource } from '../templates/openrouter-source';
 
 export const PROVIDER_ALIASES: Record<string, string> = {
   'github-ai': 'github-models',
+  'openrouter-ai': 'openrouter',
 };
 
 const MODELS_DEV_ONLY_PROVIDERS = new Set([
-  'openrouter',
   'vercel',
   'anthropic',
   'deepseek',
@@ -50,6 +49,9 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
 
       case 'tokenflux':
         return new providers.TokenfluxProvider(config.apiUrl);
+
+      case 'openrouter':
+        return new providers.OpenRouterProvider(config.apiUrl);
 
       case 'groq': {
         const groqApiKey = config.getApiKey();
@@ -154,8 +156,6 @@ export interface BaseContext {
 export async function loadBaseContext(): Promise<BaseContext> {
   const modelsDevClient = new ModelsDevClient();
 
-  await new OpenRouterSource().load();
-
   const baseData = await modelsDevClient.fetchProviders();
 
   const templateManager = new ModelsDevTemplateManager();
@@ -167,17 +167,39 @@ export async function loadBaseContext(): Promise<BaseContext> {
   const templatesById = new Map<string, ModelsDevProvider>();
   const templateIds: string[] = [];
   const externalIds = new Set<string>();
+  const normalizedOpenRouterId = normalizeProviderId('openrouter');
 
+  let loggedTemplateSkip = false;
   for (const template of loadedTemplates.values()) {
     const normalizedId = normalizeProviderId(template.id);
+    if (normalizedId === normalizedOpenRouterId) {
+      if (!loggedTemplateSkip) {
+        console.log(
+          'ℹ️  Skipping OpenRouter manual template: live provider will write dist/openrouter.json directly.',
+        );
+        loggedTemplateSkip = true;
+      }
+      continue;
+    }
     templatesById.set(normalizedId, template);
     templateIds.push(normalizedId);
   }
 
   const baseProvidersRecord = providersToRecord(baseData.providers);
   const modelsDevIds = new Set<string>();
+  let loggedModelsDevSkip = false;
   for (const [key, provider] of Object.entries(baseProvidersRecord)) {
     const normalizedId = normalizeProviderId(getModelsDevProviderId(provider));
+    if (normalizedId === normalizedOpenRouterId) {
+      if (!loggedModelsDevSkip) {
+        console.log(
+          'ℹ️  Removing OpenRouter entry from models.dev snapshot in favor of the live provider.',
+        );
+        loggedModelsDevSkip = true;
+      }
+      delete baseProvidersRecord[key];
+      continue;
+    }
     modelsDevIds.add(normalizedId);
     const template = templatesById.get(normalizedId);
     if (template) {
@@ -188,6 +210,12 @@ export async function loadBaseContext(): Promise<BaseContext> {
 
   for (const provider of externalProviders.values()) {
     const normalizedId = normalizeProviderId(getModelsDevProviderId(provider));
+    if (normalizedId === normalizedOpenRouterId) {
+      console.log(
+        'ℹ️  Skipping external OpenRouter data: live provider fetch will handle this source.',
+      );
+      continue;
+    }
     externalIds.add(normalizedId);
     const template = templatesById.get(normalizedId);
     const merged = mergeProviderWithTemplate(provider, template);
@@ -224,6 +252,10 @@ export async function loadBaseContext(): Promise<BaseContext> {
 
   for (const id of templateIds) {
     existingProviderIds.add(id);
+  }
+
+  if (existingProviderIds.delete(normalizedOpenRouterId)) {
+    console.log('ℹ️  Forcing OpenRouter provider to refetch live data for dist output.');
   }
 
   const exclusionSources: ExclusionSources = {

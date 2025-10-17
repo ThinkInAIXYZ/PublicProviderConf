@@ -1,4 +1,5 @@
 import { ModelInfo, ModelType } from './model-info';
+import { normalizeToggleInPlace, ToggleConfig } from '../utils/toggles';
 import { ProviderInfo } from './provider-info';
 
 export interface ModelsDevModalities {
@@ -107,8 +108,23 @@ export function convertModelType(modelType: ModelType): string {
   }
 }
 
+function toModelsDevReasoning(reasoning: ModelInfo['reasoning']): ReasoningConfig | undefined {
+  if (typeof reasoning === 'boolean') {
+    return reasoning ? { supported: true, default: true } : { supported: false };
+  }
+
+  if (reasoning && typeof reasoning === 'object') {
+    const normalized: ReasoningConfig = { ...reasoning };
+    normalizeToggleInPlace(normalized as unknown as ToggleConfig);
+    return normalized;
+  }
+
+  return undefined;
+}
+
 export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
   const toolCall = model.toolCall ?? model.functionCall;
+  const reasoning = toModelsDevReasoning(model.reasoning);
 
   return {
     id: model.id,
@@ -118,7 +134,7 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
     context_length: model.contextLength,
     max_output_tokens: model.maxTokens,
     attachment: model.attachment,
-    reasoning: { supported: model.reasoning, default: model.reasoning ? true : undefined },
+    reasoning,
     temperature: model.temperature,
     tool_call: toolCall,
     knowledge: model.knowledge,

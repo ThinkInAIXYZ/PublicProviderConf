@@ -17,7 +17,7 @@ export default defineConfig({
         ...builtinModules,
         ...builtinModules.map((m) => `node:${m}`),
         // Externalize project deps
-        'axios', 'commander', 'cheerio', 'toml'
+        'axios', 'commander', 'cheerio', 'toml', 'undici'
       ],
     },
     sourcemap: true,
