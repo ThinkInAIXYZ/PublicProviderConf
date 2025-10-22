@@ -1,4 +1,4 @@
-import { fetch } from 'undici';
+import { fetch, ProxyAgent, type Dispatcher } from 'undici';
 import { Provider } from './Provider';
 import { createModelInfo, ModelInfo, ModelType } from '../models/model-info';
 
@@ -180,14 +180,49 @@ function mapModel(model: JiekouModel): ModelInfo | null {
   );
 }
 
+function createProxyDispatcher(): Dispatcher | undefined {
+  const proxyUrl =
+    process.env.HTTPS_PROXY ??
+    process.env.https_proxy ??
+    process.env.HTTP_PROXY ??
+    process.env.http_proxy;
+
+  if (!proxyUrl) {
+    return undefined;
+  }
+
+  try {
+    return new ProxyAgent(proxyUrl);
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error);
+    console.warn('⚠️  Failed to configure proxy for Jiekou provider:', reason);
+    return undefined;
+  }
+}
+
 export class JiekouProvider implements Provider {
-  constructor(private readonly apiUrl: string) {}
+  private readonly dispatcher?: Dispatcher;
+
+  constructor(private readonly apiUrl: string, private readonly timeoutMs = 30_000) {
+    this.dispatcher = createProxyDispatcher();
+  }
 
   async fetchModels(): Promise<ModelInfo[]> {
+    console.log('🔄 Fetching models from Jiekou API...');
     try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), this.timeoutMs);
+
       const response = await fetch(this.apiUrl, {
         method: 'GET',
-        headers: { Accept: 'application/json' },
+        dispatcher: this.dispatcher,
+        signal: controller.signal,
+        headers: {
+          Accept: 'application/json',
+          'User-Agent': 'PublicProviderConf/1.0 (+https://github.com/ThinkInAIXYZ/PublicProviderConf)',
+        },
+      }).finally(() => {
+        clearTimeout(timeout);
       });
 
       if (!response.ok) {
@@ -197,8 +232,14 @@ export class JiekouProvider implements Provider {
 
       const json = (await response.json()) as JiekouResponse;
       const models = Array.isArray(json?.data) ? json.data : [];
-      return models.map(mapModel).filter((model): model is ModelInfo => model !== null);
+      const mapped = models.map(mapModel).filter((model): model is ModelInfo => model !== null);
+      console.log(`✅ Successfully processed ${mapped.length} Jiekou models`);
+      return mapped;
     } catch (error) {
+      if (error instanceof Error && error.name === 'AbortError') {
+        console.warn('⚠️  Jiekou request timed out');
+        return [];
+      }
       const reason = error instanceof Error ? error.message : String(error);
       console.warn('⚠️  Failed to fetch Jiekou models, returning empty list', reason);
       return [];
