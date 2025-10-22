@@ -18,6 +18,7 @@ import { ExternalProviderManager } from '../templates/external-provider-manager'
 export const PROVIDER_ALIASES: Record<string, string> = {
   'github-ai': 'github-models',
   'openrouter-ai': 'openrouter',
+  'jiekou-ai': 'jiekou',
 };
 
 const MODELS_DEV_ONLY_PROVIDERS = new Set([
@@ -122,7 +123,9 @@ export function createProvidersFromConfig(
 
   for (const [providerId, providerConfig] of Object.entries(config.providers)) {
     const normalizedId = normalizeProviderId(providerId);
-    if (excludedProviders.has(normalizedId)) {
+    const overrideName = LIVE_PROVIDER_OVERRIDES.get(normalizedId);
+
+    if (!overrideName && excludedProviders.has(normalizedId)) {
       if (exclusionSources) {
         const reason = getExclusionReason(normalizedId, exclusionSources);
         console.log(`ℹ️  Skipping ${providerId}: ${reason}`);
@@ -130,6 +133,12 @@ export function createProvidersFromConfig(
         console.log(`ℹ️  Skipping ${providerId}: already available via models.dev or templates`);
       }
       continue;
+    }
+
+    if (overrideName && excludedProviders.has(normalizedId)) {
+      console.log(
+        `ℹ️  Forcing ${overrideName} provider to fetch live data despite coverage in base dataset.`,
+      );
     }
 
     const provider = createProvider(providerId, providerConfig);
