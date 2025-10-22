@@ -53,6 +53,9 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
       case 'openrouter':
         return new providers.OpenRouterProvider(config.apiUrl);
 
+      case 'jiekou':
+        return new providers.JiekouProvider(config.apiUrl);
+
       case 'groq': {
         const groqApiKey = config.getApiKey();
         if (groqApiKey) {

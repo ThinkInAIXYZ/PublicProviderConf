@@ -66,6 +66,13 @@ export function getDefaultConfig(): AppConfig {
     30
   );
 
+  providers['jiekou'] = createProviderConfig(
+    'https://api.jiekou.ai/openai/models',
+    undefined,
+    10,
+    30
+  );
+
   providers['ollama'] = createProviderConfig(
     'manual-templates/ollama.json',
     undefined,
