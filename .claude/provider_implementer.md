@@ -22,6 +22,7 @@ pub struct {ProviderName}Provider {
     api_url: String,
     api_key: Option<String>,
     client: reqwest::Client,
+    templates: HashMap<String, TemplateModel>, // For template-based providers
 }
 ```
 
@@ -30,11 +31,17 @@ pub struct {ProviderName}Provider {
 - `provider_id() -> &str`
 - `provider_name() -> &str`
 
-### 3. Data Conversion
-Map provider-specific fields to ModelInfo:
-- Extract vision/function_call/reasoning capabilities from features/tags
+### 3. Template-Based vs Direct Conversion
+**Template-Based Providers** (OpenAI, Anthropic):
+- Load model templates from `templates/{provider}.json`
+- Use template matching with `match` arrays for multi-pattern support
+- Auto-configure unmatched models with intelligent capability detection
+- Provides consistent metadata and handles API versioning
+
+**Direct Conversion Providers** (PPInfra, OpenRouter):
+- Map provider-specific fields directly to ModelInfo
+- Extract capabilities from API response features/tags
 - Convert context_length/max_tokens to u32
-- Map model_type to ModelType enum
 - Handle optional description field
 
 ## Output Format Requirements
@@ -74,8 +81,29 @@ When implementing a new provider:
 
 ## Example API Response Patterns
 
-### PPInfra Format
+### Template-Based Pattern (OpenAI, Anthropic)
 ```json
+// API Response
+{
+  "data": [{
+    "id": "gpt-5-chat-latest",
+    "object": "model"
+  }]
+}
+
+// Template File (templates/openai.json)
+[{
+  "id": "gpt-5-chat",
+  "name": "GPT-5 Chat",
+  "contextLength": 272000,
+  "maxTokens": 16384,
+  "match": ["gpt-5-chat", "gpt-5-chat-latest"]
+}]
+```
+
+### Direct Conversion Pattern (PPInfra, OpenRouter)
+```json
+// PPInfra Format
 {
   "data": [{
     "id": "model-id",
@@ -86,10 +114,8 @@ When implementing a new provider:
     "model_type": "chat"
   }]
 }
-```
 
-### OpenRouter Format  
-```json
+// OpenRouter Format  
 {
   "id": "model-id",
   "name": "Model Name",
@@ -121,4 +147,72 @@ Follow provider-specific limits:
 - PPInfra: 10 requests/second
 - Add delays between requests as needed
 
-When implementing a provider, always verify the API documentation for current rate limits and authentication requirements.
+## Template Matching System
+
+For providers with complex model naming or versioning (OpenAI, Anthropic), use the template matching system:
+
+### Template Structure
+```json
+{
+  "id": "base-model-id",
+  "name": "Display Name", 
+  "contextLength": 128000,
+  "maxTokens": 8192,
+  "vision": true,
+  "functionCall": true,
+  "reasoning": false,
+  "type": "chat",
+  "description": "Model description",
+  "match": ["exact-api-id", "versioned-api-id", "alias"]
+}
+```
+
+### Implementation Pattern
+```rust
+// Load templates in constructor
+let templates = Self::load_templates()?;
+let template_map: HashMap<String, TemplateModel> = templates
+    .into_iter()
+    .flat_map(|template| {
+        template.match_patterns
+            .iter()
+            .map(|pattern| (pattern.clone(), template.clone()))
+            .collect::<Vec<_>>()
+    })
+    .collect();
+
+// Match models in fetch_models()
+if let Some(template) = self.templates.get(&api_model.id) {
+    // Use template configuration
+    models.push(template.to_model_info());
+    matched_models.insert(api_model.id.clone());
+} else {
+    // Auto-configure unmatched model
+    models.push(self.create_default_model(&api_model.id));
+}
+```
+
+### Auto-Configuration for Unmatched Models
+```rust
+fn create_default_model(&self, model_id: &str) -> ModelInfo {
+    // Intelligent detection based on model ID patterns
+    let is_reasoning = model_id.contains("o1") || model_id.contains("o3");
+    let has_vision = model_id.contains("4o") || model_id.contains("vision");
+    let has_function_call = !model_id.contains("instruct");
+    
+    // Set appropriate defaults based on analysis
+    ModelInfo::new(
+        model_id.to_string(),
+        format!("Auto: {}", model_id),
+        default_context_length,
+        default_max_tokens,
+        has_vision,
+        has_function_call, 
+        is_reasoning,
+        ModelType::Chat,
+        Some(format!("Auto-configured model: {}", model_id)),
+    )
+}
+```
+
+When implementing a provider, choose template-based approach for providers with complex versioning, direct conversion for providers with rich API metadata.
