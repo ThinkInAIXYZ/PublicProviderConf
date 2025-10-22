@@ -60,6 +60,7 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
         return new providers.OpenRouterProvider(config.apiUrl);
 
       case 'jiekou':
+        console.log('create jekou')
         return new providers.JiekouProvider(config.apiUrl);
 
       case 'groq': {
