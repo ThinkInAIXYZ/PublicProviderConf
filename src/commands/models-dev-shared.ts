@@ -18,6 +18,7 @@ import { ExternalProviderManager } from '../templates/external-provider-manager'
 export const PROVIDER_ALIASES: Record<string, string> = {
   'github-ai': 'github-models',
   'openrouter-ai': 'openrouter',
+  'jiekou-ai': 'jiekou',
 };
 
 const MODELS_DEV_ONLY_PROVIDERS = new Set([
@@ -28,6 +29,11 @@ const MODELS_DEV_ONLY_PROVIDERS = new Set([
   'github-models',
   'gemini',
   'openai',
+]);
+
+const LIVE_PROVIDER_OVERRIDES = new Map<string, string>([
+  ['openrouter', 'OpenRouter'],
+  ['jiekou', 'Jiekou'],
 ]);
 
 export function normalizeProviderId(providerId: string): string {
@@ -52,6 +58,10 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
 
       case 'openrouter':
         return new providers.OpenRouterProvider(config.apiUrl);
+
+      case 'jiekou':
+        console.log('create jekou')
+        return new providers.JiekouProvider(config.apiUrl);
 
       case 'groq': {
         const groqApiKey = config.getApiKey();
@@ -114,7 +124,9 @@ export function createProvidersFromConfig(
 
   for (const [providerId, providerConfig] of Object.entries(config.providers)) {
     const normalizedId = normalizeProviderId(providerId);
-    if (excludedProviders.has(normalizedId)) {
+    const overrideName = LIVE_PROVIDER_OVERRIDES.get(normalizedId);
+
+    if (!overrideName && excludedProviders.has(normalizedId)) {
       if (exclusionSources) {
         const reason = getExclusionReason(normalizedId, exclusionSources);
         console.log(`ℹ️  Skipping ${providerId}: ${reason}`);
@@ -122,6 +134,12 @@ export function createProvidersFromConfig(
         console.log(`ℹ️  Skipping ${providerId}: already available via models.dev or templates`);
       }
       continue;
+    }
+
+    if (overrideName && excludedProviders.has(normalizedId)) {
+      console.log(
+        `ℹ️  Forcing ${overrideName} provider to fetch live data despite coverage in base dataset.`,
+      );
     }
 
     const provider = createProvider(providerId, providerConfig);
@@ -167,17 +185,16 @@ export async function loadBaseContext(): Promise<BaseContext> {
   const templatesById = new Map<string, ModelsDevProvider>();
   const templateIds: string[] = [];
   const externalIds = new Set<string>();
-  const normalizedOpenRouterId = normalizeProviderId('openrouter');
-
-  let loggedTemplateSkip = false;
+  const loggedTemplateSkips = new Set<string>();
   for (const template of loadedTemplates.values()) {
     const normalizedId = normalizeProviderId(template.id);
-    if (normalizedId === normalizedOpenRouterId) {
-      if (!loggedTemplateSkip) {
+    const overrideName = LIVE_PROVIDER_OVERRIDES.get(normalizedId);
+    if (overrideName) {
+      if (!loggedTemplateSkips.has(normalizedId)) {
         console.log(
-          'ℹ️  Skipping OpenRouter manual template: live provider will write dist/openrouter.json directly.',
+          `ℹ️  Skipping ${overrideName} manual template: live provider will write dist/${normalizedId}.json directly.`,
         );
-        loggedTemplateSkip = true;
+        loggedTemplateSkips.add(normalizedId);
       }
       continue;
     }
@@ -187,15 +204,16 @@ export async function loadBaseContext(): Promise<BaseContext> {
 
   const baseProvidersRecord = providersToRecord(baseData.providers);
   const modelsDevIds = new Set<string>();
-  let loggedModelsDevSkip = false;
+  const loggedModelsDevSkips = new Set<string>();
   for (const [key, provider] of Object.entries(baseProvidersRecord)) {
     const normalizedId = normalizeProviderId(getModelsDevProviderId(provider));
-    if (normalizedId === normalizedOpenRouterId) {
-      if (!loggedModelsDevSkip) {
+    const overrideName = LIVE_PROVIDER_OVERRIDES.get(normalizedId);
+    if (overrideName) {
+      if (!loggedModelsDevSkips.has(normalizedId)) {
         console.log(
-          'ℹ️  Removing OpenRouter entry from models.dev snapshot in favor of the live provider.',
+          `ℹ️  Removing ${overrideName} entry from models.dev snapshot in favor of the live provider.`,
         );
-        loggedModelsDevSkip = true;
+        loggedModelsDevSkips.add(normalizedId);
       }
       delete baseProvidersRecord[key];
       continue;
@@ -208,12 +226,17 @@ export async function loadBaseContext(): Promise<BaseContext> {
     }
   }
 
+  const loggedExternalSkips = new Set<string>();
   for (const provider of externalProviders.values()) {
     const normalizedId = normalizeProviderId(getModelsDevProviderId(provider));
-    if (normalizedId === normalizedOpenRouterId) {
-      console.log(
-        'ℹ️  Skipping external OpenRouter data: live provider fetch will handle this source.',
-      );
+    const overrideName = LIVE_PROVIDER_OVERRIDES.get(normalizedId);
+    if (overrideName) {
+      if (!loggedExternalSkips.has(normalizedId)) {
+        console.log(
+          `ℹ️  Skipping external ${overrideName} data: live provider fetch will handle this source.`,
+        );
+        loggedExternalSkips.add(normalizedId);
+      }
       continue;
     }
     externalIds.add(normalizedId);
@@ -254,8 +277,12 @@ export async function loadBaseContext(): Promise<BaseContext> {
     existingProviderIds.add(id);
   }
 
-  if (existingProviderIds.delete(normalizedOpenRouterId)) {
-    console.log('ℹ️  Forcing OpenRouter provider to refetch live data for dist output.');
+  for (const [overrideId, overrideName] of LIVE_PROVIDER_OVERRIDES) {
+    if (existingProviderIds.delete(overrideId)) {
+      console.log(
+        `ℹ️  Forcing ${overrideName} provider to refetch live data for dist output.`,
+      );
+    }
   }
 
   const exclusionSources: ExclusionSources = {
