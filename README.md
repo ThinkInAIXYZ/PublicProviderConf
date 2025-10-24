@@ -119,4 +119,4 @@ Issues and ideas are always welcome.
 
 ## License
 
-MIT © ThinkInAIXYZ
+Apache-2.0 license 
