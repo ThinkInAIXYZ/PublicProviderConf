@@ -13,7 +13,6 @@ import {
   mergeProviderWithTemplate,
 } from '../templates/models-dev-template-manager';
 import { AppConfig, ProviderConfig } from '../config/app-config';
-import { ExternalProviderManager } from '../templates/external-provider-manager';
 
 export const PROVIDER_ALIASES: Record<string, string> = {
   'github-ai': 'github-models',
@@ -34,6 +33,7 @@ const MODELS_DEV_ONLY_PROVIDERS = new Set([
 const LIVE_PROVIDER_OVERRIDES = new Map<string, string>([
   ['openrouter', 'OpenRouter'],
   ['jiekou', 'Jiekou'],
+  ['aihubmix', 'AIHubMix'],
 ]);
 
 export function normalizeProviderId(providerId: string): string {
@@ -63,6 +63,9 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
         console.log('create jekou')
         return new providers.JiekouProvider(config.apiUrl);
 
+      case 'aihubmix':
+        return new providers.AiHubMixProvider(config.apiUrl);
+
       case 'groq': {
         const groqApiKey = config.getApiKey();
         if (groqApiKey) {
@@ -88,7 +91,6 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
 export interface ExclusionSources {
   modelsDev: Set<string>;
   templates: Set<string>;
-  externals: Set<string>;
 }
 
 export function getExclusionReason(providerId: string, sources: ExclusionSources): string {
@@ -100,10 +102,6 @@ export function getExclusionReason(providerId: string, sources: ExclusionSources
   if (sources.templates.has(providerId)) {
     reasons.push('manual template');
   }
-  if (sources.externals.has(providerId)) {
-    reasons.push('external source');
-  }
-
   if (reasons.length === 0) {
     return 'already included in combined dataset';
   }
@@ -179,12 +177,8 @@ export async function loadBaseContext(): Promise<BaseContext> {
   const templateManager = new ModelsDevTemplateManager();
   const loadedTemplates = await templateManager.loadAllTemplates();
 
-  const externalManager = new ExternalProviderManager();
-  const externalProviders = await externalManager.loadAllProviders();
-
   const templatesById = new Map<string, ModelsDevProvider>();
   const templateIds: string[] = [];
-  const externalIds = new Set<string>();
   const loggedTemplateSkips = new Set<string>();
   for (const template of loadedTemplates.values()) {
     const normalizedId = normalizeProviderId(template.id);
@@ -222,28 +216,6 @@ export async function loadBaseContext(): Promise<BaseContext> {
     const template = templatesById.get(normalizedId);
     if (template) {
       baseProvidersRecord[key] = mergeProviderWithTemplate(provider, template);
-      templatesById.delete(normalizedId);
-    }
-  }
-
-  const loggedExternalSkips = new Set<string>();
-  for (const provider of externalProviders.values()) {
-    const normalizedId = normalizeProviderId(getModelsDevProviderId(provider));
-    const overrideName = LIVE_PROVIDER_OVERRIDES.get(normalizedId);
-    if (overrideName) {
-      if (!loggedExternalSkips.has(normalizedId)) {
-        console.log(
-          `ℹ️  Skipping external ${overrideName} data: live provider fetch will handle this source.`,
-        );
-        loggedExternalSkips.add(normalizedId);
-      }
-      continue;
-    }
-    externalIds.add(normalizedId);
-    const template = templatesById.get(normalizedId);
-    const merged = mergeProviderWithTemplate(provider, template);
-    baseProvidersRecord[provider.id] = merged;
-    if (template) {
       templatesById.delete(normalizedId);
     }
   }
@@ -288,7 +260,6 @@ export async function loadBaseContext(): Promise<BaseContext> {
   const exclusionSources: ExclusionSources = {
     modelsDev: modelsDevIds,
     templates: new Set(templateIds),
-    externals: externalIds,
   };
 
   return {
