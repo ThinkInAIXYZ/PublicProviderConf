@@ -74,10 +74,12 @@ Options:
 - PPInfra (live API)
 - TokenFlux (marketplace API)
 - Groq (requires `GROQ_API_KEY`)
+- AIHubMix (live API)
 - Ollama (snapshot templates)
 - SiliconFlow (snapshot templates)
 
 Adding a new provider usually involves implementing `Provider` under `src/providers/`, adding configuration to `src/config/app-config.ts`, and optionally contributing templates to `manual-templates/`.
+AIHubMix is fetched live from `https://aihubmix.com/api/v1/models` so you have a ready-made fallback dataset for models that aren't yet covered by the primary `models.dev` catalog. Keeping the provider enabled ensures `dist/aihubmix.json` stays current without manual snapshots.
 
 ## Project Structure
 ```

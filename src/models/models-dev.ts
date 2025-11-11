@@ -126,7 +126,16 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
   const toolCall = model.toolCall ?? model.functionCall;
   const reasoning = toModelsDevReasoning(model.reasoning);
 
-  return {
+  const limit = model.limit
+    ? {
+        context: model.limit.context,
+        output: model.limit.output,
+        requests_per_minute: model.limit.requestsPerMinute,
+        requests_per_day: model.limit.requestsPerDay,
+      }
+    : undefined;
+
+  const result: ModelsDevModel = {
     id: model.id,
     name: model.name,
     display_name: model.name,
@@ -155,20 +164,23 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
           cache_write: model.cost.cacheWrite,
         }
       : undefined,
-    limit: model.limit
-      ? {
-          context: model.limit.context,
-          output: model.limit.output,
-          requests_per_minute: model.limit.requestsPerMinute,
-          requests_per_day: model.limit.requestsPerDay,
-        }
-      : undefined,
+    limit,
     metadata: {
       ...model.metadata,
       source: 'public-provider-conf',
     },
     vision: model.vision,
   };
+
+  if (limit?.context !== undefined) {
+    delete result.context_length;
+  }
+
+  if (limit?.output !== undefined) {
+    delete result.max_output_tokens;
+  }
+
+  return result;
 }
 
 export function createModelsDevProvider(provider: ProviderInfo): ModelsDevProvider {
