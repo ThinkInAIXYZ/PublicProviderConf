@@ -75,11 +75,13 @@ Options:
 - TokenFlux (marketplace API)
 - Groq (requires `GROQ_API_KEY`)
 - AIHubMix (live API)
+- BurnCloud (manual template)
 - Ollama (snapshot templates)
 - SiliconFlow (snapshot templates)
 
 Adding a new provider usually involves implementing `Provider` under `src/providers/`, adding configuration to `src/config/app-config.ts`, and optionally contributing templates to `manual-templates/`.
 AIHubMix is fetched live from `https://aihubmix.com/api/v1/models` so you have a ready-made fallback dataset for models that aren't yet covered by the primary `models.dev` catalog. Keeping the provider enabled ensures `dist/aihubmix.json` stays current without manual snapshots.
+BurnCloud rides exclusively on `manual-templates/burncloud.json`, which is regenerated from `models.txt` snapshots so the CLI can ship the latest catalog without hitting proprietary endpoints. Keep that template up to date (and re-run `jq -c` to refresh `dist/burncloud.json`) whenever BurnCloud publishes new models or capability metadata.
 
 ## Project Structure
 ```
