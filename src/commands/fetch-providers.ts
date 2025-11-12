@@ -1,6 +1,6 @@
 import { DataFetcher } from '../fetcher/data-fetcher';
 import { DataProcessor } from '../processor/data-processor';
-import { ModelsDevOutputManager } from '../output/models-dev-output-manager';
+import { OutputManager } from '../output/output-manager';
 import { loadConfig } from '../config/app-config';
 import {
   ModelsDevApiResponse,
@@ -34,7 +34,7 @@ export async function fetchSpecificProviders(
 
   const fetcher = new DataFetcher();
   const processor = new DataProcessor();
-  const outputManager = new ModelsDevOutputManager(outputDir);
+  const outputManager = new OutputManager(outputDir);
 
   for (const providerName of providerNames) {
     const normalizedName = normalizeProviderId(providerName);
