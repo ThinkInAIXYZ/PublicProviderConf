@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2025-11-12T08:45:03.900Z",
+  "updated_at": "2025-11-13T02:07:03.634Z",
   "models": [
     {
       "id": "claude-haiku-4-5",
@@ -1043,6 +1043,75 @@
         "pricing": {
           "input": 20,
           "output": 20
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "cc-glm-4.6",
+      "name": "cc-glm-4.6",
+      "display_name": "cc-glm-4.6",
+      "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.06,
+        "output": 0.22
+      },
+      "metadata": {
+        "description": "for claude code",
+        "pricing": {
+          "input": 0.06,
+          "output": 0.22
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "coding-glm-4.6",
+      "name": "coding-glm-4.6",
+      "display_name": "coding-glm-4.6",
+      "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.06,
+        "output": 0.22,
+        "cache_read": 0.010998
+      },
+      "metadata": {
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.010998,
+          "input": 0.06,
+          "output": 0.22
         },
         "source": "public-provider-conf"
       },
@@ -2451,114 +2520,40 @@
       "vision": false
     },
     {
-      "id": "DeepSeek-OCR",
-      "name": "DeepSeek-OCR",
-      "display_name": "DeepSeek-OCR",
+      "id": "qwen3-vl-30b-a3b-thinking",
+      "name": "qwen3-vl-30b-a3b-thinking",
+      "display_name": "qwen3-vl-30b-a3b-thinking",
       "type": "chat",
-      "max_output_tokens": 8000,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
+      "tool_call": true,
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ]
       },
       "cost": {
-        "input": 0.02,
-        "output": 0.02
+        "input": 0.1028,
+        "output": 1.028
       },
       "limit": {
-        "context": 8000
+        "context": 128000,
+        "output": 32000
       },
       "metadata": {
-        "description": "DeepSeek-OCR is a vision-language model launched by DeepSeek AI, focusing on optical character recognition (OCR) and “contextual optical compression.” The model is designed to explore the limits of compressing contextual information from images, efficiently processing documents and converting them into structured text formats such as Markdown. The model requires an image as input.",
+        "description": "The Qwen3-VL series’ second-largest MoE model Thinking version offers fast response speed, stronger multimodal understanding and reasoning, visual agent capabilities, and ultra-long context support for long videos and long documents; it features comprehensive upgrades in image/video understanding, spatial perception, and universal recognition abilities, making it capable of handling complex real-world tasks.",
         "typeHints": [
           "llm"
         ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 0.02,
-          "output": 0.02
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "gemini-2.5-flash-image-preview",
-      "name": "gemini-2.5-flash-image-preview",
-      "display_name": "gemini-2.5-flash-image-preview",
-      "type": "image-generation",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "image",
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.3
-      },
-      "limit": {
-        "context": 32800,
-        "output": 8000
-      },
-      "metadata": {
-        "description": "Aihubmix supports the gemini-2.5-flash-image-preview model; you can add extra parameters modalities=[\"text\", \"image\"] through the OpenAI-compatible chat interface; https://docs.aihubmix.com/en/api/Gemini-Guides#gemini-2-5-flash%3A-quick-task-support",
-        "typeHints": [
-          "image_generation"
-        ],
-        "inputModalities": [
-          "image",
-          "text"
-        ],
-        "pricing": {
-          "cache_read": 0.3,
-          "input": 0.3,
-          "output": 1.2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "veo-3.0-generate-preview",
-      "name": "veo-3.0-generate-preview",
-      "display_name": "veo-3.0-generate-preview",
-      "type": "chat",
-      "context_length": 0,
-      "max_output_tokens": 0,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ]
-      },
-      "cost": {
-        "input": 2,
-        "output": 2,
-        "cache_read": 0
-      },
-      "metadata": {
-        "description": "Veo 3.0 Generate Preview is an advanced AI video generation model that supports text-to-video creation with synchronized audio, featuring excellent physical simulation and lip-sync capabilities. Users can generate vivid video clips from short story prompts. 🎟️ Limited-Time Deal: Save 10% Now.",
-        "typeHints": [
-          "video"
+        "features": [
+          "thinking",
+          "tools",
+          "function_calling",
+          "structured_outputs"
         ],
         "inputModalities": [
           "text",
@@ -2566,51 +2561,8 @@
           "video"
         ],
         "pricing": {
-          "cache_read": 0,
-          "input": 2,
-          "output": 2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "veo-3.1-generate-preview",
-      "name": "veo-3.1-generate-preview",
-      "display_name": "veo-3.1-generate-preview",
-      "type": "chat",
-      "context_length": 0,
-      "max_output_tokens": 0,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ]
-      },
-      "cost": {
-        "input": 2,
-        "output": 2,
-        "cache_read": 0
-      },
-      "metadata": {
-        "description": "Veo 3.1 is Google's state-of-the-art model for generating high-fidelity, 8-second 720p or 1080p videos featuring stunning realism and natively generated audio.",
-        "typeHints": [
-          "video"
-        ],
-        "inputModalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "pricing": {
-          "cache_read": 0,
-          "input": 2,
-          "output": 2
+          "input": 0.1028,
+          "output": 1.028
         },
         "source": "public-provider-conf"
       },
@@ -2760,15 +2712,16 @@
       "vision": true
     },
     {
-      "id": "qwen3-vl-30b-a3b-thinking",
-      "name": "qwen3-vl-30b-a3b-thinking",
-      "display_name": "qwen3-vl-30b-a3b-thinking",
+      "id": "veo-3.1-generate-preview",
+      "name": "veo-3.1-generate-preview",
+      "display_name": "veo-3.1-generate-preview",
       "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "tool_call": true,
+      "tool_call": false,
       "modalities": {
         "input": [
           "text",
@@ -2777,23 +2730,14 @@
         ]
       },
       "cost": {
-        "input": 0.1028,
-        "output": 1.028
-      },
-      "limit": {
-        "context": 128000,
-        "output": 32000
+        "input": 2,
+        "output": 2,
+        "cache_read": 0
       },
       "metadata": {
-        "description": "The Qwen3-VL series’ second-largest MoE model Thinking version offers fast response speed, stronger multimodal understanding and reasoning, visual agent capabilities, and ultra-long context support for long videos and long documents; it features comprehensive upgrades in image/video understanding, spatial perception, and universal recognition abilities, making it capable of handling complex real-world tasks.",
+        "description": "Veo 3.1 is Google's state-of-the-art model for generating high-fidelity, 8-second 720p or 1080p videos featuring stunning realism and natively generated audio.",
         "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "thinking",
-          "tools",
-          "function_calling",
-          "structured_outputs"
+          "video"
         ],
         "inputModalities": [
           "text",
@@ -2801,22 +2745,25 @@
           "video"
         ],
         "pricing": {
-          "input": 0.1028,
-          "output": 1.028
+          "cache_read": 0,
+          "input": 2,
+          "output": 2
         },
         "source": "public-provider-conf"
       },
       "vision": true
     },
     {
-      "id": "qwen3-vl-plus",
-      "name": "qwen3-vl-plus",
-      "display_name": "qwen3-vl-plus",
+      "id": "veo-3.0-generate-preview",
+      "name": "veo-3.0-generate-preview",
+      "display_name": "veo-3.0-generate-preview",
       "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
       "reasoning": {
         "supported": false
       },
-      "tool_call": true,
+      "tool_call": false,
       "modalities": {
         "input": [
           "text",
@@ -2825,23 +2772,14 @@
         ]
       },
       "cost": {
-        "input": 0.137,
-        "output": 1.37,
-        "cache_read": 0.0274
-      },
-      "limit": {
-        "context": 256000,
-        "output": 32000
+        "input": 2,
+        "output": 2,
+        "cache_read": 0
       },
       "metadata": {
-        "description": "The Qwen3 series visual understanding model achieves an effective fusion of thinking and non-thinking modes. Its visual agent capabilities reach world-class levels on public test sets such as OS World. This version features comprehensive upgrades in visual coding, spatial perception, and multimodal reasoning; visual perception and recognition abilities are greatly enhanced, supporting ultra-long video understanding.",
+        "description": "Veo 3.0 Generate Preview is an advanced AI video generation model that supports text-to-video creation with synchronized audio, featuring excellent physical simulation and lip-sync capabilities. Users can generate vivid video clips from short story prompts. 🎟️ Limited-Time Deal: Save 10% Now.",
         "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs"
+          "video"
         ],
         "inputModalities": [
           "text",
@@ -2849,9 +2787,131 @@
           "video"
         ],
         "pricing": {
-          "cache_read": 0.0274,
-          "input": 0.137,
-          "output": 1.37
+          "cache_read": 0,
+          "input": 2,
+          "output": 2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "DeepSeek-OCR",
+      "name": "DeepSeek-OCR",
+      "display_name": "DeepSeek-OCR",
+      "type": "chat",
+      "max_output_tokens": 8000,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.02,
+        "output": 0.02
+      },
+      "limit": {
+        "context": 8000
+      },
+      "metadata": {
+        "description": "DeepSeek-OCR is a vision-language model launched by DeepSeek AI, focusing on optical character recognition (OCR) and “contextual optical compression.” The model is designed to explore the limits of compressing contextual information from images, efficiently processing documents and converting them into structured text formats such as Markdown. The model requires an image as input.",
+        "typeHints": [
+          "llm"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0.02,
+          "output": 0.02
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gemini-2.5-flash-image-preview",
+      "name": "gemini-2.5-flash-image-preview",
+      "display_name": "gemini-2.5-flash-image-preview",
+      "type": "image-generation",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "image",
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": 0.3
+      },
+      "limit": {
+        "context": 32800,
+        "output": 8000
+      },
+      "metadata": {
+        "description": "Aihubmix supports the gemini-2.5-flash-image-preview model; you can add extra parameters modalities=[\"text\", \"image\"] through the OpenAI-compatible chat interface; https://docs.aihubmix.com/en/api/Gemini-Guides#gemini-2-5-flash%3A-quick-task-support",
+        "typeHints": [
+          "image_generation"
+        ],
+        "inputModalities": [
+          "image",
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.3,
+          "input": 0.3,
+          "output": 1.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "aihubmix-router",
+      "name": "aihubmix-router",
+      "display_name": "aihubmix-router",
+      "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.4,
+        "output": 1.6,
+        "cache_read": 0.1
+      },
+      "metadata": {
+        "description": "New model routing capability; request aihubmix-router to automatically route models based on question complexity, so everyone no longer needs to manually switch models; in our tests comparing the use of the model router versus only using GPT-4.1, we observed up to 60% cost savings while maintaining similar accuracy.  \nThe context length of the model router depends on the base model used for each prompt. Input size is 200,000, output size is 32,768.  \nCurrently, there are four routing models: gpt-4.1, gpt-4.1-mini, gpt-4.1-nano, o4-mini.  \nPricing: Due to our current billing structure system, requests through aihubmix-router are billed at the price of gpt-4.1-mini regardless of which final model is used; future billing will be based on the actual model invoked.  \nEveryone is welcome to try it out; the interface will return the name of the actual called model.",
+        "typeHints": [
+          "llm"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0.1,
+          "input": 0.4,
+          "output": 1.6
         },
         "source": "public-provider-conf"
       },
@@ -2906,40 +2966,49 @@
       "vision": true
     },
     {
-      "id": "aihubmix-router",
-      "name": "aihubmix-router",
-      "display_name": "aihubmix-router",
+      "id": "qwen3-vl-plus",
+      "name": "qwen3-vl-plus",
+      "display_name": "qwen3-vl-plus",
       "type": "chat",
-      "context_length": 0,
-      "max_output_tokens": 0,
       "reasoning": {
         "supported": false
       },
-      "tool_call": false,
+      "tool_call": true,
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ]
       },
       "cost": {
-        "input": 0.4,
-        "output": 1.6,
-        "cache_read": 0.1
+        "input": 0.137,
+        "output": 1.37,
+        "cache_read": 0.0274
+      },
+      "limit": {
+        "context": 256000,
+        "output": 32000
       },
       "metadata": {
-        "description": "New model routing capability; request aihubmix-router to automatically route models based on question complexity, so everyone no longer needs to manually switch models; in our tests comparing the use of the model router versus only using GPT-4.1, we observed up to 60% cost savings while maintaining similar accuracy.  \nThe context length of the model router depends on the base model used for each prompt. Input size is 200,000, output size is 32,768.  \nCurrently, there are four routing models: gpt-4.1, gpt-4.1-mini, gpt-4.1-nano, o4-mini.  \nPricing: Due to our current billing structure system, requests through aihubmix-router are billed at the price of gpt-4.1-mini regardless of which final model is used; future billing will be based on the actual model invoked.  \nEveryone is welcome to try it out; the interface will return the name of the actual called model.",
+        "description": "The Qwen3 series visual understanding model achieves an effective fusion of thinking and non-thinking modes. Its visual agent capabilities reach world-class levels on public test sets such as OS World. This version features comprehensive upgrades in visual coding, spatial perception, and multimodal reasoning; visual perception and recognition abilities are greatly enhanced, supporting ultra-long video understanding.",
         "typeHints": [
           "llm"
         ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
         "inputModalities": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "pricing": {
-          "cache_read": 0.1,
-          "input": 0.4,
-          "output": 1.6
+          "cache_read": 0.0274,
+          "input": 0.137,
+          "output": 1.37
         },
         "source": "public-provider-conf"
       },
@@ -3242,53 +3311,6 @@
       "vision": true
     },
     {
-      "id": "qwen3-max",
-      "name": "qwen3-max",
-      "display_name": "qwen3-max",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 0.822,
-        "output": 3.288,
-        "cache_read": 0.822
-      },
-      "limit": {
-        "context": 262144,
-        "output": 65536
-      },
-      "metadata": {
-        "description": "The Tongyi Qianwen 3 series Max model has undergone special upgrades in intelligent agent programming and tool invocation compared to the preview version. The officially released model this time reaches SOTA level in the field and is adapted to more complex intelligent agent scenarios.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "cache_read": 0.822,
-          "input": 0.822,
-          "output": 3.288
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "qwen3-next-80b-a3b-instruct",
       "name": "qwen3-next-80b-a3b-instruct",
       "display_name": "qwen3-next-80b-a3b-instruct",
@@ -3375,6 +3397,53 @@
         "pricing": {
           "input": 0.138,
           "output": 1.38
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "qwen3-max",
+      "name": "qwen3-max",
+      "display_name": "qwen3-max",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.822,
+        "output": 3.288,
+        "cache_read": 0.822
+      },
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
+      "metadata": {
+        "description": "The Tongyi Qianwen 3 series Max model has undergone special upgrades in intelligent agent programming and tool invocation compared to the preview version. The officially released model this time reaches SOTA level in the field and is adapted to more complex intelligent agent scenarios.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0.822,
+          "input": 0.822,
+          "output": 3.288
         },
         "source": "public-provider-conf"
       },
@@ -3702,141 +3771,6 @@
       "vision": true
     },
     {
-      "id": "qwen3-coder-flash",
-      "name": "qwen3-coder-flash",
-      "display_name": "qwen3-coder-flash",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.136,
-        "output": 0.544,
-        "cache_read": 0.136
-      },
-      "limit": {
-        "context": 256000,
-        "output": 65536
-      },
-      "metadata": {
-        "description": "Qwen3 Coder Flash is Alibaba's fast and cost efficient version of their proprietary Qwen3 Coder Plus. It is a powerful coding agent model specializing in autonomous programming via tool calling and environment interaction, combining coding proficiency with versatile general-purpose abilities.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "cache_read": 0.136,
-          "input": 0.136,
-          "output": 0.544
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "qwen3-coder-plus",
-      "name": "qwen3-coder-plus",
-      "display_name": "qwen3-coder-plus",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.54,
-        "output": 2.16,
-        "cache_read": 0.108
-      },
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "metadata": {
-        "description": "The code generation model based on Qwen3 has powerful Coding Agent capabilities, excels in tool invocation and environment interaction, and can achieve autonomous programming with outstanding coding abilities while also possessing general capabilities.The model adopts tiered pricing.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "cache_read": 0.108,
-          "input": 0.54,
-          "output": 2.16
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "qwen3-coder-plus-2025-07-22",
-      "name": "qwen3-coder-plus-2025-07-22",
-      "display_name": "qwen3-coder-plus-2025-07-22",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.54,
-        "output": 2.16,
-        "cache_read": 0.54
-      },
-      "limit": {
-        "context": 128000,
-        "output": 65536
-      },
-      "metadata": {
-        "description": "The code generation model based on Qwen3 has powerful Coding Agent capabilities, excels in tool invocation and environment interaction, and can achieve autonomous programming with outstanding coding abilities while also possessing general capabilities.The model adopts tiered pricing.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "cache_read": 0.54,
-          "input": 0.54,
-          "output": 2.16
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "DeepSeek-V3",
       "name": "DeepSeek-V3",
       "display_name": "DeepSeek-V3",
@@ -3899,6 +3833,141 @@
         "pricing": {
           "input": 0.14,
           "output": 0.7
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen3-coder-plus-2025-07-22",
+      "name": "qwen3-coder-plus-2025-07-22",
+      "display_name": "qwen3-coder-plus-2025-07-22",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.54,
+        "output": 2.16,
+        "cache_read": 0.54
+      },
+      "limit": {
+        "context": 128000,
+        "output": 65536
+      },
+      "metadata": {
+        "description": "The code generation model based on Qwen3 has powerful Coding Agent capabilities, excels in tool invocation and environment interaction, and can achieve autonomous programming with outstanding coding abilities while also possessing general capabilities.The model adopts tiered pricing.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.54,
+          "input": 0.54,
+          "output": 2.16
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen3-coder-plus",
+      "name": "qwen3-coder-plus",
+      "display_name": "qwen3-coder-plus",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.54,
+        "output": 2.16,
+        "cache_read": 0.108
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "metadata": {
+        "description": "The code generation model based on Qwen3 has powerful Coding Agent capabilities, excels in tool invocation and environment interaction, and can achieve autonomous programming with outstanding coding abilities while also possessing general capabilities.The model adopts tiered pricing.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.108,
+          "input": 0.54,
+          "output": 2.16
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen3-coder-flash",
+      "name": "qwen3-coder-flash",
+      "display_name": "qwen3-coder-flash",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.136,
+        "output": 0.544,
+        "cache_read": 0.136
+      },
+      "limit": {
+        "context": 256000,
+        "output": 65536
+      },
+      "metadata": {
+        "description": "Qwen3 Coder Flash is Alibaba's fast and cost efficient version of their proprietary Qwen3 Coder Plus. It is a powerful coding agent model specializing in autonomous programming via tool calling and environment interaction, combining coding proficiency with versatile general-purpose abilities.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.136,
+          "input": 0.136,
+          "output": 0.544
         },
         "source": "public-provider-conf"
       },
@@ -4949,12 +5018,10 @@
       "vision": true
     },
     {
-      "id": "qwen3-reranker-8b",
-      "name": "qwen3-reranker-8b",
-      "display_name": "qwen3-reranker-8b",
+      "id": "qwen3-reranker-0.6b",
+      "name": "qwen3-reranker-0.6b",
+      "display_name": "qwen3-reranker-0.6b",
       "type": "chat",
-      "context_length": 0,
-      "max_output_tokens": 0,
       "reasoning": {
         "supported": false
       },
@@ -4968,6 +5035,10 @@
       "cost": {
         "input": 0.11,
         "output": 0.11
+      },
+      "limit": {
+        "context": 16000,
+        "output": 8000
       },
       "metadata": {
         "description": "Based on the dense foundational model of the Qwen3 series, it is specifically designed for ranking tasks. It inherits the base model’s outstanding multilingual capabilities, long-text understanding, and reasoning skills, achieving significant advancements in ranking tasks.",
@@ -5025,10 +5096,12 @@
       "vision": true
     },
     {
-      "id": "qwen3-reranker-0.6b",
-      "name": "qwen3-reranker-0.6b",
-      "display_name": "qwen3-reranker-0.6b",
+      "id": "qwen3-reranker-8b",
+      "name": "qwen3-reranker-8b",
+      "display_name": "qwen3-reranker-8b",
       "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
       "reasoning": {
         "supported": false
       },
@@ -5042,10 +5115,6 @@
       "cost": {
         "input": 0.11,
         "output": 0.11
-      },
-      "limit": {
-        "context": 16000,
-        "output": 8000
       },
       "metadata": {
         "description": "Based on the dense foundational model of the Qwen3 series, it is specifically designed for ranking tasks. It inherits the base model’s outstanding multilingual capabilities, long-text understanding, and reasoning skills, achieving significant advancements in ranking tasks.",
@@ -5063,33 +5132,6 @@
         "source": "public-provider-conf"
       },
       "vision": true
-    },
-    {
-      "id": "tao-8k",
-      "name": "tao-8k",
-      "display_name": "tao-8k",
-      "type": "embedding",
-      "context_length": 0,
-      "max_output_tokens": 0,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.068,
-        "output": 0.068
-      },
-      "metadata": {
-        "typeHints": [
-          "embedding"
-        ],
-        "pricing": {
-          "input": 0.068,
-          "output": 0.068
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
     },
     {
       "id": "qwen3-embedding-8b",
@@ -5190,6 +5232,33 @@
         ],
         "inputModalities": [
           "text"
+        ],
+        "pricing": {
+          "input": 0.068,
+          "output": 0.068
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "tao-8k",
+      "name": "tao-8k",
+      "display_name": "tao-8k",
+      "type": "embedding",
+      "context_length": 0,
+      "max_output_tokens": 0,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.068,
+        "output": 0.068
+      },
+      "metadata": {
+        "typeHints": [
+          "embedding"
         ],
         "pricing": {
           "input": 0.068,
@@ -6368,6 +6437,34 @@
           "cache_read": 0.02,
           "input": 0.2,
           "output": 0.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "coding-minimax-m2",
+      "name": "coding-minimax-m2",
+      "display_name": "coding-minimax-m2",
+      "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.1,
+        "output": 0.1
+      },
+      "metadata": {
+        "description": "for coding plan",
+        "typeHints": [
+          "llm"
+        ],
+        "pricing": {
+          "input": 0.1,
+          "output": 0.1
         },
         "source": "public-provider-conf"
       },
@@ -8668,31 +8765,6 @@
       "vision": true
     },
     {
-      "id": "tencent/Hunyuan-A13B-Instruct",
-      "name": "tencent/Hunyuan-A13B-Instruct",
-      "display_name": "tencent/Hunyuan-A13B-Instruct",
-      "type": "chat",
-      "context_length": 0,
-      "max_output_tokens": 0,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.14,
-        "output": 0.56
-      },
-      "metadata": {
-        "description": "Hunyuan-A13B-Instruct has 8 billion parameters and can match larger models by activating only 1.3 billion parameters, supporting \"fast thinking/slow thinking\" hybrid inference. It offers stable long text understanding. Verified by BFCL-v3 and τ-Bench, its Agent capabilities are leading in the field. Combined with GQA and multiple quantization formats, it enables efficient inference.",
-        "pricing": {
-          "input": 0.14,
-          "output": 0.56
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "unsloth/gemma-3-27b-it",
       "name": "unsloth/gemma-3-27b-it",
       "display_name": "unsloth/gemma-3-27b-it",
@@ -8714,6 +8786,31 @@
           "cache_read": 0,
           "input": 0.22,
           "output": 0.22
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "tencent/Hunyuan-A13B-Instruct",
+      "name": "tencent/Hunyuan-A13B-Instruct",
+      "display_name": "tencent/Hunyuan-A13B-Instruct",
+      "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.14,
+        "output": 0.56
+      },
+      "metadata": {
+        "description": "Hunyuan-A13B-Instruct has 8 billion parameters and can match larger models by activating only 1.3 billion parameters, supporting \"fast thinking/slow thinking\" hybrid inference. It offers stable long text understanding. Verified by BFCL-v3 and τ-Bench, its Agent capabilities are leading in the field. Combined with GQA and multiple quantization formats, it enables efficient inference.",
+        "pricing": {
+          "input": 0.14,
+          "output": 0.56
         },
         "source": "public-provider-conf"
       },
@@ -10928,50 +11025,6 @@
       "vision": false
     },
     {
-      "id": "coding-glm-4.6",
-      "name": "coding-glm-4.6",
-      "display_name": "coding-glm-4.6",
-      "type": "chat",
-      "context_length": 0,
-      "max_output_tokens": 0,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.06,
-        "output": 0.22,
-        "cache_read": 0.010998
-      },
-      "metadata": {
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "thinking",
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "cache_read": 0.010998,
-          "input": 0.06,
-          "output": 0.22
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "glm-4.5-air",
       "name": "glm-4.5-air",
       "display_name": "glm-4.5-air",
@@ -11930,9 +11983,9 @@
       "vision": false
     },
     {
-      "id": "text-embedding-3-large",
-      "name": "text-embedding-3-large",
-      "display_name": "text-embedding-3-large",
+      "id": "text-embedding-3-small",
+      "name": "text-embedding-3-small",
+      "display_name": "text-embedding-3-small",
       "type": "embedding",
       "context_length": 0,
       "max_output_tokens": 0,
@@ -11946,8 +11999,8 @@
         ]
       },
       "cost": {
-        "input": 0.13,
-        "output": 0.13
+        "input": 0.02,
+        "output": 0.02
       },
       "metadata": {
         "typeHints": [
@@ -11957,8 +12010,8 @@
           "text"
         ],
         "pricing": {
-          "input": 0.13,
-          "output": 0.13
+          "input": 0.02,
+          "output": 0.02
         },
         "source": "public-provider-conf"
       },
@@ -12061,24 +12114,35 @@
       "vision": false
     },
     {
-      "id": "text-davinci-edit-001",
-      "name": "text-davinci-edit-001",
-      "display_name": "text-davinci-edit-001",
-      "type": "chat",
+      "id": "text-embedding-3-large",
+      "name": "text-embedding-3-large",
+      "display_name": "text-embedding-3-large",
+      "type": "embedding",
       "context_length": 0,
       "max_output_tokens": 0,
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
       "cost": {
-        "input": 20,
-        "output": 20
+        "input": 0.13,
+        "output": 0.13
       },
       "metadata": {
+        "typeHints": [
+          "embedding"
+        ],
+        "inputModalities": [
+          "text"
+        ],
         "pricing": {
-          "input": 20,
-          "output": 20
+          "input": 0.13,
+          "output": 0.13
         },
         "source": "public-provider-conf"
       },
@@ -12225,6 +12289,30 @@
       "vision": false
     },
     {
+      "id": "text-davinci-edit-001",
+      "name": "text-davinci-edit-001",
+      "display_name": "text-davinci-edit-001",
+      "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 20,
+        "output": 20
+      },
+      "metadata": {
+        "pricing": {
+          "input": 20,
+          "output": 20
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "text-davinci-003",
       "name": "text-davinci-003",
       "display_name": "text-davinci-003",
@@ -12267,30 +12355,6 @@
         "pricing": {
           "input": 20,
           "output": 20
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "text-curie-001",
-      "name": "text-curie-001",
-      "display_name": "text-curie-001",
-      "type": "chat",
-      "context_length": 0,
-      "max_output_tokens": 0,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 2,
-        "output": 2
-      },
-      "metadata": {
-        "pricing": {
-          "input": 2,
-          "output": 2
         },
         "source": "public-provider-conf"
       },
@@ -12341,6 +12405,30 @@
       "vision": true
     },
     {
+      "id": "text-curie-001",
+      "name": "text-curie-001",
+      "display_name": "text-curie-001",
+      "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 2,
+        "output": 2
+      },
+      "metadata": {
+        "pricing": {
+          "input": 2,
+          "output": 2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "text-babbage-001",
       "name": "text-babbage-001",
       "display_name": "text-babbage-001",
@@ -12359,30 +12447,6 @@
         "pricing": {
           "input": 0.5,
           "output": 0.5
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "text-ada-001",
-      "name": "text-ada-001",
-      "display_name": "text-ada-001",
-      "type": "chat",
-      "context_length": 0,
-      "max_output_tokens": 0,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.4,
-        "output": 0.4
-      },
-      "metadata": {
-        "pricing": {
-          "input": 0.4,
-          "output": 0.4
         },
         "source": "public-provider-conf"
       },
@@ -12433,6 +12497,30 @@
       "vision": true
     },
     {
+      "id": "text-ada-001",
+      "name": "text-ada-001",
+      "display_name": "text-ada-001",
+      "type": "chat",
+      "context_length": 0,
+      "max_output_tokens": 0,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.4,
+        "output": 0.4
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.4,
+          "output": 0.4
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "step-2-16k",
       "name": "step-2-16k",
       "display_name": "step-2-16k",
@@ -12475,41 +12563,6 @@
         "pricing": {
           "input": 3,
           "output": 12
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "text-embedding-3-small",
-      "name": "text-embedding-3-small",
-      "display_name": "text-embedding-3-small",
-      "type": "embedding",
-      "context_length": 0,
-      "max_output_tokens": 0,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.02,
-        "output": 0.02
-      },
-      "metadata": {
-        "typeHints": [
-          "embedding"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "input": 0.02,
-          "output": 0.02
         },
         "source": "public-provider-conf"
       },
@@ -14130,13 +14183,13 @@
       },
       "tool_call": false,
       "cost": {
-        "input": 0.02,
-        "output": 0.02
+        "input": 0.1,
+        "output": 0.1
       },
       "metadata": {
         "pricing": {
-          "input": 0.02,
-          "output": 0.02
+          "input": 0.1,
+          "output": 0.1
         },
         "source": "public-provider-conf"
       },
