@@ -8,8 +8,6 @@ on:
         required: false
         default: ''
         type: string
-  schedule:
-    - cron: '0 2 * * 2'
 
 jobs:
   refresh-dist:
@@ -114,6 +112,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Set target branch
+        id: branch
+        run: |
+          BRANCH="auto/dist-$(date -u '+%Y%m%d%H%M%S')"
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+
       - name: Detect dist updates
         id: detect_changes
         run: |
@@ -124,24 +128,22 @@ jobs:
             echo "dist_changed=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create pull request
+      - name: Commit dist updates
         if: steps.detect_changes.outputs.dist_changed == 'true'
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'chore: refresh dist data'
-          branch: auto/update-dist-${{ github.run_id }}
-          base: dev
-          title: 'chore: refresh dist data'
-          body: |
-            ## Summary
-            - Automated refresh of the provider JSON data in `dist/`
-            - Total models: ${{ steps.stats.outputs.total_models }} across ${{ steps.stats.outputs.provider_count }} providers
-            - Providers: ${{ steps.stats.outputs.providers }}
-            - Trigger: `${{ github.event_name }}`
-            - Timestamp: ${{ steps.stats.outputs.timestamp }}
-          labels: automated
-          delete-branch: true
+        run: |
+          git checkout -b ${{ steps.branch.outputs.branch }}
+          git add dist
+          git commit -m 'chore: refresh dist data'
+
+      - name: Push branch changes
+        if: steps.detect_changes.outputs.dist_changed == 'true'
+        run: git push origin ${{ steps.branch.outputs.branch }}
+
+      - name: Notify manual PR
+        if: steps.detect_changes.outputs.dist_changed == 'true'
+        run: |
+          echo "Dist refresh pushed to ${{ steps.branch.outputs.branch }}."
+          echo "Please create a pull request manually and merge into dev when ready."
 
       - name: Upload dist artifacts
         uses: actions/upload-artifact@v4
