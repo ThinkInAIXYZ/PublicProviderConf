@@ -1,0 +1,151 @@
+name: Auto Refresh Dist
+
+on:
+  workflow_dispatch:
+    inputs:
+      providers:
+        description: 'Comma-separated list of providers to fetch (empty for all)'
+        required: false
+        default: ''
+        type: string
+  schedule:
+    - cron: '0 4 * * *'
+
+jobs:
+  refresh-dist:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      NODE_ENV: production
+      PROVIDERS_INPUT: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.providers || '' }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.13.1'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.12.1
+
+      - name: Cache pnpm dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            node_modules/
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build project
+        run: pnpm build
+
+      - name: Ensure dist directory
+        run: mkdir -p dist
+
+      - name: Fetch provider data
+        run: |
+          set -euo pipefail
+          echo "Provider filter: '${PROVIDERS_INPUT}'"
+          if [ -n "$PROVIDERS_INPUT" ]; then
+            node build/cli.js fetch-providers -p "$PROVIDERS_INPUT" -o dist
+          else
+            node build/cli.js fetch-all -o dist
+          fi
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Validate generated JSON files
+        run: |
+          set -e
+          echo "Validating JSON files..."
+          for file in dist/*.json; do
+            if [ -f "$file" ]; then
+              echo "Validating $file"
+              jq empty "$file" || (echo "Invalid JSON in $file" && exit 1)
+            fi
+          done
+
+      - name: List generated files
+        run: |
+          echo "Dist contents:"
+          ls -lah dist
+          echo "File sizes:"
+          du -h dist/*.json
+
+      - name: Summarize fetched models
+        id: stats
+        run: |
+          if [ -f dist/all.json ]; then
+            TOTAL_MODELS=$(jq -r '.totalModels // 0' dist/all.json)
+            PROVIDERS=$(jq -r '.providers | keys | join(", ")' dist/all.json)
+            PROVIDER_COUNT=$(jq -r '.providers | keys | length' dist/all.json)
+          else
+            TOTAL_MODELS=0
+            PROVIDERS=none
+            PROVIDER_COUNT=0
+          fi
+          echo "total_models=$TOTAL_MODELS" >> $GITHUB_OUTPUT
+          echo "providers=$PROVIDERS" >> $GITHUB_OUTPUT
+          echo "provider_count=$PROVIDER_COUNT" >> $GITHUB_OUTPUT
+          echo "timestamp=$(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_OUTPUT
+          echo "date_short=$(date -u '+%Y%m%d')" >> $GITHUB_OUTPUT
+
+      - name: Configure Git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Detect dist updates
+        id: detect_changes
+        run: |
+          git status -sb
+          if git diff --quiet HEAD -- dist; then
+            echo "dist_changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "dist_changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create pull request
+        if: steps.detect_changes.outputs.dist_changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: chore: refresh dist data
+          branch: auto/update-dist-${{ github.run_id }}
+          base: dev
+          title: chore: refresh dist data
+          body: |
+            ## Summary
+            - Automated refresh of the provider JSON data in `dist/`
+            - Total models: ${{ steps.stats.outputs.total_models }} across ${{ steps.stats.outputs.provider_count }} providers
+            - Providers: ${{ steps.stats.outputs.providers }}
+            - Trigger: `${{ github.event_name }}`
+            - Timestamp: ${{ steps.stats.outputs.timestamp }}
+          labels: automated
+          delete-branch: true
+
+      - name: Upload dist artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: provider-configs-${{ steps.stats.outputs.date_short }}
+          path: dist/*.json
+          retention-days: 30
