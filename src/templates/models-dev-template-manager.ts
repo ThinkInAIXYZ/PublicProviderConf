@@ -5,6 +5,7 @@ import {
   ModelsDevModel,
   ModelsDevProvider,
   ModelsDevLimit,
+  normalizeLimitValues,
 } from '../models/models-dev';
 import { normalizeModelToggles } from '../utils/toggles';
 
@@ -83,7 +84,7 @@ function moveTokenFieldsToLimit(model: ModelsDevModelRecord): void {
     delete model.max_output_tokens;
   }
 
-  model.limit = limit;
+  model.limit = normalizeLimitValues(limit);
 }
 
 function applyCapabilitiesToFlags(model: ModelsDevModelRecord): void {

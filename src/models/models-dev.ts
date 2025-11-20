@@ -122,6 +122,24 @@ function toModelsDevReasoning(reasoning: ModelInfo['reasoning']): ReasoningConfi
   return undefined;
 }
 
+/**
+ * Normalizes limit values by replacing 0 with 8192 for context and output fields.
+ * This ensures that limit values are never 0 in the final output.
+ */
+export function normalizeLimitValues(limit: ModelsDevLimit): ModelsDevLimit {
+  const normalized: ModelsDevLimit = { ...limit };
+  
+  if (normalized.context === 0) {
+    normalized.context = 8192;
+  }
+  
+  if (normalized.output === 0) {
+    normalized.output = 8192;
+  }
+  
+  return normalized;
+}
+
 export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
   const toolCall = model.toolCall ?? model.functionCall;
   const reasoning = toModelsDevReasoning(model.reasoning);
@@ -135,11 +153,11 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
       }
     : {};
 
-  const limit: ModelsDevLimit = {
+  const limit: ModelsDevLimit = normalizeLimitValues({
     ...baseLimit,
     context: model.contextLength,
     output: model.maxTokens,
-  };
+  });
 
   const result: ModelsDevModel = {
     id: model.id,

@@ -200,9 +200,11 @@ function mapOpenRouterModel(model: OpenRouterModel): ModelInfo | null {
     overrides.toolCall = true;
   }
   if (contextLength !== undefined || maxOutputTokens !== undefined) {
+    const limitContext = contextLength === 0 ? 8192 : contextLength;
+    const limitOutput = maxOutputTokens === 0 ? 8192 : maxOutputTokens;
     overrides.limit = {
-      context: contextLength,
-      output: maxOutputTokens,
+      context: limitContext,
+      output: limitOutput,
     };
   }
   return createModelInfo(
