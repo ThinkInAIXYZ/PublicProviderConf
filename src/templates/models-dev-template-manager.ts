@@ -4,6 +4,7 @@ import {
   ModelsDevApiResponse,
   ModelsDevModel,
   ModelsDevProvider,
+  ModelsDevLimit,
 } from '../models/models-dev';
 import { normalizeModelToggles } from '../utils/toggles';
 
@@ -59,6 +60,31 @@ function sanitizeProviderLike(
 }
 
 type ModelsDevModelRecord = ModelsDevModel & Record<string, unknown>;
+
+function moveTokenFieldsToLimit(model: ModelsDevModelRecord): void {
+  const hasContextLength = model.context_length !== undefined;
+  const hasMaxOutputTokens = model.max_output_tokens !== undefined;
+
+  if (!hasContextLength && !hasMaxOutputTokens) {
+    return;
+  }
+
+  const limit: ModelsDevLimit = {
+    ...(model.limit ?? {}),
+  };
+
+  if (hasContextLength) {
+    limit.context = model.context_length;
+    delete model.context_length;
+  }
+
+  if (hasMaxOutputTokens) {
+    limit.output = model.max_output_tokens;
+    delete model.max_output_tokens;
+  }
+
+  model.limit = limit;
+}
 
 function applyCapabilitiesToFlags(model: ModelsDevModelRecord): void {
   const capabilities = model.capabilities;
@@ -230,6 +256,7 @@ function ensureModelDefaults(model: Partial<ModelsDevModel>, providerId: string)
   normalized.modalities = model.modalities ? { ...model.modalities } : undefined;
   normalized.cost = model.cost ? { ...model.cost } : undefined;
   normalized.limit = model.limit ? { ...model.limit } : undefined;
+  moveTokenFieldsToLimit(normalized);
 
   applyCapabilitiesToFlags(normalized);
 

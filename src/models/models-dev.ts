@@ -126,14 +126,20 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
   const toolCall = model.toolCall ?? model.functionCall;
   const reasoning = toModelsDevReasoning(model.reasoning);
 
-  const limit = model.limit
+  const baseLimit: ModelsDevLimit = model.limit
     ? {
         context: model.limit.context,
         output: model.limit.output,
         requests_per_minute: model.limit.requestsPerMinute,
         requests_per_day: model.limit.requestsPerDay,
       }
-    : undefined;
+    : {};
+
+  const limit: ModelsDevLimit = {
+    ...baseLimit,
+    context: model.contextLength,
+    output: model.maxTokens,
+  };
 
   const result: ModelsDevModel = {
     id: model.id,
@@ -172,13 +178,8 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
     vision: model.vision,
   };
 
-  if (limit?.context !== undefined) {
-    delete result.context_length;
-  }
-
-  if (limit?.output !== undefined) {
-    delete result.max_output_tokens;
-  }
+  delete result.context_length;
+  delete result.max_output_tokens;
 
   return result;
 }
