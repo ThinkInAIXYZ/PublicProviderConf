@@ -90,28 +90,42 @@ function parseTokenCount(value?: string | number | null): number {
   return Math.max(0, Math.round(parsed));
 }
 
-function determineModelType(typeHints: string[]): ModelType {
-  const normalized = typeHints.map(value => value.toLowerCase());
-
-  if (normalized.some(value => value.includes('embedding'))) {
-    return ModelType.Embedding;
+function determineModelType(firstType: string): ModelType {
+  if (!firstType) {
+    return ModelType.Chat;
   }
-  if (
-    normalized.some(value =>
-      value.includes('image') || value.includes('vision') || value.includes('t2i'),
-    )
-  ) {
+
+  const normalized = firstType.trim().toLowerCase();
+
+  // Explicit type mappings
+  if (normalized === 'llm') {
+    return ModelType.Chat;
+  }
+  if (normalized === 'image_generation' || normalized === 'image-generation') {
     return ModelType.ImageGeneration;
   }
-  if (
-    normalized.some(value =>
-      value.includes('speech') || value.includes('tts') || value.includes('audio'),
-    )
-  ) {
+  if (normalized === 'embedding') {
+    return ModelType.Embedding;
+  }
+  if (normalized === 'rerank') {
+    return ModelType.Rerank;
+  }
+
+  // Fallback: use includes matching for flexibility
+  if (normalized.includes('embedding')) {
+    return ModelType.Embedding;
+  }
+  if (normalized.includes('image') || normalized.includes('vision') || normalized.includes('t2i')) {
+    return ModelType.ImageGeneration;
+  }
+  if (normalized.includes('speech') || normalized.includes('tts') || normalized.includes('audio')) {
     return ModelType.Audio;
   }
-  if (normalized.some(value => value.includes('completion'))) {
-    return ModelType.Completion;
+  if (normalized.includes('completion')) {
+    return ModelType.Chat;
+  }
+  if (normalized.includes('rerank')) {
+    return ModelType.Rerank;
   }
 
   return ModelType.Chat;
@@ -212,7 +226,9 @@ export class AiHubMixProvider implements Provider {
       overrides.limit = limit;
     }
 
-    const modelType = determineModelType(types);
+    // Use the first type from the list, or empty string if no types
+    const firstType = types.length > 0 ? types[0] : '';
+    const modelType = determineModelType(firstType);
 
     return createModelInfo(
       id,

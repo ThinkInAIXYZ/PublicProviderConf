@@ -41,7 +41,7 @@ export class TokenfluxProvider implements Provider {
     } else if (model.id.includes('whisper') || model.id.includes('tts')) {
       modelType = ModelType.Audio;
     } else if (model.id.includes('instruct')) {
-      modelType = ModelType.Completion;
+      modelType = ModelType.Chat;
     } else {
       modelType = ModelType.Chat;
     }

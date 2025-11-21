@@ -32,10 +32,8 @@ export class PPInfraProvider implements Provider {
     let modelType: ModelType;
     switch (model.model_type) {
       case 'chat':
-        modelType = ModelType.Chat;
-        break;
       case 'completion':
-        modelType = ModelType.Completion;
+        modelType = ModelType.Chat;
         break;
       case 'embedding':
         modelType = ModelType.Embedding;

@@ -95,14 +95,14 @@ export function convertModelType(modelType: ModelType): string {
   switch (modelType) {
     case ModelType.Chat:
       return 'chat';
-    case ModelType.Completion:
-      return 'completion';
     case ModelType.Embedding:
       return 'embedding';
     case ModelType.ImageGeneration:
       return 'image-generation';
     case ModelType.Audio:
       return 'audio';
+    case ModelType.Rerank:
+      return 'rerank';
     default:
       return 'unknown';
   }
