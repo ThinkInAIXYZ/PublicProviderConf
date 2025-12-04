@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2025-12-01T14:02:15.628Z",
+  "updated_at": "2025-12-04T14:51:23.094Z",
   "models": [
     {
       "id": "claude-opus-4-5",
@@ -401,6 +401,50 @@
       "vision": true
     },
     {
+      "id": "mistral-large-3",
+      "name": "mistral-large-3",
+      "display_name": "mistral-large-3",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 1.5
+      },
+      "limit": {
+        "context": 256000,
+        "output": 256000
+      },
+      "metadata": {
+        "description": "Mistral Large 3 is a MoE model with 67.5B total parameters and 41B active parameters, supporting a 256K-token context window. Trained from scratch on 3,000 NVIDIA H200 GPUs, it is one of the strongest permissively licensed open-weight models available.\n\nDesigned for advanced reasoning and long-context understanding, Mistral Large 3 delivers performance on par with the best instruction-tuned open-weight models for general-purpose tasks, while also offering image understanding capabilities. Its multilingual strengths are particularly notable for non-English/Chinese languages, making it well-suited for global applications.\n\nTypical use cases include enterprise assistants, multilingual customer support, content generation and editing, data analysis over long documents, code assistance, and research workflows that require handling large corpora or complex instructions. With its MoE architecture, Mistral Large 3 balances strong performance with efficient inference, providing a versatile backbone for building reliable, production-grade AI systems.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0.5,
+          "output": 1.5
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "claude-haiku-4-5",
       "name": "claude-haiku-4-5",
       "display_name": "claude-haiku-4-5",
@@ -637,53 +681,184 @@
       "vision": true
     },
     {
-      "id": "gpt-5-codex",
-      "name": "gpt-5-codex",
-      "display_name": "gpt-5-codex",
+      "id": "deepseek-v3.2",
+      "name": "deepseek-v3.2",
+      "display_name": "deepseek-v3.2",
       "type": "chat",
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": true,
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ]
       },
       "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.125
+        "input": 0.302,
+        "output": 0.453,
+        "cache_read": 0.0302
       },
       "limit": {
-        "context": 400000,
-        "output": 400000
+        "context": 128000,
+        "output": 128000
       },
       "metadata": {
-        "description": "GPT-5-Codex is a version of GPT-5 optimized for autonomous coding tasks in Codex or similar environments. It is only available in the Responses API, and the underlying model snapshots will be updated regularly. https://docs.aihubmix.com/en/api/Responses-API You can also use it in codex-cll; see https://docs.aihubmix.com/en/api/Codex-CLI for using codex-cll through Aihubmix.",
+        "description": "DeepSeek-V3.2 is an efficient large language model equipped with DeepSeek Sparse Attention and reinforced reasoning performance, but its core strength lies in powerful agentic capabilities—enabled by large-scale task-synthesis that tightly integrates reasoning with real-world tool use, delivering robust, compliant, and generalizable agent behaviour. Users can toggle deeper reasoning through the reasoning_enabled switch.",
         "typeHints": [
           "llm"
         ],
         "features": [
-          "thinking",
           "tools",
           "function_calling",
           "structured_outputs"
         ],
         "inputModalities": [
-          "text",
-          "image"
+          "text"
         ],
         "pricing": {
-          "cache_read": 0.125,
-          "input": 1.25,
-          "output": 10
+          "cache_read": 0.0302,
+          "input": 0.302,
+          "output": 0.453
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": false
+    },
+    {
+      "id": "deepseek-v3.2-speciale",
+      "name": "deepseek-v3.2-speciale",
+      "display_name": "deepseek-v3.2-speciale",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.302,
+        "output": 0.453,
+        "cache_read": 0.0302
+      },
+      "limit": {
+        "context": 128000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "DeepSeek-V3.2-Speciale is an enhanced long-thinking variant of DeepSeek-V3.2 that integrates the theorem-proving capabilities of DeepSeek-Math-V2. It excels in instruction following, mathematical reasoning, and logical verification, achieving performance comparable to Gemini-3.0-Pro on major reasoning benchmarks and winning gold medals at IMO 2025, CMO 2025, ICPC World Finals 2025, and IOI 2025. However, due to its long-thinking mechanism, the model may overthink simple questions, so task complexity should be carefully controlled during usage. The model only supports the thinking version.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.0302,
+          "input": 0.302,
+          "output": 0.453
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "deepseek-v3.2-think",
+      "name": "deepseek-v3.2-think",
+      "display_name": "deepseek-v3.2-think",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.302,
+        "output": 0.453,
+        "cache_read": 0.0302
+      },
+      "limit": {
+        "context": 128000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "DeepSeek-V3.2 is an efficient large language model equipped with DeepSeek Sparse Attention and reinforced reasoning performance, but its core strength lies in powerful agentic capabilities—enabled by large-scale task-synthesis that tightly integrates reasoning with real-world tool use, delivering robust, compliant, and generalizable agent behaviour. Users can toggle deeper reasoning through the reasoning_enabled switch.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "web",
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.0302,
+          "input": 0.302,
+          "output": 0.453
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "deepseek-math-v2",
+      "name": "deepseek-math-v2",
+      "display_name": "deepseek-math-v2",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.492,
+        "output": 1.968,
+        "cache_read": 0.0984
+      },
+      "limit": {
+        "context": 163000,
+        "output": 163000
+      },
+      "metadata": {
+        "description": "The mathematical reasoning of large language models has shifted from pursuing correct answers to ensuring rigorous processes. Research proposes a new paradigm of \"self-verification,\" training specialized verifiers to evaluate proof steps and using this to train generators for self-error correction. The two co-evolve, pushing the boundaries of capability. Ultimately, the model achieves gold medal level in top competitions like the IMO, demonstrating the great potential of deep reasoning.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "web"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.0984,
+          "input": 0.492,
+          "output": 1.968
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
     },
     {
       "id": "DeepSeek-V3.2-Exp",
@@ -776,6 +951,55 @@
         "source": "public-provider-conf"
       },
       "vision": false
+    },
+    {
+      "id": "gpt-5-codex",
+      "name": "gpt-5-codex",
+      "display_name": "gpt-5-codex",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.125
+      },
+      "limit": {
+        "context": 400000,
+        "output": 400000
+      },
+      "metadata": {
+        "description": "GPT-5-Codex is a version of GPT-5 optimized for autonomous coding tasks in Codex or similar environments. It is only available in the Responses API, and the underlying model snapshots will be updated regularly. https://docs.aihubmix.com/en/api/Responses-API You can also use it in codex-cll; see https://docs.aihubmix.com/en/api/Codex-CLI for using codex-cll through Aihubmix.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0.125,
+          "input": 1.25,
+          "output": 10
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "DeepSeek-V3.1-Terminus",
@@ -1094,6 +1318,48 @@
         "pricing": {
           "input": 16.5,
           "output": 82.5
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "doubao-seedream-4-5",
+      "name": "doubao-seedream-4-5",
+      "display_name": "doubao-seedream-4-5",
+      "type": "image-generation",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 2,
+        "output": 0,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Seedream 4.5 is ByteDance's latest multimodal image model, integrating capabilities such as text-to-image, image-to-image, and multi-image output, along with incorporating common sense and reasoning abilities. Compared to the previous 4.0 model, it significantly improves generation quality, offering better editing consistency and multi-image fusion effects, with more precise control over image details. The generation of small text and small faces is more natural.",
+        "typeHints": [
+          "image_generation"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0,
+          "input": 2,
+          "output": 0
         },
         "source": "public-provider-conf"
       },
@@ -1562,44 +1828,6 @@
       "vision": true
     },
     {
-      "id": "wan2.5-t2v-preview",
-      "name": "wan2.5-t2v-preview",
-      "display_name": "wan2.5-t2v-preview",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 2,
-        "output": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Tongyi Wanxiang 2.5 - Text-to-Video Preview, newly upgraded model architecture, supports sound generation synchronized with visuals, supports 10-second long video generation, enhanced instruction compliance, improved motion capability, and further enhanced visual quality.",
-        "typeHints": [
-          "video"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "input": 2,
-          "output": 0
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "web-sora-2-pro",
       "name": "web-sora-2-pro",
       "display_name": "web-sora-2-pro",
@@ -1654,6 +1882,44 @@
         "pricing": {
           "input": 2,
           "output": 2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "wan2.5-t2v-preview",
+      "name": "wan2.5-t2v-preview",
+      "display_name": "wan2.5-t2v-preview",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 2,
+        "output": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Tongyi Wanxiang 2.5 - Text-to-Video Preview, newly upgraded model architecture, supports sound generation synchronized with visuals, supports 10-second long video generation, enhanced instruction compliance, improved motion capability, and further enhanced visual quality.",
+        "typeHints": [
+          "video"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "input": 2,
+          "output": 0
         },
         "source": "public-provider-conf"
       },
@@ -2316,6 +2582,55 @@
       "vision": false
     },
     {
+      "id": "claude-sonnet-4-0",
+      "name": "claude-sonnet-4-0",
+      "display_name": "claude-sonnet-4-0",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 3.3,
+        "output": 16.5,
+        "cache_read": 0.33
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "metadata": {
+        "description": "Claude Sonnet 4 is a significant upgrade to Sonnet 3.7, delivering superior performance in coding and reasoning with enhanced precision and control. Achieving a state-of-the-art 72.7% on SWE-bench, the model expertly balances advanced capability with computational efficiency. Key improvements include more reliable codebase navigation and complex instruction following, making it ideal for a wide range of applications, from routine coding to complex software development projects.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0.33,
+          "input": 3.3,
+          "output": 16.5
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "gemini-2.5-flash",
       "name": "gemini-2.5-flash",
       "display_name": "gemini-2.5-flash",
@@ -2895,6 +3210,36 @@
       "vision": false
     },
     {
+      "id": "veo3.1",
+      "name": "veo3.1",
+      "display_name": "veo3.1",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 200,
+        "output": 200
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "veo3.1 reverse model, and other available model names that can be requested include: veo3.1-pro and veo3.1-components. The price is currently tentatively set to be calculated per token, approximately $0.05 per request.",
+        "typeHints": [
+          "video"
+        ],
+        "pricing": {
+          "input": 200,
+          "output": 200
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "veo-2.0-generate-001",
       "name": "veo-2.0-generate-001",
       "display_name": "veo-2.0-generate-001",
@@ -2929,36 +3274,6 @@
           "cache_read": 0,
           "input": 2,
           "output": 2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "veo3.1",
-      "name": "veo3.1",
-      "display_name": "veo3.1",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 200,
-        "output": 200
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "veo3.1 reverse model, and other available model names that can be requested include: veo3.1-pro and veo3.1-components. The price is currently tentatively set to be calculated per token, approximately $0.05 per request.",
-        "typeHints": [
-          "video"
-        ],
-        "pricing": {
-          "input": 200,
-          "output": 200
         },
         "source": "public-provider-conf"
       },
@@ -3338,6 +3653,48 @@
       "vision": true
     },
     {
+      "id": "gemini-2.5-flash-image-preview",
+      "name": "gemini-2.5-flash-image-preview",
+      "display_name": "gemini-2.5-flash-image-preview",
+      "type": "image-generation",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "image",
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": 0.3
+      },
+      "limit": {
+        "context": 32800,
+        "output": 32800
+      },
+      "metadata": {
+        "description": "Aihubmix supports the gemini-2.5-flash-image-preview model; you can add extra parameters modalities=[\"text\", \"image\"] through the OpenAI-compatible chat interface; https://docs.aihubmix.com/en/api/Gemini-Guides#gemini-2-5-flash%3A-quick-task-support",
+        "typeHints": [
+          "image_generation"
+        ],
+        "inputModalities": [
+          "image",
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.3,
+          "input": 0.3,
+          "output": 1.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "glm-4.5",
       "name": "glm-4.5",
       "display_name": "glm-4.5",
@@ -3596,9 +3953,9 @@
       "vision": false
     },
     {
-      "id": "veo-3.0-generate-preview",
-      "name": "veo-3.0-generate-preview",
-      "display_name": "veo-3.0-generate-preview",
+      "id": "veo-3.1-generate-preview",
+      "name": "veo-3.1-generate-preview",
+      "display_name": "veo-3.1-generate-preview",
       "type": "chat",
       "reasoning": {
         "supported": false
@@ -3621,7 +3978,7 @@
         "output": 8192
       },
       "metadata": {
-        "description": "Veo 3.0 Generate Preview is an advanced AI video generation model that supports text-to-video creation with synchronized audio, featuring excellent physical simulation and lip-sync capabilities. Users can generate vivid video clips from short story prompts. 🎟️ Limited-Time Deal: Save 10% Now.",
+        "description": "Veo 3.1 is Google's state-of-the-art model for generating high-fidelity, 8-second 720p or 1080p videos featuring stunning realism and natively generated audio.",
         "typeHints": [
           "video"
         ],
@@ -3682,9 +4039,9 @@
       "vision": true
     },
     {
-      "id": "veo-3.1-generate-preview",
-      "name": "veo-3.1-generate-preview",
-      "display_name": "veo-3.1-generate-preview",
+      "id": "veo-3.0-generate-preview",
+      "name": "veo-3.0-generate-preview",
+      "display_name": "veo-3.0-generate-preview",
       "type": "chat",
       "reasoning": {
         "supported": false
@@ -3707,7 +4064,7 @@
         "output": 8192
       },
       "metadata": {
-        "description": "Veo 3.1 is Google's state-of-the-art model for generating high-fidelity, 8-second 720p or 1080p videos featuring stunning realism and natively generated audio.",
+        "description": "Veo 3.0 Generate Preview is an advanced AI video generation model that supports text-to-video creation with synchronized audio, featuring excellent physical simulation and lip-sync capabilities. Users can generate vivid video clips from short story prompts. 🎟️ Limited-Time Deal: Save 10% Now.",
         "typeHints": [
           "video"
         ],
@@ -3984,48 +4341,6 @@
         "source": "public-provider-conf"
       },
       "vision": false
-    },
-    {
-      "id": "gemini-2.5-flash-image-preview",
-      "name": "gemini-2.5-flash-image-preview",
-      "display_name": "gemini-2.5-flash-image-preview",
-      "type": "image-generation",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "image",
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.3
-      },
-      "limit": {
-        "context": 32800,
-        "output": 32800
-      },
-      "metadata": {
-        "description": "Aihubmix supports the gemini-2.5-flash-image-preview model; you can add extra parameters modalities=[\"text\", \"image\"] through the OpenAI-compatible chat interface; https://docs.aihubmix.com/en/api/Gemini-Guides#gemini-2-5-flash%3A-quick-task-support",
-        "typeHints": [
-          "image_generation"
-        ],
-        "inputModalities": [
-          "image",
-          "text"
-        ],
-        "pricing": {
-          "cache_read": 0.3,
-          "input": 0.3,
-          "output": 1.2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
     },
     {
       "id": "aihubmix-router",
@@ -4471,12 +4786,13 @@
       "vision": true
     },
     {
-      "id": "qwen3-max",
-      "name": "qwen3-max",
-      "display_name": "qwen3-max",
+      "id": "qwen3-next-80b-a3b-thinking",
+      "name": "qwen3-next-80b-a3b-thinking",
+      "display_name": "qwen3-next-80b-a3b-thinking",
       "type": "chat",
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
       "tool_call": true,
       "modalities": {
@@ -4486,20 +4802,20 @@
         ]
       },
       "cost": {
-        "input": 0.822,
-        "output": 3.288,
-        "cache_read": 0.822
+        "input": 0.138,
+        "output": 1.38
       },
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 256000,
+        "output": 256000
       },
       "metadata": {
-        "description": "The Tongyi Qianwen 3 series Max model has undergone special upgrades in intelligent agent programming and tool invocation compared to the preview version. The officially released model this time reaches SOTA level in the field and is adapted to more complex intelligent agent scenarios.",
+        "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that excels by outputting structured 'thinking' traces (Chain-of-Thought) by default.\n\nDesigned for hard, multi-step problems, it is ideal for tasks like math proofs, code synthesis, logic puzzles, and agentic planning. Compared to other Qwen3 variants, it offers greater stability during long reasoning chains and is tuned to follow complex instructions without getting repetitive or off-task.\n\nThis model is perfectly suited for agent frameworks, tool use (function calling), and benchmarks where a step-by-step breakdown is required. It leverages throughput-oriented techniques for fast generation of detailed, procedural outputs.",
         "typeHints": [
           "llm"
         ],
         "features": [
+          "thinking",
           "tools",
           "function_calling",
           "structured_outputs"
@@ -4509,9 +4825,8 @@
           "image"
         ],
         "pricing": {
-          "cache_read": 0.822,
-          "input": 0.822,
-          "output": 3.288
+          "input": 0.138,
+          "output": 1.38
         },
         "source": "public-provider-conf"
       },
@@ -4563,13 +4878,12 @@
       "vision": true
     },
     {
-      "id": "qwen3-next-80b-a3b-thinking",
-      "name": "qwen3-next-80b-a3b-thinking",
-      "display_name": "qwen3-next-80b-a3b-thinking",
+      "id": "qwen3-max",
+      "name": "qwen3-max",
+      "display_name": "qwen3-max",
       "type": "chat",
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": true,
       "modalities": {
@@ -4579,20 +4893,20 @@
         ]
       },
       "cost": {
-        "input": 0.138,
-        "output": 1.38
+        "input": 0.822,
+        "output": 3.288,
+        "cache_read": 0.822
       },
       "limit": {
-        "context": 256000,
-        "output": 256000
+        "context": 262144,
+        "output": 262144
       },
       "metadata": {
-        "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that excels by outputting structured 'thinking' traces (Chain-of-Thought) by default.\n\nDesigned for hard, multi-step problems, it is ideal for tasks like math proofs, code synthesis, logic puzzles, and agentic planning. Compared to other Qwen3 variants, it offers greater stability during long reasoning chains and is tuned to follow complex instructions without getting repetitive or off-task.\n\nThis model is perfectly suited for agent frameworks, tool use (function calling), and benchmarks where a step-by-step breakdown is required. It leverages throughput-oriented techniques for fast generation of detailed, procedural outputs.",
+        "description": "The Tongyi Qianwen 3 series Max model has undergone special upgrades in intelligent agent programming and tool invocation compared to the preview version. The officially released model this time reaches SOTA level in the field and is adapted to more complex intelligent agent scenarios.",
         "typeHints": [
           "llm"
         ],
         "features": [
-          "thinking",
           "tools",
           "function_calling",
           "structured_outputs"
@@ -4602,8 +4916,9 @@
           "image"
         ],
         "pricing": {
-          "input": 0.138,
-          "output": 1.38
+          "cache_read": 0.822,
+          "input": 0.822,
+          "output": 3.288
         },
         "source": "public-provider-conf"
       },
@@ -6012,86 +6327,6 @@
       "vision": false
     },
     {
-      "id": "qwen3-reranker-4b",
-      "name": "qwen3-reranker-4b",
-      "display_name": "qwen3-reranker-4b",
-      "type": "rerank",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 0.11,
-        "output": 0.11
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Based on the dense foundational model of the Qwen3 series, it is specifically designed for ranking tasks. It inherits the base model’s outstanding multilingual capabilities, long-text understanding, and reasoning skills, achieving significant advancements in ranking tasks.",
-        "typeHints": [
-          "rerank"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 0.11,
-          "output": 0.11
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "qwen3-reranker-0.6b",
-      "name": "qwen3-reranker-0.6b",
-      "display_name": "qwen3-reranker-0.6b",
-      "type": "rerank",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 0.11,
-        "output": 0.11
-      },
-      "limit": {
-        "context": 16000,
-        "output": 16000
-      },
-      "metadata": {
-        "description": "Based on the dense foundational model of the Qwen3 series, it is specifically designed for ranking tasks. It inherits the base model’s outstanding multilingual capabilities, long-text understanding, and reasoning skills, achieving significant advancements in ranking tasks.",
-        "typeHints": [
-          "rerank"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 0.11,
-          "output": 0.11
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "qwen3-embedding-8b",
       "name": "qwen3-embedding-8b",
       "display_name": "qwen3-embedding-8b",
@@ -6204,6 +6439,86 @@
         "source": "public-provider-conf"
       },
       "vision": false
+    },
+    {
+      "id": "qwen3-reranker-0.6b",
+      "name": "qwen3-reranker-0.6b",
+      "display_name": "qwen3-reranker-0.6b",
+      "type": "rerank",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.11,
+        "output": 0.11
+      },
+      "limit": {
+        "context": 16000,
+        "output": 16000
+      },
+      "metadata": {
+        "description": "Based on the dense foundational model of the Qwen3 series, it is specifically designed for ranking tasks. It inherits the base model’s outstanding multilingual capabilities, long-text understanding, and reasoning skills, achieving significant advancements in ranking tasks.",
+        "typeHints": [
+          "rerank"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0.11,
+          "output": 0.11
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "qwen3-reranker-4b",
+      "name": "qwen3-reranker-4b",
+      "display_name": "qwen3-reranker-4b",
+      "type": "rerank",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.11,
+        "output": 0.11
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Based on the dense foundational model of the Qwen3 series, it is specifically designed for ranking tasks. It inherits the base model’s outstanding multilingual capabilities, long-text understanding, and reasoning skills, achieving significant advancements in ranking tasks.",
+        "typeHints": [
+          "rerank"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0.11,
+          "output": 0.11
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "qwen3-reranker-8b",
@@ -7889,6 +8204,60 @@
       "vision": true
     },
     {
+      "id": "gemini-2.5-pro-preview-06-05",
+      "name": "gemini-2.5-pro-preview-06-05",
+      "display_name": "gemini-2.5-pro-preview-06-05",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ]
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.31
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "metadata": {
+        "description": "Google’s latest multimodal flagship model, combining exceptional coding and reasoning capabilities. Its massive 1 million token context window (soon to expand to 2 million) places it at the top of the WebDevArena and LMArena leaderboards. It is particularly well-suited for developing aesthetically pleasing and highly functional interactive web applications, code transformation, and complex workflows. The newly introduced \"reasoning budget\" feature cleverly balances cost and performance, while optimized tool calls and response styles further enhance development efficiency, making it the ideal choice for rapid prototyping and advanced coding.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "tools",
+          "function_calling",
+          "structured_outputs",
+          "long_context"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "pricing": {
+          "cache_read": 0.31,
+          "input": 1.25,
+          "output": 10
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "Aihubmix-MAI-DS-R1",
       "name": "Aihubmix-MAI-DS-R1",
       "display_name": "Aihubmix-MAI-DS-R1",
@@ -8036,60 +8405,6 @@
           "cache_read": 0.25,
           "input": 0.1,
           "output": 0.4
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "gemini-2.5-pro-preview-06-05",
-      "name": "gemini-2.5-pro-preview-06-05",
-      "display_name": "gemini-2.5-pro-preview-06-05",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ]
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.31
-      },
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "metadata": {
-        "description": "Google’s latest multimodal flagship model, combining exceptional coding and reasoning capabilities. Its massive 1 million token context window (soon to expand to 2 million) places it at the top of the WebDevArena and LMArena leaderboards. It is particularly well-suited for developing aesthetically pleasing and highly functional interactive web applications, code transformation, and complex workflows. The newly introduced \"reasoning budget\" feature cleverly balances cost and performance, while optimized tool calls and response styles further enhance development efficiency, making it the ideal choice for rapid prototyping and advanced coding.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "thinking",
-          "tools",
-          "function_calling",
-          "structured_outputs",
-          "long_context"
-        ],
-        "inputModalities": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ],
-        "pricing": {
-          "cache_read": 0.31,
-          "input": 1.25,
-          "output": 10
         },
         "source": "public-provider-conf"
       },
@@ -8993,48 +9308,6 @@
       "vision": false
     },
     {
-      "id": "gpt-4o-2024-11-20",
-      "name": "gpt-4o-2024-11-20",
-      "display_name": "gpt-4o-2024-11-20",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 2.5,
-        "output": 10,
-        "cache_read": 1.25
-      },
-      "limit": {
-        "context": 128000,
-        "output": 128000
-      },
-      "metadata": {
-        "description": "The latest version of the GPT-4o model; it is recommended to use this version, as it is currently smarter than the regular 4o.",
-        "typeHints": [
-          "llm"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "cache_read": 1.25,
-          "input": 2.5,
-          "output": 10
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "gemini-2.0-flash-thinking-exp-01-21",
       "name": "gemini-2.0-flash-thinking-exp-01-21",
       "display_name": "gemini-2.0-flash-thinking-exp-01-21",
@@ -9078,6 +9351,48 @@
         "pricing": {
           "input": 0.076,
           "output": 0.304
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gpt-4o-2024-11-20",
+      "name": "gpt-4o-2024-11-20",
+      "display_name": "gpt-4o-2024-11-20",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 2.5,
+        "output": 10,
+        "cache_read": 1.25
+      },
+      "limit": {
+        "context": 128000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "The latest version of the GPT-4o model; it is recommended to use this version, as it is currently smarter than the regular 4o.",
+        "typeHints": [
+          "llm"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 1.25,
+          "input": 2.5,
+          "output": 10
         },
         "source": "public-provider-conf"
       },
@@ -9285,6 +9600,41 @@
       "vision": true
     },
     {
+      "id": "minimax-m2",
+      "name": "minimax-m2",
+      "display_name": "minimax-m2",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.288,
+        "output": 1.152
+      },
+      "limit": {
+        "context": 204800,
+        "output": 204800
+      },
+      "metadata": {
+        "description": "MiniMax-M2 redefines efficiency for intelligent agents. It is a compact, fast, and cost-effective MoE model with a total of 230 billion parameters and 10 billion active parameters, designed for top performance in coding and intelligent agent tasks while maintaining strong general intelligence. With only 10 billion active parameters, MiniMax-M2 delivers the complex end-to-end tool usage performance expected from today's leading models, but in a more streamlined form factor, making deployment and scaling easier than ever before.",
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "input": 0.288,
+          "output": 1.152
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "ERNIE-X1.1-Preview",
       "name": "ERNIE-X1.1-Preview",
       "display_name": "ERNIE-X1.1-Preview",
@@ -9413,223 +9763,6 @@
         "pricing": {
           "input": 0.136,
           "output": 0.544
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "minimax-m2",
-      "name": "minimax-m2",
-      "display_name": "minimax-m2",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.288,
-        "output": 1.152
-      },
-      "limit": {
-        "context": 204800,
-        "output": 204800
-      },
-      "metadata": {
-        "description": "MiniMax-M2 redefines efficiency for intelligent agents. It is a compact, fast, and cost-effective MoE model with a total of 230 billion parameters and 10 billion active parameters, designed for top performance in coding and intelligent agent tasks while maintaining strong general intelligence. With only 10 billion active parameters, MiniMax-M2 delivers the complex end-to-end tool usage performance expected from today's leading models, but in a more streamlined form factor, making deployment and scaling easier than ever before.",
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "input": 0.288,
-          "output": 1.152
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "kat-dev",
-      "name": "kat-dev",
-      "display_name": "kat-dev",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.137,
-        "output": 0.548
-      },
-      "limit": {
-        "context": 128000,
-        "output": 128000
-      },
-      "metadata": {
-        "description": "KAT-Dev (32B) is an open-source 32B parameter model specifically designed for software engineering tasks. It achieved a 62.4% resolution rate on the SWE-Bench Verified benchmark, ranking fifth among all open-source models of various scales. The model is optimized through multiple stages, including intermediate training, supervised fine-tuning (SFT) and reinforcement fine-tuning (RFT), as well as large-scale agent reinforcement learning (RL). Based on Qwen3-32B, its training process lays the foundation for subsequent fine-tuning and reinforcement learning stages by enhancing fundamental abilities such as tool usage, multi-turn interaction, and instruction following. During the fine-tuning phase, the model not only learns eight carefully curated task types and programming scenarios but also innovatively introduces a reinforcement fine-tuning (RFT) stage guided by human engineer-annotated “teacher trajectories.” The final agent reinforcement learning phase addresses scalability challenges through multi-level prefix caching, entropy-based trajectory pruning, and efficient architecture.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "input": 0.137,
-          "output": 0.548
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "llama-3.3-70b",
-      "name": "llama-3.3-70b",
-      "display_name": "llama-3.3-70b",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.6,
-        "output": 0.6
-      },
-      "limit": {
-        "context": 65536,
-        "output": 65536
-      },
-      "metadata": {
-        "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model is optimized for multilingual dialogue use cases and outperforms many of the available open source and closed chat models on common industry benchmarks.",
-        "pricing": {
-          "input": 0.6,
-          "output": 0.6
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "moonshotai/Kimi-Dev-72B",
-      "name": "moonshotai/Kimi-Dev-72B",
-      "display_name": "moonshotai/Kimi-Dev-72B",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.32,
-        "output": 1.28,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Kimi-Dev-72B is a new generation open-source programming large model that achieved a leading performance of 60.4% on SWE-bench Verified. Through large-scale reinforcement learning optimization, it can automatically fix code in real Docker environments, receiving rewards only when passing the complete test suite, thereby ensuring the correctness and robustness of solutions and aligning more closely with real software development standards.",
-        "pricing": {
-          "cache_read": 0,
-          "input": 0.32,
-          "output": 1.28
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "moonshotai/Moonlight-16B-A3B-Instruct",
-      "name": "moonshotai/Moonlight-16B-A3B-Instruct",
-      "display_name": "moonshotai/Moonlight-16B-A3B-Instruct",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.2,
-        "output": 0.2,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Provided by chutes.ai.",
-        "pricing": {
-          "cache_read": 0,
-          "input": 0.2,
-          "output": 0.2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "o1-global",
-      "name": "o1-global",
-      "display_name": "o1-global",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 15,
-        "output": 60,
-        "cache_read": 7.5
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "OpenAI new model",
-        "pricing": {
-          "cache_read": 7.5,
-          "input": 15,
-          "output": 60
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "qianfan-qi-vl",
-      "name": "qianfan-qi-vl",
-      "display_name": "qianfan-qi-vl",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.2,
-        "output": 0.6
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "The Qianfan-QI-VL model is a proprietary image quality inspection and visual understanding large model (Quality Inspection Large Vision Language Model, Qianfan-QI-VL) developed by Baidu Cloud’s Qianfan platform. It is designed for quality inspection of product images uploaded in e-commerce scenarios, with detection capabilities including AIGC human defect detection, mosaic recognition, watermark recognition, and trademark detection.",
-        "pricing": {
-          "input": 0.2,
-          "output": 0.6
         },
         "source": "public-provider-conf"
       },
@@ -9892,55 +10025,6 @@
       "vision": true
     },
     {
-      "id": "claude-sonnet-4-0",
-      "name": "claude-sonnet-4-0",
-      "display_name": "claude-sonnet-4-0",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 3.3,
-        "output": 16.5,
-        "cache_read": 0.33
-      },
-      "limit": {
-        "context": 1000000,
-        "output": 1000000
-      },
-      "metadata": {
-        "description": "Claude Sonnet 4 is a significant upgrade to Sonnet 3.7, delivering superior performance in coding and reasoning with enhanced precision and control. Achieving a state-of-the-art 72.7% on SWE-bench, the model expertly balances advanced capability with computational efficiency. Key improvements include more reliable codebase navigation and complex instruction following, making it ideal for a wide range of applications, from routine coding to complex software development projects.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "thinking",
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "cache_read": 0.33,
-          "input": 3.3,
-          "output": 16.5
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "codestral-latest",
       "name": "codestral-latest",
       "display_name": "codestral-latest",
@@ -10151,17 +10235,85 @@
       "vision": true
     },
     {
-      "id": "unsloth/gemma-3-27b-it",
-      "name": "unsloth/gemma-3-27b-it",
-      "display_name": "unsloth/gemma-3-27b-it",
+      "id": "kat-dev",
+      "name": "kat-dev",
+      "display_name": "kat-dev",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.137,
+        "output": 0.548
+      },
+      "limit": {
+        "context": 128000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "KAT-Dev (32B) is an open-source 32B parameter model specifically designed for software engineering tasks. It achieved a 62.4% resolution rate on the SWE-Bench Verified benchmark, ranking fifth among all open-source models of various scales. The model is optimized through multiple stages, including intermediate training, supervised fine-tuning (SFT) and reinforcement fine-tuning (RFT), as well as large-scale agent reinforcement learning (RL). Based on Qwen3-32B, its training process lays the foundation for subsequent fine-tuning and reinforcement learning stages by enhancing fundamental abilities such as tool usage, multi-turn interaction, and instruction following. During the fine-tuning phase, the model not only learns eight carefully curated task types and programming scenarios but also innovatively introduces a reinforcement fine-tuning (RFT) stage guided by human engineer-annotated “teacher trajectories.” The final agent reinforcement learning phase addresses scalability challenges through multi-level prefix caching, entropy-based trajectory pruning, and efficient architecture.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "input": 0.137,
+          "output": 0.548
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "llama-3.3-70b",
+      "name": "llama-3.3-70b",
+      "display_name": "llama-3.3-70b",
       "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "cost": {
-        "input": 0.22,
-        "output": 0.22,
+        "input": 0.6,
+        "output": 0.6
+      },
+      "limit": {
+        "context": 65536,
+        "output": 65536
+      },
+      "metadata": {
+        "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model is optimized for multilingual dialogue use cases and outperforms many of the available open source and closed chat models on common industry benchmarks.",
+        "pricing": {
+          "input": 0.6,
+          "output": 0.6
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "moonshotai/Kimi-Dev-72B",
+      "name": "moonshotai/Kimi-Dev-72B",
+      "display_name": "moonshotai/Kimi-Dev-72B",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.32,
+        "output": 1.28,
         "cache_read": 0
       },
       "limit": {
@@ -10169,11 +10321,96 @@
         "output": 8192
       },
       "metadata": {
-        "description": "Google's latest open-source model; provided by chutes.ai",
+        "description": "Kimi-Dev-72B is a new generation open-source programming large model that achieved a leading performance of 60.4% on SWE-bench Verified. Through large-scale reinforcement learning optimization, it can automatically fix code in real Docker environments, receiving rewards only when passing the complete test suite, thereby ensuring the correctness and robustness of solutions and aligning more closely with real software development standards.",
         "pricing": {
           "cache_read": 0,
-          "input": 0.22,
-          "output": 0.22
+          "input": 0.32,
+          "output": 1.28
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "moonshotai/Moonlight-16B-A3B-Instruct",
+      "name": "moonshotai/Moonlight-16B-A3B-Instruct",
+      "display_name": "moonshotai/Moonlight-16B-A3B-Instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2,
+        "output": 0.2,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Provided by chutes.ai.",
+        "pricing": {
+          "cache_read": 0,
+          "input": 0.2,
+          "output": 0.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "o1-global",
+      "name": "o1-global",
+      "display_name": "o1-global",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 15,
+        "output": 60,
+        "cache_read": 7.5
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "OpenAI new model",
+        "pricing": {
+          "cache_read": 7.5,
+          "input": 15,
+          "output": 60
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qianfan-qi-vl",
+      "name": "qianfan-qi-vl",
+      "display_name": "qianfan-qi-vl",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2,
+        "output": 0.6
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "The Qianfan-QI-VL model is a proprietary image quality inspection and visual understanding large model (Quality Inspection Large Vision Language Model, Qianfan-QI-VL) developed by Baidu Cloud’s Qianfan platform. It is designed for quality inspection of product images uploaded in e-commerce scenarios, with detection capabilities including AIGC human defect detection, mosaic recognition, watermark recognition, and trademark detection.",
+        "pricing": {
+          "input": 0.2,
+          "output": 0.6
         },
         "source": "public-provider-conf"
       },
@@ -10218,6 +10455,35 @@
         "source": "public-provider-conf"
       },
       "vision": true
+    },
+    {
+      "id": "unsloth/gemma-3-27b-it",
+      "name": "unsloth/gemma-3-27b-it",
+      "display_name": "unsloth/gemma-3-27b-it",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.22,
+        "output": 0.22,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Google's latest open-source model; provided by chutes.ai",
+        "pricing": {
+          "cache_read": 0,
+          "input": 0.22,
+          "output": 0.22
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
     },
     {
       "id": "tencent/Hunyuan-A13B-Instruct",
@@ -11131,6 +11397,48 @@
       "vision": false
     },
     {
+      "id": "AiHubmix-Phi-4-reasoning",
+      "name": "AiHubmix-Phi-4-reasoning",
+      "display_name": "AiHubmix-Phi-4-reasoning",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 0.2
+      },
+      "limit": {
+        "context": 128000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "Phi-4-Reasoning is a state-of-the-art open-weight reasoning model finetuned from Phi-4 using supervised fine-tuning on a dataset of chain-of-thought traces and reinforcement learning. The supervised fine-tuning dataset includes a blend of synthetic prompts and high-quality filtered data from public domain websites, focused on math, science, and coding skills as well as alignment data for safety and Responsible AI. The goal of this approach was to ensure that small capable models were trained with data focused on high quality and advanced reasoning.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "input": 0.2,
+          "output": 0.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "sonar",
       "name": "sonar",
       "display_name": "sonar",
@@ -11223,42 +11531,32 @@
       "vision": false
     },
     {
-      "id": "AiHubmix-Phi-4-reasoning",
-      "name": "AiHubmix-Phi-4-reasoning",
-      "display_name": "AiHubmix-Phi-4-reasoning",
+      "id": "qwen-turbo-latest",
+      "name": "qwen-turbo-latest",
+      "display_name": "qwen-turbo-latest",
       "type": "chat",
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
       "cost": {
-        "input": 0.2,
-        "output": 0.2
+        "input": 0.046,
+        "output": 0.92,
+        "cache_read": 0
       },
       "limit": {
-        "context": 128000,
-        "output": 128000
+        "context": 8192,
+        "output": 8192
       },
       "metadata": {
-        "description": "Phi-4-Reasoning is a state-of-the-art open-weight reasoning model finetuned from Phi-4 using supervised fine-tuning on a dataset of chain-of-thought traces and reinforcement learning. The supervised fine-tuning dataset includes a blend of synthetic prompts and high-quality filtered data from public domain websites, focused on math, science, and coding skills as well as alignment data for safety and Responsible AI. The goal of this approach was to ensure that small capable models were trained with data focused on high quality and advanced reasoning.",
+        "description": "The Qwen series model with the fastest speed and lowest cost, suitable for simple tasks. This model is a dynamically updated version, and updates will not be announced in advance. The model's overall Chinese and English abilities have been significantly improved, human preference alignment has been greatly enhanced, inference capability and complex instruction understanding have been substantially strengthened, performance on difficult tasks is better, and mathematics and coding skills have been significantly improved. The current version is qwen-turbo-2025-04-28.",
         "typeHints": [
           "llm"
         ],
-        "features": [
-          "thinking"
-        ],
-        "inputModalities": [
-          "text"
-        ],
         "pricing": {
-          "input": 0.2,
-          "output": 0.2
+          "cache_read": 0,
+          "input": 0.046,
+          "output": 0.92
         },
         "source": "public-provider-conf"
       },
@@ -11297,38 +11595,6 @@
         "pricing": {
           "input": 0.12,
           "output": 0.12
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "qwen-turbo-latest",
-      "name": "qwen-turbo-latest",
-      "display_name": "qwen-turbo-latest",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.046,
-        "output": 0.92,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "The Qwen series model with the fastest speed and lowest cost, suitable for simple tasks. This model is a dynamically updated version, and updates will not be announced in advance. The model's overall Chinese and English abilities have been significantly improved, human preference alignment has been greatly enhanced, inference capability and complex instruction understanding have been substantially strengthened, performance on difficult tasks is better, and mathematics and coding skills have been significantly improved. The current version is qwen-turbo-2025-04-28.",
-        "typeHints": [
-          "llm"
-        ],
-        "pricing": {
-          "cache_read": 0,
-          "input": 0.046,
-          "output": 0.92
         },
         "source": "public-provider-conf"
       },
@@ -11438,33 +11704,6 @@
       "vision": false
     },
     {
-      "id": "grok-3",
-      "name": "grok-3",
-      "display_name": "grok-3",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 3,
-        "output": 15
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Grok's latest model",
-        "pricing": {
-          "input": 3,
-          "output": 15
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "aihub-Phi-4-mini-instruct",
       "name": "aihub-Phi-4-mini-instruct",
       "display_name": "aihub-Phi-4-mini-instruct",
@@ -11497,6 +11736,94 @@
         "pricing": {
           "input": 0.12,
           "output": 0.48
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "grok-3",
+      "name": "grok-3",
+      "display_name": "grok-3",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 3,
+        "output": 15
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Grok's latest model",
+        "pricing": {
+          "input": 3,
+          "output": 15
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "grok-3-beta",
+      "name": "grok-3-beta",
+      "display_name": "grok-3-beta",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Grok's latest model\nThis model ID with beta has been officially taken offline. Using this model grok-3-beta will automatically point to grok-3.",
+        "pricing": {
+          "cache_read": 0,
+          "input": 3,
+          "output": 15
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen3-14b",
+      "name": "qwen3-14b",
+      "display_name": "qwen3-14b",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.16,
+        "output": 1.6,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Achieves effective integration of thinking and non-thinking modes, enabling mode switching during conversations. Its reasoning ability reaches state-of-the-art (SOTA) levels among models of the same scale, and its general capability significantly surpasses Qwen2.5-14B.",
+        "typeHints": [
+          "llm"
+        ],
+        "pricing": {
+          "cache_read": 0,
+          "input": 0.16,
+          "output": 1.6
         },
         "source": "public-provider-conf"
       },
@@ -11640,67 +11967,6 @@
         "pricing": {
           "input": 0.7,
           "output": 0.7
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "qwen3-14b",
-      "name": "qwen3-14b",
-      "display_name": "qwen3-14b",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.16,
-        "output": 1.6,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Achieves effective integration of thinking and non-thinking modes, enabling mode switching during conversations. Its reasoning ability reaches state-of-the-art (SOTA) levels among models of the same scale, and its general capability significantly surpasses Qwen2.5-14B.",
-        "typeHints": [
-          "llm"
-        ],
-        "pricing": {
-          "cache_read": 0,
-          "input": 0.16,
-          "output": 1.6
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "grok-3-beta",
-      "name": "grok-3-beta",
-      "display_name": "grok-3-beta",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Grok's latest model\nThis model ID with beta has been officially taken offline. Using this model grok-3-beta will automatically point to grok-3.",
-        "pricing": {
-          "cache_read": 0,
-          "input": 3,
-          "output": 15
         },
         "source": "public-provider-conf"
       },
@@ -12458,35 +12724,6 @@
       "vision": false
     },
     {
-      "id": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
-      "name": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
-      "display_name": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.5,
-        "output": 0.5,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Llama-3.1-Nemotron-Ultra-253B is a 253 billion parameter reasoning-focused language model optimized for efficiency that excels at math, coding, and general instruction-following tasks while running on a single 8xH100 node.",
-        "pricing": {
-          "cache_read": 0,
-          "input": 0.5,
-          "output": 0.5
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "gemini-2.0-flash-thinking-exp-1219",
       "name": "gemini-2.0-flash-thinking-exp-1219",
       "display_name": "gemini-2.0-flash-thinking-exp-1219",
@@ -12514,34 +12751,29 @@
       "vision": false
     },
     {
-      "id": "coding-glm-4.5-air",
-      "name": "coding-glm-4.5-air",
-      "display_name": "coding-glm-4.5-air",
+      "id": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
+      "name": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
+      "display_name": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
       "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
       "cost": {
-        "input": 0.014,
-        "output": 0.084
+        "input": 0.5,
+        "output": 0.5,
+        "cache_read": 0
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
-        "inputModalities": [
-          "text"
-        ],
+        "description": "Llama-3.1-Nemotron-Ultra-253B is a 253 billion parameter reasoning-focused language model optimized for efficiency that excels at math, coding, and general instruction-following tasks while running on a single 8xH100 node.",
         "pricing": {
-          "input": 0.014,
-          "output": 0.084
+          "cache_read": 0,
+          "input": 0.5,
+          "output": 0.5
         },
         "source": "public-provider-conf"
       },
@@ -12631,6 +12863,40 @@
           "cache_read": 7.5,
           "input": 15,
           "output": 60
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "coding-glm-4.5-air",
+      "name": "coding-glm-4.5-air",
+      "display_name": "coding-glm-4.5-air",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.014,
+        "output": 0.084
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "input": 0.014,
+          "output": 0.084
         },
         "source": "public-provider-conf"
       },
@@ -12836,8 +13102,9 @@
         ]
       },
       "cost": {
-        "input": 0.02,
-        "output": 0.02
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
       },
       "limit": {
         "context": 8192,
@@ -12848,8 +13115,9 @@
           "text"
         ],
         "pricing": {
-          "input": 0.02,
-          "output": 0.02
+          "cache_read": 0,
+          "input": 0,
+          "output": 0
         },
         "source": "public-provider-conf"
       },
@@ -14943,6 +15211,94 @@
         "pricing": {
           "input": 2.8,
           "output": 11.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "baidu-deepseek-v3.2",
+      "name": "baidu-deepseek-v3.2",
+      "display_name": "baidu-deepseek-v3.2",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.274,
+        "output": 0.411,
+        "cache_read": 0.0274
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.0274,
+          "input": 0.274,
+          "output": 0.411
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "baidu-deepseek-v3.2-exp",
+      "name": "baidu-deepseek-v3.2-exp",
+      "display_name": "baidu-deepseek-v3.2-exp",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.274,
+        "output": 0.411,
+        "cache_read": 0.0274
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.0274,
+          "input": 0.274,
+          "output": 0.411
         },
         "source": "public-provider-conf"
       },
@@ -18869,17 +19225,17 @@
       "vision": false
     },
     {
-      "id": "qwen2.5-14b-instruct",
-      "name": "qwen2.5-14b-instruct",
-      "display_name": "qwen2.5-14b-instruct",
+      "id": "text-davinci-003",
+      "name": "text-davinci-003",
+      "display_name": "text-davinci-003",
       "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "cost": {
-        "input": 0.4,
-        "output": 1.2
+        "input": 20,
+        "output": 20
       },
       "limit": {
         "context": 8192,
@@ -18887,25 +19243,25 @@
       },
       "metadata": {
         "pricing": {
-          "input": 0.4,
-          "output": 1.2
+          "input": 20,
+          "output": 20
         },
         "source": "public-provider-conf"
       },
       "vision": false
     },
     {
-      "id": "qwen2.5-32b-instruct",
-      "name": "qwen2.5-32b-instruct",
-      "display_name": "qwen2.5-32b-instruct",
+      "id": "text-davinci-edit-001",
+      "name": "text-davinci-edit-001",
+      "display_name": "text-davinci-edit-001",
       "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "cost": {
-        "input": 0.6,
-        "output": 1.2
+        "input": 20,
+        "output": 20
       },
       "limit": {
         "context": 8192,
@@ -18913,25 +19269,25 @@
       },
       "metadata": {
         "pricing": {
-          "input": 0.6,
-          "output": 1.2
+          "input": 20,
+          "output": 20
         },
         "source": "public-provider-conf"
       },
       "vision": false
     },
     {
-      "id": "qwen2.5-3b-instruct",
-      "name": "qwen2.5-3b-instruct",
-      "display_name": "qwen2.5-3b-instruct",
+      "id": "text-davinci-002",
+      "name": "text-davinci-002",
+      "display_name": "text-davinci-002",
       "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "cost": {
-        "input": 0.4,
-        "output": 0.8
+        "input": 20,
+        "output": 20
       },
       "limit": {
         "context": 8192,
@@ -18939,129 +19295,173 @@
       },
       "metadata": {
         "pricing": {
-          "input": 0.4,
-          "output": 0.8
+          "input": 20,
+          "output": 20
         },
         "source": "public-provider-conf"
       },
       "vision": false
     },
     {
-      "id": "qwen2.5-72b-instruct",
-      "name": "qwen2.5-72b-instruct",
-      "display_name": "qwen2.5-72b-instruct",
-      "type": "chat",
+      "id": "text-embedding-3-large",
+      "name": "text-embedding-3-large",
+      "display_name": "text-embedding-3-large",
+      "type": "embedding",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
       "cost": {
-        "input": 0.8,
-        "output": 2.4
+        "input": 0.13,
+        "output": 0.13
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
+        "typeHints": [
+          "embedding"
+        ],
+        "inputModalities": [
+          "text"
+        ],
         "pricing": {
-          "input": 0.8,
-          "output": 2.4
+          "input": 0.13,
+          "output": 0.13
         },
         "source": "public-provider-conf"
       },
       "vision": false
     },
     {
-      "id": "qwen2.5-7b-instruct",
-      "name": "qwen2.5-7b-instruct",
-      "display_name": "qwen2.5-7b-instruct",
-      "type": "chat",
+      "id": "text-embedding-3-small",
+      "name": "text-embedding-3-small",
+      "display_name": "text-embedding-3-small",
+      "type": "embedding",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
       "cost": {
-        "input": 0.4,
-        "output": 0.8
+        "input": 0.02,
+        "output": 0.02
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
+        "typeHints": [
+          "embedding"
+        ],
+        "inputModalities": [
+          "text"
+        ],
         "pricing": {
-          "input": 0.4,
-          "output": 0.8
+          "input": 0.02,
+          "output": 0.02
         },
         "source": "public-provider-conf"
       },
       "vision": false
     },
     {
-      "id": "qwen2.5-coder-1.5b-instruct",
-      "name": "qwen2.5-coder-1.5b-instruct",
-      "display_name": "qwen2.5-coder-1.5b-instruct",
-      "type": "chat",
+      "id": "text-embedding-ada-002",
+      "name": "text-embedding-ada-002",
+      "display_name": "text-embedding-ada-002",
+      "type": "embedding",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
       "cost": {
-        "input": 0.2,
-        "output": 0.4
+        "input": 0.1,
+        "output": 0.1
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
+        "typeHints": [
+          "embedding"
+        ],
+        "inputModalities": [
+          "text"
+        ],
         "pricing": {
-          "input": 0.2,
-          "output": 0.4
+          "input": 0.1,
+          "output": 0.1
         },
         "source": "public-provider-conf"
       },
       "vision": false
     },
     {
-      "id": "qwen2.5-coder-7b-instruct",
-      "name": "qwen2.5-coder-7b-instruct",
-      "display_name": "qwen2.5-coder-7b-instruct",
-      "type": "chat",
+      "id": "text-embedding-v1",
+      "name": "text-embedding-v1",
+      "display_name": "text-embedding-v1",
+      "type": "embedding",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
       "cost": {
-        "input": 0.2,
-        "output": 0.4
+        "input": 0.1,
+        "output": 0.1
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
+        "typeHints": [
+          "embedding"
+        ],
+        "inputModalities": [
+          "text"
+        ],
         "pricing": {
-          "input": 0.2,
-          "output": 0.4
+          "input": 0.1,
+          "output": 0.1
         },
         "source": "public-provider-conf"
       },
       "vision": false
     },
     {
-      "id": "qwen2.5-math-1.5b-instruct",
-      "name": "qwen2.5-math-1.5b-instruct",
-      "display_name": "qwen2.5-math-1.5b-instruct",
+      "id": "text-curie-001",
+      "name": "text-curie-001",
+      "display_name": "text-curie-001",
       "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "cost": {
-        "input": 0.2,
-        "output": 0.2
+        "input": 2,
+        "output": 2
       },
       "limit": {
         "context": 8192,
@@ -19069,8 +19469,8 @@
       },
       "metadata": {
         "pricing": {
-          "input": 0.2,
-          "output": 0.2
+          "input": 2,
+          "output": 2
         },
         "source": "public-provider-conf"
       },
@@ -19181,37 +19581,26 @@
       "vision": false
     },
     {
-      "id": "text-embedding-v1",
-      "name": "text-embedding-v1",
-      "display_name": "text-embedding-v1",
-      "type": "embedding",
+      "id": "text-babbage-001",
+      "name": "text-babbage-001",
+      "display_name": "text-babbage-001",
+      "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
       "cost": {
-        "input": 0.1,
-        "output": 0.1
+        "input": 0.5,
+        "output": 0.5
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
-        "typeHints": [
-          "embedding"
-        ],
-        "inputModalities": [
-          "text"
-        ],
         "pricing": {
-          "input": 0.1,
-          "output": 0.1
+          "input": 0.5,
+          "output": 0.5
         },
         "source": "public-provider-conf"
       },
@@ -19366,339 +19755,6 @@
       "vision": false
     },
     {
-      "id": "text-embedding-ada-002",
-      "name": "text-embedding-ada-002",
-      "display_name": "text-embedding-ada-002",
-      "type": "embedding",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.1,
-        "output": 0.1
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "typeHints": [
-          "embedding"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "input": 0.1,
-          "output": 0.1
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "text-embedding-3-small",
-      "name": "text-embedding-3-small",
-      "display_name": "text-embedding-3-small",
-      "type": "embedding",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.02,
-        "output": 0.02
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "typeHints": [
-          "embedding"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "input": 0.02,
-          "output": 0.02
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "text-embedding-3-large",
-      "name": "text-embedding-3-large",
-      "display_name": "text-embedding-3-large",
-      "type": "embedding",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.13,
-        "output": 0.13
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "typeHints": [
-          "embedding"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "input": 0.13,
-          "output": 0.13
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "veo-3",
-      "name": "veo-3",
-      "display_name": "veo-3",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ]
-      },
-      "cost": {
-        "input": 2,
-        "output": 2,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "veo3 reverse access with a total cost of just $0.41 per video generation., OpenAI chat port compatible format.",
-        "typeHints": [
-          "video"
-        ],
-        "inputModalities": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ],
-        "pricing": {
-          "cache_read": 0,
-          "input": 2,
-          "output": 2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "text-davinci-edit-001",
-      "name": "text-davinci-edit-001",
-      "display_name": "text-davinci-edit-001",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 20,
-        "output": 20
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 20,
-          "output": 20
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "text-davinci-003",
-      "name": "text-davinci-003",
-      "display_name": "text-davinci-003",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 20,
-        "output": 20
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 20,
-          "output": 20
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "text-davinci-002",
-      "name": "text-davinci-002",
-      "display_name": "text-davinci-002",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 20,
-        "output": 20
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 20,
-          "output": 20
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "veo3",
-      "name": "veo3",
-      "display_name": "veo3",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ]
-      },
-      "cost": {
-        "input": 2,
-        "output": 2,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "veo3 reverse access with a total cost of just $0.41 per video generation., OpenAI chat port compatible format.\nNote that this is a reverse interface, and charges are based on the number of requests. As long as a request is initiated, even if it returns a failure, you will be charged. If you cannot accept this, please do not use it.",
-        "typeHints": [
-          "video"
-        ],
-        "inputModalities": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ],
-        "pricing": {
-          "cache_read": 0,
-          "input": 2,
-          "output": 2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "text-curie-001",
-      "name": "text-curie-001",
-      "display_name": "text-curie-001",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 2,
-        "output": 2
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 2,
-          "output": 2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "text-babbage-001",
-      "name": "text-babbage-001",
-      "display_name": "text-babbage-001",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.5,
-        "output": 0.5
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 0.5,
-          "output": 0.5
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "text-ada-001",
       "name": "text-ada-001",
       "display_name": "text-ada-001",
@@ -19719,32 +19775,6 @@
         "pricing": {
           "input": 0.4,
           "output": 0.4
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "qwen2.5-math-72b-instruct",
-      "name": "qwen2.5-math-72b-instruct",
-      "display_name": "qwen2.5-math-72b-instruct",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.8,
-        "output": 2.4
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 0.8,
-          "output": 2.4
         },
         "source": "public-provider-conf"
       },
@@ -19803,6 +19833,52 @@
       "vision": false
     },
     {
+      "id": "veo-3",
+      "name": "veo-3",
+      "display_name": "veo-3",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ]
+      },
+      "cost": {
+        "input": 2,
+        "output": 2,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "veo3 reverse access with a total cost of just $0.41 per video generation., OpenAI chat port compatible format.",
+        "typeHints": [
+          "video"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "pricing": {
+          "cache_read": 0,
+          "input": 2,
+          "output": 2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "qwen2.5-math-7b-instruct",
       "name": "qwen2.5-math-7b-instruct",
       "display_name": "qwen2.5-math-7b-instruct",
@@ -19823,6 +19899,286 @@
         "pricing": {
           "input": 0.2,
           "output": 0.4
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen2.5-math-72b-instruct",
+      "name": "qwen2.5-math-72b-instruct",
+      "display_name": "qwen2.5-math-72b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.8,
+        "output": 2.4
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.8,
+          "output": 2.4
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen2.5-math-1.5b-instruct",
+      "name": "qwen2.5-math-1.5b-instruct",
+      "display_name": "qwen2.5-math-1.5b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2,
+        "output": 0.2
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.2,
+          "output": 0.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "veo3",
+      "name": "veo3",
+      "display_name": "veo3",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ]
+      },
+      "cost": {
+        "input": 2,
+        "output": 2,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "veo3 reverse access with a total cost of just $0.41 per video generation., OpenAI chat port compatible format.\nNote that this is a reverse interface, and charges are based on the number of requests. As long as a request is initiated, even if it returns a failure, you will be charged. If you cannot accept this, please do not use it.",
+        "typeHints": [
+          "video"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "pricing": {
+          "cache_read": 0,
+          "input": 2,
+          "output": 2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "qwen2.5-coder-7b-instruct",
+      "name": "qwen2.5-coder-7b-instruct",
+      "display_name": "qwen2.5-coder-7b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2,
+        "output": 0.4
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.2,
+          "output": 0.4
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen2.5-coder-1.5b-instruct",
+      "name": "qwen2.5-coder-1.5b-instruct",
+      "display_name": "qwen2.5-coder-1.5b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2,
+        "output": 0.4
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.2,
+          "output": 0.4
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen2.5-7b-instruct",
+      "name": "qwen2.5-7b-instruct",
+      "display_name": "qwen2.5-7b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.4,
+        "output": 0.8
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.4,
+          "output": 0.8
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen2.5-72b-instruct",
+      "name": "qwen2.5-72b-instruct",
+      "display_name": "qwen2.5-72b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.8,
+        "output": 2.4
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.8,
+          "output": 2.4
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen2.5-3b-instruct",
+      "name": "qwen2.5-3b-instruct",
+      "display_name": "qwen2.5-3b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.4,
+        "output": 0.8
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.4,
+          "output": 0.8
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen2.5-32b-instruct",
+      "name": "qwen2.5-32b-instruct",
+      "display_name": "qwen2.5-32b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.6,
+        "output": 1.2
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.6,
+          "output": 1.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen2.5-14b-instruct",
+      "name": "qwen2.5-14b-instruct",
+      "display_name": "qwen2.5-14b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.4,
+        "output": 1.2
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.4,
+          "output": 1.2
         },
         "source": "public-provider-conf"
       },
