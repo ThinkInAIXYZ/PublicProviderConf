@@ -220,6 +220,25 @@ export async function loadBaseContext(): Promise<BaseContext> {
     }
   }
 
+  // Merge ollama-cloud into ollama, preferring cloud data on conflicts
+  const ollamaTemplate = templatesById.get('ollama');
+  const ollamaCloud = baseProvidersRecord['ollama-cloud'];
+  if (ollamaTemplate && ollamaCloud) {
+    const combined = mergeProviderWithTemplate(ollamaTemplate, ollamaCloud);
+    combined.id = 'ollama';
+    combined.name = combined.name || 'Ollama';
+    combined.display_name = combined.display_name || 'Ollama';
+
+    baseProvidersRecord['ollama'] = combined;
+    delete baseProvidersRecord['ollama-cloud'];
+
+    templatesById.delete('ollama');
+
+    if (modelsDevIds.delete('ollama-cloud')) {
+      modelsDevIds.add('ollama');
+    }
+  }
+
   const templatesRemaining = new Map(templatesById);
 
   for (const template of templatesRemaining.values()) {

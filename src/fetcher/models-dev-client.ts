@@ -12,6 +12,63 @@ const DEFAULT_MODELS_DEV_API_URL = 'https://models.dev/api.json';
 const HTTP_MAX_ATTEMPTS = 3;
 const HTTP_RETRY_DELAY_MS = 2_000;
 
+interface RemappedProviderIdentity {
+  id: string;
+  name: string;
+  display_name: string;
+}
+
+function normalizeProviderKey(rawId: string): string {
+  return rawId.trim().toLowerCase().replace(/_/g, '-');
+}
+
+function remapProviderIdentity(
+  rawId: string,
+  name?: string,
+  displayName?: string,
+): RemappedProviderIdentity {
+  const key = normalizeProviderKey(rawId);
+
+  switch (key) {
+    case 'moonshotai-cn':
+    case 'moonshot-cn': {
+      const id = 'moonshot';
+      const finalName = name ?? 'Moonshot';
+      const finalDisplayName = displayName ?? finalName;
+      return { id, name: finalName, display_name: finalDisplayName };
+    }
+
+    case 'moonshotai':
+    case 'moonshot': {
+      const id = 'moonshot-ai';
+      const finalName = name ?? 'Moonshot AI';
+      const finalDisplayName = displayName ?? finalName;
+      return { id, name: finalName, display_name: finalDisplayName };
+    }
+
+    case 'siliconflow-cn': {
+      const id = 'siliconflow';
+      const finalName = name ?? 'SiliconFlow';
+      const finalDisplayName = displayName ?? finalName;
+      return { id, name: finalName, display_name: finalDisplayName };
+    }
+
+    case 'siliconflow': {
+      const id = 'siliconflow-com';
+      const finalName = name ?? 'SiliconFlow (Global)';
+      const finalDisplayName = displayName ?? finalName;
+      return { id, name: finalName, display_name: finalDisplayName };
+    }
+
+    default: {
+      const id = rawId;
+      const finalName = name ?? rawId;
+      const finalDisplayName = displayName ?? finalName;
+      return { id, name: finalName, display_name: finalDisplayName };
+    }
+  }
+}
+
 function resolvePrimarySource(): string {
   return process.env.MODELS_DEV_API_URL?.trim() || DEFAULT_MODELS_DEV_API_URL;
 }
@@ -174,31 +231,31 @@ export class ModelsDevClient {
     const normalizedModels = this.normalizeModels(models, fallbackId);
     const partialProvider = rest as Partial<ModelsDevProvider>;
 
-    const normalizedId =
-      typeof partialProvider.id === 'string' && partialProvider.id.trim()
-        ? partialProvider.id
-        : fallbackId;
+    const rawId =
+      (typeof partialProvider.id === 'string' && partialProvider.id.trim()) || fallbackId;
 
     const fallbackDisplayName =
       typeof record['display_name'] === 'string' && (record['display_name'] as string).trim()
         ? (record['display_name'] as string)
         : undefined;
 
-    const normalizedName =
-      typeof partialProvider.name === 'string' && partialProvider.name.trim()
-        ? partialProvider.name
-        : fallbackDisplayName ?? normalizedId;
+    const rawName =
+      (typeof partialProvider.name === 'string' && partialProvider.name.trim()) ||
+      fallbackDisplayName ||
+      rawId;
 
-    const normalizedDisplayName =
-      typeof partialProvider.display_name === 'string' && partialProvider.display_name.trim()
-        ? partialProvider.display_name
-        : fallbackDisplayName ?? normalizedName;
+    const rawDisplayName =
+      (typeof partialProvider.display_name === 'string' && partialProvider.display_name.trim()) ||
+      fallbackDisplayName ||
+      rawName;
+
+    const remapped = remapProviderIdentity(rawId, rawName, rawDisplayName);
 
     const normalizedProvider: ModelsDevProvider = {
       ...partialProvider,
-      id: normalizedId,
-      name: normalizedName,
-      display_name: normalizedDisplayName,
+      id: remapped.id,
+      name: remapped.name,
+      display_name: remapped.display_name,
       models: normalizedModels,
     };
 

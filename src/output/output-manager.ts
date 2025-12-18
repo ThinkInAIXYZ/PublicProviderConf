@@ -2,11 +2,30 @@ import { promises as fs } from 'fs';
 import { join } from 'path';
 import {
   ModelsDevApiResponse,
+  ModelsDevProvider,
   normalizeProvidersList,
   providersToRecord,
   getProviderId,
 } from '../models/models-dev';
 import { JsonWriter } from './json-writer';
+
+function canonicalizeProvidersShape(data: ModelsDevApiResponse): ModelsDevApiResponse {
+  const providersList = normalizeProvidersList(data.providers);
+  const providersRecord: Record<string, ModelsDevProvider> = {};
+
+  for (const provider of providersList) {
+    const id = getProviderId(provider);
+    if (!id) {
+      continue;
+    }
+    providersRecord[id] = provider;
+  }
+
+  return {
+    ...data,
+    providers: providersRecord,
+  };
+}
 
 function sanitizeProviderId(id: string): string {
   return id.replace(/[^a-zA-Z0-9-_]/g, '_');
@@ -33,9 +52,11 @@ export class OutputManager {
   async writeAllFiles(data: ModelsDevApiResponse): Promise<void> {
     await this.clearJsonFiles();
 
-    const updatedAtIso = data.updated_at ?? new Date().toISOString();
-    if (!data.updated_at) {
-      data.updated_at = updatedAtIso;
+    const canonicalData = canonicalizeProvidersShape(data);
+
+    const updatedAtIso = canonicalData.updated_at ?? new Date().toISOString();
+    if (!canonicalData.updated_at) {
+      canonicalData.updated_at = updatedAtIso;
     }
 
     const updatedAtMs = Date.parse(updatedAtIso);
@@ -43,9 +64,9 @@ export class OutputManager {
       throw new Error(`Invalid updated_at timestamp: ${updatedAtIso}`);
     }
 
-    await this.writeAggregatedFile(data);
+    await this.writeAggregatedFile(canonicalData);
     await this.writeSyncVersionFile(updatedAtMs);
-    await this.writeProviderFiles(data);
+    await this.writeProviderFiles(canonicalData);
   }
 
   getProviderCount(data: ModelsDevApiResponse): number {
