@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2025-12-27T12:24:15.183Z",
+  "updated_at": "2025-12-31T15:18:17.557Z",
   "models": [
     {
       "id": "gemini-3-flash-preview",
@@ -10,7 +10,8 @@
       "display_name": "gemini-3-flash-preview",
       "type": "chat",
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
       "tool_call": true,
       "modalities": {
@@ -38,7 +39,8 @@
         "features": [
           "tools",
           "function_calling",
-          "structured_outputs"
+          "structured_outputs",
+          "thinking"
         ],
         "inputModalities": [
           "text",
@@ -158,6 +160,59 @@
       "vision": true
     },
     {
+      "id": "gemini-3-flash-preview-free",
+      "name": "gemini-3-flash-preview-free",
+      "display_name": "gemini-3-flash-preview-free",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ]
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "metadata": {
+        "description": "gemini-3-flash-preview-free is the free, publicly available version of gemini-3-flash-preview, offering the same model capabilities with usage limits in place to ensure service stability. Limits include up to 5 requests per minute, a maximum of 250 requests per day, and a daily quota of 500,000 tokens. Free usage is based on shared capacity and is limited in availability. This version is intended for testing and light usage; for consistent and reliable access, please switch to the paid model.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs",
+          "thinking"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "pricing": {
+          "cache_read": 0,
+          "input": 0,
+          "output": 0
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "glm-4.7",
       "name": "glm-4.7",
       "display_name": "glm-4.7",
@@ -203,6 +258,58 @@
         "source": "public-provider-conf"
       },
       "vision": false
+    },
+    {
+      "id": "gemini-2.0-flash-free",
+      "name": "gemini-2.0-flash-free",
+      "display_name": "gemini-2.0-flash-free",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ]
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "metadata": {
+        "description": "gemini-2.0-flash-free is the free, publicly available version of gemini-2.0-flash, offering the same model capabilities with usage limits in place to ensure service stability. Limits include up to 5 requests per minute, a maximum of 500 requests per day, and a daily quota of 1,000,000 tokens. Free usage is based on shared capacity and is limited in availability. This version is intended for testing and light usage; for consistent and reliable access, please switch to the paid model.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs",
+          "long_context"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "pricing": {
+          "cache_read": 0,
+          "input": 0,
+          "output": 0
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "coding-glm-4.7-free",
@@ -3829,6 +3936,10 @@
       },
       "metadata": {
         "description": "GLM-4.5V is a vision-language foundational model designed for multimodal agent applications. Based on a mixture-of-experts (MoE) architecture, it has 106 billion parameters and 12 billion active parameters. It delivers outstanding performance in video understanding, image question answering, OCR, and document parsing, and achieves significant improvements in front-end web encoding, basic reasoning, and spatial reasoning.",
+        "typeHints": [
+          "llm",
+          "ocr"
+        ],
         "inputModalities": [
           "text",
           "image",
@@ -4663,6 +4774,9 @@
       },
       "metadata": {
         "description": "PaddleOCR-VL is an advanced and efficient document parsing model specifically designed for element recognition within documents. Its core component, PaddleOCR-VL-0.9B, is a compact yet powerful vision-language model (VLM) composed of a NaViT-style dynamic resolution visual encoder and the ERNIE-4.5-0.3B language model, enabling precise element recognition. This model supports 109 languages and excels at recognizing complex elements such as text, tables, formulas, and charts while maintaining extremely low resource consumption. Through comprehensive evaluations on widely used public benchmarks and internal benchmarks, PaddleOCR-VL achieves state-of-the-art (SOTA) performance in both page-level document parsing and element-level recognition. It significantly outperforms existing pipeline-based solutions, multimodal document parsing approaches, and advanced general-purpose multimodal large models, while also offering faster inference speed.",
+        "typeHints": [
+          "ocr"
+        ],
         "pricing": {
           "input": 2,
           "output": 0
@@ -4690,6 +4804,9 @@
       },
       "metadata": {
         "description": "PP-StructureV3 is an efficient and comprehensive document parsing solution that can effectively convert document images and PDF files into structured content (such as Markdown format). It features powerful capabilities including layout area detection, table recognition, formula recognition, chart understanding, and multi-column reading order recovery. This tool performs excellently across various document types and can handle complex document data.",
+        "typeHints": [
+          "ocr"
+        ],
         "pricing": {
           "input": 2,
           "output": 0
@@ -5414,7 +5531,7 @@
       "metadata": {
         "description": "DeepSeek-OCR is a vision-language model launched by DeepSeek AI, focusing on optical character recognition (OCR) and “contextual optical compression.” The model is designed to explore the limits of compressing contextual information from images, efficiently processing documents and converting them into structured text formats such as Markdown. The model requires an image as input.",
         "typeHints": [
-          "llm"
+          "ocr"
         ],
         "inputModalities": [
           "text",
@@ -11226,6 +11343,158 @@
       "vision": true
     },
     {
+      "id": "o1-global",
+      "name": "o1-global",
+      "display_name": "o1-global",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 15,
+        "output": 60,
+        "cache_read": 7.5
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "OpenAI new model",
+        "pricing": {
+          "cache_read": 7.5,
+          "input": 15,
+          "output": 60
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qianfan-qi-vl",
+      "name": "qianfan-qi-vl",
+      "display_name": "qianfan-qi-vl",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2,
+        "output": 0.6
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "The Qianfan-QI-VL model is a proprietary image quality inspection and visual understanding large model (Quality Inspection Large Vision Language Model, Qianfan-QI-VL) developed by Baidu Cloud’s Qianfan platform. It is designed for quality inspection of product images uploaded in e-commerce scenarios, with detection capabilities including AIGC human defect detection, mosaic recognition, watermark recognition, and trademark detection.",
+        "pricing": {
+          "input": 0.2,
+          "output": 0.6
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen2.5-vl-72b-instruct",
+      "name": "qwen2.5-vl-72b-instruct",
+      "display_name": "qwen2.5-vl-72b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 2.4,
+        "output": 7.2
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Strong capability in Chinese domain recognition, comparable to ChatGPT-4.0.",
+        "typeHints": [
+          "llm"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 2.4,
+          "output": 7.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "tencent/Hunyuan-A13B-Instruct",
+      "name": "tencent/Hunyuan-A13B-Instruct",
+      "display_name": "tencent/Hunyuan-A13B-Instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.14,
+        "output": 0.56
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Hunyuan-A13B-Instruct has 8 billion parameters and can match larger models by activating only 1.3 billion parameters, supporting \"fast thinking/slow thinking\" hybrid inference. It offers stable long text understanding. Verified by BFCL-v3 and τ-Bench, its Agent capabilities are leading in the field. Combined with GQA and multiple quantization formats, it enables efficient inference.",
+        "pricing": {
+          "input": 0.14,
+          "output": 0.56
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "unsloth/gemma-3-27b-it",
+      "name": "unsloth/gemma-3-27b-it",
+      "display_name": "unsloth/gemma-3-27b-it",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.22,
+        "output": 0.22,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Google's latest open-source model; provided by chutes.ai",
+        "pricing": {
+          "cache_read": 0,
+          "input": 0.22,
+          "output": 0.22
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "ernie-x1-turbo",
       "name": "ernie-x1-turbo",
       "display_name": "ernie-x1-turbo",
@@ -11445,213 +11714,6 @@
       "vision": false
     },
     {
-      "id": "o1-global",
-      "name": "o1-global",
-      "display_name": "o1-global",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 15,
-        "output": 60,
-        "cache_read": 7.5
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "OpenAI new model",
-        "pricing": {
-          "cache_read": 7.5,
-          "input": 15,
-          "output": 60
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "qianfan-qi-vl",
-      "name": "qianfan-qi-vl",
-      "display_name": "qianfan-qi-vl",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.2,
-        "output": 0.6
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "The Qianfan-QI-VL model is a proprietary image quality inspection and visual understanding large model (Quality Inspection Large Vision Language Model, Qianfan-QI-VL) developed by Baidu Cloud’s Qianfan platform. It is designed for quality inspection of product images uploaded in e-commerce scenarios, with detection capabilities including AIGC human defect detection, mosaic recognition, watermark recognition, and trademark detection.",
-        "pricing": {
-          "input": 0.2,
-          "output": 0.6
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "qwen2.5-vl-72b-instruct",
-      "name": "qwen2.5-vl-72b-instruct",
-      "display_name": "qwen2.5-vl-72b-instruct",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 2.4,
-        "output": 7.2
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Strong capability in Chinese domain recognition, comparable to ChatGPT-4.0.",
-        "typeHints": [
-          "llm"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 2.4,
-          "output": 7.2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "tencent/Hunyuan-A13B-Instruct",
-      "name": "tencent/Hunyuan-A13B-Instruct",
-      "display_name": "tencent/Hunyuan-A13B-Instruct",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.14,
-        "output": 0.56
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Hunyuan-A13B-Instruct has 8 billion parameters and can match larger models by activating only 1.3 billion parameters, supporting \"fast thinking/slow thinking\" hybrid inference. It offers stable long text understanding. Verified by BFCL-v3 and τ-Bench, its Agent capabilities are leading in the field. Combined with GQA and multiple quantization formats, it enables efficient inference.",
-        "pricing": {
-          "input": 0.14,
-          "output": 0.56
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "unsloth/gemma-3-27b-it",
-      "name": "unsloth/gemma-3-27b-it",
-      "display_name": "unsloth/gemma-3-27b-it",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.22,
-        "output": 0.22,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Google's latest open-source model; provided by chutes.ai",
-        "pricing": {
-          "cache_read": 0,
-          "input": 0.22,
-          "output": 0.22
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "qwen-qwq-32b",
-      "name": "qwen-qwq-32b",
-      "display_name": "qwen-qwq-32b",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.4,
-        "output": 0.8
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 0.4,
-          "output": 0.8
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "unsloth/gemma-3-12b-it",
-      "name": "unsloth/gemma-3-12b-it",
-      "display_name": "unsloth/gemma-3-12b-it",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.2,
-        "output": 0.8,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Provided by chutes.ai.",
-        "pricing": {
-          "cache_read": 0,
-          "input": 0.2,
-          "output": 0.8
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "gemini-exp-1206",
       "name": "gemini-exp-1206",
       "display_name": "gemini-exp-1206",
@@ -11718,6 +11780,88 @@
       "vision": true
     },
     {
+      "id": "qwen-qwq-32b",
+      "name": "qwen-qwq-32b",
+      "display_name": "qwen-qwq-32b",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.4,
+        "output": 0.8
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.4,
+          "output": 0.8
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "unsloth/gemma-3-12b-it",
+      "name": "unsloth/gemma-3-12b-it",
+      "display_name": "unsloth/gemma-3-12b-it",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2,
+        "output": 0.8,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Provided by chutes.ai.",
+        "pricing": {
+          "cache_read": 0,
+          "input": 0.2,
+          "output": 0.8
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen-max-0125",
+      "name": "qwen-max-0125",
+      "display_name": "qwen-max-0125",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.38,
+        "output": 1.52
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Qwen 2.5-Max latest model",
+        "pricing": {
+          "input": 0.38,
+          "output": 1.52
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "claude-3-5-haiku",
       "name": "claude-3-5-haiku",
       "display_name": "claude-3-5-haiku",
@@ -11761,60 +11905,6 @@
         "source": "public-provider-conf"
       },
       "vision": true
-    },
-    {
-      "id": "qwen-max-0125",
-      "name": "qwen-max-0125",
-      "display_name": "qwen-max-0125",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.38,
-        "output": 1.52
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Qwen 2.5-Max latest model",
-        "pricing": {
-          "input": 0.38,
-          "output": 1.52
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "tencent/Hunyuan-MT-7B",
-      "name": "tencent/Hunyuan-MT-7B",
-      "display_name": "tencent/Hunyuan-MT-7B",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.2,
-        "output": 0.2
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Hunyuan-MT-7B is a lightweight translation model with 7 billion parameters, designed to translate source text into target languages. The model supports translation among 33 languages as well as 5 Chinese minority languages. In the WMT25 International Machine Translation Competition, Hunyuan-MT-7B achieved first place in 30 out of 31 language categories it participated in, demonstrating its exceptional translation capabilities. For translation scenarios, Tencent Hunyuan proposed a complete training paradigm from pre-training to supervised fine-tuning, followed by translation reinforcement and ensemble reinforcement, enabling it to achieve industry-leading performance among models of similar scale. The model is computationally efficient, easy to deploy, and suitable for various application scenarios.",
-        "pricing": {
-          "input": 0.2,
-          "output": 0.2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
     },
     {
       "id": "BAAI/bge-large-en-v1.5",
@@ -11945,6 +12035,33 @@
         "source": "public-provider-conf"
       },
       "vision": true
+    },
+    {
+      "id": "tencent/Hunyuan-MT-7B",
+      "name": "tencent/Hunyuan-MT-7B",
+      "display_name": "tencent/Hunyuan-MT-7B",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2,
+        "output": 0.2
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Hunyuan-MT-7B is a lightweight translation model with 7 billion parameters, designed to translate source text into target languages. The model supports translation among 33 languages as well as 5 Chinese minority languages. In the WMT25 International Machine Translation Competition, Hunyuan-MT-7B achieved first place in 30 out of 31 language categories it participated in, demonstrating its exceptional translation capabilities. For translation scenarios, Tencent Hunyuan proposed a complete training paradigm from pre-training to supervised fine-tuning, followed by translation reinforcement and ensemble reinforcement, enabling it to achieve industry-leading performance among models of similar scale. The model is computationally efficient, easy to deploy, and suitable for various application scenarios.",
+        "pricing": {
+          "input": 0.2,
+          "output": 0.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
     },
     {
       "id": "gemini-2.0-flash-lite-preview-02-05",
@@ -14393,51 +14510,6 @@
       "vision": false
     },
     {
-      "id": "o1-2024-12-17",
-      "name": "o1-2024-12-17",
-      "display_name": "o1-2024-12-17",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 15,
-        "output": 60,
-        "cache_read": 7.5
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "thinking"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "cache_read": 7.5,
-          "input": 15,
-          "output": 60
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "DESCRIBE",
       "name": "DESCRIBE",
       "display_name": "DESCRIBE",
@@ -14907,6 +14979,51 @@
       "vision": false
     },
     {
+      "id": "o1-2024-12-17",
+      "name": "o1-2024-12-17",
+      "display_name": "o1-2024-12-17",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 15,
+        "output": 60,
+        "cache_read": 7.5
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 7.5,
+          "input": 15,
+          "output": 60
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "sf-kimi-k2-thinking",
       "name": "sf-kimi-k2-thinking",
       "display_name": "sf-kimi-k2-thinking",
@@ -14927,6 +15044,35 @@
         "pricing": {
           "input": 0.548,
           "output": 2.192
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
+      "name": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
+      "display_name": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.5,
+        "output": 0.5,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Llama-3.1-Nemotron-Ultra-253B is a 253 billion parameter reasoning-focused language model optimized for efficiency that excels at math, coding, and general instruction-following tasks while running on a single 8xH100 node.",
+        "pricing": {
+          "cache_read": 0,
+          "input": 0.5,
+          "output": 0.5
         },
         "source": "public-provider-conf"
       },
@@ -15537,6 +15683,32 @@
           "cache_read": 0.273974,
           "input": 0.273974,
           "output": 1.095896
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "sophnet-minimax-m2.1",
+      "name": "sophnet-minimax-m2.1",
+      "display_name": "sophnet-minimax-m2.1",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2876,
+        "output": 1.1504
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.2876,
+          "output": 1.1504
         },
         "source": "public-provider-conf"
       },
@@ -18819,6 +18991,32 @@
       "vision": false
     },
     {
+      "id": "mm-minimax-m2.1",
+      "name": "mm-minimax-m2.1",
+      "display_name": "mm-minimax-m2.1",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.288,
+        "output": 1.152
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.288,
+          "output": 1.152
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "moonshot-v1-128k",
       "name": "moonshot-v1-128k",
       "display_name": "moonshot-v1-128k",
@@ -18969,35 +19167,6 @@
         "pricing": {
           "input": 2,
           "output": 2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
-      "name": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
-      "display_name": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.5,
-        "output": 0.5,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Llama-3.1-Nemotron-Ultra-253B is a 253 billion parameter reasoning-focused language model optimized for efficiency that excels at math, coding, and general instruction-following tasks while running on a single 8xH100 node.",
-        "pricing": {
-          "cache_read": 0,
-          "input": 0.5,
-          "output": 0.5
         },
         "source": "public-provider-conf"
       },
