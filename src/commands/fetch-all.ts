@@ -1,18 +1,71 @@
+import { promises as fs } from 'fs';
+import { join } from 'path';
 import { DataFetcher } from '../fetcher/data-fetcher';
 import { DataProcessor } from '../processor/data-processor';
 import { OutputManager } from '../output/output-manager';
 import { loadConfig } from '../config/app-config';
 import {
   ModelsDevApiResponse,
+  ModelsDevProvider,
   createModelsDevProvider,
+  getProviderId,
   mergeProviders,
 } from '../models/models-dev';
+import { createProviderInfo, ProviderInfo } from '../models/provider-info';
 import { mergeProviderWithTemplate } from '../templates/models-dev-template-manager';
+import { ZenMuxProvider } from '../providers/ZenMuxProvider';
 import {
   loadBaseContext,
   createProvidersFromConfig,
   normalizeProviderId,
 } from './models-dev-shared';
+
+async function loadAihubmixFallback(outputDir: string): Promise<ModelsDevProvider | null> {
+  const candidates = [join(outputDir, 'aihubmix.json'), join('dist', 'aihubmix.json')];
+
+  for (const filePath of candidates) {
+    try {
+      const raw = await fs.readFile(filePath, 'utf8');
+      const parsed = JSON.parse(raw) as ModelsDevProvider;
+      if (parsed && Array.isArray(parsed.models)) {
+        return parsed;
+      }
+    } catch (error) {
+      const err = error as NodeJS.ErrnoException;
+      if (err.code === 'ENOENT') {
+        continue;
+      }
+      console.warn(`⚠️  Failed to read ${filePath}: ${err.message ?? String(err)}`);
+    }
+  }
+
+  return null;
+}
+
+function removeProviderById(
+  providers: ModelsDevApiResponse['providers'],
+  targetId: string,
+): ModelsDevApiResponse['providers'] {
+  const normalizedTarget = normalizeProviderId(targetId);
+
+  if (Array.isArray(providers)) {
+    return providers.filter(
+      provider => normalizeProviderId(getProviderId(provider)) !== normalizedTarget,
+    );
+  }
+
+  if (providers && typeof providers === 'object') {
+    const record = { ...(providers as Record<string, ModelsDevProvider>) };
+    for (const [key, provider] of Object.entries(record)) {
+      if (normalizeProviderId(getProviderId(provider)) === normalizedTarget) {
+        delete record[key];
+      }
+    }
+    return record;
+  }
+
+  return providers;
+}
 
 export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApiResponse> {
   console.log('🚀 Fetching models from all providers...');
@@ -59,7 +112,61 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
 
     console.log(`📊 Processed ${processedProviders.length} providers with data validation`);
 
-    const additionalProviders = processedProviders
+    const aihubmixLive = processedProviders.find(
+      provider => normalizeProviderId(provider.provider) === 'aihubmix',
+    );
+    let aihubmixData: ModelsDevProvider | undefined;
+
+    if (aihubmixLive) {
+      aihubmixData = createModelsDevProvider(aihubmixLive);
+      console.log('🔗 Using live AIHubMix data for ZenMux matching.');
+    } else {
+      const fallback = await loadAihubmixFallback(outputDir);
+      if (fallback) {
+        aihubmixData = fallback;
+        console.log('📦 Using cached AIHubMix data for ZenMux matching.');
+      } else {
+        console.warn('⚠️  AIHubMix data unavailable; ZenMux will rely on models.dev only.');
+      }
+    }
+
+    const zenmuxConfig = config.providers['zenmux'];
+    const zenmuxProviders: ProviderInfo[] = [];
+
+    if (zenmuxConfig?.apiUrl) {
+      const zenmuxProvider = new ZenMuxProvider(
+        zenmuxConfig.apiUrl,
+        baseDataWithTemplates,
+        aihubmixData,
+      );
+      const zenmuxModels = await zenmuxProvider.fetchModels();
+      if (zenmuxModels.length > 0) {
+        const zenmuxInfo = createProviderInfo(
+          zenmuxProvider.providerId(),
+          zenmuxProvider.providerName(),
+          zenmuxModels,
+        );
+        const [processedZenmux] = await processor.processProviders([zenmuxInfo], {
+          normalize: true,
+          deduplicate: true,
+          sort: true,
+          validate: true,
+          minModelsPerProvider: 1,
+        });
+        if (processedZenmux) {
+          zenmuxProviders.push(processedZenmux);
+          console.log(`🧭 ZenMux provider ready: ${processedZenmux.models.length} models`);
+        }
+      } else {
+        console.log('ℹ️  ZenMux provider returned no models; keeping base/template data.');
+      }
+    } else {
+      console.warn('⚠️  ZenMux config missing; skipping ZenMux provider fetch.');
+    }
+
+    const combinedProviders = [...processedProviders, ...zenmuxProviders];
+
+    const additionalProviders = combinedProviders
       .map(createModelsDevProvider)
       .map(provider => {
         const normalizedId = normalizeProviderId(provider.id);
@@ -75,7 +182,14 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
       provider => provider.models.length > 0,
     );
 
-    const mergedProviders = mergeProviders(baseDataWithTemplates.providers, [
+    const hasZenmuxProvider = additionalProviders.some(
+      provider => normalizeProviderId(provider.id) === 'zenmux',
+    );
+    const baseProviders = hasZenmuxProvider
+      ? removeProviderById(baseDataWithTemplates.providers, 'zenmux')
+      : baseDataWithTemplates.providers;
+
+    const mergedProviders = mergeProviders(baseProviders, [
       ...additionalProviders,
       ...templateOnlyProviders,
     ]);

@@ -73,6 +73,13 @@ export function getDefaultConfig(): AppConfig {
     30
   );
 
+  providers['zenmux'] = createProviderConfig(
+    'https://zenmux.ai/api/v1/models',
+    undefined,
+    10,
+    30
+  );
+
   providers['jiekou'] = createProviderConfig(
     'https://api.jiekou.ai/openai/models',
     undefined,
