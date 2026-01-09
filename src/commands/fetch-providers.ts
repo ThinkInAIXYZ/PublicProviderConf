@@ -4,6 +4,8 @@ import { OutputManager } from '../output/output-manager';
 import { loadConfig } from '../config/app-config';
 import {
   ModelsDevApiResponse,
+  applyModelsDevTypeFallbacks,
+  buildAiHubMixTypeMap,
   createModelsDevProvider,
   mergeProviders,
 } from '../models/models-dev';
@@ -14,6 +16,7 @@ import {
   normalizeProviderId,
   createProvider,
   getExclusionReason,
+  loadAihubmixFallback,
 } from './models-dev-shared';
 
 export async function fetchSpecificProviders(
@@ -103,6 +106,10 @@ export async function fetchSpecificProviders(
       providers: mergedProviders,
       updated_at: new Date().toISOString(),
     };
+
+    const aihubmixFallback = await loadAihubmixFallback(outputDir);
+    const aihubmixTypeMap = buildAiHubMixTypeMap(aihubmixFallback ?? undefined);
+    applyModelsDevTypeFallbacks(aggregatedData, aihubmixTypeMap);
 
     await outputManager.writeAllFiles(aggregatedData);
 
