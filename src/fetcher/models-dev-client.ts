@@ -5,6 +5,7 @@ import {
   ModelsDevModel,
   ModelsDevProvider,
   normalizeProvidersList,
+  normalizeModelsDevModelFormat,
 } from '../models/models-dev';
 import { normalizeModelToggles } from '../utils/toggles';
 
@@ -307,7 +308,7 @@ export class ModelsDevClient {
     // Ensure toggle fields follow supported/default rules
     normalizeModelToggles(normalized as unknown as Record<string, unknown>);
 
-    return normalized;
+    return normalizeModelsDevModelFormat(normalized);
   }
 
   private ensureValidResponse(data: ModelsDevApiResponse): void {

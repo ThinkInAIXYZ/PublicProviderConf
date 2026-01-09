@@ -50,13 +50,15 @@ export interface ModelsDevModel {
   name: string;
   display_name?: string;
   description?: string;
+  family?: string;
   type?: string;
   context_length?: number;
   max_output_tokens?: number;
   attachment?: boolean;
-  reasoning?: ReasoningConfig;
+  reasoning?: ReasoningConfig | boolean;
   temperature?: boolean;
   tool_call?: boolean;
+  structured_output?: boolean;
   knowledge?: string;
   release_date?: string;
   last_updated?: string;
@@ -68,7 +70,7 @@ export interface ModelsDevModel {
   metadata?: Record<string, unknown>;
   provider?: string;
   vision?: boolean;
-  search?: SearchConfig;
+  search?: SearchConfig | boolean;
 }
 
 export interface ModelsDevProvider {
@@ -285,4 +287,177 @@ export function mergeProviders(
 
   // If structure unknown, fallback to array
   return additions;
+}
+
+function normalizeTypeValue(type?: string): string | undefined {
+  if (!type) {
+    return undefined;
+  }
+  const normalized = type.trim().toLowerCase();
+  return normalized ? normalized : undefined;
+}
+
+function normalizeModelId(rawId?: string): string | null {
+  const trimmed = rawId?.trim();
+  if (!trimmed) {
+    return null;
+  }
+  return trimmed.toLowerCase();
+}
+
+function normalizeModelMatchKey(rawId?: string): string | null {
+  const trimmed = rawId?.trim();
+  if (!trimmed) {
+    return null;
+  }
+  const slashIndex = trimmed.lastIndexOf('/');
+  const modelId = slashIndex >= 0 ? trimmed.slice(slashIndex + 1) : trimmed;
+  const withoutFree = modelId.replace(/-free$/i, '').trim();
+  if (!withoutFree) {
+    return null;
+  }
+  return withoutFree.toLowerCase();
+}
+
+function addTypeMapping(
+  map: Map<string, string>,
+  conflicts: Set<string>,
+  key: string | null,
+  type: string,
+): void {
+  if (!key || conflicts.has(key)) {
+    return;
+  }
+  const existing = map.get(key);
+  if (!existing) {
+    map.set(key, type);
+    return;
+  }
+  if (existing !== type) {
+    map.delete(key);
+    conflicts.add(key);
+  }
+}
+
+const AIHUBMIX_TYPE_WHITELIST = new Set(['image-generation', 'embedding', 'rerank']);
+const EMBEDDING_TYPE_PREFIXES = ['qwen3-embedding', 'bge-m3', 'bge-large-en', 'bge-large-zh'];
+const RERANK_TYPE_PREFIXES = ['qwen3-reranker', 'bge-reranker'];
+
+export function buildAiHubMixTypeMap(aihubmix?: ModelsDevProvider): Map<string, string> {
+  const map = new Map<string, string>();
+  const conflicts = new Set<string>();
+
+  if (!aihubmix) {
+    return map;
+  }
+
+  for (const model of aihubmix.models ?? []) {
+    const normalizedType = normalizeTypeValue(model.type);
+    if (!normalizedType || !AIHUBMIX_TYPE_WHITELIST.has(normalizedType)) {
+      continue;
+    }
+
+    const rawId = model.id ?? model.name;
+    const fullKey = normalizeModelId(rawId);
+    addTypeMapping(map, conflicts, fullKey, normalizedType);
+
+    const matchKey = normalizeModelMatchKey(rawId);
+    if (matchKey && matchKey !== fullKey) {
+      addTypeMapping(map, conflicts, matchKey, normalizedType);
+    }
+  }
+
+  return map;
+}
+
+function resolveAiHubMixType(typeMap: Map<string, string>, modelId?: string): string | undefined {
+  if (!modelId) {
+    return undefined;
+  }
+
+  const fullKey = normalizeModelId(modelId);
+  if (fullKey && typeMap.has(fullKey)) {
+    return typeMap.get(fullKey);
+  }
+
+  const matchKey = normalizeModelMatchKey(modelId);
+  if (matchKey && typeMap.has(matchKey)) {
+    return typeMap.get(matchKey);
+  }
+
+  return undefined;
+}
+
+function resolveWhitelistedType(modelId?: string): string | undefined {
+  if (!modelId) {
+    return undefined;
+  }
+
+  const matchKey = normalizeModelMatchKey(modelId);
+  const normalized = matchKey ?? normalizeModelId(modelId);
+  if (!normalized) {
+    return undefined;
+  }
+
+  const lowered = normalized.toLowerCase();
+  if (EMBEDDING_TYPE_PREFIXES.some(prefix => lowered.startsWith(prefix))) {
+    return 'embedding';
+  }
+  if (RERANK_TYPE_PREFIXES.some(prefix => lowered.startsWith(prefix))) {
+    return 'rerank';
+  }
+
+  return undefined;
+}
+
+export function applyModelsDevTypeFallbacks(
+  data: ModelsDevApiResponse,
+  aihubmixTypeMap?: Map<string, string>,
+): void {
+  const providers = normalizeProvidersList(data.providers);
+  const typeMap = aihubmixTypeMap ?? new Map<string, string>();
+
+  for (const provider of providers) {
+    for (const model of provider.models ?? []) {
+      const matchId = model.id ?? model.name;
+      const whitelistedType = resolveWhitelistedType(matchId);
+      if (whitelistedType) {
+        model.type = whitelistedType;
+        continue;
+      }
+
+      const normalizedType = normalizeTypeValue(model.type);
+      if (normalizedType) {
+        continue;
+      }
+
+      const resolvedType =
+        resolveAiHubMixType(typeMap, matchId) ?? resolveWhitelistedType(matchId);
+      model.type = resolvedType ?? 'chat';
+    }
+  }
+}
+
+export function normalizeModelsDevModelFormat(model: ModelsDevModel): ModelsDevModel {
+  const normalized = { ...model } as ModelsDevModel & Record<string, unknown>;
+  const limit: ModelsDevLimit = { ...(normalized.limit ?? {}) };
+  let touchedLimit = false;
+
+  if (normalized.context_length !== undefined) {
+    limit.context = normalized.context_length;
+    delete normalized.context_length;
+    touchedLimit = true;
+  }
+
+  if (normalized.max_output_tokens !== undefined) {
+    limit.output = normalized.max_output_tokens;
+    delete normalized.max_output_tokens;
+    touchedLimit = true;
+  }
+
+  if (touchedLimit || normalized.limit) {
+    normalized.limit = normalizeLimitValues(limit);
+  }
+
+  return normalized as ModelsDevModel;
 }

@@ -1,3 +1,5 @@
+import { promises as fs } from 'fs';
+import { join } from 'path';
 import * as providers from '../providers';
 import { Provider } from '../providers/Provider';
 import { ModelsDevClient } from '../fetcher/models-dev-client';
@@ -287,4 +289,26 @@ export async function loadBaseContext(): Promise<BaseContext> {
     existingProviderIds,
     exclusionSources,
   };
+}
+
+export async function loadAihubmixFallback(outputDir: string): Promise<ModelsDevProvider | null> {
+  const candidates = [join(outputDir, 'aihubmix.json'), join('dist', 'aihubmix.json')];
+
+  for (const filePath of candidates) {
+    try {
+      const raw = await fs.readFile(filePath, 'utf8');
+      const parsed = JSON.parse(raw) as ModelsDevProvider;
+      if (parsed && Array.isArray(parsed.models)) {
+        return parsed;
+      }
+    } catch (error) {
+      const err = error as NodeJS.ErrnoException;
+      if (err.code === 'ENOENT') {
+        continue;
+      }
+      console.warn(`⚠️  Failed to read ${filePath}: ${err.message ?? String(err)}`);
+    }
+  }
+
+  return null;
 }

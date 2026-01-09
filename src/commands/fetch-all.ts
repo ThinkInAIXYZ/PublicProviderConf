@@ -1,5 +1,3 @@
-import { promises as fs } from 'fs';
-import { join } from 'path';
 import { DataFetcher } from '../fetcher/data-fetcher';
 import { DataProcessor } from '../processor/data-processor';
 import { OutputManager } from '../output/output-manager';
@@ -7,6 +5,8 @@ import { loadConfig } from '../config/app-config';
 import {
   ModelsDevApiResponse,
   ModelsDevProvider,
+  applyModelsDevTypeFallbacks,
+  buildAiHubMixTypeMap,
   createModelsDevProvider,
   getProviderId,
   mergeProviders,
@@ -18,29 +18,8 @@ import {
   loadBaseContext,
   createProvidersFromConfig,
   normalizeProviderId,
+  loadAihubmixFallback,
 } from './models-dev-shared';
-
-async function loadAihubmixFallback(outputDir: string): Promise<ModelsDevProvider | null> {
-  const candidates = [join(outputDir, 'aihubmix.json'), join('dist', 'aihubmix.json')];
-
-  for (const filePath of candidates) {
-    try {
-      const raw = await fs.readFile(filePath, 'utf8');
-      const parsed = JSON.parse(raw) as ModelsDevProvider;
-      if (parsed && Array.isArray(parsed.models)) {
-        return parsed;
-      }
-    } catch (error) {
-      const err = error as NodeJS.ErrnoException;
-      if (err.code === 'ENOENT') {
-        continue;
-      }
-      console.warn(`⚠️  Failed to read ${filePath}: ${err.message ?? String(err)}`);
-    }
-  }
-
-  return null;
-}
 
 function removeProviderById(
   providers: ModelsDevApiResponse['providers'],
@@ -199,6 +178,9 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
       providers: mergedProviders,
       updated_at: new Date().toISOString(),
     };
+
+    const aihubmixTypeMap = buildAiHubMixTypeMap(aihubmixData);
+    applyModelsDevTypeFallbacks(aggregatedData, aihubmixTypeMap);
 
     await outputManager.writeAllFiles(aggregatedData);
 
