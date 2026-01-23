@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2026-01-20T06:01:51.518Z",
+  "updated_at": "2026-01-23T08:49:50.487Z",
   "models": [
     {
       "id": "gemini-3-flash-preview",
@@ -710,6 +710,56 @@
       },
       "metadata": {
         "description": "GPT-5.2 supports configurable reasoning effort only through the /responses endpoint. To make higher-intensity reasoning available directly via the /chat interface, GPT-5.2-High is provided as a reasoning-enhanced variant of GPT-5.2 with reasoning_effort preset to high. It is designed for tasks that require deeper analysis, stronger result consistency, and greater controllability. By applying more aggressive reasoning strategies and more effective use of extended context, the model delivers clearer and more reliable responses, making it well suited for complex agent workflows, long-chain decision-making, and reliability-critical advanced applications.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "function_calling",
+          "web",
+          "structured_outputs",
+          "tools"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0.175,
+          "input": 1.75,
+          "output": 14
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gpt-5.2-low",
+      "name": "gpt-5.2-low",
+      "display_name": "gpt-5.2-low",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 1.75,
+        "output": 14,
+        "cache_read": 0.175
+      },
+      "limit": {
+        "context": 400000,
+        "output": 400000
+      },
+      "metadata": {
+        "description": "GPT-5.2 supports configuring reasoning strength only through the /responses endpoint. To make lower-overhead reasoning available directly in the /chat endpoint, the GPT-5.2-Low model is provided. This model is based on GPT-5.2 with reasoning_effort preset to low. This model is designed for use cases that are sensitive to response latency and cost. By adopting a lighter reasoning strategy, it delivers stable responses with lower latency and higher throughput. It is well suited for high-concurrency conversations, real-time interactions, basic Q&A, and scenarios where deep reasoning is not required.",
         "typeHints": [
           "llm"
         ],
@@ -7173,6 +7223,89 @@
       "vision": false
     },
     {
+      "id": "embedding-v1",
+      "name": "embedding-v1",
+      "display_name": "embedding-v1",
+      "type": "embedding",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.068,
+        "output": 0.068
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Embedding-V1 is a text representation model based on Baidu's Wenxin large model technology, capable of converting text into numerical vector forms for applications such as text retrieval, information recommendation, and knowledge mining. Embedding-V1 provides an Embeddings interface that generates corresponding vector representations based on the input content. By calling this interface, you can input text into the model and obtain the corresponding vector representations for subsequent text processing and analysis.",
+        "typeHints": [
+          "embedding"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "input": 0.068,
+          "output": 0.068
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "ernie-4.5-turbo-latest",
+      "name": "ernie-4.5-turbo-latest",
+      "display_name": "ernie-4.5-turbo-latest",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.11,
+        "output": 0.44
+      },
+      "limit": {
+        "context": 135000,
+        "output": 135000
+      },
+      "metadata": {
+        "description": "Wenxin 4.5 Turbo also has significant improvements in hallucination reduction, logical reasoning, and coding capabilities. Compared to Wenxin 4.5, it is faster and more affordable.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0.11,
+          "output": 0.44
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "ernie-irag-edit",
       "name": "ernie-irag-edit",
       "display_name": "ernie-irag-edit",
@@ -8308,89 +8441,6 @@
       "vision": true
     },
     {
-      "id": "embedding-v1",
-      "name": "embedding-v1",
-      "display_name": "embedding-v1",
-      "type": "embedding",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.068,
-        "output": 0.068
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Embedding-V1 is a text representation model based on Baidu's Wenxin large model technology, capable of converting text into numerical vector forms for applications such as text retrieval, information recommendation, and knowledge mining. Embedding-V1 provides an Embeddings interface that generates corresponding vector representations based on the input content. By calling this interface, you can input text into the model and obtain the corresponding vector representations for subsequent text processing and analysis.",
-        "typeHints": [
-          "embedding"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "input": 0.068,
-          "output": 0.068
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "ernie-4.5-turbo-latest",
-      "name": "ernie-4.5-turbo-latest",
-      "display_name": "ernie-4.5-turbo-latest",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 0.11,
-        "output": 0.44
-      },
-      "limit": {
-        "context": 135000,
-        "output": 135000
-      },
-      "metadata": {
-        "description": "Wenxin 4.5 Turbo also has significant improvements in hallucination reduction, logical reasoning, and coding capabilities. Compared to Wenxin 4.5, it is faster and more affordable.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 0.11,
-          "output": 0.44
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "jina-clip-v2",
       "name": "jina-clip-v2",
       "display_name": "jina-clip-v2",
@@ -8689,6 +8739,51 @@
       "vision": false
     },
     {
+      "id": "ernie-4.5",
+      "name": "ernie-4.5",
+      "display_name": "ernie-4.5",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.068,
+        "output": 0.272
+      },
+      "limit": {
+        "context": 160000,
+        "output": 160000
+      },
+      "metadata": {
+        "description": "Wenxin Large Model 4.5 is a next-generation native multimodal foundational model independently developed by Baidu. It achieves collaborative optimization through joint modeling of multiple modalities, demonstrating excellent multimodal understanding capabilities; it possesses more advanced language abilities, with comprehensive improvements in comprehension, generation, logic, and memory, as well as significant enhancements in hallucination reduction, logical reasoning, and coding capabilities.ERNIE-4.5-21B-A3B is an aligned open-source model with a MoE structure, having a total of 21 billion parameters and 3 billion activated parameters.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0.068,
+          "output": 0.272
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "ernie-4.5-turbo-vl",
       "name": "ernie-4.5-turbo-vl",
       "display_name": "ernie-4.5-turbo-vl",
@@ -8953,51 +9048,6 @@
         "pricing": {
           "input": 3.3,
           "output": 16.5
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "ernie-4.5",
-      "name": "ernie-4.5",
-      "display_name": "ernie-4.5",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 0.068,
-        "output": 0.272
-      },
-      "limit": {
-        "context": 160000,
-        "output": 160000
-      },
-      "metadata": {
-        "description": "Wenxin Large Model 4.5 is a next-generation native multimodal foundational model independently developed by Baidu. It achieves collaborative optimization through joint modeling of multiple modalities, demonstrating excellent multimodal understanding capabilities; it possesses more advanced language abilities, with comprehensive improvements in comprehension, generation, logic, and memory, as well as significant enhancements in hallucination reduction, logical reasoning, and coding capabilities.ERNIE-4.5-21B-A3B is an aligned open-source model with a MoE structure, having a total of 21 billion parameters and 3 billion activated parameters.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 0.068,
-          "output": 0.272
         },
         "source": "public-provider-conf"
       },
@@ -11679,96 +11729,6 @@
       "vision": false
     },
     {
-      "id": "ernie-4.5-0.3b",
-      "name": "ernie-4.5-0.3b",
-      "display_name": "ernie-4.5-0.3b",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 0.0136,
-        "output": 0.0544
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Wenxin Large Model 4.5 is a next-generation native multimodal foundational large model independently developed by Baidu. It achieves collaborative optimization through joint modeling of multiple modalities, demonstrating excellent multimodal understanding capabilities. The model possesses enhanced language abilities, with comprehensive improvements in understanding, generation, reasoning, and memory. It significantly reduces hallucinations and shows notable advancements in logical reasoning and coding skills.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 0.0136,
-          "output": 0.0544
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "ernie-4.5-turbo-128k-preview",
-      "name": "ernie-4.5-turbo-128k-preview",
-      "display_name": "ernie-4.5-turbo-128k-preview",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 0.108,
-        "output": 0.432
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Wenxin 4.5 Turbo also shows significant enhancements in reducing hallucinations, logical reasoning, and coding capabilities. Compared to Wenxin 4.5, it is faster and more cost-effective.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 0.108,
-          "output": 0.432
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "moonshotai/Kimi-Dev-72B",
       "name": "moonshotai/Kimi-Dev-72B",
       "display_name": "moonshotai/Kimi-Dev-72B",
@@ -11977,6 +11937,96 @@
         "source": "public-provider-conf"
       },
       "vision": false
+    },
+    {
+      "id": "ernie-4.5-0.3b",
+      "name": "ernie-4.5-0.3b",
+      "display_name": "ernie-4.5-0.3b",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.0136,
+        "output": 0.0544
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Wenxin Large Model 4.5 is a next-generation native multimodal foundational large model independently developed by Baidu. It achieves collaborative optimization through joint modeling of multiple modalities, demonstrating excellent multimodal understanding capabilities. The model possesses enhanced language abilities, with comprehensive improvements in understanding, generation, reasoning, and memory. It significantly reduces hallucinations and shows notable advancements in logical reasoning and coding skills.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0.0136,
+          "output": 0.0544
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "ernie-4.5-turbo-128k-preview",
+      "name": "ernie-4.5-turbo-128k-preview",
+      "display_name": "ernie-4.5-turbo-128k-preview",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.108,
+        "output": 0.432
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Wenxin 4.5 Turbo also shows significant enhancements in reducing hallucinations, logical reasoning, and coding capabilities. Compared to Wenxin 4.5, it is faster and more cost-effective.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0.108,
+          "output": 0.432
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "ernie-x1-turbo",
@@ -15470,6 +15520,162 @@
         "pricing": {
           "input": 0.548,
           "output": 2.192
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "mm-minimax-m2.1",
+      "name": "mm-minimax-m2.1",
+      "display_name": "mm-minimax-m2.1",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.288,
+        "output": 1.152
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.288,
+          "output": 1.152
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "moonshot-v1-128k",
+      "name": "moonshot-v1-128k",
+      "display_name": "moonshot-v1-128k",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 10,
+        "output": 10
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 10,
+          "output": 10
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "moonshot-v1-128k-vision-preview",
+      "name": "moonshot-v1-128k-vision-preview",
+      "display_name": "moonshot-v1-128k-vision-preview",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 10,
+        "output": 10
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 10,
+          "output": 10
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "moonshot-v1-32k",
+      "name": "moonshot-v1-32k",
+      "display_name": "moonshot-v1-32k",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 4,
+        "output": 4
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 4,
+          "output": 4
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "moonshot-v1-32k-vision-preview",
+      "name": "moonshot-v1-32k-vision-preview",
+      "display_name": "moonshot-v1-32k-vision-preview",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 4,
+        "output": 4
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 4,
+          "output": 4
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "moonshot-v1-8k",
+      "name": "moonshot-v1-8k",
+      "display_name": "moonshot-v1-8k",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 2,
+        "output": 2
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 2,
+          "output": 2
         },
         "source": "public-provider-conf"
       },
@@ -19447,162 +19653,6 @@
       "vision": false
     },
     {
-      "id": "mm-minimax-m2.1",
-      "name": "mm-minimax-m2.1",
-      "display_name": "mm-minimax-m2.1",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.288,
-        "output": 1.152
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 0.288,
-          "output": 1.152
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "moonshot-v1-128k",
-      "name": "moonshot-v1-128k",
-      "display_name": "moonshot-v1-128k",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 10,
-        "output": 10
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 10,
-          "output": 10
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "moonshot-v1-128k-vision-preview",
-      "name": "moonshot-v1-128k-vision-preview",
-      "display_name": "moonshot-v1-128k-vision-preview",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 10,
-        "output": 10
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 10,
-          "output": 10
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "moonshot-v1-32k",
-      "name": "moonshot-v1-32k",
-      "display_name": "moonshot-v1-32k",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 4,
-        "output": 4
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 4,
-          "output": 4
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "moonshot-v1-32k-vision-preview",
-      "name": "moonshot-v1-32k-vision-preview",
-      "display_name": "moonshot-v1-32k-vision-preview",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 4,
-        "output": 4
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 4,
-          "output": 4
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "moonshot-v1-8k",
-      "name": "moonshot-v1-8k",
-      "display_name": "moonshot-v1-8k",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 2,
-        "output": 2
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 2,
-          "output": 2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "Baichuan3-Turbo",
       "name": "Baichuan3-Turbo",
       "display_name": "Baichuan3-Turbo",
@@ -21054,6 +21104,142 @@
         "pricing": {
           "input": 2.8,
           "output": 11.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "alicloud-deepseek-v3.2",
+      "name": "alicloud-deepseek-v3.2",
+      "display_name": "alicloud-deepseek-v3.2",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.274,
+        "output": 0.411,
+        "cache_read": 0.0548
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "cache_read": 0.0548,
+          "input": 0.274,
+          "output": 0.411
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "alicloud-glm-4.6",
+      "name": "alicloud-glm-4.6",
+      "display_name": "alicloud-glm-4.6",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.41096,
+        "output": 1.917539,
+        "cache_read": 0.41096
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "cache_read": 0.41096,
+          "input": 0.41096,
+          "output": 1.917539
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "alicloud-glm-4.7",
+      "name": "alicloud-glm-4.7",
+      "display_name": "alicloud-glm-4.7",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.41096,
+        "output": 1.917786,
+        "cache_read": 0.41096
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "cache_read": 0.41096,
+          "input": 0.41096,
+          "output": 1.917786
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "alicloud-kimi-k2-instruct",
+      "name": "alicloud-kimi-k2-instruct",
+      "display_name": "alicloud-kimi-k2-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.548,
+        "output": 2.192
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.548,
+          "output": 2.192
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "alicloud-kimi-k2-thinking",
+      "name": "alicloud-kimi-k2-thinking",
+      "display_name": "alicloud-kimi-k2-thinking",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.548,
+        "output": 2.192
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.548,
+          "output": 2.192
         },
         "source": "public-provider-conf"
       },
