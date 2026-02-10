@@ -6,22 +6,21 @@
   "display_name": "Firmware",
   "models": [
     {
-      "id": "grok-4-fast-non-reasoning",
-      "name": "Grok 4 Fast (Non-Reasoning)",
-      "family": "grok",
+      "id": "deepseek-v3",
+      "name": "DeepSeek v3.2",
+      "family": "deepseek",
       "attachment": true,
       "reasoning": {
         "supported": false
       },
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2025-07",
-      "release_date": "2025-09-19",
-      "last_updated": "2025-09-19",
+      "knowledge": "2024-07",
+      "release_date": "2024-12-26",
+      "last_updated": "2025-09-29",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -29,48 +28,14 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 0.58,
+        "output": 1.68
       },
       "limit": {
-        "context": 2000000,
-        "output": 30000
+        "context": 128000,
+        "output": 8192
       },
-      "display_name": "Grok 4 Fast (Non-Reasoning)"
-    },
-    {
-      "id": "grok-4-fast-reasoning",
-      "name": "Grok 4 Fast (Reasoning)",
-      "family": "grok",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-07",
-      "release_date": "2025-09-19",
-      "last_updated": "2025-09-19",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "limit": {
-        "context": 2000000,
-        "output": 30000
-      },
-      "display_name": "Grok 4 Fast (Reasoning)"
+      "display_name": "DeepSeek v3.2"
     },
     {
       "id": "gemini-3-flash-preview",
@@ -101,8 +66,9 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 0.5,
+        "output": 3,
+        "cache_read": 0.05
       },
       "limit": {
         "context": 1048576,
@@ -111,19 +77,21 @@
       "display_name": "Gemini 3 Flash Preview"
     },
     {
-      "id": "grok-code-fast-1",
-      "name": "Grok Code Fast 1",
-      "family": "grok",
-      "attachment": false,
+      "id": "deepseek-r1",
+      "name": "DeepSeek R1",
+      "family": "deepseek-thinking",
+      "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "temperature": true,
-      "knowledge": "2023-10",
-      "release_date": "2025-08-28",
-      "last_updated": "2025-08-28",
+      "knowledge": "2024-07",
+      "release_date": "2025-01-20",
+      "last_updated": "2025-09-29",
       "modalities": {
         "input": [
           "text"
@@ -134,14 +102,14 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 1.35,
+        "output": 5.4
       },
       "limit": {
-        "context": 256000,
-        "output": 10000
+        "context": 128000,
+        "output": 65536
       },
-      "display_name": "Grok Code Fast 1"
+      "display_name": "DeepSeek R1"
     },
     {
       "id": "claude-haiku-4-5",
@@ -149,8 +117,7 @@
       "family": "claude-haiku",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": true,
       "temperature": true,
@@ -169,8 +136,10 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 1,
+        "output": 5,
+        "cache_read": 0.1,
+        "cache_write": 1.25
       },
       "limit": {
         "context": 200000,
@@ -179,45 +148,12 @@
       "display_name": "Claude Haiku 4.5"
     },
     {
-      "id": "kimi-k2-thinking-turbo",
-      "name": "Kimi K2 Thinking Turbo",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "1970-01-01",
-      "last_updated": "1970-01-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 1.15,
-        "output": 8
-      },
-      "limit": {
-        "context": 262000,
-        "output": 128000
-      },
-      "display_name": "Kimi K2 Thinking Turbo"
-    },
-    {
       "id": "claude-opus-4-6",
       "name": "Claude Opus 4.6",
       "family": "claude-opus",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": true,
       "temperature": true,
@@ -236,8 +172,10 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
       },
       "limit": {
         "context": 200000,
@@ -251,8 +189,7 @@
       "family": "claude-opus",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": true,
       "temperature": true,
@@ -271,46 +208,16 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
       },
       "limit": {
         "context": 200000,
         "output": 64000
       },
       "display_name": "Claude Opus 4.5"
-    },
-    {
-      "id": "deepseek-chat",
-      "name": "DeepSeek Chat",
-      "family": "deepseek",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-07",
-      "release_date": "2024-12-26",
-      "last_updated": "2025-09-29",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "limit": {
-        "context": 128000,
-        "output": 8192
-      },
-      "display_name": "DeepSeek Chat"
     },
     {
       "id": "gemini-3-pro-preview",
@@ -341,8 +248,9 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2
       },
       "limit": {
         "context": 1000000,
@@ -378,8 +286,9 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 0.3,
+        "output": 2.5,
+        "cache_read": 0.075
       },
       "limit": {
         "context": 1048576,
@@ -388,45 +297,12 @@
       "display_name": "Gemini 2.5 Flash"
     },
     {
-      "id": "kimi-k2.5",
-      "name": "Kimi-K2.5",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "1970-01-01",
-      "last_updated": "1970-01-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 0.1,
-        "output": 3
-      },
-      "limit": {
-        "context": 262000,
-        "output": 128000
-      },
-      "display_name": "Kimi-K2.5"
-    },
-    {
       "id": "claude-sonnet-4-5",
       "name": "Claude Sonnet 4.5",
       "family": "claude-sonnet",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": true,
       "temperature": true,
@@ -445,77 +321,16 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
       },
       "limit": {
         "context": 200000,
         "output": 64000
       },
       "display_name": "Claude Sonnet 4.5"
-    },
-    {
-      "id": "zai-glm-4.7",
-      "name": "Z.AI GLM-4.7",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "1970-01-01",
-      "last_updated": "1970-01-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "limit": {
-        "context": 131072,
-        "output": 40000
-      },
-      "display_name": "Z.AI GLM-4.7"
-    },
-    {
-      "id": "kimi-k2-thinking",
-      "name": "Kimi K2 Thinking",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "1970-01-01",
-      "last_updated": "1970-01-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 0.6,
-        "output": 2.5
-      },
-      "limit": {
-        "context": 262000,
-        "output": 128000
-      },
-      "display_name": "Kimi K2 Thinking"
     },
     {
       "id": "gpt-5-nano",
@@ -543,9 +358,9 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0
+        "input": 0.05,
+        "output": 0.4,
+        "cache_read": 0.01
       },
       "limit": {
         "context": 400000,
@@ -578,8 +393,9 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 2.5,
+        "output": 10,
+        "cache_read": 1.25
       },
       "limit": {
         "context": 128000,
@@ -613,51 +429,15 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0
+        "input": 0.25,
+        "output": 2,
+        "cache_read": 0.03
       },
       "limit": {
         "context": 400000,
         "output": 128000
       },
       "display_name": "GPT-5 Mini"
-    },
-    {
-      "id": "deepseek-reasoner",
-      "name": "DeepSeek Reasoner",
-      "family": "deepseek-thinking",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "knowledge": "2024-07",
-      "release_date": "2025-01-20",
-      "last_updated": "2025-09-29",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "limit": {
-        "context": 128000,
-        "output": 65536
-      },
-      "display_name": "DeepSeek Reasoner"
     },
     {
       "id": "gemini-2.5-pro",
@@ -687,14 +467,48 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.31
       },
       "limit": {
         "context": 1048576,
         "output": 65536
       },
       "display_name": "Gemini 2.5 Pro"
+    },
+    {
+      "id": "gpt-oss-20b",
+      "name": "GPT OSS 120B",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "1970-01-01",
+      "last_updated": "1970-01-01",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.07,
+        "output": 0.2
+      },
+      "limit": {
+        "context": 131072,
+        "output": 32768
+      },
+      "display_name": "GPT OSS 120B"
     },
     {
       "id": "gpt-oss-120b",
@@ -720,8 +534,8 @@
       },
       "open_weights": true,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 0.15,
+        "output": 0.6
       },
       "limit": {
         "context": 131072,
@@ -755,8 +569,9 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.13
       },
       "limit": {
         "context": 400000,
@@ -789,8 +604,9 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 1.75,
+        "output": 14,
+        "cache_read": 0.175
       },
       "limit": {
         "context": 400000,
