@@ -2,10 +2,10 @@ import type { ToggleConfig } from '../utils/toggles';
 
 export enum ModelType {
   Chat = 'chat',
-  Completion = 'completion',
   Embedding = 'embedding',
   ImageGeneration = 'imageGeneration',
   Audio = 'audio',
+  Rerank = 'rerank',
 }
 
 export interface ModelModalities {

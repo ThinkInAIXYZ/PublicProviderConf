@@ -85,7 +85,7 @@ function determineModelType(modelType?: string | null, modelId?: string): ModelT
   const normalizedType = (modelType ?? '').trim().toLowerCase();
   switch (normalizedType) {
     case 'completion':
-      return ModelType.Completion;
+      return ModelType.Chat;
     case 'embedding':
       return ModelType.Embedding;
     case 'image':

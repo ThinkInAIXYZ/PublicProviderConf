@@ -1,18 +1,50 @@
 import { DataFetcher } from '../fetcher/data-fetcher';
 import { DataProcessor } from '../processor/data-processor';
-import { ModelsDevOutputManager } from '../output/models-dev-output-manager';
+import { OutputManager } from '../output/output-manager';
 import { loadConfig } from '../config/app-config';
 import {
   ModelsDevApiResponse,
+  ModelsDevProvider,
+  applyModelsDevTypeFallbacks,
+  buildAiHubMixTypeMap,
   createModelsDevProvider,
+  getProviderId,
   mergeProviders,
 } from '../models/models-dev';
+import { createProviderInfo, ProviderInfo } from '../models/provider-info';
 import { mergeProviderWithTemplate } from '../templates/models-dev-template-manager';
+import { ZenMuxProvider } from '../providers/ZenMuxProvider';
 import {
   loadBaseContext,
   createProvidersFromConfig,
   normalizeProviderId,
+  loadAihubmixFallback,
 } from './models-dev-shared';
+
+function removeProviderById(
+  providers: ModelsDevApiResponse['providers'],
+  targetId: string,
+): ModelsDevApiResponse['providers'] {
+  const normalizedTarget = normalizeProviderId(targetId);
+
+  if (Array.isArray(providers)) {
+    return providers.filter(
+      provider => normalizeProviderId(getProviderId(provider)) !== normalizedTarget,
+    );
+  }
+
+  if (providers && typeof providers === 'object') {
+    const record = { ...(providers as Record<string, ModelsDevProvider>) };
+    for (const [key, provider] of Object.entries(record)) {
+      if (normalizeProviderId(getProviderId(provider)) === normalizedTarget) {
+        delete record[key];
+      }
+    }
+    return record;
+  }
+
+  return providers;
+}
 
 export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApiResponse> {
   console.log('🚀 Fetching models from all providers...');
@@ -30,7 +62,7 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
 
   const fetcher = new DataFetcher();
   const processor = new DataProcessor();
-  const outputManager = new ModelsDevOutputManager(outputDir);
+  const outputManager = new OutputManager(outputDir);
 
   const providerInstances = createProvidersFromConfig(
     config,
@@ -59,7 +91,61 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
 
     console.log(`📊 Processed ${processedProviders.length} providers with data validation`);
 
-    const additionalProviders = processedProviders
+    const aihubmixLive = processedProviders.find(
+      provider => normalizeProviderId(provider.provider) === 'aihubmix',
+    );
+    let aihubmixData: ModelsDevProvider | undefined;
+
+    if (aihubmixLive) {
+      aihubmixData = createModelsDevProvider(aihubmixLive);
+      console.log('🔗 Using live AIHubMix data for ZenMux matching.');
+    } else {
+      const fallback = await loadAihubmixFallback(outputDir);
+      if (fallback) {
+        aihubmixData = fallback;
+        console.log('📦 Using cached AIHubMix data for ZenMux matching.');
+      } else {
+        console.warn('⚠️  AIHubMix data unavailable; ZenMux will rely on models.dev only.');
+      }
+    }
+
+    const zenmuxConfig = config.providers['zenmux'];
+    const zenmuxProviders: ProviderInfo[] = [];
+
+    if (zenmuxConfig?.apiUrl) {
+      const zenmuxProvider = new ZenMuxProvider(
+        zenmuxConfig.apiUrl,
+        baseDataWithTemplates,
+        aihubmixData,
+      );
+      const zenmuxModels = await zenmuxProvider.fetchModels();
+      if (zenmuxModels.length > 0) {
+        const zenmuxInfo = createProviderInfo(
+          zenmuxProvider.providerId(),
+          zenmuxProvider.providerName(),
+          zenmuxModels,
+        );
+        const [processedZenmux] = await processor.processProviders([zenmuxInfo], {
+          normalize: true,
+          deduplicate: true,
+          sort: true,
+          validate: true,
+          minModelsPerProvider: 1,
+        });
+        if (processedZenmux) {
+          zenmuxProviders.push(processedZenmux);
+          console.log(`🧭 ZenMux provider ready: ${processedZenmux.models.length} models`);
+        }
+      } else {
+        console.log('ℹ️  ZenMux provider returned no models; keeping base/template data.');
+      }
+    } else {
+      console.warn('⚠️  ZenMux config missing; skipping ZenMux provider fetch.');
+    }
+
+    const combinedProviders = [...processedProviders, ...zenmuxProviders];
+
+    const additionalProviders = combinedProviders
       .map(createModelsDevProvider)
       .map(provider => {
         const normalizedId = normalizeProviderId(provider.id);
@@ -75,7 +161,14 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
       provider => provider.models.length > 0,
     );
 
-    const mergedProviders = mergeProviders(baseDataWithTemplates.providers, [
+    const hasZenmuxProvider = additionalProviders.some(
+      provider => normalizeProviderId(provider.id) === 'zenmux',
+    );
+    const baseProviders = hasZenmuxProvider
+      ? removeProviderById(baseDataWithTemplates.providers, 'zenmux')
+      : baseDataWithTemplates.providers;
+
+    const mergedProviders = mergeProviders(baseProviders, [
       ...additionalProviders,
       ...templateOnlyProviders,
     ]);
@@ -85,6 +178,9 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
       providers: mergedProviders,
       updated_at: new Date().toISOString(),
     };
+
+    const aihubmixTypeMap = buildAiHubMixTypeMap(aihubmixData);
+    applyModelsDevTypeFallbacks(aggregatedData, aihubmixTypeMap);
 
     await outputManager.writeAllFiles(aggregatedData);
 

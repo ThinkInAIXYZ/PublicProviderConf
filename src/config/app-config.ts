@@ -59,8 +59,22 @@ export function getDefaultConfig(): AppConfig {
     30
   );
 
+  providers['aihubmix'] = createProviderConfig(
+    'https://aihubmix.com/api/v1/models',
+    undefined,
+    10,
+    30
+  );
+
   providers['openrouter'] = createProviderConfig(
     'https://openrouter.ai/api/v1/models',
+    undefined,
+    10,
+    30
+  );
+
+  providers['zenmux'] = createProviderConfig(
+    'https://zenmux.ai/api/v1/models',
     undefined,
     10,
     30
