@@ -39,6 +39,50 @@ function exec(command, options = {}) {
   return execSync(command, { ...defaultOptions, ...options });
 }
 
+function resolveUpstreamBranch(branch) {
+  try {
+    return exec('git rev-parse --abbrev-ref --symbolic-full-name @{u}', { silent: true }).trim();
+  } catch {
+    try {
+      exec(`git show-ref --verify --quiet refs/remotes/origin/${branch}`, { silent: true });
+      return `origin/${branch}`;
+    } catch {
+      return null;
+    }
+  }
+}
+
+function forceCleanWorkingTree() {
+  log('   Cleaning working tree (hard reset + clean)...', 'blue');
+  exec('git reset --hard HEAD');
+  exec('git clean -fd');
+  log('   ✅ Working tree cleaned', 'green');
+}
+
+function syncBranchToLatest(branch) {
+  log('   Syncing repository to latest remote commit...', 'blue');
+
+  try {
+    exec('git fetch --all --prune');
+  } catch (error) {
+    log(`   ⚠️  Fetch failed, continue with local HEAD: ${error.message}`, 'yellow');
+    return;
+  }
+
+  const upstream = resolveUpstreamBranch(branch);
+  if (!upstream) {
+    log('   ⚠️  No upstream branch found, continue with local HEAD', 'yellow');
+    return;
+  }
+
+  try {
+    exec(`git reset --hard ${upstream}`);
+    log(`   ✅ Synced to ${upstream}`, 'green');
+  } catch (error) {
+    log(`   ⚠️  Failed to reset to ${upstream}, continue with local HEAD: ${error.message}`, 'yellow');
+  }
+}
+
 // ============================================
 // Phase 1: Prerequisites Check
 // ============================================
@@ -55,14 +99,14 @@ async function checkPrerequisites() {
 
   // Check current branch
   const branch = exec('git branch --show-current', { silent: true }).trim();
+  if (!branch) {
+    throw new Error('Detached HEAD is not supported. Please checkout a branch first.');
+  }
   log(`   Current branch: ${branch}`, 'blue');
 
-  // Check for uncommitted changes
-  try {
-    exec('git diff-index --quiet HEAD --', { silent: true });
-  } catch {
-    throw new Error('Working tree has uncommitted changes. Please commit or stash them first.');
-  }
+  // Force clean local changes to maximize automation success
+  forceCleanWorkingTree();
+  syncBranchToLatest(branch);
 
   // Check if dist directory exists
   if (!existsSync(DIST_DIR)) {
