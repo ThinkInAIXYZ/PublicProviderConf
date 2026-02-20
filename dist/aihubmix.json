@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2026-02-19T14:40:00.332Z",
+  "updated_at": "2026-02-20T02:17:13.795Z",
   "models": [
     {
       "id": "gemini-3.1-pro-preview",
@@ -28,8 +28,8 @@
         "cache_read": 0.2
       },
       "limit": {
-        "context": 8192,
-        "output": 8192
+        "context": 1000000,
+        "output": 1000000
       },
       "metadata": {
         "description": "gemini-3.1-pro-preview is an officially unreleased model; we found this model name in Vertex AI and can currently successfully request it. The price is currently set the same as gemini-3-pro-preview.",
@@ -43,6 +43,62 @@
           "structured_outputs",
           "web",
           "deepsearch",
+          "long_context"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "pricing": {
+          "cache_read": 0.2,
+          "input": 2,
+          "output": 12
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gemini-3.1-pro-preview-search",
+      "name": "gemini-3.1-pro-preview-search",
+      "display_name": "gemini-3.1-pro-preview-search",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ]
+      },
+      "cost": {
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Gemini-3.1-pro-preview-search integrates Google's official search functionality; the search feature incurs an additional separate fee log directly incorporated into the scoring, but the log details are not displayed; this will be fixed in the future to show the details; it only supports OpenAI-compatible format calls and does not support the Gemini SDK; for the Gemini native SDK, please directly set the official search parameters.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "web",
+          "deepsearch",
+          "tools",
+          "function_calling",
+          "structured_outputs",
           "long_context"
         ],
         "inputModalities": [
@@ -1140,6 +1196,54 @@
       "id": "gpt-4.1-nano-free",
       "name": "gpt-4.1-nano-free",
       "display_name": "gpt-4.1-nano-free",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 1047576,
+        "output": 1047576
+      },
+      "metadata": {
+        "description": "This free model API comes from the OpenAI model deployed on Azure. To prevent abuse, the external content filter provided by Azure has been enforced, which will result in additional delays. If you want to experience the full version of the model API without filters, please use the paid version and request the model name ID without \"-free\".",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs",
+          "long_context"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0,
+          "input": 0,
+          "output": 0
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gpt-4o-free",
+      "name": "gpt-4o-free",
+      "display_name": "gpt-4o-free",
       "type": "chat",
       "reasoning": {
         "supported": false
