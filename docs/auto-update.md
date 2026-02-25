@@ -11,6 +11,7 @@ Automated script for periodically fetching latest AI model configurations and co
 **English:**
 - **Smart Change Detection**: Only commits when substantial changes detected (new/removed models, price changes, feature updates)
 - **Auto Backup & Restore**: Automatic backup before run, auto-restore on failure
+- **Force Clean & Sync**: Discards local uncommitted changes and syncs to latest upstream before update
 - **Detailed Commit Messages**: Generates conventional commit messages with change details
 - **Timestamp Exclusion**: Automatically excludes timestamp-only changes (`all.json` and `dc_sync_version.json`)
 - **One-Click Execution**: Single command for build, detect, and commit workflow
@@ -18,6 +19,7 @@ Automated script for periodically fetching latest AI model configurations and co
 **中文：**
 - **智能变更检测**: 仅当检测到实质性变更（新增/删除模型、价格变动、功能更新）时才提交
 - **自动备份恢复**: 运行前自动备份，失败时自动恢复
+- **强制清理并同步**: 更新前丢弃本地未提交改动并同步到上游最新提交
 - **详细 Commit Message**: 生成包含变更详情的规范化提交信息
 - **排除时间戳变更**: 自动排除仅时间戳变化的场景
 - **一键执行**: 单条命令完成构建、检测、提交全流程
@@ -66,14 +68,16 @@ crontab -e
 ## Script Workflow / 脚本流程
 
 ```
-1. Check prerequisites (git status, branch) / 检查前提条件
-2. Backup current dist/ directory / 备份当前 dist/ 目录
-3. Run pnpm install → pnpm build → pnpm start / 执行构建
-4. Compare old vs new provider JSON files / 对比新旧文件
-5. Detect substantial changes / 检测实质性变更
-6. If changes exist → git add + commit + push / 有变更则提交
-7. If no changes → cleanup and exit / 无变更则清理退出
-8. Cleanup temporary backup / 清理临时备份
+1. Check git repo and current branch / 检查 Git 仓库与当前分支
+2. Force clean working tree (reset + clean) / 强制清理工作目录（reset + clean）
+3. Fetch remote and hard reset to upstream latest / 拉取远端并 hard reset 到上游最新
+4. Backup current dist/ directory / 备份当前 dist/ 目录
+5. Run pnpm install → pnpm build → pnpm start / 执行构建
+6. Compare old vs new provider JSON files / 对比新旧文件
+7. Detect substantial changes / 检测实质性变更
+8. If changes exist → git add + commit + push / 有变更则提交
+9. If no changes → cleanup and exit / 无变更则清理退出
+10. Cleanup temporary backup / 清理临时备份
 ```
 
 ---
@@ -130,7 +134,8 @@ Total: 5 models added, 1 model deprecated, 1 price change
 | fetch-all failed / 获取失败 | Exit 1, **auto-restore backup** |
 | No substantial changes / 无实质变更 | Exit 0, normal exit |
 | git push failed / 推送失败 | Exit 1, commit exists locally |
-| Dirty working tree / 工作目录不干净 | Exit 1, commit or stash first |
+| Dirty working tree / 工作目录不干净 | Auto reset + clean, then continue |
+| Detached HEAD / 非分支状态 | Exit 1, checkout a branch first |
 
 ---
 
@@ -162,15 +167,10 @@ mv dist-backup dist
 
 ### FAQ / 常见问题
 
-**Q: "Working tree has uncommitted changes"**
+**Q: What if there are uncommitted local changes? / 有未提交本地改动怎么办？**
 
-**A:** Commit or stash first / 先提交或暂存：
-```bash
-git add .
-git commit -m "wip: save current work"
-# or / 或
-git stash
-```
+**A:** The script will discard them automatically before update.
+脚本会在更新前自动丢弃这些改动（`git reset --hard` + `git clean -fd`）。
 
 **Q: Push failed but commit created / Push 失败但 commit 已创建**
 
@@ -209,8 +209,9 @@ dist/                        # Output directory / 输出目录
 ## Security Notes / 安全注意事项
 
 1. **Don't expose API Keys in public / 不要在公共环境暴露 API Keys**: Ensure `.env` is in `.gitignore`
-2. **Check cron logs regularly / 定期检查定时任务日志**: Ensure automation runs properly
-3. **Backup important configs / 备份重要配置**: Manual backup recommended before critical changes
+2. **This script is destructive to local changes / 脚本会清理本地改动**: It force-runs `git reset --hard` and `git clean -fd`
+3. **Check cron logs regularly / 定期检查定时任务日志**: Ensure automation runs properly
+4. **Backup important configs / 备份重要配置**: Manual backup recommended before critical changes
 
 ---
 
@@ -225,3 +226,4 @@ dist/                        # Output directory / 输出目录
 ## Changelog / 更新日志
 
 - **2025-02**: Initial release / 初始版本发布
+- **2026-02**: Force-clean and upstream sync behavior added / 增加强制清理与上游同步行为
