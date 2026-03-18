@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2026-03-18T00:17:13.419Z",
+  "updated_at": "2026-03-18T04:17:13.696Z",
   "models": [
     {
       "id": "gemini-3.1-flash-image-preview",
@@ -325,9 +325,9 @@
       "vision": true
     },
     {
-      "id": "gpt-5.3-chat-latest",
-      "name": "gpt-5.3-chat-latest",
-      "display_name": "gpt-5.3-chat-latest",
+      "id": "gpt-5.4-mini",
+      "name": "gpt-5.4-mini",
+      "display_name": "gpt-5.4-mini",
       "type": "chat",
       "reasoning": {
         "supported": false
@@ -340,40 +340,42 @@
         ]
       },
       "cost": {
-        "input": 1.75,
-        "output": 14,
-        "cache_read": 0.175
+        "input": 0.75,
+        "output": 4.5,
+        "cache_read": 0.075
       },
       "limit": {
-        "context": 128000,
-        "output": 128000
+        "context": 400000,
+        "output": 400000
       },
       "metadata": {
-        "description": "GPT-5.3Chat refers to the GPT-5.3 snapshot currently used in ChatGPT and is optimized for conversational use cases. While GPT-5.2 is recommended for most API applications, GPT-5.3Chat is ideal for testing the latest improvements in chat-based interactions.",
+        "description": "GPT-5.4 mini is a faster, more efficient model that inherits the advantages of GPT-5.4 and is specifically optimized for high-volume workloads.",
         "typeHints": [
           "llm"
         ],
         "features": [
+          "tools",
           "function_calling",
-          "structured_outputs"
+          "structured_outputs",
+          "web"
         ],
         "inputModalities": [
           "text",
           "image"
         ],
         "pricing": {
-          "cache_read": 0.175,
-          "input": 1.75,
-          "output": 14
+          "cache_read": 0.075,
+          "input": 0.75,
+          "output": 4.5
         },
         "source": "public-provider-conf"
       },
       "vision": true
     },
     {
-      "id": "gpt-5.4-pro",
-      "name": "gpt-5.4-pro",
-      "display_name": "gpt-5.4-pro",
+      "id": "gpt-5.4-nano",
+      "name": "gpt-5.4-nano",
+      "display_name": "gpt-5.4-nano",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -387,34 +389,34 @@
         ]
       },
       "cost": {
-        "input": 30,
-        "output": 180,
-        "cache_read": 30
+        "input": 0.2,
+        "output": 1.25,
+        "cache_read": 0.02
       },
       "limit": {
-        "context": 1050000,
-        "output": 1050000
+        "context": 400000,
+        "output": 400000
       },
       "metadata": {
-        "description": "This model is very expensive and slow. Please note that you will still be charged if failures are caused by network issues.GPT-5.4 pro is available in the Responses API only to enable support for multi-turn model interactions before responding to API requests, and other advanced API features in the future. Since GPT-5.4 pro is designed to tackle tough problems, some requests may take several minutes to finish. To avoid timeout, please set a longer timeout duration. It is recommended to use this under good network conditions.",
+        "description": "GPT-5.4 nano is designed for tasks where speed and cost are most important, such as classification, data extraction, ranking, and sub-agent scenarios.",
         "typeHints": [
           "llm"
         ],
         "features": [
-          "thinking",
-          "web",
           "tools",
           "function_calling",
-          "structured_outputs"
+          "structured_outputs",
+          "thinking",
+          "web"
         ],
         "inputModalities": [
           "text",
           "image"
         ],
         "pricing": {
-          "cache_read": 30,
-          "input": 30,
-          "output": 180
+          "cache_read": 0.02,
+          "input": 0.2,
+          "output": 1.25
         },
         "source": "public-provider-conf"
       },
@@ -791,6 +793,52 @@
       "vision": true
     },
     {
+      "id": "gpt-5.3-chat-latest",
+      "name": "gpt-5.3-chat-latest",
+      "display_name": "gpt-5.3-chat-latest",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 1.75,
+        "output": 14,
+        "cache_read": 0.175
+      },
+      "limit": {
+        "context": 128000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "GPT-5.3Chat refers to the GPT-5.3 snapshot currently used in ChatGPT and is optimized for conversational use cases. While GPT-5.2 is recommended for most API applications, GPT-5.3Chat is ideal for testing the latest improvements in chat-based interactions.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0.175,
+          "input": 1.75,
+          "output": 14
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "gpt-5.3-codex",
       "name": "gpt-5.3-codex",
       "display_name": "gpt-5.3-codex",
@@ -1080,6 +1128,56 @@
           "cache_read": 0.25,
           "input": 2.5,
           "output": 15
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gpt-5.4-pro",
+      "name": "gpt-5.4-pro",
+      "display_name": "gpt-5.4-pro",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 30,
+        "output": 180,
+        "cache_read": 30
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 1050000
+      },
+      "metadata": {
+        "description": "This model is very expensive and slow. Please note that you will still be charged if failures are caused by network issues.GPT-5.4 pro is available in the Responses API only to enable support for multi-turn model interactions before responding to API requests, and other advanced API features in the future. Since GPT-5.4 pro is designed to tackle tough problems, some requests may take several minutes to finish. To avoid timeout, please set a longer timeout duration. It is recommended to use this under good network conditions.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "web",
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 30,
+          "input": 30,
+          "output": 180
         },
         "source": "public-provider-conf"
       },
@@ -9861,6 +9959,46 @@
       "vision": false
     },
     {
+      "id": "jina-embeddings-v5-text-small",
+      "name": "jina-embeddings-v5-text-small",
+      "display_name": "jina-embeddings-v5-text-small",
+      "type": "embedding",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.05,
+        "output": 0.05
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "A 3.8-billion-parameter general vector (embedding) model providing state-of-the-art multilingual embeddings with task-specific adapters.",
+        "typeHints": [
+          "embedding"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0.05,
+          "output": 0.05
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "qwen3-235b-a22b",
       "name": "qwen3-235b-a22b",
       "display_name": "qwen3-235b-a22b",
@@ -10163,46 +10301,6 @@
       },
       "metadata": {
         "description": "A 3.8-billion-parameter general vector model (embedding model) for state-of-the-art multilingual embeddings for edge deployment.",
-        "typeHints": [
-          "embedding"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 0.05,
-          "output": 0.05
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "jina-embeddings-v5-text-small",
-      "name": "jina-embeddings-v5-text-small",
-      "display_name": "jina-embeddings-v5-text-small",
-      "type": "embedding",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 0.05,
-        "output": 0.05
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "A 3.8-billion-parameter general vector (embedding) model providing state-of-the-art multilingual embeddings with task-specific adapters.",
         "typeHints": [
           "embedding"
         ],
