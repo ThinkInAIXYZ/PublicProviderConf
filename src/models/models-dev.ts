@@ -1,6 +1,11 @@
 import { ModelInfo, ModelType } from './model-info';
 import { normalizeToggleInPlace, ToggleConfig } from '../utils/toggles';
 import { ProviderInfo } from './provider-info';
+import {
+  applyReasoningPortraitToModel,
+  cloneExtraCapabilities,
+  type ExtraCapabilities,
+} from './extra-capabilities';
 
 export interface ModelsDevModalities {
   input?: string[];
@@ -71,6 +76,7 @@ export interface ModelsDevModel {
   provider?: string;
   vision?: boolean;
   search?: SearchConfig | boolean;
+  extra_capabilities?: ExtraCapabilities;
 }
 
 export interface ModelsDevProvider {
@@ -196,6 +202,7 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
       source: 'public-provider-conf',
     },
     vision: model.vision,
+    extra_capabilities: cloneExtraCapabilities(model.extraCapabilities),
   };
 
   delete result.context_length;
@@ -460,4 +467,14 @@ export function normalizeModelsDevModelFormat(model: ModelsDevModel): ModelsDevM
   }
 
   return normalized as ModelsDevModel;
+}
+
+export function applyReasoningPortraits(data: ModelsDevApiResponse): void {
+  const providers = normalizeProvidersList(data.providers);
+
+  for (const provider of providers) {
+    for (const model of provider.models ?? []) {
+      applyReasoningPortraitToModel(model);
+    }
+  }
 }

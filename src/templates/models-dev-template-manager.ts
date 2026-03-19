@@ -7,6 +7,7 @@ import {
   ModelsDevLimit,
   normalizeLimitValues,
 } from '../models/models-dev';
+import { cloneExtraCapabilities } from '../models/extra-capabilities';
 import { normalizeModelToggles } from '../utils/toggles';
 
 function mergeObjects<T extends Record<string, any> | undefined>(
@@ -137,6 +138,7 @@ function cloneModel(model: ModelsDevModel): ModelsDevModelRecord {
   cloned.modalities = model.modalities ? { ...model.modalities } : undefined;
   cloned.cost = model.cost ? { ...model.cost } : undefined;
   cloned.limit = model.limit ? { ...model.limit } : undefined;
+  cloned.extra_capabilities = cloneExtraCapabilities(model.extra_capabilities);
 
   applyCapabilitiesToFlags(cloned);
 
@@ -172,6 +174,7 @@ function mergeModels(base: ModelsDevModel[] = [], override: ModelsDevModel[] = [
       combined.modalities = mergeObjects(existing.modalities, model.modalities);
       combined.cost = mergeObjects(existing.cost, model.cost);
       combined.limit = mergeObjects(existing.limit, model.limit);
+      combined.extra_capabilities = mergeObjects(existing.extra_capabilities, model.extra_capabilities);
 
       applyCapabilitiesToFlags(combined);
 
@@ -257,6 +260,7 @@ function ensureModelDefaults(model: Partial<ModelsDevModel>, providerId: string)
   normalized.modalities = model.modalities ? { ...model.modalities } : undefined;
   normalized.cost = model.cost ? { ...model.cost } : undefined;
   normalized.limit = model.limit ? { ...model.limit } : undefined;
+  normalized.extra_capabilities = cloneExtraCapabilities(model.extra_capabilities);
   moveTokenFieldsToLimit(normalized);
 
   applyCapabilitiesToFlags(normalized);
