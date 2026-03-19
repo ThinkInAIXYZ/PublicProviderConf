@@ -5,6 +5,7 @@ import { loadConfig } from '../config/app-config';
 import {
   ModelsDevApiResponse,
   ModelsDevProvider,
+  applyReasoningPortraits,
   applyModelsDevTypeFallbacks,
   buildAiHubMixTypeMap,
   createModelsDevProvider,
@@ -181,6 +182,7 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
 
     const aihubmixTypeMap = buildAiHubMixTypeMap(aihubmixData);
     applyModelsDevTypeFallbacks(aggregatedData, aihubmixTypeMap);
+    applyReasoningPortraits(aggregatedData);
 
     await outputManager.writeAllFiles(aggregatedData);
 

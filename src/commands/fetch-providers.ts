@@ -4,6 +4,7 @@ import { OutputManager } from '../output/output-manager';
 import { loadConfig } from '../config/app-config';
 import {
   ModelsDevApiResponse,
+  applyReasoningPortraits,
   applyModelsDevTypeFallbacks,
   buildAiHubMixTypeMap,
   createModelsDevProvider,
@@ -110,6 +111,7 @@ export async function fetchSpecificProviders(
     const aihubmixFallback = await loadAihubmixFallback(outputDir);
     const aihubmixTypeMap = buildAiHubMixTypeMap(aihubmixFallback ?? undefined);
     applyModelsDevTypeFallbacks(aggregatedData, aihubmixTypeMap);
+    applyReasoningPortraits(aggregatedData);
 
     await outputManager.writeAllFiles(aggregatedData);
 

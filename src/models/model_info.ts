@@ -1,4 +1,5 @@
 import type { ToggleConfig } from "../utils/toggles";
+import type { ExtraCapabilities } from "./extra-capabilities";
 
 export enum ModelType {
   Chat = "chat",
@@ -50,6 +51,7 @@ export interface ModelInfo {
   cost?: ModelCost;
   limit?: ModelLimit;
   metadata?: Record<string, unknown>;
+  extraCapabilities?: ExtraCapabilities;
 }
 
 export function createModelInfo(

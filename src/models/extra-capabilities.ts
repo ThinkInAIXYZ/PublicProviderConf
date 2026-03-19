@@ -1,0 +1,343 @@
+export type ReasoningMode = 'budget' | 'effort' | 'level' | 'fixed' | 'mixed';
+export type ReasoningVisibility = 'hidden' | 'summary' | 'full' | 'mixed';
+
+export interface ExtraCapabilitiesReasoningBudget {
+  min?: number;
+  max?: number;
+  default?: number;
+  auto?: number;
+  off?: number;
+  unit?: 'tokens';
+}
+
+export interface ExtraCapabilitiesReasoning {
+  supported?: boolean;
+  default_enabled?: boolean;
+  mode?: ReasoningMode;
+  budget?: ExtraCapabilitiesReasoningBudget;
+  effort?: string;
+  effort_options?: string[];
+  verbosity?: string;
+  verbosity_options?: string[];
+  level?: string;
+  level_options?: string[];
+  interleaved?: boolean;
+  summaries?: boolean;
+  visibility?: ReasoningVisibility;
+  continuation?: string[];
+  notes?: string[];
+  [key: string]: unknown;
+}
+
+export interface ExtraCapabilities {
+  reasoning?: ExtraCapabilitiesReasoning;
+  [key: string]: unknown;
+}
+
+interface ReasoningPortraitDefinition {
+  matches: (normalizedId: string, baseId: string, portableBaseId: string) => boolean;
+  portrait: ExtraCapabilitiesReasoning;
+}
+
+function cloneBudget(
+  budget?: ExtraCapabilitiesReasoningBudget,
+): ExtraCapabilitiesReasoningBudget | undefined {
+  return budget ? { ...budget } : undefined;
+}
+
+function cloneReasoningPortrait(
+  portrait?: ExtraCapabilitiesReasoning,
+): ExtraCapabilitiesReasoning | undefined {
+  if (!portrait) {
+    return undefined;
+  }
+
+  return {
+    ...portrait,
+    budget: cloneBudget(portrait.budget),
+    effort_options: portrait.effort_options ? [...portrait.effort_options] : undefined,
+    verbosity_options: portrait.verbosity_options ? [...portrait.verbosity_options] : undefined,
+    level_options: portrait.level_options ? [...portrait.level_options] : undefined,
+    continuation: portrait.continuation ? [...portrait.continuation] : undefined,
+    notes: portrait.notes ? [...portrait.notes] : undefined,
+  };
+}
+
+function mergeReasoningPortrait(
+  base: ExtraCapabilitiesReasoning,
+  override?: ExtraCapabilitiesReasoning,
+): ExtraCapabilitiesReasoning {
+  if (!override) {
+    return cloneReasoningPortrait(base) ?? {};
+  }
+
+  return {
+    ...base,
+    ...override,
+    budget: base.budget || override.budget ? { ...base.budget, ...override.budget } : undefined,
+    effort_options: override.effort_options ? [...override.effort_options] : base.effort_options ? [...base.effort_options] : undefined,
+    verbosity_options: override.verbosity_options ? [...override.verbosity_options] : base.verbosity_options ? [...base.verbosity_options] : undefined,
+    level_options: override.level_options ? [...override.level_options] : base.level_options ? [...base.level_options] : undefined,
+    continuation: override.continuation ? [...override.continuation] : base.continuation ? [...base.continuation] : undefined,
+    notes: override.notes ? [...override.notes] : base.notes ? [...base.notes] : undefined,
+  };
+}
+
+function normalizeId(rawId?: string): string {
+  return String(rawId ?? '')
+    .trim()
+    .toLowerCase()
+    .replace(/\(free\)/g, '')
+    .replace(/\s+/g, '');
+}
+
+function extractBaseId(normalizedId: string): string {
+  const parts = normalizedId.split('/');
+  return parts[parts.length - 1] ?? normalizedId;
+}
+
+function isGeminiImageVariant(baseId: string): boolean {
+  return baseId.includes('image');
+}
+
+function isGeminiAudioVariant(baseId: string): boolean {
+  return baseId.includes('tts') || baseId.includes('audio');
+}
+
+function matchesGpt5(baseId: string): boolean {
+  return baseId === 'gpt-5' || baseId.startsWith('gpt-5-');
+}
+
+function matchesGpt51(baseId: string): boolean {
+  return baseId === 'gpt-5.1' || baseId.startsWith('gpt-5.1-');
+}
+
+const REASONING_PORTRAITS: ReasoningPortraitDefinition[] = [
+  {
+    matches: (_normalizedId, baseId) => baseId === 'gpt-5-pro',
+    portrait: {
+      supported: true,
+      default_enabled: true,
+      mode: 'fixed',
+      effort: 'high',
+      verbosity: 'medium',
+      verbosity_options: ['low', 'medium', 'high'],
+      visibility: 'hidden',
+    },
+  },
+  {
+    matches: (_normalizedId, baseId) => matchesGpt51(baseId),
+    portrait: {
+      supported: true,
+      default_enabled: false,
+      mode: 'effort',
+      effort: 'none',
+      effort_options: ['none', 'low', 'medium', 'high'],
+      verbosity: 'medium',
+      verbosity_options: ['low', 'medium', 'high'],
+      visibility: 'hidden',
+    },
+  },
+  {
+    matches: (_normalizedId, baseId) => matchesGpt5(baseId) && !matchesGpt51(baseId),
+    portrait: {
+      supported: true,
+      default_enabled: true,
+      mode: 'effort',
+      effort: 'medium',
+      effort_options: ['minimal', 'low', 'medium', 'high'],
+      verbosity: 'medium',
+      verbosity_options: ['low', 'medium', 'high'],
+      visibility: 'hidden',
+    },
+  },
+  {
+    matches: (_normalizedId, baseId) => baseId === 'o4-mini' || baseId.startsWith('o4-mini-'),
+    portrait: {
+      supported: true,
+      default_enabled: true,
+      mode: 'effort',
+      effort: 'medium',
+      visibility: 'hidden',
+    },
+  },
+  {
+    matches: (_normalizedId, baseId) => baseId === 'o3' || baseId.startsWith('o3-'),
+    portrait: {
+      supported: true,
+      default_enabled: true,
+      mode: 'effort',
+      effort: 'medium',
+      visibility: 'hidden',
+    },
+  },
+  {
+    matches: (_normalizedId, _baseId, portableBaseId) =>
+      portableBaseId === 'claude-3-7-sonnet-latest' ||
+      portableBaseId.startsWith('claude-3-7-sonnet-') ||
+      portableBaseId === 'claude-3-7-sonnet',
+    portrait: {
+      supported: true,
+      default_enabled: false,
+      mode: 'budget',
+      budget: {
+        min: 1024,
+        unit: 'tokens',
+      },
+      interleaved: false,
+      summaries: false,
+      visibility: 'full',
+      continuation: ['thinking_blocks'],
+      notes: ['Anthropic uses thinking budget tokens'],
+    },
+  },
+  {
+    matches: (_normalizedId, _baseId, portableBaseId) =>
+      portableBaseId.startsWith('claude-sonnet-4') || portableBaseId.startsWith('claude-opus-4'),
+    portrait: {
+      supported: true,
+      default_enabled: false,
+      mode: 'budget',
+      budget: {
+        min: 1024,
+        unit: 'tokens',
+      },
+      interleaved: true,
+      summaries: true,
+      visibility: 'summary',
+      continuation: ['thinking_blocks'],
+      notes: ['Anthropic uses thinking budget tokens'],
+    },
+  },
+  {
+    matches: (_normalizedId, baseId) => baseId.includes('gemini-2.5-pro'),
+    portrait: {
+      supported: true,
+      default_enabled: true,
+      mode: 'budget',
+      budget: {
+        min: 128,
+        max: 32768,
+        default: -1,
+        auto: -1,
+        unit: 'tokens',
+      },
+      summaries: true,
+      visibility: 'summary',
+      continuation: ['thought_signatures'],
+    },
+  },
+  {
+    matches: (_normalizedId, baseId) => baseId.includes('gemini-2.5-flash-lite'),
+    portrait: {
+      supported: true,
+      default_enabled: false,
+      mode: 'budget',
+      budget: {
+        min: 512,
+        max: 24576,
+        default: -1,
+        auto: -1,
+        unit: 'tokens',
+      },
+      summaries: true,
+      visibility: 'summary',
+      continuation: ['thought_signatures'],
+    },
+  },
+  {
+    matches: (_normalizedId, baseId) =>
+      baseId.includes('gemini-2.5-flash') && !isGeminiImageVariant(baseId) && !isGeminiAudioVariant(baseId),
+    portrait: {
+      supported: true,
+      default_enabled: true,
+      mode: 'budget',
+      budget: {
+        min: 0,
+        max: 24576,
+        default: -1,
+        auto: -1,
+        off: 0,
+        unit: 'tokens',
+      },
+      summaries: true,
+      visibility: 'summary',
+      continuation: ['thought_signatures'],
+    },
+  },
+  {
+    matches: (_normalizedId, baseId) => /^gemini-3(?:\.\d+)?-pro/.test(baseId),
+    portrait: {
+      supported: true,
+      default_enabled: true,
+      mode: 'level',
+      level: 'high',
+      level_options: ['low', 'high'],
+      summaries: true,
+      visibility: 'summary',
+      continuation: ['thought_signatures'],
+    },
+  },
+  {
+    matches: (_normalizedId, baseId) =>
+      /^gemini-3(?:\.\d+)?-flash/.test(baseId) &&
+      !baseId.includes('flash-lite') &&
+      !isGeminiImageVariant(baseId) &&
+      !isGeminiAudioVariant(baseId),
+    portrait: {
+      supported: true,
+      default_enabled: true,
+      mode: 'level',
+      level: 'high',
+      level_options: ['minimal', 'low', 'medium', 'high'],
+      summaries: true,
+      visibility: 'summary',
+      continuation: ['thought_signatures'],
+    },
+  },
+];
+
+export function getReasoningPortrait(modelId?: string): ExtraCapabilitiesReasoning | undefined {
+  const normalizedId = normalizeId(modelId);
+  if (!normalizedId) {
+    return undefined;
+  }
+
+  const baseId = extractBaseId(normalizedId);
+  const portableBaseId = baseId.replace(/\./g, '-');
+
+  for (const definition of REASONING_PORTRAITS) {
+    if (definition.matches(normalizedId, baseId, portableBaseId)) {
+      return cloneReasoningPortrait(definition.portrait);
+    }
+  }
+
+  return undefined;
+}
+
+export function cloneExtraCapabilities(
+  extraCapabilities?: ExtraCapabilities,
+): ExtraCapabilities | undefined {
+  if (!extraCapabilities) {
+    return undefined;
+  }
+
+  const cloned: ExtraCapabilities = { ...extraCapabilities };
+  if (extraCapabilities.reasoning) {
+    cloned.reasoning = cloneReasoningPortrait(extraCapabilities.reasoning);
+  }
+  return cloned;
+}
+
+export function applyReasoningPortraitToModel<T extends { id?: string; extra_capabilities?: ExtraCapabilities }>(
+  model: T,
+): void {
+  const portrait = getReasoningPortrait(model.id);
+  if (!portrait) {
+    return;
+  }
+
+  const extraCapabilities = cloneExtraCapabilities(model.extra_capabilities) ?? {};
+  extraCapabilities.reasoning = mergeReasoningPortrait(portrait, extraCapabilities.reasoning);
+  model.extra_capabilities = extraCapabilities;
+}
