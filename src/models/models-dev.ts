@@ -386,16 +386,41 @@ export function buildAiHubMixTypeMap(aihubmix?: ModelsDevProvider): Map<string, 
 }
 
 function normalizeMetadataList(value: unknown): string[] {
-  if (!Array.isArray(value)) {
-    return [];
-  }
+  const normalized: string[] = [];
+  const seen = new Set<string>();
 
-  return value
-    .map(item => String(item ?? '').trim().toLowerCase())
-    .filter(item => item.length > 0);
+  const addValue = (item: unknown): void => {
+    if (Array.isArray(item)) {
+      for (const entry of item) {
+        addValue(entry);
+      }
+      return;
+    }
+
+    if (item && typeof item === 'object') {
+      for (const entry of Object.values(item as Record<string, unknown>)) {
+        addValue(entry);
+      }
+      return;
+    }
+
+    const normalizedValue = String(item ?? '').trim().toLowerCase();
+    if (!normalizedValue || seen.has(normalizedValue)) {
+      return;
+    }
+
+    seen.add(normalizedValue);
+    normalized.push(normalizedValue);
+  };
+
+  addValue(value);
+
+  return normalized;
 }
 
-function hasReasoningSupport(reasoning?: ModelsDevModel['reasoning']): boolean {
+function hasReasoningSupport(
+  reasoning?: ModelsDevModel['reasoning'] | ExtraCapabilitiesReasoning,
+): boolean {
   if (typeof reasoning === 'boolean') {
     return reasoning;
   }
@@ -404,12 +429,18 @@ function hasReasoningSupport(reasoning?: ModelsDevModel['reasoning']): boolean {
 }
 
 function hasAiHubMixReasoningHint(model: ModelsDevModel): boolean {
-  if (hasReasoningSupport(model.reasoning)) {
+  if (
+    hasReasoningSupport(model.reasoning) ||
+    hasReasoningSupport(model.extra_capabilities?.reasoning)
+  ) {
     return true;
   }
 
   const features = normalizeMetadataList(model.metadata?.features);
-  return features.some(feature => feature.includes('thinking') || feature.includes('reasoning'));
+  const interleavedMetadata = normalizeMetadataList(model.interleaved);
+  return [...features, ...interleavedMetadata].some(
+    feature => feature.includes('thinking') || feature.includes('reasoning'),
+  );
 }
 
 export function buildAiHubMixReasoningHintMap(

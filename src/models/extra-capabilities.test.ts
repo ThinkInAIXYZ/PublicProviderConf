@@ -55,6 +55,23 @@ test('matches interleaved reasoning portraits for canonical and slash-prefixed i
   }
 });
 
+test('normalizes supported to true when existing extra reasoning keeps interleaved true', () => {
+  const model = {
+    id: 'deepseek-reasoner',
+    extra_capabilities: {
+      reasoning: {
+        supported: false,
+        interleaved: true,
+      },
+    },
+  };
+
+  applyReasoningPortraitToModel(model);
+
+  assert.equal(model.extra_capabilities.reasoning.supported, true);
+  assert.equal(model.extra_capabilities.reasoning.interleaved, true);
+});
+
 test('aihubmix reasoning hints promote reasoning support even without a portrait', () => {
   const aihubmix: ModelsDevProvider = {
     id: 'aihubmix',

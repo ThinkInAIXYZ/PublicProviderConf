@@ -97,6 +97,19 @@ function mergeReasoningPortrait(
   };
 }
 
+function normalizeReasoningSupport(
+  reasoning: ExtraCapabilitiesReasoning,
+): ExtraCapabilitiesReasoning {
+  if (reasoning.interleaved === true && reasoning.supported !== true) {
+    return {
+      ...reasoning,
+      supported: true,
+    };
+  }
+
+  return reasoning;
+}
+
 function normalizeId(rawId?: string): string {
   return String(rawId ?? '')
     .trim()
@@ -430,7 +443,7 @@ export function applyReasoningPortraitToModel<T extends ReasoningModelLike>(
   }
 
   const extraCapabilities = cloneExtraCapabilities(model.extra_capabilities) ?? {};
-  extraCapabilities.reasoning = normalizedReasoning;
+  extraCapabilities.reasoning = normalizeReasoningSupport(normalizedReasoning);
   model.extra_capabilities = extraCapabilities;
 }
 
