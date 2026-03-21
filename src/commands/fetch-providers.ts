@@ -6,6 +6,7 @@ import {
   ModelsDevApiResponse,
   applyReasoningPortraits,
   applyModelsDevTypeFallbacks,
+  buildAiHubMixReasoningHintMap,
   buildAiHubMixTypeMap,
   createModelsDevProvider,
   mergeProviders,
@@ -110,8 +111,9 @@ export async function fetchSpecificProviders(
 
     const aihubmixFallback = await loadAihubmixFallback(outputDir);
     const aihubmixTypeMap = buildAiHubMixTypeMap(aihubmixFallback ?? undefined);
+    const aihubmixReasoningHintMap = buildAiHubMixReasoningHintMap(aihubmixFallback ?? undefined);
     applyModelsDevTypeFallbacks(aggregatedData, aihubmixTypeMap);
-    applyReasoningPortraits(aggregatedData);
+    applyReasoningPortraits(aggregatedData, aihubmixReasoningHintMap);
 
     await outputManager.writeAllFiles(aggregatedData);
 

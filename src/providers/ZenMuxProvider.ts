@@ -14,6 +14,7 @@ import {
   ModelsDevProvider,
   normalizeProvidersList,
 } from '../models/models-dev';
+import { cloneExtraCapabilities, cloneLegacyInterleaved } from '../models/extra-capabilities';
 import { normalizeToggleInPlace, type ToggleConfig } from '../utils/toggles';
 
 interface ZenMuxPricingEntry {
@@ -307,6 +308,14 @@ function mapModelsDevModel(
   }
   if (model.metadata) {
     overrides.metadata = { ...model.metadata };
+  }
+  const interleaved = cloneLegacyInterleaved(model.interleaved);
+  if (interleaved !== undefined) {
+    overrides.interleaved = interleaved;
+  }
+  const extraCapabilities = cloneExtraCapabilities(model.extra_capabilities);
+  if (extraCapabilities) {
+    overrides.extraCapabilities = extraCapabilities;
   }
 
   return createModelInfo(

@@ -1,5 +1,5 @@
 import type { ToggleConfig } from "../utils/toggles";
-import type { ExtraCapabilities } from "./extra-capabilities";
+import type { ExtraCapabilities, LegacyInterleaved } from "./extra-capabilities";
 
 export enum ModelType {
   Chat = "chat",
@@ -51,6 +51,7 @@ export interface ModelInfo {
   cost?: ModelCost;
   limit?: ModelLimit;
   metadata?: Record<string, unknown>;
+  interleaved?: LegacyInterleaved;
   extraCapabilities?: ExtraCapabilities;
 }
 
