@@ -3,8 +3,12 @@ import { normalizeToggleInPlace, ToggleConfig } from '../utils/toggles';
 import { ProviderInfo } from './provider-info';
 import {
   applyReasoningPortraitToModel,
+  cloneLegacyInterleaved,
   cloneExtraCapabilities,
+  syncReasoningFlagFromExtra,
   type ExtraCapabilities,
+  type ExtraCapabilitiesReasoning,
+  type LegacyInterleaved,
 } from './extra-capabilities';
 
 export interface ModelsDevModalities {
@@ -76,6 +80,7 @@ export interface ModelsDevModel {
   provider?: string;
   vision?: boolean;
   search?: SearchConfig | boolean;
+  interleaved?: LegacyInterleaved;
   extra_capabilities?: ExtraCapabilities;
 }
 
@@ -202,6 +207,7 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
       source: 'public-provider-conf',
     },
     vision: model.vision,
+    interleaved: cloneLegacyInterleaved(model.interleaved),
     extra_capabilities: cloneExtraCapabilities(model.extraCapabilities),
   };
 
@@ -350,6 +356,8 @@ const AIHUBMIX_TYPE_WHITELIST = new Set(['image-generation', 'embedding', 'reran
 const EMBEDDING_TYPE_PREFIXES = ['qwen3-embedding', 'bge-m3', 'bge-large-en', 'bge-large-zh'];
 const RERANK_TYPE_PREFIXES = ['qwen3-reranker', 'bge-reranker'];
 
+export type AiHubMixReasoningHintMap = Map<string, ExtraCapabilitiesReasoning>;
+
 export function buildAiHubMixTypeMap(aihubmix?: ModelsDevProvider): Map<string, string> {
   const map = new Map<string, string>();
   const conflicts = new Set<string>();
@@ -377,6 +385,94 @@ export function buildAiHubMixTypeMap(aihubmix?: ModelsDevProvider): Map<string, 
   return map;
 }
 
+function normalizeMetadataList(value: unknown): string[] {
+  const normalized: string[] = [];
+  const seen = new Set<string>();
+
+  const addValue = (item: unknown): void => {
+    if (Array.isArray(item)) {
+      for (const entry of item) {
+        addValue(entry);
+      }
+      return;
+    }
+
+    if (item && typeof item === 'object') {
+      for (const entry of Object.values(item as Record<string, unknown>)) {
+        addValue(entry);
+      }
+      return;
+    }
+
+    const normalizedValue = String(item ?? '').trim().toLowerCase();
+    if (!normalizedValue || seen.has(normalizedValue)) {
+      return;
+    }
+
+    seen.add(normalizedValue);
+    normalized.push(normalizedValue);
+  };
+
+  addValue(value);
+
+  return normalized;
+}
+
+function hasReasoningSupport(
+  reasoning?: ModelsDevModel['reasoning'] | ExtraCapabilitiesReasoning,
+): boolean {
+  if (typeof reasoning === 'boolean') {
+    return reasoning;
+  }
+
+  return Boolean(reasoning?.supported);
+}
+
+function hasAiHubMixReasoningHint(model: ModelsDevModel): boolean {
+  if (
+    hasReasoningSupport(model.reasoning) ||
+    hasReasoningSupport(model.extra_capabilities?.reasoning)
+  ) {
+    return true;
+  }
+
+  const features = normalizeMetadataList(model.metadata?.features);
+  const interleavedMetadata = normalizeMetadataList(model.interleaved);
+  return [...features, ...interleavedMetadata].some(
+    feature => feature.includes('thinking') || feature.includes('reasoning'),
+  );
+}
+
+export function buildAiHubMixReasoningHintMap(
+  aihubmix?: ModelsDevProvider,
+): AiHubMixReasoningHintMap {
+  const map: AiHubMixReasoningHintMap = new Map();
+
+  if (!aihubmix) {
+    return map;
+  }
+
+  for (const model of aihubmix.models ?? []) {
+    if (!hasAiHubMixReasoningHint(model)) {
+      continue;
+    }
+
+    const rawId = model.id ?? model.name;
+    const hint: ExtraCapabilitiesReasoning = { supported: true };
+    const fullKey = normalizeModelId(rawId);
+    if (fullKey) {
+      map.set(fullKey, hint);
+    }
+
+    const matchKey = normalizeModelMatchKey(rawId);
+    if (matchKey) {
+      map.set(matchKey, hint);
+    }
+  }
+
+  return map;
+}
+
 function resolveAiHubMixType(typeMap: Map<string, string>, modelId?: string): string | undefined {
   if (!modelId) {
     return undefined;
@@ -390,6 +486,27 @@ function resolveAiHubMixType(typeMap: Map<string, string>, modelId?: string): st
   const matchKey = normalizeModelMatchKey(modelId);
   if (matchKey && typeMap.has(matchKey)) {
     return typeMap.get(matchKey);
+  }
+
+  return undefined;
+}
+
+function resolveAiHubMixReasoningHint(
+  hintMap: AiHubMixReasoningHintMap,
+  modelId?: string,
+): ExtraCapabilitiesReasoning | undefined {
+  if (!modelId) {
+    return undefined;
+  }
+
+  const fullKey = normalizeModelId(modelId);
+  if (fullKey && hintMap.has(fullKey)) {
+    return hintMap.get(fullKey);
+  }
+
+  const matchKey = normalizeModelMatchKey(modelId);
+  if (matchKey && hintMap.has(matchKey)) {
+    return hintMap.get(matchKey);
   }
 
   return undefined;
@@ -469,12 +586,18 @@ export function normalizeModelsDevModelFormat(model: ModelsDevModel): ModelsDevM
   return normalized as ModelsDevModel;
 }
 
-export function applyReasoningPortraits(data: ModelsDevApiResponse): void {
+export function applyReasoningPortraits(
+  data: ModelsDevApiResponse,
+  aihubmixReasoningHintMap?: AiHubMixReasoningHintMap,
+): void {
   const providers = normalizeProvidersList(data.providers);
+  const hintMap = aihubmixReasoningHintMap ?? new Map();
 
   for (const provider of providers) {
     for (const model of provider.models ?? []) {
-      applyReasoningPortraitToModel(model);
+      const hint = resolveAiHubMixReasoningHint(hintMap, model.id ?? model.name);
+      applyReasoningPortraitToModel(model, hint);
+      syncReasoningFlagFromExtra(model);
     }
   }
 }

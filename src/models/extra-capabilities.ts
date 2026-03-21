@@ -1,6 +1,13 @@
 export type ReasoningMode = 'budget' | 'effort' | 'level' | 'fixed' | 'mixed';
 export type ReasoningVisibility = 'hidden' | 'summary' | 'full' | 'mixed';
 
+export interface LegacyInterleavedDescriptor {
+  field?: string;
+  [key: string]: unknown;
+}
+
+export type LegacyInterleaved = boolean | LegacyInterleavedDescriptor;
+
 export interface ExtraCapabilitiesReasoningBudget {
   min?: number;
   max?: number;
@@ -39,13 +46,20 @@ interface ReasoningPortraitDefinition {
   portrait: ExtraCapabilitiesReasoning;
 }
 
+interface ReasoningModelLike {
+  id?: string;
+  reasoning?: unknown;
+  extra_capabilities?: ExtraCapabilities;
+  interleaved?: LegacyInterleaved;
+}
+
 function cloneBudget(
   budget?: ExtraCapabilitiesReasoningBudget,
 ): ExtraCapabilitiesReasoningBudget | undefined {
   return budget ? { ...budget } : undefined;
 }
 
-function cloneReasoningPortrait(
+export function cloneReasoningPortrait(
   portrait?: ExtraCapabilitiesReasoning,
 ): ExtraCapabilitiesReasoning | undefined {
   if (!portrait) {
@@ -83,6 +97,19 @@ function mergeReasoningPortrait(
   };
 }
 
+function normalizeReasoningSupport(
+  reasoning: ExtraCapabilitiesReasoning,
+): ExtraCapabilitiesReasoning {
+  if (reasoning.interleaved === true && reasoning.supported !== true) {
+    return {
+      ...reasoning,
+      supported: true,
+    };
+  }
+
+  return reasoning;
+}
+
 function normalizeId(rawId?: string): string {
   return String(rawId ?? '')
     .trim()
@@ -112,7 +139,31 @@ function matchesGpt51(baseId: string): boolean {
   return baseId === 'gpt-5.1' || baseId.startsWith('gpt-5.1-');
 }
 
+function matchesInterleavedReasoningBase(baseId: string): boolean {
+  return (
+    baseId === 'deepseek-reasoner' ||
+    baseId === 'deepseek-r1' ||
+    baseId === 'deepseek-r1-0528' ||
+    baseId === 'kimi-k2-thinking' ||
+    baseId === 'kimi-k2.5' ||
+    baseId === 'glm-4.7' ||
+    baseId === 'glm-5'
+  );
+}
+
+const DEFAULT_INTERLEAVED_REASONING_PORTRAIT: ExtraCapabilitiesReasoning = {
+  supported: true,
+  interleaved: true,
+  summaries: true,
+  visibility: 'summary',
+  continuation: ['thinking_blocks'],
+};
+
 const REASONING_PORTRAITS: ReasoningPortraitDefinition[] = [
+  {
+    matches: (_normalizedId, baseId) => matchesInterleavedReasoningBase(baseId),
+    portrait: DEFAULT_INTERLEAVED_REASONING_PORTRAIT,
+  },
   {
     matches: (_normalizedId, baseId) => baseId === 'gpt-5-pro',
     portrait: {
@@ -329,15 +380,93 @@ export function cloneExtraCapabilities(
   return cloned;
 }
 
-export function applyReasoningPortraitToModel<T extends { id?: string; extra_capabilities?: ExtraCapabilities }>(
+export function cloneLegacyInterleaved(
+  interleaved?: LegacyInterleaved,
+): LegacyInterleaved | undefined {
+  if (interleaved === undefined) {
+    return undefined;
+  }
+
+  if (typeof interleaved === 'boolean') {
+    return interleaved;
+  }
+
+  return { ...interleaved };
+}
+
+function reasoningFromLegacyInterleaved(
+  interleaved?: LegacyInterleaved,
+): ExtraCapabilitiesReasoning | undefined {
+  if (interleaved === undefined || interleaved === false) {
+    return undefined;
+  }
+
+  if (interleaved === true) {
+    return {
+      supported: true,
+      interleaved: true,
+    };
+  }
+
+  const field = typeof interleaved.field === 'string' ? interleaved.field.trim().toLowerCase() : '';
+  if (!field || field === 'reasoning_content') {
+    return cloneReasoningPortrait(DEFAULT_INTERLEAVED_REASONING_PORTRAIT);
+  }
+
+  return {
+    supported: true,
+    interleaved: true,
+  };
+}
+
+export function applyReasoningPortraitToModel<T extends ReasoningModelLike>(
   model: T,
+  reasoningHint?: ExtraCapabilitiesReasoning,
 ): void {
   const portrait = getReasoningPortrait(model.id);
-  if (!portrait) {
+  const hint = cloneReasoningPortrait(reasoningHint);
+  const legacy = reasoningFromLegacyInterleaved(model.interleaved);
+  const existing = cloneReasoningPortrait(model.extra_capabilities?.reasoning);
+
+  let normalizedReasoning: ExtraCapabilitiesReasoning | undefined;
+  for (const candidate of [portrait, hint, legacy, existing]) {
+    if (!candidate) {
+      continue;
+    }
+    normalizedReasoning = normalizedReasoning
+      ? mergeReasoningPortrait(normalizedReasoning, candidate)
+      : cloneReasoningPortrait(candidate);
+  }
+
+  if (!normalizedReasoning) {
     return;
   }
 
   const extraCapabilities = cloneExtraCapabilities(model.extra_capabilities) ?? {};
-  extraCapabilities.reasoning = mergeReasoningPortrait(portrait, extraCapabilities.reasoning);
+  extraCapabilities.reasoning = normalizeReasoningSupport(normalizedReasoning);
   model.extra_capabilities = extraCapabilities;
+}
+
+export function syncReasoningFlagFromExtra<T extends ReasoningModelLike>(model: T): void {
+  const reasoning = model.extra_capabilities?.reasoning;
+  if (!reasoning || (reasoning.supported !== true && reasoning.interleaved !== true)) {
+    return;
+  }
+
+  if (typeof model.reasoning === 'boolean') {
+    model.reasoning = (model.reasoning
+      ? { supported: true, default: true }
+      : { supported: true }) as T['reasoning'];
+    return;
+  }
+
+  if (model.reasoning && typeof model.reasoning === 'object') {
+    model.reasoning = {
+      ...(model.reasoning as Record<string, unknown>),
+      supported: true,
+    } as T['reasoning'];
+    return;
+  }
+
+  model.reasoning = { supported: true } as T['reasoning'];
 }

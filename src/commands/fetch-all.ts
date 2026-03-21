@@ -7,6 +7,7 @@ import {
   ModelsDevProvider,
   applyReasoningPortraits,
   applyModelsDevTypeFallbacks,
+  buildAiHubMixReasoningHintMap,
   buildAiHubMixTypeMap,
   createModelsDevProvider,
   getProviderId,
@@ -181,8 +182,9 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
     };
 
     const aihubmixTypeMap = buildAiHubMixTypeMap(aihubmixData);
+    const aihubmixReasoningHintMap = buildAiHubMixReasoningHintMap(aihubmixData);
     applyModelsDevTypeFallbacks(aggregatedData, aihubmixTypeMap);
-    applyReasoningPortraits(aggregatedData);
+    applyReasoningPortraits(aggregatedData, aihubmixReasoningHintMap);
 
     await outputManager.writeAllFiles(aggregatedData);
 
