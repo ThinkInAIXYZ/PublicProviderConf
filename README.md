@@ -12,6 +12,8 @@ PublicProviderConf is a TypeScript CLI and library that aggregates the canonical
 The aggregated dataset starts with the upstream `https://models.dev/api.json`. During each run we overlay:
 - Provider overrides from `manual-templates/`
 - Live fetchers for operators that are not (yet) covered by models.dev, such as `ppinfra`, `tokenflux`, and `groq`
+- Official provider fetches where the upstream service exposes a public model-management API, such as `doubao` via the Volcengine Ark control-plane API
+- Fallback or enrichment data from aggregator feeds when the official API omits capability fields, such as ZenMux for `doubao`
 - Lightweight snapshots for ecosystems like `ollama` and `siliconflow`
 
 After post-processing, the CLI writes the final catalog to `dist/`. Key outputs include:
@@ -132,6 +134,8 @@ Options:
 - TokenFlux (marketplace API)
 - Groq (requires `GROQ_API_KEY`)
 - AIHubMix (live API)
+- ZenMux (live API)
+- Doubao (Volcengine Ark control-plane API first, ZenMux fallback/enrichment)
 - BurnCloud (manual template)
 - Ollama (snapshot templates)
 - SiliconFlow (snapshot templates)
@@ -157,6 +161,8 @@ src/
 - Override the models.dev endpoint with `MODELS_DEV_API_URL`
 - Provide an offline fallback snapshot via `MODELS_DEV_SNAPSHOT_PATH`
 - Set API secrets (e.g. `GROQ_API_KEY`) in your environment or CI secrets
+- To prefer the official Doubao source, set `VOLC_ACCESSKEY` / `VOLC_SECRETKEY`
+- This repo also accepts `VOLCENGINE_ACCESS_KEY_ID` / `VOLCENGINE_SECRET_ACCESS_KEY` and optional session token envs `VOLC_SESSION_TOKEN` / `VOLCENGINE_SESSION_TOKEN`
 
 ## Development Tips
 ```bash

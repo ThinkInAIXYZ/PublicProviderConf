@@ -16,6 +16,8 @@ import {
 import { createProviderInfo, ProviderInfo } from '../models/provider-info';
 import { mergeProviderWithTemplate } from '../templates/models-dev-template-manager';
 import { ZenMuxProvider } from '../providers/ZenMuxProvider';
+import { deriveDoubaoProvider } from './derived-providers';
+import { buildPreferredDoubaoProvider } from './doubao-source';
 import {
   loadBaseContext,
   createProvidersFromConfig,
@@ -65,6 +67,13 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
   const fetcher = new DataFetcher();
   const processor = new DataProcessor();
   const outputManager = new OutputManager(outputDir);
+  const processingOptions = {
+    normalize: true,
+    deduplicate: true,
+    sort: true,
+    validate: true,
+    minModelsPerProvider: 1,
+  } as const;
 
   const providerInstances = createProvidersFromConfig(
     config,
@@ -83,13 +92,7 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
       console.log(`✅ Successfully fetched ${providerInfos.length} providers`);
     }
 
-    const processedProviders = await processor.processProviders(providerInfos, {
-      normalize: true,
-      deduplicate: true,
-      sort: true,
-      validate: true,
-      minModelsPerProvider: 1,
-    });
+    const processedProviders = await processor.processProviders(providerInfos, processingOptions);
 
     console.log(`📊 Processed ${processedProviders.length} providers with data validation`);
 
@@ -113,6 +116,8 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
 
     const zenmuxConfig = config.providers['zenmux'];
     const zenmuxProviders: ProviderInfo[] = [];
+    let zenmuxInfo: ProviderInfo | null = null;
+    let fallbackDoubao: ProviderInfo | null = null;
 
     if (zenmuxConfig?.apiUrl) {
       const zenmuxProvider = new ZenMuxProvider(
@@ -122,27 +127,42 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
       );
       const zenmuxModels = await zenmuxProvider.fetchModels();
       if (zenmuxModels.length > 0) {
-        const zenmuxInfo = createProviderInfo(
+        zenmuxInfo = createProviderInfo(
           zenmuxProvider.providerId(),
           zenmuxProvider.providerName(),
           zenmuxModels,
         );
-        const [processedZenmux] = await processor.processProviders([zenmuxInfo], {
-          normalize: true,
-          deduplicate: true,
-          sort: true,
-          validate: true,
-          minModelsPerProvider: 1,
-        });
-        if (processedZenmux) {
-          zenmuxProviders.push(processedZenmux);
-          console.log(`🧭 ZenMux provider ready: ${processedZenmux.models.length} models`);
-        }
+        fallbackDoubao = deriveDoubaoProvider(zenmuxInfo);
       } else {
         console.log('ℹ️  ZenMux provider returned no models; keeping base/template data.');
       }
     } else {
       console.warn('⚠️  ZenMux config missing; skipping ZenMux provider fetch.');
+    }
+
+    const preferredDoubao = await buildPreferredDoubaoProvider(fallbackDoubao);
+    const preferredProviderInfos = [
+      ...(zenmuxInfo ? [zenmuxInfo] : []),
+      ...(preferredDoubao.provider ? [preferredDoubao.provider] : []),
+    ];
+
+    if (preferredProviderInfos.length > 0) {
+      const processedPreferredProviders = await processor.processProviders(
+        preferredProviderInfos,
+        processingOptions,
+      );
+
+      for (const provider of processedPreferredProviders) {
+        zenmuxProviders.push(provider);
+
+        if (normalizeProviderId(provider.provider) === 'doubao') {
+          console.log(
+            `🧭 ${provider.providerName} provider ready: ${provider.models.length} models (${preferredDoubao.source})`,
+          );
+        } else {
+          console.log(`🧭 ${provider.providerName} provider ready: ${provider.models.length} models`);
+        }
+      }
     }
 
     const combinedProviders = [...processedProviders, ...zenmuxProviders];
