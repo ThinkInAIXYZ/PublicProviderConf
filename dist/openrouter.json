@@ -2,7 +2,7 @@
   "id": "openrouter",
   "name": "OpenRouter",
   "display_name": "OpenRouter",
-  "updated_at": "2026-04-07T16:17:09.044Z",
+  "updated_at": "2026-04-07T20:17:09.269Z",
   "models": [
     {
       "id": "ai21/jamba-large-1.7",
@@ -771,6 +771,54 @@
       "id": "anthropic/claude-opus-4.6",
       "name": "Anthropic: Claude Opus 4.6",
       "display_name": "Anthropic: Claude Opus 4.6",
+      "type": "image-generation",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic uses thinking budget tokens"
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-4.6-fast",
+      "name": "Anthropic: Claude Opus 4.6 (Fast)",
+      "display_name": "Anthropic: Claude Opus 4.6 (Fast)",
       "type": "image-generation",
       "reasoning": {
         "supported": true,
@@ -2976,6 +3024,36 @@
       "vision": true
     },
     {
+      "id": "google/gemma-4-26b-a4b-it:free",
+      "name": "Google: Gemma 4 26B A4B  (free)",
+      "display_name": "Google: Gemma 4 26B A4B  (free)",
+      "type": "image-generation",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "image",
+          "text",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "google/gemma-4-31b-it",
       "name": "Google: Gemma 4 31B",
       "display_name": "Google: Gemma 4 31B",
@@ -2999,6 +3077,36 @@
       "limit": {
         "context": 262144,
         "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "google/gemma-4-31b-it:free",
+      "name": "Google: Gemma 4 31B (free)",
+      "display_name": "Google: Gemma 4 31B (free)",
+      "type": "image-generation",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "image",
+          "text",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -10488,12 +10596,17 @@
       },
       "limit": {
         "context": 202752,
-        "output": 131072
+        "output": 202752
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "z-ai/glm-5v-turbo",
