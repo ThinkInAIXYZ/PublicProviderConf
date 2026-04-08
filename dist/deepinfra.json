@@ -5,21 +5,242 @@
   "display_name": "Deep Infra",
   "models": [
     {
-      "id": "Qwen/Qwen3-Coder-480B-A35B-Instruct-Turbo",
-      "name": "Qwen3 Coder 480B A35B Instruct Turbo",
-      "family": "qwen",
+      "id": "openai/gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "family": "gpt-oss",
       "attachment": false,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-07-23",
-      "last_updated": "2025-07-23",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
       "modalities": {
         "input": [
           "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.05,
+        "output": 0.24
+      },
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
+      "display_name": "GPT OSS 120B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "name": "GPT OSS 20B",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.03,
+        "output": 0.14
+      },
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
+      "display_name": "GPT OSS 20B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-4-opus",
+      "name": "Claude Opus 4",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-03-31",
+      "release_date": "2025-06-12",
+      "last_updated": "2025-06-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "cost": {
+        "input": 16.5,
+        "output": 82.5
+      },
+      "limit": {
+        "context": 200000,
+        "output": 32000
+      },
+      "display_name": "Claude Opus 4",
+      "type": "chat"
+    },
+    {
+      "id": "anthropic/claude-3-7-sonnet-latest",
+      "name": "Claude Sonnet 3.7 (Latest)",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2024-10-31",
+      "release_date": "2025-03-13",
+      "last_updated": "2025-03-13",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "cost": {
+        "input": 3.3,
+        "output": 16.5,
+        "cache_read": 0.33
+      },
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "display_name": "Claude Sonnet 3.7 (Latest)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": false,
+          "summaries": false,
+          "visibility": "full",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic uses thinking budget tokens"
+          ]
+        }
+      }
+    },
+    {
+      "id": "zai-org/GLM-4.7",
+      "name": "GLM-4.7",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-04",
+      "release_date": "2025-12-22",
+      "last_updated": "2025-12-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.43,
+        "output": 1.75,
+        "cache_read": 0.08
+      },
+      "limit": {
+        "context": 202752,
+        "output": 16384
+      },
+      "display_name": "GLM-4.7",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "zai-org/GLM-4.6V",
+      "name": "GLM-4.6V",
+      "family": "glm",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-04",
+      "release_date": "2025-09-30",
+      "last_updated": "2025-09-30",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -28,47 +249,25 @@
       "open_weights": true,
       "cost": {
         "input": 0.3,
-        "output": 1.2
+        "output": 0.9
       },
       "limit": {
-        "context": 262144,
-        "output": 66536
+        "context": 204800,
+        "output": 131072
       },
-      "display_name": "Qwen3 Coder 480B A35B Instruct Turbo",
-      "type": "chat"
-    },
-    {
-      "id": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
-      "name": "Qwen3 Coder 480B A35B Instruct",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-07-23",
-      "last_updated": "2025-07-23",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0.4,
-        "output": 1.6
-      },
-      "limit": {
-        "context": 262144,
-        "output": 66536
-      },
-      "display_name": "Qwen3 Coder 480B A35B Instruct",
-      "type": "chat"
+      "display_name": "GLM-4.6V",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "zai-org/GLM-4.7-Flash",
@@ -153,55 +352,6 @@
       "type": "chat"
     },
     {
-      "id": "zai-org/GLM-4.7",
-      "name": "GLM-4.7",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-12-22",
-      "last_updated": "2025-12-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0.43,
-        "output": 1.75,
-        "cache_read": 0.08
-      },
-      "limit": {
-        "context": 202752,
-        "output": 16384
-      },
-      "display_name": "GLM-4.7",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
       "id": "zai-org/GLM-5",
       "name": "GLM-5",
       "family": "glm",
@@ -237,55 +387,6 @@
         "output": 16384
       },
       "display_name": "GLM-5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "zai-org/GLM-4.6V",
-      "name": "GLM-4.6V",
-      "family": "glm",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-09-30",
-      "last_updated": "2025-09-30",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0.3,
-        "output": 0.9
-      },
-      "limit": {
-        "context": 204800,
-        "output": 131072
-      },
-      "display_name": "GLM-4.6V",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -412,37 +513,6 @@
       "type": "chat"
     },
     {
-      "id": "meta-llama/Llama-3.1-70B-Instruct",
-      "name": "Llama 3.1 70B",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "release_date": "2024-07-23",
-      "last_updated": "2024-07-23",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0.4,
-        "output": 0.4
-      },
-      "limit": {
-        "context": 131072,
-        "output": 16384
-      },
-      "display_name": "Llama 3.1 70B",
-      "type": "chat"
-    },
-    {
       "id": "meta-llama/Llama-3.1-8B-Instruct-Turbo",
       "name": "Llama 3.1 8B Turbo",
       "family": "llama",
@@ -471,6 +541,68 @@
         "output": 16384
       },
       "display_name": "Llama 3.1 8B Turbo",
+      "type": "chat"
+    },
+    {
+      "id": "meta-llama/Llama-3.1-70B-Instruct-Turbo",
+      "name": "Llama 3.1 70B Turbo",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "release_date": "2024-07-23",
+      "last_updated": "2024-07-23",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.4,
+        "output": 0.4
+      },
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
+      "display_name": "Llama 3.1 70B Turbo",
+      "type": "chat"
+    },
+    {
+      "id": "meta-llama/Llama-3.1-70B-Instruct",
+      "name": "Llama 3.1 70B",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "release_date": "2024-07-23",
+      "last_updated": "2024-07-23",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.4,
+        "output": 0.4
+      },
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
+      "display_name": "Llama 3.1 70B",
       "type": "chat"
     },
     {
@@ -537,16 +669,21 @@
       "type": "chat"
     },
     {
-      "id": "meta-llama/Llama-3.1-70B-Instruct-Turbo",
-      "name": "Llama 3.1 70B Turbo",
-      "family": "llama",
+      "id": "MiniMaxAI/MiniMax-M2.1",
+      "name": "MiniMax M2.1",
       "attachment": false,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
       "tool_call": true,
-      "release_date": "2024-07-23",
-      "last_updated": "2024-07-23",
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-06",
+      "release_date": "2025-12-23",
+      "last_updated": "2025-12-23",
       "modalities": {
         "input": [
           "text"
@@ -557,15 +694,124 @@
       },
       "open_weights": true,
       "cost": {
-        "input": 0.4,
-        "output": 0.4
+        "input": 0.28,
+        "output": 1.2
       },
       "limit": {
-        "context": 131072,
-        "output": 16384
+        "context": 196608,
+        "output": 196608
       },
-      "display_name": "Llama 3.1 70B Turbo",
-      "type": "chat"
+      "display_name": "MiniMax M2.1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "MiniMaxAI/MiniMax-M2.5",
+      "name": "MiniMax M2.5",
+      "family": "minimax",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-06",
+      "release_date": "2026-02-12",
+      "last_updated": "2026-02-12",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.27,
+        "output": 0.95,
+        "cache_read": 0.03,
+        "cache_write": 0.375
+      },
+      "limit": {
+        "context": 204800,
+        "output": 131072
+      },
+      "display_name": "MiniMax M2.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "MiniMaxAI/MiniMax-M2",
+      "name": "MiniMax M2",
+      "family": "minimax",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2024-10",
+      "release_date": "2025-11-13",
+      "last_updated": "2025-11-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.254,
+        "output": 1.02
+      },
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "display_name": "MiniMax M2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
     },
     {
       "id": "deepseek-ai/DeepSeek-R1-0528",
@@ -664,18 +910,18 @@
       }
     },
     {
-      "id": "openai/gpt-oss-20b",
-      "name": "GPT OSS 20B",
-      "family": "gpt-oss",
+      "id": "Qwen/Qwen3-Coder-480B-A35B-Instruct-Turbo",
+      "name": "Qwen3 Coder 480B A35B Instruct Turbo",
+      "family": "qwen",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": true,
       "temperature": true,
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
+      "knowledge": "2025-04",
+      "release_date": "2025-07-23",
+      "last_updated": "2025-07-23",
       "modalities": {
         "input": [
           "text"
@@ -686,34 +932,29 @@
       },
       "open_weights": true,
       "cost": {
-        "input": 0.03,
-        "output": 0.14
+        "input": 0.3,
+        "output": 1.2
       },
       "limit": {
-        "context": 131072,
-        "output": 16384
+        "context": 262144,
+        "output": 66536
       },
-      "display_name": "GPT OSS 20B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "display_name": "Qwen3 Coder 480B A35B Instruct Turbo",
+      "type": "chat"
     },
     {
-      "id": "openai/gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "family": "gpt-oss",
+      "id": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+      "name": "Qwen3 Coder 480B A35B Instruct",
+      "family": "qwen",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": true,
       "temperature": true,
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
+      "knowledge": "2025-04",
+      "release_date": "2025-07-23",
+      "last_updated": "2025-07-23",
       "modalities": {
         "input": [
           "text"
@@ -724,68 +965,15 @@
       },
       "open_weights": true,
       "cost": {
-        "input": 0.05,
-        "output": 0.24
+        "input": 0.4,
+        "output": 1.6
       },
       "limit": {
-        "context": 131072,
-        "output": 16384
+        "context": 262144,
+        "output": 66536
       },
-      "display_name": "GPT OSS 120B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "moonshotai/Kimi-K2-Thinking",
-      "name": "Kimi K2 Thinking",
-      "family": "kimi-thinking",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-11-06",
-      "last_updated": "2025-11-07",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0.47,
-        "output": 2
-      },
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "display_name": "Kimi K2 Thinking",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "display_name": "Qwen3 Coder 480B A35B Instruct",
+      "type": "chat"
     },
     {
       "id": "moonshotai/Kimi-K2-Instruct",
@@ -818,40 +1006,6 @@
         "output": 32768
       },
       "display_name": "Kimi K2",
-      "type": "chat"
-    },
-    {
-      "id": "moonshotai/Kimi-K2-Instruct-0905",
-      "name": "Kimi K2 0905",
-      "family": "kimi",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-09-05",
-      "last_updated": "2025-09-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0.4,
-        "output": 2,
-        "cache_read": 0.15
-      },
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "display_name": "Kimi K2 0905",
       "type": "chat"
     },
     {
@@ -906,9 +1060,43 @@
       }
     },
     {
-      "id": "MiniMaxAI/MiniMax-M2",
-      "name": "MiniMax M2",
-      "family": "minimax",
+      "id": "moonshotai/Kimi-K2-Instruct-0905",
+      "name": "Kimi K2 0905",
+      "family": "kimi",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2024-10",
+      "release_date": "2025-09-05",
+      "last_updated": "2025-09-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.4,
+        "output": 2,
+        "cache_read": 0.15
+      },
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "display_name": "Kimi K2 0905",
+      "type": "chat"
+    },
+    {
+      "id": "moonshotai/Kimi-K2-Thinking",
+      "name": "Kimi K2 Thinking",
+      "family": "kimi-thinking",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -920,8 +1108,8 @@
       },
       "temperature": true,
       "knowledge": "2024-10",
-      "release_date": "2025-11-13",
-      "last_updated": "2025-11-13",
+      "release_date": "2025-11-06",
+      "last_updated": "2025-11-07",
       "modalities": {
         "input": [
           "text"
@@ -932,214 +1120,26 @@
       },
       "open_weights": true,
       "cost": {
-        "input": 0.254,
-        "output": 1.02
+        "input": 0.47,
+        "output": 2
       },
       "limit": {
-        "context": 262144,
+        "context": 131072,
         "output": 32768
       },
-      "display_name": "MiniMax M2",
+      "display_name": "Kimi K2 Thinking",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "MiniMaxAI/MiniMax-M2.5",
-      "name": "MiniMax M2.5",
-      "family": "minimax",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "knowledge": "2025-06",
-      "release_date": "2026-02-12",
-      "last_updated": "2026-02-12",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0.27,
-        "output": 0.95,
-        "cache_read": 0.03,
-        "cache_write": 0.375
-      },
-      "limit": {
-        "context": 204800,
-        "output": 131072
-      },
-      "display_name": "MiniMax M2.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
+          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "MiniMaxAI/MiniMax-M2.1",
-      "name": "MiniMax M2.1",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "knowledge": "2025-06",
-      "release_date": "2025-12-23",
-      "last_updated": "2025-12-23",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0.28,
-        "output": 1.2
-      },
-      "limit": {
-        "context": 196608,
-        "output": 196608
-      },
-      "display_name": "MiniMax M2.1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-3-7-sonnet-latest",
-      "name": "Claude Sonnet 3.7 (Latest)",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-10-31",
-      "release_date": "2025-03-13",
-      "last_updated": "2025-03-13",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 3.3,
-        "output": 16.5,
-        "cache_read": 0.33
-      },
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "display_name": "Claude Sonnet 3.7 (Latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": false,
-          "summaries": false,
-          "visibility": "full",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
           ]
         }
       }
-    },
-    {
-      "id": "anthropic/claude-4-opus",
-      "name": "Claude Opus 4",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-03-31",
-      "release_date": "2025-06-12",
-      "last_updated": "2025-06-12",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 16.5,
-        "output": 82.5
-      },
-      "limit": {
-        "context": 200000,
-        "output": 32000
-      },
-      "display_name": "Claude Opus 4",
-      "type": "chat"
     }
   ]
 }
