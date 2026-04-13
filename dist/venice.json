@@ -74,6 +74,47 @@
       "type": "chat"
     },
     {
+      "id": "grok-4-20-multi-agent",
+      "name": "Grok 4.20 Multi-Agent",
+      "family": "grok",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-03-12",
+      "last_updated": "2026-04-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "cost": {
+        "input": 2.27,
+        "output": 6.8,
+        "cache_read": 0.23,
+        "context_over_200k": {
+          "input": 4.53,
+          "output": 13.6,
+          "cache_read": 0.23
+        }
+      },
+      "limit": {
+        "context": 2000000,
+        "output": 128000
+      },
+      "display_name": "Grok 4.20 Multi-Agent",
+      "type": "chat"
+    },
+    {
       "id": "qwen3-235b-a22b-instruct-2507",
       "name": "Qwen 3 235B A22B Instruct 2507",
       "family": "qwen",
@@ -105,6 +146,42 @@
         "output": 16384
       },
       "display_name": "Qwen 3 235B A22B Instruct 2507",
+      "type": "chat"
+    },
+    {
+      "id": "z-ai-glm-5v-turbo",
+      "name": "GLM 5V Turbo",
+      "family": "glmv",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-01",
+      "last_updated": "2026-04-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "cost": {
+        "input": 1.5,
+        "output": 5,
+        "cache_read": 0.3
+      },
+      "limit": {
+        "context": 200000,
+        "output": 32768
+      },
+      "display_name": "GLM 5V Turbo",
       "type": "chat"
     },
     {
@@ -297,6 +374,83 @@
           "interleaved": true
         }
       }
+    },
+    {
+      "id": "grok-4-20",
+      "name": "Grok 4.20",
+      "family": "grok",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-03-12",
+      "last_updated": "2026-04-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "cost": {
+        "input": 2.27,
+        "output": 6.8,
+        "cache_read": 0.23,
+        "context_over_200k": {
+          "input": 4.53,
+          "output": 13.6,
+          "cache_read": 0.23
+        }
+      },
+      "limit": {
+        "context": 2000000,
+        "output": 128000
+      },
+      "display_name": "Grok 4.20",
+      "type": "chat"
+    },
+    {
+      "id": "google-gemma-4-26b-a4b-it",
+      "name": "Google Gemma 4 26B A4B Instruct",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.1625,
+        "output": 0.5
+      },
+      "limit": {
+        "context": 256000,
+        "output": 8192
+      },
+      "display_name": "Google Gemma 4 26B A4B Instruct",
+      "type": "chat"
     },
     {
       "id": "qwen3-coder-480b-a35b-instruct-turbo",
@@ -592,67 +746,6 @@
       "type": "chat"
     },
     {
-      "id": "claude-sonnet-45",
-      "name": "Claude Sonnet 4.5",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-09",
-      "release_date": "2025-01-15",
-      "last_updated": "2026-01-28",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 3.75,
-        "output": 18.75,
-        "cache_read": 0.375,
-        "cache_write": 4.69
-      },
-      "limit": {
-        "context": 198000,
-        "output": 49500
-      },
-      "display_name": "Claude Sonnet 4.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
-    },
-    {
       "id": "openai-gpt-52",
       "name": "GPT-5.2",
       "family": "gpt",
@@ -722,106 +815,6 @@
       "type": "chat"
     },
     {
-      "id": "claude-opus-45",
-      "name": "Claude Opus 4.5",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-03",
-      "release_date": "2025-12-06",
-      "last_updated": "2026-01-28",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 6,
-        "output": 30,
-        "cache_read": 0.6,
-        "cache_write": 7.5
-      },
-      "limit": {
-        "context": 198000,
-        "output": 49500
-      },
-      "display_name": "Claude Opus 4.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
-    },
-    {
-      "id": "grok-4-20-multi-agent-beta",
-      "name": "Grok 4.20 Multi-Agent Beta",
-      "family": "grok-beta",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-03-12",
-      "last_updated": "2026-04-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 2.27,
-        "output": 6.8,
-        "cache_read": 0.23,
-        "context_over_200k": {
-          "input": 4.53,
-          "output": 13.6,
-          "cache_read": 0.23
-        }
-      },
-      "limit": {
-        "context": 2000000,
-        "output": 128000
-      },
-      "display_name": "Grok 4.20 Multi-Agent Beta",
-      "type": "chat"
-    },
-    {
       "id": "minimax-m27",
       "name": "MiniMax M2.7",
       "family": "minimax",
@@ -833,7 +826,7 @@
       "tool_call": true,
       "temperature": true,
       "release_date": "2026-03-18",
-      "last_updated": "2026-03-18",
+      "last_updated": "2026-04-12",
       "modalities": {
         "input": [
           "text"
@@ -842,7 +835,7 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "cost": {
         "input": 0.375,
         "output": 1.5,
@@ -957,7 +950,7 @@
       "structured_output": true,
       "temperature": true,
       "release_date": "2026-02-25",
-      "last_updated": "2026-03-09",
+      "last_updated": "2026-04-12",
       "modalities": {
         "input": [
           "text",
@@ -968,7 +961,7 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "cost": {
         "input": 0.3125,
         "output": 1.25,
@@ -1323,6 +1316,63 @@
       "type": "chat"
     },
     {
+      "id": "claude-opus-4-5",
+      "name": "Claude Opus 4.5",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2025-12-06",
+      "last_updated": "2026-04-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "cost": {
+        "input": 6,
+        "output": 30,
+        "cache_read": 0.6,
+        "cache_write": 7.5
+      },
+      "limit": {
+        "context": 198000,
+        "output": 32768
+      },
+      "display_name": "Claude Opus 4.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic uses thinking budget tokens"
+          ]
+        }
+      }
+    },
+    {
       "id": "qwen3-5-9b",
       "name": "Qwen 3.5 9B",
       "family": "qwen",
@@ -1397,40 +1447,6 @@
       "type": "chat"
     },
     {
-      "id": "aion-labs.aion-2-0",
-      "name": "Aion 2.0",
-      "family": "o",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2026-03-24",
-      "last_updated": "2026-03-31",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 1,
-        "output": 2,
-        "cache_read": 0.25
-      },
-      "limit": {
-        "context": 128000,
-        "output": 32768
-      },
-      "display_name": "Aion 2.0",
-      "type": "chat"
-    },
-    {
       "id": "openai-gpt-54-mini",
       "name": "GPT-5.4 Mini",
       "family": "gpt-mini",
@@ -1467,42 +1483,6 @@
       "type": "chat"
     },
     {
-      "id": "google.gemma-4-31b-it",
-      "name": "Google Gemma 4 31B Instruct",
-      "family": "gemma",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-03",
-      "last_updated": "2026-04-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0.175,
-        "output": 0.5
-      },
-      "limit": {
-        "context": 256000,
-        "output": 8192
-      },
-      "display_name": "Google Gemma 4 31B Instruct",
-      "type": "chat"
-    },
-    {
       "id": "minimax-m25",
       "name": "MiniMax M2.5",
       "family": "minimax",
@@ -1517,7 +1497,7 @@
       },
       "temperature": true,
       "release_date": "2026-02-12",
-      "last_updated": "2026-03-16",
+      "last_updated": "2026-04-12",
       "modalities": {
         "input": [
           "text"
@@ -1526,7 +1506,7 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "cost": {
         "input": 0.34,
         "output": 1.19,
@@ -1778,7 +1758,7 @@
       "structured_output": true,
       "temperature": true,
       "release_date": "2026-04-06",
-      "last_updated": "2026-04-09",
+      "last_updated": "2026-04-12",
       "modalities": {
         "input": [
           "text",
@@ -1797,7 +1777,9 @@
         "cache_write": 0.78,
         "context_over_200k": {
           "input": 2.5,
-          "output": 7.5
+          "output": 7.5,
+          "cache_read": 0.0625,
+          "cache_write": 0.78
         }
       },
       "limit": {
@@ -1808,9 +1790,43 @@
       "type": "chat"
     },
     {
-      "id": "google.gemma-4-26b-a4b-it",
-      "name": "Google Gemma 4 26B A4B Instruct",
-      "family": "gemma",
+      "id": "aion-labs-aion-2-0",
+      "name": "Aion 2.0",
+      "family": "o",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2026-03-24",
+      "last_updated": "2026-04-12",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "cost": {
+        "input": 1,
+        "output": 2,
+        "cache_read": 0.25
+      },
+      "limit": {
+        "context": 128000,
+        "output": 32768
+      },
+      "display_name": "Aion 2.0",
+      "type": "chat"
+    },
+    {
+      "id": "claude-sonnet-4-5",
+      "name": "Claude Sonnet 4.5",
+      "family": "claude-sonnet",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1819,29 +1835,50 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-09",
+      "release_date": "2025-01-15",
+      "last_updated": "2026-04-12",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "cost": {
-        "input": 0.1625,
-        "output": 0.5
+        "input": 3.75,
+        "output": 18.75,
+        "cache_read": 0.375,
+        "cache_write": 4.69
       },
       "limit": {
-        "context": 256000,
-        "output": 8192
+        "context": 198000,
+        "output": 64000
       },
-      "display_name": "Google Gemma 4 26B A4B Instruct",
-      "type": "chat"
+      "display_name": "Claude Sonnet 4.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic uses thinking budget tokens"
+          ]
+        }
+      }
     },
     {
       "id": "openai-gpt-4o-2024-11-20",
@@ -1927,7 +1964,7 @@
       "temperature": true,
       "knowledge": "2024-04",
       "release_date": "2026-01-27",
-      "last_updated": "2026-03-16",
+      "last_updated": "2026-04-12",
       "modalities": {
         "input": [
           "text",
@@ -1937,7 +1974,7 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "cost": {
         "input": 0.56,
         "output": 3.5,
@@ -1960,47 +1997,6 @@
           ]
         }
       }
-    },
-    {
-      "id": "grok-4-20-beta",
-      "name": "Grok 4.20 Beta",
-      "family": "grok-beta",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-03-12",
-      "last_updated": "2026-04-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 2.27,
-        "output": 6.8,
-        "cache_read": 0.23,
-        "context_over_200k": {
-          "input": 4.53,
-          "output": 13.6,
-          "cache_read": 0.23
-        }
-      },
-      "limit": {
-        "context": 2000000,
-        "output": 128000
-      },
-      "display_name": "Grok 4.20 Beta",
-      "type": "chat"
     },
     {
       "id": "minimax-m21",
@@ -2313,6 +2309,77 @@
           ]
         }
       }
+    },
+    {
+      "id": "z-ai-glm-5-turbo",
+      "name": "GLM 5 Turbo",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-03-15",
+      "last_updated": "2026-04-12",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 1.2,
+        "output": 4,
+        "cache_read": 0.24
+      },
+      "limit": {
+        "context": 200000,
+        "output": 32768
+      },
+      "display_name": "GLM 5 Turbo",
+      "type": "chat"
+    },
+    {
+      "id": "google-gemma-4-31b-it",
+      "name": "Google Gemma 4 31B Instruct",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-03",
+      "last_updated": "2026-04-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.175,
+        "output": 0.5
+      },
+      "limit": {
+        "context": 256000,
+        "output": 8192
+      },
+      "display_name": "Google Gemma 4 31B Instruct",
+      "type": "chat"
     }
   ]
 }
