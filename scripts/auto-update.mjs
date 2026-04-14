@@ -166,6 +166,9 @@ async function runBuild() {
     log('   Fetching provider data...', 'blue');
     exec('pnpm start');
 
+    log('   Syncing Volcengine doc data...', 'blue');
+    exec('pnpm sync:volcengine');
+
     log('   ✅ Build completed successfully', 'green');
   } catch (error) {
     throw new Error(`Build failed: ${error.message}`);
