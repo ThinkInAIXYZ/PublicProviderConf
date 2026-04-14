@@ -20,6 +20,7 @@ import {
   getExclusionReason,
   loadAihubmixFallback,
 } from './models-dev-shared';
+import { shouldSyncDoubaoProvider, syncVolcengineOutput } from './volcengine-sync';
 
 export async function fetchSpecificProviders(
   providerNames: string[],
@@ -133,6 +134,9 @@ export async function fetchSpecificProviders(
     applyReasoningPortraits(aggregatedData, aihubmixReasoningHintMap);
 
     await outputManager.writeAllFiles(aggregatedData);
+    if (shouldSyncDoubaoProvider(providerNames)) {
+      await syncVolcengineOutput({ outputDir, logger: console });
+    }
 
     console.log(`📁 Output files written to: ${outputDir}`);
 
