@@ -1,3 +1,5 @@
+import { getOpenAIReasoningProfile } from './openai-reasoning-profile';
+
 export type ReasoningMode = 'budget' | 'effort' | 'level' | 'fixed' | 'mixed';
 export type ReasoningVisibility = 'hidden' | 'summary' | 'full' | 'mixed';
 
@@ -131,14 +133,6 @@ function isGeminiAudioVariant(baseId: string): boolean {
   return baseId.includes('tts') || baseId.includes('audio');
 }
 
-function matchesGpt5(baseId: string): boolean {
-  return baseId === 'gpt-5' || baseId.startsWith('gpt-5-');
-}
-
-function matchesGpt51(baseId: string): boolean {
-  return baseId === 'gpt-5.1' || baseId.startsWith('gpt-5.1-');
-}
-
 function matchesInterleavedReasoningBase(baseId: string): boolean {
   return (
     baseId === 'deepseek-reasoner' ||
@@ -163,64 +157,6 @@ const REASONING_PORTRAITS: ReasoningPortraitDefinition[] = [
   {
     matches: (_normalizedId, baseId) => matchesInterleavedReasoningBase(baseId),
     portrait: DEFAULT_INTERLEAVED_REASONING_PORTRAIT,
-  },
-  {
-    matches: (_normalizedId, baseId) => baseId === 'gpt-5-pro',
-    portrait: {
-      supported: true,
-      default_enabled: true,
-      mode: 'fixed',
-      effort: 'high',
-      verbosity: 'medium',
-      verbosity_options: ['low', 'medium', 'high'],
-      visibility: 'hidden',
-    },
-  },
-  {
-    matches: (_normalizedId, baseId) => matchesGpt51(baseId),
-    portrait: {
-      supported: true,
-      default_enabled: false,
-      mode: 'effort',
-      effort: 'none',
-      effort_options: ['none', 'low', 'medium', 'high'],
-      verbosity: 'medium',
-      verbosity_options: ['low', 'medium', 'high'],
-      visibility: 'hidden',
-    },
-  },
-  {
-    matches: (_normalizedId, baseId) => matchesGpt5(baseId) && !matchesGpt51(baseId),
-    portrait: {
-      supported: true,
-      default_enabled: true,
-      mode: 'effort',
-      effort: 'medium',
-      effort_options: ['minimal', 'low', 'medium', 'high'],
-      verbosity: 'medium',
-      verbosity_options: ['low', 'medium', 'high'],
-      visibility: 'hidden',
-    },
-  },
-  {
-    matches: (_normalizedId, baseId) => baseId === 'o4-mini' || baseId.startsWith('o4-mini-'),
-    portrait: {
-      supported: true,
-      default_enabled: true,
-      mode: 'effort',
-      effort: 'medium',
-      visibility: 'hidden',
-    },
-  },
-  {
-    matches: (_normalizedId, baseId) => baseId === 'o3' || baseId.startsWith('o3-'),
-    portrait: {
-      supported: true,
-      default_enabled: true,
-      mode: 'effort',
-      effort: 'medium',
-      visibility: 'hidden',
-    },
   },
   {
     matches: (_normalizedId, _baseId, portableBaseId) =>
@@ -348,10 +284,33 @@ const REASONING_PORTRAITS: ReasoningPortraitDefinition[] = [
   },
 ];
 
+function toOpenAIReasoningPortrait(modelId?: string): ExtraCapabilitiesReasoning | undefined {
+  const profile = getOpenAIReasoningProfile(modelId);
+  if (!profile) {
+    return undefined;
+  }
+
+  return {
+    supported: true,
+    default_enabled: profile.defaultEnabled,
+    mode: profile.mode,
+    effort: profile.effort,
+    effort_options: profile.effortOptions ? [...profile.effortOptions] : undefined,
+    verbosity: profile.verbosity,
+    verbosity_options: profile.verbosityOptions ? [...profile.verbosityOptions] : undefined,
+    visibility: 'hidden',
+  };
+}
+
 export function getReasoningPortrait(modelId?: string): ExtraCapabilitiesReasoning | undefined {
   const normalizedId = normalizeId(modelId);
   if (!normalizedId) {
     return undefined;
+  }
+
+  const openAIReasoningPortrait = toOpenAIReasoningPortrait(normalizedId);
+  if (openAIReasoningPortrait) {
+    return openAIReasoningPortrait;
   }
 
   const baseId = extractBaseId(normalizedId);

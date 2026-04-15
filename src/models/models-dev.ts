@@ -1,6 +1,7 @@
 import { ModelInfo, ModelType } from './model-info';
 import { normalizeToggleInPlace, ToggleConfig } from '../utils/toggles';
 import { ProviderInfo } from './provider-info';
+import { type ReasoningEffort, type ReasoningVerbosity } from './openai-reasoning-profile';
 import {
   applyReasoningPortraitToModel,
   cloneLegacyInterleaved,
@@ -43,8 +44,8 @@ export interface ReasoningConfig {
   supported?: boolean;
   default?: boolean;
   budget?: ReasoningBudget;
-  effort?: 'minimal' | 'low' | 'medium' | 'high';
-  verbosity?: 'low' | 'medium' | 'high';
+  effort?: ReasoningEffort;
+  verbosity?: ReasoningVerbosity;
 }
 
 export interface SearchConfig {
