@@ -2,6 +2,7 @@ import { fetch, ProxyAgent, type Dispatcher } from 'undici';
 import { Provider } from './Provider';
 import { createModelInfo, ModelInfo, ModelType } from '../models/model-info';
 import { normalizeToggleInPlace, type ToggleConfig } from '../utils/toggles';
+import { getOpenAIReasoningProfile } from '../models/openai-reasoning-profile';
 
 interface OpenRouterModel {
   id?: string;
@@ -36,59 +37,21 @@ function toNumber(value: unknown): number | undefined {
   return undefined;
 }
 
-const OPENAI_VERBOSITY_SUFFIXES = new Set<string>([
-  'gpt-5',
-  'gpt-5-mini',
-  'gpt-5-nano',
-  'gpt-5-pro',
-  'gpt-5-codex',
-]);
-
-const OPENAI_EFFORT_SUFFIXES = new Set<string>([
-  'o1-pro',
-  'o3',
-  'o3-pro',
-  'o4-mini',
-  'gpt-5',
-  'gpt-5-mini',
-  'gpt-5-nano',
-  'gpt-5-pro',
-  'gpt-5-codex',
-]);
-
-function isOpenAIModel(id: string): boolean {
-  return (id || '').trim().toLowerCase().startsWith('openai/');
-}
-
-function openaiSuffix(id: string): string | null {
-  if (!isOpenAIModel(id)) return null;
-  const value = (id || '').trim().toLowerCase();
-  return value.substring('openai/'.length);
-}
-
-function needsOpenAIVerbosity(id: string): boolean {
-  const suffix = openaiSuffix(id);
-  return !!suffix && OPENAI_VERBOSITY_SUFFIXES.has(suffix);
-}
-
-function needsOpenAIEffort(id: string): boolean {
-  const suffix = openaiSuffix(id);
-  return !!suffix && OPENAI_EFFORT_SUFFIXES.has(suffix);
-}
-
-function applyOpenAIReasoningTuning(config: ToggleConfig, id: string): void {
-  const addVerbosity = needsOpenAIVerbosity(id);
-  const addEffort = needsOpenAIEffort(id);
-  if (!addVerbosity && !addEffort) return;
-
-  // Ensure reasoning is marked supported when adding OpenAI-specific params
-  config.supported = true;
-
-  if (addVerbosity) {
-    config.verbosity = 'medium';
+export function applyOpenAIReasoningTuning(
+  config: ToggleConfig,
+  id: string,
+  allowProviderReasoningControls: boolean,
+): void {
+  const profile = getOpenAIReasoningProfile(id);
+  if (!profile) {
+    return;
   }
-  if (addEffort) {
-    config.effort = 'medium';
+
+  // Keep legacy reasoning.supported as the compatibility signal that the
+  // underlying model supports reasoning, even if the provider omits controls.
+  config.supported = true;
+  if (allowProviderReasoningControls) {
+    config.effort = profile.effort;
   }
 }
 
@@ -170,7 +133,7 @@ function mapOpenRouterModel(model: OpenRouterModel): ModelInfo | null {
   const hasReasoningParameter = supportedParameters.some(parameter => String(parameter || '').toLowerCase() === 'reasoning');
 
   const reasoningConfig: ToggleConfig = { supported: hasReasoningParameter };
-  applyOpenAIReasoningTuning(reasoningConfig, id);
+  applyOpenAIReasoningTuning(reasoningConfig, id, hasReasoningParameter);
   normalizeToggleInPlace(reasoningConfig);
   const reasoning: ToggleConfig = reasoningConfig;
 

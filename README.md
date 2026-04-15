@@ -30,6 +30,8 @@ When we need richer model-level metadata, we add it under `extra_capabilities` i
 - The same model should have the same reasoning portrait across providers whenever possible
 - If a model is not covered by the portrait registry, `extra_capabilities.reasoning` is omitted
 - Legacy fields remain the compatibility layer for downstream consumers that already depend on them
+- Legacy `reasoning.supported` is the compatibility signal that a model supports reasoning; provider-specific controls such as `effort` may still depend on the current provider surface
+- Portrait defaults may intentionally differ from an upstream provider's raw default when we choose a better client-side starting point for a supported reasoning model
 
 ### Example
 ```json
@@ -56,10 +58,10 @@ When we need richer model-level metadata, we add it under `extra_capabilities` i
 
 ### `extra_capabilities.reasoning` Fields
 - `supported`: whether the model family supports reasoning
-- `default_enabled`: whether reasoning is enabled by default in the model portrait
+- `default_enabled`: whether reasoning should be enabled by default in the model portrait
 - `mode`: one of `budget`, `effort`, `level`, `fixed`, or `mixed`
 - `budget`: token-budget style reasoning controls such as min/max/default/auto/off
-- `effort`: default reasoning effort
+- `effort`: default reasoning effort for this portrait, which may be a client-friendly default rather than the upstream provider's raw default
 - `effort_options`: supported effort levels
 - `verbosity`: default reasoning verbosity
 - `verbosity_options`: supported verbosity levels

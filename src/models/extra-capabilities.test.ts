@@ -7,6 +7,7 @@ import {
   type ModelsDevApiResponse,
   type ModelsDevProvider,
 } from './models-dev';
+import type { ReasoningEffort } from './openai-reasoning-profile';
 
 function assertInterleavedThinkingShape(model: {
   [key: string]: unknown;
@@ -25,6 +26,84 @@ function assertInterleavedThinkingShape(model: {
   assert.equal(model.extra_capabilities?.reasoning?.summaries, true);
   assert.equal(model.extra_capabilities?.reasoning?.visibility, 'summary');
   assert.deepEqual(model.extra_capabilities?.reasoning?.continuation, ['thinking_blocks']);
+}
+
+function assertEffortPortrait(
+  modelId: string,
+  expected: {
+    defaultEnabled: boolean;
+    mode: 'effort' | 'fixed';
+    effort: ReasoningEffort;
+    effortOptions?: ReasoningEffort[];
+  },
+): void {
+  const model: {
+    id: string;
+    extra_capabilities?: {
+      reasoning?: Record<string, unknown>;
+    };
+  } = {
+    id: modelId,
+  };
+
+  applyReasoningPortraitToModel(model);
+
+  const reasoning = model.extra_capabilities?.reasoning;
+
+  assert.deepEqual({
+    supported: reasoning?.supported,
+    default_enabled: reasoning?.default_enabled,
+    mode: reasoning?.mode,
+    effort: reasoning?.effort,
+    effort_options: reasoning?.effort_options,
+    verbosity: reasoning?.verbosity,
+    verbosity_options: reasoning?.verbosity_options,
+    visibility: reasoning?.visibility,
+  }, {
+    supported: true,
+    default_enabled: expected.defaultEnabled,
+    mode: expected.mode,
+    effort: expected.effort,
+    effort_options: expected.effortOptions,
+    verbosity: undefined,
+    verbosity_options: undefined,
+    visibility: 'hidden',
+  });
+}
+
+function assertNoXHigh(modelId: string): void {
+  const model: {
+    id: string;
+    extra_capabilities?: {
+      reasoning?: {
+        effort_options?: string[];
+      };
+    };
+  } = {
+    id: modelId,
+  };
+
+  applyReasoningPortraitToModel(model);
+
+  assert.equal(
+    Boolean(model.extra_capabilities?.reasoning?.effort_options?.includes('xhigh')),
+    false,
+  );
+}
+
+function assertNoReasoningPortrait(modelId: string): void {
+  const model: {
+    id: string;
+    extra_capabilities?: {
+      reasoning?: Record<string, unknown>;
+    };
+  } = {
+    id: modelId,
+  };
+
+  applyReasoningPortraitToModel(model);
+
+  assert.equal(model.extra_capabilities?.reasoning, undefined);
 }
 
 test('migrates legacy interleaved reasoning_content into extra capabilities', () => {
@@ -142,4 +221,133 @@ test('portrait normalization syncs legacy reasoning when extra reasoning becomes
   const model = providers.sample.models[0];
   assert.equal(model.extra_capabilities?.reasoning?.supported, true);
   assert.equal(typeof model.reasoning === 'object' && model.reasoning?.supported, true);
+});
+
+test('applies xhigh reasoning portraits for supported GPT-5.x variants', () => {
+  assertEffortPortrait('gpt-5.2', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+  });
+
+  assertEffortPortrait('gpt-5.2-pro', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['medium', 'high', 'xhigh'],
+  });
+
+  assertEffortPortrait('gpt-5.2-codex', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['low', 'medium', 'high', 'xhigh'],
+  });
+
+  assertEffortPortrait('openai/gpt-5.3-codex', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['low', 'medium', 'high', 'xhigh'],
+  });
+
+  assertEffortPortrait('gpt-5.4', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+  });
+
+  assertEffortPortrait('openai/gpt-5.4-mini', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+  });
+
+  assertEffortPortrait('gpt-5.4-nano', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+  });
+
+  assertEffortPortrait('gpt-5.4-pro', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['medium', 'high', 'xhigh'],
+  });
+
+  assertEffortPortrait('openai/gpt-5.1-codex-max', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['none', 'low', 'medium', 'high'],
+  });
+});
+
+test('does not add xhigh to unsupported GPT-5.x variants', () => {
+  assertEffortPortrait('gpt-5.1', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['none', 'low', 'medium', 'high'],
+  });
+
+  assertEffortPortrait('gpt-5.1-codex', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['none', 'low', 'medium', 'high'],
+  });
+
+  assertEffortPortrait('gpt-5.1-codex-mini', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['none', 'low', 'medium', 'high'],
+  });
+
+  assertEffortPortrait('gpt-5-pro', {
+    defaultEnabled: true,
+    mode: 'fixed',
+    effort: 'high',
+  });
+
+  assertNoXHigh('gpt-5.3-codex-spark');
+  assertNoXHigh('gpt-5.3-chat');
+});
+
+test('applies low-medium-high effort portraits for pre-gpt-5.1 o-series variants from the Responses API family rule', () => {
+  const expected = {
+    defaultEnabled: true,
+    mode: 'effort' as const,
+    effort: 'medium' as const,
+    effortOptions: ['low', 'medium', 'high'] as ReasoningEffort[],
+  };
+
+  assertEffortPortrait('o1', expected);
+  assertEffortPortrait('openai/o1-preview', expected);
+  assertEffortPortrait('o1-mini', expected);
+  assertEffortPortrait('openai/o1-pro', expected);
+  assertEffortPortrait('o3', expected);
+  assertEffortPortrait('openai/o3-mini-high', expected);
+  assertEffortPortrait('o3-pro', expected);
+  assertEffortPortrait('openai/o3-deep-research', expected);
+  assertEffortPortrait('o4-mini', expected);
+  assertEffortPortrait('openai/o4-mini-high', expected);
+  assertEffortPortrait('o4-mini-deep-research', expected);
+
+  assertNoXHigh('o1');
+  assertNoXHigh('o3-mini-high');
+  assertNoXHigh('o4-mini-deep-research');
+});
+
+test('does not infer effort portraits for GPT-5 chat aliases without official effort docs', () => {
+  assertNoReasoningPortrait('gpt-5.1-chat');
+  assertNoReasoningPortrait('openai/gpt-5.1-chat-latest');
+  assertNoReasoningPortrait('gpt-5.2-chat');
+  assertNoReasoningPortrait('openai/gpt-5.2-chat-latest');
 });
