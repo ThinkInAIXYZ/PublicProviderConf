@@ -3,6 +3,7 @@ import test from 'node:test';
 import {
   getOpenAIReasoningProfile,
   type ReasoningEffort,
+  type ReasoningVerbosity,
 } from './openai-reasoning-profile';
 
 function assertProfile(
@@ -12,6 +13,8 @@ function assertProfile(
     mode: 'effort' | 'fixed';
     effort: ReasoningEffort;
     effortOptions?: ReasoningEffort[];
+    verbosity?: ReasoningVerbosity;
+    verbosityOptions?: ReasoningVerbosity[];
   },
 ): void {
   assert.deepEqual(getOpenAIReasoningProfile(modelId), {
@@ -19,6 +22,8 @@ function assertProfile(
     mode: expected.mode,
     effort: expected.effort,
     effortOptions: expected.effortOptions,
+    verbosity: expected.verbosity,
+    verbosityOptions: expected.verbosityOptions,
   });
 }
 
@@ -28,6 +33,8 @@ test('matches GPT-5 family effort ladders', () => {
     mode: 'effort',
     effort: 'medium',
     effortOptions: ['minimal', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5-mini', {
@@ -35,6 +42,8 @@ test('matches GPT-5 family effort ladders', () => {
     mode: 'effort',
     effort: 'medium',
     effortOptions: ['minimal', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5-nano', {
@@ -42,6 +51,8 @@ test('matches GPT-5 family effort ladders', () => {
     mode: 'effort',
     effort: 'medium',
     effortOptions: ['minimal', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5-codex', {
@@ -49,40 +60,52 @@ test('matches GPT-5 family effort ladders', () => {
     mode: 'effort',
     effort: 'medium',
     effortOptions: ['minimal', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5-pro', {
     defaultEnabled: true,
     mode: 'fixed',
     effort: 'high',
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5.1', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5.1-codex-max', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5.2', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5.2-pro', {
     defaultEnabled: true,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'high',
     effortOptions: ['medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5.2-codex', {
@@ -90,6 +113,8 @@ test('matches GPT-5 family effort ladders', () => {
     mode: 'effort',
     effort: 'medium',
     effortOptions: ['low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5.3-codex', {
@@ -97,34 +122,53 @@ test('matches GPT-5 family effort ladders', () => {
     mode: 'effort',
     effort: 'medium',
     effortOptions: ['low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
+  });
+
+  assertProfile('openai/gpt-5.3-codex-spark', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5.4', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5.4-mini', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5.4-nano', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertProfile('openai/gpt-5.4-pro', {
     defaultEnabled: true,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'high',
     effortOptions: ['medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 });
 
@@ -172,10 +216,6 @@ test('does not add xhigh to unsupported reasoning families', () => {
     false,
   );
   assert.equal(
-    getOpenAIReasoningProfile('openai/gpt-5.3-codex-spark')?.effortOptions?.includes('xhigh'),
-    undefined,
-  );
-  assert.equal(
     getOpenAIReasoningProfile('openai/gpt-5.3-chat')?.effortOptions?.includes('xhigh'),
     undefined,
   );
@@ -186,6 +226,7 @@ test('does not add xhigh to unsupported reasoning families', () => {
 });
 
 test('does not infer effort ladders for GPT-5 chat aliases without official effort docs', () => {
+  assert.equal(getOpenAIReasoningProfile('openai/gpt-5.3-chat'), undefined);
   assert.equal(getOpenAIReasoningProfile('openai/gpt-5.1-chat'), undefined);
   assert.equal(getOpenAIReasoningProfile('openai/gpt-5.1-chat-latest'), undefined);
   assert.equal(getOpenAIReasoningProfile('openai/gpt-5.2-chat'), undefined);

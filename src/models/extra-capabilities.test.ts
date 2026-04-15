@@ -7,7 +7,7 @@ import {
   type ModelsDevApiResponse,
   type ModelsDevProvider,
 } from './models-dev';
-import type { ReasoningEffort } from './openai-reasoning-profile';
+import type { ReasoningEffort, ReasoningVerbosity } from './openai-reasoning-profile';
 
 function assertInterleavedThinkingShape(model: {
   [key: string]: unknown;
@@ -35,6 +35,8 @@ function assertEffortPortrait(
     mode: 'effort' | 'fixed';
     effort: ReasoningEffort;
     effortOptions?: ReasoningEffort[];
+    verbosity?: ReasoningVerbosity;
+    verbosityOptions?: ReasoningVerbosity[];
   },
 ): void {
   const model: {
@@ -65,8 +67,8 @@ function assertEffortPortrait(
     mode: expected.mode,
     effort: expected.effort,
     effort_options: expected.effortOptions,
-    verbosity: undefined,
-    verbosity_options: undefined,
+    verbosity: expected.verbosity,
+    verbosity_options: expected.verbosityOptions,
     visibility: 'hidden',
   });
 }
@@ -225,17 +227,21 @@ test('portrait normalization syncs legacy reasoning when extra reasoning becomes
 
 test('applies xhigh reasoning portraits for supported GPT-5.x variants', () => {
   assertEffortPortrait('gpt-5.2', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('gpt-5.2-pro', {
     defaultEnabled: true,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'high',
     effortOptions: ['medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('gpt-5.2-codex', {
@@ -243,6 +249,8 @@ test('applies xhigh reasoning portraits for supported GPT-5.x variants', () => {
     mode: 'effort',
     effort: 'medium',
     effortOptions: ['low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('openai/gpt-5.3-codex', {
@@ -250,73 +258,101 @@ test('applies xhigh reasoning portraits for supported GPT-5.x variants', () => {
     mode: 'effort',
     effort: 'medium',
     effortOptions: ['low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
+  });
+
+  assertEffortPortrait('openai/gpt-5.3-codex-spark', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('gpt-5.4', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('openai/gpt-5.4-mini', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('gpt-5.4-nano', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('gpt-5.4-pro', {
     defaultEnabled: true,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'high',
     effortOptions: ['medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('openai/gpt-5.1-codex-max', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 });
 
 test('does not add xhigh to unsupported GPT-5.x variants', () => {
   assertEffortPortrait('gpt-5.1', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('gpt-5.1-codex', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('gpt-5.1-codex-mini', {
-    defaultEnabled: true,
+    defaultEnabled: false,
     mode: 'effort',
-    effort: 'medium',
+    effort: 'none',
     effortOptions: ['none', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
   assertEffortPortrait('gpt-5-pro', {
     defaultEnabled: true,
     mode: 'fixed',
     effort: 'high',
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
   });
 
-  assertNoXHigh('gpt-5.3-codex-spark');
   assertNoXHigh('gpt-5.3-chat');
 });
 

@@ -7,6 +7,8 @@ export interface OpenAIReasoningProfile {
   mode: OpenAIReasoningMode;
   effort: ReasoningEffort;
   effortOptions?: ReasoningEffort[];
+  verbosity?: ReasoningVerbosity;
+  verbosityOptions?: ReasoningVerbosity[];
 }
 
 interface OpenAIReasoningRule {
@@ -32,61 +34,72 @@ const LEGACY_GPT5_FAMILIES = [
   'gpt-5-codex',
 ] as const;
 
+const GPT5_TEXT_VERBOSITY: ReasoningVerbosity = 'medium';
+const GPT5_TEXT_VERBOSITY_OPTIONS: ReasoningVerbosity[] = ['low', 'medium', 'high'];
+
+function withGpt5TextVerbosity(profile: OpenAIReasoningProfile): OpenAIReasoningProfile {
+  return {
+    ...profile,
+    verbosity: GPT5_TEXT_VERBOSITY,
+    verbosityOptions: [...GPT5_TEXT_VERBOSITY_OPTIONS],
+  };
+}
+
 const OPENAI_REASONING_RULES: OpenAIReasoningRule[] = [
   {
     matches: (_baseId, portableBaseId) => isPortableExactOrSnapshot(portableBaseId, 'gpt-5-pro'),
-    profile: {
+    profile: withGpt5TextVerbosity({
       defaultEnabled: true,
       mode: 'fixed',
       effort: 'high',
-    },
+    }),
   },
   {
     matches: (_baseId, portableBaseId) => isPortableExactOrSnapshot(portableBaseId, 'gpt-5-4-pro'),
-    profile: {
+    profile: withGpt5TextVerbosity({
       defaultEnabled: true,
       mode: 'effort',
       effort: 'high',
       effortOptions: ['medium', 'high', 'xhigh'],
-    },
+    }),
   },
   {
     matches: (_baseId, portableBaseId) =>
       isPortableFamilyVariant(portableBaseId, 'gpt-5-4') &&
       !isPortableFamilyVariant(portableBaseId, 'gpt-5-4-pro'),
-    profile: {
-      defaultEnabled: true,
+    profile: withGpt5TextVerbosity({
+      defaultEnabled: false,
       mode: 'effort',
       effort: 'none',
       effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
-    },
+    }),
   },
   {
-    matches: (_baseId, portableBaseId) => isPortableExactOrSnapshot(portableBaseId, 'gpt-5-3-codex'),
-    profile: {
+    matches: (_baseId, portableBaseId) => isPortableFamilyVariant(portableBaseId, 'gpt-5-3-codex'),
+    profile: withGpt5TextVerbosity({
       defaultEnabled: true,
       mode: 'effort',
       effort: 'medium',
       effortOptions: ['low', 'medium', 'high', 'xhigh'],
-    },
+    }),
   },
   {
     matches: (_baseId, portableBaseId) => isPortableExactOrSnapshot(portableBaseId, 'gpt-5-2-pro'),
-    profile: {
+    profile: withGpt5TextVerbosity({
       defaultEnabled: true,
       mode: 'effort',
       effort: 'high',
       effortOptions: ['medium', 'high', 'xhigh'],
-    },
+    }),
   },
   {
     matches: (_baseId, portableBaseId) => isPortableExactOrSnapshot(portableBaseId, 'gpt-5-2-codex'),
-    profile: {
+    profile: withGpt5TextVerbosity({
       defaultEnabled: true,
       mode: 'effort',
       effort: 'medium',
       effortOptions: ['low', 'medium', 'high', 'xhigh'],
-    },
+    }),
   },
   {
     matches: (_baseId, portableBaseId) =>
@@ -94,23 +107,23 @@ const OPENAI_REASONING_RULES: OpenAIReasoningRule[] = [
       !isPortableFamilyVariant(portableBaseId, 'gpt-5-2-pro') &&
       !isPortableFamilyVariant(portableBaseId, 'gpt-5-2-codex') &&
       !isPortableFamilyVariant(portableBaseId, 'gpt-5-2-chat'),
-    profile: {
-      defaultEnabled: true,
+    profile: withGpt5TextVerbosity({
+      defaultEnabled: false,
       mode: 'effort',
       effort: 'none',
       effortOptions: ['none', 'low', 'medium', 'high', 'xhigh'],
-    },
+    }),
   },
   {
     matches: (_baseId, portableBaseId) =>
       isPortableFamilyVariant(portableBaseId, 'gpt-5-1') &&
       !isPortableFamilyVariant(portableBaseId, 'gpt-5-1-chat'),
-    profile: {
+    profile: withGpt5TextVerbosity({
       defaultEnabled: false,
       mode: 'effort',
       effort: 'none',
       effortOptions: ['none', 'low', 'medium', 'high'],
-    },
+    }),
   },
   // OpenAI only publishes a family-level rule for pre-gpt-5.1 reasoning models:
   // they default to medium and do not support none. Keep this mapping conservative.
@@ -127,12 +140,12 @@ const OPENAI_REASONING_RULES: OpenAIReasoningRule[] = [
   {
     matches: (_baseId, portableBaseId) =>
       LEGACY_GPT5_FAMILIES.some(family => isPortableExactOrSnapshot(portableBaseId, family)),
-    profile: {
+    profile: withGpt5TextVerbosity({
       defaultEnabled: true,
       mode: 'effort',
       effort: 'medium',
       effortOptions: ['minimal', 'low', 'medium', 'high'],
-    },
+    }),
   },
 ];
 
@@ -159,34 +172,14 @@ function isPortableExactOrSnapshot(portableBaseId: string, family: string): bool
 
 function cloneOpenAIReasoningProfile(profile: OpenAIReasoningProfile): OpenAIReasoningProfile {
   const effortOptions = profile.effortOptions ? [...profile.effortOptions] : undefined;
+  const verbosityOptions = profile.verbosityOptions ? [...profile.verbosityOptions] : undefined;
 
   return {
     ...profile,
-    // Keep supported ladders aligned with OpenAI docs, but prefer a non-none
-    // portrait default for downstream clients when the model supports it.
-    defaultEnabled: true,
-    effort: pickPreferredEffort(profile.effort, effortOptions),
     effortOptions,
+    verbosity: profile.verbosity,
+    verbosityOptions,
   };
-}
-
-function pickPreferredEffort(
-  fallback: ReasoningEffort,
-  effortOptions?: ReasoningEffort[],
-): ReasoningEffort {
-  if (!effortOptions || effortOptions.length === 0) {
-    return fallback;
-  }
-
-  if (effortOptions.includes('medium')) {
-    return 'medium';
-  }
-
-  if (effortOptions.includes('high')) {
-    return 'high';
-  }
-
-  return effortOptions.find(option => option !== 'none') ?? fallback;
 }
 
 export function getOpenAIReasoningProfile(

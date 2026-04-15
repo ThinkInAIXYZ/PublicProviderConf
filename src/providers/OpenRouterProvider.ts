@@ -52,6 +52,9 @@ export function applyOpenAIReasoningTuning(
   config.supported = true;
   if (allowProviderReasoningControls) {
     config.effort = profile.effort;
+    if (profile.verbosity) {
+      config.verbosity = profile.verbosity;
+    }
   }
 }
 
@@ -133,8 +136,8 @@ function mapOpenRouterModel(model: OpenRouterModel): ModelInfo | null {
   const hasReasoningParameter = supportedParameters.some(parameter => String(parameter || '').toLowerCase() === 'reasoning');
 
   const reasoningConfig: ToggleConfig = { supported: hasReasoningParameter };
-  applyOpenAIReasoningTuning(reasoningConfig, id, hasReasoningParameter);
   normalizeToggleInPlace(reasoningConfig);
+  applyOpenAIReasoningTuning(reasoningConfig, id, hasReasoningParameter);
   const reasoning: ToggleConfig = reasoningConfig;
 
   const defaultTemperature = model.default_parameters?.temperature;

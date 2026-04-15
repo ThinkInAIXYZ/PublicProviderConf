@@ -296,6 +296,8 @@ function toOpenAIReasoningPortrait(modelId?: string): ExtraCapabilitiesReasoning
     mode: profile.mode,
     effort: profile.effort,
     effort_options: profile.effortOptions ? [...profile.effortOptions] : undefined,
+    verbosity: profile.verbosity,
+    verbosity_options: profile.verbosityOptions ? [...profile.verbosityOptions] : undefined,
     visibility: 'hidden',
   };
 }

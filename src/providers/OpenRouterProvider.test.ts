@@ -22,7 +22,16 @@ test('adds effort only when the provider explicitly supports reasoning controls'
   applyOpenAIReasoningTuning(gpt5Config, 'openai/gpt-5.4', true);
   assert.deepEqual(gpt5Config, {
     supported: true,
-    effort: 'medium',
+    effort: 'none',
+    verbosity: 'medium',
+  });
+
+  const gpt52ProConfig: ToggleConfig = { supported: true };
+  applyOpenAIReasoningTuning(gpt52ProConfig, 'openai/gpt-5.2-pro', true);
+  assert.deepEqual(gpt52ProConfig, {
+    supported: true,
+    effort: 'high',
+    verbosity: 'medium',
   });
 
   const oSeriesConfig: ToggleConfig = { supported: true };
