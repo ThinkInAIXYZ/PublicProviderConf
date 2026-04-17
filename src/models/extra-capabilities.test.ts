@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { applyReasoningPortraitToModel } from './extra-capabilities';
+import { applyReasoningPortraitToModel, syncReasoningFlagFromExtra } from './extra-capabilities';
 import {
   applyReasoningPortraits,
   buildAiHubMixReasoningHintMap,
@@ -77,7 +77,7 @@ function assertReasoningPortrait(
   modelId: string,
   expected: {
     defaultEnabled: boolean;
-    mode: string;
+    mode?: string;
     budget?: Record<string, unknown>;
     effort?: string;
     effortOptions?: string[];
@@ -161,6 +161,37 @@ function assertNoReasoningPortrait(modelId: string): void {
   applyReasoningPortraitToModel(model);
 
   assert.equal(model.extra_capabilities?.reasoning, undefined);
+}
+
+function assertSyncedReasoningDefault(
+  modelId: string,
+  initialReasoning: boolean | Record<string, unknown>,
+  expectedDefaultEnabled: boolean,
+): void {
+  const model: {
+    id: string;
+    reasoning: boolean | Record<string, unknown>;
+    extra_capabilities?: {
+      reasoning?: Record<string, unknown>;
+    };
+  } = {
+    id: modelId,
+    reasoning: initialReasoning,
+  };
+
+  applyReasoningPortraitToModel(model);
+  syncReasoningFlagFromExtra(model);
+
+  assert.equal(model.extra_capabilities?.reasoning?.default_enabled, expectedDefaultEnabled);
+  assert.equal(typeof model.reasoning === 'object', true);
+  assert.equal(
+    typeof model.reasoning === 'object' ? model.reasoning.supported : undefined,
+    true,
+  );
+  assert.equal(
+    typeof model.reasoning === 'object' ? model.reasoning.default : undefined,
+    expectedDefaultEnabled,
+  );
 }
 
 test('migrates legacy interleaved reasoning_content into extra capabilities', () => {
@@ -307,6 +338,7 @@ test('applies mixed reasoning portraits to Claude 4.6 variants', () => {
       continuation: ['thinking_blocks'],
       notes: expectedNotes,
     });
+    assertSyncedReasoningDefault(modelId, { supported: true, default: true }, false);
   }
 
   assertNoXHigh('anthropic/claude-opus-4.6');
@@ -329,14 +361,15 @@ test('applies effort reasoning portraits to Claude Opus 4.7 variants', () => {
     assertReasoningPortrait(modelId, {
       defaultEnabled: false,
       mode: 'effort',
-      effort: 'medium',
+      effort: 'high',
       effortOptions: ['low', 'medium', 'high', 'xhigh', 'max'],
       interleaved: true,
       summaries: true,
-      visibility: 'mixed',
+      visibility: 'omitted',
       continuation: ['thinking_blocks'],
       notes: expectedNotes,
     });
+    assertSyncedReasoningDefault(modelId, { supported: true, default: true }, false);
   }
 });
 
@@ -360,7 +393,60 @@ test('keeps budget reasoning portraits for Claude 3.7 Sonnet variants', () => {
       continuation: ['thinking_blocks'],
       notes: ['Anthropic uses thinking budget tokens'],
     });
+    assertSyncedReasoningDefault(modelId, { supported: true, default: true }, false);
   }
+});
+
+test('enables default thinking for Claude think aliases while preserving matched portraits', () => {
+  assertReasoningPortrait('claude-opus-4-6-think', {
+    defaultEnabled: true,
+    mode: 'mixed',
+    budget: {
+      min: 1024,
+      unit: 'tokens',
+    },
+    effort: 'medium',
+    effortOptions: ['low', 'medium', 'high', 'max'],
+    interleaved: true,
+    summaries: true,
+    visibility: 'summary',
+    continuation: ['thinking_blocks'],
+    notes: [
+      'Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.',
+    ],
+  });
+  assertSyncedReasoningDefault('claude-opus-4-6-think', { supported: true, default: false }, true);
+
+  assertReasoningPortrait('anthropic/claude-3.7-sonnet:thinking', {
+    defaultEnabled: true,
+    mode: 'budget',
+    budget: {
+      min: 1024,
+      unit: 'tokens',
+    },
+    interleaved: false,
+    summaries: false,
+    visibility: 'full',
+    continuation: ['thinking_blocks'],
+    notes: ['Anthropic uses thinking budget tokens'],
+  });
+  assertSyncedReasoningDefault('anthropic/claude-3.7-sonnet:thinking', { supported: true, default: false }, true);
+
+  assertReasoningPortrait('claude-opus-4-5-20251101-thinking', {
+    defaultEnabled: true,
+  });
+  assertSyncedReasoningDefault('claude-opus-4-5-20251101-thinking', false, true);
+});
+
+test('keeps OpenAI portraits on hidden visibility semantics', () => {
+  assertEffortPortrait('openai/gpt-5', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['minimal', 'low', 'medium', 'high'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
+  });
 });
 
 test('applies xhigh reasoning portraits for supported GPT-5.x variants', () => {

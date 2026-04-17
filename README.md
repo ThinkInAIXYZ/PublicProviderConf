@@ -32,26 +32,28 @@ When we need richer model-level metadata, we add it under `extra_capabilities` i
 - Legacy fields remain the compatibility layer for downstream consumers that already depend on them
 - Legacy `reasoning.supported` is the compatibility signal that a model supports reasoning; provider-specific controls such as `effort` may still depend on the current provider surface
 - `visibility` is a normalized output-visibility field, not a provider-native parameter name such as Anthropic's `thinking.display`
+- `omitted` is distinct from `hidden`: `omitted` tracks Anthropic's omitted thinking display, while `hidden` remains the generic non-exposed visibility bucket used by other providers
 - Portrait defaults may intentionally differ from an upstream provider's raw default when we choose a better client-side starting point for a supported reasoning model
 
 ### Example
 ```json
 {
-  "id": "gpt-5",
+  "id": "claude-opus-4.7",
   "reasoning": {
     "supported": true,
-    "default": true
+    "default": false
   },
   "extra_capabilities": {
     "reasoning": {
       "supported": true,
-      "default_enabled": true,
+      "default_enabled": false,
       "mode": "effort",
-      "effort": "medium",
-      "effort_options": ["minimal", "low", "medium", "high"],
-      "verbosity": "medium",
-      "verbosity_options": ["low", "medium", "high"],
-      "visibility": "hidden"
+      "effort": "high",
+      "effort_options": ["low", "medium", "high", "xhigh", "max"],
+      "interleaved": true,
+      "summaries": true,
+      "visibility": "omitted",
+      "continuation": ["thinking_blocks"]
     }
   }
 }
@@ -70,7 +72,7 @@ When we need richer model-level metadata, we add it under `extra_capabilities` i
 - `level_options`: supported reasoning levels
 - `interleaved`: whether interleaved reasoning is part of the model portrait
 - `summaries`: whether reasoning summaries are part of the model portrait
-- `visibility`: one of `hidden`, `summary`, `full`, or `mixed`; normalized across providers rather than mirroring vendor-native parameter names
+- `visibility`: one of `hidden`, `summary`, `full`, `mixed`, or `omitted`; normalized across providers rather than mirroring vendor-native parameter names
 - `continuation`: continuation mechanism hints such as `thinking_blocks` or `thought_signatures`
 - `notes`: short implementation notes when the model family has important quirks
 

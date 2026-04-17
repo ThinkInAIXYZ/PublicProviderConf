@@ -1,7 +1,7 @@
 import { getOpenAIReasoningProfile } from './openai-reasoning-profile';
 
 export type ReasoningMode = 'budget' | 'effort' | 'level' | 'fixed' | 'mixed';
-export type ReasoningVisibility = 'hidden' | 'summary' | 'full' | 'mixed';
+export type ReasoningVisibility = 'hidden' | 'summary' | 'full' | 'mixed' | 'omitted';
 
 export interface LegacyInterleavedDescriptor {
   field?: string;
@@ -50,6 +50,7 @@ interface ReasoningPortraitDefinition {
 
 interface ReasoningModelLike {
   id?: string;
+  name?: string;
   reasoning?: unknown;
   extra_capabilities?: ExtraCapabilities;
   interleaved?: LegacyInterleaved;
@@ -153,6 +154,8 @@ function matchesAnthropicModelVariant(normalizedId: string, pattern: RegExp): bo
 const CLAUDE_37_SONNET_PATTERN = /(^|[/:@.-])claude-3[.-]7-sonnet(?=$|[/:@.-])/;
 const CLAUDE_46_PATTERN = /(^|[/:@.-])claude-(?:sonnet|opus)-4[.-]6(?=$|[/:@.-])/;
 const CLAUDE_OPUS_47_PATTERN = /(^|[/:@.-])claude-opus-4[.-]7(?=$|[/:@.-])/;
+const CLAUDE_THINKING_VARIANT_PATTERN = /(^|[/:@.-])claude(?=$|[/:@.-])/;
+const THINKING_SUFFIX_PATTERN = /(^|[/:@.-])think(?:ing)?(?=$|[/:@.-])/;
 
 const CLAUDE_46_NOTES = [
   'Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.',
@@ -219,11 +222,11 @@ const REASONING_PORTRAITS: ReasoningPortraitDefinition[] = [
       supported: true,
       default_enabled: false,
       mode: 'effort',
-      effort: 'medium',
+      effort: 'high',
       effort_options: ['low', 'medium', 'high', 'xhigh', 'max'],
       interleaved: true,
       summaries: true,
-      visibility: 'mixed',
+      visibility: 'omitted',
       continuation: ['thinking_blocks'],
       notes: CLAUDE_OPUS_47_NOTES,
     },
@@ -410,17 +413,36 @@ function reasoningFromLegacyInterleaved(
   };
 }
 
+function getClaudeThinkingDefaultOverride(rawIdentifier?: string): ExtraCapabilitiesReasoning | undefined {
+  const normalizedId = normalizeId(rawIdentifier);
+  if (!normalizedId) {
+    return undefined;
+  }
+
+  const portableId = normalizedId.replace(/\./g, '-');
+  if (!CLAUDE_THINKING_VARIANT_PATTERN.test(portableId) || !THINKING_SUFFIX_PATTERN.test(portableId)) {
+    return undefined;
+  }
+
+  return {
+    supported: true,
+    default_enabled: true,
+  };
+}
+
 export function applyReasoningPortraitToModel<T extends ReasoningModelLike>(
   model: T,
   reasoningHint?: ExtraCapabilitiesReasoning,
 ): void {
-  const portrait = getReasoningPortrait(model.id);
+  const identifier = model.id ?? model.name;
+  const portrait = getReasoningPortrait(identifier);
   const hint = cloneReasoningPortrait(reasoningHint);
   const legacy = reasoningFromLegacyInterleaved(model.interleaved);
   const existing = cloneReasoningPortrait(model.extra_capabilities?.reasoning);
+  const claudeThinkingDefault = getClaudeThinkingDefaultOverride(identifier);
 
   let normalizedReasoning: ExtraCapabilitiesReasoning | undefined;
-  for (const candidate of [portrait, hint, legacy, existing]) {
+  for (const candidate of [portrait, hint, legacy, existing, claudeThinkingDefault]) {
     if (!candidate) {
       continue;
     }
@@ -443,21 +465,31 @@ export function syncReasoningFlagFromExtra<T extends ReasoningModelLike>(model: 
   if (!reasoning || (reasoning.supported !== true && reasoning.interleaved !== true)) {
     return;
   }
+  const defaultEnabled =
+    typeof reasoning.default_enabled === 'boolean' ? reasoning.default_enabled : undefined;
 
   if (typeof model.reasoning === 'boolean') {
-    model.reasoning = (model.reasoning
-      ? { supported: true, default: true }
-      : { supported: true }) as T['reasoning'];
+    model.reasoning = (defaultEnabled !== undefined
+      ? { supported: true, default: defaultEnabled }
+      : model.reasoning
+        ? { supported: true, default: true }
+        : { supported: true }) as T['reasoning'];
     return;
   }
 
   if (model.reasoning && typeof model.reasoning === 'object') {
-    model.reasoning = {
+    const nextReasoning: Record<string, unknown> = {
       ...(model.reasoning as Record<string, unknown>),
       supported: true,
-    } as T['reasoning'];
+    };
+    if (defaultEnabled !== undefined) {
+      nextReasoning.default = defaultEnabled;
+    }
+    model.reasoning = nextReasoning as T['reasoning'];
     return;
   }
 
-  model.reasoning = { supported: true } as T['reasoning'];
+  model.reasoning = (defaultEnabled !== undefined
+    ? { supported: true, default: defaultEnabled }
+    : { supported: true }) as T['reasoning'];
 }
