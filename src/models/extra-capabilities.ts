@@ -145,6 +145,25 @@ function matchesInterleavedReasoningBase(baseId: string): boolean {
   );
 }
 
+function matchesAnthropicModelVariant(normalizedId: string, pattern: RegExp): boolean {
+  const portableId = normalizedId.replace(/\./g, '-');
+  return pattern.test(normalizedId) || pattern.test(portableId);
+}
+
+const CLAUDE_37_SONNET_PATTERN = /(^|[/:@.-])claude-3[.-]7-sonnet(?=$|[/:@.-])/;
+const CLAUDE_46_PATTERN = /(^|[/:@.-])claude-(?:sonnet|opus)-4[.-]6(?=$|[/:@.-])/;
+const CLAUDE_OPUS_47_PATTERN = /(^|[/:@.-])claude-opus-4[.-]7(?=$|[/:@.-])/;
+
+const CLAUDE_46_NOTES = [
+  'Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.',
+];
+
+const CLAUDE_OPUS_47_NOTES = [
+  'Claude Opus 4.7 requires thinking.type = "adaptive" to enable thinking explicitly.',
+  'Manual budget_tokens requests return 400 on Claude Opus 4.7.',
+  'task_budget is separate from thinking control and should not be treated as a thinking budget.',
+];
+
 const DEFAULT_INTERLEAVED_REASONING_PORTRAIT: ExtraCapabilitiesReasoning = {
   supported: true,
   interleaved: true,
@@ -159,10 +178,7 @@ const REASONING_PORTRAITS: ReasoningPortraitDefinition[] = [
     portrait: DEFAULT_INTERLEAVED_REASONING_PORTRAIT,
   },
   {
-    matches: (_normalizedId, _baseId, portableBaseId) =>
-      portableBaseId === 'claude-3-7-sonnet-latest' ||
-      portableBaseId.startsWith('claude-3-7-sonnet-') ||
-      portableBaseId === 'claude-3-7-sonnet',
+    matches: normalizedId => matchesAnthropicModelVariant(normalizedId, CLAUDE_37_SONNET_PATTERN),
     portrait: {
       supported: true,
       default_enabled: false,
@@ -179,21 +195,37 @@ const REASONING_PORTRAITS: ReasoningPortraitDefinition[] = [
     },
   },
   {
-    matches: (_normalizedId, _baseId, portableBaseId) =>
-      portableBaseId.startsWith('claude-sonnet-4') || portableBaseId.startsWith('claude-opus-4'),
+    matches: normalizedId => matchesAnthropicModelVariant(normalizedId, CLAUDE_46_PATTERN),
     portrait: {
       supported: true,
       default_enabled: false,
-      mode: 'budget',
+      mode: 'mixed',
       budget: {
         min: 1024,
         unit: 'tokens',
       },
+      effort: 'medium',
+      effort_options: ['low', 'medium', 'high', 'max'],
       interleaved: true,
       summaries: true,
       visibility: 'summary',
       continuation: ['thinking_blocks'],
-      notes: ['Anthropic uses thinking budget tokens'],
+      notes: CLAUDE_46_NOTES,
+    },
+  },
+  {
+    matches: normalizedId => matchesAnthropicModelVariant(normalizedId, CLAUDE_OPUS_47_PATTERN),
+    portrait: {
+      supported: true,
+      default_enabled: false,
+      mode: 'effort',
+      effort: 'medium',
+      effort_options: ['low', 'medium', 'high', 'xhigh', 'max'],
+      interleaved: true,
+      summaries: true,
+      visibility: 'mixed',
+      continuation: ['thinking_blocks'],
+      notes: CLAUDE_OPUS_47_NOTES,
     },
   },
   {

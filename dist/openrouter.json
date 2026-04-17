@@ -2,7 +2,7 @@
   "id": "openrouter",
   "name": "OpenRouter",
   "display_name": "OpenRouter",
-  "updated_at": "2026-04-17T05:08:11.530Z",
+  "updated_at": "2026-04-17T05:36:14.045Z",
   "models": [
     {
       "id": "ai21/jamba-large-1.7",
@@ -564,7 +564,27 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": false,
+          "summaries": false,
+          "visibility": "full",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic uses thinking budget tokens"
+          ]
+        }
+      }
     },
     {
       "id": "anthropic/claude-haiku-4.5",
@@ -621,27 +641,7 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "anthropic/claude-opus-4.1",
@@ -670,27 +670,7 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "anthropic/claude-opus-4.5",
@@ -719,27 +699,7 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "anthropic/claude-opus-4.6",
@@ -772,11 +732,18 @@
         "reasoning": {
           "supported": true,
           "default_enabled": false,
-          "mode": "budget",
+          "mode": "mixed",
           "budget": {
             "min": 1024,
             "unit": "tokens"
           },
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
@@ -784,7 +751,7 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic uses thinking budget tokens"
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
           ]
         }
       }
@@ -820,11 +787,18 @@
         "reasoning": {
           "supported": true,
           "default_enabled": false,
-          "mode": "budget",
+          "mode": "mixed",
           "budget": {
             "min": 1024,
             "unit": "tokens"
           },
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
@@ -832,7 +806,7 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic uses thinking budget tokens"
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
           ]
         }
       }
@@ -868,19 +842,25 @@
         "reasoning": {
           "supported": true,
           "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary",
+          "visibility": "mixed",
           "continuation": [
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic uses thinking budget tokens"
+            "Claude Opus 4.7 requires thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
           ]
         }
       }
@@ -912,27 +892,7 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "anthropic/claude-sonnet-4.5",
@@ -962,27 +922,7 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "anthropic/claude-sonnet-4.6",
@@ -1015,11 +955,18 @@
         "reasoning": {
           "supported": true,
           "default_enabled": false,
-          "mode": "budget",
+          "mode": "mixed",
           "budget": {
             "min": 1024,
             "unit": "tokens"
           },
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
@@ -1027,7 +974,7 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic uses thinking budget tokens"
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
           ]
         }
       }
@@ -2041,7 +1988,7 @@
         ]
       },
       "limit": {
-        "context": 1000000,
+        "context": 1048576,
         "output": 8192
       },
       "metadata": {

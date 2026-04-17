@@ -73,6 +73,61 @@ function assertEffortPortrait(
   });
 }
 
+function assertReasoningPortrait(
+  modelId: string,
+  expected: {
+    defaultEnabled: boolean;
+    mode: string;
+    budget?: Record<string, unknown>;
+    effort?: string;
+    effortOptions?: string[];
+    interleaved?: boolean;
+    summaries?: boolean;
+    visibility?: string;
+    continuation?: string[];
+    notes?: string[];
+  },
+): void {
+  const model: {
+    id: string;
+    extra_capabilities?: {
+      reasoning?: Record<string, unknown>;
+    };
+  } = {
+    id: modelId,
+  };
+
+  applyReasoningPortraitToModel(model);
+
+  const reasoning = model.extra_capabilities?.reasoning;
+
+  assert.deepEqual({
+    supported: reasoning?.supported,
+    default_enabled: reasoning?.default_enabled,
+    mode: reasoning?.mode,
+    budget: reasoning?.budget,
+    effort: reasoning?.effort,
+    effort_options: reasoning?.effort_options,
+    interleaved: reasoning?.interleaved,
+    summaries: reasoning?.summaries,
+    visibility: reasoning?.visibility,
+    continuation: reasoning?.continuation,
+    notes: reasoning?.notes,
+  }, {
+    supported: true,
+    default_enabled: expected.defaultEnabled,
+    mode: expected.mode,
+    budget: expected.budget,
+    effort: expected.effort,
+    effort_options: expected.effortOptions,
+    interleaved: expected.interleaved,
+    summaries: expected.summaries,
+    visibility: expected.visibility,
+    continuation: expected.continuation,
+    notes: expected.notes,
+  });
+}
+
 function assertNoXHigh(modelId: string): void {
   const model: {
     id: string;
@@ -223,6 +278,89 @@ test('portrait normalization syncs legacy reasoning when extra reasoning becomes
   const model = providers.sample.models[0];
   assert.equal(model.extra_capabilities?.reasoning?.supported, true);
   assert.equal(typeof model.reasoning === 'object' && model.reasoning?.supported, true);
+});
+
+test('applies mixed reasoning portraits to Claude 4.6 variants', () => {
+  const expectedNotes = [
+    'Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.',
+  ];
+
+  const modelIds = [
+    'anthropic/claude-opus-4.6',
+    'claude-sonnet-4-6@default',
+    'us.anthropic.claude-sonnet-4-6',
+  ];
+
+  for (const modelId of modelIds) {
+    assertReasoningPortrait(modelId, {
+      defaultEnabled: false,
+      mode: 'mixed',
+      budget: {
+        min: 1024,
+        unit: 'tokens',
+      },
+      effort: 'medium',
+      effortOptions: ['low', 'medium', 'high', 'max'],
+      interleaved: true,
+      summaries: true,
+      visibility: 'summary',
+      continuation: ['thinking_blocks'],
+      notes: expectedNotes,
+    });
+  }
+
+  assertNoXHigh('anthropic/claude-opus-4.6');
+});
+
+test('applies effort reasoning portraits to Claude Opus 4.7 variants', () => {
+  const expectedNotes = [
+    'Claude Opus 4.7 requires thinking.type = "adaptive" to enable thinking explicitly.',
+    'Manual budget_tokens requests return 400 on Claude Opus 4.7.',
+    'task_budget is separate from thinking control and should not be treated as a thinking budget.',
+  ];
+
+  const modelIds = [
+    'claude-opus-4-7',
+    'anthropic/claude-opus-4.7',
+    'global.anthropic.claude-opus-4-7',
+  ];
+
+  for (const modelId of modelIds) {
+    assertReasoningPortrait(modelId, {
+      defaultEnabled: false,
+      mode: 'effort',
+      effort: 'medium',
+      effortOptions: ['low', 'medium', 'high', 'xhigh', 'max'],
+      interleaved: true,
+      summaries: true,
+      visibility: 'mixed',
+      continuation: ['thinking_blocks'],
+      notes: expectedNotes,
+    });
+  }
+});
+
+test('keeps budget reasoning portraits for Claude 3.7 Sonnet variants', () => {
+  const modelIds = [
+    'anthropic/claude-3.7-sonnet',
+    'claude-3-7-sonnet-20250219',
+  ];
+
+  for (const modelId of modelIds) {
+    assertReasoningPortrait(modelId, {
+      defaultEnabled: false,
+      mode: 'budget',
+      budget: {
+        min: 1024,
+        unit: 'tokens',
+      },
+      interleaved: false,
+      summaries: false,
+      visibility: 'full',
+      continuation: ['thinking_blocks'],
+      notes: ['Anthropic uses thinking budget tokens'],
+    });
+  }
 });
 
 test('applies xhigh reasoning portraits for supported GPT-5.x variants', () => {

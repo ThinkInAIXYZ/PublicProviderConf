@@ -31,6 +31,7 @@ When we need richer model-level metadata, we add it under `extra_capabilities` i
 - If a model is not covered by the portrait registry, `extra_capabilities.reasoning` is omitted
 - Legacy fields remain the compatibility layer for downstream consumers that already depend on them
 - Legacy `reasoning.supported` is the compatibility signal that a model supports reasoning; provider-specific controls such as `effort` may still depend on the current provider surface
+- `visibility` is a normalized output-visibility field, not a provider-native parameter name such as Anthropic's `thinking.display`
 - Portrait defaults may intentionally differ from an upstream provider's raw default when we choose a better client-side starting point for a supported reasoning model
 
 ### Example
@@ -69,14 +70,14 @@ When we need richer model-level metadata, we add it under `extra_capabilities` i
 - `level_options`: supported reasoning levels
 - `interleaved`: whether interleaved reasoning is part of the model portrait
 - `summaries`: whether reasoning summaries are part of the model portrait
-- `visibility`: one of `hidden`, `summary`, `full`, or `mixed`
+- `visibility`: one of `hidden`, `summary`, `full`, or `mixed`; normalized across providers rather than mirroring vendor-native parameter names
 - `continuation`: continuation mechanism hints such as `thinking_blocks` or `thought_signatures`
 - `notes`: short implementation notes when the model family has important quirks
 
 ### Current Coverage
 The initial portrait registry covers these model families:
 - OpenAI: `gpt-5`, `gpt-5.1`, `o3`, `o4-mini`, and close variants/aliases
-- Anthropic: Claude 3.7 and Claude 4 reasoning models
+- Anthropic: Claude 3.7, Claude 4.6, and Claude 4.7 reasoning portraits
 - Google: Gemini 2.5 and Gemini 3 reasoning-capable models
 
 ## Getting Started

@@ -2,7 +2,7 @@
   "id": "jiekou",
   "name": "Jiekou",
   "display_name": "Jiekou",
-  "updated_at": "2026-04-17T05:08:12.548Z",
+  "updated_at": "2026-04-17T05:36:15.110Z",
   "models": [
     {
       "id": "claude-3-5-haiku-20241022",
@@ -271,27 +271,7 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "claude-opus-4-5-20251101",
@@ -333,27 +313,7 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "claude-opus-4-6",
@@ -401,11 +361,18 @@
         "reasoning": {
           "supported": true,
           "default_enabled": false,
-          "mode": "budget",
+          "mode": "mixed",
           "budget": {
             "min": 1024,
             "unit": "tokens"
           },
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
@@ -413,7 +380,7 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic uses thinking budget tokens"
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
           ]
         }
       }
@@ -464,19 +431,25 @@
         "reasoning": {
           "supported": true,
           "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary",
+          "visibility": "mixed",
           "continuation": [
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic uses thinking budget tokens"
+            "Claude Opus 4.7 requires thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
           ]
         }
       }
@@ -487,7 +460,7 @@
       "display_name": "claude-sonnet-4-20250514",
       "type": "chat",
       "reasoning": {
-        "supported": true
+        "supported": false
       },
       "tool_call": true,
       "modalities": {
@@ -520,27 +493,7 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "claude-sonnet-4-5-20250929",
@@ -582,27 +535,7 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "claude-sonnet-4-6",
@@ -650,11 +583,18 @@
         "reasoning": {
           "supported": true,
           "default_enabled": false,
-          "mode": "budget",
+          "mode": "mixed",
           "budget": {
             "min": 1024,
             "unit": "tokens"
           },
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
@@ -662,7 +602,7 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic uses thinking budget tokens"
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
           ]
         }
       }
