@@ -2,7 +2,7 @@
   "id": "zenmux",
   "name": "ZenMux",
   "display_name": "ZenMux",
-  "updated_at": "2026-02-25T12:17:15.674Z",
+  "updated_at": "2026-04-18T04:37:48.047Z",
   "models": [
     {
       "id": "anthropic/claude-3.5-haiku",
@@ -22,8 +22,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -52,7 +51,7 @@
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "temperature": true,
       "tool_call": true,
@@ -63,8 +62,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -83,7 +81,27 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": false,
+          "summaries": false,
+          "visibility": "full",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic uses thinking budget tokens"
+          ]
+        }
+      }
     },
     {
       "id": "anthropic/claude-haiku-4.5",
@@ -92,20 +110,18 @@
       "type": "chat",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-02-28",
+      "knowledge": "2025-01-01",
       "release_date": "2025-10-15",
       "last_updated": "2025-10-15",
       "open_weights": false,
       "modalities": {
         "input": [
-          "text",
           "image",
-          "pdf"
+          "text"
         ],
         "output": [
           "text"
@@ -145,8 +161,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -180,14 +195,13 @@
       "temperature": true,
       "tool_call": true,
       "knowledge": "2025-03-31",
-      "release_date": "2025-05-22",
-      "last_updated": "2025-05-22",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
       "open_weights": false,
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -220,15 +234,15 @@
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-03-31",
+      "knowledge": "2025-01-01",
       "release_date": "2025-11-24",
       "last_updated": "2025-11-24",
       "open_weights": false,
       "modalities": {
         "input": [
-          "text",
+          "pdf",
           "image",
-          "pdf"
+          "text"
         ],
         "output": [
           "text"
@@ -238,7 +252,7 @@
         "input": 5,
         "output": 25,
         "cache_read": 0.5,
-        "cache_write": 18.75
+        "cache_write": 6.25
       },
       "limit": {
         "context": 200000,
@@ -257,13 +271,77 @@
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
-      "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-02",
-      "last_updated": "2026-02",
+      "release_date": "2026-02-05",
+      "last_updated": "2026-02-05",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 4.998,
+        "output": 25.007
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-4.7",
+      "name": "Anthropic: Claude Opus 4.7",
+      "display_name": "Anthropic: Claude Opus 4.7",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "temperature": false,
+      "tool_call": true,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -288,7 +366,33 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 requires thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
     },
     {
       "id": "anthropic/claude-sonnet-4",
@@ -309,8 +413,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -350,8 +453,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -380,11 +482,10 @@
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
-      "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-08",
+      "knowledge": "2025-08-31",
       "release_date": "2026-02-17",
       "last_updated": "2026-02-17",
       "open_weights": false,
@@ -399,10 +500,8 @@
         ]
       },
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
+        "input": 2.992,
+        "output": 14.993999999999998
       },
       "limit": {
         "context": 1000000,
@@ -411,7 +510,34 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+          ]
+        }
+      }
     },
     {
       "id": "baidu/ernie-5.0-thinking-preview",
@@ -450,34 +576,306 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "baidu/ernie-x1.1-preview",
       "name": "Baidu: ERNIE-X1.1-Preview",
       "display_name": "Baidu: ERNIE-X1.1-Preview",
       "type": "chat",
+      "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true
       },
       "tool_call": false,
+      "release_date": "2025-09-10",
+      "last_updated": "2025-09-10",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "cost": {
-        "input": 0.136,
-        "output": 0.544
+        "input": 0.15,
+        "output": 0.6
       },
       "limit": {
-        "context": 8192,
+        "context": 64000,
         "output": 8192
       },
       "metadata": {
-        "description": "The Wenxin large model X1.1 has made significant improvements in question answering, tool invocation, intelligent agents, instruction following, logical reasoning, mathematics, and coding tasks, with notable enhancements in factual accuracy. The context length has been extended to 64K tokens, supporting longer inputs and dialogue history, which improves the coherence of long-chain reasoning while maintaining response speed.",
-        "pricing": {
-          "input": 0.136,
-          "output": 0.544
-        },
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "bytedance/doubao-seed-1.8",
+      "name": "ByteDance: Doubao-Seed-1.8",
+      "display_name": "ByteDance: Doubao-Seed-1.8",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-01-01",
+      "release_date": "2025-12-18",
+      "last_updated": "2025-12-18",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.11,
+        "output": 0.28,
+        "cache_read": 0.02,
+        "cache_write": 0.0024
+      },
+      "limit": {
+        "context": 256000,
+        "output": 64000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "bytedance/doubao-seed-2.0-code",
+      "name": "ByteDance: Doubao-Seed-2.0-Code",
+      "display_name": "ByteDance: Doubao-Seed-2.0-Code",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-02-14",
+      "last_updated": "2026-02-14",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 256000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "bytedance/doubao-seed-2.0-lite",
+      "name": "ByteDance: Doubao-Seed-2.0-lite",
+      "display_name": "ByteDance: Doubao-Seed-2.0-lite",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-02-14",
+      "last_updated": "2026-02-14",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 256000,
+        "output": 32000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "bytedance/doubao-seed-2.0-mini",
+      "name": "ByteDance: Doubao-Seed-2.0-mini",
+      "display_name": "ByteDance: Doubao-Seed-2.0-mini",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-02-14",
+      "last_updated": "2026-02-14",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 256000,
+        "output": 32000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "bytedance/doubao-seed-2.0-pro",
+      "name": "ByteDance: Doubao-Seed-2.0-pro",
+      "display_name": "ByteDance: Doubao-Seed-2.0-pro",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-02-14",
+      "last_updated": "2026-02-14",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 256000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "bytedance/doubao-seed-code",
+      "name": "ByteDance: Doubao-Seed-Code",
+      "display_name": "ByteDance: Doubao-Seed-Code",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-01-01",
+      "release_date": "2025-11-11",
+      "last_updated": "2025-11-11",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.17,
+        "output": 1.12,
+        "cache_read": 0.03
+      },
+      "limit": {
+        "context": 256000,
+        "output": 64000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "deepseek/deepseek-r1-0528",
+      "name": "DeepSeek: DeepSeek R1 0528",
+      "display_name": "DeepSeek: DeepSeek R1 0528",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 163840,
+        "output": 163840
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "deepseek/deepseek-chat-v3.1",
@@ -511,37 +909,40 @@
       "name": "DeepSeek: DeepSeek V3.2",
       "display_name": "DeepSeek: DeepSeek V3.2",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true
       },
-      "temperature": true,
-      "tool_call": false,
-      "knowledge": "2024-07",
+      "tool_call": true,
       "release_date": "2025-12-01",
       "last_updated": "2025-12-01",
       "open_weights": false,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "pdf"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.27,
-        "output": 0.4,
-        "cache_read": 0.22
+        "input": 0.27999999999999997,
+        "output": 0.42000000000000004
       },
       "limit": {
-        "context": 163842,
-        "output": 8000
+        "context": 163000,
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "deepseek/deepseek-chat",
@@ -615,7 +1016,18 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "deepseek/deepseek-v3.2-exp",
@@ -629,7 +1041,7 @@
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-09",
+      "knowledge": "2025-01-01",
       "release_date": "2025-09-29",
       "last_updated": "2025-09-29",
       "open_weights": false,
@@ -642,125 +1054,17 @@
         ]
       },
       "cost": {
-        "input": 0.27,
-        "output": 0.4
+        "input": 0.22,
+        "output": 0.33
       },
       "limit": {
-        "context": 163840,
-        "output": 163840
+        "context": 163000,
+        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": false
-    },
-    {
-      "id": "deepseek/deepseek-r1-0528",
-      "name": "DeepSeek: R1 0528",
-      "display_name": "DeepSeek: R1 0528",
-      "type": "chat",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-07",
-      "release_date": "2025-05-28",
-      "last_updated": "2025-05-28",
-      "open_weights": true,
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.7,
-        "output": 2.5,
-        "cache_read": 0.35
-      },
-      "limit": {
-        "context": 163840,
-        "output": 32768
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "google/gemini-2.0-flash",
-      "name": "Google: Gemini 2.0 Flash",
-      "display_name": "Google: Gemini 2.0 Flash",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-06",
-      "release_date": "2024-12-11",
-      "last_updated": "2024-12-11",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.1,
-        "output": 0.4,
-        "cache_read": 0.025
-      },
-      "limit": {
-        "context": 1048576,
-        "output": 8192
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "google/gemini-2.0-flash-lite-001",
-      "name": "Google: Gemini 2.0 Flash Lite",
-      "display_name": "Google: Gemini 2.0 Flash Lite",
-      "type": "image-generation",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1048576,
-        "output": 8192
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
     },
     {
       "id": "google/gemini-2.5-flash",
@@ -793,7 +1097,7 @@
       "cost": {
         "input": 0.3,
         "output": 2.5,
-        "cache_read": 0.075
+        "cache_read": 0.03
       },
       "limit": {
         "context": 1048576,
@@ -802,31 +1106,49 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "budget",
+          "budget": {
+            "min": 0,
+            "max": 24576,
+            "default": -1,
+            "auto": -1,
+            "off": 0,
+            "unit": "tokens"
+          },
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
     },
     {
       "id": "google/gemini-2.5-flash-lite",
       "name": "Google: Gemini 2.5 Flash Lite",
       "display_name": "Google: Gemini 2.5 Flash Lite",
-      "type": "chat",
+      "type": "image-generation",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-01",
-      "release_date": "2025-06-17",
-      "last_updated": "2025-06-17",
+      "knowledge": "2025-01-01",
+      "release_date": "2025-07-22",
+      "last_updated": "2025-07-22",
       "open_weights": false,
       "modalities": {
         "input": [
-          "text",
           "image",
-          "audio",
-          "video",
-          "pdf"
+          "text",
+          "audio"
         ],
         "output": [
           "text"
@@ -835,16 +1157,36 @@
       "cost": {
         "input": 0.1,
         "output": 0.4,
-        "cache_read": 0.01
+        "cache_read": 0.03,
+        "cache_write": 1
       },
       "limit": {
         "context": 1048576,
-        "output": 65536
+        "output": 65535
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 512,
+            "max": 24576,
+            "default": -1,
+            "auto": -1,
+            "unit": "tokens"
+          },
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
     },
     {
       "id": "google/gemini-2.5-pro",
@@ -877,7 +1219,7 @@
       "cost": {
         "input": 1.25,
         "output": 10,
-        "cache_read": 0.31
+        "cache_read": 0.125
       },
       "limit": {
         "context": 1048576,
@@ -886,7 +1228,26 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "budget",
+          "budget": {
+            "min": 128,
+            "max": 32768,
+            "default": -1,
+            "auto": -1,
+            "unit": "tokens"
+          },
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
     },
     {
       "id": "google/gemini-3-flash-preview",
@@ -898,18 +1259,14 @@
         "supported": true,
         "default": true
       },
-      "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-01-01",
       "release_date": "2025-12-17",
       "last_updated": "2025-12-17",
       "open_weights": false,
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf",
-          "audio"
+          "image"
         ],
         "output": [
           "text"
@@ -917,23 +1274,83 @@
       },
       "cost": {
         "input": 0.5,
-        "output": 3,
-        "cache_read": 0.05,
-        "cache_write": 1
+        "output": 3
       },
       "limit": {
-        "context": 1048000,
-        "output": 64000
+        "context": 1048756,
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
     },
     {
-      "id": "google/gemini-3-pro-preview",
-      "name": "Google: Gemini 3 Pro Preview",
-      "display_name": "Google: Gemini 3 Pro Preview",
+      "id": "google/gemini-3.1-flash-lite-preview",
+      "name": "Google: Gemini 3.1 Flash Lite Preview",
+      "display_name": "Google: Gemini 3.1 Flash Lite Preview",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2025-03-20",
+      "last_updated": "2025-03-20",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.25,
+        "output": 1.5
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 65530
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "google/gemini-3.1-pro-preview",
+      "name": "Google: Gemini 3.1 Pro Preview",
+      "display_name": "Google: Gemini 3.1 Pro Preview",
       "type": "chat",
       "attachment": true,
       "reasoning": {
@@ -943,8 +1360,8 @@
       "temperature": true,
       "tool_call": true,
       "knowledge": "2025-01",
-      "release_date": "2025-11-18",
-      "last_updated": "2025-11-18",
+      "release_date": "2026-02-19",
+      "last_updated": "2026-02-19",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -964,13 +1381,30 @@
         "cache_read": 0.2
       },
       "limit": {
-        "context": 1000000,
-        "output": 64000
+        "context": 1048576,
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "low",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
     },
     {
       "id": "google/gemini-3.1-pro-preview",
@@ -1016,17 +1450,18 @@
       "name": "Google: Gemma 3 12B",
       "display_name": "Google: Gemma 3 12B",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": false
       },
       "temperature": true,
-      "tool_call": true,
-      "release_date": "2025-03-01",
-      "last_updated": "2025-03-01",
+      "tool_call": false,
+      "release_date": "2025-03-13",
+      "last_updated": "2026-03-15",
       "open_weights": true,
       "modalities": {
         "input": [
+          "image",
           "text"
         ],
         "output": [
@@ -1034,17 +1469,18 @@
         ]
       },
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 0.04,
+        "output": 0.13,
+        "cache_read": 0.015
       },
       "limit": {
-        "context": 128000,
-        "output": 4096
+        "context": 131072,
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": true
     },
     {
       "id": "inclusionai/ling-1t",
@@ -1143,9 +1579,9 @@
       "vision": false
     },
     {
-      "id": "inclusionai/llada2.0-flash-cap",
-      "name": "inclusionAI: LLaDA2-flash-CAP",
-      "display_name": "inclusionAI: LLaDA2-flash-CAP",
+      "id": "inclusionai/llada2.1-flash",
+      "name": "inclusionAI: LLaDA2.1-flash",
+      "display_name": "inclusionAI: LLaDA2.1-flash",
       "type": "chat",
       "reasoning": {
         "supported": false
@@ -1170,47 +1606,10 @@
       },
       "metadata": {
         "ownedBy": "inclusionai",
-        "created": 1766135034,
+        "created": 1773648925,
         "source": "public-provider-conf"
       },
       "vision": false
-    },
-    {
-      "id": "inclusionai/ming-flash-omni-2.0",
-      "name": "inclusionAI: Ming-flash-omni-2.0",
-      "display_name": "inclusionAI: Ming-flash-omni-2.0",
-      "type": "image-generation",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ],
-        "output": [
-          "text",
-          "image",
-          "audio"
-        ]
-      },
-      "cost": {
-        "input": 0.8,
-        "output": 1.8
-      },
-      "limit": {
-        "context": 64000,
-        "output": 64000
-      },
-      "metadata": {
-        "ownedBy": "inclusionai",
-        "created": 1770619090,
-        "source": "public-provider-conf"
-      },
-      "vision": true
     },
     {
       "id": "inclusionai/ring-1t",
@@ -1237,7 +1636,12 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "inclusionai/ring-flash-2.0",
@@ -1273,7 +1677,12 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "inclusionai/ring-mini-2.0",
@@ -1311,11 +1720,9 @@
       "reasoning": {
         "supported": false
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2025-01-01",
-      "release_date": "2025-10-23",
-      "last_updated": "2025-10-23",
+      "tool_call": false,
+      "release_date": "2025-10-28",
+      "last_updated": "2025-10-28",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -1326,13 +1733,12 @@
         ]
       },
       "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.06
+        "input": 1.5,
+        "output": 6
       },
       "limit": {
         "context": 256000,
-        "output": 64000
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1340,9 +1746,9 @@
       "vision": false
     },
     {
-      "id": "kuaishou/kat-coder-pro-v1-free",
-      "name": "KwaiKAT: KAT-Coder-Pro-V1 Free",
-      "display_name": "KwaiKAT: KAT-Coder-Pro-V1 Free",
+      "id": "kuaishou/kat-coder-pro-v2",
+      "name": "KwaiKAT: KAT-Coder-Pro-V2",
+      "display_name": "KwaiKAT: KAT-Coder-Pro-V2",
       "type": "chat",
       "attachment": false,
       "reasoning": {
@@ -1350,9 +1756,8 @@
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-01-01",
-      "release_date": "2025-10-23",
-      "last_updated": "2025-10-23",
+      "release_date": "2026-03-30",
+      "last_updated": "2026-03-30",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -1369,7 +1774,7 @@
       },
       "limit": {
         "context": 256000,
-        "output": 64000
+        "output": 80000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1460,78 +1865,7 @@
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-10-27",
-      "last_updated": "2025-10-27",
-      "open_weights": true,
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.27,
-        "output": 1.15,
-        "cache_read": 0.03,
-        "cache_write": 0.38
-      },
-      "limit": {
-        "context": 262114,
-        "output": 262114
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "minimax/minimax-m2-her",
-      "name": "MiniMax: MiniMax M2-her",
-      "display_name": "MiniMax: MiniMax M2-her",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 1.2
-      },
-      "limit": {
-        "context": 64000,
-        "output": 64000
-      },
-      "metadata": {
-        "ownedBy": "minimax",
-        "created": 1769495414,
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "minimax/minimax-m2.1",
-      "name": "MiniMax: MiniMax M2.1",
-      "display_name": "MiniMax: MiniMax M2.1",
-      "type": "chat",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-10",
+      "knowledge": "2025-01-01",
       "release_date": "2025-10-27",
       "last_updated": "2025-10-27",
       "open_weights": false,
@@ -1550,8 +1884,243 @@
         "cache_write": 0.38
       },
       "limit": {
+        "context": 204000,
+        "output": 64000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "minimax/minimax-m2-her",
+      "name": "MiniMax: MiniMax M2-her",
+      "display_name": "MiniMax: MiniMax M2-her",
+      "type": "chat",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2026-01-24",
+      "last_updated": "2026-01-24",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.30200000000000005,
+        "output": 1.2069999999999999
+      },
+      "limit": {
+        "context": 65532,
+        "output": 2048
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "minimax/minimax-m2.1",
+      "name": "MiniMax: MiniMax M2.1",
+      "display_name": "MiniMax: MiniMax M2.1",
+      "type": "chat",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "release_date": "2025-12-19",
+      "last_updated": "2025-12-19",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.33,
+        "output": 1.32
+      },
+      "limit": {
+        "context": 200000,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "minimax/minimax-m2.5",
+      "name": "MiniMax: MiniMax M2.5",
+      "display_name": "MiniMax: MiniMax M2.5",
+      "type": "chat",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "release_date": "2026-02-12",
+      "last_updated": "2026-02-12",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 1.2
+      },
+      "limit": {
         "context": 204800,
         "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "minimax/minimax-m2.5-lightning",
+      "name": "MiniMax: MiniMax M2.5 highspeed",
+      "display_name": "MiniMax: MiniMax M2.5 highspeed",
+      "type": "chat",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-01-01",
+      "release_date": "2026-02-13",
+      "last_updated": "2026-02-13",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.6,
+        "output": 4.8,
+        "cache_read": 0.06,
+        "cache_write": 0.75
+      },
+      "limit": {
+        "context": 204800,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "minimax/minimax-m2.7",
+      "name": "MiniMax: MiniMax M2.7",
+      "display_name": "MiniMax: MiniMax M2.7",
+      "type": "chat",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "release_date": "2026-03-18",
+      "last_updated": "2026-03-18",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 1.2
+      },
+      "limit": {
+        "context": 204800,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "minimax/minimax-m2.7-highspeed",
+      "name": "MiniMax: MiniMax M2.7 highspeed",
+      "display_name": "MiniMax: MiniMax M2.7 highspeed",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-01-01",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.611,
+        "output": 2.4439
+      },
+      "limit": {
+        "context": 204800,
+        "output": 131070
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1726,10 +2295,10 @@
         "supported": false
       },
       "temperature": true,
-      "tool_call": false,
-      "knowledge": "2024-10",
-      "release_date": "2025-09-05",
-      "last_updated": "2025-09-05",
+      "tool_call": true,
+      "knowledge": "2025-01-01",
+      "release_date": "2025-09-04",
+      "last_updated": "2025-09-04",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -1741,11 +2310,12 @@
       },
       "cost": {
         "input": 0.6,
-        "output": 2.5
+        "output": 2.5,
+        "cache_read": 0.15
       },
       "limit": {
-        "context": 131072,
-        "output": 16384
+        "context": 262144,
+        "output": 262144
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1759,15 +2329,12 @@
       "type": "chat",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": true
       },
-      "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-07",
-      "release_date": "2025-11",
-      "last_updated": "2025-12",
-      "open_weights": true,
+      "release_date": "2025-11-06",
+      "last_updated": "2025-11-06",
+      "open_weights": false,
       "modalities": {
         "input": [
           "text"
@@ -1777,19 +2344,28 @@
         ]
       },
       "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0,
-        "cache_write": 0
+        "input": 0.3,
+        "output": 1.2
       },
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 256000,
+        "output": 256000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "moonshotai/kimi-k2-thinking-turbo",
@@ -1803,7 +2379,7 @@
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2024-08",
+      "knowledge": "2025-01-01",
       "release_date": "2025-11-06",
       "last_updated": "2025-11-06",
       "open_weights": false,
@@ -1821,8 +2397,8 @@
         "cache_read": 0.15
       },
       "limit": {
-        "context": 262114,
-        "output": 262114
+        "context": 262000,
+        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1836,50 +2412,11 @@
       "type": "chat",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": true
       },
       "tool_call": true,
-      "release_date": "2026-01-27",
-      "last_updated": "2026-01-27",
-      "open_weights": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 1.47,
-        "output": 5.9
-      },
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "openai/gpt-4.1",
-      "name": "OpenAI: GPT-4.1",
-      "display_name": "OpenAI: GPT-4.1",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-04",
-      "release_date": "2025-04-14",
-      "last_updated": "2025-04-14",
+      "release_date": "2026-01-26",
+      "last_updated": "2026-01-26",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -1891,9 +2428,55 @@
         ]
       },
       "cost": {
+        "input": 0.3,
+        "output": 1.9
+      },
+      "limit": {
+        "context": 256000,
+        "output": 65536
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-4.1",
+      "name": "OpenAI: GPT-4.1",
+      "display_name": "OpenAI: GPT-4.1",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "release_date": "2025-09-10",
+      "last_updated": "2025-09-10",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
         "input": 2,
-        "output": 8,
-        "cache_read": 0.5
+        "output": 8
       },
       "limit": {
         "context": 1047576,
@@ -1913,9 +2496,7 @@
       "reasoning": {
         "supported": false
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-04",
+      "tool_call": false,
       "release_date": "2025-04-14",
       "last_updated": "2025-04-14",
       "open_weights": false,
@@ -1930,8 +2511,7 @@
       },
       "cost": {
         "input": 0.4,
-        "output": 1.6,
-        "cache_read": 0.1
+        "output": 1.6
       },
       "limit": {
         "context": 1047576,
@@ -1951,16 +2531,15 @@
       "reasoning": {
         "supported": false
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-04",
+      "tool_call": false,
       "release_date": "2025-04-14",
       "last_updated": "2025-04-14",
       "open_weights": false,
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -1968,8 +2547,7 @@
       },
       "cost": {
         "input": 0.1,
-        "output": 0.4,
-        "cache_read": 0.03
+        "output": 0.4
       },
       "limit": {
         "context": 1047576,
@@ -1989,11 +2567,9 @@
       "reasoning": {
         "supported": false
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2023-09",
+      "tool_call": false,
       "release_date": "2024-05-13",
-      "last_updated": "2024-08-06",
+      "last_updated": "2024-05-13",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2005,9 +2581,8 @@
         ]
       },
       "cost": {
-        "input": 2.5,
-        "output": 10,
-        "cache_read": 1.25
+        "input": 2.499,
+        "output": 9.996
       },
       "limit": {
         "context": 128000,
@@ -2027,9 +2602,7 @@
       "reasoning": {
         "supported": false
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2023-09",
+      "tool_call": false,
       "release_date": "2024-07-18",
       "last_updated": "2024-07-18",
       "open_weights": false,
@@ -2043,9 +2616,8 @@
         ]
       },
       "cost": {
-        "input": 0.15,
-        "output": 0.6,
-        "cache_read": 0.08
+        "input": 0.1496,
+        "output": 0.595
       },
       "limit": {
         "context": 128000,
@@ -2066,48 +2638,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
       "tool_call": true,
-      "knowledge": "2024-09-30",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.125
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "openai/gpt-5-chat",
-      "name": "OpenAI: GPT-5 Chat",
-      "display_name": "OpenAI: GPT-5 Chat",
-      "type": "image-generation",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-10",
       "release_date": "2025-08-07",
       "last_updated": "2025-08-07",
       "open_weights": false,
@@ -2118,23 +2649,60 @@
           "pdf"
         ],
         "output": [
-          "text",
-          "image"
+          "text"
         ]
       },
       "cost": {
         "input": 1.25,
-        "output": 10,
-        "cache_read": 0.13
+        "output": 10
       },
       "limit": {
-        "context": 128000,
+        "context": 400000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5-chat",
+      "name": "OpenAI: GPT-5 Chat",
+      "display_name": "OpenAI: GPT-5 Chat",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "limit": {
+        "context": 272000,
         "output": 16384
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": false
     },
     {
       "id": "openai/gpt-5-codex",
@@ -2146,34 +2714,51 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
-      "tool_call": true,
-      "knowledge": "2024-09-30",
+      "tool_call": false,
       "release_date": "2025-09-15",
       "last_updated": "2025-09-15",
       "open_weights": false,
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.125
+        "input": 9.996,
+        "output": 19.992
       },
       "limit": {
-        "context": 400000,
-        "output": 128000
+        "context": 256000,
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
       "id": "openai/gpt-5-mini",
@@ -2185,9 +2770,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
-      "tool_call": true,
-      "knowledge": "2024-05-30",
+      "tool_call": false,
       "release_date": "2025-08-07",
       "last_updated": "2025-08-07",
       "open_weights": false,
@@ -2202,8 +2785,7 @@
       },
       "cost": {
         "input": 0.25,
-        "output": 2,
-        "cache_read": 0.025
+        "output": 2
       },
       "limit": {
         "context": 400000,
@@ -2212,7 +2794,28 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
       "id": "openai/gpt-5-nano",
@@ -2224,9 +2827,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
-      "tool_call": true,
-      "knowledge": "2024-05-30",
+      "tool_call": false,
       "release_date": "2025-08-07",
       "last_updated": "2025-08-07",
       "open_weights": false,
@@ -2241,8 +2842,7 @@
       },
       "cost": {
         "input": 0.05,
-        "output": 0.4,
-        "cache_read": 0.005
+        "output": 0.4
       },
       "limit": {
         "context": 400000,
@@ -2251,33 +2851,50 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
       "id": "openai/gpt-5-pro",
       "name": "OpenAI: GPT-5 Pro",
       "display_name": "OpenAI: GPT-5 Pro",
-      "type": "image-generation",
+      "type": "chat",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-10",
+      "tool_call": false,
       "release_date": "2025-08-07",
       "last_updated": "2025-08-07",
       "open_weights": false,
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
-          "text",
-          "image"
+          "text"
         ]
       },
       "cost": {
@@ -2286,12 +2903,27 @@
       },
       "limit": {
         "context": 400000,
-        "output": 272000
+        "output": 128000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "fixed",
+          "effort": "high",
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
       "id": "openai/gpt-5.1",
@@ -2301,11 +2933,67 @@
       "attachment": true,
       "reasoning": {
         "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "release_date": "2025-11-13",
+      "last_updated": "2025-11-13",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 10
+      },
+      "limit": {
+        "context": 400000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5.1-chat",
+      "name": "OpenAI: GPT-5.1 Chat",
+      "display_name": "OpenAI: GPT-5.1 Chat",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
         "default": true
       },
-      "temperature": false,
-      "tool_call": true,
-      "knowledge": "2024-09-30",
+      "tool_call": false,
       "release_date": "2025-11-13",
       "last_updated": "2025-11-13",
       "open_weights": false,
@@ -2320,51 +3008,11 @@
       },
       "cost": {
         "input": 1.25,
-        "output": 10,
-        "cache_read": 0.13
+        "output": 10
       },
       "limit": {
         "context": 400000,
         "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "openai/gpt-5.1-chat",
-      "name": "OpenAI: GPT-5.1 Chat",
-      "display_name": "OpenAI: GPT-5.1 Chat",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2025-01-01",
-      "release_date": "2025-11-13",
-      "last_updated": "2025-11-13",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "pdf",
-          "image",
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.12
-      },
-      "limit": {
-        "context": 128000,
-        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2379,19 +3027,16 @@
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
+      "tool_call": false,
+      "release_date": "2025-11-13",
+      "last_updated": "2025-11-13",
       "open_weights": false,
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -2399,8 +3044,7 @@
       },
       "cost": {
         "input": 1.25,
-        "output": 10,
-        "cache_read": 0.13
+        "output": 10
       },
       "limit": {
         "context": 400000,
@@ -2409,7 +3053,28 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
       "id": "openai/gpt-5.1-codex-mini",
@@ -2419,19 +3084,16 @@
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-05-16",
-      "last_updated": "2025-05-16",
+      "tool_call": false,
+      "release_date": "2025-11-13",
+      "last_updated": "2025-11-13",
       "open_weights": false,
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -2439,8 +3101,7 @@
       },
       "cost": {
         "input": 0.25,
-        "output": 2,
-        "cache_read": 0.03
+        "output": 2
       },
       "limit": {
         "context": 400000,
@@ -2449,7 +3110,28 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
       "id": "openai/gpt-5.2",
@@ -2459,13 +3141,11 @@
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
-      "temperature": true,
       "tool_call": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
+      "release_date": "2026-01-01",
+      "last_updated": "2026-01-01",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2479,8 +3159,7 @@
       },
       "cost": {
         "input": 1.75,
-        "output": 14,
-        "cache_read": 0.18
+        "output": 14
       },
       "limit": {
         "context": 400000,
@@ -2489,7 +3168,29 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
       "id": "openai/gpt-5.2-chat",
@@ -2501,17 +3202,14 @@
         "supported": true,
         "default": true
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
+      "tool_call": false,
+      "release_date": "2026-01-01",
+      "last_updated": "2026-01-01",
       "open_weights": false,
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -2519,11 +3217,10 @@
       },
       "cost": {
         "input": 1.75,
-        "output": 14,
-        "cache_read": 0.18
+        "output": 14
       },
       "limit": {
-        "context": 128000,
+        "context": 400000,
         "output": 16384
       },
       "metadata": {
@@ -2541,11 +3238,9 @@
         "supported": true,
         "default": true
       },
-      "temperature": true,
       "tool_call": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
+      "release_date": "2026-01-01",
+      "last_updated": "2026-01-01",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2568,7 +3263,27 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
       "id": "openai/gpt-5.2-codex",
@@ -2580,11 +3295,9 @@
         "supported": true,
         "default": true
       },
-      "temperature": true,
       "tool_call": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-12",
-      "last_updated": "2025-12",
+      "release_date": "2026-01-14",
+      "last_updated": "2026-01-14",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2598,8 +3311,7 @@
       },
       "cost": {
         "input": 1.75,
-        "output": 14,
-        "cache_read": 0.175
+        "output": 14
       },
       "limit": {
         "context": 400000,
@@ -2608,7 +3320,64 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5.3-chat",
+      "name": "OpenAI: GPT-5.3 Chat",
+      "display_name": "OpenAI: GPT-5.3 Chat",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 1.75,
+        "output": 14
+      },
+      "limit": {
+        "context": 128000,
+        "output": 16380
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
     },
     {
       "id": "openai/gpt-5.3-codex",
@@ -2622,14 +3391,13 @@
       },
       "temperature": true,
       "tool_call": true,
-      "release_date": "2026-02-24",
-      "last_updated": "2026-02-24",
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
       "open_weights": false,
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "pdf"
+          "text"
         ],
         "output": [
           "text"
@@ -2637,8 +3405,7 @@
       },
       "cost": {
         "input": 1.75,
-        "output": 14,
-        "cache_read": 0.175
+        "output": 14
       },
       "limit": {
         "context": 400000,
@@ -2647,23 +3414,44 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
-      "id": "openai/o4-mini",
-      "name": "OpenAI: o4 Mini",
-      "display_name": "OpenAI: o4 Mini",
+      "id": "openai/gpt-5.4",
+      "name": "OpenAI: GPT-5.4",
+      "display_name": "OpenAI: GPT-5.4",
       "type": "chat",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "temperature": false,
       "tool_call": true,
-      "knowledge": "2024-05",
-      "release_date": "2025-04-16",
-      "last_updated": "2025-04-16",
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-05",
+      "last_updated": "2026-03-05",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2675,32 +3463,56 @@
         ]
       },
       "cost": {
-        "input": 1.1,
-        "output": 4.4,
-        "cache_read": 0.28
+        "input": 2.5,
+        "output": 15,
+        "cache_read": 0.25
       },
       "limit": {
-        "context": 200000,
-        "output": 100000
+        "context": 1050000,
+        "output": 128000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
-      "id": "qwen/qwen3-14b",
-      "name": "Qwen: Qwen3 14B",
-      "display_name": "Qwen: Qwen3 14B",
+      "id": "openai/gpt-5.4-mini",
+      "name": "OpenAI: GPT-5.4 Mini",
+      "display_name": "OpenAI: GPT-5.4 Mini",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": false
       },
       "temperature": true,
       "tool_call": true,
-      "release_date": "2025-04-30",
-      "last_updated": "2025-11-25",
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2711,17 +3523,205 @@
         ]
       },
       "cost": {
-        "input": 0.07,
-        "output": 0.28
+        "input": 0.75,
+        "output": 4.5
       },
       "limit": {
-        "context": 131072,
-        "output": 8192
+        "context": 400000,
+        "output": 128000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5.4-nano",
+      "name": "OpenAI: GPT-5.4 Nano",
+      "display_name": "OpenAI: GPT-5.4 Nano",
+      "type": "chat",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 1.25
+      },
+      "limit": {
+        "context": 400000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5.4-pro",
+      "name": "OpenAI: GPT-5.4 Pro",
+      "display_name": "OpenAI: GPT-5.4 Pro",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 45,
+        "output": 225
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/o4-mini",
+      "name": "OpenAI: o4 Mini",
+      "display_name": "OpenAI: o4 Mini",
+      "type": "chat",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "release_date": "2025-04-16",
+      "last_updated": "2025-04-16",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 1.1,
+        "output": 4.4
+      },
+      "limit": {
+        "context": 200000,
+        "output": 100000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
       "id": "qwen/qwen3-235b-a22b-2507",
@@ -2762,9 +3762,8 @@
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-07",
-      "release_date": "2025-07-25",
-      "last_updated": "2025-10-04",
+      "release_date": "2025-07-28",
+      "last_updated": "2025-11-25",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2775,17 +3774,22 @@
         ]
       },
       "cost": {
-        "input": 0.2,
-        "output": 0.8
+        "input": 0.13,
+        "output": 0.6
       },
       "limit": {
-        "context": 262144,
+        "context": 131072,
         "output": 8192
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "qwen/qwen3-max-preview",
@@ -2816,9 +3820,9 @@
       "vision": false
     },
     {
-      "id": "qwen/qwen3-coder",
-      "name": "Qwen: Qwen3-Coder",
-      "display_name": "Qwen: Qwen3-Coder",
+      "id": "qwen/qwen3-14b",
+      "name": "Qwen: Qwen3-14B",
+      "display_name": "Qwen: Qwen3-14B",
       "type": "chat",
       "attachment": false,
       "reasoning": {
@@ -2826,10 +3830,9 @@
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-07-23",
-      "last_updated": "2025-07-23",
-      "open_weights": true,
+      "release_date": "2025-04-30",
+      "last_updated": "2025-11-25",
+      "open_weights": false,
       "modalities": {
         "input": [
           "text"
@@ -2839,12 +3842,39 @@
         ]
       },
       "cost": {
-        "input": 0.3,
-        "output": 1.2
+        "input": 0.07,
+        "output": 0.28
+      },
+      "limit": {
+        "context": 131072,
+        "output": 8192
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen/qwen3-coder",
+      "name": "Qwen: Qwen3-Coder",
+      "display_name": "Qwen: Qwen3-Coder",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
       },
       "limit": {
         "context": 262144,
-        "output": 66536
+        "output": 262144
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2900,9 +3930,9 @@
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-09-24",
-      "last_updated": "2025-09-24",
+      "knowledge": "2025-01-01",
+      "release_date": "2026-01-23",
+      "last_updated": "2026-01-23",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2913,12 +3943,12 @@
         ]
       },
       "cost": {
-        "input": 2.11,
-        "output": 8.45
+        "input": 1.2,
+        "output": 6
       },
       "limit": {
-        "context": 262144,
-        "output": 65536
+        "context": 256000,
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2961,19 +3991,18 @@
       "type": "chat",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": true
       },
       "temperature": true,
       "tool_call": true,
-      "release_date": "2026-02-24",
-      "last_updated": "2026-02-24",
+      "knowledge": "2025-01-01",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
       "open_weights": false,
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -2981,24 +4010,70 @@
       },
       "cost": {
         "input": 0.1,
-        "output": 0.4,
-        "cache_read": 0.001,
-        "cache_write": 0.125
+        "output": 0.4
       },
       "limit": {
-        "context": 1000000,
-        "output": 64000
+        "context": 1020000,
+        "output": 1020000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "qwen/qwen3.5-plus",
       "name": "Qwen: Qwen3.5-Plus",
       "display_name": "Qwen: Qwen3.5-Plus",
       "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-01-01",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.8,
+        "output": 4.8
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 64000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3.6-plus",
+      "name": "Qwen: Qwen3.6-Plus",
+      "display_name": "Qwen: Qwen3.6-Plus",
+      "type": "chat",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -3006,27 +4081,67 @@
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-04",
-      "release_date": "2026-02",
-      "last_updated": "2026-02",
+      "release_date": "2026-03-30",
+      "last_updated": "2026-03-30",
       "open_weights": false,
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.4,
-        "output": 2.4
+        "input": 0.5,
+        "output": 3,
+        "cache_read": 0.05,
+        "cache_write": 0.625
       },
       "limit": {
         "context": 1000000,
-        "output": 65536
+        "output": 64000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "sapiens-ai/agnes-1.5-lite",
+      "name": "Sapiens AI: Agnes-1.5-Lite",
+      "display_name": "Sapiens AI: Agnes-1.5-Lite",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-03-26",
+      "last_updated": "2026-03-26",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.12,
+        "output": 0.6
+      },
+      "limit": {
+        "context": 256000,
+        "output": 256000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -3034,19 +4149,19 @@
       "vision": true
     },
     {
-      "id": "stepfun/step-3.5-flash",
-      "name": "StepFun: Step 3.5 Flash",
-      "display_name": "StepFun: Step 3.5 Flash",
+      "id": "sapiens-ai/agnes-1.5-pro",
+      "name": "Sapiens AI: Agnes-1.5-Pro",
+      "display_name": "Sapiens AI: Agnes-1.5-Pro",
       "type": "chat",
       "attachment": false,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-01-01",
-      "release_date": "2026-02-02",
-      "last_updated": "2026-02-02",
+      "release_date": "2026-03-21",
+      "last_updated": "2026-03-21",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -3057,12 +4172,12 @@
         ]
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.3
+        "input": 0.16,
+        "output": 0.8
       },
       "limit": {
         "context": 256000,
-        "output": 64000
+        "output": 256000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -3070,9 +4185,9 @@
       "vision": false
     },
     {
-      "id": "stepfun/step-3.5-flash-free",
-      "name": "StepFun: Step 3.5 Flash (Free)",
-      "display_name": "StepFun: Step 3.5 Flash (Free)",
+      "id": "stepfun/step-3.5-flash",
+      "name": "StepFun: Step 3.5 Flash",
+      "display_name": "StepFun: Step 3.5 Flash",
       "type": "chat",
       "attachment": false,
       "reasoning": {
@@ -3148,11 +4263,16 @@
       "name": "Tencent: HY 2.0 Think",
       "display_name": "Tencent: HY 2.0 Think",
       "type": "chat",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "tool_call": false,
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-03-08",
+      "last_updated": "2026-03-08",
+      "open_weights": false,
       "modalities": {
         "input": [
           "text"
@@ -3162,19 +4282,33 @@
         ]
       },
       "cost": {
-        "input": 0.57,
-        "output": 2.29
+        "input": 0,
+        "output": 0,
+        "cache_read": 0,
+        "cache_write": 0
       },
       "limit": {
-        "context": 128000,
-        "output": 128000
+        "context": 131072,
+        "output": 16384
       },
       "metadata": {
-        "ownedBy": "tencent",
-        "created": 1770283383,
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "volcengine/doubao-seed-1-6-vision",
@@ -3213,245 +4347,6 @@
       "vision": true
     },
     {
-      "id": "volcengine/doubao-seed-1.8",
-      "name": "VolcanoEngine: Doubao-Seed-1.8",
-      "display_name": "VolcanoEngine: Doubao-Seed-1.8",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2025-01-01",
-      "release_date": "2025-12-18",
-      "last_updated": "2025-12-18",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.11,
-        "output": 0.28,
-        "cache_read": 0.02,
-        "cache_write": 0.0024
-      },
-      "limit": {
-        "context": 256000,
-        "output": 64000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "volcengine/doubao-seed-2.0-code",
-      "name": "VolcanoEngine: Doubao-Seed-2.0-Code",
-      "display_name": "VolcanoEngine: Doubao-Seed-2.0-Code",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.45,
-        "output": 2.24,
-        "cache_read": 0.09
-      },
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "metadata": {
-        "ownedBy": "volcengine",
-        "created": 1771052263,
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "volcengine/doubao-seed-2.0-lite",
-      "name": "VolcanoEngine: Doubao-Seed-2.0-lite",
-      "display_name": "VolcanoEngine: Doubao-Seed-2.0-lite",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2026-02-14",
-      "release_date": "2026-02-14",
-      "last_updated": "2026-02-14",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.09,
-        "output": 0.51,
-        "cache_read": 0.02,
-        "cache_write": 0.0024
-      },
-      "limit": {
-        "context": 256000,
-        "output": 64000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "volcengine/doubao-seed-2.0-mini",
-      "name": "VolcanoEngine: Doubao-Seed-2.0-mini",
-      "display_name": "VolcanoEngine: Doubao-Seed-2.0-mini",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2026-02-14",
-      "release_date": "2026-02-14",
-      "last_updated": "2026-02-14",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.03,
-        "output": 0.28,
-        "cache_read": 0.01,
-        "cache_write": 0.0024
-      },
-      "limit": {
-        "context": 256000,
-        "output": 64000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "volcengine/doubao-seed-2.0-pro",
-      "name": "VolcanoEngine: Doubao-Seed-2.0-pro",
-      "display_name": "VolcanoEngine: Doubao-Seed-2.0-pro",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2026-02-14",
-      "release_date": "2026-02-14",
-      "last_updated": "2026-02-14",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.45,
-        "output": 2.24,
-        "cache_read": 0.09,
-        "cache_write": 0.0024
-      },
-      "limit": {
-        "context": 256000,
-        "output": 64000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "volcengine/doubao-seed-code",
-      "name": "VolcanoEngine: Doubao-Seed-Code",
-      "display_name": "VolcanoEngine: Doubao-Seed-Code",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2025-01-01",
-      "release_date": "2025-11-11",
-      "last_updated": "2025-11-11",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.17,
-        "output": 1.12,
-        "cache_read": 0.03
-      },
-      "limit": {
-        "context": 256000,
-        "output": 64000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "x-ai/grok-4",
       "name": "xAI: Grok 4",
       "display_name": "xAI: Grok 4",
@@ -3478,8 +4373,7 @@
       "cost": {
         "input": 3,
         "output": 15,
-        "cache_read": 0.75,
-        "cache_write": 15
+        "cache_read": 0.75
       },
       "limit": {
         "context": 256000,
@@ -3488,7 +4382,12 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "x-ai/grok-4-fast",
@@ -3500,11 +4399,9 @@
         "supported": true,
         "default": true
       },
-      "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-07",
-      "release_date": "2025-09-19",
-      "last_updated": "2025-09-19",
+      "release_date": "2025-09-20",
+      "last_updated": "2025-09-20",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -3517,12 +4414,11 @@
       },
       "cost": {
         "input": 0.2,
-        "output": 0.5,
-        "cache_read": 0.05
+        "output": 0.5
       },
       "limit": {
         "context": 2000000,
-        "output": 30000
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -3577,9 +4473,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-01-01",
       "release_date": "2025-11-20",
       "last_updated": "2025-11-20",
       "open_weights": false,
@@ -3594,12 +4488,11 @@
       },
       "cost": {
         "input": 0.2,
-        "output": 0.5,
-        "cache_read": 0.05
+        "output": 0.5
       },
       "limit": {
         "context": 2000000,
-        "output": 64000
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -3645,6 +4538,83 @@
       "vision": true
     },
     {
+      "id": "x-ai/grok-4.2-fast",
+      "name": "xAI: Grok 4.2 Fast",
+      "display_name": "xAI: Grok 4.2 Fast",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 3,
+        "output": 9
+      },
+      "limit": {
+        "context": 2000000,
+        "output": 30000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "x-ai/grok-4.2-fast-non-reasoning",
+      "name": "xAI: Grok 4.2 Fast Non Reasoning",
+      "display_name": "xAI: Grok 4.2 Fast Non Reasoning",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 3,
+        "output": 9
+      },
+      "limit": {
+        "context": 2000000,
+        "output": 30000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "x-ai/grok-code-fast-1",
       "name": "xAI: Grok Code Fast 1",
       "display_name": "xAI: Grok Code Fast 1",
@@ -3654,9 +4624,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2023-10",
+      "tool_call": false,
       "release_date": "2025-08-28",
       "last_updated": "2025-08-28",
       "open_weights": false,
@@ -3670,17 +4638,21 @@
       },
       "cost": {
         "input": 0.2,
-        "output": 1.5,
-        "cache_read": 0.02
+        "output": 1.5
       },
       "limit": {
         "context": 256000,
-        "output": 10000
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "xiaomi/mimo-v2-flash",
@@ -3689,12 +4661,9 @@
       "type": "chat",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2024-10",
+      "tool_call": false,
       "release_date": "2025-12-17",
       "last_updated": "2025-12-17",
       "open_weights": false,
@@ -3707,12 +4676,12 @@
         ]
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.29
+        "input": 0.102,
+        "output": 0.306
       },
       "limit": {
-        "context": 262144,
-        "output": 32000
+        "context": 256000,
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -3720,41 +4689,81 @@
       "vision": false
     },
     {
-      "id": "xiaomi/mimo-v2-flash-free",
-      "name": "Xiaomi: MiMo-V2-Flash Free",
-      "display_name": "Xiaomi: MiMo-V2-Flash Free",
+      "id": "xiaomi/mimo-v2-omni",
+      "name": "Xiaomi: MiMo-V2-Omni",
+      "display_name": "Xiaomi: MiMo-V2-Omni",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-12-17",
-      "last_updated": "2025-12-17",
+      "knowledge": "2025-01-01",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
       "open_weights": false,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.29
+        "input": 0.4,
+        "output": 2
       },
       "limit": {
-        "context": 262144,
-        "output": 32000
+        "context": 265000,
+        "output": 265000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": true
+    },
+    {
+      "id": "xiaomi/mimo-v2-pro",
+      "name": "Xiaomi: MiMo-V2-Pro",
+      "display_name": "Xiaomi: MiMo-V2-Pro",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-01-01",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 1.5,
+        "output": 4.5
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 256000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "z-ai/glm-4.5",
@@ -3844,12 +4853,10 @@
         "supported": true,
         "default": true
       },
-      "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-04",
       "release_date": "2025-09-30",
       "last_updated": "2025-09-30",
-      "open_weights": true,
+      "open_weights": false,
       "modalities": {
         "input": [
           "text"
@@ -3859,19 +4866,22 @@
         ]
       },
       "cost": {
-        "input": 0.6,
-        "output": 2.2,
-        "cache_read": 0.11,
-        "cache_write": 0
+        "input": 0.4,
+        "output": 1.5
       },
       "limit": {
-        "context": 204800,
-        "output": 131072
+        "context": 200000,
+        "output": 65535
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "z-ai/glm-4.6v",
@@ -4029,7 +5039,21 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "z-ai/glm-4.7-flash-free",
@@ -4066,7 +5090,12 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "z-ai/glm-4.7-flashx",
@@ -4104,7 +5133,21 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "z-ai/glm-5",
@@ -4121,7 +5164,7 @@
       "knowledge": "2025-01-01",
       "release_date": "2026-02-12",
       "last_updated": "2026-02-12",
-      "open_weights": false,
+      "open_weights": true,
       "modalities": {
         "input": [
           "text"
@@ -4142,7 +5185,168 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "z-ai/glm-5-turbo",
+      "name": "Z.ai: GLM 5 Turbo",
+      "display_name": "Z.ai: GLM 5 Turbo",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-01-01",
+      "release_date": "2026-03-20",
+      "last_updated": "2026-03-20",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.88,
+        "output": 3.48
+      },
+      "limit": {
+        "context": 200000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "z-ai/glm-5.1",
+      "name": "Z.AI: GLM 5.1",
+      "display_name": "Z.AI: GLM 5.1",
+      "type": "chat",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-04-03",
+      "last_updated": "2026-04-03",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.8781,
+        "output": 3.5126,
+        "cache_read": 0.1903
+      },
+      "limit": {
+        "context": 200000,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "z-ai/glm-5v-turbo",
+      "name": "Z.AI: GLM 5V Turbo",
+      "display_name": "Z.AI: GLM 5V Turbo",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-04-01",
+      "last_updated": "2026-04-01",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.726,
+        "output": 3.1946,
+        "cache_read": 0.1743
+      },
+      "limit": {
+        "context": 200000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     }
   ],
   "metadata": {

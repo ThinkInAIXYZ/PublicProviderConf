@@ -20,6 +20,68 @@ After post-processing, the CLI writes the final catalog to `dist/`. Key outputs 
 
 Consumers can point CDN tooling at the `dist/` directory (see GitHub Actions workflow) to publish the latest data for public access.
 
+## Extended Capability Fields
+The dataset keeps legacy capability fields unchanged for backward compatibility. Existing fields such as `reasoning`, `reasoning_effort`, and `interleaved` are preserved as-is.
+
+When we need richer model-level metadata, we add it under `extra_capabilities` instead of changing old fields. The first supported extension is `extra_capabilities.reasoning`, which represents a fixed reasoning portrait for the model itself.
+
+### Design Rules
+- `extra_capabilities.reasoning` describes the model portrait, not provider-specific parameter exposure
+- The same model should have the same reasoning portrait across providers whenever possible
+- If a model is not covered by the portrait registry, `extra_capabilities.reasoning` is omitted
+- Legacy fields remain the compatibility layer for downstream consumers that already depend on them
+- Legacy `reasoning.supported` is the compatibility signal that a model supports reasoning; provider-specific controls such as `effort` may still depend on the current provider surface
+- `visibility` is a normalized output-visibility field, not a provider-native parameter name such as Anthropic's `thinking.display`
+- `omitted` is distinct from `hidden`: `omitted` tracks Anthropic's omitted thinking display, while `hidden` remains the generic non-exposed visibility bucket used by other providers
+- Portrait defaults may intentionally differ from an upstream provider's raw default when we choose a better client-side starting point for a supported reasoning model
+
+### Example
+```json
+{
+  "id": "claude-opus-4.7",
+  "reasoning": {
+    "supported": true,
+    "default": false
+  },
+  "extra_capabilities": {
+    "reasoning": {
+      "supported": true,
+      "default_enabled": false,
+      "mode": "effort",
+      "effort": "high",
+      "effort_options": ["low", "medium", "high", "xhigh", "max"],
+      "interleaved": true,
+      "summaries": true,
+      "visibility": "omitted",
+      "continuation": ["thinking_blocks"]
+    }
+  }
+}
+```
+
+### `extra_capabilities.reasoning` Fields
+- `supported`: whether the model family supports reasoning
+- `default_enabled`: whether reasoning should be enabled by default in the model portrait
+- `mode`: one of `budget`, `effort`, `level`, `fixed`, or `mixed`
+- `budget`: token-budget style reasoning controls such as min/max/default/auto/off
+- `effort`: default reasoning effort for this portrait, which may be a client-friendly default rather than the upstream provider's raw default
+- `effort_options`: supported effort levels
+- `verbosity`: default reasoning verbosity
+- `verbosity_options`: supported verbosity levels
+- `level`: default reasoning level for models that use level-based controls
+- `level_options`: supported reasoning levels
+- `interleaved`: whether interleaved reasoning is part of the model portrait
+- `summaries`: whether reasoning summaries are part of the model portrait
+- `visibility`: one of `hidden`, `summary`, `full`, `mixed`, or `omitted`; normalized across providers rather than mirroring vendor-native parameter names
+- `continuation`: continuation mechanism hints such as `thinking_blocks` or `thought_signatures`
+- `notes`: short implementation notes when the model family has important quirks
+
+### Current Coverage
+The initial portrait registry covers these model families:
+- OpenAI: `gpt-5`, `gpt-5.1`, `o3`, `o4-mini`, and close variants/aliases
+- Anthropic: Claude 3.7, Claude 4.6, and Claude 4.7 reasoning portraits
+- Google: Gemini 2.5 and Gemini 3 reasoning-capable models
+
 ## Getting Started
 
 ### Prerequisites

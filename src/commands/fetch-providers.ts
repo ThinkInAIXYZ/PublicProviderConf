@@ -4,7 +4,9 @@ import { OutputManager } from '../output/output-manager';
 import { loadConfig } from '../config/app-config';
 import {
   ModelsDevApiResponse,
+  applyReasoningPortraits,
   applyModelsDevTypeFallbacks,
+  buildAiHubMixReasoningHintMap,
   buildAiHubMixTypeMap,
   createModelsDevProvider,
   mergeProviders,
@@ -18,6 +20,7 @@ import {
   getExclusionReason,
   loadAihubmixFallback,
 } from './models-dev-shared';
+import { shouldSyncDoubaoProvider, syncVolcengineOutput } from './volcengine-sync';
 
 export async function fetchSpecificProviders(
   providerNames: string[],
@@ -80,6 +83,24 @@ export async function fetchSpecificProviders(
 
     console.log(`📊 Processed ${processedProviders.length} providers with data validation`);
 
+    const aihubmixLive = processedProviders.find(
+      provider => normalizeProviderId(provider.provider) === 'aihubmix',
+    );
+    let aihubmixData;
+
+    if (aihubmixLive) {
+      aihubmixData = createModelsDevProvider(aihubmixLive);
+      console.log('🔗 Using live AIHubMix data for capability fallbacks.');
+    } else {
+      const fallback = await loadAihubmixFallback(outputDir);
+      if (fallback) {
+        aihubmixData = fallback;
+        console.log('📦 Using cached AIHubMix data for capability fallbacks.');
+      } else {
+        console.warn('⚠️  AIHubMix data unavailable; capability fallbacks will rely on portraits only.');
+      }
+    }
+
     const additionalProviders = processedProviders
       .map(createModelsDevProvider)
       .map(provider => {
@@ -107,11 +128,15 @@ export async function fetchSpecificProviders(
       updated_at: new Date().toISOString(),
     };
 
-    const aihubmixFallback = await loadAihubmixFallback(outputDir);
-    const aihubmixTypeMap = buildAiHubMixTypeMap(aihubmixFallback ?? undefined);
+    const aihubmixTypeMap = buildAiHubMixTypeMap(aihubmixData);
+    const aihubmixReasoningHintMap = buildAiHubMixReasoningHintMap(aihubmixData);
     applyModelsDevTypeFallbacks(aggregatedData, aihubmixTypeMap);
+    applyReasoningPortraits(aggregatedData, aihubmixReasoningHintMap);
 
     await outputManager.writeAllFiles(aggregatedData);
+    if (shouldSyncDoubaoProvider(providerNames)) {
+      await syncVolcengineOutput({ outputDir, logger: console });
+    }
 
     console.log(`📁 Output files written to: ${outputDir}`);
 

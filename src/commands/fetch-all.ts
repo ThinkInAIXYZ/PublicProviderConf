@@ -5,7 +5,9 @@ import { loadConfig } from '../config/app-config';
 import {
   ModelsDevApiResponse,
   ModelsDevProvider,
+  applyReasoningPortraits,
   applyModelsDevTypeFallbacks,
+  buildAiHubMixReasoningHintMap,
   buildAiHubMixTypeMap,
   createModelsDevProvider,
   getProviderId,
@@ -20,6 +22,7 @@ import {
   normalizeProviderId,
   loadAihubmixFallback,
 } from './models-dev-shared';
+import { syncVolcengineOutput } from './volcengine-sync';
 
 function removeProviderById(
   providers: ModelsDevApiResponse['providers'],
@@ -180,9 +183,12 @@ export async function fetchAllProviders(outputDir: string): Promise<ModelsDevApi
     };
 
     const aihubmixTypeMap = buildAiHubMixTypeMap(aihubmixData);
+    const aihubmixReasoningHintMap = buildAiHubMixReasoningHintMap(aihubmixData);
     applyModelsDevTypeFallbacks(aggregatedData, aihubmixTypeMap);
+    applyReasoningPortraits(aggregatedData, aihubmixReasoningHintMap);
 
     await outputManager.writeAllFiles(aggregatedData);
+    await syncVolcengineOutput({ outputDir, logger: console });
 
     console.log(`📁 Output files written to: ${outputDir}`);
 
