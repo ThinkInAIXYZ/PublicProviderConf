@@ -6,43 +6,8 @@
   "display_name": "QiHang",
   "models": [
     {
-      "id": "claude-opus-4-5-20251101",
-      "name": "Claude Opus 4.5",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-03",
-      "release_date": "2025-11-01",
-      "last_updated": "2025-11-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 0.71,
-        "output": 3.57
-      },
-      "limit": {
-        "context": 200000,
-        "output": 32000
-      },
-      "display_name": "Claude Opus 4.5",
-      "type": "chat"
-    },
-    {
-      "id": "gemini-3-flash-preview",
-      "name": "Gemini 3 Flash Preview",
+      "id": "gemini-2.5-flash",
+      "name": "Gemini 2.5 Flash",
       "family": "gemini-flash",
       "attachment": true,
       "reasoning": {
@@ -69,31 +34,32 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0.07,
-        "output": 0.43,
+        "input": 0.09,
+        "output": 0.71,
         "context_over_200k": {
-          "input": 0.07,
-          "output": 0.43
+          "input": 0.09,
+          "output": 0.71
         }
       },
       "limit": {
         "context": 1048576,
         "output": 65536
       },
-      "display_name": "Gemini 3 Flash Preview",
+      "display_name": "Gemini 2.5 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
           "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
+          "mode": "budget",
+          "budget": {
+            "min": 0,
+            "max": 24576,
+            "default": -1,
+            "auto": -1,
+            "off": 0,
+            "unit": "tokens"
+          },
           "summaries": true,
           "visibility": "summary",
           "continuation": [
@@ -159,6 +125,42 @@
       }
     },
     {
+      "id": "claude-haiku-4-5-20251001",
+      "name": "Claude Haiku 4.5",
+      "family": "claude-haiku",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-07-31",
+      "release_date": "2025-10-01",
+      "last_updated": "2025-10-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "cost": {
+        "input": 0.14,
+        "output": 0.71
+      },
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "display_name": "Claude Haiku 4.5",
+      "type": "chat"
+    },
+    {
       "id": "gemini-3-pro-preview",
       "name": "Gemini 3 Pro Preview",
       "family": "gemini-pro",
@@ -213,23 +215,26 @@
       }
     },
     {
-      "id": "claude-sonnet-4-5-20250929",
-      "name": "Claude Sonnet 4.5",
-      "family": "claude-sonnet",
+      "id": "gemini-3-flash-preview",
+      "name": "Gemini 3 Flash Preview",
+      "family": "gemini-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-07-31",
-      "release_date": "2025-09-29",
-      "last_updated": "2025-09-29",
+      "knowledge": "2025-01",
+      "release_date": "2025-12-17",
+      "last_updated": "2025-12-17",
       "modalities": {
         "input": [
           "text",
           "image",
+          "video",
+          "audio",
           "pdf"
         ],
         "output": [
@@ -238,15 +243,38 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0.43,
-        "output": 2.14
+        "input": 0.07,
+        "output": 0.43,
+        "context_over_200k": {
+          "input": 0.07,
+          "output": 0.43
+        }
       },
       "limit": {
-        "context": 200000,
-        "output": 64000
+        "context": 1048576,
+        "output": 65536
       },
-      "display_name": "Claude Sonnet 4.5",
-      "type": "chat"
+      "display_name": "Gemini 3 Flash Preview",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
     },
     {
       "id": "gpt-5.2",
@@ -366,27 +394,23 @@
       }
     },
     {
-      "id": "gemini-2.5-flash",
-      "name": "Gemini 2.5 Flash",
-      "family": "gemini-flash",
+      "id": "claude-opus-4-5-20251101",
+      "name": "Claude Opus 4.5",
+      "family": "claude-opus",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2025-12-17",
-      "last_updated": "2025-12-17",
+      "knowledge": "2025-03",
+      "release_date": "2025-11-01",
+      "last_updated": "2025-11-01",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -394,44 +418,20 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0.09,
-        "output": 0.71,
-        "context_over_200k": {
-          "input": 0.09,
-          "output": 0.71
-        }
+        "input": 0.71,
+        "output": 3.57
       },
       "limit": {
-        "context": 1048576,
-        "output": 65536
+        "context": 200000,
+        "output": 32000
       },
-      "display_name": "Gemini 2.5 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "budget",
-          "budget": {
-            "min": 0,
-            "max": 24576,
-            "default": -1,
-            "auto": -1,
-            "off": 0,
-            "unit": "tokens"
-          },
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
+      "display_name": "Claude Opus 4.5",
+      "type": "chat"
     },
     {
-      "id": "claude-haiku-4-5-20251001",
-      "name": "Claude Haiku 4.5",
-      "family": "claude-haiku",
+      "id": "claude-sonnet-4-5-20250929",
+      "name": "Claude Sonnet 4.5",
+      "family": "claude-sonnet",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -440,8 +440,8 @@
       "tool_call": true,
       "temperature": true,
       "knowledge": "2025-07-31",
-      "release_date": "2025-10-01",
-      "last_updated": "2025-10-01",
+      "release_date": "2025-09-29",
+      "last_updated": "2025-09-29",
       "modalities": {
         "input": [
           "text",
@@ -454,14 +454,14 @@
       },
       "open_weights": false,
       "cost": {
-        "input": 0.14,
-        "output": 0.71
+        "input": 0.43,
+        "output": 2.14
       },
       "limit": {
         "context": 200000,
         "output": 64000
       },
-      "display_name": "Claude Haiku 4.5",
+      "display_name": "Claude Sonnet 4.5",
       "type": "chat"
     }
   ]
