@@ -134,6 +134,115 @@ function isGeminiAudioVariant(baseId: string): boolean {
   return baseId.includes('tts') || baseId.includes('audio');
 }
 
+function normalizeFreeSuffix(baseId: string): string {
+  return baseId.replace(/(?::free|-free)$/i, '');
+}
+
+function isQwenExcludedVariant(baseId: string): boolean {
+  return (
+    baseId.includes('instruct-2507') ||
+    baseId.includes('-instruct') ||
+    baseId.includes('qwen3-coder') ||
+    baseId.includes('embedding') ||
+    baseId.includes('reranker') ||
+    baseId.includes('asr') ||
+    baseId.includes('livetranslate') ||
+    baseId.includes('realtime') ||
+    baseId.includes('captioner')
+  );
+}
+
+function getQwenSnapshotDate(baseId: string, family: string): number | undefined {
+  const match = baseId.match(new RegExp(`^${family}-(\\d{4})-(\\d{2})-(\\d{2})$`));
+  if (!match) {
+    return undefined;
+  }
+
+  return Number(`${match[1]}${match[2]}${match[3]}`);
+}
+
+function matchesQwenCommercialReasoningBase(baseId: string): boolean {
+  const commercialFamilies = ['qwen-plus', 'qwen-flash', 'qwen-turbo'];
+  const firstReasoningSnapshot = 20250428;
+
+  for (const family of commercialFamilies) {
+    if (baseId === family || baseId === `${family}-latest`) {
+      return true;
+    }
+
+    const snapshotDate = getQwenSnapshotDate(baseId, family);
+    if (snapshotDate !== undefined) {
+      return snapshotDate >= firstReasoningSnapshot;
+    }
+  }
+
+  return false;
+}
+
+function matchesQwen35ReasoningBase(baseId: string): boolean {
+  return (
+    baseId.startsWith('qwen3.5-plus') ||
+    baseId.startsWith('qwen3.5-flash') ||
+    /^qwen3\.5-\d+b(?:-[a-z]\d+b)?(?:-|$)/.test(baseId)
+  );
+}
+
+function matchesQwen3MaxReasoningBase(baseId: string): boolean {
+  if (baseId === 'qwen3-max' || baseId === 'qwen3-max-preview') {
+    return true;
+  }
+
+  if (baseId.startsWith('qwen3-max') && baseId.includes('thinking')) {
+    return true;
+  }
+
+  const snapshotDate = getQwenSnapshotDate(baseId, 'qwen3-max');
+  return snapshotDate !== undefined && snapshotDate >= 20260123;
+}
+
+function matchesQwen3ReasoningBase(baseId: string): boolean {
+  if (baseId.startsWith('qwen3.6-') || matchesQwen3MaxReasoningBase(baseId)) {
+    return true;
+  }
+
+  if (baseId.startsWith('qwen3-vl-')) {
+    return (
+      baseId.includes('thinking') ||
+      baseId.startsWith('qwen3-vl-plus') ||
+      baseId.startsWith('qwen3-vl-flash') ||
+      /^qwen3-vl-(?:\d+b|235b|30b)-/.test(baseId)
+    );
+  }
+
+  if (baseId.startsWith('qwen3-omni-')) {
+    return baseId.includes('thinking') || baseId.startsWith('qwen3-omni-flash');
+  }
+
+  if (/^qwen3-next-\d+b-[a-z0-9]+-thinking/.test(baseId)) {
+    return true;
+  }
+
+  if (/^qwen3-(?:235b|32b|30b|14b|8b|4b|1\.7b|0\.6b).*-thinking/.test(baseId)) {
+    return true;
+  }
+
+  return /^qwen3-(?:235b-a22b|32b|30b-a3b|14b|8b|4b|1\.7b|0\.6b)$/.test(baseId);
+}
+
+function matchesQwenInterleavedReasoningBase(baseId: string): boolean {
+  const normalizedBaseId = normalizeFreeSuffix(baseId);
+  if (isQwenExcludedVariant(normalizedBaseId)) {
+    return false;
+  }
+
+  return (
+    normalizedBaseId.startsWith('qwq-') ||
+    matchesQwen35ReasoningBase(normalizedBaseId) ||
+    matchesQwen3ReasoningBase(normalizedBaseId) ||
+    matchesQwenCommercialReasoningBase(normalizedBaseId)
+  );
+}
+
 function matchesInterleavedReasoningBase(baseId: string): boolean {
   return (
     baseId === 'deepseek-reasoner' ||
@@ -144,7 +253,8 @@ function matchesInterleavedReasoningBase(baseId: string): boolean {
     baseId === 'glm-4.7' ||
     baseId === 'glm-5' ||
     baseId === 'minimax-m2.7' ||
-    baseId === 'minimax-m2.7-highspeed'
+    baseId === 'minimax-m2.7-highspeed' ||
+    matchesQwenInterleavedReasoningBase(baseId)
   );
 }
 

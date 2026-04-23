@@ -224,6 +224,45 @@ test('matches interleaved reasoning portraits for canonical and slash-prefixed i
   }
 });
 
+test('matches Qwen interleaved reasoning portraits', () => {
+  const models = [
+    { id: 'qwen/qwen3-235b-a22b-thinking-2507' },
+    { id: 'qwen3-8b' },
+    { id: 'qwen3.5-plus' },
+    { id: 'qwen3.6-plus' },
+    { id: 'qwq-plus' },
+    { id: 'qwen3-vl-235b-a22b-thinking' },
+    { id: 'qwen3-next-80b-a3b-thinking' },
+    { id: 'qwen3-max-thinking' },
+    { id: 'qwen3-max-2026-01-23' },
+    { id: 'qwen-plus-2025-04-28' },
+    { id: 'qwen3-omni-flash' },
+  ];
+
+  for (const model of models) {
+    applyReasoningPortraitToModel(model);
+    assertInterleavedThinkingShape(model);
+  }
+});
+
+test('skips Qwen non-reasoning and non-chat variants', () => {
+  const modelIds = [
+    'qwen3-235b-a22b-instruct-2507',
+    'qwen3-coder-plus',
+    'qwen3-embedding-8b',
+    'qwen3-reranker-8b',
+    'qwen-plus-2024-09-19',
+    'qwen3-max-2025-09-23',
+    'qwen3-vl-235b-a22b-instruct',
+    'qwen3-235b-a22b-2507',
+    'qwen3-235b-a22b-07-25',
+  ];
+
+  for (const modelId of modelIds) {
+    assertNoReasoningPortrait(modelId);
+  }
+});
+
 test('migrates MiniMax reasoning_details interleaved metadata into the default portrait', () => {
   const model = {
     id: 'custom-minimax',
