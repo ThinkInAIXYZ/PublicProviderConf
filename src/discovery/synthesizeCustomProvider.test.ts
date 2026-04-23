@@ -3,7 +3,7 @@ import test from 'node:test';
 import { createModelInfo, ModelType } from '../models/model-info';
 import { createProviderInfo } from '../models/provider-info';
 import { JsonValidator } from '../output/json-validator';
-import { createModelsDevProvider } from '../models/models-dev';
+import { applyReasoningPortraits, createModelsDevProvider } from '../models/models-dev';
 import { CustomProvider } from '../providers/CustomProvider';
 import { synthesizeCustomProvider } from './synthesizeCustomProvider';
 import type {
@@ -86,6 +86,10 @@ test('creates valid normalized model cards in the provider output shape', async 
 
     const provider = createModelsDevProvider(providerInfo);
     const model = provider.models.find(item => item.id === 'gpt-5.4');
+    const providerData = { providers: { [provider.id]: provider } };
+
+    applyReasoningPortraits(providerData);
+    const miniMaxM27 = provider.models.find(item => item.id === 'MiniMax-M2.7');
 
     assert.equal(provider.id, 'custom-provider');
     assert.equal(provider.name, 'custom provider');
@@ -96,6 +100,7 @@ test('creates valid normalized model cards in the provider output shape', async 
     assert.equal(model?.limit?.context, 1050000);
     assert.equal(model?.limit?.output, 128000);
     assert.equal(model?.metadata?.sourceProvider, 'openai');
+    assert.equal(miniMaxM27?.extra_capabilities?.reasoning?.interleaved, true);
   });
 });
 

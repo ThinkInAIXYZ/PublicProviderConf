@@ -214,12 +214,27 @@ test('matches interleaved reasoning portraits for canonical and slash-prefixed i
     { id: 'moonshotai/kimi-k2.5' },
     { id: 'z-ai/glm-4.7' },
     { id: 'glm-5' },
+    { id: 'MiniMax-M2.7' },
+    { id: 'minimax/minimax-m2.7-highspeed' },
   ];
 
   for (const model of models) {
     applyReasoningPortraitToModel(model);
     assertInterleavedThinkingShape(model);
   }
+});
+
+test('migrates MiniMax reasoning_details interleaved metadata into the default portrait', () => {
+  const model = {
+    id: 'custom-minimax',
+    interleaved: {
+      field: 'reasoning_details',
+    },
+  };
+
+  applyReasoningPortraitToModel(model);
+
+  assertInterleavedThinkingShape(model);
 });
 
 test('normalizes supported to true when existing extra reasoning keeps interleaved true', () => {

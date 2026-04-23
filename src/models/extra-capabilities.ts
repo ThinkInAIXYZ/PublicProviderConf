@@ -142,7 +142,9 @@ function matchesInterleavedReasoningBase(baseId: string): boolean {
     baseId === 'kimi-k2-thinking' ||
     baseId === 'kimi-k2.5' ||
     baseId === 'glm-4.7' ||
-    baseId === 'glm-5'
+    baseId === 'glm-5' ||
+    baseId === 'minimax-m2.7' ||
+    baseId === 'minimax-m2.7-highspeed'
   );
 }
 
@@ -403,7 +405,7 @@ function reasoningFromLegacyInterleaved(
   }
 
   const field = typeof interleaved.field === 'string' ? interleaved.field.trim().toLowerCase() : '';
-  if (!field || field === 'reasoning_content') {
+  if (!field || field === 'reasoning_content' || field === 'reasoning_details') {
     return cloneReasoningPortrait(DEFAULT_INTERLEAVED_REASONING_PORTRAIT);
   }
 

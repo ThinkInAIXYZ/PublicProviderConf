@@ -81,6 +81,7 @@ The initial portrait registry covers these model families:
 - OpenAI: `gpt-5`, `gpt-5.1`, `o3`, `o4-mini`, and close variants/aliases
 - Anthropic: Claude 3.7, Claude 4.6, and Claude 4.7 reasoning portraits
 - Google: Gemini 2.5 and Gemini 3 reasoning-capable models
+- MiniMax: MiniMax M2.7 and MiniMax M2.7 highspeed interleaved reasoning portraits
 
 ## Getting Started
 
