@@ -280,6 +280,9 @@ export class ModelsDevTemplateManager {
         if (!entry.isFile() || !entry.name.endsWith('.json')) {
           continue;
         }
+        if (entry.name.endsWith('-overrides.json')) {
+          continue;
+        }
 
         const filePath = join(this.templatesDir, entry.name);
         const raw = await fs.readFile(filePath, 'utf8');
