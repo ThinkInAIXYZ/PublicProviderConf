@@ -506,6 +506,15 @@ test('keeps OpenAI portraits on hidden visibility semantics', () => {
 });
 
 test('applies xhigh reasoning portraits for supported GPT-5.x variants', () => {
+  assertEffortPortrait('gpt-5.5', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
+  });
+
   assertEffortPortrait('gpt-5.2', {
     defaultEnabled: false,
     mode: 'effort',

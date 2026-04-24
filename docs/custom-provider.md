@@ -65,6 +65,8 @@ This file is excluded from manual template provider loading and is consumed by t
 
 Official model list APIs are used as an availability/enrichment signal. When those APIs return only basic model IDs, the generator preserves the seed capability metadata and annotates model metadata with API listing status.
 
+Models announced in official OpenAI product surfaces before stable API documentation may be included as provisional seeds. These entries carry `metadata.apiStatus = "coming-soon"` and should be updated once stable API limits, pricing, and model docs are published.
+
 ## Logging
 
 Generation prints a concise source summary:

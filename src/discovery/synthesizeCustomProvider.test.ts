@@ -56,7 +56,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     assert.deepEqual(
       result.summaries.map(summary => [summary.displayName, summary.selected]),
       [
-        ['OpenAI', 5],
+        ['OpenAI', 6],
         ['Anthropic', 3],
         ['Gemini', 5],
         ['Kimi', 4],
@@ -86,6 +86,7 @@ test('creates valid normalized model cards in the provider output shape', async 
 
     const provider = createModelsDevProvider(providerInfo);
     const model = provider.models.find(item => item.id === 'gpt-5.4');
+    const gpt55 = provider.models.find(item => item.id === 'gpt-5.5');
     const deepSeekV4 = provider.models.find(item => item.id === 'deepseek-v4-pro');
     const providerData = { providers: { [provider.id]: provider } };
 
@@ -94,6 +95,8 @@ test('creates valid normalized model cards in the provider output shape', async 
 
     assert.equal(provider.id, 'custom-provider');
     assert.equal(provider.name, 'custom provider');
+    assert.equal(gpt55?.metadata?.apiStatus, 'coming-soon');
+    assert.equal(gpt55?.extra_capabilities?.reasoning?.effort_options?.includes('xhigh'), true);
     assert.equal(model?.type, 'chat');
     assert.equal(model?.tool_call, true);
     assert.equal(model?.structured_output, true);
