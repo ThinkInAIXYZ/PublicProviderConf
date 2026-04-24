@@ -2,7 +2,7 @@
   "id": "deepseek",
   "api": "https://api.deepseek.com",
   "name": "DeepSeek",
-  "doc": "https://platform.deepseek.com/api-docs/pricing",
+  "doc": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
   "display_name": "DeepSeek",
   "models": [
     {
@@ -15,9 +15,9 @@
       },
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2024-07",
+      "knowledge": "2025-09",
       "release_date": "2024-12-26",
-      "last_updated": "2025-08-21",
+      "last_updated": "2026-04-24",
       "modalities": {
         "input": [
           "text"
@@ -26,17 +26,23 @@
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "cost": {
-        "input": 0.57,
-        "output": 1.68,
-        "cache_read": 0.07
+        "input": 0.14,
+        "output": 0.28,
+        "cache_read": 0.028
       },
       "limit": {
-        "context": 128000,
-        "output": 8192
+        "context": 1048576,
+        "output": 393216
       },
       "display_name": "DeepSeek Chat",
+      "metadata": {
+        "alias_of": "deepseek-v4-flash",
+        "mode": "non-thinking",
+        "lifecycle": "compatibility"
+      },
+      "structured_output": true,
       "type": "chat"
     },
     {
@@ -52,10 +58,10 @@
       "interleaved": {
         "field": "reasoning_content"
       },
-      "temperature": true,
-      "knowledge": "2024-07",
+      "temperature": false,
+      "knowledge": "2025-09",
       "release_date": "2025-01-20",
-      "last_updated": "2025-08-21",
+      "last_updated": "2026-04-24",
       "modalities": {
         "input": [
           "text"
@@ -64,17 +70,22 @@
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "cost": {
-        "input": 0.57,
-        "output": 1.68,
-        "cache_read": 0.07
+        "input": 0.14,
+        "output": 0.28,
+        "cache_read": 0.028
       },
       "limit": {
-        "context": 128000,
-        "output": 64000
+        "context": 1048576,
+        "output": 393216
       },
       "display_name": "DeepSeek Reasoner",
+      "metadata": {
+        "alias_of": "deepseek-v4-flash",
+        "mode": "thinking",
+        "lifecycle": "compatibility"
+      },
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -83,9 +94,136 @@
           "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ]
+          ],
+          "effort_options": [
+            "high",
+            "max"
+          ],
+          "notes": [
+            "Compatibility alias for deepseek-v4-flash thinking mode."
+          ],
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high"
         }
       },
+      "structured_output": true,
+      "type": "chat"
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "family": "deepseek",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "structured_output": true,
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 0.14,
+        "output": 0.28,
+        "cache_read": 0.028
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 393216
+      },
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "high",
+            "max"
+          ],
+          "notes": [
+            "Thinking mode is controlled through the thinking parameter; non-thinking mode disables reasoning."
+          ],
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high"
+        }
+      },
+      "display_name": "DeepSeek V4 Flash",
+      "type": "chat"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "family": "deepseek",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "structured_output": true,
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "cost": {
+        "input": 1.74,
+        "output": 3.48,
+        "cache_read": 0.145
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 393216
+      },
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "high",
+            "max"
+          ],
+          "notes": [
+            "Thinking mode is controlled through the thinking parameter; non-thinking mode disables reasoning."
+          ],
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high"
+        }
+      },
+      "display_name": "DeepSeek V4 Pro",
       "type": "chat"
     }
   ]

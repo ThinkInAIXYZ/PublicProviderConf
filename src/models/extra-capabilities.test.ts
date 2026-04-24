@@ -210,6 +210,8 @@ test('migrates legacy interleaved reasoning_content into extra capabilities', ()
 test('matches interleaved reasoning portraits for canonical and slash-prefixed ids', () => {
   const models = [
     { id: 'deepseek-reasoner' },
+    { id: 'deepseek-v4-flash' },
+    { id: 'deepseek/deepseek-v4-pro' },
     { id: 'deepseek/deepseek-r1-0528' },
     { id: 'moonshotai/kimi-k2.5' },
     { id: 'z-ai/glm-4.7' },

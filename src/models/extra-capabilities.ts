@@ -246,6 +246,8 @@ function matchesQwenInterleavedReasoningBase(baseId: string): boolean {
 function matchesInterleavedReasoningBase(baseId: string): boolean {
   return (
     baseId === 'deepseek-reasoner' ||
+    baseId === 'deepseek-v4-flash' ||
+    baseId === 'deepseek-v4-pro' ||
     baseId === 'deepseek-r1' ||
     baseId === 'deepseek-r1-0528' ||
     baseId === 'kimi-k2-thinking' ||

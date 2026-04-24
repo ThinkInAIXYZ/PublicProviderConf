@@ -3,7 +3,7 @@
   "name": "custom provider",
   "display_name": "custom provider",
   "description": "Generated first-tier fallback catalog combining official high-signal chat, coding, reasoning, and frontier model metadata.",
-  "updated_at": "2026-04-23T00:00:00.000Z",
+  "updated_at": "2026-04-24T00:00:00.000Z",
   "doc": "docs/custom-provider.md",
   "tags": [
     "fallback",
@@ -256,10 +256,9 @@
       "temperature": true,
       "tool_call": true,
       "structured_output": true,
-      "knowledge": "2024-07",
       "release_date": "2024-12-26",
-      "last_updated": "2026-04-18",
-      "open_weights": false,
+      "last_updated": "2026-04-24",
+      "open_weights": true,
       "modalities": {
         "input": [
           "text"
@@ -269,27 +268,30 @@
         ]
       },
       "cost": {
-        "input": 0.28,
-        "output": 0.42,
+        "input": 0.14,
+        "output": 0.28,
         "cache_read": 0.028
       },
       "limit": {
-        "context": 128000,
-        "output": 8192
+        "context": 1048576,
+        "output": 393216
       },
       "metadata": {
         "selection": [
           "chat",
           "coding",
-          "cost-efficient"
+          "compatibility"
         ],
-        "lifecycle": "active",
+        "lifecycle": "compatibility",
+        "aliasOf": "deepseek-v4-flash",
+        "mode": "non-thinking",
         "sourceProvider": "deepseek",
         "sourceProviderName": "DeepSeek",
         "sourceApiUrl": "https://api.deepseek.com/models",
         "sourceDocs": [
-          "https://api-docs.deepseek.com/api/create-chat-completion",
-          "https://api-docs.deepseek.com/guides/thinking_mode"
+          "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+          "https://api-docs.deepseek.com/zh-cn/api/create-chat-completion",
+          "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -310,10 +312,9 @@
       "temperature": false,
       "tool_call": true,
       "structured_output": true,
-      "knowledge": "2024-07",
       "release_date": "2025-01-20",
-      "last_updated": "2026-04-18",
-      "open_weights": false,
+      "last_updated": "2026-04-24",
+      "open_weights": true,
       "modalities": {
         "input": [
           "text"
@@ -323,27 +324,30 @@
         ]
       },
       "cost": {
-        "input": 0.28,
-        "output": 0.42,
+        "input": 0.14,
+        "output": 0.28,
         "cache_read": 0.028
       },
       "limit": {
-        "context": 128000,
-        "output": 64000
+        "context": 1048576,
+        "output": 393216
       },
       "metadata": {
         "selection": [
           "reasoning",
           "tool-use",
-          "cost-efficient"
+          "compatibility"
         ],
-        "lifecycle": "active",
+        "lifecycle": "compatibility",
+        "aliasOf": "deepseek-v4-flash",
+        "mode": "thinking",
         "sourceProvider": "deepseek",
         "sourceProviderName": "DeepSeek",
         "sourceApiUrl": "https://api.deepseek.com/models",
         "sourceDocs": [
-          "https://api-docs.deepseek.com/api/create-chat-completion",
-          "https://api-docs.deepseek.com/guides/thinking_mode"
+          "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+          "https://api-docs.deepseek.com/zh-cn/api/create-chat-completion",
+          "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -362,7 +366,170 @@
           "continuation": [
             "thinking_blocks"
           ],
-          "default_enabled": true
+          "effort_options": [
+            "high",
+            "max"
+          ],
+          "notes": [
+            "Compatibility alias for deepseek-v4-flash thinking mode."
+          ],
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high"
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "display_name": "DeepSeek V4 Flash",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "structured_output": true,
+      "last_updated": "2026-04-24",
+      "open_weights": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.14,
+        "output": 0.28,
+        "cache_read": 0.028
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 393216
+      },
+      "metadata": {
+        "selection": [
+          "latest",
+          "cost-efficient",
+          "long-context"
+        ],
+        "lifecycle": "active",
+        "sourceProvider": "deepseek",
+        "sourceProviderName": "DeepSeek",
+        "sourceApiUrl": "https://api.deepseek.com/models",
+        "sourceDocs": [
+          "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+          "https://api-docs.deepseek.com/zh-cn/api/create-chat-completion",
+          "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode"
+        ],
+        "sourceStatus": "seed",
+        "apiListed": false,
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "high",
+            "max"
+          ],
+          "notes": [
+            "Thinking mode is controlled through the thinking parameter; non-thinking mode disables reasoning."
+          ],
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high"
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "structured_output": true,
+      "last_updated": "2026-04-24",
+      "open_weights": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 1.74,
+        "output": 3.48,
+        "cache_read": 0.145
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 393216
+      },
+      "metadata": {
+        "selection": [
+          "latest",
+          "frontier",
+          "long-context"
+        ],
+        "lifecycle": "active",
+        "sourceProvider": "deepseek",
+        "sourceProviderName": "DeepSeek",
+        "sourceApiUrl": "https://api.deepseek.com/models",
+        "sourceDocs": [
+          "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+          "https://api-docs.deepseek.com/zh-cn/api/create-chat-completion",
+          "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode"
+        ],
+        "sourceStatus": "seed",
+        "apiListed": false,
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "high",
+            "max"
+          ],
+          "notes": [
+            "Thinking mode is controlled through the thinking parameter; non-thinking mode disables reasoning."
+          ],
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high"
         }
       }
     },
