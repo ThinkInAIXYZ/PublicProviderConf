@@ -109,6 +109,65 @@
       "type": "chat"
     },
     {
+      "id": "openai/gpt-5.5",
+      "name": "GPT-5.5",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2025-12-01",
+      "release_date": "2026-04-23",
+      "last_updated": "2026-04-23",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "cost": {
+        "input": 5,
+        "output": 30,
+        "cache_read": 0.5
+      },
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "display_name": "GPT-5.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
       "id": "openai/gpt-5-mini",
       "name": "GPT-5 Mini",
       "family": "gpt-mini",
@@ -690,6 +749,69 @@
           ],
           "notes": [
             "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-4-7",
+      "name": "Claude Opus 4.7",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "display_name": "Claude Opus 4.7",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 requires thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
           ]
         }
       }
