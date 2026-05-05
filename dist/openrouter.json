@@ -2,7 +2,7 @@
   "id": "openrouter",
   "name": "OpenRouter",
   "display_name": "OpenRouter",
-  "updated_at": "2026-05-05T00:08:12.343Z",
+  "updated_at": "2026-05-05T00:37:52.170Z",
   "models": [
     {
       "id": "~anthropic/claude-haiku-latest",
@@ -719,6 +719,104 @@
         "source": "public-provider-conf"
       },
       "vision": true
+    },
+    {
+      "id": "anthropic/claude-3.7-sonnet",
+      "name": "Anthropic: Claude 3.7 Sonnet",
+      "display_name": "Anthropic: Claude 3.7 Sonnet",
+      "type": "image-generation",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": false,
+          "summaries": false,
+          "visibility": "full",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic uses thinking budget tokens"
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-3.7-sonnet:thinking",
+      "name": "Anthropic: Claude 3.7 Sonnet (thinking)",
+      "display_name": "Anthropic: Claude 3.7 Sonnet (thinking)",
+      "type": "image-generation",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": false,
+          "summaries": false,
+          "visibility": "full",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic uses thinking budget tokens"
+          ]
+        }
+      }
     },
     {
       "id": "anthropic/claude-haiku-4.5",
