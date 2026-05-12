@@ -30,12 +30,6 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 1,
-        "output": 5,
-        "cache_read": 0.1,
-        "cache_write": 1.25
-      },
       "limit": {
         "context": 200000,
         "output": 64000
@@ -43,6 +37,12 @@
       "provider": {
         "npm": "@ai-sdk/anthropic",
         "api": "https://${AZURE_COGNITIVE_SERVICES_RESOURCE_NAME}.services.ai.azure.com/anthropic/v1"
+      },
+      "cost": {
+        "input": 1,
+        "output": 5,
+        "cache_read": 0.1,
+        "cache_write": 1.25
       },
       "display_name": "Claude Haiku 4.5",
       "type": "chat",
@@ -78,12 +78,6 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 15,
-        "output": 75,
-        "cache_read": 1.5,
-        "cache_write": 18.75
-      },
       "limit": {
         "context": 200000,
         "output": 32000
@@ -91,6 +85,12 @@
       "provider": {
         "npm": "@ai-sdk/anthropic",
         "api": "https://${AZURE_COGNITIVE_SERVICES_RESOURCE_NAME}.services.ai.azure.com/anthropic/v1"
+      },
+      "cost": {
+        "input": 15,
+        "output": 75,
+        "cache_read": 1.5,
+        "cache_write": 18.75
       },
       "display_name": "Claude Opus 4.1",
       "type": "chat",
@@ -125,12 +125,6 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
-      },
       "limit": {
         "context": 200000,
         "output": 64000
@@ -138,6 +132,12 @@
       "provider": {
         "npm": "@ai-sdk/anthropic",
         "api": "https://${AZURE_COGNITIVE_SERVICES_RESOURCE_NAME}.services.ai.azure.com/anthropic/v1"
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
       },
       "display_name": "Claude Opus 4.5",
       "type": "chat",
@@ -173,10 +173,6 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.95,
-        "output": 4
-      },
       "limit": {
         "context": 262144,
         "output": 262144
@@ -185,6 +181,10 @@
         "npm": "@ai-sdk/openai-compatible",
         "api": "https://${AZURE_RESOURCE_NAME}.services.ai.azure.com/models",
         "shape": "completions"
+      },
+      "cost": {
+        "input": 0.95,
+        "output": 4
       },
       "display_name": "Kimi K2.6",
       "type": "chat",
@@ -220,18 +220,6 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25,
-        "context_over_200k": {
-          "input": 10,
-          "output": 37.5,
-          "cache_read": 1,
-          "cache_write": 12.5
-        }
-      },
       "limit": {
         "context": 200000,
         "output": 128000
@@ -239,6 +227,30 @@
       "provider": {
         "npm": "@ai-sdk/anthropic",
         "api": "https://${AZURE_COGNITIVE_SERVICES_RESOURCE_NAME}.services.ai.azure.com/anthropic/v1"
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25,
+        "tiers": [
+          {
+            "input": 10,
+            "output": 37.5,
+            "cache_read": 1,
+            "cache_write": 12.5,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 10,
+          "output": 37.5,
+          "cache_read": 1,
+          "cache_write": 12.5
+        }
       },
       "display_name": "Claude Opus 4.6",
       "type": "chat",
@@ -296,12 +308,6 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
-      },
       "limit": {
         "context": 200000,
         "output": 64000
@@ -309,6 +315,12 @@
       "provider": {
         "npm": "@ai-sdk/anthropic",
         "api": "https://${AZURE_COGNITIVE_SERVICES_RESOURCE_NAME}.services.ai.azure.com/anthropic/v1"
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
       },
       "display_name": "Claude Sonnet 4.5",
       "type": "chat",
@@ -341,13 +353,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 1.35,
-        "output": 5.4
-      },
       "limit": {
         "context": 128000,
         "output": 8192
+      },
+      "cost": {
+        "input": 1.35,
+        "output": 5.4
       },
       "display_name": "MAI-DS-R1",
       "type": "chat"
@@ -375,13 +387,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.25,
-        "output": 1
-      },
       "limit": {
         "context": 128000,
         "output": 8192
+      },
+      "cost": {
+        "input": 0.25,
+        "output": 1
       },
       "display_name": "Llama 4 Maverick 17B 128E Instruct FP8",
       "type": "chat"
@@ -408,13 +420,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 0.3,
-        "output": 0.9
-      },
       "limit": {
         "context": 256000,
         "output": 256000
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 0.9
       },
       "display_name": "Codestral 25.01",
       "type": "chat"
@@ -447,14 +459,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "output": 128000
+      },
       "cost": {
         "input": 1.25,
         "output": 10,
         "cache_read": 0.125
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
       },
       "display_name": "GPT-5.1 Codex",
       "type": "chat",
@@ -504,14 +516,14 @@
         ]
       },
       "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
       "cost": {
         "input": 0.6,
         "output": 2.5,
         "cache_read": 0.15
-      },
-      "limit": {
-        "context": 262144,
-        "output": 262144
       },
       "display_name": "Kimi K2 Thinking",
       "type": "chat",
@@ -550,13 +562,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 1.35,
-        "output": 5.4
-      },
       "limit": {
         "context": 163840,
         "output": 163840
+      },
+      "cost": {
+        "input": 1.35,
+        "output": 5.4
       },
       "display_name": "DeepSeek-R1-0528",
       "type": "chat",
@@ -594,13 +606,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 1.5,
-        "output": 2
-      },
       "limit": {
         "context": 4096,
         "output": 4096
+      },
+      "cost": {
+        "input": 1.5,
+        "output": 2
       },
       "display_name": "GPT-3.5 Turbo Instruct",
       "type": "chat"
@@ -628,13 +640,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 0.4,
-        "output": 2
-      },
       "limit": {
         "context": 128000,
         "output": 128000
+      },
+      "cost": {
+        "input": 0.4,
+        "output": 2
       },
       "display_name": "Mistral Medium 3",
       "type": "chat"
@@ -662,13 +674,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.125,
-        "output": 0.5
-      },
       "limit": {
         "context": 32000,
         "output": 4096
+      },
+      "cost": {
+        "input": 0.125,
+        "output": 0.5
       },
       "display_name": "Phi-4-reasoning-plus",
       "type": "chat"
@@ -694,13 +706,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.1,
-        "output": 0
-      },
       "limit": {
         "context": 512,
         "output": 1024
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0
       },
       "display_name": "Embed v3 English",
       "type": "chat"
@@ -727,13 +739,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 60,
-        "output": 120
-      },
       "limit": {
         "context": 32768,
         "output": 32768
+      },
+      "cost": {
+        "input": 60,
+        "output": 120
       },
       "display_name": "GPT-4 32K",
       "type": "chat"
@@ -762,14 +774,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 272000,
+        "output": 128000
+      },
       "cost": {
         "input": 1.25,
         "output": 10,
         "cache_read": 0.13
-      },
-      "limit": {
-        "context": 272000,
-        "output": 128000
       },
       "display_name": "GPT-5",
       "type": "chat",
@@ -817,13 +829,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.125,
-        "output": 0.5
-      },
       "limit": {
         "context": 128000,
         "output": 4096
+      },
+      "cost": {
+        "input": 0.125,
+        "output": 0.5
       },
       "display_name": "Phi-4",
       "type": "chat"
@@ -850,13 +862,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 3,
-        "output": 4
-      },
       "limit": {
         "context": 16384,
         "output": 16384
+      },
+      "cost": {
+        "input": 3,
+        "output": 4
       },
       "display_name": "GPT-3.5 Turbo 0613",
       "type": "chat"
@@ -883,13 +895,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.17,
-        "output": 0.68
-      },
       "limit": {
         "context": 128000,
         "output": 4096
+      },
+      "cost": {
+        "input": 0.17,
+        "output": 0.68
       },
       "display_name": "Phi-3-medium-instruct (128k)",
       "type": "chat"
@@ -917,13 +929,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.58,
-        "output": 1.68
-      },
       "limit": {
         "context": 128000,
         "output": 128000
+      },
+      "cost": {
+        "input": 0.58,
+        "output": 1.68
       },
       "display_name": "DeepSeek-V3.2",
       "type": "chat",
@@ -955,13 +967,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.15,
-        "output": 0.6
-      },
       "limit": {
         "context": 128000,
         "output": 4096
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.6
       },
       "display_name": "Phi-3-small-instruct (128k)",
       "type": "chat"
@@ -988,13 +1000,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 1.5,
-        "output": 2
-      },
       "limit": {
         "context": 4096,
         "output": 4096
+      },
+      "cost": {
+        "input": 1.5,
+        "output": 2
       },
       "display_name": "GPT-3.5 Turbo 0301",
       "type": "chat"
@@ -1021,13 +1033,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.075,
-        "output": 0.3
-      },
       "limit": {
         "context": 128000,
         "output": 4096
+      },
+      "cost": {
+        "input": 0.075,
+        "output": 0.3
       },
       "display_name": "Phi-4-mini",
       "type": "chat"
@@ -1056,14 +1068,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "output": 128000
+      },
       "cost": {
         "input": 1.25,
         "output": 10,
         "cache_read": 0.13
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
       },
       "display_name": "GPT-5-Codex",
       "type": "chat",
@@ -1111,13 +1123,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.3,
-        "output": 0.61
-      },
       "limit": {
         "context": 8192,
         "output": 2048
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 0.61
       },
       "display_name": "Meta-Llama-3-8B-Instruct",
       "type": "chat"
@@ -1144,13 +1156,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 60,
-        "output": 120
-      },
       "limit": {
         "context": 8192,
         "output": 8192
+      },
+      "cost": {
+        "input": 60,
+        "output": 120
       },
       "display_name": "GPT-4",
       "type": "chat"
@@ -1178,13 +1190,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.075,
-        "output": 0.3
-      },
       "limit": {
         "context": 128000,
         "output": 4096
+      },
+      "cost": {
+        "input": 0.075,
+        "output": 0.3
       },
       "display_name": "Phi-4-mini-reasoning",
       "type": "chat"
@@ -1211,13 +1223,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 2.68,
-        "output": 3.54
-      },
       "limit": {
         "context": 128000,
         "output": 32768
+      },
+      "cost": {
+        "input": 2.68,
+        "output": 3.54
       },
       "display_name": "Meta-Llama-3.1-70B-Instruct",
       "type": "chat"
@@ -1244,13 +1256,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.13,
-        "output": 0.52
-      },
       "limit": {
         "context": 4096,
         "output": 1024
+      },
+      "cost": {
+        "input": 0.13,
+        "output": 0.52
       },
       "display_name": "Phi-3-mini-instruct (4k)",
       "type": "chat"
@@ -1278,13 +1290,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.56,
-        "output": 1.68
-      },
       "limit": {
         "context": 131072,
         "output": 131072
+      },
+      "cost": {
+        "input": 0.56,
+        "output": 1.68
       },
       "display_name": "DeepSeek-V3.1",
       "type": "chat"
@@ -1309,13 +1321,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 0.02,
-        "output": 0
-      },
       "limit": {
         "context": 8191,
         "output": 1536
+      },
+      "cost": {
+        "input": 0.02,
+        "output": 0
       },
       "display_name": "text-embedding-3-small",
       "type": "embedding"
@@ -1342,13 +1354,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 1,
-        "output": 2
-      },
       "limit": {
         "context": 16384,
         "output": 16384
+      },
+      "cost": {
+        "input": 1,
+        "output": 2
       },
       "display_name": "GPT-3.5 Turbo 1106",
       "type": "chat"
@@ -1374,13 +1386,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 0.14,
-        "output": 0
-      },
       "limit": {
         "context": 128000,
         "output": 16384
+      },
+      "cost": {
+        "input": 0.14,
+        "output": 0
       },
       "display_name": "Model Router",
       "type": "chat"
@@ -1408,13 +1420,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 0.1,
-        "output": 0.3
-      },
       "limit": {
         "context": 128000,
         "output": 32768
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0.3
       },
       "display_name": "Mistral Small 3.1",
       "type": "chat"
@@ -1443,14 +1455,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 100000
+      },
       "cost": {
         "input": 15,
         "output": 60,
         "cache_read": 7.5
-      },
-      "limit": {
-        "context": 200000,
-        "output": 100000
       },
       "display_name": "o1",
       "type": "chat",
@@ -1493,14 +1505,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 2000000,
+        "output": 30000
+      },
       "cost": {
         "input": 0.2,
         "output": 0.5,
         "cache_read": 0.05
-      },
-      "limit": {
-        "context": 2000000,
-        "output": 30000
       },
       "display_name": "Grok 4 Fast (Reasoning)",
       "type": "chat",
@@ -1538,14 +1550,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 272000,
+        "output": 128000
+      },
       "cost": {
         "input": 1.25,
         "output": 10,
         "cache_read": 0.125
-      },
-      "limit": {
-        "context": 272000,
-        "output": 128000
       },
       "display_name": "GPT-5.1",
       "type": "chat",
@@ -1592,13 +1604,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.1,
-        "output": 0
-      },
       "limit": {
         "context": 512,
         "output": 1024
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0
       },
       "display_name": "Embed v3 Multilingual",
       "type": "chat"
@@ -1626,14 +1638,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 32768
+      },
       "cost": {
         "input": 16.5,
         "output": 66,
         "cache_read": 8.25
-      },
-      "limit": {
-        "context": 128000,
-        "output": 32768
       },
       "display_name": "o1-preview",
       "type": "chat",
@@ -1674,13 +1686,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 0.5,
-        "output": 1.5
-      },
       "limit": {
         "context": 16384,
         "output": 16384
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 1.5
       },
       "display_name": "GPT-3.5 Turbo 0125",
       "type": "chat"
@@ -1710,14 +1722,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "output": 128000
+      },
       "cost": {
         "input": 0.25,
         "output": 2,
         "cache_read": 0.025
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
       },
       "display_name": "GPT-5.1 Codex Mini",
       "type": "chat",
@@ -1765,13 +1777,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.12,
-        "output": 0
-      },
       "limit": {
         "context": 128000,
         "output": 1536
+      },
+      "cost": {
+        "input": 0.12,
+        "output": 0
       },
       "display_name": "Embed v4",
       "type": "chat"
@@ -1801,14 +1813,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "output": 128000
+      },
       "cost": {
         "input": 1.75,
         "output": 14,
         "cache_read": 0.175
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
       },
       "display_name": "GPT-5.2 Codex",
       "type": "chat",
@@ -1857,13 +1869,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 10,
-        "output": 30
-      },
       "limit": {
         "context": 128000,
         "output": 4096
+      },
+      "cost": {
+        "input": 10,
+        "output": 30
       },
       "display_name": "GPT-4 Turbo Vision",
       "type": "chat"
@@ -1896,14 +1908,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
       "cost": {
         "input": 1.25,
         "output": 10,
         "cache_read": 0.125
-      },
-      "limit": {
-        "context": 128000,
-        "output": 16384
       },
       "display_name": "GPT-5.1 Chat",
       "type": "chat"
@@ -1930,13 +1942,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 5.33,
-        "output": 16
-      },
       "limit": {
         "context": 128000,
         "output": 32768
+      },
+      "cost": {
+        "input": 5.33,
+        "output": 16
       },
       "display_name": "Meta-Llama-3.1-405B-Instruct",
       "type": "chat"
@@ -1964,13 +1976,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.37,
-        "output": 0.37
-      },
       "limit": {
         "context": 128000,
         "output": 8192
+      },
+      "cost": {
+        "input": 0.37,
+        "output": 0.37
       },
       "display_name": "Llama-3.2-11B-Vision-Instruct",
       "type": "chat"
@@ -1998,13 +2010,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 2.5,
-        "output": 10
-      },
       "limit": {
         "context": 256000,
         "output": 8000
+      },
+      "cost": {
+        "input": 2.5,
+        "output": 10
       },
       "display_name": "Command A",
       "type": "chat"
@@ -2031,13 +2043,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 2,
-        "output": 6
-      },
       "limit": {
         "context": 128000,
         "output": 32768
+      },
+      "cost": {
+        "input": 2,
+        "output": 6
       },
       "display_name": "Mistral Large 24.11",
       "type": "chat"
@@ -2067,14 +2079,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "output": 128000
+      },
       "cost": {
         "input": 1.75,
         "output": 14,
         "cache_read": 0.125
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
       },
       "display_name": "GPT-5.2",
       "type": "chat",
@@ -2124,13 +2136,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.58,
-        "output": 1.68
-      },
       "limit": {
         "context": 128000,
         "output": 128000
+      },
+      "cost": {
+        "input": 0.58,
+        "output": 1.68
       },
       "display_name": "DeepSeek-V3.2-Speciale",
       "type": "chat"
@@ -2158,13 +2170,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 1.35,
-        "output": 5.4
-      },
       "limit": {
         "context": 163840,
         "output": 163840
+      },
+      "cost": {
+        "input": 1.35,
+        "output": 5.4
       },
       "display_name": "DeepSeek-R1",
       "type": "chat",
@@ -2203,13 +2215,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 2.04,
-        "output": 2.04
-      },
       "limit": {
         "context": 128000,
         "output": 8192
+      },
+      "cost": {
+        "input": 2.04,
+        "output": 2.04
       },
       "display_name": "Llama-3.2-90B-Vision-Instruct",
       "type": "chat"
@@ -2234,13 +2246,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 0.1,
-        "output": 0
-      },
       "limit": {
         "context": 8192,
         "output": 1536
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0
       },
       "display_name": "text-embedding-ada-002",
       "type": "embedding"
@@ -2270,14 +2282,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "output": 128000
+      },
       "cost": {
         "input": 1.75,
         "output": 14,
         "cache_read": 0.175
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
       },
       "display_name": "GPT-5.3 Codex",
       "type": "chat",
@@ -2325,13 +2337,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.15,
-        "output": 0.6
-      },
       "limit": {
         "context": 8192,
         "output": 2048
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.6
       },
       "display_name": "Phi-3-small-instruct (8k)",
       "type": "chat"
@@ -2358,13 +2370,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 2.68,
-        "output": 3.54
-      },
       "limit": {
         "context": 8192,
         "output": 2048
+      },
+      "cost": {
+        "input": 2.68,
+        "output": 3.54
       },
       "display_name": "Meta-Llama-3-70B-Instruct",
       "type": "chat"
@@ -2393,14 +2405,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 272000,
+        "output": 128000
+      },
       "cost": {
         "input": 0.05,
         "output": 0.4,
         "cache_read": 0.01
-      },
-      "limit": {
-        "context": 272000,
-        "output": 128000
       },
       "display_name": "GPT-5 Nano",
       "type": "chat",
@@ -2450,14 +2462,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 272000,
+        "output": 128000
+      },
       "cost": {
         "input": 0.25,
         "output": 2,
         "cache_read": 0.03
-      },
-      "limit": {
-        "context": 272000,
-        "output": 128000
       },
       "display_name": "GPT-5 Mini",
       "type": "chat",
@@ -2506,13 +2518,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.125,
-        "output": 0.5
-      },
       "limit": {
         "context": 32000,
         "output": 4096
+      },
+      "cost": {
+        "input": 0.125,
+        "output": 0.5
       },
       "display_name": "Phi-4-reasoning",
       "type": "chat"
@@ -2539,13 +2551,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.13,
-        "output": 0.52
-      },
       "limit": {
         "context": 128000,
         "output": 4096
+      },
+      "cost": {
+        "input": 0.13,
+        "output": 0.52
       },
       "display_name": "Phi-3-mini-instruct (128k)",
       "type": "chat"
@@ -2570,13 +2582,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 0.13,
-        "output": 0
-      },
       "limit": {
         "context": 8191,
         "output": 3072
+      },
+      "cost": {
+        "input": 0.13,
+        "output": 0
       },
       "display_name": "text-embedding-3-large",
       "type": "embedding"
@@ -2604,14 +2616,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 65536
+      },
       "cost": {
         "input": 1.1,
         "output": 4.4,
         "cache_read": 0.55
-      },
-      "limit": {
-        "context": 128000,
-        "output": 65536
       },
       "display_name": "o1-mini",
       "type": "chat",
@@ -2652,13 +2664,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.16,
-        "output": 0.64
-      },
       "limit": {
         "context": 128000,
         "output": 4096
+      },
+      "cost": {
+        "input": 0.16,
+        "output": 0.64
       },
       "display_name": "Phi-3.5-MoE-instruct",
       "type": "chat"
@@ -2687,14 +2699,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
       "cost": {
         "input": 1.25,
         "output": 10,
         "cache_read": 0.13
-      },
-      "limit": {
-        "context": 128000,
-        "output": 16384
       },
       "display_name": "GPT-5 Chat",
       "type": "chat"
@@ -2721,13 +2733,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 1.14,
-        "output": 4.56
-      },
       "limit": {
         "context": 131072,
         "output": 131072
+      },
+      "cost": {
+        "input": 1.14,
+        "output": 4.56
       },
       "display_name": "DeepSeek-V3-0324",
       "type": "chat"
@@ -2754,13 +2766,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.71,
-        "output": 0.71
-      },
       "limit": {
         "context": 128000,
         "output": 32768
+      },
+      "cost": {
+        "input": 0.71,
+        "output": 0.71
       },
       "display_name": "Llama-3.3-70B-Instruct",
       "type": "chat"
@@ -2791,10 +2803,6 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.6,
-        "output": 3
-      },
       "limit": {
         "context": 262144,
         "output": 262144
@@ -2803,6 +2811,10 @@
         "npm": "@ai-sdk/openai-compatible",
         "api": "https://${AZURE_RESOURCE_NAME}.services.ai.azure.com/models",
         "shape": "completions"
+      },
+      "cost": {
+        "input": 0.6,
+        "output": 3
       },
       "display_name": "Kimi K2.5",
       "type": "chat",
@@ -2840,13 +2852,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.3,
-        "output": 0.61
-      },
       "limit": {
         "context": 128000,
         "output": 32768
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 0.61
       },
       "display_name": "Meta-Llama-3.1-8B-Instruct",
       "type": "chat"
@@ -2873,13 +2885,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.04,
-        "output": 0.04
-      },
       "limit": {
         "context": 128000,
         "output": 8192
+      },
+      "cost": {
+        "input": 0.04,
+        "output": 0.04
       },
       "display_name": "Ministral 3B",
       "type": "chat"
@@ -2906,13 +2918,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.17,
-        "output": 0.68
-      },
       "limit": {
         "context": 4096,
         "output": 1024
+      },
+      "cost": {
+        "input": 0.17,
+        "output": 0.68
       },
       "display_name": "Phi-3-medium-instruct (4k)",
       "type": "chat"
@@ -2940,13 +2952,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.2,
-        "output": 0.78
-      },
       "limit": {
         "context": 128000,
         "output": 8192
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 0.78
       },
       "display_name": "Llama 4 Scout 17B 16E Instruct",
       "type": "chat"
@@ -2973,13 +2985,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.13,
-        "output": 0.52
-      },
       "limit": {
         "context": 128000,
         "output": 4096
+      },
+      "cost": {
+        "input": 0.13,
+        "output": 0.52
       },
       "display_name": "Phi-3.5-mini-instruct",
       "type": "chat"
@@ -3008,14 +3020,14 @@
         ]
       },
       "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 4096
+      },
       "cost": {
         "input": 0.08,
         "output": 0.32,
         "input_audio": 4
-      },
-      "limit": {
-        "context": 128000,
-        "output": 4096
       },
       "display_name": "Phi-4-multimodal",
       "type": "chat"
@@ -3043,14 +3055,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 100000
+      },
       "cost": {
         "input": 1.5,
         "output": 6,
         "cache_read": 0.375
-      },
-      "limit": {
-        "context": 200000,
-        "output": 100000
       },
       "display_name": "Codex Mini",
       "type": "chat"
@@ -3080,14 +3092,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
       "cost": {
         "input": 1.75,
         "output": 14,
         "cache_read": 0.175
-      },
-      "limit": {
-        "context": 128000,
-        "output": 16384
       },
       "display_name": "GPT-5.2 Chat",
       "type": "chat"
@@ -3114,13 +3126,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.15,
-        "output": 0.15
-      },
       "limit": {
         "context": 128000,
         "output": 128000
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.15
       },
       "display_name": "Mistral Nemo",
       "type": "chat"
@@ -3151,15 +3163,15 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 0.75,
-        "output": 4.5,
-        "cache_read": 0.075
-      },
       "limit": {
         "context": 400000,
         "input": 272000,
         "output": 128000
+      },
+      "cost": {
+        "input": 0.75,
+        "output": 4.5,
+        "cache_read": 0.075
       },
       "display_name": "GPT-5.4 Mini",
       "type": "chat",
@@ -3212,15 +3224,15 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 0.2,
-        "output": 1.25,
-        "cache_read": 0.02
-      },
       "limit": {
         "context": 400000,
         "input": 272000,
         "output": 128000
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 1.25,
+        "cache_read": 0.02
       },
       "display_name": "GPT-5.4 Nano",
       "type": "chat",
@@ -3272,18 +3284,28 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
       "cost": {
         "input": 30,
         "output": 180,
         "context_over_200k": {
           "input": 60,
           "output": 270
-        }
-      },
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
+        },
+        "tiers": [
+          {
+            "input": 60,
+            "output": 270,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ]
       },
       "display_name": "GPT-5.4 Pro",
       "type": "chat",
@@ -3334,6 +3356,11 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
       "cost": {
         "input": 2.5,
         "output": 15,
@@ -3342,12 +3369,18 @@
           "input": 5,
           "output": 22.5,
           "cache_read": 0.5
-        }
-      },
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
+        },
+        "tiers": [
+          {
+            "input": 5,
+            "output": 22.5,
+            "cache_read": 0.5,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ]
       },
       "display_name": "GPT-5.4",
       "type": "chat",
@@ -3397,14 +3430,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 2000000,
+        "output": 30000
+      },
       "cost": {
         "input": 0.2,
         "output": 0.5,
         "cache_read": 0.05
-      },
-      "limit": {
-        "context": 2000000,
-        "output": 30000
       },
       "display_name": "Grok 4 Fast (Non-Reasoning)",
       "type": "chat"
@@ -3431,14 +3464,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 131072,
+        "output": 8192
+      },
       "cost": {
         "input": 3,
         "output": 15,
         "cache_read": 0.75
-      },
-      "limit": {
-        "context": 131072,
-        "output": 8192
       },
       "display_name": "Grok 3",
       "type": "chat"
@@ -3466,14 +3499,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 1047576,
+        "output": 32768
+      },
       "cost": {
         "input": 0.4,
         "output": 1.6,
         "cache_read": 0.1
-      },
-      "limit": {
-        "context": 1047576,
-        "output": 32768
       },
       "display_name": "GPT-4.1 mini",
       "type": "chat"
@@ -3501,14 +3534,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 1047576,
+        "output": 32768
+      },
       "cost": {
         "input": 2,
         "output": 8,
         "cache_read": 0.5
-      },
-      "limit": {
-        "context": 1047576,
-        "output": 32768
       },
       "display_name": "GPT-4.1",
       "type": "chat"
@@ -3535,13 +3568,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 2.5,
-        "output": 10
-      },
       "limit": {
         "context": 128000,
         "output": 4000
+      },
+      "cost": {
+        "input": 2.5,
+        "output": 10
       },
       "display_name": "Command R+",
       "type": "chat"
@@ -3569,14 +3602,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
       "cost": {
         "input": 2.5,
         "output": 10,
         "cache_read": 1.25
-      },
-      "limit": {
-        "context": 128000,
-        "output": 16384
       },
       "display_name": "GPT-4o",
       "type": "chat"
@@ -3606,13 +3639,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 15,
-        "output": 120
-      },
       "limit": {
         "context": 400000,
         "output": 272000
+      },
+      "cost": {
+        "input": 15,
+        "output": 120
       },
       "display_name": "GPT-5 Pro",
       "type": "chat",
@@ -3656,14 +3689,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 100000
+      },
       "cost": {
         "input": 2,
         "output": 8,
         "cache_read": 0.5
-      },
-      "limit": {
-        "context": 200000,
-        "output": 100000
       },
       "display_name": "o3",
       "type": "chat",
@@ -3705,15 +3738,15 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 131072,
+        "output": 8192
+      },
       "cost": {
         "input": 0.3,
         "output": 0.5,
         "reasoning": 0.5,
         "cache_read": 0.075
-      },
-      "limit": {
-        "context": 131072,
-        "output": 8192
       },
       "display_name": "Grok 3 Mini",
       "type": "chat"
@@ -3741,14 +3774,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 1047576,
+        "output": 32768
+      },
       "cost": {
         "input": 0.1,
         "output": 0.4,
         "cache_read": 0.03
-      },
-      "limit": {
-        "context": 1047576,
-        "output": 32768
       },
       "display_name": "GPT-4.1 nano",
       "type": "chat"
@@ -3776,15 +3809,15 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 256000,
+        "output": 64000
+      },
       "cost": {
         "input": 3,
         "output": 15,
         "reasoning": 15,
         "cache_read": 0.75
-      },
-      "limit": {
-        "context": 256000,
-        "output": 64000
       },
       "display_name": "Grok 4",
       "type": "chat",
@@ -3817,14 +3850,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 100000
+      },
       "cost": {
         "input": 1.1,
         "output": 4.4,
         "cache_read": 0.55
-      },
-      "limit": {
-        "context": 200000,
-        "output": 100000
       },
       "display_name": "o3-mini",
       "type": "chat",
@@ -3866,14 +3899,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 256000,
+        "output": 10000
+      },
       "cost": {
         "input": 0.2,
         "output": 1.5,
         "cache_read": 0.02
-      },
-      "limit": {
-        "context": 256000,
-        "output": 10000
       },
       "display_name": "Grok Code Fast 1",
       "type": "chat",
@@ -3907,14 +3940,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 100000
+      },
       "cost": {
         "input": 1.1,
         "output": 4.4,
         "cache_read": 0.28
-      },
-      "limit": {
-        "context": 200000,
-        "output": 100000
       },
       "display_name": "o4-mini",
       "type": "chat",
@@ -3955,13 +3988,13 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0.15,
-        "output": 0.6
-      },
       "limit": {
         "context": 128000,
         "output": 4000
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.6
       },
       "display_name": "Command R",
       "type": "chat"
@@ -3989,14 +4022,14 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
       "cost": {
         "input": 0.15,
         "output": 0.6,
         "cache_read": 0.08
-      },
-      "limit": {
-        "context": 128000,
-        "output": 16384
       },
       "display_name": "GPT-4o mini",
       "type": "chat"
@@ -4024,13 +4057,13 @@
         ]
       },
       "open_weights": false,
-      "cost": {
-        "input": 10,
-        "output": 30
-      },
       "limit": {
         "context": 128000,
         "output": 4096
+      },
+      "cost": {
+        "input": 10,
+        "output": 30
       },
       "display_name": "GPT-4 Turbo",
       "type": "chat"
@@ -4061,6 +4094,11 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
       "cost": {
         "input": 5,
         "output": 30,
@@ -4069,12 +4107,18 @@
           "input": 10,
           "output": 45,
           "cache_read": 1
-        }
-      },
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
+        },
+        "tiers": [
+          {
+            "input": 10,
+            "output": 45,
+            "cache_read": 1,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ]
       },
       "display_name": "GPT-5.5",
       "type": "chat",
