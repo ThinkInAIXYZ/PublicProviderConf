@@ -6,40 +6,6 @@
   "display_name": "Databricks",
   "models": [
     {
-      "id": "databricks-gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.072,
-        "output": 0.28
-      },
-      "display_name": "GPT OSS 120B",
-      "type": "chat"
-    },
-    {
       "id": "databricks-gpt-oss-20b",
       "name": "GPT OSS 20B",
       "family": "gpt-oss",
@@ -74,9 +40,99 @@
       "type": "chat"
     },
     {
-      "id": "databricks-claude-haiku-4-5",
-      "name": "Claude Haiku 4.5 (latest)",
-      "family": "claude-haiku",
+      "id": "databricks-gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.072,
+        "output": 0.28
+      },
+      "display_name": "GPT OSS 120B",
+      "type": "chat"
+    },
+    {
+      "id": "databricks-gemini-3-pro",
+      "name": "Gemini 3 Pro Preview",
+      "family": "gemini-pro",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2025-11-18",
+      "last_updated": "2025-11-18",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2,
+        "context_over_200k": {
+          "input": 4,
+          "output": 18,
+          "cache_read": 0.4
+        },
+        "tiers": [
+          {
+            "input": 4,
+            "output": 18,
+            "cache_read": 0.4,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ]
+      },
+      "display_name": "Gemini 3 Pro Preview",
+      "type": "chat"
+    },
+    {
+      "id": "databricks-claude-sonnet-4-5",
+      "name": "Claude Sonnet 4.5 (latest)",
+      "family": "claude-sonnet",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -84,9 +140,9 @@
       },
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2025-02-28",
-      "release_date": "2025-10-15",
-      "last_updated": "2025-10-15",
+      "knowledge": "2025-07-31",
+      "release_date": "2025-09-29",
+      "last_updated": "2025-09-29",
       "modalities": {
         "input": [
           "text",
@@ -103,12 +159,53 @@
         "output": 64000
       },
       "cost": {
-        "input": 1,
-        "output": 5,
-        "cache_read": 0.1,
-        "cache_write": 1.25
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
       },
-      "display_name": "Claude Haiku 4.5 (latest)",
+      "display_name": "Claude Sonnet 4.5 (latest)",
+      "type": "chat"
+    },
+    {
+      "id": "databricks-gemini-3-1-flash-lite",
+      "name": "Gemini 3.1 Flash Lite Preview",
+      "family": "gemini-flash-lite",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-03-03",
+      "last_updated": "2026-03-03",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.25,
+        "output": 1.5,
+        "cache_read": 0.025,
+        "input_audio": 0.5
+      },
+      "display_name": "Gemini 3.1 Flash Lite Preview",
       "type": "chat"
     },
     {
@@ -177,26 +274,23 @@
       }
     },
     {
-      "id": "databricks-gemini-3-pro",
-      "name": "Gemini 3 Pro Preview",
-      "family": "gemini-pro",
+      "id": "databricks-claude-opus-4-1",
+      "name": "Claude Opus 4.1 (latest)",
+      "family": "claude-opus",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2025-11-18",
-      "last_updated": "2025-11-18",
+      "knowledge": "2025-03-31",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
       "modalities": {
         "input": [
           "text",
           "image",
-          "video",
-          "audio",
           "pdf"
         ],
         "output": [
@@ -205,37 +299,60 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 64000
+        "context": 200000,
+        "output": 32000
       },
       "cost": {
-        "input": 2,
-        "output": 12,
-        "cache_read": 0.2,
-        "context_over_200k": {
-          "input": 4,
-          "output": 18,
-          "cache_read": 0.4
-        },
-        "tiers": [
-          {
-            "input": 4,
-            "output": 18,
-            "cache_read": 0.4,
-            "tier": {
-              "type": "context",
-              "size": 200000
-            }
-          }
-        ]
+        "input": 15,
+        "output": 75,
+        "cache_read": 1.5,
+        "cache_write": 18.75
       },
-      "display_name": "Gemini 3 Pro Preview",
+      "display_name": "Claude Opus 4.1 (latest)",
       "type": "chat"
     },
     {
-      "id": "databricks-gemini-3-1-pro",
-      "name": "Gemini 3.1 Pro Preview Custom Tools",
-      "family": "gemini-pro",
+      "id": "databricks-gpt-5",
+      "name": "GPT-5",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2024-09-30",
+      "release_date": "2025-08-07",
+      "last_updated": "2025-08-07",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.125
+      },
+      "display_name": "GPT-5",
+      "type": "chat"
+    },
+    {
+      "id": "databricks-gemini-3-flash",
+      "name": "Gemini 3 Flash Preview",
+      "family": "gemini-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -245,8 +362,8 @@
       "structured_output": true,
       "temperature": true,
       "knowledge": "2025-01",
-      "release_date": "2026-02-19",
-      "last_updated": "2026-02-19",
+      "release_date": "2025-12-17",
+      "last_updated": "2025-12-17",
       "modalities": {
         "input": [
           "text",
@@ -265,32 +382,17 @@
         "output": 65536
       },
       "cost": {
-        "input": 2,
-        "output": 12,
-        "cache_read": 0.2,
-        "context_over_200k": {
-          "input": 4,
-          "output": 18,
-          "cache_read": 0.4
-        },
-        "tiers": [
-          {
-            "input": 4,
-            "output": 18,
-            "cache_read": 0.4,
-            "tier": {
-              "type": "context",
-              "size": 200000
-            }
-          }
-        ]
+        "input": 0.5,
+        "output": 3,
+        "cache_read": 0.05,
+        "input_audio": 1
       },
-      "display_name": "Gemini 3.1 Pro Preview Custom Tools",
+      "display_name": "Gemini 3 Flash Preview",
       "type": "chat"
     },
     {
-      "id": "databricks-gpt-5-4-mini",
-      "name": "GPT-5.4 mini",
+      "id": "databricks-gpt-5-mini",
+      "name": "GPT-5 Mini",
       "family": "gpt-mini",
       "attachment": true,
       "reasoning": {
@@ -300,9 +402,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": false,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-17",
-      "last_updated": "2026-03-17",
+      "knowledge": "2024-05-30",
+      "release_date": "2025-08-07",
+      "last_updated": "2025-08-07",
       "modalities": {
         "input": [
           "text",
@@ -318,28 +420,12 @@
         "input": 272000,
         "output": 128000
       },
-      "experimental": {
-        "modes": {
-          "fast": {
-            "cost": {
-              "input": 1.5,
-              "output": 9,
-              "cache_read": 0.15
-            },
-            "provider": {
-              "body": {
-                "service_tier": "priority"
-              }
-            }
-          }
-        }
-      },
       "cost": {
-        "input": 0.75,
-        "output": 4.5,
-        "cache_read": 0.075
+        "input": 0.25,
+        "output": 2,
+        "cache_read": 0.025
       },
-      "display_name": "GPT-5.4 mini",
+      "display_name": "GPT-5 Mini",
       "type": "chat"
     },
     {
@@ -428,438 +514,6 @@
       }
     },
     {
-      "id": "databricks-gemini-2-5-pro",
-      "name": "Gemini 2.5 Pro",
-      "family": "gemini-pro",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2025-03-20",
-      "last_updated": "2025-06-05",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.125,
-        "context_over_200k": {
-          "input": 2.5,
-          "output": 15,
-          "cache_read": 0.25
-        },
-        "tiers": [
-          {
-            "input": 2.5,
-            "output": 15,
-            "cache_read": 0.25,
-            "tier": {
-              "type": "context",
-              "size": 200000
-            }
-          }
-        ]
-      },
-      "display_name": "Gemini 2.5 Pro",
-      "type": "chat"
-    },
-    {
-      "id": "databricks-gpt-5-nano",
-      "name": "GPT-5 Nano",
-      "family": "gpt-nano",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2024-05-30",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 0.05,
-        "output": 0.4,
-        "cache_read": 0.005
-      },
-      "display_name": "GPT-5 Nano",
-      "type": "chat"
-    },
-    {
-      "id": "databricks-gpt-5-4",
-      "name": "GPT-5.4",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-05",
-      "last_updated": "2026-03-05",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "experimental": {
-        "modes": {
-          "fast": {
-            "cost": {
-              "input": 5,
-              "output": 30,
-              "cache_read": 0.5
-            },
-            "provider": {
-              "body": {
-                "service_tier": "priority"
-              }
-            }
-          }
-        }
-      },
-      "cost": {
-        "input": 2.5,
-        "output": 15,
-        "cache_read": 0.25,
-        "context_over_200k": {
-          "input": 5,
-          "output": 22.5,
-          "cache_read": 0.5
-        },
-        "tiers": [
-          {
-            "input": 5,
-            "output": 22.5,
-            "cache_read": 0.5,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ]
-      },
-      "display_name": "GPT-5.4",
-      "type": "chat"
-    },
-    {
-      "id": "databricks-gemini-3-1-flash-lite",
-      "name": "Gemini 3.1 Flash Lite Preview",
-      "family": "gemini-flash-lite",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-03-03",
-      "last_updated": "2026-03-03",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.25,
-        "output": 1.5,
-        "cache_read": 0.025,
-        "input_audio": 0.5
-      },
-      "display_name": "Gemini 3.1 Flash Lite Preview",
-      "type": "chat"
-    },
-    {
-      "id": "databricks-gpt-5",
-      "name": "GPT-5",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2024-09-30",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.125
-      },
-      "display_name": "GPT-5",
-      "type": "chat"
-    },
-    {
-      "id": "databricks-claude-opus-4-1",
-      "name": "Claude Opus 4.1 (latest)",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-03-31",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 32000
-      },
-      "cost": {
-        "input": 15,
-        "output": 75,
-        "cache_read": 1.5,
-        "cache_write": 18.75
-      },
-      "display_name": "Claude Opus 4.1 (latest)",
-      "type": "chat"
-    },
-    {
-      "id": "databricks-gpt-5-2",
-      "name": "GPT-5.2",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-08-31",
-      "release_date": "2025-12-11",
-      "last_updated": "2025-12-11",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 1.75,
-        "output": 14,
-        "cache_read": 0.175
-      },
-      "display_name": "GPT-5.2",
-      "type": "chat"
-    },
-    {
-      "id": "databricks-gpt-5-5",
-      "name": "GPT-5.5",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-12-01",
-      "release_date": "2026-04-23",
-      "last_updated": "2026-04-23",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "experimental": {
-        "modes": {
-          "fast": {
-            "cost": {
-              "input": 12.5,
-              "output": 75,
-              "cache_read": 1.25
-            },
-            "provider": {
-              "body": {
-                "service_tier": "priority"
-              }
-            }
-          }
-        }
-      },
-      "cost": {
-        "input": 5,
-        "output": 30,
-        "cache_read": 0.5,
-        "context_over_200k": {
-          "input": 10,
-          "output": 45,
-          "cache_read": 1
-        },
-        "tiers": [
-          {
-            "input": 10,
-            "output": 45,
-            "cache_read": 1,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ]
-      },
-      "display_name": "GPT-5.5",
-      "type": "chat"
-    },
-    {
-      "id": "databricks-gemini-3-flash",
-      "name": "Gemini 3 Flash Preview",
-      "family": "gemini-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2025-12-17",
-      "last_updated": "2025-12-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.5,
-        "output": 3,
-        "cache_read": 0.05,
-        "input_audio": 1
-      },
-      "display_name": "Gemini 3 Flash Preview",
-      "type": "chat"
-    },
-    {
       "id": "databricks-claude-opus-4-5",
       "name": "Claude Opus 4.5 (latest)",
       "family": "claude-opus",
@@ -898,9 +552,9 @@
       "type": "chat"
     },
     {
-      "id": "databricks-gpt-5-mini",
-      "name": "GPT-5 Mini",
-      "family": "gpt-mini",
+      "id": "databricks-gpt-5-4-nano",
+      "name": "GPT-5.4 nano",
+      "family": "gpt-nano",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -909,9 +563,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": false,
-      "knowledge": "2024-05-30",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-17",
+      "last_updated": "2026-03-17",
       "modalities": {
         "input": [
           "text",
@@ -928,54 +582,16 @@
         "output": 128000
       },
       "cost": {
-        "input": 0.25,
-        "output": 2,
-        "cache_read": 0.025
+        "input": 0.2,
+        "output": 1.25,
+        "cache_read": 0.02
       },
-      "display_name": "GPT-5 Mini",
+      "display_name": "GPT-5.4 nano",
       "type": "chat"
     },
     {
-      "id": "databricks-claude-sonnet-4",
-      "name": "Claude Sonnet 4.5",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-07-31",
-      "release_date": "2025-09-29",
-      "last_updated": "2025-09-29",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
-      },
-      "display_name": "Claude Sonnet 4.5",
-      "type": "chat"
-    },
-    {
-      "id": "databricks-gpt-5-1",
-      "name": "GPT-5.1",
+      "id": "databricks-gpt-5-2",
+      "name": "GPT-5.2",
       "family": "gpt",
       "attachment": true,
       "reasoning": {
@@ -985,9 +601,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": false,
-      "knowledge": "2024-09-30",
-      "release_date": "2025-11-13",
-      "last_updated": "2025-11-13",
+      "knowledge": "2025-08-31",
+      "release_date": "2025-12-11",
+      "last_updated": "2025-12-11",
       "modalities": {
         "input": [
           "text",
@@ -1004,11 +620,11 @@
         "output": 128000
       },
       "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.13
+        "input": 1.75,
+        "output": 14,
+        "cache_read": 0.175
       },
-      "display_name": "GPT-5.1",
+      "display_name": "GPT-5.2",
       "type": "chat"
     },
     {
@@ -1096,6 +712,296 @@
       }
     },
     {
+      "id": "databricks-gpt-5-4",
+      "name": "GPT-5.4",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-05",
+      "last_updated": "2026-03-05",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 5,
+              "output": 30,
+              "cache_read": 0.5
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
+      "cost": {
+        "input": 2.5,
+        "output": 15,
+        "cache_read": 0.25,
+        "context_over_200k": {
+          "input": 5,
+          "output": 22.5,
+          "cache_read": 0.5
+        },
+        "tiers": [
+          {
+            "input": 5,
+            "output": 22.5,
+            "cache_read": 0.5,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ]
+      },
+      "display_name": "GPT-5.4",
+      "type": "chat"
+    },
+    {
+      "id": "databricks-claude-sonnet-4",
+      "name": "Claude Sonnet 4.5",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-07-31",
+      "release_date": "2025-09-29",
+      "last_updated": "2025-09-29",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
+      },
+      "display_name": "Claude Sonnet 4.5",
+      "type": "chat"
+    },
+    {
+      "id": "databricks-gpt-5-4-mini",
+      "name": "GPT-5.4 mini",
+      "family": "gpt-mini",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-17",
+      "last_updated": "2026-03-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 1.5,
+              "output": 9,
+              "cache_read": 0.15
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
+      "cost": {
+        "input": 0.75,
+        "output": 4.5,
+        "cache_read": 0.075
+      },
+      "display_name": "GPT-5.4 mini",
+      "type": "chat"
+    },
+    {
+      "id": "databricks-gpt-5-5",
+      "name": "GPT-5.5",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-12-01",
+      "release_date": "2026-04-23",
+      "last_updated": "2026-04-23",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 12.5,
+              "output": 75,
+              "cache_read": 1.25
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
+      "cost": {
+        "input": 5,
+        "output": 30,
+        "cache_read": 0.5,
+        "context_over_200k": {
+          "input": 10,
+          "output": 45,
+          "cache_read": 1
+        },
+        "tiers": [
+          {
+            "input": 10,
+            "output": 45,
+            "cache_read": 1,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ]
+      },
+      "display_name": "GPT-5.5",
+      "type": "chat"
+    },
+    {
+      "id": "databricks-gemini-2-5-pro",
+      "name": "Gemini 2.5 Pro",
+      "family": "gemini-pro",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2025-03-20",
+      "last_updated": "2025-06-05",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.125,
+        "context_over_200k": {
+          "input": 2.5,
+          "output": 15,
+          "cache_read": 0.25
+        },
+        "tiers": [
+          {
+            "input": 2.5,
+            "output": 15,
+            "cache_read": 0.25,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ]
+      },
+      "display_name": "Gemini 2.5 Pro",
+      "type": "chat"
+    },
+    {
       "id": "databricks-gemini-2-5-flash",
       "name": "Gemini 2.5 Flash",
       "family": "gemini-flash",
@@ -1137,8 +1043,8 @@
       "type": "chat"
     },
     {
-      "id": "databricks-gpt-5-4-nano",
-      "name": "GPT-5.4 nano",
+      "id": "databricks-gpt-5-nano",
+      "name": "GPT-5 Nano",
       "family": "gpt-nano",
       "attachment": true,
       "reasoning": {
@@ -1148,9 +1054,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": false,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-17",
-      "last_updated": "2026-03-17",
+      "knowledge": "2024-05-30",
+      "release_date": "2025-08-07",
+      "last_updated": "2025-08-07",
       "modalities": {
         "input": [
           "text",
@@ -1167,17 +1073,17 @@
         "output": 128000
       },
       "cost": {
-        "input": 0.2,
-        "output": 1.25,
-        "cache_read": 0.02
+        "input": 0.05,
+        "output": 0.4,
+        "cache_read": 0.005
       },
-      "display_name": "GPT-5.4 nano",
+      "display_name": "GPT-5 Nano",
       "type": "chat"
     },
     {
-      "id": "databricks-claude-sonnet-4-5",
-      "name": "Claude Sonnet 4.5 (latest)",
-      "family": "claude-sonnet",
+      "id": "databricks-claude-haiku-4-5",
+      "name": "Claude Haiku 4.5 (latest)",
+      "family": "claude-haiku",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1185,9 +1091,9 @@
       },
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2025-07-31",
-      "release_date": "2025-09-29",
-      "last_updated": "2025-09-29",
+      "knowledge": "2025-02-28",
+      "release_date": "2025-10-15",
+      "last_updated": "2025-10-15",
       "modalities": {
         "input": [
           "text",
@@ -1204,12 +1110,106 @@
         "output": 64000
       },
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
+        "input": 1,
+        "output": 5,
+        "cache_read": 0.1,
+        "cache_write": 1.25
       },
-      "display_name": "Claude Sonnet 4.5 (latest)",
+      "display_name": "Claude Haiku 4.5 (latest)",
+      "type": "chat"
+    },
+    {
+      "id": "databricks-gemini-3-1-pro",
+      "name": "Gemini 3.1 Pro Preview Custom Tools",
+      "family": "gemini-pro",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-02-19",
+      "last_updated": "2026-02-19",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2,
+        "context_over_200k": {
+          "input": 4,
+          "output": 18,
+          "cache_read": 0.4
+        },
+        "tiers": [
+          {
+            "input": 4,
+            "output": 18,
+            "cache_read": 0.4,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ]
+      },
+      "display_name": "Gemini 3.1 Pro Preview Custom Tools",
+      "type": "chat"
+    },
+    {
+      "id": "databricks-gpt-5-1",
+      "name": "GPT-5.1",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2024-09-30",
+      "release_date": "2025-11-13",
+      "last_updated": "2025-11-13",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.13
+      },
+      "display_name": "GPT-5.1",
       "type": "chat"
     }
   ]
