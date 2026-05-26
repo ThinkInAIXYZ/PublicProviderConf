@@ -181,7 +181,7 @@
       "open_weights": false,
       "limit": {
         "context": 202752,
-        "output": 202752
+        "output": 65536
       },
       "cost": {
         "input": 1,
@@ -207,7 +207,7 @@
       "id": "route/qwen3.6-27b",
       "name": "Qwen3.6 27B",
       "family": "qwen",
-      "attachment": true,
+      "attachment": false,
       "reasoning": {
         "supported": true
       },
@@ -218,9 +218,7 @@
       "last_updated": "2026-04-22",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -228,8 +226,8 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 202000,
+        "output": 32768
       },
       "cost": {
         "input": 1.1,
@@ -327,7 +325,7 @@
       "open_weights": false,
       "limit": {
         "context": 202752,
-        "output": 202752
+        "output": 65536
       },
       "cost": {
         "input": 1,
@@ -893,6 +891,73 @@
       "type": "chat"
     },
     {
+      "id": "route/mimo-v2.5",
+      "name": "MiMo V2.5",
+      "family": "mimo",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2024-12",
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 262144
+      },
+      "cost": {
+        "input": 0.45,
+        "output": 1.35,
+        "cache_read": 0.2,
+        "context_over_200k": {
+          "input": 2,
+          "output": 6,
+          "cache_read": 0.4
+        },
+        "tiers": [
+          {
+            "input": 2,
+            "output": 6,
+            "cache_read": 0.4,
+            "tier": {
+              "type": "context",
+              "size": 256000
+            }
+          }
+        ]
+      },
+      "display_name": "MiMo V2.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
       "id": "route/deepseek-v4-flash",
       "name": "DeepSeek V4 Flash",
       "family": "deepseek-flash",
@@ -1045,6 +1110,50 @@
         "cache_read": 0.019
       },
       "display_name": "Step 3.5 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "route/qwen3.6-27b-202k",
+      "name": "Qwen3.6 27B 202K",
+      "family": "qwen",
+      "attachment": false,
+      "reasoning": {
+        "supported": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 202000,
+        "output": 32768
+      },
+      "cost": {
+        "input": 1.1,
+        "output": 3.3
+      },
+      "display_name": "Qwen3.6 27B 202K",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
