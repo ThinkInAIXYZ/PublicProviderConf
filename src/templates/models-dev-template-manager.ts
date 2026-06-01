@@ -63,8 +63,17 @@ function sanitizeProviderLike(
 
 type ModelsDevModelRecord = ModelsDevModel & Record<string, unknown>;
 
+const MINIMAX_M3_FALLBACK_PROVIDER_IDS = [
+  'minimax',
+  'minimax-cn',
+  'minimax-coding-plan',
+  'minimax-cn-coding-plan',
+];
+
 const FALLBACK_ONLY_TEMPLATE_MODELS = new Map<string, Set<string>>([
-  ['minimax', new Set(['minimax-m3'])],
+  ...MINIMAX_M3_FALLBACK_PROVIDER_IDS.map(
+    providerId => [providerId, new Set(['minimax-m3'])] as const,
+  ),
 ]);
 
 function normalizeTemplateKey(value?: string): string {

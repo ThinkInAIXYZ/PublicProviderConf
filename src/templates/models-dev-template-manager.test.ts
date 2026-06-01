@@ -24,6 +24,13 @@ const minimaxM3Template: ModelsDevProvider = {
   ],
 };
 
+function minimaxTemplateForProvider(providerId: string): ModelsDevProvider {
+  return {
+    ...minimaxM3Template,
+    id: providerId,
+  };
+}
+
 test('adds MiniMax-M3 fallback template when upstream has not published it yet', () => {
   const upstream: ModelsDevProvider = {
     id: 'minimax',
@@ -37,6 +44,27 @@ test('adds MiniMax-M3 fallback template when upstream has not published it yet',
   assert.equal(m3?.limit?.context, 1000000);
   assert.equal(m3?.vision, true);
   assert.deepEqual(m3?.modalities?.input, ['text', 'image']);
+});
+
+test('adds MiniMax-M3 fallback to MiniMax provider variants', () => {
+  for (const providerId of [
+    'minimax-cn',
+    'minimax-coding-plan',
+    'minimax-cn-coding-plan',
+  ]) {
+    const upstream: ModelsDevProvider = {
+      id: providerId,
+      name: providerId,
+      models: [],
+    };
+
+    const merged = mergeProviderWithTemplate(upstream, minimaxTemplateForProvider(providerId));
+    const m3 = merged.models.find(model => model.id === 'MiniMax-M3');
+
+    assert.equal(m3?.limit?.context, 1000000);
+    assert.equal(m3?.vision, true);
+    assert.deepEqual(m3?.modalities?.input, ['text', 'image']);
+  }
 });
 
 test('keeps upstream MiniMax-M3 unchanged when it exists', () => {
@@ -75,4 +103,36 @@ test('keeps upstream MiniMax-M3 unchanged when it exists', () => {
     },
     upstreamM3,
   );
+});
+
+test('keeps upstream MiniMax-M3 unchanged for MiniMax plan providers', () => {
+  const upstreamM3 = {
+    id: 'minimax-m3',
+    name: 'Upstream MiniMax M3',
+    vision: false,
+    attachment: false,
+    modalities: {
+      input: ['text'],
+      output: ['text'],
+    },
+    limit: {
+      context: 512000,
+      output: 64000,
+    },
+  };
+
+  for (const providerId of ['minimax-coding-plan', 'minimax-cn-coding-plan']) {
+    const upstream: ModelsDevProvider = {
+      id: providerId,
+      name: providerId,
+      models: [upstreamM3],
+    };
+
+    const merged = mergeProviderWithTemplate(upstream, minimaxTemplateForProvider(providerId));
+
+    assert.equal(merged.models.length, 1);
+    assert.equal(merged.models[0]?.limit?.context, 512000);
+    assert.equal(merged.models[0]?.vision, false);
+    assert.deepEqual(merged.models[0]?.modalities?.input, ['text']);
+  }
 });
