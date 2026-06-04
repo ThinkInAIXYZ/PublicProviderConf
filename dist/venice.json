@@ -738,11 +738,12 @@
       "tool_call": true,
       "temperature": true,
       "release_date": "2026-06-01",
-      "last_updated": "2026-06-01",
+      "last_updated": "2026-06-04",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -751,7 +752,7 @@
       "open_weights": false,
       "limit": {
         "context": 500000,
-        "output": 32768
+        "output": 131072
       },
       "cost": {
         "input": 0.3,
@@ -2378,6 +2379,62 @@
       "type": "chat"
     },
     {
+      "id": "qwen-3-7-plus",
+      "name": "Qwen 3.7 Plus",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-06-02",
+      "last_updated": "2026-06-04",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 2,
+        "cache_read": 0.05,
+        "cache_write": 0.625,
+        "tiers": [
+          {
+            "input": 1.5,
+            "output": 6,
+            "cache_read": 0.15,
+            "cache_write": 1.875,
+            "tier": {
+              "type": "context",
+              "size": 256000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 1.5,
+          "output": 6,
+          "cache_read": 0.15,
+          "cache_write": 1.875
+        }
+      },
+      "display_name": "Qwen 3.7 Plus",
+      "type": "chat"
+    },
+    {
       "id": "claude-sonnet-4-5",
       "name": "Claude Sonnet 4.5",
       "family": "claude-sonnet",
@@ -2716,7 +2773,7 @@
       "structured_output": true,
       "temperature": true,
       "release_date": "2026-04-03",
-      "last_updated": "2026-05-25",
+      "last_updated": "2026-06-04",
       "modalities": {
         "input": [
           "text",
@@ -2734,7 +2791,8 @@
       },
       "cost": {
         "input": 0.155,
-        "output": 0.44
+        "output": 0.44,
+        "cache_read": 0.12
       },
       "display_name": "Google Gemma 4 31B Instruct",
       "type": "chat"
