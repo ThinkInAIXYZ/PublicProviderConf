@@ -6,10 +6,10 @@
   "display_name": "GMI Cloud",
   "models": [
     {
-      "id": "moonshotai/Kimi-K2.6",
-      "name": "Kimi K2.6",
-      "family": "kimi-k2.6",
-      "attachment": true,
+      "id": "zai-org/GLM-5-FP8",
+      "name": "GLM-5",
+      "family": "glm",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -18,11 +18,9 @@
       "interleaved": {
         "field": "reasoning_content"
       },
-      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-04-21",
-      "last_updated": "2026-04-21",
+      "release_date": "2026-02-11",
+      "last_updated": "2026-02-11",
       "modalities": {
         "input": [
           "text"
@@ -33,25 +31,136 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 65536,
-        "output": 65536
+        "context": 202752,
+        "output": 131072
       },
       "cost": {
-        "input": 0.855,
-        "output": 3.6,
-        "cache_read": 0.144
+        "input": 0.6,
+        "output": 1.92,
+        "cache_read": 0.12
       },
-      "display_name": "Kimi K2.6",
+      "display_name": "GLM-5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "zai-org/GLM-5.1-FP8",
+      "name": "GLM-5.1",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-03-27",
+      "last_updated": "2026-03-27",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 202752,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.98,
+        "output": 3.08,
+        "cache_read": 0.182
+      },
+      "display_name": "GLM-5.1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.6",
+      "name": "Claude Sonnet 4.6",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-02-17",
+      "last_updated": "2026-03-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 409600,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3
+      },
+      "display_name": "Claude Sonnet 4.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
           ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+          ]
         }
       }
     },
@@ -137,68 +246,6 @@
       }
     },
     {
-      "id": "anthropic/claude-sonnet-4.6",
-      "name": "Claude Sonnet 4.6",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-02-17",
-      "last_updated": "2026-03-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 409600,
-        "output": 64000
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3
-      },
-      "display_name": "Claude Sonnet 4.6",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "mixed",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
-          ]
-        }
-      }
-    },
-    {
       "id": "anthropic/claude-opus-4.6",
       "name": "Claude Opus 4.6",
       "family": "claude-opus",
@@ -261,10 +308,10 @@
       }
     },
     {
-      "id": "zai-org/GLM-5.1-FP8",
-      "name": "GLM-5.1",
-      "family": "glm",
-      "attachment": false,
+      "id": "moonshotai/Kimi-K2.6",
+      "name": "Kimi K2.6",
+      "family": "kimi-k2.6",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -275,8 +322,9 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-03-27",
-      "last_updated": "2026-03-27",
+      "knowledge": "2025-01",
+      "release_date": "2026-04-21",
+      "last_updated": "2026-04-21",
       "modalities": {
         "input": [
           "text"
@@ -287,73 +335,25 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 202752,
-        "output": 131072
+        "context": 65536,
+        "output": 65536
       },
       "cost": {
-        "input": 0.98,
-        "output": 3.08,
-        "cache_read": 0.182
+        "input": 0.855,
+        "output": 3.6,
+        "cache_read": 0.144
       },
-      "display_name": "GLM-5.1",
+      "display_name": "Kimi K2.6",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "zai-org/GLM-5-FP8",
-      "name": "GLM-5",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-02-11",
-      "last_updated": "2026-02-11",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 202752,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.6,
-        "output": 1.92,
-        "cache_read": 0.12
-      },
-      "display_name": "GLM-5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
+          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
+          "visibility": "summary"
         }
       }
     },
