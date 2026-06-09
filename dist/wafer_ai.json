@@ -6,25 +6,26 @@
   "display_name": "Wafer",
   "models": [
     {
-      "id": "Kimi-K2.6",
-      "name": "Kimi-K2.6",
-      "family": "kimi",
-      "attachment": true,
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "family": "deepseek-flash",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-05-13",
-      "last_updated": "2026-06-01",
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-05-30",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -32,20 +33,26 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 65536
+        "context": 1000000,
+        "output": 384000
       },
       "cost": {
-        "input": 0.68,
-        "output": 3.15,
-        "cache_read": 0.07,
+        "input": 0.14,
+        "output": 0.28,
+        "cache_read": 0.01,
         "cache_write": 0
       },
-      "display_name": "Kimi-K2.6",
+      "display_name": "DeepSeek V4 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -142,6 +149,57 @@
       }
     },
     {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "family": "deepseek-thinking",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-05-30",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 1.74,
+        "output": 3.48,
+        "cache_read": 0.02,
+        "cache_write": 0
+      },
+      "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
       "id": "Qwen3.5-397B-A17B",
       "name": "Qwen3.5-397B-A17B",
       "family": "qwen",
@@ -192,6 +250,50 @@
       }
     },
     {
+      "id": "Kimi-K2.6",
+      "name": "Kimi-K2.6",
+      "family": "kimi",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-05-13",
+      "last_updated": "2026-06-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.68,
+        "output": 3.15,
+        "cache_read": 0.07,
+        "cache_write": 0
+      },
+      "display_name": "Kimi-K2.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "GLM-5.1",
       "name": "GLM-5.1",
       "family": "glm",
@@ -230,108 +332,6 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash",
-      "family": "deepseek-flash",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-05-30",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.14,
-        "output": 0.28,
-        "cache_read": 0.01,
-        "cache_write": 0
-      },
-      "display_name": "DeepSeek V4 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "family": "deepseek-thinking",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-05-30",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 1.74,
-        "output": 3.48,
-        "cache_read": 0.02,
-        "cache_write": 0
-      },
-      "display_name": "DeepSeek V4 Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
         }
       }
     }
