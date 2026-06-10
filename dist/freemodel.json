@@ -51,7 +51,7 @@
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
             "low",
             "medium",
@@ -65,7 +65,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -77,7 +78,7 @@
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "temperature": true,
@@ -106,7 +107,28 @@
         "cache_write": 1.25
       },
       "display_name": "Claude Haiku 4.5",
-      "type": "chat"
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
       "id": "gpt-5.4",
@@ -311,7 +333,7 @@
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "temperature": false,
@@ -342,7 +364,28 @@
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
         }
       }
     },
@@ -457,7 +500,7 @@
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
             "low",
             "medium",
@@ -471,7 +514,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -533,8 +577,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Claude Opus 4.7 requires thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7.",
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
             "task_budget is separate from thinking control and should not be treated as a thinking budget."
           ]
         }

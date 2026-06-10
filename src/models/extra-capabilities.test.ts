@@ -370,6 +370,7 @@ test('portrait normalization syncs legacy reasoning when extra reasoning becomes
 test('applies mixed reasoning portraits to Claude 4.6 variants', () => {
   const expectedNotes = [
     'Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.',
+    'Anthropic API defaults effort to high; lower effort levels should be chosen per workload.',
   ];
 
   const modelIds = [
@@ -386,7 +387,7 @@ test('applies mixed reasoning portraits to Claude 4.6 variants', () => {
         min: 1024,
         unit: 'tokens',
       },
-      effort: 'medium',
+      effort: 'high',
       effortOptions: ['low', 'medium', 'high', 'max'],
       interleaved: true,
       summaries: true,
@@ -400,10 +401,10 @@ test('applies mixed reasoning portraits to Claude 4.6 variants', () => {
   assertNoXHigh('anthropic/claude-opus-4.6');
 });
 
-test('applies effort reasoning portraits to Claude Opus 4.7 variants', () => {
+test('applies effort reasoning portraits to adaptive-only Claude Opus variants', () => {
   const expectedNotes = [
-    'Claude Opus 4.7 requires thinking.type = "adaptive" to enable thinking explicitly.',
-    'Manual budget_tokens requests return 400 on Claude Opus 4.7.',
+    'Claude Opus 4.7 and newer Opus models require thinking.type = "adaptive" to enable thinking explicitly.',
+    'Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.',
     'task_budget is separate from thinking control and should not be treated as a thinking budget.',
   ];
 
@@ -411,6 +412,9 @@ test('applies effort reasoning portraits to Claude Opus 4.7 variants', () => {
     'claude-opus-4-7',
     'anthropic/claude-opus-4.7',
     'global.anthropic.claude-opus-4-7',
+    'claude-opus-4-8',
+    'anthropic/claude-opus-4.8',
+    'eu.anthropic.claude-opus-4-8',
   ];
 
   for (const modelId of modelIds) {
@@ -422,6 +426,132 @@ test('applies effort reasoning portraits to Claude Opus 4.7 variants', () => {
       interleaved: true,
       summaries: true,
       visibility: 'omitted',
+      continuation: ['thinking_blocks'],
+      notes: expectedNotes,
+    });
+    assertSyncedReasoningDefault(modelId, { supported: true, default: true }, false);
+  }
+});
+
+test('applies always-on adaptive reasoning portraits to Claude Fable and Mythos 5', () => {
+  const expectedNotes = [
+    'Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = "disabled" is rejected.',
+    'Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.',
+    'thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries.',
+  ];
+
+  const modelIds = [
+    'claude-fable-5',
+    'anthropic/claude-mythos-5',
+    'global.anthropic.claude-fable-5',
+    '~anthropic/claude-fable-latest',
+  ];
+
+  for (const modelId of modelIds) {
+    assertReasoningPortrait(modelId, {
+      defaultEnabled: true,
+      mode: 'effort',
+      effort: 'high',
+      effortOptions: ['low', 'medium', 'high', 'xhigh', 'max'],
+      interleaved: true,
+      summaries: true,
+      visibility: 'omitted',
+      continuation: ['thinking_blocks'],
+      notes: expectedNotes,
+    });
+    assertSyncedReasoningDefault(modelId, { supported: true, default: false }, true);
+  }
+});
+
+test('applies mixed reasoning portraits to Claude Mythos Preview', () => {
+  const expectedNotes = [
+    'Claude Mythos Preview defaults to adaptive thinking and rejects thinking.type = "disabled".',
+    'Manual budget_tokens remains accepted on Claude Mythos Preview.',
+    'thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries.',
+  ];
+
+  const modelIds = [
+    'claude-mythos-preview',
+    'anthropic/claude-mythos-preview',
+    'us.anthropic.claude-mythos-preview',
+  ];
+
+  for (const modelId of modelIds) {
+    assertReasoningPortrait(modelId, {
+      defaultEnabled: true,
+      mode: 'mixed',
+      budget: {
+        min: 1024,
+        unit: 'tokens',
+      },
+      effort: 'high',
+      effortOptions: ['low', 'medium', 'high', 'max'],
+      interleaved: true,
+      summaries: true,
+      visibility: 'omitted',
+      continuation: ['thinking_blocks'],
+      notes: expectedNotes,
+    });
+    assertSyncedReasoningDefault(modelId, { supported: true, default: false }, true);
+  }
+});
+
+test('applies mixed reasoning portraits to Claude Opus 4.5 variants', () => {
+  const expectedNotes = [
+    'Claude Opus 4.5 uses manual thinking.type = "enabled" with budget_tokens; effort can be used alongside the thinking budget.',
+    'Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header.',
+  ];
+
+  const modelIds = [
+    'claude-opus-4-5',
+    'anthropic/claude-opus-4-5-20251101',
+    'anthropic.claude-opus-4-5-20251101-v1:0',
+  ];
+
+  for (const modelId of modelIds) {
+    assertReasoningPortrait(modelId, {
+      defaultEnabled: false,
+      mode: 'mixed',
+      budget: {
+        min: 1024,
+        unit: 'tokens',
+      },
+      effort: 'high',
+      effortOptions: ['low', 'medium', 'high'],
+      interleaved: true,
+      summaries: true,
+      visibility: 'summary',
+      continuation: ['thinking_blocks'],
+      notes: expectedNotes,
+    });
+    assertSyncedReasoningDefault(modelId, { supported: true, default: true }, false);
+  }
+});
+
+test('applies budget reasoning portraits to current manual Claude 4 variants', () => {
+  const expectedNotes = [
+    'Claude 4 manual thinking uses thinking.type = "enabled" with budget_tokens.',
+    'Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family.',
+  ];
+
+  const modelIds = [
+    'claude-sonnet-4-20250514',
+    'anthropic/claude-sonnet-4-5-20250929',
+    'claude-haiku-4-5-20251001',
+    'anthropic.claude-opus-4-1-20250805-v1:0',
+  ];
+
+  for (const modelId of modelIds) {
+    assertReasoningPortrait(modelId, {
+      defaultEnabled: false,
+      mode: 'budget',
+      budget: {
+        min: 1024,
+        unit: 'tokens',
+      },
+      interleaved: true,
+      summaries: true,
+      visibility: 'summary',
       continuation: ['thinking_blocks'],
       notes: expectedNotes,
     });
@@ -461,7 +591,7 @@ test('enables default thinking for Claude think aliases while preserving matched
       min: 1024,
       unit: 'tokens',
     },
-    effort: 'medium',
+    effort: 'high',
     effortOptions: ['low', 'medium', 'high', 'max'],
     interleaved: true,
     summaries: true,
@@ -469,6 +599,7 @@ test('enables default thinking for Claude think aliases while preserving matched
     continuation: ['thinking_blocks'],
     notes: [
       'Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.',
+      'Anthropic API defaults effort to high; lower effort levels should be chosen per workload.',
     ],
   });
   assertSyncedReasoningDefault('claude-opus-4-6-think', { supported: true, default: false }, true);
@@ -490,6 +621,21 @@ test('enables default thinking for Claude think aliases while preserving matched
 
   assertReasoningPortrait('claude-opus-4-5-20251101-thinking', {
     defaultEnabled: true,
+    mode: 'mixed',
+    budget: {
+      min: 1024,
+      unit: 'tokens',
+    },
+    effort: 'high',
+    effortOptions: ['low', 'medium', 'high'],
+    interleaved: true,
+    summaries: true,
+    visibility: 'summary',
+    continuation: ['thinking_blocks'],
+    notes: [
+      'Claude Opus 4.5 uses manual thinking.type = "enabled" with budget_tokens; effort can be used alongside the thinking budget.',
+      'Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header.',
+    ],
   });
   assertSyncedReasoningDefault('claude-opus-4-5-20251101-thinking', false, true);
 });

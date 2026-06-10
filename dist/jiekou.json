@@ -2,7 +2,7 @@
   "id": "jiekou",
   "name": "Jiekou",
   "display_name": "Jiekou",
-  "updated_at": "2026-06-10T05:38:40.784Z",
+  "updated_at": "2026-06-10T06:53:26.488Z",
   "models": [
     {
       "id": "claude-fable-5",
@@ -48,7 +48,28 @@
       "vision": true,
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
+            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
+            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
+          ]
         }
       }
     },
@@ -59,7 +80,7 @@
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -92,7 +113,28 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
       "id": "claude-haiku-4-5-20251001-dd",
@@ -101,7 +143,7 @@
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -134,7 +176,28 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
       "id": "claude-haiku-4-5-20251001-r",
@@ -143,7 +206,7 @@
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -177,7 +240,28 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
       "id": "claude-opus-4-5-20251101",
@@ -186,7 +270,7 @@
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -219,7 +303,34 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.5 uses manual thinking.type = \"enabled\" with budget_tokens; effort can be used alongside the thinking budget.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header."
+          ]
+        }
+      }
     },
     {
       "id": "claude-opus-4-5-20251101-dd",
@@ -227,7 +338,8 @@
       "display_name": "claude-opus-4-5-20251101-dd",
       "type": "chat",
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -259,7 +371,34 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.5 uses manual thinking.type = \"enabled\" with budget_tokens; effort can be used alongside the thinking budget.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header."
+          ]
+        }
+      }
     },
     {
       "id": "claude-opus-4-6",
@@ -312,7 +451,7 @@
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
             "low",
             "medium",
@@ -326,7 +465,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -381,7 +521,7 @@
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
             "low",
             "medium",
@@ -395,7 +535,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -451,7 +592,7 @@
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
             "low",
             "medium",
@@ -465,7 +606,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -532,8 +674,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Claude Opus 4.7 requires thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7.",
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
             "task_budget is separate from thinking control and should not be treated as a thinking budget."
           ]
         }
@@ -601,8 +743,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Claude Opus 4.7 requires thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7.",
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
             "task_budget is separate from thinking control and should not be treated as a thinking budget."
           ]
         }
@@ -615,7 +757,7 @@
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -652,7 +794,28 @@
       "vision": true,
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
         }
       }
     },
@@ -663,7 +826,7 @@
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -697,7 +860,33 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
     },
     {
       "id": "claude-sonnet-4-20250514",
@@ -705,7 +894,8 @@
       "display_name": "claude-sonnet-4-20250514",
       "type": "chat",
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -738,7 +928,28 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
       "id": "claude-sonnet-4-5-20250929",
@@ -747,7 +958,7 @@
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -780,7 +991,28 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
       "id": "claude-sonnet-4-5-20250929-dd",
@@ -788,7 +1020,8 @@
       "display_name": "claude-sonnet-4-5-20250929-dd",
       "type": "chat",
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -820,7 +1053,28 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
       "id": "claude-sonnet-4-6",
@@ -873,7 +1127,7 @@
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
             "low",
             "medium",
@@ -887,7 +1141,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -942,7 +1197,7 @@
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
             "low",
             "medium",
@@ -956,7 +1211,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -1012,7 +1268,7 @@
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
             "low",
             "medium",
@@ -1026,7 +1282,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
