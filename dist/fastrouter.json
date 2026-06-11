@@ -6,451 +6,46 @@
   "display_name": "FastRouter",
   "models": [
     {
-      "id": "z-ai/glm-5",
-      "name": "GLM-5",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-02-11",
-      "last_updated": "2026-02-11",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 204800,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.95,
-        "output": 3.15
-      },
-      "display_name": "GLM-5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "z-ai/glm-5.1",
-      "name": "GLM-5.1",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-03-27",
-      "last_updated": "2026-03-27",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 200000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 1.05,
-        "output": 3.5
-      },
-      "display_name": "GLM-5.1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "deepseek/deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "family": "deepseek-thinking",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 1.74,
-        "output": 3.48
-      },
-      "display_name": "DeepSeek V4 Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-sonnet-4",
-      "name": "Claude Sonnet 4",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-03-31",
-      "release_date": "2025-05-22",
-      "last_updated": "2025-05-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
-      },
-      "display_name": "Claude Sonnet 4",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-sonnet-4.6",
-      "name": "Claude Sonnet 4.6",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-02-17",
-      "last_updated": "2026-03-13",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 3,
-        "output": 15
-      },
-      "display_name": "Claude Sonnet 4.6",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "mixed",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
-            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-opus-4.1",
-      "name": "Claude Opus 4.1",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-03-31",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 32000
-      },
-      "cost": {
-        "input": 15,
-        "output": 75,
-        "cache_read": 1.5,
-        "cache_write": 18.75
-      },
-      "display_name": "Claude Opus 4.1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-opus-4.8",
-      "name": "Claude Opus 4.8",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "tool_call": true,
-      "temperature": false,
-      "release_date": "2026-05-28",
-      "last_updated": "2026-05-28",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 5,
-        "output": 25
-      },
-      "display_name": "Claude Opus 4.8",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
-            "task_budget is separate from thinking control and should not be treated as a thinking budget."
-          ]
-        }
-      }
-    },
-    {
-      "id": "leonardo-ai/lucid-realism",
-      "name": "Lucid Realism",
-      "family": "lucid",
+      "id": "wanx/wan-v2-6",
+      "name": "Wan 2.6",
       "attachment": true,
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "temperature": false,
-      "release_date": "2025-06-01",
-      "last_updated": "2025-06-01",
+      "release_date": "2025-12-01",
+      "last_updated": "2025-12-01",
       "modalities": {
         "input": [
           "text",
           "image"
         ],
         "output": [
-          "image"
+          "video"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 4096,
+        "context": 400000,
         "output": 8192
       },
-      "display_name": "Lucid Realism",
+      "display_name": "Wan 2.6",
       "type": "chat"
     },
     {
-      "id": "leonardo-ai/lucid-origin",
-      "name": "Lucid Origin",
-      "family": "lucid",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2025-06-01",
-      "last_updated": "2025-06-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 4096,
-        "output": 8192
-      },
-      "display_name": "Lucid Origin",
-      "type": "chat"
-    },
-    {
-      "id": "qwen/qwen3-coder",
-      "name": "Qwen3 Coder",
-      "family": "qwen",
+      "id": "moonshotai/kimi-k2",
+      "name": "Kimi K2",
+      "family": "kimi",
       "attachment": false,
       "reasoning": {
         "supported": false
       },
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-07-23",
-      "last_updated": "2025-07-23",
+      "knowledge": "2024-10",
+      "release_date": "2025-07-11",
+      "last_updated": "2025-07-11",
       "modalities": {
         "input": [
           "text"
@@ -461,14 +56,14 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 66536
+        "context": 131072,
+        "output": 32768
       },
       "cost": {
-        "input": 0.3,
-        "output": 1.2
+        "input": 0.55,
+        "output": 2.2
       },
-      "display_name": "Qwen3 Coder",
+      "display_name": "Kimi K2",
       "type": "chat"
     },
     {
@@ -514,290 +109,31 @@
       }
     },
     {
-      "id": "moonshotai/kimi-k2",
-      "name": "Kimi K2",
-      "family": "kimi",
+      "id": "google/imagen-4.0-fast",
+      "name": "Imagen 4 Fast",
+      "family": "imagen",
       "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-07-11",
-      "last_updated": "2025-07-11",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.55,
-        "output": 2.2
-      },
-      "display_name": "Kimi K2",
-      "type": "chat"
-    },
-    {
-      "id": "wanx/wan-v2-6",
-      "name": "Wan 2.6",
-      "attachment": true,
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "temperature": false,
-      "release_date": "2025-12-01",
-      "last_updated": "2025-12-01",
+      "release_date": "2025-05-20",
+      "last_updated": "2025-05-20",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
-          "video"
+          "image"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
-        "context": 400000,
+        "context": 480,
         "output": 8192
       },
-      "display_name": "Wan 2.6",
-      "type": "chat"
-    },
-    {
-      "id": "x-ai/grok-build-0.1",
-      "name": "Grok Build 0.1",
-      "family": "grok-build",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-16",
-      "last_updated": "2026-04-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "cost": {
-        "input": 1,
-        "output": 2
-      },
-      "display_name": "Grok Build 0.1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "x-ai/grok-4.3",
-      "name": "Grok 4.3",
-      "family": "grok",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-17",
-      "last_updated": "2026-04-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 30000
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 2.5
-      },
-      "display_name": "Grok 4.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "x-ai/grok-4",
-      "name": "Grok 4",
-      "family": "grok",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-07",
-      "release_date": "2025-07-09",
-      "last_updated": "2025-07-09",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 256000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.75,
-        "cache_write": 15
-      },
-      "display_name": "Grok 4",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "deepseek-ai/deepseek-r1-distill-llama-70b",
-      "name": "DeepSeek R1 Distill Llama 70B",
-      "family": "deepseek-thinking",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
-      "temperature": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-01-23",
-      "last_updated": "2025-01-23",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.03,
-        "output": 0.14
-      },
-      "display_name": "DeepSeek R1 Distill Llama 70B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "google/gemma-4-31b-it",
-      "name": "Gemma 4 31B IT",
-      "family": "gemma",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.13,
-        "output": 0.38
-      },
-      "display_name": "Gemma 4 31B IT",
-      "type": "chat"
-    },
-    {
-      "id": "google/veo3.1-fast",
-      "name": "Veo 3.1 Fast",
-      "family": "veo",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2026-05-01",
-      "last_updated": "2026-05-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "video"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "output": 8192
-      },
-      "display_name": "Veo 3.1 Fast",
+      "display_name": "Imagen 4 Fast",
       "type": "chat"
     },
     {
@@ -857,91 +193,6 @@
       }
     },
     {
-      "id": "google/gemini-3.1-pro-preview",
-      "name": "Gemini 3.1 Pro Preview",
-      "family": "gemini-pro",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-02-19",
-      "last_updated": "2026-02-19",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 2,
-        "output": 12
-      },
-      "display_name": "Gemini 3.1 Pro Preview",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "low",
-            "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
-    },
-    {
-      "id": "google/veo3.1",
-      "name": "Veo 3.1",
-      "family": "veo",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2026-05-01",
-      "last_updated": "2026-05-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "video"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "output": 8192
-      },
-      "display_name": "Veo 3.1",
-      "type": "chat"
-    },
-    {
       "id": "google/gemini-2.5-flash",
       "name": "Gemini 2.5 Flash",
       "family": "gemini-flash",
@@ -997,35 +248,6 @@
           ]
         }
       }
-    },
-    {
-      "id": "google/veo3.1-lite",
-      "name": "Veo 3.1 Lite",
-      "family": "veo",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2026-05-01",
-      "last_updated": "2026-05-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "video"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "output": 8192
-      },
-      "display_name": "Veo 3.1 Lite",
-      "type": "chat"
     },
     {
       "id": "google/gemini-3.5-flash",
@@ -1086,31 +308,96 @@
       }
     },
     {
-      "id": "google/imagen-4.0-fast",
-      "name": "Imagen 4 Fast",
-      "family": "imagen",
-      "attachment": false,
+      "id": "google/veo3.1-lite",
+      "name": "Veo 3.1 Lite",
+      "family": "veo",
+      "attachment": true,
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "temperature": false,
-      "release_date": "2025-05-20",
-      "last_updated": "2025-05-20",
+      "release_date": "2026-05-01",
+      "last_updated": "2026-05-01",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
-          "image"
+          "video"
         ]
       },
       "open_weights": false,
       "limit": {
-        "context": 480,
+        "context": 400000,
         "output": 8192
       },
-      "display_name": "Imagen 4 Fast",
+      "display_name": "Veo 3.1 Lite",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemma-4-31b-it",
+      "name": "Gemma 4 31B IT",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.13,
+        "output": 0.38
+      },
+      "display_name": "Gemma 4 31B IT",
+      "type": "chat"
+    },
+    {
+      "id": "google/veo3.1",
+      "name": "Veo 3.1",
+      "family": "veo",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2026-05-01",
+      "last_updated": "2026-05-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "output": 8192
+      },
+      "display_name": "Veo 3.1",
       "type": "chat"
     },
     {
@@ -1237,23 +524,27 @@
       }
     },
     {
-      "id": "openai/gpt-5-mini",
-      "name": "GPT-5 Mini",
-      "family": "gpt-mini",
+      "id": "google/gemini-3.1-pro-preview",
+      "name": "Gemini 3.1 Pro Preview",
+      "family": "gemini-pro",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "knowledge": "2024-10-01",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
+      "knowledge": "2025-01",
+      "release_date": "2026-02-19",
+      "last_updated": "2026-02-19",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video",
+          "audio",
+          "pdf"
         ],
         "output": [
           "text"
@@ -1261,35 +552,268 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 400000,
-        "output": 128000
+        "context": 1048576,
+        "output": 65536
       },
       "cost": {
-        "input": 0.25,
-        "output": 2,
-        "cache_read": 0.025
+        "input": 2,
+        "output": 12
       },
-      "display_name": "GPT-5 Mini",
+      "display_name": "Gemini 3.1 Pro Preview",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
           "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "minimal",
+          "mode": "level",
+          "level": "high",
+          "level_options": [
             "low",
-            "medium",
             "high"
           ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "google/veo3.1-fast",
+      "name": "Veo 3.1 Fast",
+      "family": "veo",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2026-05-01",
+      "last_updated": "2026-05-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "output": 8192
+      },
+      "display_name": "Veo 3.1 Fast",
+      "type": "chat"
+    },
+    {
+      "id": "x-ai/grok-4.3",
+      "name": "Grok 4.3",
+      "family": "grok",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-17",
+      "last_updated": "2026-04-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 30000
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 2.5
+      },
+      "display_name": "Grok 4.3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "x-ai/grok-4",
+      "name": "Grok 4",
+      "family": "grok",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-07",
+      "release_date": "2025-07-09",
+      "last_updated": "2025-07-09",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 256000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.75,
+        "cache_write": 15
+      },
+      "display_name": "Grok 4",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "x-ai/grok-build-0.1",
+      "name": "Grok Build 0.1",
+      "family": "grok-build",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 256000,
+        "output": 256000
+      },
+      "cost": {
+        "input": 1,
+        "output": 2
+      },
+      "display_name": "Grok Build 0.1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "z-ai/glm-5.1",
+      "name": "GLM-5.1",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-03-27",
+      "last_updated": "2026-03-27",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 200000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1.05,
+        "output": 3.5
+      },
+      "display_name": "GLM-5.1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "z-ai/glm-5",
+      "name": "GLM-5",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-02-11",
+      "last_updated": "2026-02-11",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 204800,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.95,
+        "output": 3.15
+      },
+      "display_name": "GLM-5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -1349,233 +873,6 @@
           "visibility": "hidden"
         }
       }
-    },
-    {
-      "id": "openai/gpt-5.5",
-      "name": "GPT-5.5",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-12-01",
-      "release_date": "2026-04-23",
-      "last_updated": "2026-04-23",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 5,
-        "output": 30
-      },
-      "display_name": "GPT-5.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-5-nano",
-      "name": "GPT-5 Nano",
-      "family": "gpt-nano",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-10-01",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 0.05,
-        "output": 0.4,
-        "cache_read": 0.005
-      },
-      "display_name": "GPT-5 Nano",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.6
-      },
-      "display_name": "GPT OSS 120B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-oss-20b",
-      "name": "GPT OSS 20B",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.05,
-        "output": 0.2
-      },
-      "display_name": "GPT OSS 20B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-4.1",
-      "name": "GPT-4.1",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-04",
-      "release_date": "2025-04-14",
-      "last_updated": "2025-04-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1047576,
-        "output": 32768
-      },
-      "cost": {
-        "input": 2,
-        "output": 8,
-        "cache_read": 0.5
-      },
-      "display_name": "GPT-4.1",
-      "type": "chat"
     },
     {
       "id": "openai/gpt-5.4-nano",
@@ -1696,78 +993,6 @@
       }
     },
     {
-      "id": "openai/gpt-5.5-pro",
-      "name": "GPT-5.5 Pro",
-      "family": "gpt-pro",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-12-01",
-      "release_date": "2026-04-23",
-      "last_updated": "2026-04-23",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 30,
-        "output": 180
-      },
-      "display_name": "GPT-5.5 Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-image-2",
-      "name": "GPT Image 2",
-      "family": "gpt-image",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2026-04-21",
-      "last_updated": "2026-04-21",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 128000,
-        "output": 8192
-      },
-      "display_name": "GPT Image 2",
-      "type": "image-generation"
-    },
-    {
       "id": "openai/gpt-realtime-1.5",
       "name": "GPT Realtime 1.5",
       "family": "gpt",
@@ -1801,6 +1026,44 @@
       },
       "display_name": "GPT Realtime 1.5",
       "type": "chat"
+    },
+    {
+      "id": "openai/gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.6
+      },
+      "display_name": "GPT OSS 120B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "openai/gpt-5.4-mini",
@@ -1858,6 +1121,596 @@
             "high"
           ],
           "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-4.1",
+      "name": "GPT-4.1",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2024-04",
+      "release_date": "2025-04-14",
+      "last_updated": "2025-04-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1047576,
+        "output": 32768
+      },
+      "cost": {
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.5
+      },
+      "display_name": "GPT-4.1",
+      "type": "chat"
+    },
+    {
+      "id": "openai/gpt-5-mini",
+      "name": "GPT-5 Mini",
+      "family": "gpt-mini",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2024-10-01",
+      "release_date": "2025-08-07",
+      "last_updated": "2025-08-07",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.25,
+        "output": 2,
+        "cache_read": 0.025
+      },
+      "display_name": "GPT-5 Mini",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5-nano",
+      "name": "GPT-5 Nano",
+      "family": "gpt-nano",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2024-10-01",
+      "release_date": "2025-08-07",
+      "last_updated": "2025-08-07",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.05,
+        "output": 0.4,
+        "cache_read": 0.005
+      },
+      "display_name": "GPT-5 Nano",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5.5-pro",
+      "name": "GPT-5.5 Pro",
+      "family": "gpt-pro",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-12-01",
+      "release_date": "2026-04-23",
+      "last_updated": "2026-04-23",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 30,
+        "output": 180
+      },
+      "display_name": "GPT-5.5 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "name": "GPT OSS 20B",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.05,
+        "output": 0.2
+      },
+      "display_name": "GPT OSS 20B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-image-2",
+      "name": "GPT Image 2",
+      "family": "gpt-image",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2026-04-21",
+      "last_updated": "2026-04-21",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 8192
+      },
+      "display_name": "GPT Image 2",
+      "type": "image-generation"
+    },
+    {
+      "id": "openai/gpt-5.5",
+      "name": "GPT-5.5",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-12-01",
+      "release_date": "2026-04-23",
+      "last_updated": "2026-04-23",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 5,
+        "output": 30
+      },
+      "display_name": "GPT-5.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "bytedance/seedance-2",
+      "name": "Seedance 2",
+      "family": "seed",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2026-04-01",
+      "last_updated": "2026-04-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 4096,
+        "output": 8192
+      },
+      "display_name": "Seedance 2",
+      "type": "chat"
+    },
+    {
+      "id": "anthropic/claude-sonnet-4",
+      "name": "Claude Sonnet 4",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-03-31",
+      "release_date": "2025-05-22",
+      "last_updated": "2025-05-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
+      },
+      "display_name": "Claude Sonnet 4",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-4.8",
+      "name": "Claude Opus 4.8",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "temperature": false,
+      "release_date": "2026-05-28",
+      "last_updated": "2026-05-28",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 5,
+        "output": 25
+      },
+      "display_name": "Claude Opus 4.8",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-4.1",
+      "name": "Claude Opus 4.1",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-03-31",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 32000
+      },
+      "cost": {
+        "input": 15,
+        "output": 75,
+        "cache_read": 1.5,
+        "cache_write": 18.75
+      },
+      "display_name": "Claude Opus 4.1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-sonnet-4.6",
+      "name": "Claude Sonnet 4.6",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-02-17",
+      "last_updated": "2026-03-13",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15
+      },
+      "display_name": "Claude Sonnet 4.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
         }
       }
     },
@@ -1928,33 +1781,122 @@
       "type": "chat"
     },
     {
-      "id": "bytedance/seedance-2",
-      "name": "Seedance 2",
-      "family": "seed",
-      "attachment": true,
+      "id": "deepseek-ai/deepseek-r1-distill-llama-70b",
+      "name": "DeepSeek R1 Distill Llama 70B",
+      "family": "deepseek-thinking",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "temperature": true,
+      "knowledge": "2024-10",
+      "release_date": "2025-01-23",
+      "last_updated": "2025-01-23",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.03,
+        "output": 0.14
+      },
+      "display_name": "DeepSeek R1 Distill Llama 70B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3-coder",
+      "name": "Qwen3 Coder",
+      "family": "qwen",
+      "attachment": false,
       "reasoning": {
         "supported": false
       },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2026-04-01",
-      "last_updated": "2026-04-01",
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-04",
+      "release_date": "2025-07-23",
+      "last_updated": "2025-07-23",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
-          "video"
+          "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 4096,
-        "output": 8192
+        "context": 262144,
+        "output": 66536
       },
-      "display_name": "Seedance 2",
+      "cost": {
+        "input": 0.3,
+        "output": 1.2
+      },
+      "display_name": "Qwen3 Coder",
       "type": "chat"
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "family": "deepseek-thinking",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 1.74,
+        "output": 3.48
+      },
+      "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "minimax/minimax-m2.7-highspeed",
@@ -2043,6 +1985,64 @@
           ]
         }
       }
+    },
+    {
+      "id": "leonardo-ai/lucid-origin",
+      "name": "Lucid Origin",
+      "family": "lucid",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2025-06-01",
+      "last_updated": "2025-06-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 4096,
+        "output": 8192
+      },
+      "display_name": "Lucid Origin",
+      "type": "chat"
+    },
+    {
+      "id": "leonardo-ai/lucid-realism",
+      "name": "Lucid Realism",
+      "family": "lucid",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2025-06-01",
+      "last_updated": "2025-06-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 4096,
+        "output": 8192
+      },
+      "display_name": "Lucid Realism",
+      "type": "chat"
     }
   ]
 }
