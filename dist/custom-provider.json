@@ -73,7 +73,23 @@
       "vision": true,
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
         }
       }
     },
@@ -153,8 +169,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Claude Opus 4.7 requires thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7.",
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
             "task_budget is separate from thinking control and should not be treated as a thinking budget."
           ]
         }
@@ -239,7 +255,8 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -1955,6 +1972,78 @@
       }
     },
     {
+      "id": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "display_name": "Kimi K2.7 Code",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "structured_output": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-04-21",
+      "last_updated": "2026-04-21",
+      "open_weights": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.95,
+        "output": 4,
+        "cache_read": 0.16
+      },
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "metadata": {
+        "selection": [
+          "latest",
+          "coding",
+          "agentic"
+        ],
+        "lifecycle": "active",
+        "sourceProvider": "kimi",
+        "sourceProviderName": "Kimi",
+        "sourceApiUrl": "https://api.moonshot.ai/v1/models",
+        "sourceDocs": [
+          "https://platform.moonshot.ai/",
+          "https://platform.kimi.ai/docs/pricing/chat",
+          "https://platform.moonshot.ai/docs/guide/use-kimi-k2-thinking-model.en-US"
+        ],
+        "sourceStatus": "seed",
+        "apiListed": false,
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "default_enabled": true
+        }
+      }
+    },
+    {
       "id": "MiniMax-M2.5",
       "name": "MiniMax-M2.5",
       "display_name": "MiniMax-M2.5",
@@ -2113,72 +2202,6 @@
           "latest",
           "coding",
           "agentic"
-        ],
-        "lifecycle": "active",
-        "sourceProvider": "minimax",
-        "sourceProviderName": "MiniMax",
-        "sourceDocs": [
-          "https://platform.minimax.io/docs/guides/models-intro",
-          "https://platform.minimax.io/docs/api-reference/api-overview",
-          "https://platform.minimax.io/docs/guides/text-ai-coding-tools"
-        ],
-        "sourceStatus": "seed",
-        "apiListed": false,
-        "source": "public-provider-conf"
-      },
-      "vision": false,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "default_enabled": true
-        }
-      }
-    },
-    {
-      "id": "MiniMax-M2.7-highspeed",
-      "name": "MiniMax-M2.7-highspeed",
-      "display_name": "MiniMax-M2.7-highspeed",
-      "type": "chat",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "structured_output": false,
-      "release_date": "2026-03-18",
-      "last_updated": "2026-03-18",
-      "open_weights": true,
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.6,
-        "output": 2.4,
-        "cache_read": 0.06,
-        "cache_write": 0.375
-      },
-      "limit": {
-        "context": 204800,
-        "output": 131072
-      },
-      "metadata": {
-        "selection": [
-          "latest",
-          "fast",
-          "coding"
         ],
         "lifecycle": "active",
         "sourceProvider": "minimax",
