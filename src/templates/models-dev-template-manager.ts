@@ -63,44 +63,6 @@ function sanitizeProviderLike(
 
 type ModelsDevModelRecord = ModelsDevModel & Record<string, unknown>;
 
-const MINIMAX_M3_FALLBACK_PROVIDER_IDS = [
-  'minimax',
-  'minimax-cn',
-  'minimax-coding-plan',
-  'minimax-cn-coding-plan',
-];
-
-const FALLBACK_ONLY_TEMPLATE_MODELS = new Map<string, Set<string>>([
-  ...MINIMAX_M3_FALLBACK_PROVIDER_IDS.map(
-    providerId => [providerId, new Set(['minimax-m3'])] as const,
-  ),
-]);
-
-function normalizeTemplateKey(value?: string): string {
-  return String(value ?? '').trim().toLowerCase();
-}
-
-function isFallbackOnlyTemplateModel(providerId: string, modelId: string): boolean {
-  return Boolean(
-    FALLBACK_ONLY_TEMPLATE_MODELS
-      .get(normalizeTemplateKey(providerId))
-      ?.has(normalizeTemplateKey(modelId)),
-  );
-}
-
-function findModelByNormalizedId(
-  models: Iterable<ModelsDevModel>,
-  modelId: string,
-): ModelsDevModel | undefined {
-  const normalizedModelId = normalizeTemplateKey(modelId);
-  for (const model of models) {
-    if (normalizeTemplateKey(model.id) === normalizedModelId) {
-      return model;
-    }
-  }
-  return undefined;
-}
-
 function moveTokenFieldsToLimit(model: ModelsDevModelRecord): void {
   const hasContextLength = model.context_length !== undefined;
   const hasMaxOutputTokens = model.max_output_tokens !== undefined;
@@ -184,7 +146,6 @@ function cloneModel(model: ModelsDevModel): ModelsDevModelRecord {
 }
 
 function mergeModels(
-  providerId: string,
   base: ModelsDevModel[] = [],
   override: ModelsDevModel[] = [],
 ): ModelsDevModel[] {
@@ -205,15 +166,8 @@ function mergeModels(
     if (!model.id) {
       continue;
     }
-    const fallbackOnly = isFallbackOnlyTemplateModel(providerId, model.id);
-    const existing =
-      merged.get(model.id) ??
-      (fallbackOnly ? findModelByNormalizedId(merged.values(), model.id) : undefined);
+    const existing = merged.get(model.id);
     if (existing) {
-      if (fallbackOnly) {
-        continue;
-      }
-
       const combined = {
         ...existing,
         ...model,
@@ -253,7 +207,7 @@ export function mergeProviderWithTemplate(
   } as ModelsDevProvider & Record<string, unknown>;
 
   merged.metadata = mergeObjects(sanitizedProvider.metadata, sanitizedTemplate.metadata);
-  merged.models = mergeModels(merged.id, sanitizedProvider.models, sanitizedTemplate.models);
+  merged.models = mergeModels(sanitizedProvider.models, sanitizedTemplate.models);
   merged.tags = mergeStringArrays(sanitizedProvider.tags, sanitizedTemplate.tags);
 
   return merged as ModelsDevProvider;

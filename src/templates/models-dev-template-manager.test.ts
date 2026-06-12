@@ -3,136 +3,101 @@ import test from 'node:test';
 import type { ModelsDevProvider } from '../models/models-dev';
 import { mergeProviderWithTemplate } from './models-dev-template-manager';
 
-const minimaxM3Template: ModelsDevProvider = {
-  id: 'minimax',
-  name: 'MiniMax Template',
-  models: [
-    {
-      id: 'MiniMax-M3',
-      name: 'MiniMax-M3',
-      vision: true,
-      attachment: true,
-      modalities: {
-        input: ['text', 'image'],
-        output: ['text'],
-      },
-      limit: {
-        context: 1000000,
-        output: 131072,
-      },
-    },
-  ],
-};
-
-function minimaxTemplateForProvider(providerId: string): ModelsDevProvider {
-  return {
-    ...minimaxM3Template,
-    id: providerId,
-  };
-}
-
-test('adds MiniMax-M3 fallback template when upstream has not published it yet', () => {
+test('adds template-only models to the upstream provider', () => {
   const upstream: ModelsDevProvider = {
-    id: 'minimax',
-    name: 'MiniMax',
-    models: [],
+    id: 'moonshot-ai',
+    name: 'Moonshot AI',
+    models: [
+      {
+        id: 'kimi-k2.6',
+        name: 'Kimi K2.6',
+        limit: {
+          context: 262144,
+          output: 262144,
+        },
+      },
+    ],
   };
 
-  const merged = mergeProviderWithTemplate(upstream, minimaxM3Template);
-  const m3 = merged.models.find(model => model.id === 'MiniMax-M3');
-
-  assert.equal(m3?.limit?.context, 1000000);
-  assert.equal(m3?.vision, true);
-  assert.deepEqual(m3?.modalities?.input, ['text', 'image']);
-});
-
-test('adds MiniMax-M3 fallback to MiniMax provider variants', () => {
-  for (const providerId of [
-    'minimax-cn',
-    'minimax-coding-plan',
-    'minimax-cn-coding-plan',
-  ]) {
-    const upstream: ModelsDevProvider = {
-      id: providerId,
-      name: providerId,
-      models: [],
-    };
-
-    const merged = mergeProviderWithTemplate(upstream, minimaxTemplateForProvider(providerId));
-    const m3 = merged.models.find(model => model.id === 'MiniMax-M3');
-
-    assert.equal(m3?.limit?.context, 1000000);
-    assert.equal(m3?.vision, true);
-    assert.deepEqual(m3?.modalities?.input, ['text', 'image']);
-  }
-});
-
-test('keeps upstream MiniMax-M3 unchanged when it exists', () => {
-  const upstreamM3 = {
-    id: 'minimax-m3',
-    name: 'Upstream MiniMax M3',
-    vision: false,
-    attachment: false,
-    modalities: {
-      input: ['text'],
-      output: ['text'],
-    },
-    limit: {
-      context: 512000,
-      output: 64000,
-    },
+  const template: ModelsDevProvider = {
+    id: 'moonshot-ai',
+    name: 'Moonshot AI',
+    models: [
+      {
+        id: 'kimi-k2.7-code',
+        name: 'Kimi K2.7 Code',
+        family: 'kimi-k2.7-code',
+        limit: {
+          context: 262144,
+          output: 262144,
+        },
+      },
+    ],
   };
 
+  const merged = mergeProviderWithTemplate(upstream, template);
+  const k27 = merged.models.find(model => model.id === 'kimi-k2.7-code');
+
+  assert.equal(merged.models.length, 2);
+  assert.equal(k27?.name, 'Kimi K2.7 Code');
+  assert.equal(k27?.family, 'kimi-k2.7-code');
+  assert.equal(k27?.limit?.context, 262144);
+});
+
+test('merges template fields into matching upstream models', () => {
   const upstream: ModelsDevProvider = {
-    id: 'minimax',
-    name: 'MiniMax',
-    models: [upstreamM3],
+    id: 'example',
+    name: 'Example',
+    models: [
+      {
+        id: 'model-a',
+        name: 'Model A',
+        metadata: {
+          upstream: true,
+        },
+        modalities: {
+          input: ['text'],
+        },
+        limit: {
+          context: 8192,
+        },
+      },
+    ],
   };
 
-  const merged = mergeProviderWithTemplate(upstream, minimaxM3Template);
-
-  assert.equal(merged.models.length, 1);
-  assert.deepEqual(
-    {
-      id: merged.models[0]?.id,
-      name: merged.models[0]?.name,
-      vision: merged.models[0]?.vision,
-      attachment: merged.models[0]?.attachment,
-      modalities: merged.models[0]?.modalities,
-      limit: merged.models[0]?.limit,
-    },
-    upstreamM3,
-  );
-});
-
-test('keeps upstream MiniMax-M3 unchanged for MiniMax plan providers', () => {
-  const upstreamM3 = {
-    id: 'minimax-m3',
-    name: 'Upstream MiniMax M3',
-    vision: false,
-    attachment: false,
-    modalities: {
-      input: ['text'],
-      output: ['text'],
-    },
-    limit: {
-      context: 512000,
-      output: 64000,
-    },
+  const template: ModelsDevProvider = {
+    id: 'example',
+    name: 'Example Template',
+    models: [
+      {
+        id: 'model-a',
+        name: 'Model A Template',
+        metadata: {
+          lifecycle: 'active',
+        },
+        modalities: {
+          output: ['text'],
+        },
+        limit: {
+          output: 4096,
+        },
+      },
+    ],
   };
 
-  for (const providerId of ['minimax-coding-plan', 'minimax-cn-coding-plan']) {
-    const upstream: ModelsDevProvider = {
-      id: providerId,
-      name: providerId,
-      models: [upstreamM3],
-    };
+  const merged = mergeProviderWithTemplate(upstream, template);
 
-    const merged = mergeProviderWithTemplate(upstream, minimaxTemplateForProvider(providerId));
-
-    assert.equal(merged.models.length, 1);
-    assert.equal(merged.models[0]?.limit?.context, 512000);
-    assert.equal(merged.models[0]?.vision, false);
-    assert.deepEqual(merged.models[0]?.modalities?.input, ['text']);
-  }
+  assert.equal(merged.name, 'Example Template');
+  assert.deepEqual(merged.models[0]?.metadata, {
+    upstream: true,
+    lifecycle: 'active',
+  });
+  assert.deepEqual(merged.models[0]?.modalities, {
+    input: ['text'],
+    output: ['text'],
+  });
+  assert.deepEqual(merged.models[0]?.limit, {
+    context: 8192,
+    output: 4096,
+  });
 });
