@@ -1,4 +1,4 @@
-import type { ModelCost, ModelInfo, ModelLimit, ModelModalities, ModelType } from '../models/model-info';
+import type { ModelCost, ModelInfo, ModelLimit, ModelModalities, ModelType, ReasoningOption } from '../models/model-info';
 import type { ExtraCapabilities, LegacyInterleaved } from '../models/extra-capabilities';
 
 export type CustomProviderSourceId =
@@ -47,6 +47,7 @@ export interface CustomProviderModelSeed {
   temperature?: boolean;
   toolCall?: boolean;
   structuredOutput?: boolean;
+  reasoningOptions?: ReasoningOption[];
   knowledge?: string;
   releaseDate?: string;
   lastUpdated?: string;
