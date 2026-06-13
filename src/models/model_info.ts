@@ -30,9 +30,16 @@ export interface ModelLimit {
   [key: string]: number | undefined;
 }
 
+export interface ReasoningOption {
+  type: string;
+  values?: string[];
+  [key: string]: string | string[] | undefined;
+}
+
 export interface ModelInfo {
   id: string;
   name: string;
+  family?: string;
   contextLength: number;
   maxTokens: number;
   vision: boolean;
@@ -43,6 +50,7 @@ export interface ModelInfo {
   temperature?: boolean;
   toolCall?: boolean;
   knowledge?: string;
+  reasoningOptions?: ReasoningOption[];
   releaseDate?: string;
   lastUpdated?: string;
   openWeights?: boolean;

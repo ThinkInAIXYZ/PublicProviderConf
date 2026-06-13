@@ -1,4 +1,4 @@
-import { ModelInfo, ModelType } from './model-info';
+import { ModelInfo, ModelType, type ReasoningOption } from './model-info';
 import { normalizeToggleInPlace, ToggleConfig } from '../utils/toggles';
 import { ProviderInfo } from './provider-info';
 import { type ReasoningEffort, type ReasoningVerbosity } from './openai-reasoning-profile';
@@ -69,6 +69,7 @@ export interface ModelsDevModel {
   temperature?: boolean;
   tool_call?: boolean;
   structured_output?: boolean;
+  reasoning_options?: ReasoningOption[];
   knowledge?: string;
   release_date?: string;
   last_updated?: string;
@@ -176,6 +177,7 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
   const result: ModelsDevModel = {
     id: model.id,
     name: model.name,
+    family: model.family,
     display_name: model.name,
     type: convertModelType(model.type),
     context_length: model.contextLength,
@@ -185,6 +187,10 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
     temperature: model.temperature,
     tool_call: toolCall,
     structured_output: model.structuredOutput,
+    reasoning_options: model.reasoningOptions?.map(option => ({
+      ...option,
+      values: option.values ? [...option.values] : undefined,
+    })),
     knowledge: model.knowledge,
     release_date: model.releaseDate,
     last_updated: model.lastUpdated,

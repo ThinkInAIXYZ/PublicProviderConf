@@ -41,6 +41,13 @@ function cloneReasoning(reasoning: ModelInfo['reasoning']): ModelInfo['reasoning
   return typeof reasoning === 'object' && reasoning !== null ? { ...reasoning } : reasoning;
 }
 
+function cloneReasoningOptions(options?: ModelInfo['reasoningOptions']): ModelInfo['reasoningOptions'] {
+  return options?.map(option => ({
+    ...option,
+    values: cloneArray(option.values),
+  }));
+}
+
 function createModelFromSeed(
   source: CustomProviderSourceSeed,
   seed: CustomProviderModelSeed,
@@ -77,9 +84,11 @@ function createModelFromSeed(
     toModelType(seed.type),
     {
       attachment: seed.attachment,
+      family: seed.family,
       temperature: seed.temperature,
       toolCall: seed.toolCall,
       structuredOutput: seed.structuredOutput,
+      reasoningOptions: cloneReasoningOptions(seed.reasoningOptions),
       knowledge: seed.knowledge,
       releaseDate: seed.releaseDate,
       lastUpdated: seed.lastUpdated,
