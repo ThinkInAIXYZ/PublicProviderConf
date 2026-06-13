@@ -2,193 +2,8 @@
   "id": "jiekou",
   "name": "Jiekou",
   "display_name": "Jiekou",
-  "updated_at": "2026-04-18T04:37:47.454Z",
+  "updated_at": "2026-06-13T05:38:01.924Z",
   "models": [
-    {
-      "id": "claude-3-5-haiku-20241022",
-      "name": "claude-3-5-haiku-20241022",
-      "display_name": "claude-3-5-haiku-20241022",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 200000,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "claude-3-5-haiku-20241022",
-        "endpoints": [
-          "chat/completions",
-          "anthropic"
-        ],
-        "features": [
-          "function-calling",
-          "structured-outputs",
-          "serverless"
-        ],
-        "pricing": {
-          "inputPerM": 7600,
-          "outputPerM": 38000
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "claude-3-5-sonnet-20241022",
-      "name": "claude-3-5-sonnet-20241022",
-      "display_name": "claude-3-5-sonnet-20241022",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 200000,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "支持prompt cache的模型",
-        "endpoints": [
-          "chat/completions",
-          "anthropic"
-        ],
-        "features": [
-          "function-calling",
-          "structured-outputs",
-          "serverless"
-        ],
-        "pricing": {
-          "inputPerM": 28500,
-          "outputPerM": 142500
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "claude-3-7-sonnet-20250219",
-      "name": "claude-3-7-sonnet-20250219",
-      "display_name": "claude-3-7-sonnet-20250219",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "metadata": {
-        "description": "支持prompt cache的模型",
-        "endpoints": [
-          "chat/completions",
-          "anthropic"
-        ],
-        "features": [
-          "function-calling",
-          "structured-outputs",
-          "serverless"
-        ],
-        "pricing": {
-          "inputPerM": 28500,
-          "outputPerM": 142500
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": false,
-          "summaries": false,
-          "visibility": "full",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic uses thinking budget tokens"
-          ]
-        }
-      }
-    },
-    {
-      "id": "claude-3-haiku-20240307",
-      "name": "claude-3-haiku-20240307",
-      "display_name": "claude-3-haiku-20240307",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 200000,
-        "output": 4096
-      },
-      "metadata": {
-        "description": "claude-3-haiku-20240307",
-        "endpoints": [
-          "chat/completions",
-          "anthropic"
-        ],
-        "features": [
-          "function-calling",
-          "structured-outputs",
-          "serverless"
-        ],
-        "pricing": {
-          "inputPerM": 2375,
-          "outputPerM": 11875
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
     {
       "id": "claude-haiku-4-5-20251001",
       "name": "claude-haiku-4-5-20251001",
@@ -196,7 +11,7 @@
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -229,16 +44,37 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
-      "id": "claude-opus-4-20250514",
-      "name": "claude-opus-4-20250514",
-      "display_name": "claude-opus-4-20250514",
+      "id": "claude-haiku-4-5-20251001-dd",
+      "name": "claude-haiku-4-5-20251001-dd",
+      "display_name": "claude-haiku-4-5-20251001-dd",
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -252,10 +88,9 @@
       },
       "limit": {
         "context": 200000,
-        "output": 32000
+        "output": 64000
       },
       "metadata": {
-        "description": "支持prompt cache的模型",
         "endpoints": [
           "chat/completions",
           "anthropic"
@@ -267,12 +102,97 @@
           "serverless"
         ],
         "pricing": {
-          "inputPerM": 142500,
-          "outputPerM": 712500
+          "inputPerM": 5500,
+          "outputPerM": 27500
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-haiku-4-5-20251001-r",
+      "name": "claude-haiku-4-5-20251001-r",
+      "display_name": "claude-haiku-4-5-20251001-r",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "metadata": {
+        "description": "Our fastest model with near-frontier intelligence",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 2000,
+          "outputPerM": 10000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
       "id": "claude-opus-4-5-20251101",
@@ -281,7 +201,7 @@
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -314,7 +234,102 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.5 uses manual thinking.type = \"enabled\" with budget_tokens; effort can be used alongside the thinking budget.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-5-20251101-dd",
+      "name": "claude-opus-4-5-20251101-dd",
+      "display_name": "claude-opus-4-5-20251101-dd",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 200000,
+        "output": 65536
+      },
+      "metadata": {
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 27500,
+          "outputPerM": 137500
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.5 uses manual thinking.type = \"enabled\" with budget_tokens; effort can be used alongside the thinking budget.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header."
+          ]
+        }
+      }
     },
     {
       "id": "claude-opus-4-6",
@@ -367,7 +382,7 @@
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
             "low",
             "medium",
@@ -381,7 +396,149 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-6-dd",
+      "name": "claude-opus-4-6-dd",
+      "display_name": "claude-opus-4-6-dd",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 27500,
+          "outputPerM": 137500
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-6-r",
+      "name": "claude-opus-4-6-r",
+      "display_name": "claude-opus-4-6-r",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "Most intelligent model for building agents and coding",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 10000,
+          "outputPerM": 50000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -448,8 +605,215 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Claude Opus 4.7 requires thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7.",
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-7-r",
+      "name": "claude-opus-4-7-r",
+      "display_name": "claude-opus-4-7-r",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "Most intelligent model for building agents and coding",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 10000,
+          "outputPerM": 50000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-8",
+      "name": "claude-opus-4-8",
+      "display_name": "claude-opus-4-8",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "Most intelligent model for building agents and coding",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 50000,
+          "outputPerM": 250000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-8-r",
+      "name": "claude-opus-4-8-r",
+      "display_name": "claude-opus-4-8-r",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "Most intelligent model for building agents and coding",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 10000,
+          "outputPerM": 50000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
             "task_budget is separate from thinking control and should not be treated as a thinking budget."
           ]
         }
@@ -461,7 +825,8 @@
       "display_name": "claude-sonnet-4-20250514",
       "type": "chat",
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -494,7 +859,28 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
       "id": "claude-sonnet-4-5-20250929",
@@ -503,7 +889,7 @@
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "modalities": {
@@ -536,7 +922,90 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-sonnet-4-5-20250929-dd",
+      "name": "claude-sonnet-4-5-20250929-dd",
+      "display_name": "claude-sonnet-4-5-20250929-dd",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "metadata": {
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 16500,
+          "outputPerM": 82500
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
     },
     {
       "id": "claude-sonnet-4-6",
@@ -589,7 +1058,7 @@
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
             "low",
             "medium",
@@ -603,7 +1072,149 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path."
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-sonnet-4-6-dd",
+      "name": "claude-sonnet-4-6-dd",
+      "display_name": "claude-sonnet-4-6-dd",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 16500,
+          "outputPerM": 82500
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-sonnet-4-6-r",
+      "name": "claude-sonnet-4-6-r",
+      "display_name": "claude-sonnet-4-6-r",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "Our smartest model. Best for complex agents, coding, and most advanced tasks",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 6000,
+          "outputPerM": 30000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -735,7 +1346,8 @@
         "features": [
           "function-calling",
           "structured-outputs",
-          "reasoning"
+          "reasoning",
+          "serverless"
         ],
         "pricing": {
           "inputPerM": 2700,
@@ -744,6 +1356,112 @@
         "source": "public-provider-conf"
       },
       "vision": false
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash",
+      "name": "Deepseek V4 Flash",
+      "display_name": "Deepseek V4 Flash",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 393216
+      },
+      "metadata": {
+        "description": "DeepSeek-V4-Flash is a lightweight model meticulously designed by DeepSeek to deliver the ultimate combination of lightning-fast response times and unmatched cost-effectiveness. Engineered with fewer parameters and significantly lower activation overhead, V4-Flash provides an exceptionally fast and economical API service. At its core, V4-Flash demonstrates outstanding reasoning capabilities that closely rival the V4-Pro model. While featuring a slightly streamlined repository of world knowledge, it remains highly capable of satisfying the demands of most application scenarios. In Agentic applications, V4-Flash performs on par with the Pro version when handling standard and fundamental tasks. As the premier choice for developers prioritizing high concurrency, low latency, and cost efficiency, DeepSeek-V4-Flash serves as the optimal solution for deploying large-scale, high-frequency, and lightweight AI workloads.",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 1400,
+          "outputPerM": 2800
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "Deepseek V4 Pro",
+      "display_name": "Deepseek V4 Pro",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 393216
+      },
+      "metadata": {
+        "description": "DeepSeek-V4-Pro is the next-generation flagship open-source large language model developed by DeepSeek, delivering comprehensive performance that rivals the world's premier closed-source models. Compared to its predecessor, V4-Pro achieves a breakthrough evolution in Agentic capabilities. It firmly holds the top position among open-source models in Agentic Coding, providing a high-quality, end-to-end code delivery experience that surpasses mainstream industry benchmarks (such as Sonnet 4.5). Furthermore, the model not only boasts an expansive repository of world knowledge that leads the open-source community, but it also demonstrates ultimate logical reasoning prowess in highly demanding evaluations—including mathematics, STEM, and competitive programming. In these rigorous domains, V4-Pro outperforms all publicly evaluated open-source models and matches the capabilities of global closed-source giants. As the ideal foundational model for building complex agentic workflows, professional-grade software developm",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 17400,
+          "outputPerM": 34800
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "deepseek/deepseek-ocr-2",
@@ -1684,12 +2402,13 @@
       }
     },
     {
-      "id": "gemini-3.1-pro-preview",
-      "name": "gemini-3.1-pro-preview",
-      "display_name": "gemini-3.1-pro-preview",
+      "id": "gemini-3.5-flash",
+      "name": "gemini-3.5-flash",
+      "display_name": "gemini-3.5-flash",
       "type": "chat",
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
       "tool_call": true,
       "modalities": {
@@ -1710,20 +2429,41 @@
       "metadata": {
         "endpoints": [
           "chat/completions",
-          "gemini"
+          "gemini",
+          "responses"
         ],
         "features": [
           "function-calling",
           "structured-outputs",
+          "reasoning",
           "serverless"
         ],
         "pricing": {
-          "inputPerM": 20000,
-          "outputPerM": 120000
+          "inputPerM": 15000,
+          "outputPerM": 90000
         },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
     },
     {
       "id": "google/gemma-3-27b-it",
@@ -2045,9 +2785,56 @@
       }
     },
     {
-      "id": "zai-org/glm-5",
-      "name": "GLM-5",
-      "display_name": "GLM-5",
+      "id": "zai-org/glm-5-turbo",
+      "name": "GLM-5-Turbo",
+      "display_name": "GLM-5-Turbo",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 202800,
+        "output": 131072
+      },
+      "metadata": {
+        "description": "GLM-5 is an open-source foundation model engineered for complex system engineering and long-horizon Agent tasks, delivering reliable productivity for top-tier programmers. Transcending the boundary from \"writing code\" to \"building systems,\" it moves beyond traditional snippet generation to offer senior-architect-level planning and execution capabilities. By rejecting the \"frontend-heavy, logic-light\" approach, GLM-5 demonstrates exceptional reasoning and self-healing abilities in backend refactoring, complex algorithm implementation, and deep debugging—autonomously analyzing logs and iteratively fixing persistent bugs until the system runs. As the first open-source model featuring Opus-class style and system engineering depth, GLM-5 provides extreme logic density alongside the freedom of local deployment and high cost-effectiveness, making it the ideal choice for large-scale backend development and automated Agent construction.",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 12000,
+          "outputPerM": 40000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "zai-org/glm-5.1",
+      "name": "GLM-5.1",
+      "display_name": "GLM-5.1",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -2067,11 +2854,10 @@
         "output": 131072
       },
       "metadata": {
-        "description": "GLM-5 is an open-source foundation model engineered for complex system engineering and long-horizon Agent tasks, delivering reliable productivity for top-tier programmers. Transcending the boundary from \"writing code\" to \"building systems,\" it moves beyond traditional snippet generation to offer senior-architect-level planning and execution capabilities. By rejecting the \"frontend-heavy, logic-light\" approach, GLM-5 demonstrates exceptional reasoning and self-healing abilities in backend refactoring, complex algorithm implementation, and deep debugging—autonomously analyzing logs and iteratively fixing persistent bugs until the system runs. As the first open-source model featuring Opus-class style and system engineering depth, GLM-5 provides extreme logic density alongside the freedom of local deployment and high cost-effectiveness, making it the ideal choice for large-scale backend development and automated Agent construction.",
+        "description": "GLM-5.1 is Z.AI's latest flagship model, meticulously engineered for long-horizon autonomous tasks. Capable of working continuously on a single assignment for up to 8 hours, it autonomously manages the entire workflow—from initial planning and execution to iterative optimization and the delivery of production-grade results. While its general capabilities and coding proficiency are on par with Claude Opus 4.6, GLM-5.1 excels particularly in sustained execution, complex engineering optimization, and real-world development scenarios. This makes it the ideal foundational model for powering advanced autonomous agents and long-horizon coding assistants.",
         "endpoints": [
           "chat/completions",
-          "anthropic",
-          "completion"
+          "anthropic"
         ],
         "features": [
           "function-calling",
@@ -2080,12 +2866,60 @@
           "serverless"
         ],
         "pricing": {
-          "inputPerM": 10000,
-          "outputPerM": 32000
+          "inputPerM": 13800,
+          "outputPerM": 44000
         },
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "zai-org/glm-5v-turbo",
+      "name": "GLM-5V-Turbo",
+      "display_name": "GLM-5V-Turbo",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 204800,
+        "output": 131072
+      },
+      "metadata": {
+        "description": "GLM-5V-Turbo is Z.AI’s first multimodal coding foundation model, built for vision-based coding tasks. It can natively process multimodal inputs such as images, video, and text, while also excelling at long-horizon planning, complex coding, and action execution. Deeply optimized for agent workflows, it works seamlessly with agents such as Claude Code and OpenClaw to complete the full loop of “understand the environment → plan actions → execute tasks”.",
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 12000,
+          "outputPerM": 40000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "zai-org/glm-ocr",
@@ -2643,7 +3477,7 @@
       },
       "metadata": {
         "endpoints": [
-          "response"
+          "responses"
         ],
         "features": [
           "function-calling",
@@ -3547,6 +4381,199 @@
       }
     },
     {
+      "id": "gpt-5.5",
+      "name": "gpt-5.5",
+      "display_name": "gpt-5.5",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 128000
+      },
+      "metadata": {
+        "endpoints": [
+          "responses",
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 50000,
+          "outputPerM": 300000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "gpt-5.5-light",
+      "name": "gpt-5.5-light",
+      "display_name": "gpt-5.5-light",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 128000
+      },
+      "metadata": {
+        "endpoints": [
+          "responses",
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 2500,
+          "outputPerM": 15000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gpt-5.5-pro",
+      "name": "gpt-5.5-pro",
+      "display_name": "gpt-5.5-pro",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 128000
+      },
+      "metadata": {
+        "endpoints": [
+          "responses"
+        ],
+        "features": [
+          "function-calling",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 300000,
+          "outputPerM": 1800000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "gpt-5.5-r",
+      "name": "gpt-5.5-r",
+      "display_name": "gpt-5.5-r",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 128000
+      },
+      "metadata": {
+        "endpoints": [
+          "responses"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 2500,
+          "outputPerM": 15000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "grok-3",
       "name": "grok-3",
       "display_name": "grok-3",
@@ -3836,6 +4863,180 @@
       }
     },
     {
+      "id": "grok-4.20-0309-non-reasoning",
+      "name": "grok-4.20-0309-non-reasoning",
+      "display_name": "grok-4.20-0309-non-reasoning",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 2000000,
+        "output": 2000000
+      },
+      "metadata": {
+        "description": "Grok 4.20 is our newest flagship model with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering consistently precise and truthful responses.",
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 19000,
+          "outputPerM": 57000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "grok-4.20-0309-reasoning",
+      "name": "grok-4.20-0309-reasoning",
+      "display_name": "grok-4.20-0309-reasoning",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 2000000,
+        "output": 2000000
+      },
+      "metadata": {
+        "description": "Grok 4.20 is our newest flagship model with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering consistently precise and truthful responses.",
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 19000,
+          "outputPerM": 57000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "grok-4.20-multi-agent-0309",
+      "name": "grok-4.20-multi-agent-0309",
+      "display_name": "grok-4.20-multi-agent-0309",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 2000000,
+        "output": 2000000
+      },
+      "metadata": {
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 19000,
+          "outputPerM": 57000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "grok-4.3",
+      "name": "grok-4.3",
+      "display_name": "grok-4.3",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "metadata": {
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 12500,
+          "outputPerM": 25000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "grok-code-fast-1",
       "name": "grok-code-fast-1",
       "display_name": "grok-code-fast-1",
@@ -4018,6 +5219,104 @@
       }
     },
     {
+      "id": "moonshotai/kimi-k2.6",
+      "name": "Kimi K2.6",
+      "display_name": "Kimi K2.6",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "metadata": {
+        "description": "Kimi K2.5 is the latest flagship iteration of Moonshot AI's large language model series, representing a significant leap in multimodal and agentic capabilities. It features a native multimodal architecture supporting both visual and text inputs, alongside versatile thinking and non-thinking modes. This model maintains the substantial 256k token context window found in the K2 series but achieves new open-source state-of-the-art (SoTA) performance across general intelligence, coding, and visual understanding benchmarks. Kimi K2.5 delivers a breakthrough in frontend development, enabling the generation of fully functional, aesthetically polished interactive interfaces with complex dynamic layouts directly from natural language. Optimized for complex problem-solving, it excels in multi-step tool invocation, logical reasoning, and full-stack code synthesis.",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "serverless",
+          "reasoning",
+          "structured-outputs",
+          "function-calling"
+        ],
+        "pricing": {
+          "inputPerM": 6000,
+          "outputPerM": 30000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "moonshotai/kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "display_name": "Kimi K2.7 Code",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "metadata": {
+        "description": "Kimi K2.7 Code is MoonshotAI's strongest coding & agentic model — a 1T-parameter MoE (32B activated) , 256K context and interleaved thinking with multi-step tool calling. It delivers major gains on long-horizon coding tasks while cutting thinking-token usage by ~30% vs K2.6, and accepts text, image and video inputs for vision-driven development workflows.",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 9500,
+          "outputPerM": 40000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "sao10k/l3-70b-euryale-v2.1",
       "name": "L3 70B Euryale V2.1",
       "display_name": "L3 70B Euryale V2.1",
@@ -4129,6 +5428,44 @@
         "pricing": {
           "inputPerM": 14800,
           "outputPerM": 14800
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "inclusionai/ling-2.6-flash",
+      "name": "Ling-2.6-flash",
+      "display_name": "Ling-2.6-flash",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "metadata": {
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs"
+        ],
+        "pricing": {
+          "inputPerM": 1000,
+          "outputPerM": 3000
         },
         "source": "public-provider-conf"
       },
@@ -4465,9 +5802,109 @@
       }
     },
     {
-      "id": "minimax/minimax-m2.5",
-      "name": "MiniMax M2.5",
-      "display_name": "MiniMax M2.5",
+      "id": "minimax/minimax-m2.5-highspeed",
+      "name": "MiniMax M2.5-highspeed",
+      "display_name": "MiniMax M2.5-highspeed",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 204800,
+        "output": 131100
+      },
+      "metadata": {
+        "description": "MiniMax M2.5-highspeed is an accelerated SOTA model engineered for scenarios demanding extreme efficiency. It perfectly inherits the core intelligence and robust digital workspace capabilities of the standard M2.5—including its 80.2% score on SWE-Bench Verified, seamless manipulation of Office documents, and versatility in cross-software collaboration. With zero compromise on reasoning precision or logical depth, the Highspeed version delivers ultra-low latency inference through rigorous engineering optimization. This means you get more than just an intelligent assistant capable of planning and self-optimization; you gain a \"high-velocity engine\" that responds to high-frequency calls and processes complex document streams in near real-time, making it ideal for latency-sensitive interactive applications and large-scale automated pipelines.",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 6000,
+          "outputPerM": 24000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "minimax/minimax-m2.7",
+      "name": "MiniMax M2.7",
+      "display_name": "MiniMax M2.7",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 204800,
+        "output": 131100
+      },
+      "metadata": {
+        "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1 to extend into general office work, reaching fluency in generating and operating Word, Excel, and Powerpoint files, context switching between diverse software environments, and working across different agent and human teams. Scoring 80.2% on SWE-Bench Verified, 51.3% on Multi-SWE-Bench, and 76.3% on BrowseComp, M2.5 is also more token efficient than previous generations, having been trained to optimize its actions and output through planning.",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 3000,
+          "outputPerM": 12000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "minimax/minimax-m2.7-highspeed",
+      "name": "MiniMax M2.7-highspeed",
+      "display_name": "MiniMax M2.7-highspeed",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -4487,7 +5924,7 @@
         "output": 131072
       },
       "metadata": {
-        "description": "MiniMax M2.1 is a cutting-edge AI model designed to revolutionize how developers build software. With enhanced multi-language programming support, it excels in generating high-quality code across popular languages like Rust, Java, Golang, C++, Kotlin, Objective-C, TypeScript, and JavaScript.\n\nKey improvements include:\n\n22% faster response times and 30% lower token consumption for efficient workflows.\nSeamless integration with leading development frameworks (Claude Code, Droid Factory AI, BlackBox, etc.).\nFull-stack development capabilities, from mobile (Android/iOS) to web and 3D interactive prototyping.\nOptimized performance-to-cost ratio, making AI-assisted development more accessible.\nWhether you're a software engineer, app developer, or tech innovator, M2.1 empowers smarter coding with industry-leading AI.",
+        "description": "MiniMax M2.7-highspeed is an accelerated SOTA model engineered for scenarios demanding extreme efficiency. It perfectly inherits the core intelligence and robust digital workspace capabilities of the standard M2.7.\nIn real-world software engineering, M2.7 excels by independently driving end-to-end project delivery while efficiently handling advanced tasks such as log analysis, bug troubleshooting, code security, and machine learning. In the professional workspace, it boasts the highest open-source GDPval-AA score (1495 ELO). It delivers high-fidelity, complex editing and multi-turn revisions across the Office suite (Excel, PPT, Word), elevating task execution to industry-leading standards.\nBuilt for complex environment interactions, M2.7 maintains an impressive 97% skill-following rate even with complex, long-context tool calls (>2000 tokens).  Beyond its robust productivity, M2.7 breaks the \"cold tool\" stereotype of traditional models. With exceptional identity retention and high emotional intelligence (EQ),",
         "endpoints": [
           "chat/completions",
           "anthropic"
@@ -4499,12 +5936,72 @@
           "serverless"
         ],
         "pricing": {
+          "inputPerM": 6000,
+          "outputPerM": 24000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "minimax/minimax-m3",
+      "name": "MiniMax M3",
+      "display_name": "MiniMax M3",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "metadata": {
+        "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding, and tool use. It is built on MiniMax Sparse Attention (MSA), which replaces full attention with KV-block selection to cut per-token compute at long context — roughly 1/20 the cost of the previous generation at 1M tokens, with substantially faster prefill and decode while retaining quality across most tasks.\nTrained as a native multimodal model on interleaved data and tuned for multi-turn, production-like collaboration via an interactive user-simulator framework, the model is oriented toward sustained, multi-step tasks rather than single-turn execution.",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
           "inputPerM": 3000,
           "outputPerM": 12000
         },
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "mistralai/mistral-7b-instruct",
@@ -4920,7 +6417,8 @@
         "features": [
           "function-calling",
           "structured-outputs",
-          "reasoning"
+          "reasoning",
+          "serverless"
         ],
         "pricing": {
           "inputPerM": 1000,
@@ -4966,7 +6464,8 @@
         ],
         "features": [
           "structured-outputs",
-          "reasoning"
+          "reasoning",
+          "serverless"
         ],
         "pricing": {
           "inputPerM": 500,
@@ -5262,7 +6761,13 @@
       "vision": false,
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -5513,9 +7018,325 @@
       "vision": false,
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
+    },
+    {
+      "id": "qwen/qwen3.5-122b-a10b",
+      "name": "Qwen3.5-122B-A10B",
+      "display_name": "Qwen3.5-122B-A10B",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 65500
+      },
+      "metadata": {
+        "description": "The Qwen3.5-122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of overall performance, this model is second only to Qwen3.5-397B-A17B. Its text capabilities significantly outperform those of Qwen3-235B-2507, and its visual capabilities surpass those of Qwen3-VL-235B.",
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 4000,
+          "outputPerM": 32000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3.5-27b",
+      "name": "Qwen3.5-27B",
+      "display_name": "Qwen3.5-27B",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 65500
+      },
+      "metadata": {
+        "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of the Qwen3.5-122B-A10B.",
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 3000,
+          "outputPerM": 24000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3.5-35b-a3b",
+      "name": "Qwen3.5-35B-A3B",
+      "display_name": "Qwen3.5-35B-A3B",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 65500
+      },
+      "metadata": {
+        "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall performance is comparable to that of the Qwen3.5-27B.",
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 2500,
+          "outputPerM": 20000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3.5-397b-a17b",
+      "name": "Qwen3.5-397B-A17B",
+      "display_name": "Qwen3.5-397B-A17B",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 64000
+      },
+      "metadata": {
+        "description": "The Qwen3.5 series 397B-A17B native vision-language model is based on a hybrid architecture design that integrates linear attention mechanisms with sparse Mixture-of-Experts (MoE), achieving higher inference efficiency. Across a variety of tasks—including language understanding, logical reasoning, code generation, agentic tasks, image understanding, video understanding, and graphical user interface (GUI) interaction—it demonstrates exceptional performance comparable to current top-tier frontier models. Possessing robust code generation and agentic capabilities, it exhibits strong generalization across various agent scenarios.",
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 6000,
+          "outputPerM": 36000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3.5-plus",
+      "name": "Qwen3.5-Plus",
+      "display_name": "Qwen3.5-Plus",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 64000
+      },
+      "metadata": {
+        "description": "The Qwen3.5 native vision-language series Plus models are based on a hybrid architecture design that integrates linear attention mechanisms with sparse Mixture-of-Experts (MoE), achieving higher inference efficiency. Across various task evaluations, the 3.5 series demonstrates exceptional performance comparable to current top-tier frontier models, marking a leap forward in both plain text and multimodal capabilities compared to the 3 series.",
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 0,
+          "outputPerM": 0
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "inclusionai/ring-2.6-1t",
+      "name": "Ring-2.6-1T",
+      "display_name": "Ring-2.6-1T",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
+      "metadata": {
+        "endpoints": [
+          "chat/completions"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 3000,
+          "outputPerM": 25000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
     },
     {
       "id": "sao10k/l3-8b-lunaris",
@@ -5594,6 +7415,92 @@
         "pricing": {
           "inputPerM": 1000,
           "outputPerM": 3000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "xiaomimimo/mimo-v2-pro",
+      "name": "XiaomiMiMo/MiMo-V2-Pro",
+      "display_name": "XiaomiMiMo/MiMo-V2-Pro",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "metadata": {
+        "description": "Xiaomi’s MiMo-V2-Pro is a flagship, >1T parameter foundation model with a 1M context window, specifically optimized for advanced agentic workflows. Highly compatible with frameworks like OpenClaw, it secures top-tier global rankings on PinchBench and ClawBench, with a perceived capability approaching Opus 4.6. Built to act as the cognitive core of intelligent systems, MiMo-V2-Pro seamlessly orchestrates complex tasks, drives engineering automation, and consistently delivers dependable real-world outcomes.",
+        "endpoints": [
+          "completion",
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 20000,
+          "outputPerM": 60000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "xiaomimimo/mimo-v2.5-pro",
+      "name": "XiaomiMiMo/MiMo-V2.5-Pro",
+      "display_name": "XiaomiMiMo/MiMo-V2.5-Pro",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "metadata": {
+        "description": "MiMo-V2.5-Pro is purpose-built to push the boundaries of complex software engineering and extreme long-horizon tasks. Compared to its predecessor, it achieves a comprehensive leap in general agentic capabilities, advancing the human-AI collaboration paradigm toward true \"autonomous delivery.\" Without human intervention, it stably orchestrates massive workflows requiring up to a thousand tool calls in a single session, not only precisely capturing implicit requirements within ultra-long contexts but also demonstrating exceptional global architectural planning and self-correction discipline. In core agentic scenarios and long-horizon complexities, MiMo-V2.5-Pro is fully equipped to go head-to-head with top-tier global models like Claude Opus 4.6 and GPT-5.4. Backed by this exceptionally high execution confidence and long-term logical consistency, it completely sheds the \"co-pilot\" label, ready to take on truly serious, professional-grade workloads in real-world business environments.",
+        "endpoints": [
+          "completion",
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 20000,
+          "outputPerM": 60000
         },
         "source": "public-provider-conf"
       },

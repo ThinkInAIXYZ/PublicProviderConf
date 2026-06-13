@@ -1,0 +1,1107 @@
+{
+  "updatedAt": "2026-04-24T00:00:00.000Z",
+  "maxModels": 30,
+  "provider": {
+    "id": "custom-provider",
+    "name": "custom provider",
+    "description": "Generated first-tier fallback catalog combining official high-signal chat, coding, reasoning, and frontier model metadata.",
+    "doc": "docs/custom-provider.md",
+    "tags": ["fallback", "official", "generated", "chat", "coding", "reasoning"],
+    "metadata": {
+      "catalogKind": "generated-fallback",
+      "fallbackPriority": "before-aihubmix",
+      "sourcePolicy": "official-api-plus-official-doc-derived-seeds"
+    }
+  },
+  "sources": [
+    {
+      "id": "openai",
+      "displayName": "OpenAI",
+      "apiUrl": "https://api.openai.com/v1/models",
+      "apiKeyEnv": "OPENAI_API_KEY",
+      "docs": [
+        "https://developers.openai.com/api/docs/models",
+        "https://developers.openai.com/api/docs/models/gpt-5.4",
+        "https://developers.openai.com/api/docs/models/gpt-5.3-codex"
+      ],
+      "models": [
+        {
+          "id": "gpt-5.5",
+          "name": "GPT-5.5",
+          "family": "gpt",
+          "contextLength": 1050000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "lastUpdated": "2026-04-24",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "medium",
+              "effort_options": ["low", "medium", "high", "xhigh"],
+              "verbosity": "medium",
+              "verbosity_options": ["low", "medium", "high"],
+              "visibility": "hidden"
+            }
+          },
+          "metadata": {
+            "selection": ["frontier", "coding", "reasoning", "provisional"],
+            "lifecycle": "api-coming-soon",
+            "apiStatus": "coming-soon",
+            "availability": ["chatgpt", "codex"],
+            "seedBasis": "gpt-5.4-api-baseline",
+            "notes": [
+              "Official OpenAI models page lists GPT-5.5 as available in ChatGPT and Codex with API availability coming soon.",
+              "Context, output, modalities, and tool metadata are provisional until stable API model documentation is published."
+            ]
+          },
+          "selectionRank": 1
+        },
+        {
+          "id": "gpt-5.4",
+          "name": "GPT-5.4",
+          "family": "gpt",
+          "contextLength": 1050000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": false },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-08-31",
+          "releaseDate": "2026-03-05",
+          "lastUpdated": "2026-03-05",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 2.5, "output": 15, "cacheRead": 0.25 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": false,
+              "mode": "effort",
+              "effort": "none",
+              "effort_options": ["none", "low", "medium", "high", "xhigh"],
+              "verbosity": "medium",
+              "verbosity_options": ["low", "medium", "high"],
+              "visibility": "hidden"
+            }
+          },
+          "metadata": { "selection": ["frontier", "coding", "reasoning"], "lifecycle": "active" },
+          "selectionRank": 2
+        },
+        {
+          "id": "gpt-5.4-pro",
+          "name": "GPT-5.4 Pro",
+          "family": "gpt-pro",
+          "contextLength": 1050000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": false,
+          "knowledge": "2025-08-31",
+          "releaseDate": "2026-03-05",
+          "lastUpdated": "2026-03-05",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 30, "output": 180 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "high",
+              "effort_options": ["medium", "high", "xhigh"],
+              "verbosity": "medium",
+              "verbosity_options": ["low", "medium", "high"],
+              "visibility": "hidden"
+            }
+          },
+          "metadata": { "selection": ["sota", "frontier", "reasoning"], "lifecycle": "active" },
+          "selectionRank": 3
+        },
+        {
+          "id": "gpt-5.4-mini",
+          "name": "GPT-5.4 Mini",
+          "family": "gpt",
+          "contextLength": 400000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": false },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-08-31",
+          "releaseDate": "2026-03-05",
+          "lastUpdated": "2026-03-05",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 0.75, "output": 4.5, "cacheRead": 0.075 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": false,
+              "mode": "effort",
+              "effort": "none",
+              "effort_options": ["none", "low", "medium", "high", "xhigh"],
+              "verbosity": "medium",
+              "verbosity_options": ["low", "medium", "high"],
+              "visibility": "hidden"
+            }
+          },
+          "metadata": { "selection": ["fast", "coding", "cost-efficient"], "lifecycle": "active" },
+          "selectionRank": 4
+        },
+        {
+          "id": "gpt-5.4-nano",
+          "name": "GPT-5.4 Nano",
+          "family": "gpt",
+          "contextLength": 400000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": false },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-08-31",
+          "releaseDate": "2026-03-05",
+          "lastUpdated": "2026-03-05",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 0.2, "output": 1.25, "cacheRead": 0.02 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": false,
+              "mode": "effort",
+              "effort": "none",
+              "effort_options": ["none", "low", "medium", "high", "xhigh"],
+              "verbosity": "medium",
+              "verbosity_options": ["low", "medium", "high"],
+              "visibility": "hidden"
+            }
+          },
+          "metadata": { "selection": ["small", "cost-efficient", "fallback"], "lifecycle": "active" },
+          "selectionRank": 5
+        },
+        {
+          "id": "gpt-5.3-codex",
+          "name": "GPT-5.3 Codex",
+          "family": "gpt-codex",
+          "contextLength": 400000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-08-31",
+          "releaseDate": "2026-02-05",
+          "lastUpdated": "2026-02-05",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 1.75, "output": 14, "cacheRead": 0.175 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "medium",
+              "effort_options": ["low", "medium", "high", "xhigh"],
+              "verbosity": "medium",
+              "verbosity_options": ["low", "medium", "high"],
+              "visibility": "hidden"
+            }
+          },
+          "metadata": { "selection": ["coding", "agentic", "reasoning"], "lifecycle": "active" },
+          "selectionRank": 6
+        }
+      ]
+    },
+    {
+      "id": "anthropic",
+      "displayName": "Anthropic",
+      "apiUrl": "https://api.anthropic.com/v1/models",
+      "apiKeyEnv": "ANTHROPIC_API_KEY",
+      "docs": [
+        "https://platform.claude.com/docs/en/about-claude/models/overview",
+        "https://docs.anthropic.com/en/api/models-list"
+      ],
+      "models": [
+        {
+          "id": "claude-opus-4-7",
+          "name": "Claude Opus 4.7",
+          "family": "claude-opus",
+          "contextLength": 1000000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": false },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": false,
+          "knowledge": "2026-01-31",
+          "releaseDate": "2026-04-16",
+          "lastUpdated": "2026-04-16",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 5, "output": 25, "cacheRead": 0.5, "cacheWrite": 6.25 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": false,
+              "mode": "effort",
+              "effort": "high",
+              "effort_options": ["low", "medium", "high", "xhigh", "max"],
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "omitted",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["sota", "agentic-coding", "reasoning"], "lifecycle": "active" },
+          "selectionRank": 1
+        },
+        {
+          "id": "claude-sonnet-4-6",
+          "name": "Claude Sonnet 4.6",
+          "family": "claude-sonnet",
+          "contextLength": 1000000,
+          "maxTokens": 64000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": false },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": false,
+          "knowledge": "2025-08-31",
+          "releaseDate": "2026-02-17",
+          "lastUpdated": "2026-03-13",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 3, "output": 15, "cacheRead": 0.3, "cacheWrite": 3.75 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": false,
+              "mode": "mixed",
+              "budget": { "min": 1024, "unit": "tokens" },
+              "effort": "medium",
+              "effort_options": ["low", "medium", "high", "max"],
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["balanced", "coding", "reasoning"], "lifecycle": "active" },
+          "selectionRank": 2
+        },
+        {
+          "id": "claude-haiku-4-5",
+          "name": "Claude Haiku 4.5",
+          "family": "claude-haiku",
+          "contextLength": 200000,
+          "maxTokens": 64000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": false },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": false,
+          "knowledge": "2025-02-28",
+          "releaseDate": "2025-10-15",
+          "lastUpdated": "2025-10-15",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 1, "output": 5, "cacheRead": 0.1, "cacheWrite": 1.25 },
+          "extraCapabilities": { "reasoning": { "supported": true } },
+          "metadata": {
+            "selection": ["fast", "near-frontier", "cost-efficient"],
+            "lifecycle": "active",
+            "snapshotId": "claude-haiku-4-5-20251001"
+          },
+          "selectionRank": 3
+        }
+      ]
+    },
+    {
+      "id": "gemini",
+      "displayName": "Gemini",
+      "apiUrl": "https://generativelanguage.googleapis.com/v1beta/models",
+      "apiKeyEnv": "GEMINI_API_KEY",
+      "docs": [
+        "https://ai.google.dev/gemini-api/docs/models",
+        "https://ai.google.dev/gemini-api/docs/gemini-3"
+      ],
+      "models": [
+        {
+          "id": "gemini-3.1-pro-preview",
+          "name": "Gemini 3.1 Pro Preview",
+          "family": "gemini-pro",
+          "contextLength": 1048576,
+          "maxTokens": 65536,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-01",
+          "releaseDate": "2026-02-19",
+          "lastUpdated": "2026-02-19",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "video", "audio", "pdf"], "output": ["text"] },
+          "cost": { "input": 2, "output": 12, "cacheRead": 0.2 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "level",
+              "level": "high",
+              "level_options": ["low", "high"],
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thought_signatures"]
+            }
+          },
+          "metadata": { "selection": ["frontier", "multimodal", "coding"], "lifecycle": "preview" },
+          "selectionRank": 1
+        },
+        {
+          "id": "gemini-3.1-pro-preview-customtools",
+          "name": "Gemini 3.1 Pro Preview Custom Tools",
+          "family": "gemini-pro",
+          "contextLength": 1048576,
+          "maxTokens": 65536,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-01",
+          "releaseDate": "2026-02-19",
+          "lastUpdated": "2026-02-19",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "video", "audio", "pdf"], "output": ["text"] },
+          "cost": { "input": 2, "output": 12, "cacheRead": 0.2 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "level",
+              "level": "high",
+              "level_options": ["low", "high"],
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thought_signatures"]
+            }
+          },
+          "metadata": { "selection": ["custom-tools", "frontier", "agentic"], "lifecycle": "preview" },
+          "selectionRank": 2
+        },
+        {
+          "id": "gemini-3-flash-preview",
+          "name": "Gemini 3 Flash Preview",
+          "family": "gemini-flash",
+          "contextLength": 1048576,
+          "maxTokens": 65536,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-01",
+          "releaseDate": "2025-12-17",
+          "lastUpdated": "2025-12-17",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "video", "audio", "pdf"], "output": ["text"] },
+          "cost": { "input": 0.5, "output": 3, "cacheRead": 0.05 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "level",
+              "level": "high",
+              "level_options": ["minimal", "low", "medium", "high"],
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thought_signatures"]
+            }
+          },
+          "metadata": { "selection": ["fast", "multimodal", "reasoning"], "lifecycle": "preview" },
+          "selectionRank": 3
+        },
+        {
+          "id": "gemini-3.1-flash-lite-preview",
+          "name": "Gemini 3.1 Flash-Lite Preview",
+          "family": "gemini-flash-lite",
+          "contextLength": 1048576,
+          "maxTokens": 65536,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-01",
+          "releaseDate": "2026-02-19",
+          "lastUpdated": "2026-02-19",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "video", "audio", "pdf"], "output": ["text"] },
+          "cost": { "input": 0.15, "output": 0.6, "cacheRead": 0.015 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "level",
+              "level": "medium",
+              "level_options": ["minimal", "low", "medium", "high"],
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thought_signatures"]
+            }
+          },
+          "metadata": { "selection": ["fast", "cost-efficient", "multimodal"], "lifecycle": "preview" },
+          "selectionRank": 4
+        },
+        {
+          "id": "gemini-2.5-pro",
+          "name": "Gemini 2.5 Pro",
+          "family": "gemini-pro",
+          "contextLength": 1048576,
+          "maxTokens": 65536,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true, "budget": { "min": 128, "max": 32768, "default": -1 } },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-01",
+          "releaseDate": "2025-03-20",
+          "lastUpdated": "2025-06-05",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "video", "audio", "pdf"], "output": ["text"] },
+          "cost": { "input": 1.25, "output": 10, "cacheRead": 0.125 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "budget",
+              "budget": { "min": 128, "max": 32768, "default": -1, "auto": -1, "unit": "tokens" },
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thought_signatures"]
+            }
+          },
+          "metadata": { "selection": ["stable", "deep-reasoning", "coding"], "lifecycle": "active" },
+          "selectionRank": 5
+        }
+      ]
+    },
+    {
+      "id": "kimi",
+      "displayName": "Kimi",
+      "apiUrl": "https://api.moonshot.ai/v1/models",
+      "apiKeyEnv": "MOONSHOT_API_KEY",
+      "docs": [
+        "https://platform.moonshot.ai/",
+        "https://platform.kimi.ai/docs/pricing/chat",
+        "https://platform.moonshot.ai/docs/guide/use-kimi-k2-thinking-model.en-US"
+      ],
+      "models": [
+        {
+          "id": "kimi-k2.7-code",
+          "name": "Kimi K2.7 Code",
+          "family": "kimi-k2.7-code",
+          "contextLength": 262144,
+          "maxTokens": 262144,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-01",
+          "releaseDate": "2026-04-21",
+          "lastUpdated": "2026-04-21",
+          "openWeights": true,
+          "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
+          "cost": { "input": 0.95, "output": 4, "cacheRead": 0.16 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "fixed",
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["latest", "coding", "agentic"], "lifecycle": "active" },
+          "selectionRank": 1
+        },
+        {
+          "id": "kimi-k2.6",
+          "name": "Kimi K2.6",
+          "family": "kimi-k2.6",
+          "contextLength": 262144,
+          "maxTokens": 262144,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-01",
+          "releaseDate": "2026-04-21",
+          "lastUpdated": "2026-04-21",
+          "openWeights": true,
+          "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
+          "cost": { "input": 0.95, "output": 4, "cacheRead": 0.16 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["latest", "coding", "agentic"], "lifecycle": "active" },
+          "selectionRank": 2
+        },
+        {
+          "id": "kimi-k2.5",
+          "name": "Kimi K2.5",
+          "family": "kimi-k2.5",
+          "contextLength": 262144,
+          "maxTokens": 262144,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-01",
+          "releaseDate": "2026-01-27",
+          "lastUpdated": "2026-01-27",
+          "openWeights": true,
+          "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
+          "cost": { "input": 0.6, "output": 3, "cacheRead": 0.1 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["multimodal", "reasoning", "coding"], "lifecycle": "active" },
+          "selectionRank": 3
+        },
+        {
+          "id": "kimi-k2-thinking",
+          "name": "Kimi K2 Thinking",
+          "family": "kimi-thinking",
+          "contextLength": 262144,
+          "maxTokens": 262144,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": false,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2024-08",
+          "releaseDate": "2025-11-06",
+          "lastUpdated": "2025-11-06",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 0.6, "output": 2.5, "cacheRead": 0.15 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["deep-reasoning", "multi-step-tools"], "lifecycle": "active" },
+          "selectionRank": 4
+        },
+        {
+          "id": "kimi-k2-thinking-turbo",
+          "name": "Kimi K2 Thinking Turbo",
+          "family": "kimi-thinking",
+          "contextLength": 262144,
+          "maxTokens": 262144,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": false,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2024-08",
+          "releaseDate": "2025-11-06",
+          "lastUpdated": "2025-11-06",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 1.15, "output": 8, "cacheRead": 0.15 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["deep-reasoning", "fast"], "lifecycle": "active" },
+          "selectionRank": 5
+        }
+      ]
+    },
+    {
+      "id": "deepseek",
+      "displayName": "DeepSeek",
+      "apiUrl": "https://api.deepseek.com/models",
+      "apiKeyEnv": "DEEPSEEK_API_KEY",
+      "docs": [
+        "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "https://api-docs.deepseek.com/zh-cn/api/create-chat-completion",
+        "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode"
+      ],
+      "models": [
+        {
+          "id": "deepseek-v4-flash",
+          "name": "DeepSeek V4 Flash",
+          "family": "deepseek",
+          "contextLength": 1048576,
+          "maxTokens": 393216,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "lastUpdated": "2026-04-24",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 0.14, "output": 0.28, "cacheRead": 0.028 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "high",
+              "effort_options": ["high", "max"],
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"],
+              "notes": [
+                "Thinking mode is controlled through the thinking parameter; non-thinking mode disables reasoning."
+              ]
+            }
+          },
+          "metadata": { "selection": ["latest", "cost-efficient", "long-context"], "lifecycle": "active" },
+          "selectionRank": 1
+        },
+        {
+          "id": "deepseek-v4-pro",
+          "name": "DeepSeek V4 Pro",
+          "family": "deepseek",
+          "contextLength": 1048576,
+          "maxTokens": 393216,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "lastUpdated": "2026-04-24",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 1.74, "output": 3.48, "cacheRead": 0.145 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "high",
+              "effort_options": ["high", "max"],
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"],
+              "notes": [
+                "Thinking mode is controlled through the thinking parameter; non-thinking mode disables reasoning."
+              ]
+            }
+          },
+          "metadata": { "selection": ["latest", "frontier", "long-context"], "lifecycle": "active" },
+          "selectionRank": 2
+        },
+        {
+          "id": "deepseek-chat",
+          "name": "DeepSeek Chat",
+          "family": "deepseek",
+          "contextLength": 1048576,
+          "maxTokens": 393216,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": false },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "releaseDate": "2024-12-26",
+          "lastUpdated": "2026-04-24",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 0.14, "output": 0.28, "cacheRead": 0.028 },
+          "metadata": {
+            "selection": ["chat", "coding", "compatibility"],
+            "lifecycle": "compatibility",
+            "aliasOf": "deepseek-v4-flash",
+            "mode": "non-thinking"
+          },
+          "selectionRank": 3
+        },
+        {
+          "id": "deepseek-reasoner",
+          "name": "DeepSeek Reasoner",
+          "family": "deepseek-thinking",
+          "contextLength": 1048576,
+          "maxTokens": 393216,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "releaseDate": "2025-01-20",
+          "lastUpdated": "2026-04-24",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 0.14, "output": 0.28, "cacheRead": 0.028 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "high",
+              "effort_options": ["high", "max"],
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"],
+              "notes": [
+                "Compatibility alias for deepseek-v4-flash thinking mode."
+              ]
+            }
+          },
+          "metadata": {
+            "selection": ["reasoning", "tool-use", "compatibility"],
+            "lifecycle": "compatibility",
+            "aliasOf": "deepseek-v4-flash",
+            "mode": "thinking"
+          },
+          "selectionRank": 4
+        }
+      ]
+    },
+    {
+      "id": "zhipu",
+      "displayName": "Zhipu",
+      "docs": [
+        "https://docs.z.ai/guides/llm/glm-5.1",
+        "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "https://docs.bigmodel.cn/cn/guide/capabilities/thinking"
+      ],
+      "models": [
+        {
+          "id": "glm-5.1",
+          "name": "GLM-5.1",
+          "family": "glm",
+          "contextLength": 200000,
+          "maxTokens": 131072,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": false,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "releaseDate": "2026-03-27",
+          "lastUpdated": "2026-03-27",
+          "openWeights": false,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 6, "output": 24, "cacheRead": 1.3, "cacheWrite": 0 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["latest", "coding", "long-horizon"], "lifecycle": "active" },
+          "selectionRank": 1
+        },
+        {
+          "id": "glm-5",
+          "name": "GLM-5",
+          "family": "glm",
+          "contextLength": 200000,
+          "maxTokens": 131072,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": false,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "releaseDate": "2026-02-11",
+          "lastUpdated": "2026-02-11",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 1, "output": 3.2, "cacheRead": 0.2, "cacheWrite": 0 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["coding", "agentic", "reasoning"], "lifecycle": "active" },
+          "selectionRank": 2
+        },
+        {
+          "id": "glm-5v-turbo",
+          "name": "GLM-5V-Turbo",
+          "family": "glm",
+          "contextLength": 204800,
+          "maxTokens": 131072,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "releaseDate": "2026-04-01",
+          "lastUpdated": "2026-04-01",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "video", "pdf"], "output": ["text"] },
+          "cost": { "input": 5, "output": 22, "cacheRead": 1.2, "cacheWrite": 0 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["vision", "coding", "reasoning"], "lifecycle": "active" },
+          "selectionRank": 3
+        },
+        {
+          "id": "glm-4.7",
+          "name": "GLM-4.7",
+          "family": "glm",
+          "contextLength": 204800,
+          "maxTokens": 131072,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": false,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "knowledge": "2025-04",
+          "releaseDate": "2025-12-22",
+          "lastUpdated": "2025-12-22",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 0.6, "output": 2.2, "cacheRead": 0.11, "cacheWrite": 0 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": { "selection": ["open-weight", "coding", "reasoning"], "lifecycle": "active" },
+          "selectionRank": 4
+        }
+      ]
+    },
+    {
+      "id": "minimax",
+      "displayName": "MiniMax",
+      "docs": [
+        "https://platform.minimax.io/docs/guides/models-intro",
+        "https://platform.minimax.io/docs/api-reference/api-overview",
+        "https://platform.minimax.io/docs/guides/text-ai-coding-tools"
+      ],
+      "models": [
+        {
+          "id": "MiniMax-M2.7",
+          "name": "MiniMax-M2.7",
+          "family": "minimax",
+          "contextLength": 204800,
+          "maxTokens": 131072,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": false,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": false,
+          "releaseDate": "2026-03-18",
+          "lastUpdated": "2026-03-18",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 0.3, "output": 1.2, "cacheRead": 0.06, "cacheWrite": 0.375 },
+          "extraCapabilities": { "reasoning": { "supported": true, "default_enabled": true } },
+          "metadata": { "selection": ["latest", "coding", "agentic"], "lifecycle": "active" },
+          "selectionRank": 1
+        },
+        {
+          "id": "MiniMax-M2.7-highspeed",
+          "name": "MiniMax-M2.7-highspeed",
+          "family": "minimax",
+          "contextLength": 204800,
+          "maxTokens": 131072,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": false,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": false,
+          "releaseDate": "2026-03-18",
+          "lastUpdated": "2026-03-18",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 0.6, "output": 2.4, "cacheRead": 0.06, "cacheWrite": 0.375 },
+          "extraCapabilities": { "reasoning": { "supported": true, "default_enabled": true } },
+          "metadata": { "selection": ["latest", "fast", "coding"], "lifecycle": "active" },
+          "selectionRank": 2
+        },
+        {
+          "id": "MiniMax-M2.5",
+          "name": "MiniMax-M2.5",
+          "family": "minimax",
+          "contextLength": 204800,
+          "maxTokens": 131072,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": false,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": false,
+          "releaseDate": "2026-02-12",
+          "lastUpdated": "2026-02-12",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 0.3, "output": 1.2, "cacheRead": 0.03, "cacheWrite": 0.375 },
+          "extraCapabilities": { "reasoning": { "supported": true, "default_enabled": true } },
+          "metadata": { "selection": ["coding", "value", "tool-use"], "lifecycle": "active" },
+          "selectionRank": 3
+        },
+        {
+          "id": "MiniMax-M2.5-highspeed",
+          "name": "MiniMax-M2.5-highspeed",
+          "family": "minimax",
+          "contextLength": 204800,
+          "maxTokens": 131072,
+          "vision": false,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": false,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": false,
+          "releaseDate": "2026-02-13",
+          "lastUpdated": "2026-02-13",
+          "openWeights": true,
+          "modalities": { "input": ["text"], "output": ["text"] },
+          "cost": { "input": 0.6, "output": 2.4, "cacheRead": 0.06, "cacheWrite": 0.375 },
+          "extraCapabilities": { "reasoning": { "supported": true, "default_enabled": true } },
+          "metadata": { "selection": ["fast", "coding", "tool-use"], "lifecycle": "active" },
+          "selectionRank": 4
+        }
+      ]
+    }
+  ]
+}

@@ -47,6 +47,15 @@ function withGpt5TextVerbosity(profile: OpenAIReasoningProfile): OpenAIReasoning
 
 const OPENAI_REASONING_RULES: OpenAIReasoningRule[] = [
   {
+    matches: (_baseId, portableBaseId) => isPortableExactOrSnapshot(portableBaseId, 'gpt-5-5'),
+    profile: withGpt5TextVerbosity({
+      defaultEnabled: true,
+      mode: 'effort',
+      effort: 'medium',
+      effortOptions: ['low', 'medium', 'high', 'xhigh'],
+    }),
+  },
+  {
     matches: (_baseId, portableBaseId) => isPortableExactOrSnapshot(portableBaseId, 'gpt-5-pro'),
     profile: withGpt5TextVerbosity({
       defaultEnabled: true,

@@ -134,15 +134,129 @@ function isGeminiAudioVariant(baseId: string): boolean {
   return baseId.includes('tts') || baseId.includes('audio');
 }
 
+function normalizeFreeSuffix(baseId: string): string {
+  return baseId.replace(/(?::free|-free)$/i, '');
+}
+
+function isQwenExcludedVariant(baseId: string): boolean {
+  return (
+    baseId.includes('instruct-2507') ||
+    baseId.includes('-instruct') ||
+    baseId.includes('qwen3-coder') ||
+    baseId.includes('embedding') ||
+    baseId.includes('reranker') ||
+    baseId.includes('asr') ||
+    baseId.includes('livetranslate') ||
+    baseId.includes('realtime') ||
+    baseId.includes('captioner')
+  );
+}
+
+function getQwenSnapshotDate(baseId: string, family: string): number | undefined {
+  const match = baseId.match(new RegExp(`^${family}-(\\d{4})-(\\d{2})-(\\d{2})$`));
+  if (!match) {
+    return undefined;
+  }
+
+  return Number(`${match[1]}${match[2]}${match[3]}`);
+}
+
+function matchesQwenCommercialReasoningBase(baseId: string): boolean {
+  const commercialFamilies = ['qwen-plus', 'qwen-flash', 'qwen-turbo'];
+  const firstReasoningSnapshot = 20250428;
+
+  for (const family of commercialFamilies) {
+    if (baseId === family || baseId === `${family}-latest`) {
+      return true;
+    }
+
+    const snapshotDate = getQwenSnapshotDate(baseId, family);
+    if (snapshotDate !== undefined) {
+      return snapshotDate >= firstReasoningSnapshot;
+    }
+  }
+
+  return false;
+}
+
+function matchesQwen35ReasoningBase(baseId: string): boolean {
+  return (
+    baseId.startsWith('qwen3.5-plus') ||
+    baseId.startsWith('qwen3.5-flash') ||
+    /^qwen3\.5-\d+b(?:-[a-z]\d+b)?(?:-|$)/.test(baseId)
+  );
+}
+
+function matchesQwen3MaxReasoningBase(baseId: string): boolean {
+  if (baseId === 'qwen3-max' || baseId === 'qwen3-max-preview') {
+    return true;
+  }
+
+  if (baseId.startsWith('qwen3-max') && baseId.includes('thinking')) {
+    return true;
+  }
+
+  const snapshotDate = getQwenSnapshotDate(baseId, 'qwen3-max');
+  return snapshotDate !== undefined && snapshotDate >= 20260123;
+}
+
+function matchesQwen3ReasoningBase(baseId: string): boolean {
+  if (baseId.startsWith('qwen3.6-') || matchesQwen3MaxReasoningBase(baseId)) {
+    return true;
+  }
+
+  if (baseId.startsWith('qwen3-vl-')) {
+    return (
+      baseId.includes('thinking') ||
+      baseId.startsWith('qwen3-vl-plus') ||
+      baseId.startsWith('qwen3-vl-flash') ||
+      /^qwen3-vl-(?:\d+b|235b|30b)-/.test(baseId)
+    );
+  }
+
+  if (baseId.startsWith('qwen3-omni-')) {
+    return baseId.includes('thinking') || baseId.startsWith('qwen3-omni-flash');
+  }
+
+  if (/^qwen3-next-\d+b-[a-z0-9]+-thinking/.test(baseId)) {
+    return true;
+  }
+
+  if (/^qwen3-(?:235b|32b|30b|14b|8b|4b|1\.7b|0\.6b).*-thinking/.test(baseId)) {
+    return true;
+  }
+
+  return /^qwen3-(?:235b-a22b|32b|30b-a3b|14b|8b|4b|1\.7b|0\.6b)$/.test(baseId);
+}
+
+function matchesQwenInterleavedReasoningBase(baseId: string): boolean {
+  const normalizedBaseId = normalizeFreeSuffix(baseId);
+  if (isQwenExcludedVariant(normalizedBaseId)) {
+    return false;
+  }
+
+  return (
+    normalizedBaseId.startsWith('qwq-') ||
+    matchesQwen35ReasoningBase(normalizedBaseId) ||
+    matchesQwen3ReasoningBase(normalizedBaseId) ||
+    matchesQwenCommercialReasoningBase(normalizedBaseId)
+  );
+}
+
 function matchesInterleavedReasoningBase(baseId: string): boolean {
   return (
     baseId === 'deepseek-reasoner' ||
+    baseId === 'deepseek-v4-flash' ||
+    baseId === 'deepseek-v4-pro' ||
     baseId === 'deepseek-r1' ||
     baseId === 'deepseek-r1-0528' ||
     baseId === 'kimi-k2-thinking' ||
     baseId === 'kimi-k2.5' ||
     baseId === 'glm-4.7' ||
-    baseId === 'glm-5'
+    baseId === 'glm-5' ||
+    baseId === 'minimax-m2.7' ||
+    baseId === 'minimax-m2.7-highspeed' ||
+    matchesQwenInterleavedReasoningBase(baseId)
   );
 }
 
@@ -153,19 +267,139 @@ function matchesAnthropicModelVariant(normalizedId: string, pattern: RegExp): bo
 
 const CLAUDE_37_SONNET_PATTERN = /(^|[/:@.-])claude-3[.-]7-sonnet(?=$|[/:@.-])/;
 const CLAUDE_46_PATTERN = /(^|[/:@.-])claude-(?:sonnet|opus)-4[.-]6(?=$|[/:@.-])/;
+const CLAUDE_OPUS_45_PATTERN = /(^|[/:@.-])claude-opus-4[.-]5(?=$|[/:@.-])/;
 const CLAUDE_OPUS_47_PATTERN = /(^|[/:@.-])claude-opus-4[.-]7(?=$|[/:@.-])/;
+const CLAUDE_OPUS_48_PATTERN = /(^|[/:@.-])claude-opus-4[.-]8(?=$|[/:@.-])/;
+const CLAUDE_FABLE_5_PATTERN = /(^|[/:@.-])claude-fable(?:-5|-latest)?(?=$|[/:@.-])/;
+const CLAUDE_MYTHOS_5_PATTERN = /(^|[/:@.-])claude-mythos-5(?=$|[/:@.-])/;
+const CLAUDE_MYTHOS_PREVIEW_PATTERN = /(^|[/:@.-])claude-mythos-preview(?=$|[/:@.-])/;
+const CLAUDE_4_MANUAL_BUDGET_PATTERN =
+  /(^|[/:@.-])claude-(?:opus-4(?:-(?:0|1(?:-\d{8})?|\d{8}))?|sonnet-4(?:-(?:0|5(?:-\d{8})?|\d{8}))?|haiku-4-5(?:-\d{8})?)(?=$|[/:@.-])/;
 const CLAUDE_THINKING_VARIANT_PATTERN = /(^|[/:@.-])claude(?=$|[/:@.-])/;
 const THINKING_SUFFIX_PATTERN = /(^|[/:@.-])think(?:ing)?(?=$|[/:@.-])/;
 
+const CLAUDE_THINKING_BUDGET: ExtraCapabilitiesReasoningBudget = {
+  min: 1024,
+  unit: 'tokens',
+};
+
+const CLAUDE_THINKING_BLOCKS = ['thinking_blocks'];
+const CLAUDE_BASIC_EFFORT_OPTIONS = ['low', 'medium', 'high'];
+const CLAUDE_MAX_EFFORT_OPTIONS = ['low', 'medium', 'high', 'max'];
+const CLAUDE_XHIGH_EFFORT_OPTIONS = ['low', 'medium', 'high', 'xhigh', 'max'];
+
 const CLAUDE_46_NOTES = [
   'Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.',
+  'Anthropic API defaults effort to high; lower effort levels should be chosen per workload.',
 ];
 
-const CLAUDE_OPUS_47_NOTES = [
-  'Claude Opus 4.7 requires thinking.type = "adaptive" to enable thinking explicitly.',
-  'Manual budget_tokens requests return 400 on Claude Opus 4.7.',
+const CLAUDE_ADAPTIVE_ONLY_NOTES = [
+  'Claude Opus 4.7 and newer Opus models require thinking.type = "adaptive" to enable thinking explicitly.',
+  'Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.',
   'task_budget is separate from thinking control and should not be treated as a thinking budget.',
 ];
+
+const CLAUDE_ALWAYS_ON_ADAPTIVE_NOTES = [
+  'Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = "disabled" is rejected.',
+  'Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.',
+  'thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries.',
+];
+
+const CLAUDE_MYTHOS_PREVIEW_NOTES = [
+  'Claude Mythos Preview defaults to adaptive thinking and rejects thinking.type = "disabled".',
+  'Manual budget_tokens remains accepted on Claude Mythos Preview.',
+  'thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries.',
+];
+
+const CLAUDE_OPUS_45_NOTES = [
+  'Claude Opus 4.5 uses manual thinking.type = "enabled" with budget_tokens; effort can be used alongside the thinking budget.',
+  'Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header.',
+];
+
+const CLAUDE_4_MANUAL_BUDGET_NOTES = [
+  'Claude 4 manual thinking uses thinking.type = "enabled" with budget_tokens.',
+  'Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family.',
+];
+
+const CLAUDE_MANUAL_BUDGET_PORTRAIT: ExtraCapabilitiesReasoning = {
+  supported: true,
+  default_enabled: false,
+  mode: 'budget',
+  budget: CLAUDE_THINKING_BUDGET,
+  interleaved: true,
+  summaries: true,
+  visibility: 'summary',
+  continuation: CLAUDE_THINKING_BLOCKS,
+  notes: CLAUDE_4_MANUAL_BUDGET_NOTES,
+};
+
+const CLAUDE_OPUS_45_PORTRAIT: ExtraCapabilitiesReasoning = {
+  supported: true,
+  default_enabled: false,
+  mode: 'mixed',
+  budget: CLAUDE_THINKING_BUDGET,
+  effort: 'high',
+  effort_options: CLAUDE_BASIC_EFFORT_OPTIONS,
+  interleaved: true,
+  summaries: true,
+  visibility: 'summary',
+  continuation: CLAUDE_THINKING_BLOCKS,
+  notes: CLAUDE_OPUS_45_NOTES,
+};
+
+const CLAUDE_46_PORTRAIT: ExtraCapabilitiesReasoning = {
+  supported: true,
+  default_enabled: false,
+  mode: 'mixed',
+  budget: CLAUDE_THINKING_BUDGET,
+  effort: 'high',
+  effort_options: CLAUDE_MAX_EFFORT_OPTIONS,
+  interleaved: true,
+  summaries: true,
+  visibility: 'summary',
+  continuation: CLAUDE_THINKING_BLOCKS,
+  notes: CLAUDE_46_NOTES,
+};
+
+const CLAUDE_ADAPTIVE_ONLY_OPUS_PORTRAIT: ExtraCapabilitiesReasoning = {
+  supported: true,
+  default_enabled: false,
+  mode: 'effort',
+  effort: 'high',
+  effort_options: CLAUDE_XHIGH_EFFORT_OPTIONS,
+  interleaved: true,
+  summaries: true,
+  visibility: 'omitted',
+  continuation: CLAUDE_THINKING_BLOCKS,
+  notes: CLAUDE_ADAPTIVE_ONLY_NOTES,
+};
+
+const CLAUDE_ALWAYS_ON_ADAPTIVE_PORTRAIT: ExtraCapabilitiesReasoning = {
+  supported: true,
+  default_enabled: true,
+  mode: 'effort',
+  effort: 'high',
+  effort_options: CLAUDE_XHIGH_EFFORT_OPTIONS,
+  interleaved: true,
+  summaries: true,
+  visibility: 'omitted',
+  continuation: CLAUDE_THINKING_BLOCKS,
+  notes: CLAUDE_ALWAYS_ON_ADAPTIVE_NOTES,
+};
+
+const CLAUDE_MYTHOS_PREVIEW_PORTRAIT: ExtraCapabilitiesReasoning = {
+  supported: true,
+  default_enabled: true,
+  mode: 'mixed',
+  budget: CLAUDE_THINKING_BUDGET,
+  effort: 'high',
+  effort_options: CLAUDE_MAX_EFFORT_OPTIONS,
+  interleaved: true,
+  summaries: true,
+  visibility: 'omitted',
+  continuation: CLAUDE_THINKING_BLOCKS,
+  notes: CLAUDE_MYTHOS_PREVIEW_NOTES,
+};
 
 const DEFAULT_INTERLEAVED_REASONING_PORTRAIT: ExtraCapabilitiesReasoning = {
   supported: true,
@@ -186,50 +420,43 @@ const REASONING_PORTRAITS: ReasoningPortraitDefinition[] = [
       supported: true,
       default_enabled: false,
       mode: 'budget',
-      budget: {
-        min: 1024,
-        unit: 'tokens',
-      },
+      budget: CLAUDE_THINKING_BUDGET,
       interleaved: false,
       summaries: false,
       visibility: 'full',
-      continuation: ['thinking_blocks'],
+      continuation: CLAUDE_THINKING_BLOCKS,
       notes: ['Anthropic uses thinking budget tokens'],
     },
   },
   {
     matches: normalizedId => matchesAnthropicModelVariant(normalizedId, CLAUDE_46_PATTERN),
-    portrait: {
-      supported: true,
-      default_enabled: false,
-      mode: 'mixed',
-      budget: {
-        min: 1024,
-        unit: 'tokens',
-      },
-      effort: 'medium',
-      effort_options: ['low', 'medium', 'high', 'max'],
-      interleaved: true,
-      summaries: true,
-      visibility: 'summary',
-      continuation: ['thinking_blocks'],
-      notes: CLAUDE_46_NOTES,
-    },
+    portrait: CLAUDE_46_PORTRAIT,
+  },
+  {
+    matches: normalizedId => matchesAnthropicModelVariant(normalizedId, CLAUDE_OPUS_45_PATTERN),
+    portrait: CLAUDE_OPUS_45_PORTRAIT,
   },
   {
     matches: normalizedId => matchesAnthropicModelVariant(normalizedId, CLAUDE_OPUS_47_PATTERN),
-    portrait: {
-      supported: true,
-      default_enabled: false,
-      mode: 'effort',
-      effort: 'high',
-      effort_options: ['low', 'medium', 'high', 'xhigh', 'max'],
-      interleaved: true,
-      summaries: true,
-      visibility: 'omitted',
-      continuation: ['thinking_blocks'],
-      notes: CLAUDE_OPUS_47_NOTES,
-    },
+    portrait: CLAUDE_ADAPTIVE_ONLY_OPUS_PORTRAIT,
+  },
+  {
+    matches: normalizedId => matchesAnthropicModelVariant(normalizedId, CLAUDE_OPUS_48_PATTERN),
+    portrait: CLAUDE_ADAPTIVE_ONLY_OPUS_PORTRAIT,
+  },
+  {
+    matches: normalizedId =>
+      matchesAnthropicModelVariant(normalizedId, CLAUDE_FABLE_5_PATTERN) ||
+      matchesAnthropicModelVariant(normalizedId, CLAUDE_MYTHOS_5_PATTERN),
+    portrait: CLAUDE_ALWAYS_ON_ADAPTIVE_PORTRAIT,
+  },
+  {
+    matches: normalizedId => matchesAnthropicModelVariant(normalizedId, CLAUDE_MYTHOS_PREVIEW_PATTERN),
+    portrait: CLAUDE_MYTHOS_PREVIEW_PORTRAIT,
+  },
+  {
+    matches: normalizedId => matchesAnthropicModelVariant(normalizedId, CLAUDE_4_MANUAL_BUDGET_PATTERN),
+    portrait: CLAUDE_MANUAL_BUDGET_PORTRAIT,
   },
   {
     matches: (_normalizedId, baseId) => baseId.includes('gemini-2.5-pro'),
@@ -403,7 +630,7 @@ function reasoningFromLegacyInterleaved(
   }
 
   const field = typeof interleaved.field === 'string' ? interleaved.field.trim().toLowerCase() : '';
-  if (!field || field === 'reasoning_content') {
+  if (!field || field === 'reasoning_content' || field === 'reasoning_details') {
     return cloneReasoningPortrait(DEFAULT_INTERLEAVED_REASONING_PORTRAIT);
   }
 

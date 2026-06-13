@@ -1,6 +1,15 @@
 import { Provider } from '../providers/Provider';
 import { ProviderInfo, createProviderInfo } from '../models/provider-info';
 
+interface ProviderInfoMetadataProvider {
+  providerLastUpdated?: () => Date;
+  providerDescription?: () => string | undefined;
+  providerApi?: () => string | undefined;
+  providerDoc?: () => string | undefined;
+  providerMetadata?: () => Record<string, unknown> | undefined;
+  providerTags?: () => string[] | undefined;
+}
+
 export class DataFetcher {
   private providers: Provider[];
 
@@ -27,11 +36,21 @@ export class DataFetcher {
       try {
         const models = await provider.fetchModels();
         console.log(`Fetched ${models.length} models from ${provider.providerId()}`);
+
+        const metadataProvider = provider as Provider & ProviderInfoMetadataProvider;
         
         const providerInfo = createProviderInfo(
           provider.providerId(),
           provider.providerName(),
-          models
+          models,
+          {
+            lastUpdated: metadataProvider.providerLastUpdated?.(),
+            description: metadataProvider.providerDescription?.(),
+            api: metadataProvider.providerApi?.(),
+            doc: metadataProvider.providerDoc?.(),
+            metadata: metadataProvider.providerMetadata?.(),
+            tags: metadataProvider.providerTags?.(),
+          },
         );
         
         results.push(providerInfo);

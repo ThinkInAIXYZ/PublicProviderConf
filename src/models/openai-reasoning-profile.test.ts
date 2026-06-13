@@ -28,6 +28,15 @@ function assertProfile(
 }
 
 test('matches GPT-5 family effort ladders', () => {
+  assertProfile('openai/gpt-5.5', {
+    defaultEnabled: true,
+    mode: 'effort',
+    effort: 'medium',
+    effortOptions: ['low', 'medium', 'high', 'xhigh'],
+    verbosity: 'medium',
+    verbosityOptions: ['low', 'medium', 'high'],
+  });
+
   assertProfile('openai/gpt-5', {
     defaultEnabled: true,
     mode: 'effort',

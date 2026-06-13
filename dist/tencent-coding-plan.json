@@ -6,9 +6,58 @@
   "display_name": "Tencent Coding Plan (China)",
   "models": [
     {
+      "id": "minimax-m2.5",
+      "name": "MiniMax-M2.5",
+      "family": "minimax",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-02-12",
+      "last_updated": "2026-02-12",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 204800,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0,
+        "cache_write": 0
+      },
+      "display_name": "MiniMax-M2.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
       "id": "kimi-k2.5",
       "name": "Kimi-K2.5",
-      "family": "kimi",
+      "family": "kimi-k2",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -33,66 +82,17 @@
         ]
       },
       "open_weights": true,
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0,
-        "cache_write": 0
-      },
       "limit": {
         "context": 262144,
         "output": 32768
       },
-      "display_name": "Kimi-K2.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "glm-5",
-      "name": "GLM-5",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-02-11",
-      "last_updated": "2026-02-11",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
       "cost": {
         "input": 0,
         "output": 0,
         "cache_read": 0,
         "cache_write": 0
       },
-      "limit": {
-        "context": 202752,
-        "output": 16384
-      },
-      "display_name": "GLM-5",
+      "display_name": "Kimi-K2.5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -127,15 +127,15 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
       "cost": {
         "input": 0,
         "output": 0,
         "cache_read": 0,
         "cache_write": 0
-      },
-      "limit": {
-        "context": 131072,
-        "output": 16384
       },
       "display_name": "Hunyuan-TurboS",
       "type": "chat"
@@ -165,17 +165,100 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
       "cost": {
         "input": 0,
         "output": 0,
         "cache_read": 0,
         "cache_write": 0
       },
+      "display_name": "Hunyuan-T1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tc-code-latest",
+      "name": "Auto",
+      "family": "auto",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-03-08",
+      "last_updated": "2026-03-08",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
       "limit": {
         "context": 131072,
         "output": 16384
       },
-      "display_name": "Hunyuan-T1",
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0,
+        "cache_write": 0
+      },
+      "display_name": "Auto",
+      "type": "chat"
+    },
+    {
+      "id": "glm-5",
+      "name": "GLM-5",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-02-11",
+      "last_updated": "2026-02-11",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 202752,
+        "output": 16384
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0,
+        "cache_write": 0
+      },
+      "display_name": "GLM-5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -210,100 +293,17 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
       "cost": {
         "input": 0,
         "output": 0,
         "cache_read": 0,
         "cache_write": 0
-      },
-      "limit": {
-        "context": 131072,
-        "output": 16384
       },
       "display_name": "Tencent HY 2.0 Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "minimax-m2.5",
-      "name": "MiniMax-M2.5",
-      "family": "minimax",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-02-12",
-      "last_updated": "2026-02-12",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0,
-        "cache_write": 0
-      },
-      "limit": {
-        "context": 204800,
-        "output": 32768
-      },
-      "display_name": "MiniMax-M2.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "tc-code-latest",
-      "name": "Auto",
-      "family": "auto",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-03-08",
-      "last_updated": "2026-03-08",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0,
-        "cache_write": 0
-      },
-      "limit": {
-        "context": 131072,
-        "output": 16384
-      },
-      "display_name": "Auto",
       "type": "chat"
     },
     {
@@ -331,15 +331,15 @@
         ]
       },
       "open_weights": false,
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
       "cost": {
         "input": 0,
         "output": 0,
         "cache_read": 0,
         "cache_write": 0
-      },
-      "limit": {
-        "context": 131072,
-        "output": 16384
       },
       "display_name": "Tencent HY 2.0 Think",
       "type": "chat",

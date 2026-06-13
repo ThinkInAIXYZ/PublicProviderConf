@@ -184,6 +184,7 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
     reasoning,
     temperature: model.temperature,
     tool_call: toolCall,
+    structured_output: model.structuredOutput,
     knowledge: model.knowledge,
     release_date: model.releaseDate,
     last_updated: model.lastUpdated,

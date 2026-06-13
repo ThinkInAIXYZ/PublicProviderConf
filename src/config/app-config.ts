@@ -59,6 +59,13 @@ export function getDefaultConfig(): AppConfig {
     30
   );
 
+  providers['custom-provider'] = createProviderConfig(
+    'manual-templates/custom-provider-overrides.json',
+    undefined,
+    5,
+    30
+  );
+
   providers['aihubmix'] = createProviderConfig(
     'https://aihubmix.com/api/v1/models',
     undefined,

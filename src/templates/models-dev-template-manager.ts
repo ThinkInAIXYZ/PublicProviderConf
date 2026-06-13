@@ -145,7 +145,10 @@ function cloneModel(model: ModelsDevModel): ModelsDevModelRecord {
   return cloned;
 }
 
-function mergeModels(base: ModelsDevModel[] = [], override: ModelsDevModel[] = []): ModelsDevModel[] {
+function mergeModels(
+  base: ModelsDevModel[] = [],
+  override: ModelsDevModel[] = [],
+): ModelsDevModel[] {
   if (!override.length) {
     return base.slice();
   }
@@ -278,6 +281,9 @@ export class ModelsDevTemplateManager {
 
       for (const entry of entries) {
         if (!entry.isFile() || !entry.name.endsWith('.json')) {
+          continue;
+        }
+        if (entry.name.endsWith('-overrides.json')) {
           continue;
         }
 
