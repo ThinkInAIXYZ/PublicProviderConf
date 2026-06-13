@@ -33,6 +33,7 @@ const MODELS_DEV_ONLY_PROVIDERS = new Set([
 ]);
 
 const LIVE_PROVIDER_OVERRIDES = new Map<string, string>([
+  ['custom-provider', 'custom provider'],
   ['openrouter', 'OpenRouter'],
   ['jiekou', 'Jiekou'],
   ['aihubmix', 'AIHubMix'],
@@ -57,6 +58,9 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
 
       case 'tokenflux':
         return new providers.TokenfluxProvider(config.apiUrl);
+
+      case 'custom-provider':
+        return new providers.CustomProvider();
 
       case 'openrouter':
         return new providers.OpenRouterProvider(config.apiUrl);

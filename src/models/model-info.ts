@@ -43,6 +43,7 @@ export interface ModelInfo {
   attachment?: boolean;
   temperature?: boolean;
   toolCall?: boolean;
+  structuredOutput?: boolean;
   knowledge?: string;
   releaseDate?: string;
   lastUpdated?: string;
