@@ -2,7 +2,7 @@
   "id": "jiekou",
   "name": "Jiekou",
   "display_name": "Jiekou",
-  "updated_at": "2026-06-17T04:38:53.363Z",
+  "updated_at": "2026-06-17T05:08:23.888Z",
   "models": [
     {
       "id": "claude-haiku-4-5-20251001",
@@ -26,6 +26,69 @@
       "limit": {
         "context": 20000,
         "output": 20000
+      },
+      "metadata": {
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 10000,
+          "outputPerM": 50000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-haiku-4-5-20251001-cc",
+      "name": "claude-haiku-4-5-20251001-cc",
+      "display_name": "claude-haiku-4-5-20251001-cc",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 200000,
+        "output": 64000
       },
       "metadata": {
         "endpoints": [
@@ -403,6 +466,77 @@
       }
     },
     {
+      "id": "claude-opus-4-6-cc",
+      "name": "claude-opus-4-6-cc",
+      "display_name": "claude-opus-4-6-cc",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "Most intelligent model for building agents and coding",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 50000,
+          "outputPerM": 250000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
+        }
+      }
+    },
+    {
       "id": "claude-opus-4-6-dd",
       "name": "claude-opus-4-6-dd",
       "display_name": "claude-opus-4-6-dd",
@@ -613,6 +747,75 @@
       }
     },
     {
+      "id": "claude-opus-4-7-cc",
+      "name": "claude-opus-4-7-cc",
+      "display_name": "claude-opus-4-7-cc",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "Most intelligent model for building agents and coding",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 50000,
+          "outputPerM": 250000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
       "id": "claude-opus-4-7-r",
       "name": "claude-opus-4-7-r",
       "display_name": "claude-opus-4-7-r",
@@ -685,6 +888,75 @@
       "id": "claude-opus-4-8",
       "name": "claude-opus-4-8",
       "display_name": "claude-opus-4-8",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "description": "Most intelligent model for building agents and coding",
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 50000,
+          "outputPerM": 250000
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-8-cc",
+      "name": "claude-opus-4-8-cc",
+      "display_name": "claude-opus-4-8-cc",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -1045,6 +1317,76 @@
         "pricing": {
           "inputPerM": 28500,
           "outputPerM": 142500
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-sonnet-4-6-cc",
+      "name": "claude-sonnet-4-6-cc",
+      "display_name": "claude-sonnet-4-6-cc",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "endpoints": [
+          "chat/completions",
+          "anthropic"
+        ],
+        "features": [
+          "function-calling",
+          "structured-outputs",
+          "reasoning",
+          "serverless"
+        ],
+        "pricing": {
+          "inputPerM": 30000,
+          "outputPerM": 150000
         },
         "source": "public-provider-conf"
       },
