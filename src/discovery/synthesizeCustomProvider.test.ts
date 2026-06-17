@@ -52,16 +52,16 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     const result = await synthesizeCustomProvider();
 
     assert.equal(result.models.length >= 20, true);
-    assert.equal(result.models.length <= 30, true);
+    assert.equal(result.models.length <= 32, true);
     assert.deepEqual(
       result.summaries.map(summary => [summary.displayName, summary.selected]),
       [
         ['OpenAI', 6],
         ['Anthropic', 3],
         ['Gemini', 5],
-        ['Kimi', 4],
+        ['Kimi', 5],
         ['DeepSeek', 4],
-        ['Zhipu', 4],
+        ['Zhipu', 5],
         ['MiniMax', 4],
       ],
     );
@@ -88,6 +88,7 @@ test('creates valid normalized model cards in the provider output shape', async 
     const model = provider.models.find(item => item.id === 'gpt-5.4');
     const gpt55 = provider.models.find(item => item.id === 'gpt-5.5');
     const deepSeekV4 = provider.models.find(item => item.id === 'deepseek-v4-pro');
+    const glm52 = provider.models.find(item => item.id === 'glm-5.2');
     const providerData = { providers: { [provider.id]: provider } };
 
     applyReasoningPortraits(providerData);
@@ -108,6 +109,9 @@ test('creates valid normalized model cards in the provider output shape', async 
     assert.equal(deepSeekV4?.limit?.output, 393216);
     assert.equal(deepSeekV4?.open_weights, true);
     assert.equal(deepSeekV4?.extra_capabilities?.reasoning?.effort_options?.includes('max'), true);
+    assert.equal(glm52?.limit?.context, 1000000);
+    assert.equal(glm52?.limit?.output, 131072);
+    assert.equal(glm52?.extra_capabilities?.reasoning?.effort_options?.includes('max'), true);
     assert.equal(miniMaxM27?.extra_capabilities?.reasoning?.interleaved, true);
   });
 });
