@@ -113,6 +113,38 @@
       }
     },
     {
+      "id": "greg-2-ultra",
+      "name": "Greg 2 Ultra",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2026-06-14",
+      "last_updated": "2026-06-14",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 229376,
+        "output": 229376
+      },
+      "cost": {
+        "input": 3,
+        "output": 10,
+        "cache_read": 0.5
+      },
+      "display_name": "Greg 2 Ultra",
+      "type": "chat"
+    },
+    {
       "id": "glm-4.7",
       "name": "GLM-4.7",
       "family": "glm",
@@ -165,38 +197,6 @@
           ]
         }
       }
-    },
-    {
-      "id": "greg-1-super",
-      "name": "Greg 1 Super",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2026-01-27",
-      "last_updated": "2026-01-27",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 229376,
-        "output": 229376
-      },
-      "cost": {
-        "input": 1,
-        "output": 5,
-        "cache_read": 0.2
-      },
-      "display_name": "Greg 1 Super",
-      "type": "chat"
     },
     {
       "id": "deepseek-v4-pro-lightning",
@@ -345,36 +345,70 @@
       "type": "chat"
     },
     {
-      "id": "greg-1",
-      "name": "Greg 1 Normal",
-      "attachment": false,
+      "id": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "family": "kimi-k2",
+      "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2026-01-27",
-      "last_updated": "2026-01-27",
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-01",
+      "release_date": "2026-06-12",
+      "last_updated": "2026-06-12",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 229376,
-        "output": 229376
+        "context": 262144,
+        "output": 262144
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai-compatible"
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.3,
-        "cache_read": 0.02
+        "input": 0.55,
+        "output": 2.25,
+        "cache_read": 0.05
       },
-      "display_name": "Greg 1 Normal",
-      "type": "chat"
+      "display_name": "Kimi K2.7 Code",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
     },
     {
       "id": "glm-5.1",
@@ -402,8 +436,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-03-27",
-      "last_updated": "2026-03-27",
+      "release_date": "2026-04-07",
+      "last_updated": "2026-04-07",
       "modalities": {
         "input": [
           "text"
@@ -503,6 +537,101 @@
           ]
         }
       }
+    },
+    {
+      "id": "glm-5.2",
+      "name": "GLM-5.2",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai-compatible"
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 2.2,
+        "cache_read": 0.08
+      },
+      "display_name": "GLM-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "greg-2-super",
+      "name": "Greg 2 Super",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2026-06-14",
+      "last_updated": "2026-06-14",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 229376,
+        "output": 229376
+      },
+      "cost": {
+        "input": 1.5,
+        "output": 5,
+        "cache_read": 0.25
+      },
+      "display_name": "Greg 2 Super",
+      "type": "chat"
     },
     {
       "id": "kimi-k2.5-lightning",
@@ -1026,8 +1155,8 @@
         "field": "reasoning_content"
       },
       "temperature": true,
-      "release_date": "2026-02-11",
-      "last_updated": "2026-02-11",
+      "release_date": "2026-02-12",
+      "last_updated": "2026-02-12",
       "modalities": {
         "input": [
           "text"
