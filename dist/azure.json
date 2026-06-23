@@ -2137,6 +2137,103 @@
       "type": "chat"
     },
     {
+      "id": "claude-opus-4-8",
+      "name": "Claude Opus 4.8",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-12-31",
+      "release_date": "2026-05-28",
+      "last_updated": "2026-05-28",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic",
+        "api": "https://${AZURE_RESOURCE_NAME}.services.ai.azure.com/anthropic/v1"
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25,
+        "tiers": [
+          {
+            "input": 10,
+            "output": 37.5,
+            "cache_read": 1,
+            "cache_write": 12.5,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 10,
+          "output": 37.5,
+          "cache_read": 1,
+          "cache_write": 12.5
+        }
+      },
+      "display_name": "Claude Opus 4.8",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
       "id": "mistral-medium-2505",
       "name": "Mistral Medium 3",
       "family": "mistral-medium",
