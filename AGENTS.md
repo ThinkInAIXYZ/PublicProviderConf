@@ -79,3 +79,4 @@ Examples:
 - Templates: add/update under `manual-templates/*.json` when normalizing names or capabilities.
 - Normalization: `processor/` trims, dedupes, sorts; keep IDs stable across runs.
 - Validation: `output/json-validator.ts` enforces schema before write; prefer failing fast.
+- Ollama template maintenance: use `skills/ollama-template-refresh/SKILL.md` before updating `manual-templates/ollama.json`; do not add workflow automation for this path unless explicitly requested.
