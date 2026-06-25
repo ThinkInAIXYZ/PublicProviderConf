@@ -6,25 +6,25 @@
   "display_name": "evroc",
   "models": [
     {
-      "id": "moonshotai/Kimi-K2.5",
-      "name": "Kimi K2.5",
+      "id": "moonshotai/Kimi-K2.6",
+      "name": "Kimi K2.6",
       "family": "kimi-k2",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
         {
-          "type": "toggle"
+          "type": "budget_tokens"
         }
       ],
       "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "release_date": "2026-01-27",
-      "last_updated": "2026-01-27",
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-04-21",
+      "last_updated": "2026-04-21",
       "modalities": {
         "input": [
           "text",
@@ -41,34 +41,36 @@
         "output": 262144
       },
       "cost": {
-        "input": 1.47,
-        "output": 5.9
+        "input": 1.4375,
+        "output": 5.75
       },
-      "display_name": "Kimi K2.5",
+      "display_name": "Kimi K2.6",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
+          "supported": true
         }
       }
     },
     {
-      "id": "microsoft/Phi-4-multimodal-instruct",
-      "name": "Phi-4 15B",
-      "family": "phi",
-      "attachment": false,
+      "id": "google/gemma-4-26B-A4B-it",
+      "name": "Gemma 4 26B A4B IT",
+      "family": "gemma",
+      "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
-      "release_date": "2025-01-01",
-      "last_updated": "2025-01-01",
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
       "modalities": {
         "input": [
           "text",
@@ -80,14 +82,14 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 32000,
-        "output": 32000
+        "context": 262144,
+        "output": 32768
       },
       "cost": {
-        "input": 0.24,
-        "output": 0.47
+        "input": 0.144,
+        "output": 0.575
       },
-      "display_name": "Phi-4 15B",
+      "display_name": "Gemma 4 26B A4B IT",
       "type": "chat"
     },
     {
@@ -115,21 +117,21 @@
         "output": 4096
       },
       "cost": {
-        "input": 0.12,
-        "output": 0.12
+        "input": 0.115,
+        "output": 0.115
       },
       "display_name": "Qwen3 Embedding 8B",
       "type": "embedding"
     },
     {
-      "id": "Qwen/Qwen3-30B-A3B-Instruct-2507-FP8",
-      "name": "Qwen3 30B 2507",
+      "id": "Qwen/Qwen3-Reranker-4B",
+      "name": "Qwen3 Reranker 4B",
       "family": "qwen",
       "attachment": false,
       "reasoning": {
         "supported": false
       },
-      "tool_call": true,
+      "tool_call": false,
       "release_date": "2025-07-30",
       "last_updated": "2025-07-30",
       "modalities": {
@@ -142,15 +144,68 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 64000,
-        "output": 64000
+        "context": 32000,
+        "output": 4096
       },
       "cost": {
-        "input": 0.35,
-        "output": 1.42
+        "input": 0.0575,
+        "output": 0
       },
-      "display_name": "Qwen3 30B 2507",
-      "type": "chat"
+      "display_name": "Qwen3 Reranker 4B",
+      "type": "rerank"
+    },
+    {
+      "id": "Qwen/Qwen3.6-35B-A3B-FP8",
+      "name": "Qwen3.6 35B-A3B",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-17",
+      "last_updated": "2026-04-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.345,
+        "output": 1.38
+      },
+      "display_name": "Qwen3.6 35B-A3B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "Qwen/Qwen3-VL-30B-A3B-Instruct",
@@ -179,8 +234,8 @@
         "output": 100000
       },
       "cost": {
-        "input": 0.24,
-        "output": 0.94
+        "input": 0.23,
+        "output": 0.92
       },
       "display_name": "Qwen3 VL 30B",
       "type": "chat"
@@ -221,8 +276,8 @@
         "output": 65536
       },
       "cost": {
-        "input": 0.24,
-        "output": 0.94
+        "input": 0.23,
+        "output": 0.92
       },
       "display_name": "GPT OSS 120B",
       "type": "chat",
@@ -231,6 +286,38 @@
           "supported": true
         }
       }
+    },
+    {
+      "id": "openai/whisper-large-v3-turbo",
+      "name": "Whisper Large v3 Turbo",
+      "family": "whisper",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2024-10-01",
+      "last_updated": "2024-10-01",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 448,
+        "output": 448
+      },
+      "cost": {
+        "input": 0.0023,
+        "output": 0.0023,
+        "output_audio": 2.3
+      },
+      "display_name": "Whisper Large v3 Turbo",
+      "type": "chat"
     },
     {
       "id": "openai/whisper-large-v3",
@@ -257,27 +344,40 @@
         "output": 4096
       },
       "cost": {
-        "input": 0.00236,
-        "output": 0.00236,
-        "output_audio": 2.36
+        "input": 0.0023,
+        "output": 0.0023,
+        "output_audio": 2.3
       },
       "display_name": "Whisper 3 Large",
       "type": "chat"
     },
     {
-      "id": "mistralai/devstral-small-2-24b-instruct-2512",
-      "name": "Devstral Small 2 24B Instruct 2512",
-      "family": "devstral",
-      "attachment": false,
+      "id": "mistralai/Mistral-Medium-3.5-128B",
+      "name": "Mistral Medium 3.5",
+      "family": "mistral-medium",
+      "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high"
+          ]
+        }
+      ],
       "tool_call": true,
-      "release_date": "2025-12-01",
-      "last_updated": "2025-12-01",
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-29",
+      "last_updated": "2026-04-29",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -285,45 +385,14 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 32768,
-        "output": 32768
+        "context": 262144,
+        "output": 262144
       },
       "cost": {
-        "input": 0.12,
-        "output": 0.47
+        "input": 1.725,
+        "output": 6.9
       },
-      "display_name": "Devstral Small 2 24B Instruct 2512",
-      "type": "chat"
-    },
-    {
-      "id": "mistralai/Magistral-Small-2509",
-      "name": "Magistral Small 1.2 24B",
-      "family": "magistral-small",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "release_date": "2025-06-01",
-      "last_updated": "2025-06-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.59,
-        "output": 2.36
-      },
-      "display_name": "Magistral Small 1.2 24B",
+      "display_name": "Mistral Medium 3.5",
       "type": "chat"
     },
     {
@@ -352,24 +421,26 @@
         "output": 32000
       },
       "cost": {
-        "input": 0.00236,
-        "output": 0.00236,
-        "output_audio": 2.36
+        "input": 0.0023,
+        "output": 0.0023,
+        "output_audio": 2.3
       },
       "display_name": "Voxtral Small 24B",
       "type": "chat"
     },
     {
       "id": "nvidia/Llama-3.3-70B-Instruct-FP8",
-      "name": "Llama 3.3 70B",
+      "name": "Llama-3.3-70B-Instruct",
       "family": "llama",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": false
       },
-      "tool_call": false,
-      "release_date": "2024-12-01",
-      "last_updated": "2024-12-01",
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-12-06",
+      "last_updated": "2024-12-06",
       "modalities": {
         "input": [
           "text"
@@ -380,15 +451,70 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 131072,
-        "output": 32768
+        "context": 128000,
+        "output": 4096
       },
       "cost": {
-        "input": 1.18,
-        "output": 1.18
+        "input": 1.15,
+        "output": 1.15
       },
-      "display_name": "Llama 3.3 70B",
+      "display_name": "Llama-3.3-70B-Instruct",
       "type": "chat"
+    },
+    {
+      "id": "evroc/roc",
+      "name": "roc",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "budget_tokens"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2026-01",
+      "release_date": "2026-06-06",
+      "last_updated": "2026-06-06",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 2.875,
+        "output": 11.516
+      },
+      "display_name": "roc",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "KBLab/kb-whisper-large",
@@ -415,9 +541,9 @@
         "output": 448
       },
       "cost": {
-        "input": 0.00236,
-        "output": 0.00236,
-        "output_audio": 2.36
+        "input": 0.0023,
+        "output": 0.0023,
+        "output_audio": 2.3
       },
       "display_name": "KB Whisper",
       "type": "chat"
@@ -447,8 +573,8 @@
         "output": 512
       },
       "cost": {
-        "input": 0.12,
-        "output": 0.12
+        "input": 0.114,
+        "output": 0.114
       },
       "display_name": "E5 Multi-Lingual Large Embeddings 0.6B",
       "type": "chat"
