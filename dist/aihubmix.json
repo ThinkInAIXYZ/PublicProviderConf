@@ -2,8 +2,67 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2026-06-28T00:12:06.342Z",
+  "updated_at": "2026-06-28T12:37:59.685Z",
   "models": [
+    {
+      "id": "auto",
+      "name": "auto",
+      "display_name": "auto",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "audio",
+          "image",
+          "video"
+        ]
+      },
+      "cost": {
+        "input": 2,
+        "output": 2
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "metadata": {
+        "description": "AIHubMix Smart Router: Fill in the model name as auto, and the gateway will automatically select the optimal model based on the request content;\n\nThe auto without a suffix uses the default strategy cost_optimized. You can explicitly specify the focus using auto:<strategy>, such as auto (= auto:cost_optimized) cost priority: choose the cheapest as long as the capability meets the standard; auto:balanced balanced: considers capability / cost / latency\n\nauto:quality_first quality priority: prioritize selecting the strongest capability for complex reasoning and critical outputs\n\nauto:latency_critical low latency priority: prioritize selecting the fastest response",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "web",
+          "deepsearch",
+          "tools",
+          "function_calling",
+          "structured_outputs",
+          "long_context"
+        ],
+        "inputModalities": [
+          "text",
+          "audio",
+          "image",
+          "video"
+        ],
+        "pricing": {
+          "input": 2,
+          "output": 2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
     {
       "id": "glm-5.2",
       "name": "glm-5.2",
@@ -3118,6 +3177,46 @@
       "vision": false
     },
     {
+      "id": "wan2.7-i2v",
+      "name": "wan2.7-i2v",
+      "display_name": "wan2.7-i2v",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "image",
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 2,
+        "output": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Wanxiang 2.7 — image-to-video: performance capabilities comprehensively upgraded. Dramatic/dialogue scenes convey delicate, natural emotions; action scenes are fierce, with every punch landing hard. Combined with more dramatic, rhythmically paced camera cuts, it achieves stronger overall performance.",
+        "typeHints": [
+          "video"
+        ],
+        "inputModalities": [
+          "image",
+          "text"
+        ],
+        "pricing": {
+          "input": 2,
+          "output": 0
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "wan2.7-videoedit",
       "name": "wan2.7-videoedit",
       "display_name": "wan2.7-videoedit",
@@ -3234,46 +3333,6 @@
         "source": "public-provider-conf"
       },
       "vision": false
-    },
-    {
-      "id": "wan2.7-i2v",
-      "name": "wan2.7-i2v",
-      "display_name": "wan2.7-i2v",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "image",
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 2,
-        "output": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Wanxiang 2.7 — image-to-video: performance capabilities comprehensively upgraded. Dramatic/dialogue scenes convey delicate, natural emotions; action scenes are fierce, with every punch landing hard. Combined with more dramatic, rhythmically paced camera cuts, it achieves stronger overall performance.",
-        "typeHints": [
-          "video"
-        ],
-        "inputModalities": [
-          "image",
-          "text"
-        ],
-        "pricing": {
-          "input": 2,
-          "output": 0
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
     },
     {
       "id": "qwen3.6-plus",
@@ -3506,9 +3565,9 @@
       "vision": false
     },
     {
-      "id": "wan2.7-image",
-      "name": "wan2.7-image",
-      "display_name": "wan2.7-image",
+      "id": "wan2.7-image-pro",
+      "name": "wan2.7-image-pro",
+      "display_name": "wan2.7-image-pro",
       "type": "image-generation",
       "reasoning": {
         "supported": false
@@ -3548,9 +3607,9 @@
       "vision": true
     },
     {
-      "id": "wan2.7-image-pro",
-      "name": "wan2.7-image-pro",
-      "display_name": "wan2.7-image-pro",
+      "id": "wan2.7-image",
+      "name": "wan2.7-image",
+      "display_name": "wan2.7-image",
       "type": "image-generation",
       "reasoning": {
         "supported": false
@@ -16789,6 +16848,46 @@
       }
     },
     {
+      "id": "gte-rerank-v2",
+      "name": "gte-rerank-v2",
+      "display_name": "gte-rerank-v2",
+      "type": "rerank",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.11,
+        "output": 0.11
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "gte-rerank-v2 is a multilingual unified text ranking model developed by Tongyi Lab, covering multiple major languages worldwide and providing high-quality text ranking services. It is typically used in scenarios such as semantic retrieval and RAG, and can simply and effectively improve text retrieval performance. Given a query and a set of candidate texts (documents), the model ranks the candidates from highest to lowest based on their semantic relevance to the query.",
+        "typeHints": [
+          "rerank"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0.11,
+          "output": 0.11
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "inclusionAI/Ling-flash-2.0",
       "name": "inclusionAI/Ling-flash-2.0",
       "display_name": "inclusionAI/Ling-flash-2.0",
@@ -17810,46 +17909,6 @@
         "pricing": {
           "input": 0.138,
           "output": 0.138
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "gte-rerank-v2",
-      "name": "gte-rerank-v2",
-      "display_name": "gte-rerank-v2",
-      "type": "rerank",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 0.11,
-        "output": 0.11
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "gte-rerank-v2 is a multilingual unified text ranking model developed by Tongyi Lab, covering multiple major languages worldwide and providing high-quality text ranking services. It is typically used in scenarios such as semantic retrieval and RAG, and can simply and effectively improve text retrieval performance. Given a query and a set of candidate texts (documents), the model ranks the candidates from highest to lowest based on their semantic relevance to the query.",
-        "typeHints": [
-          "rerank"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 0.11,
-          "output": 0.11
         },
         "source": "public-provider-conf"
       },
@@ -24912,6 +24971,32 @@
       }
     },
     {
+      "id": "deepseek-ai/deepseek-vl2",
+      "name": "deepseek-ai/deepseek-vl2",
+      "display_name": "deepseek-ai/deepseek-vl2",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.16,
+        "output": 0.16
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.16,
+          "output": 0.16
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "deepseek-v3",
       "name": "deepseek-v3",
       "display_name": "deepseek-v3",
@@ -28456,26 +28541,37 @@
       "vision": false
     },
     {
-      "id": "text-moderation-latest",
-      "name": "text-moderation-latest",
-      "display_name": "text-moderation-latest",
-      "type": "chat",
+      "id": "tts-1-hd-1106",
+      "name": "tts-1-hd-1106",
+      "display_name": "tts-1-hd-1106",
+      "type": "audio",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
+      "modalities": {
+        "input": [
+          "audio"
+        ]
+      },
       "cost": {
-        "input": 0.2,
-        "output": 0.2
+        "input": 30,
+        "output": 30
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
+        "typeHints": [
+          "tts"
+        ],
+        "inputModalities": [
+          "audio"
+        ],
         "pricing": {
-          "input": 0.2,
-          "output": 0.2
+          "input": 30,
+          "output": 30
         },
         "source": "public-provider-conf"
       },
@@ -28588,43 +28684,6 @@
         "pricing": {
           "input": 5.556,
           "output": 5.556
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "tts-1-hd-1106",
-      "name": "tts-1-hd-1106",
-      "display_name": "tts-1-hd-1106",
-      "type": "audio",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "audio"
-        ]
-      },
-      "cost": {
-        "input": 30,
-        "output": 30
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "typeHints": [
-          "tts"
-        ],
-        "inputModalities": [
-          "audio"
-        ],
-        "pricing": {
-          "input": 30,
-          "output": 30
         },
         "source": "public-provider-conf"
       },
@@ -28762,6 +28821,32 @@
         "pricing": {
           "input": 20,
           "output": 20
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "text-moderation-stable",
+      "name": "text-moderation-stable",
+      "display_name": "text-moderation-stable",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2,
+        "output": 0.2
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.2,
+          "output": 0.2
         },
         "source": "public-provider-conf"
       },
@@ -28924,9 +29009,9 @@
       "vision": false
     },
     {
-      "id": "text-moderation-stable",
-      "name": "text-moderation-stable",
-      "display_name": "text-moderation-stable",
+      "id": "text-moderation-latest",
+      "name": "text-moderation-latest",
+      "display_name": "text-moderation-latest",
       "type": "chat",
       "reasoning": {
         "supported": false
@@ -31946,32 +32031,6 @@
       "id": "deepseek-ai/deepseek-llm-67b-chat",
       "name": "deepseek-ai/deepseek-llm-67b-chat",
       "display_name": "deepseek-ai/deepseek-llm-67b-chat",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.16,
-        "output": 0.16
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 0.16,
-          "output": 0.16
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "deepseek-ai/deepseek-vl2",
-      "name": "deepseek-ai/deepseek-vl2",
-      "display_name": "deepseek-ai/deepseek-vl2",
       "type": "chat",
       "reasoning": {
         "supported": false
