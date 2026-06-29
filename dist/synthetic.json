@@ -69,7 +69,7 @@
     {
       "id": "hf:zai-org/GLM-4.7-Flash",
       "name": "GLM-4.7-Flash",
-      "family": "glm",
+      "family": "glm-flash",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -77,22 +77,17 @@
       },
       "reasoning_options": [
         {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
+          "type": "toggle"
         }
       ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
       },
-      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-01-18",
-      "last_updated": "2026-01-18",
+      "knowledge": "2025-04",
+      "release_date": "2026-01-19",
+      "last_updated": "2026-01-19",
       "modalities": {
         "input": [
           "text"
@@ -107,9 +102,9 @@
         "output": 65536
       },
       "cost": {
-        "input": 0.06,
-        "output": 0.4,
-        "cache_read": 0.06
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.1
       },
       "display_name": "GLM-4.7-Flash",
       "type": "chat",
@@ -127,7 +122,7 @@
     },
     {
       "id": "hf:zai-org/GLM-4.7",
-      "name": "GLM 4.7",
+      "name": "GLM-4.7",
       "family": "glm",
       "attachment": false,
       "reasoning": {
@@ -136,12 +131,7 @@
       },
       "reasoning_options": [
         {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
+          "type": "toggle"
         }
       ],
       "tool_call": true,
@@ -162,14 +152,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 200000,
-        "output": 64000
+        "context": 202752,
+        "output": 65536
       },
       "cost": {
-        "input": 0.55,
-        "output": 2.19
+        "input": 0.45,
+        "output": 2.19,
+        "cache_read": 0.45
       },
-      "display_name": "GLM 4.7",
+      "display_name": "GLM-4.7",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -184,8 +175,8 @@
       }
     },
     {
-      "id": "hf:zai-org/GLM-5.1",
-      "name": "GLM 5.1",
+      "id": "hf:zai-org/GLM-5.2",
+      "name": "GLM-5.2",
       "family": "glm",
       "attachment": false,
       "reasoning": {
@@ -196,9 +187,9 @@
         {
           "type": "effort",
           "values": [
-            "low",
-            "medium",
-            "high"
+            "none",
+            "high",
+            "xhigh"
           ]
         }
       ],
@@ -208,8 +199,62 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-03-27",
-      "last_updated": "2026-04-12",
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 524288,
+        "output": 65536
+      },
+      "cost": {
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 1.4
+      },
+      "display_name": "GLM-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "hf:zai-org/GLM-5.1",
+      "name": "GLM-5.1",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-07",
+      "last_updated": "2026-04-07",
       "modalities": {
         "input": [
           "text"
@@ -228,7 +273,7 @@
         "output": 3,
         "cache_read": 1
       },
-      "display_name": "GLM 5.1",
+      "display_name": "GLM-5.1",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -335,12 +380,13 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128000,
+        "context": 131072,
         "output": 32768
       },
       "cost": {
         "input": 0.1,
-        "output": 0.1
+        "output": 0.1,
+        "cache_read": 0.1
       },
       "display_name": "GPT OSS 120B",
       "type": "chat",
@@ -351,23 +397,33 @@
       }
     },
     {
-      "id": "hf:Qwen/Qwen3.5-397B-A17B",
-      "name": "Qwen3.5-97B-A17B",
+      "id": "hf:Qwen/Qwen3.6-27B",
+      "name": "Qwen3.6 27B",
       "family": "qwen",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-02-11",
-      "last_updated": "2026-02-11",
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
       "modalities": {
         "input": [
           "text",
@@ -382,13 +438,67 @@
         "context": 262144,
         "output": 65536
       },
-      "status": "beta",
+      "cost": {
+        "input": 0.45,
+        "output": 3.6,
+        "cache_read": 0.45
+      },
+      "display_name": "Qwen3.6 27B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "hf:Qwen/Qwen3.5-397B-A17B",
+      "name": "Qwen3.5 397B-A17B",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-02-15",
+      "last_updated": "2026-02-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
       "cost": {
         "input": 0.6,
-        "output": 3,
+        "output": 3.6,
         "cache_read": 0.6
       },
-      "display_name": "Qwen3.5-97B-A17B",
+      "display_name": "Qwen3.5 397B-A17B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
