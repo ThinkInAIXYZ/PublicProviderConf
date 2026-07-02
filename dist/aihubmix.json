@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2026-07-01T21:08:21.820Z",
+  "updated_at": "2026-07-02T01:39:07.875Z",
   "models": [
     {
       "id": "auto",
@@ -219,6 +219,82 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true
+        }
+      }
+    },
+    {
+      "id": "claude-fable-5",
+      "name": "claude-fable-5",
+      "display_name": "claude-fable-5",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 11,
+        "output": 55,
+        "cache_read": 1.1
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "metadata": {
+        "description": "（The official channels have temporarily suspended all access to the model.）Anthropic's most capable widely released model, for the most demanding reasoning and long-horizon agentic work（This model is extremely expensive and is not recommended for casual use.）",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 1.1,
+          "cache_write": 13.75,
+          "input": 11,
+          "output": 55
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
+            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
+            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
+          ]
         }
       }
     },
@@ -31660,32 +31736,6 @@
       "vision": false
     },
     {
-      "id": "text-davinci-003",
-      "name": "text-davinci-003",
-      "display_name": "text-davinci-003",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 20,
-        "output": 20
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 20,
-          "output": 20
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "tts-1",
       "name": "tts-1",
       "display_name": "tts-1",
@@ -31864,6 +31914,43 @@
       "vision": false
     },
     {
+      "id": "tts-1-hd-1106",
+      "name": "tts-1-hd-1106",
+      "display_name": "tts-1-hd-1106",
+      "type": "audio",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "audio"
+        ]
+      },
+      "cost": {
+        "input": 30,
+        "output": 30
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "typeHints": [
+          "tts"
+        ],
+        "inputModalities": [
+          "audio"
+        ],
+        "pricing": {
+          "input": 30,
+          "output": 30
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "whisper-1",
       "name": "whisper-1",
       "display_name": "whisper-1",
@@ -31970,43 +32057,6 @@
         "pricing": {
           "input": 5.556,
           "output": 5.556
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "tts-1-hd",
-      "name": "tts-1-hd",
-      "display_name": "tts-1-hd",
-      "type": "audio",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "audio"
-        ]
-      },
-      "cost": {
-        "input": 30,
-        "output": 30
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "typeHints": [
-          "tts"
-        ],
-        "inputModalities": [
-          "audio"
-        ],
-        "pricing": {
-          "input": 30,
-          "output": 30
         },
         "source": "public-provider-conf"
       },
@@ -32161,9 +32211,9 @@
       "vision": false
     },
     {
-      "id": "tts-1-hd-1106",
-      "name": "tts-1-hd-1106",
-      "display_name": "tts-1-hd-1106",
+      "id": "tts-1-hd",
+      "name": "tts-1-hd",
+      "display_name": "tts-1-hd",
       "type": "audio",
       "reasoning": {
         "supported": false
@@ -32192,6 +32242,32 @@
         "pricing": {
           "input": 30,
           "output": 30
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "text-davinci-edit-001",
+      "name": "text-davinci-edit-001",
+      "display_name": "text-davinci-edit-001",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 20,
+        "output": 20
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 20,
+          "output": 20
         },
         "source": "public-provider-conf"
       },
@@ -32354,9 +32430,9 @@
       "vision": false
     },
     {
-      "id": "text-davinci-edit-001",
-      "name": "text-davinci-edit-001",
-      "display_name": "text-davinci-edit-001",
+      "id": "text-davinci-003",
+      "name": "text-davinci-003",
+      "display_name": "text-davinci-003",
       "type": "chat",
       "reasoning": {
         "supported": false
