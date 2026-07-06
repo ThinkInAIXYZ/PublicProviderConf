@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2026-07-06T10:08:28.374Z",
+  "updated_at": "2026-07-06T11:38:30.056Z",
   "models": [
     {
       "id": "auto",
@@ -612,6 +612,60 @@
         "source": "public-provider-conf"
       },
       "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "hy3",
+      "name": "hy3",
+      "display_name": "hy3",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.142,
+        "output": 0.568,
+        "cache_read": 0.0355
+      },
+      "limit": {
+        "context": 256000,
+        "output": 256000
+      },
+      "metadata": {
+        "description": "The Hy3 official version is honed for real-world business scenarios, using a Mixture-of-Experts (MoE) architecture with 295B total parameters and 21B activated parameters. It natively supports a 256K context window and offers multiple thinking modes: no_think (ultra-fast response), think_low (quick thinking), and think_high (deep reasoning), balancing ultra-fast responses, complex reasoning, and invocation cost. Compared with the Preview version, Hy3—based on real business feedback from Tencent Yuanbao, WorkBuddy, ima, Marvis, and others—focuses on improving the Coding Agent, long-form understanding, multi-turn context continuity, search QA, and complex task execution, performing more stably in reducing hallucinations, improving task completion, and engineering usability. It is better suited to practical scenarios such as frontend tasks, cross-file code development, long-document analysis, office automation, and multi-step Agent workflows.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs",
+          "web",
+          "long_context",
+          "thinking"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.0355,
+          "input": 0.142,
+          "output": 0.568
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
       "extra_capabilities": {
         "reasoning": {
           "supported": true
@@ -31735,26 +31789,37 @@
       "vision": false
     },
     {
-      "id": "text-curie-001",
-      "name": "text-curie-001",
-      "display_name": "text-curie-001",
-      "type": "chat",
+      "id": "tts-1-1106",
+      "name": "tts-1-1106",
+      "display_name": "tts-1-1106",
+      "type": "audio",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
+      "modalities": {
+        "input": [
+          "audio"
+        ]
+      },
       "cost": {
-        "input": 2,
-        "output": 2
+        "input": 15,
+        "output": 15
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
+        "typeHints": [
+          "tts"
+        ],
+        "inputModalities": [
+          "audio"
+        ],
         "pricing": {
-          "input": 2,
-          "output": 2
+          "input": 15,
+          "output": 15
         },
         "source": "public-provider-conf"
       },
@@ -31792,43 +31857,6 @@
         "pricing": {
           "input": 15,
           "output": 15
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "tts-1-hd",
-      "name": "tts-1-hd",
-      "display_name": "tts-1-hd",
-      "type": "audio",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "audio"
-        ]
-      },
-      "cost": {
-        "input": 30,
-        "output": 30
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "typeHints": [
-          "tts"
-        ],
-        "inputModalities": [
-          "audio"
-        ],
-        "pricing": {
-          "input": 30,
-          "output": 30
         },
         "source": "public-provider-conf"
       },
@@ -31939,9 +31967,9 @@
       "vision": false
     },
     {
-      "id": "tts-1-hd-1106",
-      "name": "tts-1-hd-1106",
-      "display_name": "tts-1-hd-1106",
+      "id": "tts-1-hd",
+      "name": "tts-1-hd",
+      "display_name": "tts-1-hd",
       "type": "audio",
       "reasoning": {
         "supported": false
@@ -31979,6 +32007,43 @@
       "id": "text-embedding-v1",
       "name": "text-embedding-v1",
       "display_name": "text-embedding-v1",
+      "type": "embedding",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0.1
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "typeHints": [
+          "embedding"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "input": 0.1,
+          "output": 0.1
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "text-embedding-ada-002",
+      "name": "text-embedding-ada-002",
+      "display_name": "text-embedding-ada-002",
       "type": "embedding",
       "reasoning": {
         "supported": false
@@ -32125,43 +32190,6 @@
       "vision": false
     },
     {
-      "id": "text-embedding-ada-002",
-      "name": "text-embedding-ada-002",
-      "display_name": "text-embedding-ada-002",
-      "type": "embedding",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.1,
-        "output": 0.1
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "typeHints": [
-          "embedding"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "input": 0.1,
-          "output": 0.1
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "text-embedding-3-small",
       "name": "text-embedding-3-small",
       "display_name": "text-embedding-3-small",
@@ -32236,9 +32264,9 @@
       "vision": false
     },
     {
-      "id": "tts-1-1106",
-      "name": "tts-1-1106",
-      "display_name": "tts-1-1106",
+      "id": "tts-1-hd-1106",
+      "name": "tts-1-hd-1106",
+      "display_name": "tts-1-hd-1106",
       "type": "audio",
       "reasoning": {
         "supported": false
@@ -32250,8 +32278,8 @@
         ]
       },
       "cost": {
-        "input": 15,
-        "output": 15
+        "input": 30,
+        "output": 30
       },
       "limit": {
         "context": 8192,
@@ -32265,8 +32293,8 @@
           "audio"
         ],
         "pricing": {
-          "input": 15,
-          "output": 15
+          "input": 30,
+          "output": 30
         },
         "source": "public-provider-conf"
       },
@@ -32302,6 +32330,32 @@
       "id": "text-davinci-003",
       "name": "text-davinci-003",
       "display_name": "text-davinci-003",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 20,
+        "output": 20
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 20,
+          "output": 20
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "text-davinci-002",
+      "name": "text-davinci-002",
+      "display_name": "text-davinci-002",
       "type": "chat",
       "reasoning": {
         "supported": false
@@ -32481,17 +32535,17 @@
       "vision": false
     },
     {
-      "id": "text-davinci-002",
-      "name": "text-davinci-002",
-      "display_name": "text-davinci-002",
+      "id": "text-curie-001",
+      "name": "text-curie-001",
+      "display_name": "text-curie-001",
       "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "cost": {
-        "input": 20,
-        "output": 20
+        "input": 2,
+        "output": 2
       },
       "limit": {
         "context": 8192,
@@ -32499,8 +32553,8 @@
       },
       "metadata": {
         "pricing": {
-          "input": 20,
-          "output": 20
+          "input": 2,
+          "output": 2
         },
         "source": "public-provider-conf"
       },
