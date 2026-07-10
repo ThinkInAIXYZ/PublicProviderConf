@@ -52,7 +52,7 @@ export interface CustomProviderModelSeed {
   releaseDate?: string;
   lastUpdated?: string;
   openWeights?: boolean;
-  experimental?: boolean;
+  experimental?: ModelInfo['experimental'];
   modalities?: ModelModalities;
   cost?: ModelCost;
   limit?: ModelLimit;

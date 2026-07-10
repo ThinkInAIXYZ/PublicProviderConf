@@ -54,7 +54,7 @@ export interface ModelInfo {
   releaseDate?: string;
   lastUpdated?: string;
   openWeights?: boolean;
-  experimental?: boolean;
+  experimental?: boolean | Record<string, unknown>;
   modalities?: ModelModalities;
   cost?: ModelCost;
   limit?: ModelLimit;

@@ -18,12 +18,29 @@ export interface ModelsDevModalities {
   [key: string]: string[] | undefined;
 }
 
+export interface ModelsDevCostTierSelector {
+  type?: string;
+  size?: number;
+  [key: string]: unknown;
+}
+
+export interface ModelsDevCostTier {
+  input?: number;
+  output?: number;
+  cache_read?: number;
+  cache_write?: number;
+  tier?: ModelsDevCostTierSelector;
+  [key: string]: unknown;
+}
+
 export interface ModelsDevCost {
   input?: number;
   output?: number;
   cache_read?: number;
   cache_write?: number;
-  [key: string]: number | undefined;
+  tiers?: ModelsDevCostTier[];
+  context_over_200k?: ModelsDevCost;
+  [key: string]: unknown;
 }
 
 export interface ModelsDevLimit {
@@ -46,6 +63,22 @@ export interface ReasoningConfig {
   budget?: ReasoningBudget;
   effort?: ReasoningEffort;
   verbosity?: ReasoningVerbosity;
+}
+
+export interface ModelsDevExperimentalProvider {
+  body?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
+export interface ModelsDevExperimentalMode {
+  cost?: ModelsDevCost;
+  provider?: ModelsDevExperimentalProvider;
+  [key: string]: unknown;
+}
+
+export interface ModelsDevExperimentalConfig {
+  modes?: Record<string, ModelsDevExperimentalMode>;
+  [key: string]: unknown;
 }
 
 export interface SearchConfig {
@@ -74,7 +107,7 @@ export interface ModelsDevModel {
   release_date?: string;
   last_updated?: string;
   open_weights?: boolean;
-  experimental?: boolean;
+  experimental?: boolean | ModelsDevExperimentalConfig;
   modalities?: ModelsDevModalities;
   cost?: ModelsDevCost;
   limit?: ModelsDevLimit;

@@ -340,6 +340,68 @@ test('aihubmix reasoning hints promote reasoning support even without a portrait
   assert.equal(typeof model.reasoning === 'object' && model.reasoning?.supported, true);
 });
 
+test('GPT-5.6 portraits override incomplete AIHubMix reasoning hints', () => {
+  const modelIds = ['gpt-5.6', 'gpt-5.6-sol', 'gpt-5.6-terra', 'gpt-5.6-luna'];
+  const aihubmix: ModelsDevProvider = {
+    id: 'aihubmix',
+    name: 'AIHubMix',
+    models: modelIds.map(id => ({
+      id,
+      name: id,
+      extra_capabilities: {
+        reasoning: {
+          supported: true,
+        },
+      },
+    })),
+  };
+  const data: ModelsDevApiResponse = {
+    providers: {
+      openai: {
+        id: 'openai',
+        name: 'OpenAI',
+        models: modelIds.map(id => ({
+          id,
+          name: id,
+          reasoning: {
+            supported: true,
+          },
+        })),
+      },
+    },
+  };
+
+  applyReasoningPortraits(data, buildAiHubMixReasoningHintMap(aihubmix));
+
+  const providers = data.providers as Record<string, ModelsDevProvider>;
+  for (const model of providers.openai.models) {
+    const reasoning = model.extra_capabilities?.reasoning;
+    assert.deepEqual({
+      supported: reasoning?.supported,
+      default_enabled: reasoning?.default_enabled,
+      mode: reasoning?.mode,
+      effort: reasoning?.effort,
+      effort_options: reasoning?.effort_options,
+      verbosity: reasoning?.verbosity,
+      verbosity_options: reasoning?.verbosity_options,
+      visibility: reasoning?.visibility,
+    }, {
+      supported: true,
+      default_enabled: true,
+      mode: 'effort',
+      effort: 'medium',
+      effort_options: ['none', 'low', 'medium', 'high', 'xhigh', 'max'],
+      verbosity: 'medium',
+      verbosity_options: ['low', 'medium', 'high'],
+      visibility: 'hidden',
+    });
+    assert.deepEqual(model.reasoning, {
+      supported: true,
+      default: true,
+    });
+  }
+});
+
 test('portrait normalization syncs legacy reasoning when extra reasoning becomes supported', () => {
   const data: ModelsDevApiResponse = {
     providers: {
@@ -652,6 +714,24 @@ test('keeps OpenAI portraits on hidden visibility semantics', () => {
 });
 
 test('applies xhigh reasoning portraits for supported GPT-5.x variants', () => {
+  const gpt56Profile = {
+    defaultEnabled: true,
+    mode: 'effort' as const,
+    effort: 'medium' as const,
+    effortOptions: ['none', 'low', 'medium', 'high', 'xhigh', 'max'] as ReasoningEffort[],
+    verbosity: 'medium' as const,
+    verbosityOptions: ['low', 'medium', 'high'] as ReasoningVerbosity[],
+  };
+
+  for (const modelId of [
+    'gpt-5.6',
+    'openai/gpt-5.6-sol',
+    'gpt-5.6-terra',
+    'gpt-5.6-luna',
+  ]) {
+    assertEffortPortrait(modelId, gpt56Profile);
+  }
+
   assertEffortPortrait('gpt-5.5', {
     defaultEnabled: true,
     mode: 'effort',
@@ -817,6 +897,7 @@ test('applies low-medium-high effort portraits for pre-gpt-5.1 o-series variants
 });
 
 test('does not infer effort portraits for GPT-5 chat aliases without official effort docs', () => {
+  assertNoReasoningPortrait('openai/gpt-5.6-chat');
   assertNoReasoningPortrait('gpt-5.1-chat');
   assertNoReasoningPortrait('openai/gpt-5.1-chat-latest');
   assertNoReasoningPortrait('gpt-5.2-chat');

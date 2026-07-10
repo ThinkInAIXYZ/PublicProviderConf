@@ -51,12 +51,11 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
   await withoutApiKeys(async () => {
     const result = await synthesizeCustomProvider();
 
-    assert.equal(result.models.length >= 20, true);
-    assert.equal(result.models.length <= 32, true);
+    assert.equal(result.models.length, result.catalog.maxModels);
     assert.deepEqual(
       result.summaries.map(summary => [summary.displayName, summary.selected]),
       [
-        ['OpenAI', 6],
+        ['OpenAI', 10],
         ['Anthropic', 3],
         ['Gemini', 5],
         ['Kimi', 5],
@@ -87,6 +86,10 @@ test('creates valid normalized model cards in the provider output shape', async 
     const provider = createModelsDevProvider(providerInfo);
     const model = provider.models.find(item => item.id === 'gpt-5.4');
     const gpt55 = provider.models.find(item => item.id === 'gpt-5.5');
+    const gpt56 = provider.models.find(item => item.id === 'gpt-5.6');
+    const gpt56Sol = provider.models.find(item => item.id === 'gpt-5.6-sol');
+    const gpt56Terra = provider.models.find(item => item.id === 'gpt-5.6-terra');
+    const gpt56Luna = provider.models.find(item => item.id === 'gpt-5.6-luna');
     const deepSeekV4 = provider.models.find(item => item.id === 'deepseek-v4-pro');
     const glm52 = provider.models.find(item => item.id === 'glm-5.2');
     const providerData = { providers: { [provider.id]: provider } };
@@ -96,8 +99,40 @@ test('creates valid normalized model cards in the provider output shape', async 
 
     assert.equal(provider.id, 'custom-provider');
     assert.equal(provider.name, 'custom provider');
-    assert.equal(gpt55?.metadata?.apiStatus, 'coming-soon');
+    assert.equal(gpt55?.metadata?.apiStatus, 'active');
+    assert.equal(gpt55?.metadata?.lifecycle, 'active');
     assert.equal(gpt55?.extra_capabilities?.reasoning?.effort_options?.includes('xhigh'), true);
+    assert.ok(gpt56);
+    assert.ok(gpt56Sol);
+    assert.ok(gpt56Terra);
+    assert.ok(gpt56Luna);
+
+    const {
+      id: _gpt56Id,
+      name: _gpt56Name,
+      display_name: _gpt56DisplayName,
+      ...gpt56Comparable
+    } = gpt56;
+    const {
+      id: _gpt56SolId,
+      name: _gpt56SolName,
+      display_name: _gpt56SolDisplayName,
+      ...gpt56SolComparable
+    } = gpt56Sol;
+
+    assert.deepEqual(gpt56Comparable, gpt56SolComparable);
+    for (const gpt56Model of [gpt56, gpt56Sol, gpt56Terra, gpt56Luna]) {
+      assert.deepEqual(gpt56Model.extra_capabilities?.reasoning?.effort_options, [
+        'none',
+        'low',
+        'medium',
+        'high',
+        'xhigh',
+        'max',
+      ]);
+      assert.equal(gpt56Model.extra_capabilities?.reasoning?.effort, 'medium');
+      assert.equal(gpt56Model.metadata?.lifecycle, 'active');
+    }
     assert.equal(model?.type, 'chat');
     assert.equal(model?.tool_call, true);
     assert.equal(model?.structured_output, true);

@@ -28,6 +28,25 @@ function assertProfile(
 }
 
 test('matches GPT-5 family effort ladders', () => {
+  const gpt56Profile = {
+    defaultEnabled: true,
+    mode: 'effort' as const,
+    effort: 'medium' as const,
+    effortOptions: ['none', 'low', 'medium', 'high', 'xhigh', 'max'] as ReasoningEffort[],
+    verbosity: 'medium' as const,
+    verbosityOptions: ['low', 'medium', 'high'] as ReasoningVerbosity[],
+  };
+
+  for (const modelId of [
+    'gpt-5.6',
+    'openai/gpt-5.6-sol',
+    'gpt-5.6-terra',
+    'gpt-5.6-luna',
+    'openai/gpt-5.6-sol-2026-07-09',
+  ]) {
+    assertProfile(modelId, gpt56Profile);
+  }
+
   assertProfile('openai/gpt-5.5', {
     defaultEnabled: true,
     mode: 'effort',
@@ -235,6 +254,7 @@ test('does not add xhigh to unsupported reasoning families', () => {
 });
 
 test('does not infer effort ladders for GPT-5 chat aliases without official effort docs', () => {
+  assert.equal(getOpenAIReasoningProfile('openai/gpt-5.6-chat'), undefined);
   assert.equal(getOpenAIReasoningProfile('openai/gpt-5.3-chat'), undefined);
   assert.equal(getOpenAIReasoningProfile('openai/gpt-5.1-chat'), undefined);
   assert.equal(getOpenAIReasoningProfile('openai/gpt-5.1-chat-latest'), undefined);

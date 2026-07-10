@@ -1,4 +1,11 @@
-export type ReasoningEffort = 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh';
+export type ReasoningEffort =
+  | 'none'
+  | 'minimal'
+  | 'low'
+  | 'medium'
+  | 'high'
+  | 'xhigh'
+  | 'max';
 export type ReasoningVerbosity = 'low' | 'medium' | 'high';
 export type OpenAIReasoningMode = 'effort' | 'fixed';
 
@@ -34,6 +41,13 @@ const LEGACY_GPT5_FAMILIES = [
   'gpt-5-codex',
 ] as const;
 
+const GPT56_FAMILIES = [
+  'gpt-5-6',
+  'gpt-5-6-sol',
+  'gpt-5-6-terra',
+  'gpt-5-6-luna',
+] as const;
+
 const GPT5_TEXT_VERBOSITY: ReasoningVerbosity = 'medium';
 const GPT5_TEXT_VERBOSITY_OPTIONS: ReasoningVerbosity[] = ['low', 'medium', 'high'];
 
@@ -46,6 +60,16 @@ function withGpt5TextVerbosity(profile: OpenAIReasoningProfile): OpenAIReasoning
 }
 
 const OPENAI_REASONING_RULES: OpenAIReasoningRule[] = [
+  {
+    matches: (_baseId, portableBaseId) =>
+      GPT56_FAMILIES.some(family => isPortableExactOrSnapshot(portableBaseId, family)),
+    profile: withGpt5TextVerbosity({
+      defaultEnabled: true,
+      mode: 'effort',
+      effort: 'medium',
+      effortOptions: ['none', 'low', 'medium', 'high', 'xhigh', 'max'],
+    }),
+  },
   {
     matches: (_baseId, portableBaseId) => isPortableExactOrSnapshot(portableBaseId, 'gpt-5-5'),
     profile: withGpt5TextVerbosity({
