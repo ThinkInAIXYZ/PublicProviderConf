@@ -103,6 +103,52 @@
       }
     },
     {
+      "id": "xiaomi/mimo-v2.5",
+      "name": "MiMo-V2.5",
+      "description": "MiMo omni model for text, image, video, audio, and agents",
+      "family": "mimo",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-12",
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.4,
+        "output": 2,
+        "cache_read": 0.08,
+        "cache_write": 0
+      },
+      "display_name": "MiMo-V2.5",
+      "type": "chat"
+    },
+    {
       "id": "stepfun/step-3.7-flash",
       "name": "Step 3.7 Flash",
       "description": "StepFun flash model for efficient multimodal reasoning, coding, and tool use",
@@ -111,7 +157,16 @@
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
@@ -273,9 +328,9 @@
         "output": 262144
       },
       "cost": {
-        "input": 0.75,
-        "output": 3.5,
-        "cache_read": 0.16,
+        "input": 1,
+        "output": 4.4,
+        "cache_read": 0.2,
         "cache_write": 0
       },
       "display_name": "Kimi K2.7 Code",
@@ -337,6 +392,67 @@
           "interleaved": true,
           "summaries": true,
           "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "description": "Fast DeepSeek model for efficient chat, coding help, and agent loops",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "cost": {
+        "input": 0.25,
+        "output": 0.4,
+        "cache_read": 0.1,
+        "cache_write": 0
+      },
+      "display_name": "DeepSeek V4 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     }
