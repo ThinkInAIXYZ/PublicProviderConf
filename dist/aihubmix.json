@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2026-07-22T00:38:01.895Z",
+  "updated_at": "2026-07-22T04:38:08.177Z",
   "models": [
     {
       "id": "auto",
@@ -531,7 +531,8 @@
       "tool_call": true,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ]
       },
       "cost": {
@@ -557,7 +558,8 @@
           "thinking"
         ],
         "inputModalities": [
-          "text"
+          "text",
+          "image"
         ],
         "pricing": {
           "cache_read": 0.0169,
@@ -567,7 +569,7 @@
         },
         "source": "public-provider-conf"
       },
-      "vision": false,
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true
@@ -701,7 +703,7 @@
       "cost": {
         "input": 0.3,
         "output": 2.499999,
-        "cache_read": 0.3
+        "cache_read": 0.03
       },
       "limit": {
         "context": 1048576,
@@ -728,7 +730,7 @@
           "video"
         ],
         "pricing": {
-          "cache_read": 0.3,
+          "cache_read": 0.03,
           "input": 0.3,
           "output": 2.499999
         },
@@ -919,6 +921,58 @@
           "cache_read": 0.2817,
           "input": 1.1268,
           "output": 3.9438
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "glm-5.2-fast-preview",
+      "name": "glm-5.2-fast-preview",
+      "display_name": "glm-5.2-fast-preview",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 2.254,
+        "output": 7.889,
+        "cache_read": 0.5635
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "metadata": {
+        "description": "GLM-5.2-Fast-Preview is the high-speed version of Zhipu AI’s flagship model GLM-5.2, supporting a 1M ultra-long context. The model’s capabilities are aligned with the GLM-5.2 standard version, offering logical reasoning, long-text understanding, and code generation. Through inference acceleration optimizations, output TPS can reach 1.5–2× that of the GLM-5.2 standard version, significantly improving output speed. It is suitable for scenarios sensitive to output speed, such as real-time dialogue, multi-turn Agent calls, and streaming code generation.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.5635,
+          "input": 2.254,
+          "output": 7.889
         },
         "source": "public-provider-conf"
       },
@@ -1270,7 +1324,7 @@
       "cost": {
         "input": 1.5,
         "output": 9,
-        "cache_read": 1.5
+        "cache_read": 0.15
       },
       "limit": {
         "context": 1000000,
@@ -1297,7 +1351,7 @@
           "video"
         ],
         "pricing": {
-          "cache_read": 1.5,
+          "cache_read": 0.15,
           "input": 1.5,
           "output": 9
         },
@@ -15592,6 +15646,53 @@
       }
     },
     {
+      "id": "grok-4-fast-non-reasoning",
+      "name": "grok-4-fast-non-reasoning",
+      "display_name": "grok-4-fast-non-reasoning",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 0.5,
+        "cache_read": 0.05
+      },
+      "limit": {
+        "context": 2000000,
+        "output": 2000000
+      },
+      "metadata": {
+        "description": "Grok-4-fast is a cost-effective inference model developed by xAI that delivers cutting-edge performance with excellent token efficiency. The model features a 2 million token context window, advanced Web and X search capabilities, and a unified architecture supporting both \"inference\" and \"non-inference\" modes. Compared to Grok 4, it reduces thinking tokens by an average of 40% and lowers the price by 98% while achieving the same performance.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0.05,
+          "input": 0.2,
+          "output": 0.5
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "grok-4-fast-reasoning",
       "name": "grok-4-fast-reasoning",
       "display_name": "grok-4-fast-reasoning",
@@ -16118,48 +16219,6 @@
       "vision": false
     },
     {
-      "id": "veo-3.1-fast-generate-preview",
-      "name": "veo-3.1-fast-generate-preview",
-      "display_name": "veo-3.1-fast-generate-preview",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ]
-      },
-      "cost": {
-        "input": 2,
-        "output": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Veo 3.1 is Google's state-of-the-art model for generating high-fidelity, 8-second 720p , 1080p or 4k videos featuring stunning realism and natively generated audio.",
-        "typeHints": [
-          "video"
-        ],
-        "inputModalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "pricing": {
-          "input": 2,
-          "output": 0
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "veo-3.0-generate-preview",
       "name": "veo-3.0-generate-preview",
       "display_name": "veo-3.0-generate-preview",
@@ -16198,6 +16257,48 @@
           "cache_read": 0,
           "input": 2,
           "output": 2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "veo-3.1-fast-generate-preview",
+      "name": "veo-3.1-fast-generate-preview",
+      "display_name": "veo-3.1-fast-generate-preview",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ]
+      },
+      "cost": {
+        "input": 2,
+        "output": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Veo 3.1 is Google's state-of-the-art model for generating high-fidelity, 8-second 720p , 1080p or 4k videos featuring stunning realism and natively generated audio.",
+        "typeHints": [
+          "video"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "pricing": {
+          "input": 2,
+          "output": 0
         },
         "source": "public-provider-conf"
       },
@@ -16543,53 +16644,6 @@
           "supported": true
         }
       }
-    },
-    {
-      "id": "grok-4-fast-non-reasoning",
-      "name": "grok-4-fast-non-reasoning",
-      "display_name": "grok-4-fast-non-reasoning",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ]
-      },
-      "cost": {
-        "input": 0.2,
-        "output": 0.5,
-        "cache_read": 0.05
-      },
-      "limit": {
-        "context": 2000000,
-        "output": 2000000
-      },
-      "metadata": {
-        "description": "Grok-4-fast is a cost-effective inference model developed by xAI that delivers cutting-edge performance with excellent token efficiency. The model features a 2 million token context window, advanced Web and X search capabilities, and a unified architecture supporting both \"inference\" and \"non-inference\" modes. Compared to Grok 4, it reduces thinking tokens by an average of 40% and lowers the price by 98% while achieving the same performance.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "cache_read": 0.05,
-          "input": 0.2,
-          "output": 0.5
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
     },
     {
       "id": "gpt-4.1-mini",
@@ -29356,17 +29410,17 @@
       "vision": false
     },
     {
-      "id": "step-2-16k",
-      "name": "step-2-16k",
-      "display_name": "step-2-16k",
+      "id": "text-moderation-007",
+      "name": "text-moderation-007",
+      "display_name": "text-moderation-007",
       "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "cost": {
-        "input": 2,
-        "output": 2
+        "input": 0.2,
+        "output": 0.2
       },
       "limit": {
         "context": 8192,
@@ -29374,8 +29428,34 @@
       },
       "metadata": {
         "pricing": {
-          "input": 2,
-          "output": 2
+          "input": 0.2,
+          "output": 0.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "text-moderation-latest",
+      "name": "text-moderation-latest",
+      "display_name": "text-moderation-latest",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 0.2,
+        "output": 0.2
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 0.2,
+          "output": 0.2
         },
         "source": "public-provider-conf"
       },
@@ -29419,43 +29499,6 @@
       "vision": false
     },
     {
-      "id": "tts-1-hd-1106",
-      "name": "tts-1-hd-1106",
-      "display_name": "tts-1-hd-1106",
-      "type": "audio",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "audio"
-        ]
-      },
-      "cost": {
-        "input": 30,
-        "output": 30
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "typeHints": [
-          "tts"
-        ],
-        "inputModalities": [
-          "audio"
-        ],
-        "pricing": {
-          "input": 30,
-          "output": 30
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "text-embedding-ada-002",
       "name": "text-embedding-ada-002",
       "display_name": "text-embedding-ada-002",
@@ -29493,37 +29536,26 @@
       "vision": false
     },
     {
-      "id": "tts-1-hd",
-      "name": "tts-1-hd",
-      "display_name": "tts-1-hd",
-      "type": "audio",
+      "id": "text-moderation-stable",
+      "name": "text-moderation-stable",
+      "display_name": "text-moderation-stable",
+      "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
-      "modalities": {
-        "input": [
-          "audio"
-        ]
-      },
       "cost": {
-        "input": 30,
-        "output": 30
+        "input": 0.2,
+        "output": 0.2
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
-        "typeHints": [
-          "tts"
-        ],
-        "inputModalities": [
-          "audio"
-        ],
         "pricing": {
-          "input": 30,
-          "output": 30
+          "input": 0.2,
+          "output": 0.2
         },
         "source": "public-provider-conf"
       },
@@ -29567,48 +29599,22 @@
       "vision": false
     },
     {
-      "id": "text-moderation-007",
-      "name": "text-moderation-007",
-      "display_name": "text-moderation-007",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.2,
-        "output": 0.2
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 0.2,
-          "output": 0.2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "tts-1-1106",
-      "name": "tts-1-1106",
-      "display_name": "tts-1-1106",
-      "type": "audio",
+      "id": "text-embedding-3-large",
+      "name": "text-embedding-3-large",
+      "display_name": "text-embedding-3-large",
+      "type": "embedding",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "modalities": {
         "input": [
-          "audio"
+          "text"
         ]
       },
       "cost": {
-        "input": 15,
-        "output": 15
+        "input": 0.13,
+        "output": 0.13
       },
       "limit": {
         "context": 8192,
@@ -29616,14 +29622,40 @@
       },
       "metadata": {
         "typeHints": [
-          "tts"
+          "embedding"
         ],
         "inputModalities": [
-          "audio"
+          "text"
         ],
         "pricing": {
-          "input": 15,
-          "output": 15
+          "input": 0.13,
+          "output": 0.13
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "text-search-ada-doc-001",
+      "name": "text-search-ada-doc-001",
+      "display_name": "text-search-ada-doc-001",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 20,
+        "output": 20
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "pricing": {
+          "input": 20,
+          "output": 20
         },
         "source": "public-provider-conf"
       },
@@ -29898,9 +29930,83 @@
       "vision": false
     },
     {
-      "id": "tts-1",
-      "name": "tts-1",
-      "display_name": "tts-1",
+      "id": "tts-1-hd-1106",
+      "name": "tts-1-hd-1106",
+      "display_name": "tts-1-hd-1106",
+      "type": "audio",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "audio"
+        ]
+      },
+      "cost": {
+        "input": 30,
+        "output": 30
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "typeHints": [
+          "tts"
+        ],
+        "inputModalities": [
+          "audio"
+        ],
+        "pricing": {
+          "input": 30,
+          "output": 30
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "tts-1-hd",
+      "name": "tts-1-hd",
+      "display_name": "tts-1-hd",
+      "type": "audio",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "audio"
+        ]
+      },
+      "cost": {
+        "input": 30,
+        "output": 30
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "typeHints": [
+          "tts"
+        ],
+        "inputModalities": [
+          "audio"
+        ],
+        "pricing": {
+          "input": 30,
+          "output": 30
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "tts-1-1106",
+      "name": "tts-1-1106",
+      "display_name": "tts-1-1106",
       "type": "audio",
       "reasoning": {
         "supported": false
@@ -29935,78 +30041,37 @@
       "vision": false
     },
     {
-      "id": "text-search-ada-doc-001",
-      "name": "text-search-ada-doc-001",
-      "display_name": "text-search-ada-doc-001",
-      "type": "chat",
+      "id": "tts-1",
+      "name": "tts-1",
+      "display_name": "tts-1",
+      "type": "audio",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
+      "modalities": {
+        "input": [
+          "audio"
+        ]
+      },
       "cost": {
-        "input": 20,
-        "output": 20
+        "input": 15,
+        "output": 15
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
+        "typeHints": [
+          "tts"
+        ],
+        "inputModalities": [
+          "audio"
+        ],
         "pricing": {
-          "input": 20,
-          "output": 20
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "text-moderation-stable",
-      "name": "text-moderation-stable",
-      "display_name": "text-moderation-stable",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.2,
-        "output": 0.2
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 0.2,
-          "output": 0.2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
-      "id": "text-moderation-latest",
-      "name": "text-moderation-latest",
-      "display_name": "text-moderation-latest",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 0.2,
-        "output": 0.2
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "pricing": {
-          "input": 0.2,
-          "output": 0.2
+          "input": 15,
+          "output": 15
         },
         "source": "public-provider-conf"
       },
@@ -30169,37 +30234,26 @@
       "vision": false
     },
     {
-      "id": "text-embedding-3-large",
-      "name": "text-embedding-3-large",
-      "display_name": "text-embedding-3-large",
-      "type": "embedding",
+      "id": "step-2-16k",
+      "name": "step-2-16k",
+      "display_name": "step-2-16k",
+      "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
       "cost": {
-        "input": 0.13,
-        "output": 0.13
+        "input": 2,
+        "output": 2
       },
       "limit": {
         "context": 8192,
         "output": 8192
       },
       "metadata": {
-        "typeHints": [
-          "embedding"
-        ],
-        "inputModalities": [
-          "text"
-        ],
         "pricing": {
-          "input": 0.13,
-          "output": 0.13
+          "input": 2,
+          "output": 2
         },
         "source": "public-provider-conf"
       },
