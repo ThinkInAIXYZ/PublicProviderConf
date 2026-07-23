@@ -6,6 +6,303 @@
   "display_name": "Neon",
   "models": [
     {
+      "id": "claude-opus-4-8",
+      "name": "Claude Opus 4.8",
+      "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-01",
+      "release_date": "2026-05-28",
+      "last_updated": "2026-05-28",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
+      },
+      "display_name": "Claude Opus 4.8",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-1",
+      "name": "Claude Opus 4.1 (latest)",
+      "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens",
+          "min": 1024,
+          "max": 31999
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-03-31",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 32000
+      },
+      "cost": {
+        "input": 15,
+        "output": 75,
+        "cache_read": 1.5,
+        "cache_write": 18.75
+      },
+      "display_name": "Claude Opus 4.1 (latest)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-sonnet-4",
+      "name": "Claude Sonnet 4.5",
+      "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens",
+          "min": 1024,
+          "max": 63999
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-07-31",
+      "release_date": "2025-09-29",
+      "last_updated": "2025-09-29",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
+      },
+      "display_name": "Claude Sonnet 4.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "gpt-5-mini",
+      "name": "GPT-5 Mini",
+      "description": "Small GPT-5 for responsive agents, coding help, and everyday automation",
+      "family": "gpt-mini",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2024-05-30",
+      "release_date": "2025-08-07",
+      "last_updated": "2025-08-07",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text",
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai",
+        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
+        "shape": "responses"
+      },
+      "cost": {
+        "input": 0.25,
+        "output": 2,
+        "cache_read": 0.025
+      },
+      "display_name": "GPT-5 Mini",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
       "id": "claude-sonnet-4-6",
       "name": "Claude Sonnet 4.6",
       "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
@@ -83,6 +380,358 @@
       }
     },
     {
+      "id": "gemini-3-1-pro",
+      "name": "Gemini 3.1 Pro Preview Custom Tools",
+      "description": "Advanced Gemini model for complex reasoning, coding, and multimodal analysis",
+      "family": "gemini-pro",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-02-19",
+      "last_updated": "2026-02-19",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 18,
+            "cache_read": 0.4,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 18,
+          "cache_read": 0.4
+        }
+      },
+      "display_name": "Gemini 3.1 Pro Preview Custom Tools",
+      "type": "chat"
+    },
+    {
+      "id": "meta-llama-3-1-8b-instruct",
+      "name": "Llama 3.1 8B Instruct",
+      "description": "Meta's compact open-weight Llama 3.1 model for fast, low-cost text generation",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2023-12-31",
+      "release_date": "2024-07-23",
+      "last_updated": "2024-07-23",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.45
+      },
+      "display_name": "Llama 3.1 8B Instruct",
+      "type": "chat"
+    },
+    {
+      "id": "gpt-5-2",
+      "name": "GPT-5.2",
+      "description": "Reliable GPT generation for broad coding, writing, and tool-assisted product work",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-08-31",
+      "release_date": "2025-12-11",
+      "last_updated": "2025-12-11",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text",
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai",
+        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
+        "shape": "responses"
+      },
+      "cost": {
+        "input": 1.75,
+        "output": 14,
+        "cache_read": 0.175
+      },
+      "display_name": "GPT-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "gemini-3-flash",
+      "name": "Gemini 3 Flash Preview",
+      "description": "New Gemini flash lane bringing frontier-style multimodal reasoning to cheaper runs",
+      "family": "gemini-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2025-12-17",
+      "last_updated": "2025-12-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 3,
+        "cache_read": 0.05,
+        "input_audio": 1
+      },
+      "display_name": "Gemini 3 Flash Preview",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gemma-3-12b",
+      "name": "Gemma 3 12B",
+      "description": "Google's open-weight Gemma 3 vision-language model for text and image understanding",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-08-31",
+      "release_date": "2025-03-13",
+      "last_updated": "2025-03-13",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.5
+      },
+      "display_name": "Gemma 3 12B",
+      "type": "chat"
+    },
+    {
+      "id": "gemini-2-5-pro",
+      "name": "Gemini 2.5 Pro",
+      "description": "Google's proven reasoning model for coding, math, and multimodal analysis",
+      "family": "gemini-pro",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "budget_tokens",
+          "min": 128,
+          "max": 32768
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2025-06-17",
+      "last_updated": "2025-06-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.125,
+        "tiers": [
+          {
+            "input": 2.5,
+            "output": 15,
+            "cache_read": 0.25,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 2.5,
+          "output": 15,
+          "cache_read": 0.25
+        }
+      },
+      "display_name": "Gemini 2.5 Pro",
+      "type": "chat"
+    },
+    {
       "id": "claude-haiku-4-5",
       "name": "Claude Haiku 4.5 (latest)",
       "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
@@ -153,120 +802,117 @@
       }
     },
     {
-      "id": "gemini-3-5-flash",
-      "name": "Gemini 3.5 Flash",
-      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
-      "family": "gemini-flash",
+      "id": "gpt-5-4-mini",
+      "name": "GPT-5.4 mini",
+      "description": "Strong small GPT for coding subagents, quick tool use, and high-volume work",
+      "family": "gpt-mini",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "reasoning_options": [
         {
           "type": "effort",
           "values": [
-            "minimal",
+            "none",
             "low",
             "medium",
-            "high"
+            "high",
+            "xhigh"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-05-19",
-      "last_updated": "2026-05-19",
+      "temperature": false,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-17",
+      "last_updated": "2026-03-17",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
+          "image"
         ],
         "output": [
-          "text"
+          "text",
+          "image"
         ]
       },
       "open_weights": false,
       "limit": {
-        "context": 1048576,
-        "output": 65536
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai",
+        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
+        "shape": "responses"
       },
       "cost": {
-        "input": 1.5,
-        "output": 9,
-        "cache_read": 0.15,
-        "input_audio": 1.5
+        "input": 0.75,
+        "output": 4.5,
+        "cache_read": 0.075
       },
-      "display_name": "Gemini 3.5 Flash",
-      "type": "chat"
+      "display_name": "GPT-5.4 mini",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
-      "id": "gemini-2-5-pro",
-      "name": "Gemini 2.5 Pro",
-      "description": "Google's proven reasoning model for coding, math, and multimodal analysis",
-      "family": "gemini-pro",
+      "id": "llama-4-maverick",
+      "name": "Llama 4 Maverick 17B Instruct",
+      "description": "Open multimodal Llama for strong reasoning with efficient everyday serving",
+      "family": "llama",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "budget_tokens",
-          "min": 128,
-          "max": 32768
-        }
-      ],
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2025-06-17",
-      "last_updated": "2025-06-17",
+      "knowledge": "2024-08",
+      "release_date": "2025-04-05",
+      "last_updated": "2025-04-05",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "audio",
-          "video",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 65536
+        "context": 1000000,
+        "output": 16384
       },
       "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.125,
-        "tiers": [
-          {
-            "input": 2.5,
-            "output": 15,
-            "cache_read": 0.25,
-            "tier": {
-              "type": "context",
-              "size": 200000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 2.5,
-          "output": 15,
-          "cache_read": 0.25
-        }
+        "input": 0.5,
+        "output": 1.5
       },
-      "display_name": "Gemini 2.5 Pro",
+      "display_name": "Llama 4 Maverick 17B Instruct",
       "type": "chat"
     },
     {
@@ -366,9 +1012,606 @@
       }
     },
     {
-      "id": "claude-opus-4-6",
-      "name": "Claude Opus 4.6",
-      "description": "High-end Claude for difficult coding, planning, and slower expert reasoning",
+      "id": "gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.072,
+        "output": 0.28
+      },
+      "display_name": "GPT OSS 120B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "qwen35-122b-a10b",
+      "name": "Qwen3.5 122B-A10B",
+      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "family": "qwen",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-02-23",
+      "last_updated": "2026-02-23",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 8000
+      },
+      "cost": {
+        "input": 0.22,
+        "output": 2.2
+      },
+      "display_name": "Qwen3.5 122B-A10B",
+      "type": "chat"
+    },
+    {
+      "id": "gpt-5",
+      "name": "GPT-5",
+      "description": "Original GPT-5 workhorse for reasoning, coding, writing, and tool workflows",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2024-09-30",
+      "release_date": "2025-08-07",
+      "last_updated": "2025-08-07",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text",
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai",
+        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
+        "shape": "responses"
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.125
+      },
+      "display_name": "GPT-5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "gpt-5-2-codex",
+      "name": "GPT-5.2 Codex",
+      "description": "Code-specialist GPT for repository edits, reviews, and long-running software agents",
+      "family": "gpt-codex",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-08-31",
+      "release_date": "2025-12-11",
+      "last_updated": "2025-12-11",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text",
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai",
+        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
+        "shape": "responses"
+      },
+      "cost": {
+        "input": 1.75,
+        "output": 14,
+        "cache_read": 0.175
+      },
+      "display_name": "GPT-5.2 Codex",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "gpt-5-1-codex-mini",
+      "name": "GPT-5.1 Codex mini",
+      "description": "Coding-optimized GPT model for repository edits, reviews, and agentic software work",
+      "family": "gpt-codex",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2024-09-30",
+      "release_date": "2025-11-13",
+      "last_updated": "2025-11-13",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text",
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai",
+        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
+        "shape": "responses"
+      },
+      "cost": {
+        "input": 0.25,
+        "output": 2,
+        "cache_read": 0.025
+      },
+      "display_name": "GPT-5.1 Codex mini",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "gemini-3-5-flash",
+      "name": "Gemini 3.5 Flash",
+      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
+      "family": "gemini-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-05-19",
+      "last_updated": "2026-05-19",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 1.5,
+        "output": 9,
+        "cache_read": 0.15,
+        "input_audio": 1.5
+      },
+      "display_name": "Gemini 3.5 Flash",
+      "type": "chat"
+    },
+    {
+      "id": "gpt-5-3-codex",
+      "name": "GPT-5.3 Codex",
+      "description": "Coding-optimized GPT model for repository edits, reviews, and agentic software work",
+      "family": "gpt-codex",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-02-05",
+      "last_updated": "2026-02-05",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text",
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai",
+        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
+        "shape": "responses"
+      },
+      "cost": {
+        "input": 1.75,
+        "output": 14,
+        "cache_read": 0.175
+      },
+      "display_name": "GPT-5.3 Codex",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "gemini-2-5-flash",
+      "name": "Gemini 2.5 Flash",
+      "description": "Fast Gemini workhorse for multimodal apps where latency and price matter",
+      "family": "gemini-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens",
+          "min": 0,
+          "max": 24576
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2025-06-17",
+      "last_updated": "2025-06-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 2.5,
+        "cache_read": 0.03,
+        "input_audio": 1
+      },
+      "display_name": "Gemini 2.5 Flash",
+      "type": "chat"
+    },
+    {
+      "id": "meta-llama-3-3-70b-instruct",
+      "name": "Llama-3.3-70B-Instruct",
+      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-12-06",
+      "last_updated": "2024-12-06",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 4096
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 1.5
+      },
+      "display_name": "Llama-3.3-70B-Instruct",
+      "type": "chat"
+    },
+    {
+      "id": "gemini-3-1-flash-lite",
+      "name": "Gemini 3.1 Flash Lite Preview",
+      "description": "Low-latency Gemini model for high-volume multimodal and agent workloads",
+      "family": "gemini-flash-lite",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-03-03",
+      "last_updated": "2026-03-03",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.25,
+        "output": 1.5,
+        "cache_read": 0.025,
+        "input_audio": 0.5
+      },
+      "display_name": "Gemini 3.1 Flash Lite Preview",
+      "type": "chat"
+    },
+    {
+      "id": "claude-opus-4-5",
+      "name": "Claude Opus 4.5 (latest)",
+      "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
       "family": "claude-opus",
       "attachment": true,
       "reasoning": {
@@ -382,14 +1625,14 @@
         {
           "type": "budget_tokens",
           "min": 1024,
-          "max": 127999
+          "max": 63999
         }
       ],
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2025-05-31",
-      "release_date": "2026-02-05",
-      "last_updated": "2026-03-13",
+      "knowledge": "2025-05",
+      "release_date": "2025-11-24",
+      "last_updated": "2025-11-24",
       "modalities": {
         "input": [
           "text",
@@ -402,8 +1645,8 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 200000,
+        "output": 64000
       },
       "cost": {
         "input": 5,
@@ -411,7 +1654,7 @@
         "cache_read": 0.5,
         "cache_write": 6.25
       },
-      "display_name": "Claude Opus 4.6",
+      "display_name": "Claude Opus 4.5 (latest)",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -426,8 +1669,7 @@
           "effort_options": [
             "low",
             "medium",
-            "high",
-            "max"
+            "high"
           ],
           "interleaved": true,
           "summaries": true,
@@ -436,89 +1678,86 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
-            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+            "Claude Opus 4.5 uses manual thinking.type = \"enabled\" with budget_tokens; effort can be used alongside the thinking budget.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header."
           ]
         }
       }
     },
     {
-      "id": "claude-opus-4-8",
-      "name": "Claude Opus 4.8",
-      "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
-      "family": "claude-opus",
+      "id": "gpt-5-nano",
+      "name": "GPT-5 Nano",
+      "description": "Tiny GPT-5 lane for routing, extraction, classification, and bulk jobs",
+      "family": "gpt-nano",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": false
+        "default": true
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        },
-        {
           "type": "effort",
           "values": [
+            "minimal",
             "low",
             "medium",
-            "high",
-            "xhigh",
-            "max"
+            "high"
           ]
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": false,
-      "knowledge": "2026-01",
-      "release_date": "2026-05-28",
-      "last_updated": "2026-05-28",
+      "knowledge": "2024-05-30",
+      "release_date": "2025-08-07",
+      "last_updated": "2025-08-07",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
-          "text"
+          "text",
+          "image"
         ]
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
+        "context": 400000,
+        "input": 272000,
         "output": 128000
       },
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
+      "provider": {
+        "npm": "@ai-sdk/openai",
+        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
+        "shape": "responses"
       },
-      "display_name": "Claude Opus 4.8",
+      "cost": {
+        "input": 0.05,
+        "output": 0.4,
+        "cache_read": 0.005
+      },
+      "display_name": "GPT-5 Nano",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": false,
+          "default_enabled": true,
           "mode": "effort",
-          "effort": "high",
+          "effort": "medium",
           "effort_options": [
+            "minimal",
             "low",
             "medium",
-            "high",
-            "xhigh",
-            "max"
+            "high"
           ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
           ],
-          "notes": [
-            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
-            "task_budget is separate from thinking control and should not be treated as a thinking budget."
-          ]
+          "visibility": "hidden"
         }
       }
     },
@@ -652,9 +1891,9 @@
       }
     },
     {
-      "id": "gemini-3-1-pro",
-      "name": "Gemini 3.1 Pro Preview Custom Tools",
-      "description": "Advanced Gemini model for complex reasoning, coding, and multimodal analysis",
+      "id": "gemini-3-pro",
+      "name": "Gemini 3 Pro Preview",
+      "description": "Preview Gemini flagship for complex reasoning, coding, and rich multimodal prompts",
       "family": "gemini-pro",
       "attachment": true,
       "reasoning": {
@@ -675,8 +1914,8 @@
       "structured_output": true,
       "temperature": true,
       "knowledge": "2025-01",
-      "release_date": "2026-02-19",
-      "last_updated": "2026-02-19",
+      "release_date": "2025-11-18",
+      "last_updated": "2025-11-18",
       "modalities": {
         "input": [
           "text",
@@ -715,59 +1954,7 @@
           "cache_read": 0.4
         }
       },
-      "display_name": "Gemini 3.1 Pro Preview Custom Tools",
-      "type": "chat"
-    },
-    {
-      "id": "gemini-3-flash",
-      "name": "Gemini 3 Flash Preview",
-      "description": "New Gemini flash lane bringing frontier-style multimodal reasoning to cheaper runs",
-      "family": "gemini-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2025-12-17",
-      "last_updated": "2025-12-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.5,
-        "output": 3,
-        "cache_read": 0.05,
-        "input_audio": 1
-      },
-      "display_name": "Gemini 3 Flash Preview",
+      "display_name": "Gemini 3 Pro Preview",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -776,9 +1963,7 @@
           "mode": "level",
           "level": "high",
           "level_options": [
-            "minimal",
             "low",
-            "medium",
             "high"
           ],
           "summaries": true,
@@ -790,10 +1975,271 @@
       }
     },
     {
-      "id": "gpt-5-1-codex-mini",
-      "name": "GPT-5.1 Codex mini",
-      "description": "Coding-optimized GPT model for repository edits, reviews, and agentic software work",
-      "family": "gpt-codex",
+      "id": "claude-opus-4-7",
+      "name": "Claude Opus 4.7",
+      "description": "Stronger Opus tier for advanced software work and high-stakes reasoning",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
+      },
+      "display_name": "Claude Opus 4.7",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-6",
+      "name": "Claude Opus 4.6",
+      "description": "High-end Claude for difficult coding, planning, and slower expert reasoning",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens",
+          "min": 1024,
+          "max": 127999
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-05-31",
+      "release_date": "2026-02-05",
+      "last_updated": "2026-03-13",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
+      },
+      "display_name": "Claude Opus 4.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen3-next-80b-a3b-instruct",
+      "name": "Qwen3-Next 80B-A3B Instruct",
+      "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
+      "family": "qwen",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-04",
+      "release_date": "2025-09",
+      "last_updated": "2025-09",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 1.2
+      },
+      "display_name": "Qwen3-Next 80B-A3B Instruct",
+      "type": "chat"
+    },
+    {
+      "id": "claude-sonnet-4-5",
+      "name": "Claude Sonnet 4.5 (latest)",
+      "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens",
+          "min": 1024,
+          "max": 63999
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-07-31",
+      "release_date": "2025-09-29",
+      "last_updated": "2025-09-29",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
+      },
+      "display_name": "Claude Sonnet 4.5 (latest)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "gpt-5-1",
+      "name": "GPT-5.1",
+      "description": "Sharper GPT-5 generation for coding, product work, and tool-assisted tasks",
+      "family": "gpt",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -803,6 +2249,7 @@
         {
           "type": "effort",
           "values": [
+            "none",
             "low",
             "medium",
             "high"
@@ -837,11 +2284,11 @@
         "shape": "responses"
       },
       "cost": {
-        "input": 0.25,
-        "output": 2,
-        "cache_read": 0.025
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.125
       },
-      "display_name": "GPT-5.1 Codex mini",
+      "display_name": "GPT-5.1",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -941,1453 +2388,6 @@
           "visibility": "hidden"
         }
       }
-    },
-    {
-      "id": "claude-opus-4-1",
-      "name": "Claude Opus 4.1 (latest)",
-      "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens",
-          "min": 1024,
-          "max": 31999
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-03-31",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 32000
-      },
-      "cost": {
-        "input": 15,
-        "output": 75,
-        "cache_read": 1.5,
-        "cache_write": 18.75
-      },
-      "display_name": "Claude Opus 4.1 (latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
-      "id": "gpt-5",
-      "name": "GPT-5",
-      "description": "Original GPT-5 workhorse for reasoning, coding, writing, and tool workflows",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2024-09-30",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text",
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai",
-        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
-        "shape": "responses"
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.125
-      },
-      "display_name": "GPT-5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "gemini-3-1-flash-lite",
-      "name": "Gemini 3.1 Flash Lite Preview",
-      "description": "Low-latency Gemini model for high-volume multimodal and agent workloads",
-      "family": "gemini-flash-lite",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-03-03",
-      "last_updated": "2026-03-03",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.25,
-        "output": 1.5,
-        "cache_read": 0.025,
-        "input_audio": 0.5
-      },
-      "display_name": "Gemini 3.1 Flash Lite Preview",
-      "type": "chat"
-    },
-    {
-      "id": "claude-sonnet-4-5",
-      "name": "Claude Sonnet 4.5 (latest)",
-      "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens",
-          "min": 1024,
-          "max": 63999
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-07-31",
-      "release_date": "2025-09-29",
-      "last_updated": "2025-09-29",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
-      },
-      "display_name": "Claude Sonnet 4.5 (latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
-      "id": "gpt-5-4-mini",
-      "name": "GPT-5.4 mini",
-      "description": "Strong small GPT for coding subagents, quick tool use, and high-volume work",
-      "family": "gpt-mini",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-17",
-      "last_updated": "2026-03-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text",
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai",
-        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
-        "shape": "responses"
-      },
-      "cost": {
-        "input": 0.75,
-        "output": 4.5,
-        "cache_read": 0.075
-      },
-      "display_name": "GPT-5.4 mini",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "none",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "gemini-3-pro",
-      "name": "Gemini 3 Pro Preview",
-      "description": "Preview Gemini flagship for complex reasoning, coding, and rich multimodal prompts",
-      "family": "gemini-pro",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2025-11-18",
-      "last_updated": "2025-11-18",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 2,
-        "output": 12,
-        "cache_read": 0.2,
-        "tiers": [
-          {
-            "input": 4,
-            "output": 18,
-            "cache_read": 0.4,
-            "tier": {
-              "type": "context",
-              "size": 200000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 4,
-          "output": 18,
-          "cache_read": 0.4
-        }
-      },
-      "display_name": "Gemini 3 Pro Preview",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "low",
-            "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
-    },
-    {
-      "id": "gpt-5-3-codex",
-      "name": "GPT-5.3 Codex",
-      "description": "Coding-optimized GPT model for repository edits, reviews, and agentic software work",
-      "family": "gpt-codex",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-02-05",
-      "last_updated": "2026-02-05",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text",
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai",
-        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
-        "shape": "responses"
-      },
-      "cost": {
-        "input": 1.75,
-        "output": 14,
-        "cache_read": 0.175
-      },
-      "display_name": "GPT-5.3 Codex",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "llama-4-maverick",
-      "name": "Llama 4 Maverick 17B Instruct",
-      "description": "Open multimodal Llama for strong reasoning with efficient everyday serving",
-      "family": "llama",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-08",
-      "release_date": "2025-04-05",
-      "last_updated": "2025-04-05",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 16384
-      },
-      "cost": {
-        "input": 0.5,
-        "output": 1.5
-      },
-      "display_name": "Llama 4 Maverick 17B Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "claude-sonnet-4",
-      "name": "Claude Sonnet 4.5",
-      "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens",
-          "min": 1024,
-          "max": 63999
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-07-31",
-      "release_date": "2025-09-29",
-      "last_updated": "2025-09-29",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
-      },
-      "display_name": "Claude Sonnet 4.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
-      "id": "meta-llama-3-3-70b-instruct",
-      "name": "Llama-3.3-70B-Instruct",
-      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-12-06",
-      "last_updated": "2024-12-06",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 4096
-      },
-      "cost": {
-        "input": 0.5,
-        "output": 1.5
-      },
-      "display_name": "Llama-3.3-70B-Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.072,
-        "output": 0.28
-      },
-      "display_name": "GPT OSS 120B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "qwen35-122b-a10b",
-      "name": "Qwen3.5 122B-A10B",
-      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-02-23",
-      "last_updated": "2026-02-23",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 8000
-      },
-      "cost": {
-        "input": 0.22,
-        "output": 2.2
-      },
-      "display_name": "Qwen3.5 122B-A10B",
-      "type": "chat"
-    },
-    {
-      "id": "gpt-5-mini",
-      "name": "GPT-5 Mini",
-      "description": "Small GPT-5 for responsive agents, coding help, and everyday automation",
-      "family": "gpt-mini",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2024-05-30",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text",
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai",
-        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
-        "shape": "responses"
-      },
-      "cost": {
-        "input": 0.25,
-        "output": 2,
-        "cache_read": 0.025
-      },
-      "display_name": "GPT-5 Mini",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "meta-llama-3-1-8b-instruct",
-      "name": "Llama 3.1 8B Instruct",
-      "description": "Meta's compact open-weight Llama 3.1 model for fast, low-cost text generation",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2023-12-31",
-      "release_date": "2024-07-23",
-      "last_updated": "2024-07-23",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 16384
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.45
-      },
-      "display_name": "Llama 3.1 8B Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "gpt-5-2-codex",
-      "name": "GPT-5.2 Codex",
-      "description": "Code-specialist GPT for repository edits, reviews, and long-running software agents",
-      "family": "gpt-codex",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-08-31",
-      "release_date": "2025-12-11",
-      "last_updated": "2025-12-11",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text",
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai",
-        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
-        "shape": "responses"
-      },
-      "cost": {
-        "input": 1.75,
-        "output": 14,
-        "cache_read": 0.175
-      },
-      "display_name": "GPT-5.2 Codex",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "gpt-5-nano",
-      "name": "GPT-5 Nano",
-      "description": "Tiny GPT-5 lane for routing, extraction, classification, and bulk jobs",
-      "family": "gpt-nano",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2024-05-30",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text",
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai",
-        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
-        "shape": "responses"
-      },
-      "cost": {
-        "input": 0.05,
-        "output": 0.4,
-        "cache_read": 0.005
-      },
-      "display_name": "GPT-5 Nano",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "claude-opus-4-7",
-      "name": "Claude Opus 4.7",
-      "description": "Stronger Opus tier for advanced software work and high-stakes reasoning",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-04-16",
-      "last_updated": "2026-04-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
-      },
-      "display_name": "Claude Opus 4.7",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
-            "task_budget is separate from thinking control and should not be treated as a thinking budget."
-          ]
-        }
-      }
-    },
-    {
-      "id": "gemini-2-5-flash",
-      "name": "Gemini 2.5 Flash",
-      "description": "Fast Gemini workhorse for multimodal apps where latency and price matter",
-      "family": "gemini-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens",
-          "min": 0,
-          "max": 24576
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2025-06-17",
-      "last_updated": "2025-06-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 2.5,
-        "cache_read": 0.03,
-        "input_audio": 1
-      },
-      "display_name": "Gemini 2.5 Flash",
-      "type": "chat"
-    },
-    {
-      "id": "claude-opus-4-5",
-      "name": "Claude Opus 4.5 (latest)",
-      "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens",
-          "min": 1024,
-          "max": 63999
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2025-11-24",
-      "last_updated": "2025-11-24",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
-      },
-      "display_name": "Claude Opus 4.5 (latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "mixed",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.5 uses manual thinking.type = \"enabled\" with budget_tokens; effort can be used alongside the thinking budget.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header."
-          ]
-        }
-      }
-    },
-    {
-      "id": "gpt-5-2",
-      "name": "GPT-5.2",
-      "description": "Reliable GPT generation for broad coding, writing, and tool-assisted product work",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-08-31",
-      "release_date": "2025-12-11",
-      "last_updated": "2025-12-11",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text",
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai",
-        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
-        "shape": "responses"
-      },
-      "cost": {
-        "input": 1.75,
-        "output": 14,
-        "cache_read": 0.175
-      },
-      "display_name": "GPT-5.2",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "none",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "gpt-5-1",
-      "name": "GPT-5.1",
-      "description": "Sharper GPT-5 generation for coding, product work, and tool-assisted tasks",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2024-09-30",
-      "release_date": "2025-11-13",
-      "last_updated": "2025-11-13",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text",
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai",
-        "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1",
-        "shape": "responses"
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.125
-      },
-      "display_name": "GPT-5.1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "none",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "gemma-3-12b",
-      "name": "Gemma 3 12B",
-      "description": "Google's open-weight Gemma 3 vision-language model for text and image understanding",
-      "family": "gemma",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-08-31",
-      "release_date": "2025-03-13",
-      "last_updated": "2025-03-13",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 16384
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.5
-      },
-      "display_name": "Gemma 3 12B",
-      "type": "chat"
-    },
-    {
-      "id": "qwen3-next-80b-a3b-instruct",
-      "name": "Qwen3-Next 80B-A3B Instruct",
-      "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-09",
-      "last_updated": "2025-09",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 1.2
-      },
-      "display_name": "Qwen3-Next 80B-A3B Instruct",
-      "type": "chat"
     }
   ]
 }

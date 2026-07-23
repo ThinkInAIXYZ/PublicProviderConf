@@ -6,61 +6,6 @@
   "display_name": "HPC-AI",
   "models": [
     {
-      "id": "zai-org/glm-5.1",
-      "name": "GLM 5.1",
-      "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-08",
-      "last_updated": "2026-06-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 202000,
-        "output": 202000
-      },
-      "cost": {
-        "input": 0.615,
-        "output": 2.46,
-        "cache_read": 0.133
-      },
-      "display_name": "GLM 5.1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
       "id": "zai-org/glm-5.2",
       "name": "GLM-5.2",
       "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
@@ -116,6 +61,235 @@
           "interleaved": true,
           "summaries": true,
           "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "zai-org/glm-5.1",
+      "name": "GLM 5.1",
+      "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-08",
+      "last_updated": "2026-06-01",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 202000,
+        "output": 202000
+      },
+      "cost": {
+        "input": 0.615,
+        "output": 2.46,
+        "cache_read": 0.133
+      },
+      "display_name": "GLM 5.1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-4.7",
+      "name": "Claude Opus 4.7",
+      "description": "Stronger Opus tier for advanced software work and high-stakes reasoning",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5
+      },
+      "display_name": "Claude Opus 4.7",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "moonshotai/kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
+      "family": "kimi-k2",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-06-12",
+      "last_updated": "2026-06-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 256000,
+        "output": 256000
+      },
+      "cost": {
+        "input": 0.95,
+        "output": 4,
+        "cache_read": 0.19
+      },
+      "display_name": "Kimi K2.7 Code",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "moonshotai/kimi-k2.5",
+      "name": "Kimi K2.5",
+      "description": "Earlier Kimi frontier model for long-context agents, coding, and multimodal work",
+      "family": "kimi-k2",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-01",
+      "last_updated": "2026-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 256000,
+        "output": 256000
+      },
+      "cost": {
+        "input": 0.6,
+        "output": 3,
+        "cache_read": 0.1
+      },
+      "display_name": "Kimi K2.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -278,180 +452,6 @@
           "continuation": [
             "thinking_blocks"
           ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-opus-4.7",
-      "name": "Claude Opus 4.7",
-      "description": "Stronger Opus tier for advanced software work and high-stakes reasoning",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-04-16",
-      "last_updated": "2026-04-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5
-      },
-      "display_name": "Claude Opus 4.7",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
-            "task_budget is separate from thinking control and should not be treated as a thinking budget."
-          ]
-        }
-      }
-    },
-    {
-      "id": "moonshotai/kimi-k2.5",
-      "name": "Kimi K2.5",
-      "description": "Earlier Kimi frontier model for long-context agents, coding, and multimodal work",
-      "family": "kimi-k2",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-01",
-      "last_updated": "2026-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "cost": {
-        "input": 0.6,
-        "output": 3,
-        "cache_read": 0.1
-      },
-      "display_name": "Kimi K2.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "moonshotai/kimi-k2.7-code",
-      "name": "Kimi K2.7 Code",
-      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
-      "family": "kimi-k2",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-06-12",
-      "last_updated": "2026-06-12",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "cost": {
-        "input": 0.95,
-        "output": 4,
-        "cache_read": 0.19
-      },
-      "display_name": "Kimi K2.7 Code",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
         }
       }
     },
