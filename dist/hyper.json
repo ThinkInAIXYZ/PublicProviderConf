@@ -7,13 +7,16 @@
   "models": [
     {
       "id": "qwen3.7-flash",
-      "name": "Qwen3.7-Flash",
+      "name": "Qwen3.7 Flash",
       "description": "Efficient model for low-latency assistance, extraction, and routine automation",
+      "family": "qwen",
       "attachment": true,
       "reasoning": {
         "supported": true
       },
       "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
       "release_date": "2026-07-27",
       "last_updated": "2026-07-30",
       "modalities": {
@@ -28,6 +31,7 @@
       "open_weights": false,
       "limit": {
         "context": 1000000,
+        "input": 991000,
         "output": 64000
       },
       "cost": {
@@ -35,7 +39,7 @@
         "output": 0.8,
         "cache_read": 0.04
       },
-      "display_name": "Qwen3.7-Flash",
+      "display_name": "Qwen3.7 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -111,9 +115,9 @@
         "output": 20275
       },
       "cost": {
-        "input": 0.86,
-        "output": 2.784,
-        "cache_write": 0.43
+        "input": 0.85,
+        "output": 2.622,
+        "cache_write": 0.425
       },
       "display_name": "GLM-5",
       "type": "chat",
@@ -265,9 +269,9 @@
         "output": 26214
       },
       "cost": {
-        "input": 0.528,
-        "output": 2.79,
-        "cache_write": 0.264
+        "input": 0.564,
+        "output": 2.82,
+        "cache_write": 0.282
       },
       "display_name": "Kimi K2.5",
       "type": "chat",
@@ -310,9 +314,9 @@
         "output": 20480
       },
       "cost": {
-        "input": 0.42,
-        "output": 1.62,
-        "cache_write": 0.21
+        "input": 0.436,
+        "output": 1.72,
+        "cache_write": 0.218
       },
       "display_name": "MiniMax-M2.7",
       "type": "chat",
@@ -631,9 +635,9 @@
         "output": 25600
       },
       "cost": {
-        "input": 0.122,
-        "output": 0.388,
-        "cache_write": 0.061
+        "input": 0.13,
+        "output": 0.43,
+        "cache_write": 0.065
       },
       "display_name": "Gemma 4 26B A4B IT",
       "type": "chat",
@@ -732,6 +736,58 @@
           "continuation": [
             "thinking_blocks"
           ]
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-flash-0731",
+      "name": "DeepSeek V4 Flash 0731",
+      "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-08-02",
+      "last_updated": "2026-08-02",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.152432,
+        "output": 0.304864,
+        "cache_read": 0.030486
+      },
+      "display_name": "DeepSeek V4 Flash 0731",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
         }
       }
     },
@@ -883,8 +939,19 @@
       "family": "kimi-k3",
       "attachment": true,
       "reasoning": {
-        "supported": true
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
       "tool_call": true,
       "structured_output": true,
       "temperature": false,
@@ -945,9 +1012,9 @@
         "output": 10600
       },
       "cost": {
-        "input": 0.585,
-        "output": 2.245,
-        "cache_write": 0.2925
+        "input": 0.569,
+        "output": 2.135,
+        "cache_write": 0.2845
       },
       "display_name": "Qwen3-Coder 480B-A35B Instruct",
       "type": "chat"
