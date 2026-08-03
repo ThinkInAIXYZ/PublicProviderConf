@@ -188,6 +188,22 @@ export function normalizeLimitValues(limit: ModelsDevLimit): ModelsDevLimit {
   return normalized;
 }
 
+function convertCostKey(key: string): string {
+  return key.replace(/[A-Z]/g, char => `_${char.toLowerCase()}`);
+}
+
+function createModelsDevCost(cost: ModelInfo['cost']): ModelsDevCost | undefined {
+  if (!cost) {
+    return undefined;
+  }
+
+  return Object.fromEntries(
+    Object.entries(cost)
+      .filter((entry): entry is [string, number] => entry[1] !== undefined)
+      .map(([key, value]) => [convertCostKey(key), value]),
+  );
+}
+
 export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
   const toolCall = model.toolCall ?? model.functionCall;
   const reasoning = toModelsDevReasoning(model.reasoning);
@@ -234,14 +250,7 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
           ...model.modalities,
         }
       : undefined,
-    cost: model.cost
-      ? {
-          input: model.cost.input,
-          output: model.cost.output,
-          cache_read: model.cost.cacheRead,
-          cache_write: model.cost.cacheWrite,
-        }
-      : undefined,
+    cost: createModelsDevCost(model.cost),
     limit,
     metadata: {
       ...model.metadata,
