@@ -56,12 +56,12 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
       result.summaries.map(summary => [summary.displayName, summary.selected]),
       [
         ['OpenAI', 10],
-        ['Anthropic', 3],
+        ['Anthropic', 4],
         ['Gemini', 5],
         ['Kimi', 5],
-        ['DeepSeek', 4],
+        ['DeepSeek', 2],
         ['Zhipu', 5],
-        ['MiniMax', 4],
+        ['MiniMax', 5],
       ],
     );
     assert.equal(
@@ -91,7 +91,12 @@ test('creates valid normalized model cards in the provider output shape', async 
     const gpt56Terra = provider.models.find(item => item.id === 'gpt-5.6-terra');
     const gpt56Luna = provider.models.find(item => item.id === 'gpt-5.6-luna');
     const deepSeekV4 = provider.models.find(item => item.id === 'deepseek-v4-pro');
+    const deepSeekChat = provider.models.find(item => item.id === 'deepseek-chat');
+    const claudeOpus5 = provider.models.find(item => item.id === 'claude-opus-5');
+    const gemini36Flash = provider.models.find(item => item.id === 'gemini-3.6-flash');
+    const kimiK3 = provider.models.find(item => item.id === 'kimi-k3');
     const glm52 = provider.models.find(item => item.id === 'glm-5.2');
+    const miniMaxM3 = provider.models.find(item => item.id === 'MiniMax-M3');
     const providerData = { providers: { [provider.id]: provider } };
 
     applyReasoningPortraits(providerData);
@@ -140,13 +145,26 @@ test('creates valid normalized model cards in the provider output shape', async 
     assert.equal(model?.limit?.context, 1050000);
     assert.equal(model?.limit?.output, 128000);
     assert.equal(model?.metadata?.sourceProvider, 'openai');
-    assert.equal(deepSeekV4?.limit?.context, 1048576);
-    assert.equal(deepSeekV4?.limit?.output, 393216);
+    assert.equal(deepSeekV4?.limit?.context, 1000000);
+    assert.equal(deepSeekV4?.limit?.output, 384000);
+    assert.equal(deepSeekV4?.cost?.input, 0.435);
+    assert.equal(deepSeekV4?.cost?.output, 0.87);
+    assert.equal(deepSeekV4?.cost?.reasoning, 0.87);
+    assert.equal(deepSeekV4?.cost?.cache_read, 0.003625);
     assert.equal(deepSeekV4?.open_weights, true);
+    assert.equal(deepSeekV4?.extra_capabilities?.reasoning?.effort_options?.includes('low'), true);
+    assert.equal(deepSeekV4?.extra_capabilities?.reasoning?.effort_options?.includes('xhigh'), true);
     assert.equal(deepSeekV4?.extra_capabilities?.reasoning?.effort_options?.includes('max'), true);
+    assert.equal(deepSeekChat, undefined);
+    assert.ok(claudeOpus5);
+    assert.ok(gemini36Flash);
+    assert.equal(kimiK3?.limit?.context, 1048576);
+    assert.equal(kimiK3?.limit?.output, 131072);
     assert.equal(glm52?.limit?.context, 1000000);
     assert.equal(glm52?.limit?.output, 131072);
     assert.equal(glm52?.extra_capabilities?.reasoning?.effort_options?.includes('max'), true);
+    assert.equal(miniMaxM3?.limit?.context, 1000000);
+    assert.equal(miniMaxM3?.limit?.output, 128000);
     assert.equal(miniMaxM27?.extra_capabilities?.reasoning?.interleaved, true);
   });
 });
