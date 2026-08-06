@@ -90,6 +90,7 @@ test('creates valid normalized model cards in the provider output shape', async 
     const gpt56Sol = provider.models.find(item => item.id === 'gpt-5.6-sol');
     const gpt56Terra = provider.models.find(item => item.id === 'gpt-5.6-terra');
     const gpt56Luna = provider.models.find(item => item.id === 'gpt-5.6-luna');
+    const deepSeekV4Flash = provider.models.find(item => item.id === 'deepseek-v4-flash');
     const deepSeekV4 = provider.models.find(item => item.id === 'deepseek-v4-pro');
     const deepSeekChat = provider.models.find(item => item.id === 'deepseek-chat');
     const claudeOpus5 = provider.models.find(item => item.id === 'claude-opus-5');
@@ -152,9 +153,25 @@ test('creates valid normalized model cards in the provider output shape', async 
     assert.equal(deepSeekV4?.cost?.reasoning, 0.87);
     assert.equal(deepSeekV4?.cost?.cache_read, 0.003625);
     assert.equal(deepSeekV4?.open_weights, true);
-    assert.equal(deepSeekV4?.extra_capabilities?.reasoning?.effort_options?.includes('low'), true);
-    assert.equal(deepSeekV4?.extra_capabilities?.reasoning?.effort_options?.includes('xhigh'), true);
-    assert.equal(deepSeekV4?.extra_capabilities?.reasoning?.effort_options?.includes('max'), true);
+    assert.deepEqual(deepSeekV4Flash?.reasoning_options, [
+      { type: 'toggle', values: undefined },
+      { type: 'effort', values: ['low', 'high', 'max'] },
+    ]);
+    assert.deepEqual(deepSeekV4?.reasoning_options, [
+      { type: 'toggle', values: undefined },
+      { type: 'effort', values: ['low', 'high', 'xhigh', 'max'] },
+    ]);
+    assert.deepEqual(deepSeekV4Flash?.extra_capabilities?.reasoning?.effort_options, [
+      'low',
+      'high',
+      'max',
+    ]);
+    assert.deepEqual(deepSeekV4?.extra_capabilities?.reasoning?.effort_options, [
+      'low',
+      'high',
+      'xhigh',
+      'max',
+    ]);
     assert.equal(deepSeekChat, undefined);
     assert.ok(claudeOpus5);
     assert.ok(gemini36Flash);
