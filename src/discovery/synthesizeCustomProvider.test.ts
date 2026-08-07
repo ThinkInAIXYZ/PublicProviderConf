@@ -74,6 +74,9 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
 test('creates valid normalized model cards in the provider output shape', async () => {
   await withoutApiKeys(async () => {
     const result = await synthesizeCustomProvider();
+    const seededDeepSeekV4Flash = result.models.find(item => item.id === 'deepseek-v4-flash');
+    const seededDeepSeekV4Pro = result.models.find(item => item.id === 'deepseek-v4-pro');
+    const seededKimiK25 = result.models.find(item => item.id === 'kimi-k2.5');
     const providerInfo = createProviderInfo(
       'custom-provider',
       'custom provider',
@@ -90,6 +93,7 @@ test('creates valid normalized model cards in the provider output shape', async 
     const gpt56Sol = provider.models.find(item => item.id === 'gpt-5.6-sol');
     const gpt56Terra = provider.models.find(item => item.id === 'gpt-5.6-terra');
     const gpt56Luna = provider.models.find(item => item.id === 'gpt-5.6-luna');
+    const deepSeekV4Flash = provider.models.find(item => item.id === 'deepseek-v4-flash');
     const deepSeekV4 = provider.models.find(item => item.id === 'deepseek-v4-pro');
     const deepSeekChat = provider.models.find(item => item.id === 'deepseek-chat');
     const claudeOpus5 = provider.models.find(item => item.id === 'claude-opus-5');
@@ -98,6 +102,16 @@ test('creates valid normalized model cards in the provider output shape', async 
     const glm52 = provider.models.find(item => item.id === 'glm-5.2');
     const miniMaxM3 = provider.models.find(item => item.id === 'MiniMax-M3');
     const providerData = { providers: { [provider.id]: provider } };
+
+    assert.deepEqual(
+      seededDeepSeekV4Flash?.extraCapabilities?.reasoning?.effort_options,
+      ['low', 'high', 'max'],
+    );
+    assert.deepEqual(
+      seededDeepSeekV4Pro?.extraCapabilities?.reasoning?.effort_options,
+      ['high', 'max'],
+    );
+    assert.equal(seededKimiK25?.extraCapabilities?.reasoning?.default_enabled, true);
 
     applyReasoningPortraits(providerData);
     const miniMaxM27 = provider.models.find(item => item.id === 'MiniMax-M2.7');
@@ -152,9 +166,23 @@ test('creates valid normalized model cards in the provider output shape', async 
     assert.equal(deepSeekV4?.cost?.reasoning, 0.87);
     assert.equal(deepSeekV4?.cost?.cache_read, 0.003625);
     assert.equal(deepSeekV4?.open_weights, true);
-    assert.equal(deepSeekV4?.extra_capabilities?.reasoning?.effort_options?.includes('low'), true);
-    assert.equal(deepSeekV4?.extra_capabilities?.reasoning?.effort_options?.includes('xhigh'), true);
-    assert.equal(deepSeekV4?.extra_capabilities?.reasoning?.effort_options?.includes('max'), true);
+    assert.deepEqual(deepSeekV4Flash?.reasoning_options, [
+      { type: 'toggle', values: undefined },
+      { type: 'effort', values: ['low', 'high', 'max'] },
+    ]);
+    assert.deepEqual(deepSeekV4?.reasoning_options, [
+      { type: 'toggle', values: undefined },
+      { type: 'effort', values: ['high', 'max'] },
+    ]);
+    assert.deepEqual(deepSeekV4Flash?.extra_capabilities?.reasoning?.effort_options, [
+      'low',
+      'high',
+      'max',
+    ]);
+    assert.deepEqual(deepSeekV4?.extra_capabilities?.reasoning?.effort_options, [
+      'high',
+      'max',
+    ]);
     assert.equal(deepSeekChat, undefined);
     assert.ok(claudeOpus5);
     assert.ok(gemini36Flash);

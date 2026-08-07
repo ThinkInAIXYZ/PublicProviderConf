@@ -1,4 +1,8 @@
 import { createModelInfo, ModelInfo, ModelType } from '../../models/model-info';
+import {
+  cloneReasoningPortrait,
+  getReasoningPortrait,
+} from '../../models/extra-capabilities';
 import type {
   CustomProviderModelSeed,
   CustomProviderSourceSeed,
@@ -56,6 +60,8 @@ function createModelFromSeed(
 ): ModelInfo {
   const contextLength = apiReference?.contextLength ?? seed.contextLength;
   const maxTokens = apiReference?.maxTokens ?? seed.maxTokens;
+  const reasoningPortrait =
+    cloneReasoningPortrait(seed.extraCapabilities?.reasoning) ?? getReasoningPortrait(seed.id);
   const sourceMetadata: Record<string, unknown> = {
     ...seed.metadata,
     sourceProvider: source.id,
@@ -106,22 +112,10 @@ function createModelFromSeed(
         : typeof seed.interleaved === 'object'
           ? { ...seed.interleaved }
           : seed.interleaved,
-      extraCapabilities: seed.extraCapabilities
+      extraCapabilities: seed.extraCapabilities || reasoningPortrait
         ? {
             ...seed.extraCapabilities,
-            reasoning: seed.extraCapabilities.reasoning
-              ? {
-                  ...seed.extraCapabilities.reasoning,
-                  effort_options: cloneArray(seed.extraCapabilities.reasoning.effort_options),
-                  verbosity_options: cloneArray(seed.extraCapabilities.reasoning.verbosity_options),
-                  level_options: cloneArray(seed.extraCapabilities.reasoning.level_options),
-                  continuation: cloneArray(seed.extraCapabilities.reasoning.continuation),
-                  notes: cloneArray(seed.extraCapabilities.reasoning.notes),
-                  budget: seed.extraCapabilities.reasoning.budget
-                    ? { ...seed.extraCapabilities.reasoning.budget }
-                    : undefined,
-                }
-              : undefined,
+            reasoning: reasoningPortrait,
           }
         : undefined,
     },
