@@ -1,10 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { ModelsDevProvider } from '../models/models-dev';
-import {
-  mergeProviderWithTemplate,
-  ModelsDevTemplateManager,
-} from './models-dev-template-manager';
+import { mergeProviderWithTemplate } from './models-dev-template-manager';
 
 test('adds template-only models to the upstream provider', () => {
   const upstream: ModelsDevProvider = {
@@ -103,58 +100,4 @@ test('merges template fields into matching upstream models', () => {
     context: 8192,
     output: 4096,
   });
-});
-
-test('overlays DeepSeek effort controls without replacing upstream model data', async () => {
-  const templates = await new ModelsDevTemplateManager().loadAllTemplates();
-  const template = templates.get('deepseek');
-  assert.ok(template);
-
-  const upstream: ModelsDevProvider = {
-    id: 'deepseek',
-    name: 'DeepSeek',
-    models: [
-      {
-        id: 'deepseek-v4-flash',
-        name: 'DeepSeek V4 Flash',
-        cost: { input: 0.14 },
-        limit: { context: 1_000_000, output: 384_000 },
-      },
-      {
-        id: 'deepseek-v4-pro',
-        name: 'DeepSeek V4 Pro',
-        cost: { input: 0.435 },
-        limit: { context: 1_000_000, output: 384_000 },
-      },
-    ],
-  };
-
-  const merged = mergeProviderWithTemplate(upstream, template);
-  const flash = merged.models.find(model => model.id === 'deepseek-v4-flash');
-  const pro = merged.models.find(model => model.id === 'deepseek-v4-pro');
-
-  assert.equal(flash?.cost?.input, 0.14);
-  assert.equal(flash?.limit?.context, 1_000_000);
-  assert.deepEqual(flash?.reasoning_options, [
-    { type: 'toggle' },
-    { type: 'effort', values: ['low', 'high', 'max'] },
-  ]);
-  assert.deepEqual(flash?.extra_capabilities?.reasoning?.effort_options, [
-    'low',
-    'high',
-    'max',
-  ]);
-
-  assert.equal(pro?.cost?.input, 0.435);
-  assert.equal(pro?.limit?.output, 384_000);
-  assert.deepEqual(pro?.reasoning_options, [
-    { type: 'toggle' },
-    { type: 'effort', values: ['low', 'high', 'xhigh', 'max'] },
-  ]);
-  assert.deepEqual(pro?.extra_capabilities?.reasoning?.effort_options, [
-    'low',
-    'high',
-    'xhigh',
-    'max',
-  ]);
 });

@@ -65,7 +65,7 @@ When we need richer model-level metadata, we add it under `extra_capabilities` i
 - `mode`: one of `budget`, `effort`, `level`, `fixed`, or `mixed`
 - `budget`: token-budget style reasoning controls such as min/max/default/auto/off
 - `effort`: default reasoning effort for this portrait, which may be a client-friendly default rather than the upstream provider's raw default
-- `effort_options`: supported effort levels
+- `effort_options`: distinct model-effective effort levels after aliases or mappings; provider-specific controls remain in legacy `reasoning_options`
 - `verbosity`: default reasoning verbosity
 - `verbosity_options`: supported verbosity levels
 - `level`: default reasoning level for models that use level-based controls
@@ -81,6 +81,7 @@ The initial portrait registry covers these model families:
 - OpenAI: `gpt-5`, `gpt-5.1`, `o3`, `o4-mini`, and close variants/aliases
 - Anthropic: Claude 3.7, Claude 4.x manual/adaptive thinking, and Claude Fable/Mythos effort portraits
 - Google: Gemini 2.5 and Gemini 3 reasoning-capable models
+- DeepSeek: DeepSeek V4 Flash and V4 Pro effective effort portraits
 - MiniMax: MiniMax M2.7 and MiniMax M2.7 highspeed interleaved reasoning portraits
 
 ## Getting Started
