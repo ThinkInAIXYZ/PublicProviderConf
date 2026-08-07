@@ -6,10 +6,10 @@
   "display_name": "Vultr",
   "models": [
     {
-      "id": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
-      "name": "NVIDIA Nemotron 3 Nano Omni",
-      "description": "Open Nemotron omni model combining reasoning with text, vision, and audio",
-      "family": "nemotron",
+      "id": "deepseek-ai/DeepSeek-V4-Flash",
+      "name": "DeepSeek V4 Flash",
+      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
+      "family": "deepseek-flash",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -17,10 +17,11 @@
       },
       "reasoning_options": [],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "knowledge": "2025-05",
-      "release_date": "2026-04-28",
-      "last_updated": "2026-04-28",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
       "modalities": {
         "input": [
           "text"
@@ -31,87 +32,37 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 131072
+        "context": 1000000,
+        "output": 384000
       },
       "cost": {
-        "input": 0.13,
-        "output": 0.38
+        "input": 0.3,
+        "output": 1
       },
-      "display_name": "NVIDIA Nemotron 3 Nano Omni",
-      "type": "chat"
-    },
-    {
-      "id": "nvidia/DeepSeek-V3.2-NVFP4",
-      "name": "DeepSeek V3.2",
-      "description": "DeepSeek chat model for instruction following, coding, and analysis",
-      "family": "deepseek",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-07",
-      "release_date": "2025-12-01",
-      "last_updated": "2025-12-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.55,
-        "output": 1.65
-      },
-      "display_name": "DeepSeek V3.2",
-      "type": "chat"
-    },
-    {
-      "id": "nvidia/Nemotron-Cascade-2-30B-A3B",
-      "name": "NVIDIA Nemotron Cascade 2",
-      "description": "Nemotron model for efficient reasoning, coding, and specialized AI agents",
-      "family": "nemotron",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-07",
-      "release_date": "2025-12-01",
-      "last_updated": "2025-12-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.6
-      },
-      "display_name": "NVIDIA Nemotron Cascade 2",
-      "type": "chat"
+      "display_name": "DeepSeek V4 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "notes": [
+            "The DeepSeek API maps xhigh to high for V4 Flash; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
     },
     {
       "id": "zai-org/GLM-5.2-FP8",
@@ -164,27 +115,23 @@
       }
     },
     {
-      "id": "Qwen/Qwen3.6-27B",
-      "name": "Qwen3.6 27B",
-      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
-      "family": "qwen",
-      "attachment": true,
+      "id": "MiniMaxAI/MiniMax-M2.7",
+      "name": "MiniMax-M2.7",
+      "description": "Open MiniMax flagship for coding agents, office automation, and complex environments",
+      "family": "minimax",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [],
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-04-22",
-      "last_updated": "2026-04-22",
+      "release_date": "2026-03-18",
+      "last_updated": "2026-03-18",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video",
-          "audio"
+          "text"
         ],
         "output": [
           "text"
@@ -192,14 +139,14 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 65536
+        "context": 204800,
+        "output": 131072
       },
       "cost": {
         "input": 0.3,
-        "output": 2
+        "output": 1.2
       },
-      "display_name": "Qwen3.6 27B",
+      "display_name": "MiniMax-M2.7",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -264,57 +211,11 @@
       }
     },
     {
-      "id": "MiniMaxAI/MiniMax-M2.7",
-      "name": "MiniMax-M2.7",
-      "description": "Open MiniMax flagship for coding agents, office automation, and complex environments",
-      "family": "minimax",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-03-18",
-      "last_updated": "2026-03-18",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 204800,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 1.2
-      },
-      "display_name": "MiniMax-M2.7",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-ai/DeepSeek-V4-Flash",
-      "name": "DeepSeek V4 Flash",
-      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
-      "family": "deepseek-flash",
-      "attachment": false,
+      "id": "Qwen/Qwen3.6-27B",
+      "name": "Qwen3.6 27B",
+      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "family": "qwen",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -323,12 +224,14 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video",
+          "audio"
         ],
         "output": [
           "text"
@@ -336,34 +239,23 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 384000
+        "context": 262144,
+        "output": 65536
       },
       "cost": {
         "input": 0.3,
-        "output": 1
+        "output": 2
       },
-      "display_name": "DeepSeek V4 Flash",
+      "display_name": "Qwen3.6 27B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ],
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "notes": [
-            "The DeepSeek API maps xhigh to high for V4 Flash; effort_options lists distinct model-effective levels."
           ]
         }
       }
@@ -418,6 +310,114 @@
           "visibility": "summary"
         }
       }
+    },
+    {
+      "id": "nvidia/Nemotron-Cascade-2-30B-A3B",
+      "name": "NVIDIA Nemotron Cascade 2",
+      "description": "Nemotron model for efficient reasoning, coding, and specialized AI agents",
+      "family": "nemotron",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2024-07",
+      "release_date": "2025-12-01",
+      "last_updated": "2025-12-01",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.6
+      },
+      "display_name": "NVIDIA Nemotron Cascade 2",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/DeepSeek-V3.2-NVFP4",
+      "name": "DeepSeek V3.2",
+      "description": "DeepSeek chat model for instruction following, coding, and analysis",
+      "family": "deepseek",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2024-07",
+      "release_date": "2025-12-01",
+      "last_updated": "2025-12-01",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.55,
+        "output": 1.65
+      },
+      "display_name": "DeepSeek V3.2",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16",
+      "name": "NVIDIA Nemotron 3 Nano Omni",
+      "description": "Open Nemotron omni model combining reasoning with text, vision, and audio",
+      "family": "nemotron",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-28",
+      "last_updated": "2026-04-28",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.13,
+        "output": 0.38
+      },
+      "display_name": "NVIDIA Nemotron 3 Nano Omni",
+      "type": "chat"
     },
     {
       "id": "XiaomiMiMo/MiMo-V2.5-Pro",
