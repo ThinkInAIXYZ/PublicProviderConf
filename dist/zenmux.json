@@ -2,7 +2,7 @@
   "id": "zenmux",
   "name": "ZenMux",
   "display_name": "ZenMux",
-  "updated_at": "2026-08-03T04:38:18.262Z",
+  "updated_at": "2026-08-12T06:24:42.113Z",
   "models": [
     {
       "id": "anthropic/claude-fable-5",
@@ -850,7 +850,7 @@
       "name": "Baidu: ERNIE 5.1",
       "display_name": "Baidu: ERNIE 5.1",
       "type": "chat",
-      "attachment": true,
+      "attachment": false,
       "reasoning": {
         "supported": true
       },
@@ -860,9 +860,7 @@
       "open_weights": false,
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -880,7 +878,7 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
+      "vision": false,
       "extra_capabilities": {
         "reasoning": {
           "supported": true
@@ -911,7 +909,8 @@
       },
       "cost": {
         "input": 0.15,
-        "output": 0.6
+        "output": 0.6,
+        "cache_read": 0.075
       },
       "limit": {
         "context": 64000,
@@ -1109,88 +1108,89 @@
       "name": "ByteDance: Doubao-Seed-2.1-pro",
       "display_name": "ByteDance: Doubao-Seed-2.1-pro",
       "type": "chat",
+      "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": false,
+      "release_date": "2026-06-23",
+      "last_updated": "2026-06-23",
+      "open_weights": false,
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.422571632,
-        "output": 2.11285816,
-        "cache_read": 0.08453343
+        "input": 1,
+        "output": 5,
+        "cache_read": 0.5
       },
       "limit": {
         "context": 256000,
-        "output": 256000
+        "output": 128000
       },
       "metadata": {
-        "ownedBy": "bytedance",
-        "created": 1782194079,
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": false
     },
     {
       "id": "bytedance/doubao-seed-2.1-turbo",
       "name": "ByteDance: Doubao-Seed-2.1-turbo",
       "display_name": "ByteDance: Doubao-Seed-2.1-turbo",
       "type": "chat",
+      "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": false,
+      "release_date": "2026-06-23",
+      "last_updated": "2026-06-23",
+      "open_weights": false,
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.422571632,
-        "output": 2.11285816,
-        "cache_read": 0.08453343
+        "input": 0.5,
+        "output": 2.5,
+        "cache_read": 0.25
       },
       "limit": {
         "context": 256000,
-        "output": 256000
+        "output": 128000
       },
       "metadata": {
-        "ownedBy": "bytedance",
-        "created": 1782194215,
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": false
     },
     {
       "id": "bytedance/doubao-seed-character",
       "name": "ByteDance: Doubao-Seed-Character",
       "display_name": "ByteDance: Doubao-Seed-Character",
       "type": "chat",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "tool_call": false,
+      "release_date": "2026-07-18",
+      "last_updated": "2026-07-18",
+      "open_weights": false,
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -1199,15 +1199,14 @@
       "cost": {
         "input": 0.1179,
         "output": 0.2947,
-        "cache_read": 0.0236
+        "cache_read": 0.0236,
+        "cache_write": 0.0025
       },
       "limit": {
         "context": 128000,
-        "output": 128000
+        "output": 32768
       },
       "metadata": {
-        "ownedBy": "bytedance",
-        "created": 1782200373,
         "source": "public-provider-conf"
       },
       "vision": true
@@ -1272,9 +1271,9 @@
         ]
       },
       "cost": {
-        "input": 0.422571632,
-        "output": 2.11285816,
-        "cache_read": 0.08453343
+        "input": 0.8848,
+        "output": 4.424,
+        "cache_read": 0.177
       },
       "limit": {
         "context": 256000,
@@ -1361,10 +1360,12 @@
       "reasoning": {
         "supported": true
       },
+      "temperature": true,
       "tool_call": true,
+      "knowledge": "2024-07",
       "release_date": "2025-12-01",
       "last_updated": "2025-12-01",
-      "open_weights": false,
+      "open_weights": true,
       "modalities": {
         "input": [
           "text",
@@ -1375,8 +1376,9 @@
         ]
       },
       "cost": {
-        "input": 0.27999999999999997,
-        "output": 0.42000000000000004
+        "input": 0.28,
+        "output": 0.42,
+        "cache_read": 0.14
       },
       "limit": {
         "context": 163000,
@@ -2103,6 +2105,49 @@
       "vision": false
     },
     {
+      "id": "google/gemma-4-26b-a4b-it",
+      "name": "Google: Gemma 4 26B A4B IT",
+      "display_name": "Google: Gemma 4 26B A4B IT",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": false,
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "open_weights": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.13,
+        "output": 0.4,
+        "cache_read": 0.065
+      },
+      "limit": {
+        "context": 262144,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "inclusionai/ling-2.6-1t",
       "name": "inclusionAI: Ling-2.6-1T",
       "display_name": "inclusionAI: Ling-2.6-1T",
@@ -2149,7 +2194,7 @@
       "tool_call": true,
       "release_date": "2026-04-21",
       "last_updated": "2026-04-21",
-      "open_weights": false,
+      "open_weights": true,
       "modalities": {
         "input": [
           "text"
@@ -2159,8 +2204,9 @@
         ]
       },
       "cost": {
-        "input": 0.08,
-        "output": 0.24
+        "input": 0.1,
+        "output": 0.3,
+        "cache_read": 0.02
       },
       "limit": {
         "context": 262144,
@@ -2178,10 +2224,8 @@
       "type": "chat",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": true
       },
-      "temperature": true,
       "tool_call": true,
       "release_date": "2026-07-23",
       "last_updated": "2026-07-23",
@@ -2195,9 +2239,9 @@
         ]
       },
       "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0
+        "input": 0.075,
+        "output": 0.22,
+        "cache_read": 0.015
       },
       "limit": {
         "context": 262144,
@@ -2212,6 +2256,41 @@
           "supported": true
         }
       }
+    },
+    {
+      "id": "inclusionai/ling-3.0-tiny",
+      "name": "inclusionAI: Ling-3.0-tiny",
+      "display_name": "inclusionAI: Ling-3.0-tiny",
+      "type": "chat",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "release_date": "2026-08-09",
+      "last_updated": "2026-08-09",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0.2,
+        "cache_read": 0.01
+      },
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
     },
     {
       "id": "inclusionai/llada2.1-flash",
@@ -2269,8 +2348,9 @@
         ]
       },
       "cost": {
-        "input": 1,
-        "output": 3
+        "input": 0.3,
+        "output": 2.5,
+        "cache_read": 0.06
       },
       "limit": {
         "context": 262144,
@@ -2290,10 +2370,9 @@
       "reasoning": {
         "supported": false
       },
-      "temperature": true,
       "tool_call": true,
-      "release_date": "2026-07-10",
-      "last_updated": "2026-07-10",
+      "release_date": "2026-07-14",
+      "last_updated": "2026-07-14",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2362,10 +2441,9 @@
       "reasoning": {
         "supported": false
       },
-      "temperature": true,
       "tool_call": true,
-      "release_date": "2026-07-10",
-      "last_updated": "2026-07-10",
+      "release_date": "2026-07-14",
+      "last_updated": "2026-07-14",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2471,16 +2549,15 @@
       "name": "Meta: Llama 4 Scout Instruct",
       "display_name": "Meta: Llama 4 Scout Instruct",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2024-12",
-      "release_date": "2025-01-31",
-      "last_updated": "2025-01-31",
+      "knowledge": "2024-08",
+      "release_date": "2025-04-05",
+      "last_updated": "2025-04-05",
       "open_weights": true,
       "modalities": {
         "input": [
@@ -2492,8 +2569,8 @@
         ]
       },
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 0.2,
+        "output": 0.78
       },
       "limit": {
         "context": 128000,
@@ -2515,9 +2592,52 @@
         "default": true
       },
       "temperature": true,
-      "tool_call": true,
+      "tool_call": false,
       "release_date": "2026-04-08",
       "last_updated": "2026-07-09",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 4.25,
+        "cache_read": 0.15
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 65536
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "meta/muse-spark-1.2",
+      "name": "Meta: Muse Spark 1.2",
+      "display_name": "Meta: Muse Spark 1.2",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-08-05",
+      "last_updated": "2026-08-05",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -2537,18 +2657,13 @@
         "cache_read": 0.15
       },
       "limit": {
-        "context": 1048576,
-        "output": 1048576
+        "context": 1000000,
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "vision": true
     },
     {
       "id": "minimax/minimax-m2",
@@ -2604,7 +2719,7 @@
         "supported": false
       },
       "tool_call": false,
-      "release_date": "2026-01-24",
+      "release_date": "2025-01-12",
       "last_updated": "2026-01-24",
       "open_weights": false,
       "modalities": {
@@ -2616,8 +2731,9 @@
         ]
       },
       "cost": {
-        "input": 0.30200000000000005,
-        "output": 1.2069999999999999
+        "input": 0.302,
+        "output": 1.207,
+        "cache_read": 0.151
       },
       "limit": {
         "context": 65532,
@@ -2638,10 +2754,11 @@
         "supported": true,
         "default": true
       },
+      "temperature": true,
       "tool_call": true,
-      "release_date": "2025-12-19",
-      "last_updated": "2025-12-19",
-      "open_weights": false,
+      "release_date": "2025-12-23",
+      "last_updated": "2025-12-23",
+      "open_weights": true,
       "modalities": {
         "input": [
           "text"
@@ -2652,7 +2769,8 @@
       },
       "cost": {
         "input": 0.33,
-        "output": 1.32
+        "output": 1.32,
+        "cache_read": 0.165
       },
       "limit": {
         "context": 200000,
@@ -2678,10 +2796,11 @@
         "supported": true,
         "default": true
       },
+      "temperature": true,
       "tool_call": true,
       "release_date": "2026-02-12",
       "last_updated": "2026-02-12",
-      "open_weights": false,
+      "open_weights": true,
       "modalities": {
         "input": [
           "text"
@@ -2692,7 +2811,8 @@
       },
       "cost": {
         "input": 0.3,
-        "output": 1.2
+        "output": 1.2,
+        "cache_read": 0.15
       },
       "limit": {
         "context": 204800,
@@ -2933,9 +3053,9 @@
       },
       "temperature": true,
       "tool_call": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-02-02",
-      "last_updated": "2026-02-02",
+      "knowledge": "2025-12",
+      "release_date": "2026-01-30",
+      "last_updated": "2026-02-12",
       "open_weights": true,
       "modalities": {
         "input": [
@@ -2949,16 +3069,19 @@
       "cost": {
         "input": 0.6,
         "output": 3,
-        "cache_read": 0.1
+        "cache_read": 0.12
       },
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 262000,
+        "output": 262000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -3077,7 +3200,8 @@
       "open_weights": true,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -3086,28 +3210,19 @@
       "cost": {
         "input": 1.9,
         "output": 8,
-        "cache_read": 0.38
+        "cache_read": 0.32
       },
       "limit": {
         "context": 262144,
-        "output": 262144
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "supported": true
         }
       }
     },
@@ -3976,19 +4091,18 @@
       "type": "chat",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "temperature": false,
       "tool_call": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2025-12-11",
-      "last_updated": "2025-12-11",
+      "release_date": "2025-12-10",
+      "last_updated": "2025-12-10",
       "open_weights": false,
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "pdf",
+          "image",
+          "text"
         ],
         "output": [
           "text"
@@ -4001,7 +4115,7 @@
       },
       "limit": {
         "context": 128000,
-        "output": 16384
+        "output": 32000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -4988,14 +5102,11 @@
       "type": "chat",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": true
       },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-07-25",
-      "last_updated": "2025-07-25",
+      "tool_call": false,
+      "release_date": "2025-09-11",
+      "last_updated": "2025-09-11",
       "open_weights": true,
       "modalities": {
         "input": [
@@ -5006,13 +5117,13 @@
         ]
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.1,
-        "cache_read": 0.1
+        "input": 0.3,
+        "output": 0.5,
+        "cache_read": 0.15
       },
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 256000,
+        "output": 256000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -5114,7 +5225,7 @@
       "tool_call": false,
       "release_date": "2024-01-01",
       "last_updated": "2024-01-01",
-      "open_weights": false,
+      "open_weights": true,
       "modalities": {
         "input": [
           "text"
@@ -5125,7 +5236,8 @@
       },
       "cost": {
         "input": 0.08,
-        "output": 0.24
+        "output": 0.24,
+        "cache_read": 0.04
       },
       "limit": {
         "context": 41000,
@@ -5159,7 +5271,7 @@
       "tool_call": true,
       "release_date": "2026-03-17",
       "last_updated": "2026-03-17",
-      "open_weights": false,
+      "open_weights": true,
       "modalities": {
         "input": [
           "text"
@@ -5170,7 +5282,8 @@
       },
       "cost": {
         "input": 0.13,
-        "output": 0.5
+        "output": 0.5,
+        "cache_read": 0.065
       },
       "limit": {
         "context": 262000,
@@ -5190,9 +5303,11 @@
       "reasoning": {
         "supported": false
       },
+      "temperature": true,
       "tool_call": false,
-      "release_date": "2025-09-17",
-      "last_updated": "2025-09-17",
+      "knowledge": "2025-04",
+      "release_date": "2025-07-23",
+      "last_updated": "2025-07-23",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -5204,7 +5319,8 @@
       },
       "cost": {
         "input": 1,
-        "output": 5
+        "output": 5,
+        "cache_read": 0.5
       },
       "limit": {
         "context": 128000,
@@ -5224,9 +5340,11 @@
       "reasoning": {
         "supported": true
       },
+      "temperature": true,
       "tool_call": false,
-      "release_date": "2025-09-05",
-      "last_updated": "2025-09-05",
+      "knowledge": "2025-04",
+      "release_date": "2025-09-23",
+      "last_updated": "2025-09-23",
       "open_weights": false,
       "modalities": {
         "input": [
@@ -5237,8 +5355,9 @@
         ]
       },
       "cost": {
-        "input": 1.08018,
-        "output": 5.4009
+        "input": 1.2002,
+        "output": 6.001,
+        "cache_read": 0.6001
       },
       "limit": {
         "context": 256000,
@@ -5357,7 +5476,9 @@
       "reasoning": {
         "supported": true
       },
+      "temperature": true,
       "tool_call": false,
+      "knowledge": "2025-04",
       "release_date": "2026-02-16",
       "last_updated": "2026-02-16",
       "open_weights": false,
@@ -5573,10 +5694,10 @@
         ]
       },
       "cost": {
-        "input": 0.03,
+        "input": 0.04,
         "output": 0.13,
-        "cache_read": 0.006,
-        "cache_write": 0.038
+        "cache_read": 0.01,
+        "cache_write": 0.04
       },
       "limit": {
         "context": 1000000,
@@ -5680,6 +5801,51 @@
       }
     },
     {
+      "id": "qwen/qwen3.8-max",
+      "name": "Qwen: Qwen3.8-Max",
+      "display_name": "Qwen: Qwen3.8-Max",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-08-03",
+      "last_updated": "2026-08-03",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 1.88,
+        "output": 5.63,
+        "cache_read": 0.23,
+        "cache_write": 2.35
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "sapiens-ai/agnes-2.0-flash",
       "name": "Sapiens AI: Agnes-2.0-Flash",
       "display_name": "Sapiens AI: Agnes-2.0-Flash",
@@ -5699,8 +5865,8 @@
         ]
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.2
+        "input": 0,
+        "output": 0
       },
       "limit": {
         "context": 256000,
@@ -5709,6 +5875,75 @@
       "metadata": {
         "ownedBy": "sapiens-ai",
         "created": 1779357254,
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "sapiens-ai/agnes-2.5-flash",
+      "name": "Sapiens AI: Agnes-2.5-Flash",
+      "display_name": "Sapiens AI: Agnes-2.5-Flash",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "limit": {
+        "context": 524288,
+        "output": 524288
+      },
+      "metadata": {
+        "ownedBy": "sapiens-ai",
+        "created": 1786363781,
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "sapiens-ai/agnes-2.5-pro",
+      "name": "Sapiens AI: Agnes-2.5-Pro",
+      "display_name": "Sapiens AI: Agnes-2.5-Pro",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.45,
+        "output": 0.9,
+        "cache_read": 0.0038
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "metadata": {
+        "ownedBy": "sapiens-ai",
+        "created": 1786364684,
         "source": "public-provider-conf"
       },
       "vision": true
@@ -5847,7 +6082,7 @@
       "tool_call": true,
       "release_date": "2026-04-20",
       "last_updated": "2026-04-20",
-      "open_weights": true,
+      "open_weights": false,
       "modalities": {
         "input": [
           "text"
@@ -5857,10 +6092,9 @@
         ]
       },
       "cost": {
-        "input": 0.19,
-        "output": 0.63,
-        "cache_read": 0.063,
-        "cache_write": 0.19
+        "input": 0.066,
+        "output": 0.26,
+        "cache_read": 0.029
       },
       "limit": {
         "context": 262144,
@@ -6253,10 +6487,12 @@
         "supported": true,
         "default": true
       },
+      "temperature": true,
       "tool_call": true,
+      "knowledge": "2025-04",
       "release_date": "2025-09-30",
       "last_updated": "2025-09-30",
-      "open_weights": false,
+      "open_weights": true,
       "modalities": {
         "input": [
           "text"
@@ -6266,8 +6502,9 @@
         ]
       },
       "cost": {
-        "input": 0.4,
-        "output": 1.5
+        "input": 0.35,
+        "output": 1.4,
+        "cache_read": 0.175
       },
       "limit": {
         "context": 200000,
@@ -6735,6 +6972,7 @@
       "reasoning": {
         "supported": false
       },
+      "temperature": true,
       "tool_call": true,
       "release_date": "2026-04-01",
       "last_updated": "2026-04-01",
@@ -6755,7 +6993,7 @@
       },
       "limit": {
         "context": 202800,
-        "output": 131100
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"

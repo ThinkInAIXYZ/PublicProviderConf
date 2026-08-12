@@ -7,7 +7,7 @@
   "models": [
     {
       "id": "anthropic-claude-opus-4.8",
-      "name": "Claude Opus 4.8",
+      "name": "Anthropic Claude Opus 4.8",
       "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
       "family": "claude-opus",
       "attachment": true,
@@ -22,7 +22,7 @@
             "low",
             "medium",
             "high",
-            "xhigh"
+            "max"
           ]
         }
       ],
@@ -50,7 +50,7 @@
         "cache_read": 0.5,
         "cache_write": 6.25
       },
-      "display_name": "Claude Opus 4.8",
+      "display_name": "Anthropic Claude Opus 4.8",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -153,6 +153,74 @@
       "type": "chat"
     },
     {
+      "id": "openai-gpt-5.6-terra",
+      "name": "OpenAI GPT-5.6 Terra",
+      "description": "Balanced GPT-5.6 model for capable, cost-efficient everyday work",
+      "family": "gpt-terra",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 18,
+            "cache_read": 0.4,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 18,
+          "cache_read": 0.4
+        }
+      },
+      "display_name": "OpenAI GPT-5.6 Terra",
+      "type": "chat"
+    },
+    {
       "id": "glm-5",
       "name": "GLM 5",
       "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
@@ -178,6 +246,7 @@
       "interleaved": {
         "field": "reasoning_content"
       },
+      "temperature": true,
       "release_date": "2026-02-11",
       "last_updated": "2026-04-16",
       "modalities": {
@@ -190,12 +259,13 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 202752,
-        "output": 128000
+        "context": 64000,
+        "output": 12800
       },
       "cost": {
-        "input": 1,
-        "output": 3.2
+        "input": 0.75,
+        "output": 2.4,
+        "cache_read": 0.2
       },
       "display_name": "GLM 5",
       "type": "chat",
@@ -213,7 +283,7 @@
     },
     {
       "id": "openai-gpt-4.1",
-      "name": "GPT-4.1",
+      "name": "OpenAI GPT-4.1",
       "description": "GPT model for general reasoning, writing, coding, and tool-assisted tasks",
       "family": "gpt",
       "attachment": true,
@@ -229,8 +299,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -246,7 +315,7 @@
         "output": 8,
         "cache_read": 0.5
       },
-      "display_name": "GPT-4.1",
+      "display_name": "OpenAI GPT-4.1",
       "type": "chat"
     },
     {
@@ -283,8 +352,58 @@
       "type": "chat"
     },
     {
+      "id": "anthropic-claude-opus-5",
+      "name": "Anthropic Claude Opus 5",
+      "description": "Strongest Claude Opus model for coding, agents, and professional work",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-05",
+      "release_date": "2026-07-24",
+      "last_updated": "2026-07-24",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
+      },
+      "display_name": "Anthropic Claude Opus 5",
+      "type": "chat"
+    },
+    {
       "id": "mistral-3-14B",
-      "name": "Ministral 3 14B Instruct",
+      "name": "Ministral 3 14B",
       "description": "Compact Mistral model for edge, latency-sensitive, and cost-efficient workloads",
       "family": "ministral",
       "attachment": false,
@@ -313,12 +432,12 @@
         "input": 0.2,
         "output": 0.2
       },
-      "display_name": "Ministral 3 14B Instruct",
+      "display_name": "Ministral 3 14B",
       "type": "chat"
     },
     {
       "id": "openai-gpt-5.4-pro",
-      "name": "GPT-5.4 pro",
+      "name": "OpenAI GPT-5.4 Pro",
       "description": "Frontier GPT model for professional reasoning, coding, and multimodal work",
       "family": "gpt-pro",
       "attachment": true,
@@ -352,14 +471,28 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 400000,
+        "context": 1050000,
         "output": 128000
       },
       "cost": {
         "input": 30,
-        "output": 180
+        "output": 180,
+        "tiers": [
+          {
+            "input": 60,
+            "output": 270,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 60,
+          "output": 270
+        }
       },
-      "display_name": "GPT-5.4 pro",
+      "display_name": "OpenAI GPT-5.4 Pro",
       "type": "chat"
     },
     {
@@ -394,7 +527,7 @@
     },
     {
       "id": "openai-gpt-oss-20b",
-      "name": "gpt-oss-20b",
+      "name": "OpenAI GPT-oss-20b",
       "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
       "family": "gpt-oss",
       "attachment": false,
@@ -428,14 +561,14 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 131072,
-        "output": 131072
+        "context": 128000,
+        "output": 4096
       },
       "cost": {
         "input": 0.05,
         "output": 0.45
       },
-      "display_name": "gpt-oss-20b",
+      "display_name": "OpenAI GPT-oss-20b",
       "type": "chat"
     },
     {
@@ -448,7 +581,16 @@
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
@@ -467,8 +609,8 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 200000,
-        "output": 131072
+        "context": 163840,
+        "output": 32768
       },
       "cost": {
         "input": 0.975,
@@ -491,7 +633,7 @@
     },
     {
       "id": "nemotron-nano-12b-v2-vl",
-      "name": "Nemotron Nano 12B v2 VL",
+      "name": "Nemotron-nano 12b v2-vl",
       "description": "Nemotron multimodal model for visual reasoning and agentic AI workflows",
       "family": "nemotron",
       "attachment": true,
@@ -513,13 +655,13 @@
       ],
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-12-01",
-      "last_updated": "2026-04-30",
+      "release_date": "2025-10-28",
+      "last_updated": "2025-10-28",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -534,7 +676,7 @@
         "input": 0.2,
         "output": 0.6
       },
-      "display_name": "Nemotron Nano 12B v2 VL",
+      "display_name": "Nemotron-nano 12b v2-vl",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -544,7 +686,7 @@
     },
     {
       "id": "anthropic-claude-4.5-sonnet",
-      "name": "Claude Sonnet 4.5",
+      "name": "Anthropic Claude 4.5 Sonnet",
       "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
       "family": "claude-sonnet",
       "attachment": true,
@@ -570,8 +712,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -579,7 +720,7 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
+        "context": 200000,
         "output": 64000
       },
       "cost": {
@@ -591,8 +732,8 @@
           {
             "input": 6,
             "output": 22.5,
-            "cache_read": 0.3,
-            "cache_write": 3.75,
+            "cache_read": 0.6,
+            "cache_write": 7.5,
             "tier": {
               "type": "context",
               "size": 200000
@@ -602,16 +743,16 @@
         "context_over_200k": {
           "input": 6,
           "output": 22.5,
-          "cache_read": 0.3,
-          "cache_write": 3.75
+          "cache_read": 0.6,
+          "cache_write": 7.5
         }
       },
-      "display_name": "Claude Sonnet 4.5",
+      "display_name": "Anthropic Claude 4.5 Sonnet",
       "type": "chat"
     },
     {
       "id": "nvidia-nemotron-3-super-120b",
-      "name": "Nemotron-3-Super-120B",
+      "name": "NVIDIA Nemotron 3 Super 120B  (Public Preview)",
       "description": "Nemotron middle tier for collaborative agents and high-volume reasoning workloads",
       "family": "nemotron",
       "attachment": false,
@@ -634,9 +775,8 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2026-02",
       "release_date": "2026-03-11",
-      "last_updated": "2026-04-16",
+      "last_updated": "2026-03-11",
       "modalities": {
         "input": [
           "text"
@@ -647,20 +787,20 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 256000,
+        "context": 1000000,
         "output": 32768
       },
-      "status": "beta",
       "cost": {
-        "input": 0.3,
-        "output": 0.65
+        "input": 0.165,
+        "output": 0.3575,
+        "cache_read": 0.06
       },
-      "display_name": "Nemotron-3-Super-120B",
+      "display_name": "NVIDIA Nemotron 3 Super 120B  (Public Preview)",
       "type": "chat"
     },
     {
       "id": "anthropic-claude-opus-4.5",
-      "name": "Claude Opus 4.5",
+      "name": "Anthropic Claude Opus 4.5",
       "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
       "family": "claude-opus",
       "attachment": true,
@@ -674,7 +814,8 @@
           "values": [
             "low",
             "medium",
-            "high"
+            "high",
+            "max"
           ]
         }
       ],
@@ -686,8 +827,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -696,7 +836,7 @@
       "open_weights": false,
       "limit": {
         "context": 200000,
-        "output": 64000
+        "output": 8192
       },
       "cost": {
         "input": 5,
@@ -704,7 +844,7 @@
         "cache_read": 0.5,
         "cache_write": 6.25
       },
-      "display_name": "Claude Opus 4.5",
+      "display_name": "Anthropic Claude Opus 4.5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -739,7 +879,7 @@
       "name": "Kimi K2.5",
       "description": "Kimi model for long-context chat, coding, and agentic reasoning",
       "family": "kimi-k2",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -766,7 +906,8 @@
       "last_updated": "2026-04-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -775,11 +916,12 @@
       "open_weights": true,
       "limit": {
         "context": 262144,
-        "output": 32768
+        "output": 52429
       },
       "cost": {
-        "input": 0.5,
-        "output": 2.7
+        "input": 0.375,
+        "output": 2.025,
+        "cache_read": 0.203
       },
       "display_name": "Kimi K2.5",
       "type": "chat",
@@ -864,7 +1006,7 @@
     },
     {
       "id": "openai-gpt-5.3-codex",
-      "name": "GPT-5.3 Codex",
+      "name": "OpenAI GPT-5.3 Codex",
       "description": "Coding-optimized GPT model for repository edits, reviews, and agentic software work",
       "family": "gpt-codex",
       "attachment": true,
@@ -893,8 +1035,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -910,7 +1051,7 @@
         "output": 14,
         "cache_read": 0.175
       },
-      "display_name": "GPT-5.3 Codex",
+      "display_name": "OpenAI GPT-5.3 Codex",
       "type": "chat"
     },
     {
@@ -927,11 +1068,9 @@
         {
           "type": "effort",
           "values": [
-            "none",
-            "low",
             "medium",
             "high",
-            "max"
+            "xhigh"
           ]
         }
       ],
@@ -953,13 +1092,13 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 131072
+        "context": 262144,
+        "output": 52429
       },
       "cost": {
-        "input": 1.05,
-        "output": 4.4,
-        "cache_read": 0.21
+        "input": 0.63,
+        "output": 1.98,
+        "cache_read": 0.0945
       },
       "display_name": "GLM-5.2",
       "type": "chat",
@@ -977,7 +1116,7 @@
     },
     {
       "id": "openai-gpt-4o",
-      "name": "GPT-4o",
+      "name": "OpenAI GPT-4o",
       "description": "GPT model for general reasoning, writing, coding, and tool-assisted tasks",
       "family": "gpt",
       "attachment": true,
@@ -993,8 +1132,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -1010,12 +1148,12 @@
         "output": 10,
         "cache_read": 1.25
       },
-      "display_name": "GPT-4o",
+      "display_name": "OpenAI GPT-4o",
       "type": "chat"
     },
     {
       "id": "anthropic-claude-haiku-4.5",
-      "name": "Claude Haiku 4.5",
+      "name": "Anthropic Claude Haiku 4.5",
       "description": "Fast Claude model for responsive assistance, classification, and lightweight agents",
       "family": "claude-haiku",
       "attachment": true,
@@ -1041,8 +1179,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -1051,15 +1188,15 @@
       "open_weights": false,
       "limit": {
         "context": 200000,
-        "output": 64000
+        "output": 8192
       },
       "cost": {
         "input": 1,
         "output": 5,
-        "cache_read": 1,
+        "cache_read": 0.1,
         "cache_write": 1.25
       },
-      "display_name": "Claude Haiku 4.5",
+      "display_name": "Anthropic Claude Haiku 4.5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1125,11 +1262,12 @@
       "open_weights": true,
       "limit": {
         "context": 262144,
-        "output": 262144
+        "output": 52429
       },
       "cost": {
-        "input": 0.95,
-        "output": 4
+        "input": 0.76,
+        "output": 3.2,
+        "cache_read": 0.19
       },
       "display_name": "Kimi K2.6",
       "type": "chat",
@@ -1162,7 +1300,8 @@
             "low",
             "medium",
             "high",
-            "xhigh"
+            "xhigh",
+            "max"
           ]
         }
       ],
@@ -1183,6 +1322,12 @@
       "limit": {
         "context": 1000000,
         "output": 128000
+      },
+      "cost": {
+        "input": 10,
+        "output": 50,
+        "cache_read": 1,
+        "cache_write": 12.5
       },
       "display_name": "Anthropic Claude Fable 5",
       "type": "chat",
@@ -1280,8 +1425,8 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 131072,
-        "output": 32768
+        "context": 32678,
+        "output": 8192
       },
       "cost": {
         "input": 0.99,
@@ -1335,7 +1480,7 @@
     },
     {
       "id": "nemotron-3-nano-omni",
-      "name": "Nemotron Nano 3 Omni",
+      "name": "Nemotron 3 Nano Omni",
       "description": "Open Nemotron omni model combining reasoning with text, vision, and audio",
       "family": "nemotron",
       "attachment": true,
@@ -1359,13 +1504,12 @@
       "structured_output": true,
       "temperature": true,
       "release_date": "2026-04-28",
-      "last_updated": "2026-04-30",
+      "last_updated": "2026-04-28",
       "modalities": {
         "input": [
           "text",
           "image",
-          "video",
-          "audio"
+          "video"
         ],
         "output": [
           "text"
@@ -1374,13 +1518,13 @@
       "open_weights": true,
       "limit": {
         "context": 65536,
-        "output": 65536
+        "output": 13107
       },
       "cost": {
         "input": 0.5,
         "output": 0.9
       },
-      "display_name": "Nemotron Nano 3 Omni",
+      "display_name": "Nemotron 3 Nano Omni",
       "type": "chat"
     },
     {
@@ -1439,15 +1583,20 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 262144,
-        "output": 8192
+        "context": 1048576,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.0679,
+        "output": 0.168,
+        "cache_read": 0.0168
       },
       "display_name": "Deepseek V4 Flash",
       "type": "chat"
     },
     {
       "id": "openai-gpt-5.4",
-      "name": "GPT-5.4",
+      "name": "OpenAI GPT-5.4",
       "description": "Frontier GPT model for professional reasoning, coding, and multimodal work",
       "family": "gpt",
       "attachment": true,
@@ -1476,8 +1625,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -1485,20 +1633,36 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
+        "context": 400000,
         "output": 128000
       },
       "cost": {
         "input": 2.5,
         "output": 15,
-        "cache_read": 0.25
+        "cache_read": 0.25,
+        "tiers": [
+          {
+            "input": 5,
+            "output": 22.5,
+            "cache_read": 0.5,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 5,
+          "output": 22.5,
+          "cache_read": 0.5
+        }
       },
-      "display_name": "GPT-5.4",
+      "display_name": "OpenAI GPT-5.4",
       "type": "chat"
     },
     {
       "id": "anthropic-claude-4.1-opus",
-      "name": "Claude Opus 4.1",
+      "name": "Anthropic Claude 4.1 Opus",
       "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
       "family": "claude-opus",
       "attachment": true,
@@ -1524,8 +1688,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -1534,7 +1697,7 @@
       "open_weights": false,
       "limit": {
         "context": 200000,
-        "output": 32000
+        "output": 8192
       },
       "cost": {
         "input": 15,
@@ -1542,7 +1705,7 @@
         "cache_read": 1.5,
         "cache_write": 18.75
       },
-      "display_name": "Claude Opus 4.1",
+      "display_name": "Anthropic Claude 4.1 Opus",
       "type": "chat"
     },
     {
@@ -1584,7 +1747,7 @@
     },
     {
       "id": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
+      "name": "Deepseek V4 Pro",
       "description": "Flagship DeepSeek model for coding, reasoning, and agentic work",
       "family": "deepseek-thinking",
       "attachment": false,
@@ -1623,13 +1786,14 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 393216
+        "output": 384000
       },
       "cost": {
-        "input": 1.74,
-        "output": 3.48
+        "input": 0.87,
+        "output": 1.74,
+        "cache_read": 0.174
       },
-      "display_name": "DeepSeek V4 Pro",
+      "display_name": "Deepseek V4 Pro",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1733,7 +1897,7 @@
     },
     {
       "id": "openai-gpt-5-mini",
-      "name": "GPT-5 mini",
+      "name": "OpenAI GPT-5 Mini",
       "description": "Compact GPT model for low-latency assistance and high-volume workloads",
       "family": "gpt-mini",
       "attachment": true,
@@ -1777,12 +1941,12 @@
         "output": 2,
         "cache_read": 0.025
       },
-      "display_name": "GPT-5 mini",
+      "display_name": "OpenAI GPT-5 Mini",
       "type": "chat"
     },
     {
       "id": "openai-gpt-5.5",
-      "name": "GPT-5.5",
+      "name": "OpenAI GPT-5.5",
       "description": "Frontier GPT model for professional reasoning, coding, and multimodal work",
       "family": "gpt",
       "attachment": true,
@@ -1811,8 +1975,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -1844,7 +2007,7 @@
           "cache_read": 1
         }
       },
-      "display_name": "GPT-5.5",
+      "display_name": "OpenAI GPT-5.5",
       "type": "chat"
     },
     {
@@ -1872,14 +2035,67 @@
       "open_weights": true,
       "limit": {
         "context": 262144,
-        "output": 65536
+        "output": 52429
       },
       "cost": {
         "input": 0.45,
-        "output": 1.7
+        "output": 1.7,
+        "cache_read": 0.09
       },
       "display_name": "Qwen3 Coder Flash",
       "type": "chat"
+    },
+    {
+      "id": "deepseek-v4-flash-0731",
+      "name": "DeepSeek V4 Flash 0731",
+      "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-07-31",
+      "last_updated": "2026-07-31",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 209715
+      },
+      "cost": {
+        "input": 0.08,
+        "output": 0.252,
+        "cache_read": 0.0252
+      },
+      "display_name": "DeepSeek V4 Flash 0731",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "deepseek-v3",
@@ -1913,7 +2129,7 @@
     },
     {
       "id": "alibaba-qwen3-32b",
-      "name": "Qwen3-32B",
+      "name": "Qwen3 32B",
       "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
       "family": "qwen",
       "attachment": false,
@@ -1948,19 +2164,19 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 131000,
-        "output": 40960
+        "context": 32768,
+        "output": 6554
       },
       "cost": {
         "input": 0.25,
         "output": 0.55
       },
-      "display_name": "Qwen3-32B",
+      "display_name": "Qwen3 32B",
       "type": "chat"
     },
     {
       "id": "openai-gpt-image-1.5",
-      "name": "GPT Image 1.5",
+      "name": "OpenAI GPT Image 1.5",
       "description": "Image model for prompt-driven generation, editing, and visual design workflows",
       "family": "gpt-image",
       "attachment": true,
@@ -1977,25 +2193,26 @@
           "image"
         ],
         "output": [
-          "image"
+          "image",
+          "text"
         ]
       },
       "open_weights": false,
       "limit": {
         "context": 8192,
-        "output": 8192
+        "output": 16384
       },
       "cost": {
         "input": 5,
         "output": 10,
         "cache_read": 1
       },
-      "display_name": "GPT Image 1.5",
+      "display_name": "OpenAI GPT Image 1.5",
       "type": "chat"
     },
     {
       "id": "llama-4-maverick",
-      "name": "Llama 4 Maverick 17B 128E Instruct",
+      "name": "Llama 4 Maverick",
       "description": "Open multimodal Llama model for strong reasoning and fast responses",
       "family": "llama",
       "attachment": true,
@@ -2019,19 +2236,19 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
+        "context": 128000,
         "output": 16384
       },
       "cost": {
-        "input": 0.25,
-        "output": 0.87
+        "input": 0.2,
+        "output": 0.696
       },
-      "display_name": "Llama 4 Maverick 17B 128E Instruct",
+      "display_name": "Llama 4 Maverick",
       "type": "chat"
     },
     {
       "id": "openai-gpt-5.2-pro",
-      "name": "GPT-5.2 pro",
+      "name": "OpenAI GPT-5.2 Pro",
       "description": "Frontier GPT model for professional reasoning, coding, and multimodal work",
       "family": "gpt-pro",
       "attachment": true,
@@ -2043,9 +2260,10 @@
         {
           "type": "effort",
           "values": [
+            "minimal",
+            "low",
             "medium",
-            "high",
-            "xhigh"
+            "high"
           ]
         }
       ],
@@ -2072,7 +2290,7 @@
         "input": 21,
         "output": 168
       },
-      "display_name": "GPT-5.2 pro",
+      "display_name": "OpenAI GPT-5.2 Pro",
       "type": "chat"
     },
     {
@@ -2125,7 +2343,7 @@
     },
     {
       "id": "openai-gpt-5.4-mini",
-      "name": "GPT-5.4 mini",
+      "name": "OpenAI GPT-5.4 Mini",
       "description": "Compact GPT model for low-latency assistance and high-volume workloads",
       "family": "gpt-mini",
       "attachment": true,
@@ -2170,15 +2388,15 @@
         "output": 4.5,
         "cache_read": 0.075
       },
-      "display_name": "GPT-5.4 mini",
+      "display_name": "OpenAI GPT-5.4 Mini",
       "type": "chat"
     },
     {
       "id": "minimax-m2.5",
-      "name": "MiniMax M2.5",
+      "name": "MiniMax M2.5 (Public Preview)",
       "description": "MiniMax model for chat, coding, office work, and agentic tasks",
       "family": "minimax-m2.5",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -2200,7 +2418,8 @@
       "last_updated": "2026-04-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -2208,15 +2427,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 204800,
-        "output": 128000
+        "context": 65536,
+        "output": 13107
       },
-      "status": "beta",
       "cost": {
-        "input": 0.3,
-        "output": 1.2
+        "input": 0.225,
+        "output": 0.9,
+        "cache_read": 0.06
       },
-      "display_name": "MiniMax M2.5",
+      "display_name": "MiniMax M2.5 (Public Preview)",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -2226,7 +2445,7 @@
     },
     {
       "id": "arcee-trinity-large-thinking",
-      "name": "Trinity Large Thinking",
+      "name": "Arcee Trinity Large Thinking (Public Preview)",
       "description": "Flagship model for demanding analysis, coding, and production agent workflows",
       "family": "trinity",
       "attachment": false,
@@ -2258,16 +2477,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 256000,
-        "output": 128000
+        "context": 128000,
+        "output": 32000
       },
-      "status": "beta",
       "cost": {
         "input": 0.25,
         "output": 0.9,
         "cache_read": 0.06
       },
-      "display_name": "Trinity Large Thinking",
+      "display_name": "Arcee Trinity Large Thinking (Public Preview)",
       "type": "chat"
     },
     {
@@ -2321,7 +2539,7 @@
     },
     {
       "id": "openai-o1",
-      "name": "o1",
+      "name": "OpenAI o1",
       "description": "O-series reasoning model for hard analysis, math, coding, and planning",
       "family": "o",
       "attachment": true,
@@ -2348,8 +2566,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -2365,12 +2582,12 @@
         "output": 60,
         "cache_read": 7.5
       },
-      "display_name": "o1",
+      "display_name": "OpenAI o1",
       "type": "chat"
     },
     {
       "id": "openai-gpt-5-nano",
-      "name": "GPT-5 nano",
+      "name": "OpenAI GPT-5 Nano",
       "description": "Compact GPT model for low-latency assistance and high-volume workloads",
       "family": "gpt-nano",
       "attachment": true,
@@ -2414,12 +2631,12 @@
         "output": 0.4,
         "cache_read": 0.005
       },
-      "display_name": "GPT-5 nano",
+      "display_name": "OpenAI GPT-5 Nano",
       "type": "chat"
     },
     {
       "id": "anthropic-claude-opus-4.6",
-      "name": "Claude Opus 4.6",
+      "name": "Anthropic Claude Opus 4.6",
       "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
       "family": "claude-opus",
       "attachment": true,
@@ -2433,7 +2650,8 @@
           "values": [
             "low",
             "medium",
-            "high"
+            "high",
+            "max"
           ]
         }
       ],
@@ -2445,8 +2663,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -2454,8 +2671,8 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 200000,
+        "output": 8192
       },
       "cost": {
         "input": 5,
@@ -2466,8 +2683,8 @@
           {
             "input": 10,
             "output": 37.5,
-            "cache_read": 0.5,
-            "cache_write": 6.25,
+            "cache_read": 1,
+            "cache_write": 12.5,
             "tier": {
               "type": "context",
               "size": 200000
@@ -2477,11 +2694,11 @@
         "context_over_200k": {
           "input": 10,
           "output": 37.5,
-          "cache_read": 0.5,
-          "cache_write": 6.25
+          "cache_read": 1,
+          "cache_write": 12.5
         }
       },
-      "display_name": "Claude Opus 4.6",
+      "display_name": "Anthropic Claude Opus 4.6",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -2514,7 +2731,7 @@
     },
     {
       "id": "anthropic-claude-4.6-sonnet",
-      "name": "Claude Sonnet 4.6",
+      "name": "Anthropic Claude Sonnet 4.6",
       "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
       "family": "claude-sonnet",
       "attachment": true,
@@ -2528,7 +2745,8 @@
           "values": [
             "low",
             "medium",
-            "high"
+            "high",
+            "max"
           ]
         }
       ],
@@ -2540,8 +2758,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -2549,8 +2766,8 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 64000
+        "context": 200000,
+        "output": 8192
       },
       "cost": {
         "input": 3,
@@ -2561,8 +2778,8 @@
           {
             "input": 6,
             "output": 22.5,
-            "cache_read": 0.3,
-            "cache_write": 3.75,
+            "cache_read": 0.6,
+            "cache_write": 7.5,
             "tier": {
               "type": "context",
               "size": 200000
@@ -2572,16 +2789,16 @@
         "context_over_200k": {
           "input": 6,
           "output": 22.5,
-          "cache_read": 0.3,
-          "cache_write": 3.75
+          "cache_read": 0.6,
+          "cache_write": 7.5
         }
       },
-      "display_name": "Claude Sonnet 4.6",
+      "display_name": "Anthropic Claude Sonnet 4.6",
       "type": "chat"
     },
     {
       "id": "llama3.3-70b-instruct",
-      "name": "Llama 3.3 Instruct 70B",
+      "name": "Llama 3.3 Instruct (70B)",
       "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
       "family": "llama",
       "attachment": false,
@@ -2604,24 +2821,35 @@
       "open_weights": true,
       "limit": {
         "context": 128000,
-        "output": 128000
+        "output": 4096
       },
       "cost": {
         "input": 0.65,
         "output": 0.65
       },
-      "display_name": "Llama 3.3 Instruct 70B",
+      "display_name": "Llama 3.3 Instruct (70B)",
       "type": "chat"
     },
     {
       "id": "openai-gpt-4o-mini",
-      "name": "GPT-4o mini",
+      "name": "OpenAI GPT-4o mini",
       "description": "Compact GPT model for low-latency assistance and high-volume workloads",
       "family": "gpt-mini",
       "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
@@ -2631,8 +2859,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -2648,12 +2875,12 @@
         "output": 0.6,
         "cache_read": 0.075
       },
-      "display_name": "GPT-4o mini",
+      "display_name": "OpenAI GPT-4o mini",
       "type": "chat"
     },
     {
       "id": "openai-gpt-image-2",
-      "name": "GPT Image 2",
+      "name": "OpenAI GPT Image 2",
       "description": "Image model for prompt-driven generation, editing, and visual design workflows",
       "family": "gpt-image",
       "attachment": true,
@@ -2670,15 +2897,20 @@
           "image"
         ],
         "output": [
-          "image"
+          "image",
+          "text"
         ]
       },
       "open_weights": false,
       "limit": {
         "context": 8192,
-        "output": 8192
+        "output": 16384
       },
-      "display_name": "GPT Image 2",
+      "cost": {
+        "input": 8,
+        "output": 30
+      },
+      "display_name": "OpenAI GPT Image 2",
       "type": "chat"
     },
     {
@@ -2711,6 +2943,74 @@
         "output": 0
       },
       "display_name": "Wan2.2-T2V-A14B",
+      "type": "chat"
+    },
+    {
+      "id": "openai-gpt-5.6-sol",
+      "name": "OpenAI GPT-5.6 Sol",
+      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
+      "family": "gpt-sol",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 5,
+        "output": 30,
+        "cache_read": 0.5,
+        "tiers": [
+          {
+            "input": 10,
+            "output": 45,
+            "cache_read": 1,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 10,
+          "output": 45,
+          "cache_read": 1
+        }
+      },
+      "display_name": "OpenAI GPT-5.6 Sol",
       "type": "chat"
     },
     {
@@ -2756,9 +3056,9 @@
         "output": 131072
       },
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3
+        "input": 2.85,
+        "output": 14.25,
+        "cache_read": 0.285
       },
       "display_name": "Kimi K3",
       "type": "chat",
@@ -2775,11 +3075,70 @@
       }
     },
     {
+      "id": "mimo-v2.5-pro",
+      "name": "MiMo V2.5 Pro",
+      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
+      "family": "mimo",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2024-12",
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 52429
+      },
+      "cost": {
+        "input": 0.4,
+        "output": 1.5,
+        "cache_read": 0.08
+      },
+      "display_name": "MiMo V2.5 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
       "id": "qwen3.5-397b-a17b",
       "name": "Qwen 3.5 397B A17B",
       "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
       "family": "qwen3.5",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -2802,7 +3161,9 @@
       "last_updated": "2026-04-30",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -2810,12 +3171,13 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 81920
+        "context": 131072,
+        "output": 26214
       },
       "cost": {
-        "input": 0.55,
-        "output": 3.5
+        "input": 0.3025,
+        "output": 1.925,
+        "cache_read": 0.111
       },
       "display_name": "Qwen 3.5 397B A17B",
       "type": "chat",
@@ -2899,6 +3261,122 @@
       "type": "embedding"
     },
     {
+      "id": "openai-gpt-5.6-luna",
+      "name": "OpenAI GPT-5.6 Luna",
+      "description": "Cost-efficient GPT-5.6 model for fast, high-volume workloads",
+      "family": "gpt-luna",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 1.2,
+        "cache_read": 0.02,
+        "tiers": [
+          {
+            "input": 0.4,
+            "output": 1.8,
+            "cache_read": 0.04,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 0.4,
+          "output": 1.8,
+          "cache_read": 0.04
+        }
+      },
+      "display_name": "OpenAI GPT-5.6 Luna",
+      "type": "chat"
+    },
+    {
+      "id": "anthropic-claude-5-sonnet",
+      "name": "Anthropic Claude Sonnet 5",
+      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
+      "family": "claude-sonnet",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-06-30",
+      "last_updated": "2026-06-30",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.2,
+        "cache_write": 2.5
+      },
+      "display_name": "Anthropic Claude Sonnet 5",
+      "type": "chat"
+    },
+    {
       "id": "nemotron-3-ultra-550b",
       "name": "Nemotron 3 Ultra",
       "description": "Flagship Nemotron model for high-throughput reasoning and complex agents",
@@ -2922,14 +3400,18 @@
       "open_weights": false,
       "limit": {
         "context": 131072,
-        "output": 8192
+        "output": 26214
+      },
+      "cost": {
+        "input": 0.9,
+        "output": 1.7
       },
       "display_name": "Nemotron 3 Ultra",
       "type": "chat"
     },
     {
       "id": "openai-o3",
-      "name": "o3",
+      "name": "OpenAI o3",
       "description": "O-series reasoning model for hard analysis, math, coding, and planning",
       "family": "o",
       "attachment": true,
@@ -2956,8 +3438,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -2973,7 +3454,7 @@
         "output": 8,
         "cache_read": 0.5
       },
-      "display_name": "o3",
+      "display_name": "OpenAI o3",
       "type": "chat"
     },
     {
@@ -3226,7 +3707,7 @@
     },
     {
       "id": "openai-gpt-oss-120b",
-      "name": "gpt-oss-120b",
+      "name": "OpenAI GPT-oss-120b",
       "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
       "family": "gpt-oss",
       "attachment": false,
@@ -3263,14 +3744,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 131072,
-        "output": 131072
+        "context": 128000,
+        "output": 4096
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.7
+        "input": 0.055,
+        "output": 0.385,
+        "cache_read": 0.02
       },
-      "display_name": "gpt-oss-120b",
+      "display_name": "OpenAI GPT-oss-120b",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -3286,7 +3768,7 @@
     },
     {
       "id": "anthropic-claude-opus-4.7",
-      "name": "Claude Opus 4.7",
+      "name": "Anthropic Claude Opus 4.7",
       "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
       "family": "claude-opus",
       "attachment": true,
@@ -3301,7 +3783,7 @@
             "low",
             "medium",
             "high",
-            "xhigh"
+            "max"
           ]
         }
       ],
@@ -3313,8 +3795,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -3322,8 +3803,8 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 200000,
+        "output": 8192
       },
       "cost": {
         "input": 5,
@@ -3331,7 +3812,7 @@
         "cache_read": 0.5,
         "cache_write": 6.25
       },
-      "display_name": "Claude Opus 4.7",
+      "display_name": "Anthropic Claude Opus 4.7",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -3362,7 +3843,7 @@
     },
     {
       "id": "openai-gpt-5",
-      "name": "GPT-5",
+      "name": "OpenAI GPT-5",
       "description": "GPT model for general reasoning, writing, coding, and tool-assisted tasks",
       "family": "gpt",
       "attachment": true,
@@ -3406,12 +3887,12 @@
         "output": 10,
         "cache_read": 0.125
       },
-      "display_name": "GPT-5",
+      "display_name": "OpenAI GPT-5",
       "type": "chat"
     },
     {
       "id": "gemma-4-31B-it",
-      "name": "Gemma 4 31B",
+      "name": "Gemma 4",
       "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
       "family": "gemma",
       "attachment": true,
@@ -3426,7 +3907,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -3439,9 +3921,10 @@
       },
       "cost": {
         "input": 0.18,
-        "output": 0.5
+        "output": 0.5,
+        "cache_read": 0.036
       },
-      "display_name": "Gemma 4 31B",
+      "display_name": "Gemma 4",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -3451,10 +3934,10 @@
     },
     {
       "id": "openai-o3-mini",
-      "name": "o3-mini",
+      "name": "OpenAI o3 mini",
       "description": "O-series reasoning model for hard analysis, math, coding, and planning",
       "family": "o-mini",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -3477,7 +3960,8 @@
       "last_updated": "2025-01-29",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -3493,7 +3977,7 @@
         "output": 4.4,
         "cache_read": 0.55
       },
-      "display_name": "o3-mini",
+      "display_name": "OpenAI o3 mini",
       "type": "chat"
     },
     {
@@ -3589,7 +4073,7 @@
     },
     {
       "id": "deepseek-3.2",
-      "name": "DeepSeek V3.2",
+      "name": "Deepseek 3.2",
       "description": "DeepSeek chat model for instruction following, coding, and analysis",
       "family": "deepseek",
       "attachment": false,
@@ -3626,14 +4110,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128000,
-        "output": 64000
+        "context": 163840,
+        "output": 32768
       },
       "cost": {
-        "input": 0.5,
-        "output": 1.6
+        "input": 0.25,
+        "output": 0.8,
+        "cache_read": 0.075
       },
-      "display_name": "DeepSeek V3.2",
+      "display_name": "Deepseek 3.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -3682,7 +4167,7 @@
     },
     {
       "id": "openai-gpt-5.2",
-      "name": "GPT-5.2",
+      "name": "OpenAI GPT-5.2",
       "description": "GPT model for general reasoning, writing, coding, and tool-assisted tasks",
       "family": "gpt",
       "attachment": true,
@@ -3694,11 +4179,10 @@
         {
           "type": "effort",
           "values": [
-            "none",
+            "minimal",
             "low",
             "medium",
-            "high",
-            "xhigh"
+            "high"
           ]
         }
       ],
@@ -3727,12 +4211,12 @@
         "output": 14,
         "cache_read": 0.175
       },
-      "display_name": "GPT-5.2",
+      "display_name": "OpenAI GPT-5.2",
       "type": "chat"
     },
     {
       "id": "openai-gpt-5.4-nano",
-      "name": "GPT-5.4 nano",
+      "name": "OpenAI GPT-5.4 Nano",
       "description": "Compact GPT model for low-latency assistance and high-volume workloads",
       "family": "gpt-nano",
       "attachment": true,
@@ -3777,7 +4261,7 @@
         "output": 1.25,
         "cache_read": 0.02
       },
-      "display_name": "GPT-5.4 nano",
+      "display_name": "OpenAI GPT-5.4 Nano",
       "type": "chat"
     },
     {

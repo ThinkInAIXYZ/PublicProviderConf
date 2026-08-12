@@ -1282,7 +1282,7 @@
     },
     {
       "id": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash 0731",
+      "name": "DeepSeek V4 Flash",
       "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
       "family": "deepseek-flash",
       "attachment": false,
@@ -1297,6 +1297,7 @@
         {
           "type": "effort",
           "values": [
+            "low",
             "high",
             "max"
           ]
@@ -1329,7 +1330,7 @@
         "output": 0.28,
         "cache_read": 0.028
       },
-      "display_name": "DeepSeek V4 Flash 0731",
+      "display_name": "DeepSeek V4 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1572,11 +1573,67 @@
         "context": 256000,
         "output": 64000
       },
+      "status": "deprecated",
       "cost": {
         "input": 0,
         "output": 0
       },
       "display_name": "North Mini Code Free",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "longcat-2.0-free",
+      "name": "LongCat-2.0 Free",
+      "description": "Meituan LongCat-2.0, a reasoning model with tool calling and a 1M-token context window",
+      "family": "longcat",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-06-30",
+      "last_updated": "2026-06-30",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "display_name": "LongCat-2.0 Free",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1749,6 +1806,7 @@
         "context": 262144,
         "output": 32768
       },
+      "status": "deprecated",
       "cost": {
         "input": 0,
         "output": 0,
@@ -1815,7 +1873,7 @@
     },
     {
       "id": "deepseek-v4-flash-free",
-      "name": "DeepSeek V4 Flash Free (New)",
+      "name": "DeepSeek V4 Flash Free",
       "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
       "family": "deepseek-flash",
       "attachment": false,
@@ -1827,6 +1885,7 @@
         {
           "type": "effort",
           "values": [
+            "low",
             "high",
             "max"
           ]
@@ -1859,7 +1918,7 @@
         "output": 0,
         "cache_read": 0
       },
-      "display_name": "DeepSeek V4 Flash Free (New)",
+      "display_name": "DeepSeek V4 Flash Free",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -2243,6 +2302,7 @@
         "context": 200000,
         "output": 32000
       },
+      "status": "deprecated",
       "provider": {
         "npm": "@ai-sdk/anthropic"
       },
@@ -2905,6 +2965,42 @@
       }
     },
     {
+      "id": "ling-3.0-tiny-free",
+      "name": "Ling-3.0-tiny Free",
+      "description": "Compact MoE model for responsive agents, instruction following, and multi-turn conversations",
+      "family": "ling",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-08-06",
+      "last_updated": "2026-08-06",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "display_name": "Ling-3.0-tiny Free",
+      "type": "chat"
+    },
+    {
       "id": "grok-code",
       "name": "Grok Code Fast 1",
       "description": "Legacy model retained for compatibility with older integrations",
@@ -3272,11 +3368,27 @@
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
       "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-06-26",
-      "last_updated": "2026-06-26",
+      "release_date": "2026-07-06",
+      "last_updated": "2026-07-06",
       "modalities": {
         "input": [
           "text"
@@ -3290,7 +3402,6 @@
         "context": 190000,
         "output": 64000
       },
-      "status": "deprecated",
       "cost": {
         "input": 0,
         "output": 0,
@@ -3300,7 +3411,13 @@
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -4333,7 +4450,7 @@
     {
       "id": "grok-build-0.1",
       "name": "Grok Build 0.1",
-      "description": "Grok coding model for agentic engineering, edits, and codebase workflows",
+      "description": "Fast Grok coding model tuned for agentic engineering and iterative edits",
       "family": "grok-build",
       "attachment": true,
       "reasoning": {
@@ -4344,12 +4461,13 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-05-20",
-      "last_updated": "2026-05-20",
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -4359,6 +4477,9 @@
       "limit": {
         "context": 256000,
         "output": 256000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
       },
       "cost": {
         "input": 1,
@@ -4991,6 +5112,57 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true
+        }
+      }
+    },
+    {
+      "id": "nemotron-3.5-lightning-free",
+      "name": "Nemotron 3.5 Lightning Free",
+      "description": "Fast NVIDIA Nemotron MoE for reliable agentic tasks across enterprise workloads",
+      "family": "nemotron-free",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-11",
+      "last_updated": "2026-08-11",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "display_name": "Nemotron 3.5 Lightning Free",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },

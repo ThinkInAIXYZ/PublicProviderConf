@@ -609,6 +609,81 @@
       }
     },
     {
+      "id": "qwen/qwen3.7-flash",
+      "name": "Qwen3.7 Flash",
+      "description": "Lightweight multimodal Qwen model for high-throughput text, image, and video tasks",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-07-15",
+      "last_updated": "2026-07-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "input": 991000,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.04,
+        "output": 0.13,
+        "cache_read": 0.01,
+        "cache_write": 0.04,
+        "tiers": [
+          {
+            "input": 0.1,
+            "output": 0.37,
+            "cache_read": 0.02,
+            "cache_write": 0.12,
+            "tier": {
+              "type": "context",
+              "size": 32000
+            }
+          },
+          {
+            "input": 0.19,
+            "output": 0.74,
+            "cache_read": 0.04,
+            "cache_write": 0.24,
+            "tier": {
+              "type": "context",
+              "size": 256000
+            }
+          }
+        ]
+      },
+      "display_name": "Qwen3.7 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "qwen/qwen3.7-plus",
       "name": "Qwen3.7 Plus",
       "description": "Multimodal Qwen workhorse for long-context agents, visual inputs, and coding",
@@ -627,6 +702,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "knowledge": "2025-04",
       "release_date": "2026-06-02",
@@ -697,6 +773,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "release_date": "2026-05-21",
       "last_updated": "2026-05-21",
@@ -720,6 +797,58 @@
         "cache_write": 1.88
       },
       "display_name": "Qwen3.7 Max",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-03",
+      "last_updated": "2026-08-03",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1.88,
+        "output": 5.63,
+        "cache_read": 0.23,
+        "cache_write": 2.35
+      },
+      "display_name": "Qwen3.8 Max",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -822,6 +951,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "knowledge": "2025-04",
       "release_date": "2026-04-02",
@@ -900,6 +1030,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "release_date": "2026-07-06",
       "last_updated": "2026-07-06",
@@ -923,79 +1054,6 @@
         "cache_write": 0.16
       },
       "display_name": "Hy3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "tencent/hy3-preview",
-      "name": "Hy3 preview",
-      "description": "Tencent Hy reasoning model for coding, instruction following, and agent tasks",
-      "family": "Hy",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-04-20",
-      "last_updated": "2026-04-20",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "cost": {
-        "input": 0.19,
-        "output": 0.63,
-        "cache_read": 0.063,
-        "cache_write": 0.19,
-        "tiers": [
-          {
-            "input": 0.25,
-            "output": 1,
-            "cache_read": 0.094,
-            "cache_write": 0.25,
-            "tier": {
-              "type": "context",
-              "size": 16000
-            }
-          },
-          {
-            "input": 0.32,
-            "output": 1.25,
-            "cache_read": 0.125,
-            "cache_write": 0.32,
-            "tier": {
-              "type": "context",
-              "size": 32000
-            }
-          }
-        ]
-      },
-      "display_name": "Hy3 preview",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1216,6 +1274,7 @@
       },
       "reasoning_options": [],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "release_date": "2026-03-18",
       "last_updated": "2026-03-18",
@@ -1268,6 +1327,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "release_date": "2026-06-01",
       "last_updated": "2026-06-01",
@@ -1661,6 +1721,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "knowledge": "2024-12",
       "release_date": "2026-04-22",
@@ -1704,6 +1765,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "knowledge": "2024-12",
       "release_date": "2026-04-22",
@@ -1756,6 +1818,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "knowledge": "2025-08-31",
       "release_date": "2026-02-17",
@@ -1828,6 +1891,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "knowledge": "2025-02-28",
       "release_date": "2025-10-15",
@@ -1899,6 +1963,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": false,
       "knowledge": "2026-01-31",
       "release_date": "2026-06-09",
@@ -1975,6 +2040,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": false,
       "knowledge": "2026-01",
       "release_date": "2026-05-28",
@@ -2051,6 +2117,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": false,
       "knowledge": "2026-01-31",
       "release_date": "2026-04-16",
@@ -2130,6 +2197,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": false,
       "knowledge": "2026-01-31",
       "release_date": "2026-06-30",
@@ -2185,6 +2253,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": false,
       "knowledge": "2026-05",
       "release_date": "2026-07-24",
@@ -2233,6 +2302,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "release_date": "2026-02-12",
       "last_updated": "2026-02-12",
@@ -2403,6 +2473,7 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
       "knowledge": "2025-04",
       "release_date": "2025-12-22",

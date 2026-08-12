@@ -301,7 +301,7 @@
     },
     {
       "id": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash (New)",
+      "name": "DeepSeek V4 Flash (2x usage)",
       "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
       "family": "deepseek-flash",
       "attachment": false,
@@ -313,6 +313,7 @@
         {
           "type": "effort",
           "values": [
+            "low",
             "high",
             "max"
           ]
@@ -341,11 +342,11 @@
         "output": 384000
       },
       "cost": {
-        "input": 0.14,
-        "output": 0.28,
-        "cache_read": 0.0028
+        "input": 0.07,
+        "output": 0.14,
+        "cache_read": 0.0014
       },
-      "display_name": "DeepSeek V4 Flash (New)",
+      "display_name": "DeepSeek V4 Flash (2x usage)",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -871,6 +872,62 @@
           "continuation": [
             "thinking_blocks"
           ]
+        }
+      }
+    },
+    {
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "description": "2.4-trillion-parameter multimodal flagship for coding, professional work, and long-horizon agentic workflows",
+      "family": "qwen3.8-max",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens",
+          "max": 262144
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-03",
+      "last_updated": "2026-08-03",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic"
+      },
+      "cost": {
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.25,
+        "cache_write": 2.5
+      },
+      "display_name": "Qwen3.8 Max",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
         }
       }
     },
