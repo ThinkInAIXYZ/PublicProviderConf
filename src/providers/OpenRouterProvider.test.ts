@@ -1,7 +1,53 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { applyOpenAIReasoningTuning } from './OpenRouterProvider';
+import { applyOpenAIReasoningTuning, determineModelType } from './OpenRouterProvider';
 import type { ToggleConfig } from '../utils/toggles';
+import { ModelType } from '../models/model-info';
+
+test('classifies OpenRouter models by output modality', () => {
+  assert.equal(
+    determineModelType(
+      {
+        id: 'vendor/image-reader',
+        architecture: {
+          modality: 'text+image->text',
+          input_modalities: ['text', 'image'],
+          output_modalities: ['text'],
+        },
+      },
+      'vendor/image-reader',
+    ),
+    ModelType.Chat,
+  );
+
+  assert.equal(
+    determineModelType(
+      {
+        id: 'vendor/image-generator',
+        architecture: {
+          modality: 'text+image->text+image',
+          input_modalities: ['text', 'image'],
+          output_modalities: ['text', 'image'],
+        },
+      },
+      'vendor/image-generator',
+    ),
+    ModelType.ImageGeneration,
+  );
+});
+
+test('uses the output side of the legacy modality field', () => {
+  assert.equal(
+    determineModelType(
+      {
+        id: 'vendor/vision-model',
+        architecture: { modality: 'text+image->text' },
+      },
+      'vendor/vision-model',
+    ),
+    ModelType.Chat,
+  );
+});
 
 test('keeps reasoning.supported as a compatibility signal even without provider controls', () => {
   const gpt5Config: ToggleConfig = { supported: false };
