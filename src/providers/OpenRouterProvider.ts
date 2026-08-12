@@ -73,8 +73,22 @@ function normalizeModalities(list?: string[] | null): string[] | undefined {
   return output.length > 0 ? output : undefined;
 }
 
-function determineModelType(model: OpenRouterModel, normalizedId: string): ModelType {
-  const modality = (model.architecture?.modality || '').toLowerCase();
+export function determineModelType(model: OpenRouterModel, normalizedId: string): ModelType {
+  const outputModalities = normalizeModalities(model.architecture?.output_modalities);
+  if (outputModalities) {
+    if (outputModalities.some(modality => modality.includes('image'))) {
+      return ModelType.ImageGeneration;
+    }
+    if (outputModalities.some(modality => modality.includes('audio'))) {
+      return ModelType.Audio;
+    }
+    if (outputModalities.some(modality => modality.includes('embedding'))) {
+      return ModelType.Embedding;
+    }
+    return ModelType.Chat;
+  }
+
+  const modality = (model.architecture?.modality || '').toLowerCase().split('->').at(-1) ?? '';
   if (modality.includes('image')) {
     return ModelType.ImageGeneration;
   }
