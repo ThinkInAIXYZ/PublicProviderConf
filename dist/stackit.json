@@ -6,19 +6,19 @@
   "display_name": "STACKIT",
   "models": [
     {
-      "id": "intfloat/e5-mistral-7b-instruct",
-      "name": "E5 Mistral 7B",
-      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
-      "family": "mistral",
+      "id": "cortecs/Llama-3.3-70B-Instruct-FP8-Dynamic",
+      "name": "Llama 3.3 70B",
+      "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
+      "family": "llama",
       "attachment": false,
       "reasoning": {
         "supported": false
       },
-      "tool_call": false,
+      "tool_call": true,
       "structured_output": false,
-      "temperature": false,
-      "release_date": "2023-12-11",
-      "last_updated": "2023-12-11",
+      "temperature": true,
+      "release_date": "2024-12-05",
+      "last_updated": "2024-12-05",
       "modalities": {
         "input": [
           "text"
@@ -29,14 +29,14 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 4096,
+        "context": 128000,
         "output": 4096
       },
       "cost": {
-        "input": 0.02,
-        "output": 0.02
+        "input": 0.53,
+        "output": 0.76
       },
-      "display_name": "E5 Mistral 7B",
+      "display_name": "Llama 3.3 70B",
       "type": "chat"
     },
     {
@@ -75,23 +75,22 @@
       "type": "chat"
     },
     {
-      "id": "Qwen/Qwen3-VL-Embedding-8B",
-      "name": "Qwen3-VL Embedding 8B",
+      "id": "intfloat/e5-mistral-7b-instruct",
+      "name": "E5 Mistral 7B",
       "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
-      "family": "qwen",
-      "attachment": true,
+      "family": "mistral",
+      "attachment": false,
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "structured_output": false,
       "temperature": false,
-      "release_date": "2026-02-05",
-      "last_updated": "2026-02-05",
+      "release_date": "2023-12-11",
+      "last_updated": "2023-12-11",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -99,15 +98,106 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 32000,
+        "context": 4096,
         "output": 4096
       },
       "cost": {
-        "input": 0.09,
-        "output": 0.09
+        "input": 0.02,
+        "output": 0.02
       },
-      "display_name": "Qwen3-VL Embedding 8B",
+      "display_name": "E5 Mistral 7B",
       "type": "chat"
+    },
+    {
+      "id": "openai/gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131000,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.53,
+        "output": 0.76
+      },
+      "display_name": "GPT OSS 120B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "name": "GPT OSS 20B",
+      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.18,
+        "output": 0.29
+      },
+      "display_name": "GPT OSS 20B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "Qwen/Qwen3.6-27B",
@@ -190,113 +280,23 @@
       "type": "chat"
     },
     {
-      "id": "openai/gpt-oss-20b",
-      "name": "GPT OSS 20B",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0.18,
-        "output": 0.29
-      },
-      "display_name": "GPT OSS 20B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131000,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0.53,
-        "output": 0.76
-      },
-      "display_name": "GPT OSS 120B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "cortecs/Llama-3.3-70B-Instruct-FP8-Dynamic",
-      "name": "Llama 3.3 70B",
-      "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
-      "family": "llama",
-      "attachment": false,
+      "id": "Qwen/Qwen3-VL-Embedding-8B",
+      "name": "Qwen3-VL Embedding 8B",
+      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
+      "family": "qwen",
+      "attachment": true,
       "reasoning": {
         "supported": false
       },
-      "tool_call": true,
+      "tool_call": false,
       "structured_output": false,
-      "temperature": true,
-      "release_date": "2024-12-05",
-      "last_updated": "2024-12-05",
+      "temperature": false,
+      "release_date": "2026-02-05",
+      "last_updated": "2026-02-05",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -304,14 +304,14 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128000,
+        "context": 32000,
         "output": 4096
       },
       "cost": {
-        "input": 0.53,
-        "output": 0.76
+        "input": 0.09,
+        "output": 0.09
       },
-      "display_name": "Llama 3.3 70B",
+      "display_name": "Qwen3-VL Embedding 8B",
       "type": "chat"
     }
   ]

@@ -6,10 +6,10 @@
   "display_name": "Tinfoil",
   "models": [
     {
-      "id": "gemma4-31b",
-      "name": "Gemma 4 31B IT",
-      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
-      "family": "gemma",
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -31,13 +31,14 @@
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -46,60 +47,19 @@
       "open_weights": true,
       "limit": {
         "context": 262144,
-        "output": 32768
+        "output": 131072
       },
       "cost": {
-        "input": 0.4,
-        "output": 1
+        "input": 4,
+        "output": 20
       },
-      "display_name": "Gemma 4 31B IT",
-      "type": "chat"
-    },
-    {
-      "id": "gpt-oss-safeguard-120b",
-      "name": "gpt-oss-safeguard-120b",
-      "description": "Safety model for policy screening, moderation, and risk-aware routing workflows",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
+      "display_name": "Kimi K3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
         }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-10-29",
-      "last_updated": "2025-10-29",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.6
-      },
-      "display_name": "gpt-oss-safeguard-120b",
-      "type": "chat"
+      }
     },
     {
       "id": "deepseek-v4-flash",
@@ -205,6 +165,89 @@
       "type": "chat"
     },
     {
+      "id": "gemma4-31b",
+      "name": "Gemma 4 31B IT",
+      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.4,
+        "output": 1
+      },
+      "display_name": "Gemma 4 31B IT",
+      "type": "chat"
+    },
+    {
+      "id": "nomic-embed-text",
+      "name": "Nomic Embed Text v1.5",
+      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": false,
+      "release_date": "2024-02",
+      "last_updated": "2024-02",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 8192,
+        "output": 768
+      },
+      "cost": {
+        "input": 0.05,
+        "output": 0
+      },
+      "display_name": "Nomic Embed Text v1.5",
+      "type": "chat"
+    },
+    {
       "id": "glm-5-2",
       "name": "GLM-5.2",
       "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
@@ -252,39 +295,6 @@
         "cache_read": 0.375
       },
       "display_name": "GLM-5.2",
-      "type": "chat"
-    },
-    {
-      "id": "nomic-embed-text",
-      "name": "Nomic Embed Text v1.5",
-      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "structured_output": false,
-      "temperature": false,
-      "release_date": "2024-02",
-      "last_updated": "2024-02",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8192,
-        "output": 768
-      },
-      "cost": {
-        "input": 0.05,
-        "output": 0
-      },
-      "display_name": "Nomic Embed Text v1.5",
       "type": "chat"
     },
     {
@@ -339,11 +349,11 @@
       }
     },
     {
-      "id": "kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
-      "attachment": true,
+      "id": "gpt-oss-safeguard-120b",
+      "name": "gpt-oss-safeguard-120b",
+      "description": "Safety model for policy screening, moderation, and risk-aware routing workflows",
+      "family": "gpt-oss",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -352,26 +362,21 @@
         {
           "type": "effort",
           "values": [
-            "none",
-            "minimal",
             "low",
             "medium",
-            "high",
-            "xhigh",
-            "max"
+            "high"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "temperature": true,
+      "knowledge": "2024-06",
+      "release_date": "2025-10-29",
+      "last_updated": "2025-10-29",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -379,20 +384,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 131072
+        "context": 131072,
+        "output": 32768
       },
       "cost": {
-        "input": 4,
-        "output": 20
+        "input": 0.15,
+        "output": 0.6
       },
-      "display_name": "Kimi K3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "display_name": "gpt-oss-safeguard-120b",
+      "type": "chat"
     }
   ]
 }
