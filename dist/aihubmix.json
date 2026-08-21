@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2026-08-21T09:24:47.310Z",
+  "updated_at": "2026-08-21T12:13:36.144Z",
   "models": [
     {
       "id": "auto",
@@ -240,6 +240,58 @@
       }
     },
     {
+      "id": "ox-alpha",
+      "name": "ox-alpha",
+      "display_name": "ox-alpha",
+      "type": "chat",
+      "reasoning": {
+        "supported": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "metadata": {
+        "description": "Developed by Stealth, Ox Alpha is a reasoning model designed for coding, sustained agentic work, and demanding production workloads. With a massive context length of 1,048,576 tokens, it is ideally suited for long-horizon software engineering and complex reasoning. The model excels at supporting advanced workflows that combine text with other data.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "reasoning",
+          "tool_calling",
+          "long_context"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0,
+          "input": 0,
+          "output": 0
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "dots-3-note-preview-free",
       "name": "dots-3-note-preview-free",
       "display_name": "dots-3-note-preview-free",
@@ -466,6 +518,77 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-flash-vision-exp",
+      "name": "deepseek-v4-flash-vision-exp",
+      "display_name": "deepseek-v4-flash-vision-exp",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0.142,
+        "output": 0.284,
+        "cache_read": 0.0284
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "metadata": {
+        "description": "DeepSeek’s officially released new multimodal visual-understanding model, DeepSeek‑V4‑Flash‑Vision‑Exp, is experimental in nature and supports multimodal inputs. In pure-text capabilities (agents, reasoning, world knowledge, etc.), DeepSeek‑V4‑Flash‑Vision‑Exp is on par with the official DeepSeek‑V4‑Flash release.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs",
+          "thinking"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 0.0284,
+          "input": 0.142,
+          "output": 0.284
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "notes": [
+            "The DeepSeek API maps xhigh to high for V4 Flash; effort_options lists distinct model-effective levels."
+          ]
         }
       }
     },
@@ -9588,108 +9711,6 @@
       "vision": true
     },
     {
-      "id": "glm-5",
-      "name": "glm-5",
-      "display_name": "glm-5",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.88,
-        "output": 2.816,
-        "cache_read": 0.176
-      },
-      "limit": {
-        "context": 202752,
-        "output": 202752
-      },
-      "metadata": {
-        "description": "GLM-5 is an advanced, open-source large language model designed for developers tackling the toughest challenges. It excels at long-context reasoning, multi-step tool orchestration, and complex systems engineering, making it the ideal choice for powering sophisticated agents and applications that require high-level cognitive tasks.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "thinking",
-          "tools",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "cache_read": 0.176,
-          "input": 0.88,
-          "output": 2.816
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "glm-5v-turbo",
-      "name": "glm-5v-turbo",
-      "display_name": "glm-5v-turbo",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ]
-      },
-      "cost": {
-        "input": 0.7042,
-        "output": 3.09848,
-        "cache_read": 0.169008
-      },
-      "limit": {
-        "context": 200000,
-        "output": 200000
-      },
-      "metadata": {
-        "description": "GLM-5V-Turbo is Zhipu's first multimodal coding foundation model, built for visual programming tasks. It can natively handle multimodal inputs such as images, videos, and text, and is adept at long-horizon planning, complex programming, and action execution; deeply adapted to Agent workflows, it can collaborate closely with agents like Claude Code and OpenClaw to complete the full closed loop of \"understand the environment → plan actions → execute tasks.\"",
-        "typeHints": [
-          "llm"
-        ],
-        "inputModalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "pricing": {
-          "cache_read": 0.169008,
-          "input": 0.7042,
-          "output": 3.09848
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "claude-opus-4-6",
       "name": "claude-opus-4-6",
       "display_name": "claude-opus-4-6",
@@ -9926,6 +9947,108 @@
           ]
         }
       }
+    },
+    {
+      "id": "glm-5",
+      "name": "glm-5",
+      "display_name": "glm-5",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.88,
+        "output": 2.816,
+        "cache_read": 0.176
+      },
+      "limit": {
+        "context": 202752,
+        "output": 202752
+      },
+      "metadata": {
+        "description": "GLM-5 is an advanced, open-source large language model designed for developers tackling the toughest challenges. It excels at long-context reasoning, multi-step tool orchestration, and complex systems engineering, making it the ideal choice for powering sophisticated agents and applications that require high-level cognitive tasks.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "tools",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.176,
+          "input": 0.88,
+          "output": 2.816
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "glm-5v-turbo",
+      "name": "glm-5v-turbo",
+      "display_name": "glm-5v-turbo",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ]
+      },
+      "cost": {
+        "input": 0.7042,
+        "output": 3.09848,
+        "cache_read": 0.169008
+      },
+      "limit": {
+        "context": 200000,
+        "output": 200000
+      },
+      "metadata": {
+        "description": "GLM-5V-Turbo is Zhipu's first multimodal coding foundation model, built for visual programming tasks. It can natively handle multimodal inputs such as images, videos, and text, and is adept at long-horizon planning, complex programming, and action execution; deeply adapted to Agent workflows, it can collaborate closely with agents like Claude Code and OpenClaw to complete the full closed loop of \"understand the environment → plan actions → execute tasks.\"",
+        "typeHints": [
+          "llm"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "pricing": {
+          "cache_read": 0.169008,
+          "input": 0.7042,
+          "output": 3.09848
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "doubao-seed-2-0-code-preview",
@@ -10728,104 +10851,6 @@
       }
     },
     {
-      "id": "mimo-v2-omni",
-      "name": "mimo-v2-omni",
-      "display_name": "mimo-v2-omni",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio"
-        ]
-      },
-      "cost": {
-        "input": 0.44,
-        "output": 2.2,
-        "cache_read": 0.088
-      },
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "metadata": {
-        "description": "MiMo-V2-Omni is designed for complex real-world multimodal interaction and execution scenarios. We've built an all-modal foundation from the ground up that fuses text, vision, and speech, and use a unified architecture to deeply bind \"perception\" and \"action.\" This not only breaks the traditional models' limitation of emphasizing understanding over execution, but also natively equips the model with multimodal perception, tool invocation, function execution, and GUI operation capabilities. MiMo-V2-Omni can seamlessly integrate with major agent frameworks, achieving a leap from understanding to manipulation and significantly lowering the barrier to deploying full-modal agents.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "web"
-        ],
-        "inputModalities": [
-          "text",
-          "image",
-          "video",
-          "audio"
-        ],
-        "pricing": {
-          "cache_read": 0.088,
-          "input": 0.44,
-          "output": 2.2
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "mimo-v2-pro",
-      "name": "mimo-v2-pro",
-      "display_name": "mimo-v2-pro",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio"
-        ]
-      },
-      "cost": {
-        "input": 1.1,
-        "output": 3.3,
-        "cache_read": 0.22
-      },
-      "limit": {
-        "context": 1000000,
-        "output": 1000000
-      },
-      "metadata": {
-        "description": "Xiaomi MiMo-V2-Pro is built for high-intensity agent work scenarios in the real world. It has over 1 trillion total parameters (42B active parameters), employs an innovative hybrid-attention architecture, and supports an ultra-long 1M-token context length. On top of a powerful model foundation, we continuously scale compute across broader agent scenarios, further expanding the intelligent action space and achieving significant generalization from Coding to Claw.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "web"
-        ],
-        "inputModalities": [
-          "text",
-          "image",
-          "video",
-          "audio"
-        ],
-        "pricing": {
-          "cache_read": 0.22,
-          "input": 1.1,
-          "output": 3.3
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "embed-v-4-0",
       "name": "embed-v-4-0",
       "display_name": "embed-v-4-0",
@@ -10945,6 +10970,104 @@
           "supported": true
         }
       }
+    },
+    {
+      "id": "mimo-v2-omni",
+      "name": "mimo-v2-omni",
+      "display_name": "mimo-v2-omni",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ]
+      },
+      "cost": {
+        "input": 0.44,
+        "output": 2.2,
+        "cache_read": 0.088
+      },
+      "limit": {
+        "context": 256000,
+        "output": 256000
+      },
+      "metadata": {
+        "description": "MiMo-V2-Omni is designed for complex real-world multimodal interaction and execution scenarios. We've built an all-modal foundation from the ground up that fuses text, vision, and speech, and use a unified architecture to deeply bind \"perception\" and \"action.\" This not only breaks the traditional models' limitation of emphasizing understanding over execution, but also natively equips the model with multimodal perception, tool invocation, function execution, and GUI operation capabilities. MiMo-V2-Omni can seamlessly integrate with major agent frameworks, achieving a leap from understanding to manipulation and significantly lowering the barrier to deploying full-modal agents.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "web"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "pricing": {
+          "cache_read": 0.088,
+          "input": 0.44,
+          "output": 2.2
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "mimo-v2-pro",
+      "name": "mimo-v2-pro",
+      "display_name": "mimo-v2-pro",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ]
+      },
+      "cost": {
+        "input": 1.1,
+        "output": 3.3,
+        "cache_read": 0.22
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "metadata": {
+        "description": "Xiaomi MiMo-V2-Pro is built for high-intensity agent work scenarios in the real world. It has over 1 trillion total parameters (42B active parameters), employs an innovative hybrid-attention architecture, and supports an ultra-long 1M-token context length. On top of a powerful model foundation, we continuously scale compute across broader agent scenarios, further expanding the intelligent action space and achieving significant generalization from Coding to Claw.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "web"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "pricing": {
+          "cache_read": 0.22,
+          "input": 1.1,
+          "output": 3.3
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "cohere-command-a",
@@ -11443,6 +11566,48 @@
       }
     },
     {
+      "id": "veo-3.1-lite-generate-preview",
+      "name": "veo-3.1-lite-generate-preview",
+      "display_name": "veo-3.1-lite-generate-preview",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ]
+      },
+      "cost": {
+        "input": 2,
+        "output": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Veo 3.1 is Google's state-of-the-art model for generating high-fidelity, 8-second 720p , 1080p videos featuring stunning realism and natively generated audio.",
+        "typeHints": [
+          "video"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "pricing": {
+          "input": 2,
+          "output": 0
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "glm-4.7",
       "name": "glm-4.7",
       "display_name": "glm-4.7",
@@ -11499,48 +11664,6 @@
           ]
         }
       }
-    },
-    {
-      "id": "veo-3.1-lite-generate-preview",
-      "name": "veo-3.1-lite-generate-preview",
-      "display_name": "veo-3.1-lite-generate-preview",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ]
-      },
-      "cost": {
-        "input": 2,
-        "output": 0
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Veo 3.1 is Google's state-of-the-art model for generating high-fidelity, 8-second 720p , 1080p videos featuring stunning realism and natively generated audio.",
-        "typeHints": [
-          "video"
-        ],
-        "inputModalities": [
-          "text",
-          "image",
-          "video"
-        ],
-        "pricing": {
-          "input": 2,
-          "output": 0
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
     },
     {
       "id": "glm-4.7-flash-free",
@@ -13370,136 +13493,6 @@
       "vision": false
     },
     {
-      "id": "gemini-2.5-flash-image",
-      "name": "gemini-2.5-flash-image",
-      "display_name": "gemini-2.5-flash-image",
-      "type": "image-generation",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "image",
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 2.499,
-        "cache_read": 0.3
-      },
-      "limit": {
-        "context": 32800,
-        "output": 32800
-      },
-      "metadata": {
-        "description": "Gemini 2.5 Flash Image (Nano-Banana) is a state-of-the-art image generation and editing model that enables seamless blending of multiple images into a single composition while maintaining character consistency for rich visual storytelling. It supports precise, targeted image transformations through natural language instructions and leverages built-in world knowledge for both image generation and editing, making it well suited for creative design, content production, advertising, and visual expression workflows.",
-        "typeHints": [
-          "image_generation",
-          "llm"
-        ],
-        "inputModalities": [
-          "image",
-          "text"
-        ],
-        "pricing": {
-          "cache_read": 0.3,
-          "input": 0.3,
-          "output": 2.499
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "qwen3.6-plus-preview-free",
-      "name": "qwen3.6-plus-preview-free",
-      "display_name": "qwen3.6-plus-preview-free",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0
-      },
-      "limit": {
-        "context": 1000000,
-        "output": 1000000
-      },
-      "metadata": {
-        "description": "This model has been removed from the platform.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "thinking",
-          "long_context"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "cache_read": 0,
-          "input": 0,
-          "output": 0
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "zai-glm-5-turbo",
-      "name": "zai-glm-5-turbo",
-      "display_name": "zai-glm-5-turbo",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "cost": {
-        "input": 1.2,
-        "output": 3.9996,
-        "cache_read": 0.24
-      },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "typeHints": [
-          "llm"
-        ],
-        "pricing": {
-          "cache_read": 0.24,
-          "input": 1.2,
-          "output": 3.9996
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "cc-glm-5",
       "name": "cc-glm-5",
       "display_name": "cc-glm-5",
@@ -13625,6 +13618,136 @@
           "cache_read": 0.2604,
           "input": 1.4,
           "output": 4.4002
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "gemini-2.5-flash-image",
+      "name": "gemini-2.5-flash-image",
+      "display_name": "gemini-2.5-flash-image",
+      "type": "image-generation",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "image",
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 2.499,
+        "cache_read": 0.3
+      },
+      "limit": {
+        "context": 32800,
+        "output": 32800
+      },
+      "metadata": {
+        "description": "Gemini 2.5 Flash Image (Nano-Banana) is a state-of-the-art image generation and editing model that enables seamless blending of multiple images into a single composition while maintaining character consistency for rich visual storytelling. It supports precise, targeted image transformations through natural language instructions and leverages built-in world knowledge for both image generation and editing, making it well suited for creative design, content production, advertising, and visual expression workflows.",
+        "typeHints": [
+          "image_generation",
+          "llm"
+        ],
+        "inputModalities": [
+          "image",
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0.3,
+          "input": 0.3,
+          "output": 2.499
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "qwen3.6-plus-preview-free",
+      "name": "qwen3.6-plus-preview-free",
+      "display_name": "qwen3.6-plus-preview-free",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "metadata": {
+        "description": "This model has been removed from the platform.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "long_context"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "cache_read": 0,
+          "input": 0,
+          "output": 0
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "zai-glm-5-turbo",
+      "name": "zai-glm-5-turbo",
+      "display_name": "zai-glm-5-turbo",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "cost": {
+        "input": 1.2,
+        "output": 3.9996,
+        "cache_read": 0.24
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "typeHints": [
+          "llm"
+        ],
+        "pricing": {
+          "cache_read": 0.24,
+          "input": 1.2,
+          "output": 3.9996
         },
         "source": "public-provider-conf"
       },
@@ -22382,6 +22505,55 @@
       }
     },
     {
+      "id": "gpt-oss-120b",
+      "name": "gpt-oss-120b",
+      "display_name": "gpt-oss-120b",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.18,
+        "output": 0.9
+      },
+      "limit": {
+        "context": 131072,
+        "output": 131072
+      },
+      "metadata": {
+        "description": "gpt-oss-120b is a 117B-parameter open-weight Mixture-of-Experts (MoE) language model from OpenAI, designed for high-reasoning, agentic, and general-purpose production use cases. Activating just 5.1B parameters per pass, it is optimized to run on a single H100 GPU with native MXFP4 quantization. The model features configurable reasoning depth, full chain-of-thought access, and native tool use, including function calling, browsing, and structured output generation.",
+        "typeHints": [
+          "llm"
+        ],
+        "features": [
+          "thinking",
+          "function_calling",
+          "structured_outputs"
+        ],
+        "inputModalities": [
+          "text"
+        ],
+        "pricing": {
+          "input": 0.18,
+          "output": 0.9
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "qwen-3-235b-a22b-thinking-2507",
       "name": "qwen-3-235b-a22b-thinking-2507",
       "display_name": "qwen-3-235b-a22b-thinking-2507",
@@ -22445,55 +22617,6 @@
         "source": "public-provider-conf"
       },
       "vision": false
-    },
-    {
-      "id": "gpt-oss-120b",
-      "name": "gpt-oss-120b",
-      "display_name": "gpt-oss-120b",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.18,
-        "output": 0.9
-      },
-      "limit": {
-        "context": 131072,
-        "output": 131072
-      },
-      "metadata": {
-        "description": "gpt-oss-120b is a 117B-parameter open-weight Mixture-of-Experts (MoE) language model from OpenAI, designed for high-reasoning, agentic, and general-purpose production use cases. Activating just 5.1B parameters per pass, it is optimized to run on a single H100 GPU with native MXFP4 quantization. The model features configurable reasoning depth, full chain-of-thought access, and native tool use, including function calling, browsing, and structured output generation.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "thinking",
-          "function_calling",
-          "structured_outputs"
-        ],
-        "inputModalities": [
-          "text"
-        ],
-        "pricing": {
-          "input": 0.18,
-          "output": 0.9
-        },
-        "source": "public-provider-conf"
-      },
-      "vision": false,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
     },
     {
       "id": "Qwen2-VL-72B-Instruct",

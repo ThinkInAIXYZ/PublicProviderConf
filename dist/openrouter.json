@@ -2,7 +2,7 @@
   "id": "openrouter",
   "name": "OpenRouter",
   "display_name": "OpenRouter",
-  "updated_at": "2026-08-21T09:24:49.675Z",
+  "updated_at": "2026-08-21T12:13:37.377Z",
   "models": [
     {
       "id": "~anthropic/claude-fable-latest",
@@ -2852,7 +2852,7 @@
       },
       "limit": {
         "context": 1048576,
-        "output": 393216
+        "output": 384000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2861,6 +2861,56 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true
+        }
+      }
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-vision-exp",
+      "name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
+      "display_name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 384000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "notes": [
+            "The DeepSeek API maps xhigh to high for V4 Flash; effort_options lists distinct model-effective levels."
+          ]
         }
       }
     },
@@ -12991,7 +13041,12 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "stepfun/step-3.5-flash",
