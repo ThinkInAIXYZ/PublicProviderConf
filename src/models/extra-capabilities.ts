@@ -436,7 +436,8 @@ const DEEPSEEK_V4_PRO_REASONING_PORTRAIT: ExtraCapabilitiesReasoning = {
 
 const REASONING_PORTRAITS: ReasoningPortraitDefinition[] = [
   {
-    matches: (_normalizedId, baseId) => baseId === 'deepseek-v4-flash',
+    matches: (_normalizedId, baseId) =>
+      baseId === 'deepseek-v4-flash' || baseId === 'deepseek-v4-flash-vision-exp',
     portrait: DEEPSEEK_V4_FLASH_REASONING_PORTRAIT,
   },
   {

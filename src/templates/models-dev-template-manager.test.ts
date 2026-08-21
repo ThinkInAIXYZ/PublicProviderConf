@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { ModelsDevProvider } from '../models/models-dev';
-import { mergeProviderWithTemplate } from './models-dev-template-manager';
+import {
+  mergeProviderWithTemplate,
+  ModelsDevTemplateManager,
+} from './models-dev-template-manager';
 
 test('adds template-only models to the upstream provider', () => {
   const upstream: ModelsDevProvider = {
@@ -100,4 +103,16 @@ test('merges template fields into matching upstream models', () => {
     context: 8192,
     output: 4096,
   });
+});
+
+test('patches DeepSeek with the V4 Flash vision model', async () => {
+  const templates = await new ModelsDevTemplateManager().loadAllTemplates();
+  const model = templates.get('deepseek')?.models.find(
+    item => item.id === 'deepseek-v4-flash-vision-exp',
+  );
+
+  assert.equal(model?.vision, true);
+  assert.equal(model?.attachment, true);
+  assert.deepEqual(model?.modalities?.input, ['text', 'image']);
+  assert.deepEqual(model?.limit, { context: 1000000, output: 384000 });
 });
