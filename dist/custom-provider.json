@@ -3,7 +3,7 @@
   "name": "custom provider",
   "display_name": "custom provider",
   "description": "Generated first-tier fallback catalog combining official high-signal chat, coding, reasoning, and frontier model metadata.",
-  "updated_at": "2026-08-03T00:00:00.000Z",
+  "updated_at": "2026-08-21T00:00:00.000Z",
   "doc": "docs/custom-provider.md",
   "tags": [
     "fallback",
@@ -412,6 +412,105 @@
         "source": "public-provider-conf"
       },
       "vision": false,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "notes": [
+            "The DeepSeek API maps xhigh to high for V4 Flash; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-flash-vision-exp",
+      "name": "DeepSeek V4 Flash Vision Exp",
+      "family": "deepseek-flash",
+      "display_name": "DeepSeek V4 Flash Vision Exp",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "structured_output": true,
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "knowledge": "2025-05",
+      "release_date": "2026-08-21",
+      "last_updated": "2026-08-21",
+      "open_weights": true,
+      "experimental": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.14,
+        "output": 0.28,
+        "reasoning": 0.28,
+        "cache_read": 0.0028
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "metadata": {
+        "selection": [
+          "latest",
+          "multimodal",
+          "cost-efficient",
+          "long-context"
+        ],
+        "lifecycle": "preview",
+        "sourceProvider": "deepseek",
+        "sourceProviderName": "DeepSeek",
+        "sourceApiUrl": "https://api.deepseek.com/models",
+        "sourceDocs": [
+          "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+          "https://api-docs.deepseek.com/zh-cn/api/create-chat-completion",
+          "https://api-docs.deepseek.com/zh-cn/guides/thinking_mode",
+          "https://api-docs.deepseek.com/news/news260424/"
+        ],
+        "sourceStatus": "seed",
+        "apiListed": false,
+        "source": "public-provider-conf"
+      },
+      "vision": true,
       "interleaved": {
         "field": "reasoning_content"
       },

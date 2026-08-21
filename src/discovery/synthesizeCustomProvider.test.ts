@@ -59,7 +59,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
         ['Anthropic', 4],
         ['Gemini', 5],
         ['Kimi', 5],
-        ['DeepSeek', 2],
+        ['DeepSeek', 3],
         ['Zhipu', 5],
         ['MiniMax', 5],
       ],
@@ -75,6 +75,9 @@ test('creates valid normalized model cards in the provider output shape', async 
   await withoutApiKeys(async () => {
     const result = await synthesizeCustomProvider();
     const seededDeepSeekV4Flash = result.models.find(item => item.id === 'deepseek-v4-flash');
+    const seededDeepSeekV4FlashVision = result.models.find(
+      item => item.id === 'deepseek-v4-flash-vision-exp',
+    );
     const seededDeepSeekV4Pro = result.models.find(item => item.id === 'deepseek-v4-pro');
     const seededKimiK25 = result.models.find(item => item.id === 'kimi-k2.5');
     const providerInfo = createProviderInfo(
@@ -94,6 +97,9 @@ test('creates valid normalized model cards in the provider output shape', async 
     const gpt56Terra = provider.models.find(item => item.id === 'gpt-5.6-terra');
     const gpt56Luna = provider.models.find(item => item.id === 'gpt-5.6-luna');
     const deepSeekV4Flash = provider.models.find(item => item.id === 'deepseek-v4-flash');
+    const deepSeekV4FlashVision = provider.models.find(
+      item => item.id === 'deepseek-v4-flash-vision-exp',
+    );
     const deepSeekV4 = provider.models.find(item => item.id === 'deepseek-v4-pro');
     const deepSeekChat = provider.models.find(item => item.id === 'deepseek-chat');
     const claudeOpus5 = provider.models.find(item => item.id === 'claude-opus-5');
@@ -105,6 +111,12 @@ test('creates valid normalized model cards in the provider output shape', async 
 
     assert.deepEqual(
       seededDeepSeekV4Flash?.extraCapabilities?.reasoning?.effort_options,
+      ['low', 'high', 'max'],
+    );
+    assert.equal(seededDeepSeekV4FlashVision?.vision, true);
+    assert.equal(seededDeepSeekV4FlashVision?.attachment, true);
+    assert.deepEqual(
+      seededDeepSeekV4FlashVision?.extraCapabilities?.reasoning?.effort_options,
       ['low', 'high', 'max'],
     );
     assert.deepEqual(
@@ -167,6 +179,13 @@ test('creates valid normalized model cards in the provider output shape', async 
     assert.equal(deepSeekV4?.cost?.cache_read, 0.003625);
     assert.equal(deepSeekV4?.open_weights, true);
     assert.deepEqual(deepSeekV4Flash?.reasoning_options, [
+      { type: 'toggle', values: undefined },
+      { type: 'effort', values: ['low', 'high', 'max'] },
+    ]);
+    assert.equal(deepSeekV4FlashVision?.vision, true);
+    assert.equal(deepSeekV4FlashVision?.attachment, true);
+    assert.deepEqual(deepSeekV4FlashVision?.modalities?.input, ['text', 'image']);
+    assert.deepEqual(deepSeekV4FlashVision?.reasoning_options, [
       { type: 'toggle', values: undefined },
       { type: 'effort', values: ['low', 'high', 'max'] },
     ]);

@@ -211,6 +211,7 @@ test('matches interleaved reasoning portraits for canonical and slash-prefixed i
   const models = [
     { id: 'deepseek-reasoner' },
     { id: 'deepseek-v4-flash' },
+    { id: 'deepseek-v4-flash-vision-exp' },
     { id: 'deepseek/deepseek-v4-pro' },
     { id: 'deepseek/deepseek-r1-0528' },
     { id: 'moonshotai/kimi-k2.5' },
@@ -229,7 +230,12 @@ test('matches interleaved reasoning portraits for canonical and slash-prefixed i
 test('applies distinct effective effort portraits to DeepSeek V4 models', () => {
   const cases = [
     {
-      ids: ['deepseek-v4-flash', 'deepseek/deepseek-v4-flash'],
+      ids: [
+        'deepseek-v4-flash',
+        'deepseek/deepseek-v4-flash',
+        'deepseek-v4-flash-vision-exp',
+        'deepseek/deepseek-v4-flash-vision-exp',
+      ],
       effortOptions: ['low', 'high', 'max'],
       notes: [
         'The DeepSeek API maps xhigh to high for V4 Flash; effort_options lists distinct model-effective levels.',
