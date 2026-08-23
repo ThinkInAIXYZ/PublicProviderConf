@@ -216,7 +216,7 @@ function createProxyDispatcher(): Dispatcher | undefined {
 export class JiekouProvider implements Provider {
   private readonly dispatcher?: Dispatcher;
 
-  constructor(private readonly apiUrl: string, private readonly timeoutMs = 30_000) {
+  constructor(private readonly apiUrl: string, private readonly timeoutMs = 10_000) {
     this.dispatcher = createProxyDispatcher();
   }
 
