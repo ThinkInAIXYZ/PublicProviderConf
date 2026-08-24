@@ -2,7 +2,7 @@
   "id": "jiekou",
   "name": "Jiekou",
   "display_name": "Jiekou",
-  "updated_at": "2026-08-24T04:13:25.726Z",
+  "updated_at": "2026-08-24T08:13:20.015Z",
   "models": [
     {
       "id": "claude-fable-5",
@@ -233,6 +233,72 @@
             "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
             "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
             "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-vision-exp",
+      "name": "DeepSeek V4 Flash Vision Exp",
+      "display_name": "DeepSeek V4 Flash Vision Exp",
+      "type": "image-generation",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 393216
+      },
+      "metadata": {
+        "description": "DeepSeek V4 Flash Vision Exp is an experimental vision-enabled version of DeepSeek V4 Flash 0731(opens in new tab) from DeepSeek, adding image understanding while matching the base model on text capabilities including agents, reasoning, and world knowledge. It is a sparse mixture-of-experts model with 13B active parameters out of 284B total.\n\nIt is suited for document and chart understanding, visual question answering, and multimodal agent workflows that interleave text and images.",
+        "endpoints": [
+          "chat/completions",
+          "anthropic",
+          "responses"
+        ],
+        "features": [
+          "serverless",
+          "function-calling",
+          "structured-outputs",
+          "reasoning"
+        ],
+        "pricing": {
+          "inputPerM": 4400,
+          "outputPerM": 13200
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "notes": [
+            "The DeepSeek API maps xhigh to high for V4 Flash; effort_options lists distinct model-effective levels."
           ]
         }
       }
