@@ -2,7 +2,7 @@
   "id": "zenmux",
   "name": "ZenMux",
   "display_name": "ZenMux",
-  "updated_at": "2026-08-25T00:13:15.243Z",
+  "updated_at": "2026-08-25T08:13:15.881Z",
   "models": [
     {
       "id": "anthropic/claude-fable-5",
@@ -1514,9 +1514,9 @@
         ]
       },
       "cost": {
-        "input": 0.22,
-        "output": 0.66,
-        "cache_read": 0.007
+        "input": 0.44,
+        "output": 1.32,
+        "cache_read": 0.014
       },
       "limit": {
         "context": 1048576,
@@ -1574,9 +1574,9 @@
         ]
       },
       "cost": {
-        "input": 0.22,
-        "output": 0.66,
-        "cache_read": 0.007
+        "input": 0.44,
+        "output": 1.32,
+        "cache_read": 0.014
       },
       "limit": {
         "context": 1048576,
@@ -6348,11 +6348,16 @@
       "name": "Sapiens AI: Agnes-2.0-Flash",
       "display_name": "Sapiens AI: Agnes-2.0-Flash",
       "type": "chat",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "tool_call": false,
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-05-25",
+      "last_updated": "2026-05-25",
+      "open_weights": false,
       "modalities": {
         "input": [
           "text",
@@ -6367,62 +6372,76 @@
         "output": 0
       },
       "limit": {
-        "context": 256000,
-        "output": 256000
+        "context": 512000,
+        "output": 65536
       },
       "metadata": {
-        "ownedBy": "sapiens-ai",
-        "created": 1779357254,
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "sapiens-ai/agnes-2.5-flash",
       "name": "Sapiens AI: Agnes-2.5-Flash",
       "display_name": "Sapiens AI: Agnes-2.5-Flash",
       "type": "chat",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "tool_call": false,
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-07",
+      "last_updated": "2026-07",
+      "open_weights": false,
       "modalities": {
         "input": [
           "text",
           "image"
+        ],
+        "output": [
+          "text"
         ]
       },
       "cost": {
-        "input": 0.03,
-        "output": 0.15
+        "input": 0,
+        "output": 0
       },
       "limit": {
         "context": 512000,
-        "output": 512000
+        "output": 65536
       },
       "metadata": {
-        "description": "Agnes 2.5 Flash is Agnes AI’s fast and efficient language model, an upgraded, fully available model based on Agnes 2.0 Flash. It continues to use an OpenAI-compatible Chat Completions interface and has been optimized for coding tasks, agent workflows, tool calls, multi-turn dialogue, reasoning, and image understanding.",
-        "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "thinking"
-        ],
-        "inputModalities": [
-          "text",
-          "image"
-        ],
-        "pricing": {
-          "input": 0.03,
-          "output": 0.15
-        },
         "source": "public-provider-conf"
       },
       "vision": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -7527,49 +7546,6 @@
       "id": "z-ai/glm-5.3",
       "name": "Z.AI: GLM 5.3",
       "display_name": "Z.AI: GLM 5.3",
-      "type": "chat",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 1.2,
-        "output": 4.4,
-        "cache_read": 0.3,
-        "cache_write": 1.2
-      },
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": false,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "z-ai/glm-5.3-free",
-      "name": "Z.AI: GLM 5.3 (Free)",
-      "display_name": "Z.AI: GLM 5.3 (Free)",
       "type": "chat",
       "attachment": false,
       "reasoning": {
