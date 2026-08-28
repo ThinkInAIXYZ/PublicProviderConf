@@ -2,7 +2,7 @@
   "id": "zenmux",
   "name": "ZenMux",
   "display_name": "ZenMux",
-  "updated_at": "2026-08-28T00:13:23.230Z",
+  "updated_at": "2026-08-28T04:13:26.076Z",
   "models": [
     {
       "id": "anthropic/claude-fable-5",
@@ -152,8 +152,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -508,7 +507,8 @@
       "cost": {
         "input": 5,
         "output": 25,
-        "cache_read": 0.5
+        "cache_read": 0.5,
+        "cache_write": 6.25
       },
       "limit": {
         "context": 1000000,
@@ -575,7 +575,7 @@
         "input": 5,
         "output": 25,
         "cache_read": 0.5,
-        "cache_write": 6.25
+        "cache_write": 10
       },
       "limit": {
         "context": 1000000,
@@ -686,7 +686,7 @@
         "cache_write": 3.75
       },
       "limit": {
-        "context": 200000,
+        "context": 1000000,
         "output": 64000
       },
       "metadata": {
@@ -791,7 +791,8 @@
       "type": "chat",
       "attachment": true,
       "reasoning": {
-        "supported": true
+        "supported": true,
+        "default": true
       },
       "temperature": false,
       "tool_call": true,
@@ -1527,18 +1528,21 @@
         ]
       },
       "cost": {
-        "input": 0.22,
-        "output": 0.66,
-        "cache_read": 0.007
+        "input": 0.147,
+        "output": 0.295,
+        "cache_read": 0.02
       },
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 384000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -1559,49 +1563,6 @@
           "notes": [
             "The DeepSeek API maps xhigh to high for V4 Flash; effort_options lists distinct model-effective levels."
           ]
-        }
-      }
-    },
-    {
-      "id": "deepseek/deepseek-v4-flash-vision-exp-free",
-      "name": "DeepSeek: DeepSeek V4 Flash Vision Exp (Free)",
-      "display_name": "DeepSeek: DeepSeek V4 Flash Vision Exp (Free)",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "temperature": true,
-      "tool_call": true,
-      "release_date": "2026-08-21",
-      "last_updated": "2026-08-21",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.22,
-        "output": 0.66,
-        "cache_read": 0.007
-      },
-      "limit": {
-        "context": 1048576,
-        "output": 384000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
         }
       }
     },
@@ -1887,8 +1848,8 @@
         ]
       },
       "cost": {
-        "input": 2.5,
-        "output": 15,
+        "input": 1.25,
+        "output": 10,
         "cache_read": 0.125
       },
       "limit": {
@@ -2011,8 +1972,7 @@
       "cost": {
         "input": 0.25,
         "output": 1.5,
-        "cache_read": 0.025,
-        "cache_write": 0.08333
+        "cache_read": 0.025
       },
       "limit": {
         "context": 1048576,
@@ -2057,8 +2017,8 @@
         ]
       },
       "cost": {
-        "input": 4,
-        "output": 18,
+        "input": 2,
+        "output": 12,
         "cache_read": 0.2
       },
       "limit": {
@@ -2107,7 +2067,9 @@
         "input": [
           "text",
           "image",
-          "audio"
+          "video",
+          "audio",
+          "pdf"
         ],
         "output": [
           "text"
@@ -2117,7 +2079,7 @@
         "input": 1.5,
         "output": 9,
         "cache_read": 0.15,
-        "cache_write": 0.083333
+        "cache_write": 0.08333
       },
       "limit": {
         "context": 1048576,
@@ -2178,8 +2140,7 @@
       "cost": {
         "input": 0.3,
         "output": 2.5,
-        "cache_read": 0.03,
-        "cache_write": 0.08333
+        "cache_read": 0.03
       },
       "limit": {
         "context": 1048576,
@@ -2224,10 +2185,9 @@
         ]
       },
       "cost": {
-        "input": 0.75,
-        "output": 3.75,
-        "cache_read": 0.075,
-        "cache_write": 0.041667
+        "input": 1.5,
+        "output": 7.5,
+        "cache_read": 0.15
       },
       "limit": {
         "context": 1048576,
@@ -2377,7 +2337,8 @@
       },
       "cost": {
         "input": 0.06,
-        "output": 0.33
+        "output": 0.33,
+        "cache_read": 0.0075
       },
       "limit": {
         "context": 262144,
@@ -2888,14 +2849,16 @@
         "default": true
       },
       "temperature": true,
-      "tool_call": false,
+      "tool_call": true,
       "release_date": "2026-04-08",
       "last_updated": "2026-07-09",
       "open_weights": false,
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf",
+          "video"
         ],
         "output": [
           "text"
@@ -2908,7 +2871,7 @@
       },
       "limit": {
         "context": 1000000,
-        "output": 65536
+        "output": 32000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2953,8 +2916,8 @@
         "cache_read": 0.15
       },
       "limit": {
-        "context": 1000000,
-        "output": 65536
+        "context": 1048576,
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -3330,7 +3293,8 @@
       "type": "chat",
       "attachment": true,
       "reasoning": {
-        "supported": true
+        "supported": true,
+        "default": true
       },
       "temperature": true,
       "tool_call": true,
@@ -3340,7 +3304,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -3352,8 +3317,8 @@
         "cache_read": 0.06
       },
       "limit": {
-        "context": 512000,
-        "output": 80000
+        "context": 1048576,
+        "output": 512000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -3988,8 +3953,7 @@
       "open_weights": false,
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -4001,13 +3965,13 @@
         "cache_read": 0.125
       },
       "limit": {
-        "context": 400000,
-        "output": 128000
+        "context": 256000,
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
+      "vision": false,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -4774,8 +4738,8 @@
         ]
       },
       "cost": {
-        "input": 5,
-        "output": 22.5,
+        "input": 2.5,
+        "output": 15,
         "cache_read": 0.25
       },
       "limit": {
@@ -4973,8 +4937,8 @@
         ]
       },
       "cost": {
-        "input": 60,
-        "output": 270
+        "input": 30,
+        "output": 180
       },
       "limit": {
         "context": 1050000,
@@ -5097,7 +5061,7 @@
       },
       "limit": {
         "context": 1050000,
-        "output": 128000
+        "output": 100000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -5136,10 +5100,10 @@
         ]
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.6,
-        "cache_read": 0.01,
-        "cache_write": 0.125
+        "input": 0.2,
+        "output": 1.2,
+        "cache_read": 0.02,
+        "cache_write": 0.25
       },
       "limit": {
         "context": 1050000,
@@ -5200,10 +5164,10 @@
         ]
       },
       "cost": {
-        "input": 2,
-        "output": 10,
-        "cache_read": 0.2,
-        "cache_write": 2.5
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.4,
+        "cache_write": 5
       },
       "limit": {
         "context": 1050000,
@@ -5264,10 +5228,10 @@
         ]
       },
       "cost": {
-        "input": 1,
-        "output": 6,
-        "cache_read": 0.1,
-        "cache_write": 1.25
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2,
+        "cache_write": 2.5
       },
       "limit": {
         "context": 1050000,
@@ -5843,7 +5807,7 @@
       "name": "Qwen: Qwen3.5-Flash",
       "display_name": "Qwen: Qwen3.5-Flash",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -5855,25 +5819,26 @@
       "open_weights": false,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.029,
-        "output": 0.287,
-        "cache_read": 0.0058
+        "input": 0.1,
+        "output": 0.4
       },
       "limit": {
         "context": 1000000,
-        "output": 250000
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -5963,8 +5928,7 @@
       },
       "cost": {
         "input": 0.25,
-        "output": 1.5,
-        "cache_read": 0.05
+        "output": 1.5
       },
       "limit": {
         "context": 1000000,
@@ -6112,10 +6076,10 @@
         ]
       },
       "cost": {
-        "input": 0.04,
+        "input": 0.03,
         "output": 0.13,
-        "cache_read": 0.01,
-        "cache_write": 0.04
+        "cache_read": 0.006,
+        "cache_write": 0.038
       },
       "limit": {
         "context": 1000000,
@@ -6138,7 +6102,8 @@
       "type": "chat",
       "attachment": false,
       "reasoning": {
-        "supported": true
+        "supported": true,
+        "default": true
       },
       "temperature": true,
       "tool_call": true,
@@ -6154,12 +6119,13 @@
         ]
       },
       "cost": {
-        "input": 2.5,
-        "output": 7.5,
-        "cache_read": 0.5
+        "input": 1.25,
+        "output": 3.75,
+        "cache_read": 0.25,
+        "cache_write": 1.563
       },
       "limit": {
-        "context": 256000,
+        "context": 1000000,
         "output": 65536
       },
       "metadata": {
@@ -6199,9 +6165,9 @@
         ]
       },
       "cost": {
-        "input": 0.4,
-        "output": 1.6,
-        "cache_read": 0.08
+        "input": 0.35,
+        "output": 1.42,
+        "cache_read": 0.071
       },
       "limit": {
         "context": 1000000,
@@ -6280,16 +6246,16 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.4,
-        "output": 3,
-        "cache_read": 0.04
+        "input": 0.33,
+        "output": 2.4
       },
       "limit": {
         "context": 262144,
@@ -6352,7 +6318,8 @@
       "type": "chat",
       "attachment": true,
       "reasoning": {
-        "supported": true
+        "supported": true,
+        "default": true
       },
       "temperature": true,
       "tool_call": true,
@@ -6371,21 +6338,31 @@
         ]
       },
       "cost": {
-        "input": 1.65,
-        "output": 4.951,
-        "cache_read": 0.206
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.25,
+        "cache_write": 2.5
       },
       "limit": {
-        "context": 256000,
+        "context": 1000000,
         "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -6589,13 +6566,13 @@
         ]
       },
       "cost": {
-        "input": 0.066,
-        "output": 0.26,
-        "cache_read": 0.029
+        "input": 0.18,
+        "output": 0.59,
+        "cache_read": 0.059
       },
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 256000,
+        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
