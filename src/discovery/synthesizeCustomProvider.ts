@@ -14,6 +14,7 @@ import { KimiModelsAdapter } from './adapters/KimiModelsAdapter';
 import { DeepSeekModelsAdapter } from './adapters/DeepSeekModelsAdapter';
 import { ZhipuModelsAdapter } from './adapters/ZhipuModelsAdapter';
 import { MiniMaxModelsAdapter } from './adapters/MiniMaxModelsAdapter';
+import { SeededModelsAdapter } from './adapters/BaseModelsAdapter';
 
 export interface SynthesizeCustomProviderOptions {
   seedFilePath?: string;
@@ -38,6 +39,9 @@ function createAdapters(catalog: CustomProviderSeedCatalog): ModelsAdapter[] {
         return new ZhipuModelsAdapter(source);
       case 'minimax':
         return new MiniMaxModelsAdapter(source);
+      case 'stepfun':
+      case 'qwen':
+        return new SeededModelsAdapter(source);
       default:
         throw new Error(`Unsupported custom provider source: ${source.id}`);
     }

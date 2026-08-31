@@ -407,42 +407,27 @@ const DEFAULT_INTERLEAVED_REASONING_PORTRAIT: ExtraCapabilitiesReasoning = {
   continuation: ['thinking_blocks'],
 };
 
-const DEEPSEEK_V4_COMMON_REASONING_PORTRAIT: ExtraCapabilitiesReasoning = {
+const DEEPSEEK_V4_REASONING_PORTRAIT: ExtraCapabilitiesReasoning = {
   supported: true,
   default_enabled: true,
   mode: 'effort',
   effort: 'high',
+  effort_options: ['low', 'high', 'max'],
   interleaved: true,
   summaries: true,
   visibility: 'summary',
   continuation: ['thinking_blocks'],
-};
-
-const DEEPSEEK_V4_FLASH_REASONING_PORTRAIT: ExtraCapabilitiesReasoning = {
-  ...DEEPSEEK_V4_COMMON_REASONING_PORTRAIT,
-  effort_options: ['low', 'high', 'max'],
   notes: [
-    'The DeepSeek API maps xhigh to high for V4 Flash; effort_options lists distinct model-effective levels.',
-  ],
-};
-
-const DEEPSEEK_V4_PRO_REASONING_PORTRAIT: ExtraCapabilitiesReasoning = {
-  ...DEEPSEEK_V4_COMMON_REASONING_PORTRAIT,
-  effort_options: ['high', 'max'],
-  notes: [
-    'The DeepSeek API maps low to high and xhigh to max for V4 Pro; effort_options lists distinct model-effective levels.',
+    'The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels.',
   ],
 };
 
 const REASONING_PORTRAITS: ReasoningPortraitDefinition[] = [
   {
     matches: (_normalizedId, baseId) =>
-      baseId === 'deepseek-v4-flash' || baseId === 'deepseek-v4-flash-vision-exp',
-    portrait: DEEPSEEK_V4_FLASH_REASONING_PORTRAIT,
-  },
-  {
-    matches: (_normalizedId, baseId) => baseId === 'deepseek-v4-pro',
-    portrait: DEEPSEEK_V4_PRO_REASONING_PORTRAIT,
+      baseId === 'deepseek-v4-flash' || baseId === 'deepseek-v4-flash-vision-exp' ||
+      baseId === 'deepseek-v4-pro',
+    portrait: DEEPSEEK_V4_REASONING_PORTRAIT,
   },
   {
     matches: (_normalizedId, baseId) => matchesInterleavedReasoningBase(baseId),
