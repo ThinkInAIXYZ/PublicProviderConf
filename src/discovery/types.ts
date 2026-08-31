@@ -8,7 +8,9 @@ export type CustomProviderSourceId =
   | 'kimi'
   | 'deepseek'
   | 'zhipu'
-  | 'minimax';
+  | 'minimax'
+  | 'stepfun'
+  | 'qwen';
 
 export interface CustomProviderSeedCatalog {
   updatedAt: string;

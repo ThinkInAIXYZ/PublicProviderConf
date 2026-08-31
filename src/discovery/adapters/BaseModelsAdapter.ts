@@ -130,7 +130,7 @@ function sortSeeds(seeds: CustomProviderModelSeed[]): CustomProviderModelSeed[] 
   });
 }
 
-export abstract class SeededModelsAdapter implements ModelsAdapter {
+export class SeededModelsAdapter implements ModelsAdapter {
   constructor(protected readonly source: CustomProviderSourceSeed) {}
 
   sourceId(): CustomProviderSourceSeed['id'] {

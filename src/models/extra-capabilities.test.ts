@@ -227,43 +227,30 @@ test('matches interleaved reasoning portraits for canonical and slash-prefixed i
   }
 });
 
-test('applies distinct effective effort portraits to DeepSeek V4 models', () => {
-  const cases = [
-    {
-      ids: [
-        'deepseek-v4-flash',
-        'deepseek/deepseek-v4-flash',
-        'deepseek-v4-flash-vision-exp',
-        'deepseek/deepseek-v4-flash-vision-exp',
-      ],
-      effortOptions: ['low', 'high', 'max'],
-      notes: [
-        'The DeepSeek API maps xhigh to high for V4 Flash; effort_options lists distinct model-effective levels.',
-      ],
-    },
-    {
-      ids: ['deepseek-v4-pro', 'deepseek/deepseek-v4-pro'],
-      effortOptions: ['high', 'max'],
-      notes: [
-        'The DeepSeek API maps low to high and xhigh to max for V4 Pro; effort_options lists distinct model-effective levels.',
-      ],
-    },
+test('applies the current effective effort levels to all DeepSeek V4 models', () => {
+  const ids = [
+    'deepseek-v4-flash',
+    'deepseek/deepseek-v4-flash',
+    'deepseek-v4-flash-vision-exp',
+    'deepseek/deepseek-v4-flash-vision-exp',
+    'deepseek-v4-pro',
+    'deepseek/deepseek-v4-pro',
   ];
 
-  for (const { ids, effortOptions, notes } of cases) {
-    for (const id of ids) {
-      assertReasoningPortrait(id, {
-        defaultEnabled: true,
-        mode: 'effort',
-        effort: 'high',
-        effortOptions,
-        interleaved: true,
-        summaries: true,
-        visibility: 'summary',
-        continuation: ['thinking_blocks'],
-        notes,
-      });
-    }
+  for (const id of ids) {
+    assertReasoningPortrait(id, {
+      defaultEnabled: true,
+      mode: 'effort',
+      effort: 'high',
+      effortOptions: ['low', 'high', 'max'],
+      interleaved: true,
+      summaries: true,
+      visibility: 'summary',
+      continuation: ['thinking_blocks'],
+      notes: [
+        'The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels.',
+      ],
+    });
   }
 });
 
@@ -290,7 +277,7 @@ test('keeps provider-specific DeepSeek effort controls separate from the model p
     { type: 'toggle' },
     { type: 'effort', values: ['high', 'xhigh'] },
   ]);
-  assert.deepEqual(model.extra_capabilities?.reasoning?.effort_options, ['high', 'max']);
+  assert.deepEqual(model.extra_capabilities?.reasoning?.effort_options, ['low', 'high', 'max']);
 });
 
 test('matches Qwen interleaved reasoning portraits', () => {
