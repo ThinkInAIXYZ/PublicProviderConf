@@ -2,7 +2,7 @@
   "id": "zenmux",
   "name": "ZenMux",
   "display_name": "ZenMux",
-  "updated_at": "2026-09-02T00:13:19.105Z",
+  "updated_at": "2026-09-02T04:13:17.635Z",
   "models": [
     {
       "id": "anthropic/claude-fable-5",
@@ -34,6 +34,73 @@
         "input": 10,
         "output": 50,
         "cache_read": 1,
+        "cache_write": 12.5
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
+            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
+            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-fable-5.1",
+      "name": "Anthropic: Claude Fable 5.1",
+      "display_name": "Anthropic: Claude Fable 5.1",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": false,
+      "tool_call": true,
+      "knowledge": "2026-06",
+      "release_date": "2026-09-01",
+      "last_updated": "2026-09-01",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 10,
+        "output": 50,
+        "cache_read": 0.25,
         "cache_write": 12.5
       },
       "limit": {
@@ -6290,6 +6357,43 @@
           "visibility": "summary"
         }
       }
+    },
+    {
+      "id": "qwen/qwen3.8-max-0902",
+      "name": "Qwen: Qwen3.8-Max-0902",
+      "display_name": "Qwen: Qwen3.8-Max-0902",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.17,
+        "cache_write": 2.5
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "metadata": {
+        "ownedBy": "qwen",
+        "created": 1788316634,
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "sapiens-ai/agnes-2.5-flash",
