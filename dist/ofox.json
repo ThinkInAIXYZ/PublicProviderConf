@@ -2173,6 +2173,87 @@
       }
     },
     {
+      "id": "anthropic/claude-fable-5.1",
+      "name": "Claude Fable 5.1",
+      "description": "Claude model for demanding reasoning and long-horizon agentic work",
+      "family": "claude-fable",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-09-01",
+      "last_updated": "2026-09-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic",
+        "api": "https://api.ofox.ai/anthropic/v1"
+      },
+      "cost": {
+        "input": 10,
+        "output": 50,
+        "cache_read": 0.25,
+        "cache_write": 12.5
+      },
+      "display_name": "Claude Fable 5.1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
+            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
+            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
+          ]
+        }
+      }
+    },
+    {
       "id": "anthropic/claude-sonnet-4.6",
       "name": "Claude Sonnet 4.6",
       "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
@@ -5096,6 +5177,63 @@
           ]
         }
       }
+    },
+    {
+      "id": "bailian/qwen3.8-max-0902",
+      "name": "Qwen3.8 Max 0902",
+      "description": "2026-09-02 upgraded snapshot of Qwen3.8 Max with stronger coding, collaborative agents, and multimodal document understanding",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "xhigh"
+          ]
+        },
+        {
+          "type": "budget_tokens",
+          "min": 0,
+          "max": 262144
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-09-02",
+      "last_updated": "2026-09-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.25,
+        "cache_write": 2.5
+      },
+      "display_name": "Qwen3.8 Max 0902",
+      "type": "chat"
     },
     {
       "id": "bailian/qwen3.6-27b",
