@@ -6,10 +6,43 @@
   "display_name": "Tinfoil",
   "models": [
     {
-      "id": "kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
+      "id": "nomic-embed-text",
+      "name": "Nomic Embed Text v1.5",
+      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": false,
+      "release_date": "2024-02",
+      "last_updated": "2024-02",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 8192,
+        "output": 768
+      },
+      "cost": {
+        "input": 0.05,
+        "output": 0
+      },
+      "display_name": "Nomic Embed Text v1.5",
+      "type": "chat"
+    },
+    {
+      "id": "gemma4-31b",
+      "name": "Gemma 4 31B IT",
+      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
+      "family": "gemma",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -19,22 +52,25 @@
         {
           "type": "effort",
           "values": [
+            "none",
+            "minimal",
             "low",
+            "medium",
             "high",
+            "xhigh",
             "max"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "temperature": true,
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -43,20 +79,14 @@
       "open_weights": true,
       "limit": {
         "context": 262144,
-        "output": 131072
+        "output": 32768
       },
       "cost": {
-        "input": 4,
-        "output": 20,
-        "cache_read": 0.8
+        "input": 0.4,
+        "output": 1
       },
-      "display_name": "Kimi K3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "display_name": "Gemma 4 31B IT",
+      "type": "chat"
     },
     {
       "id": "deepseek-v4-flash",
@@ -132,19 +162,31 @@
       }
     },
     {
-      "id": "llama3-3-70b",
-      "name": "Llama-3.3-70B-Instruct",
-      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
-      "family": "llama",
-      "attachment": true,
+      "id": "gpt-oss-safeguard-120b",
+      "name": "gpt-oss-safeguard-120b",
+      "description": "Safety model for policy screening, moderation, and risk-aware routing workflows",
+      "family": "gpt-oss",
+      "attachment": false,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-12-06",
-      "last_updated": "2024-12-06",
+      "knowledge": "2024-06",
+      "release_date": "2025-10-29",
+      "last_updated": "2025-10-29",
       "modalities": {
         "input": [
           "text"
@@ -156,20 +198,20 @@
       "open_weights": true,
       "limit": {
         "context": 131072,
-        "output": 4096
+        "output": 32768
       },
       "cost": {
-        "input": 1.75,
-        "output": 2.75
+        "input": 0.15,
+        "output": 0.6
       },
-      "display_name": "Llama-3.3-70B-Instruct",
+      "display_name": "gpt-oss-safeguard-120b",
       "type": "chat"
     },
     {
-      "id": "gemma4-31b",
-      "name": "Gemma 4 31B IT",
-      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
-      "family": "gemma",
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -179,25 +221,22 @@
         {
           "type": "effort",
           "values": [
-            "none",
-            "minimal",
             "low",
-            "medium",
             "high",
-            "xhigh",
             "max"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -206,47 +245,20 @@
       "open_weights": true,
       "limit": {
         "context": 262144,
-        "output": 32768
+        "output": 131072
       },
       "cost": {
-        "input": 0.4,
-        "output": 1
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.8
       },
-      "display_name": "Gemma 4 31B IT",
-      "type": "chat"
-    },
-    {
-      "id": "nomic-embed-text",
-      "name": "Nomic Embed Text v1.5",
-      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "structured_output": false,
-      "temperature": false,
-      "release_date": "2024-02",
-      "last_updated": "2024-02",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8192,
-        "output": 768
-      },
-      "cost": {
-        "input": 0.05,
-        "output": 0
-      },
-      "display_name": "Nomic Embed Text v1.5",
-      "type": "chat"
+      "display_name": "Kimi K3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "glm-5-2",
@@ -350,31 +362,19 @@
       }
     },
     {
-      "id": "gpt-oss-safeguard-120b",
-      "name": "gpt-oss-safeguard-120b",
-      "description": "Safety model for policy screening, moderation, and risk-aware routing workflows",
-      "family": "gpt-oss",
-      "attachment": false,
+      "id": "llama3-3-70b",
+      "name": "Llama-3.3-70B-Instruct",
+      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
+      "family": "llama",
+      "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-10-29",
-      "last_updated": "2025-10-29",
+      "knowledge": "2023-12",
+      "release_date": "2024-12-06",
+      "last_updated": "2024-12-06",
       "modalities": {
         "input": [
           "text"
@@ -386,13 +386,13 @@
       "open_weights": true,
       "limit": {
         "context": 131072,
-        "output": 32768
+        "output": 4096
       },
       "cost": {
-        "input": 0.15,
-        "output": 0.6
+        "input": 1.75,
+        "output": 2.75
       },
-      "display_name": "gpt-oss-safeguard-120b",
+      "display_name": "Llama-3.3-70B-Instruct",
       "type": "chat"
     }
   ]
