@@ -5,10 +5,10 @@
   "display_name": "Cloudflare AI Gateway",
   "models": [
     {
-      "id": "deepseek/deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "Open MoE flagship with million-token context for coding and long agent runs",
-      "family": "deepseek-thinking",
+      "id": "alibaba/qwen3.7-max",
+      "name": "Qwen3.7 Max",
+      "description": "Qwen frontier model tuned for agent frameworks, coding assistants, and long tasks",
+      "family": "qwen",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -19,19 +19,13 @@
           "type": "toggle"
         },
         {
-          "type": "effort",
-          "values": [
-            "high",
-            "max"
-          ]
+          "type": "budget_tokens"
         }
       ],
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
+      "release_date": "2026-05-21",
+      "last_updated": "2026-05-21",
       "modalities": {
         "input": [
           "text"
@@ -40,46 +34,131 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
-        "context": 131072,
-        "output": 384000
+        "context": 1000000,
+        "output": 65536
       },
       "cost": {
-        "input": 1.74,
-        "output": 3.48,
-        "cache_read": 0.145
+        "input": 1.25,
+        "output": 3.75,
+        "cache_read": 0.25
       },
-      "display_name": "DeepSeek V4 Pro",
+      "display_name": "Qwen3.7 Max",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "alibaba/qwen3.5-397b-a17b",
+      "name": "Qwen3.5 397B-A17B",
+      "description": "Large open Qwen multimodal MoE for visual agents and long technical tasks",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-02-15",
+      "last_updated": "2026-02-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.6,
+        "output": 3.6
+      },
+      "display_name": "Qwen3.5 397B-A17B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
           ]
         }
       }
     },
     {
-      "id": "moonshotai/kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
+      "id": "alibaba/qwen3-max",
+      "name": "Qwen3 Max",
+      "description": "Flagship Qwen3 model for coding agents, complex reasoning, and tool use",
+      "family": "qwen",
+      "attachment": false,
+      "reasoning": {
+        "supported": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-04",
+      "release_date": "2025-09-23",
+      "last_updated": "2025-09-23",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
+      "cost": {
+        "input": 1.2,
+        "output": 6
+      },
+      "display_name": "Qwen3 Max",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "alibaba/qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
+      "family": "qwen",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -93,16 +172,81 @@
           "type": "effort",
           "values": [
             "low",
-            "high",
-            "max"
+            "medium",
+            "xhigh"
           ]
+        },
+        {
+          "type": "budget_tokens",
+          "min": 0,
+          "max": 262144
         }
       ],
       "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-08-03",
+      "last_updated": "2026-08-03",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.25
+      },
+      "display_name": "Qwen3.8 Max",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "alibaba/qwen3.7-plus",
+      "name": "Qwen3.7 Plus",
+      "description": "Multimodal Qwen workhorse for long-context agents, visual inputs, and coding",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens"
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-04",
+      "release_date": "2026-06-02",
+      "last_updated": "2026-06-02",
       "modalities": {
         "input": [
           "text",
@@ -113,17 +257,17 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
-        "context": 1048576,
-        "output": 131072
+        "context": 1000000,
+        "output": 64000
       },
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3
+        "input": 0.32,
+        "output": 1.28,
+        "cache_read": 0.064
       },
-      "display_name": "Kimi K3",
+      "display_name": "Qwen3.7 Plus",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -209,6 +353,147 @@
             "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
             "task_budget is separate from thinking control and should not be treated as a thinking budget."
           ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-4.7",
+      "name": "Claude Opus 4.7",
+      "description": "Stronger Opus tier for advanced software work and high-stakes reasoning",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic"
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
+      },
+      "display_name": "Claude Opus 4.7",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-5",
+      "name": "Claude Opus 5",
+      "description": "Strongest Claude Opus model for coding, agents, and professional work",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-05",
+      "release_date": "2026-07-24",
+      "last_updated": "2026-07-24",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic"
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
+      },
+      "display_name": "Claude Opus 5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
         }
       }
     },
@@ -299,69 +584,6 @@
       }
     },
     {
-      "id": "anthropic/claude-sonnet-5",
-      "name": "Claude Sonnet 5",
-      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-06-30",
-      "last_updated": "2026-06-30",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/anthropic"
-      },
-      "cost": {
-        "input": 2,
-        "output": 10,
-        "cache_read": 0.2,
-        "cache_write": 2.5
-      },
-      "display_name": "Claude Sonnet 5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
       "id": "anthropic/claude-haiku-4.5",
       "name": "Claude Haiku 4.5 (latest)",
       "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
@@ -427,171 +649,6 @@
           "notes": [
             "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
             "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-opus-4.7",
-      "name": "Claude Opus 4.7",
-      "description": "Stronger Opus tier for advanced software work and high-stakes reasoning",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-04-16",
-      "last_updated": "2026-04-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/anthropic"
-      },
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
-      },
-      "display_name": "Claude Opus 4.7",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
-            "task_budget is separate from thinking control and should not be treated as a thinking budget."
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-opus-4.5",
-      "name": "Claude Opus 4.5 (latest)",
-      "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        },
-        {
-          "type": "budget_tokens",
-          "min": 1024
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2025-11-24",
-      "last_updated": "2025-11-24",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "provider": {
-        "npm": "@ai-sdk/anthropic"
-      },
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
-      },
-      "display_name": "Claude Opus 4.5 (latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "mixed",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.5 uses manual thinking.type = \"enabled\" with budget_tokens; effort can be used alongside the thinking budget.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header."
           ]
         }
       }
@@ -683,76 +740,6 @@
       }
     },
     {
-      "id": "anthropic/claude-sonnet-4.5",
-      "name": "Claude Sonnet 4.5 (latest)",
-      "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "budget_tokens",
-          "min": 1024
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-07-31",
-      "release_date": "2025-09-29",
-      "last_updated": "2025-09-29",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 64000
-      },
-      "provider": {
-        "npm": "@ai-sdk/anthropic"
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
-      },
-      "display_name": "Claude Sonnet 4.5 (latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
       "id": "anthropic/claude-fable-5",
       "name": "Claude Fable 5",
       "description": "Claude model for creative writing, analysis, and controlled agent workflows",
@@ -834,16 +821,173 @@
       }
     },
     {
-      "id": "anthropic/claude-opus-5",
-      "name": "Claude Opus 5",
-      "description": "Strongest Claude Opus model for coding, agents, and professional work",
+      "id": "anthropic/claude-sonnet-4.5",
+      "name": "Claude Sonnet 4.5 (latest)",
+      "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "budget_tokens",
+          "min": 1024
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-07-31",
+      "release_date": "2025-09-29",
+      "last_updated": "2025-09-29",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 64000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic"
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
+      },
+      "display_name": "Claude Sonnet 4.5 (latest)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-4.5",
+      "name": "Claude Opus 4.5 (latest)",
+      "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
       "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        {
+          "type": "budget_tokens",
+          "min": 1024
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2025-11-24",
+      "last_updated": "2025-11-24",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic"
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
+      },
+      "display_name": "Claude Opus 4.5 (latest)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.5 uses manual thinking.type = \"enabled\" with budget_tokens; effort can be used alongside the thinking budget.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
+      "family": "claude-sonnet",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
+        {
+          "type": "toggle"
+        },
         {
           "type": "effort",
           "values": [
@@ -858,9 +1002,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": false,
-      "knowledge": "2026-05",
-      "release_date": "2026-07-24",
-      "last_updated": "2026-07-24",
+      "knowledge": "2026-01-31",
+      "release_date": "2026-06-30",
+      "last_updated": "2026-06-30",
       "modalities": {
         "input": [
           "text",
@@ -880,12 +1024,12 @@
         "npm": "@ai-sdk/anthropic"
       },
       "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.2,
+        "cache_write": 2.5
       },
-      "display_name": "Claude Opus 5",
+      "display_name": "Claude Sonnet 5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -894,45 +1038,75 @@
       }
     },
     {
-      "id": "openai/gpt-4o",
-      "name": "GPT-4o",
-      "description": "Omni-era GPT for multimodal chat, practical coding, and general assistants",
-      "family": "gpt",
-      "attachment": true,
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "Open MoE flagship with million-token context for coding and long agent runs",
+      "family": "deepseek-thinking",
+      "attachment": false,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
+        }
+      ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2023-09",
-      "release_date": "2024-05-13",
-      "last_updated": "2024-08-06",
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "pdf"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 128000,
-        "output": 16384
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
+        "context": 131072,
+        "output": 384000
       },
       "cost": {
-        "input": 1.25,
-        "output": 5,
-        "cache_read": 0.625
+        "input": 1.74,
+        "output": 3.48,
+        "cache_read": 0.145
       },
-      "display_name": "GPT-4o",
-      "type": "chat"
+      "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
     },
     {
       "id": "openai/gpt-5-nano",
@@ -1009,10 +1183,10 @@
       }
     },
     {
-      "id": "openai/gpt-4o-mini",
-      "name": "GPT-4o mini",
-      "description": "Small omni GPT for cheap multimodal assistance and production-scale traffic",
-      "family": "gpt-mini",
+      "id": "openai/gpt-4.1-nano",
+      "name": "GPT-4.1 nano",
+      "description": "Tiny GPT-4.1 option for classification, routing, and very high-volume tasks",
+      "family": "gpt-nano",
       "attachment": true,
       "reasoning": {
         "supported": false
@@ -1020,66 +1194,13 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2023-09",
-      "release_date": "2024-07-18",
-      "last_updated": "2024-07-18",
+      "knowledge": "2024-04",
+      "release_date": "2025-04-14",
+      "last_updated": "2025-04-14",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 128000,
-        "output": 16384
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 0.075,
-        "output": 0.3,
-        "cache_read": 0.0375
-      },
-      "display_name": "GPT-4o mini",
-      "type": "chat"
-    },
-    {
-      "id": "openai/gpt-5.5-pro",
-      "name": "GPT-5.5 Pro",
-      "description": "Highest-accuracy GPT-5.5 tier for slower, precision-heavy reasoning and coding",
-      "family": "gpt-pro",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-12-01",
-      "release_date": "2026-04-23",
-      "last_updated": "2026-04-23",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -1088,23 +1209,18 @@
       "open_weights": false,
       "limit": {
         "context": 1000000,
-        "input": 922000,
-        "output": 128000
+        "output": 32768
       },
       "provider": {
         "npm": "@ai-sdk/openai"
       },
       "cost": {
-        "input": 30,
-        "output": 180
+        "input": 0.1,
+        "output": 0.4,
+        "cache_read": 0.025
       },
-      "display_name": "GPT-5.5 Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "display_name": "GPT-4.1 nano",
+      "type": "chat"
     },
     {
       "id": "openai/gpt-5.6-sol",
@@ -1187,19 +1303,62 @@
       }
     },
     {
-      "id": "openai/gpt-5.4-pro",
-      "name": "GPT-5.4 Pro",
-      "description": "More exact GPT-5.4 tier for demanding professional reasoning and agent tasks",
-      "family": "gpt-pro",
+      "id": "openai/gpt-4.1-mini",
+      "name": "GPT-4.1 mini",
+      "description": "Affordable GPT-4.1 lane for fast coding help and structured extraction",
+      "family": "gpt-mini",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-04",
+      "release_date": "2025-04-14",
+      "last_updated": "2025-04-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1047576,
+        "output": 32768
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 0.4,
+        "output": 1.6,
+        "cache_read": 0.1
+      },
+      "display_name": "GPT-4.1 mini",
+      "type": "chat"
+    },
+    {
+      "id": "openai/gpt-5.4",
+      "name": "GPT-5.4",
+      "description": "Agent-ready GPT for coding and computer-use workflows at a lower cost",
+      "family": "gpt",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "reasoning_options": [
         {
           "type": "effort",
           "values": [
+            "none",
+            "low",
             "medium",
             "high",
             "xhigh"
@@ -1207,15 +1366,16 @@
         }
       ],
       "tool_call": true,
-      "structured_output": false,
-      "temperature": false,
+      "structured_output": true,
+      "temperature": true,
       "knowledge": "2025-08-31",
       "release_date": "2026-03-05",
       "last_updated": "2026-03-05",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -1231,18 +1391,21 @@
         "npm": "@ai-sdk/openai"
       },
       "cost": {
-        "input": 30,
-        "output": 180
+        "input": 2.5,
+        "output": 15,
+        "cache_read": 0.25
       },
-      "display_name": "GPT-5.4 Pro",
+      "display_name": "GPT-5.4",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
+          "default_enabled": false,
           "mode": "effort",
-          "effort": "high",
+          "effort": "none",
           "effort_options": [
+            "none",
+            "low",
             "medium",
             "high",
             "xhigh"
@@ -1258,20 +1421,20 @@
       }
     },
     {
-      "id": "openai/gpt-5",
-      "name": "GPT-5",
-      "description": "Original GPT-5 workhorse for reasoning, coding, writing, and tool workflows",
+      "id": "openai/gpt-5.1",
+      "name": "GPT-5.1",
+      "description": "Sharper GPT-5 generation for coding, product work, and tool-assisted tasks",
       "family": "gpt",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "reasoning_options": [
         {
           "type": "effort",
           "values": [
-            "minimal",
+            "none",
             "low",
             "medium",
             "high"
@@ -1280,10 +1443,10 @@
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": false,
+      "temperature": true,
       "knowledge": "2024-09-30",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
+      "release_date": "2025-11-13",
+      "last_updated": "2025-11-13",
       "modalities": {
         "input": [
           "text",
@@ -1307,7 +1470,126 @@
         "output": 10,
         "cache_read": 0.125
       },
-      "display_name": "GPT-5",
+      "display_name": "GPT-5.1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-4o",
+      "name": "GPT-4o",
+      "description": "Omni-era GPT for multimodal chat, practical coding, and general assistants",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2023-09",
+      "release_date": "2024-05-13",
+      "last_updated": "2024-08-06",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 5,
+        "cache_read": 0.625
+      },
+      "display_name": "GPT-4o",
+      "type": "chat"
+    },
+    {
+      "id": "openai/gpt-5.6-luna",
+      "name": "GPT-5.6 Luna",
+      "description": "Cost-efficient GPT-5.6 model for fast, high-volume workloads",
+      "family": "gpt-luna",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 1.2,
+        "cache_read": 0.02,
+        "cache_write": 0.25
+      },
+      "display_name": "GPT-5.6 Luna",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1316,10 +1598,303 @@
           "mode": "effort",
           "effort": "medium",
           "effort_options": [
-            "minimal",
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
             "low",
             "medium",
             "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-4o-mini",
+      "name": "GPT-4o mini",
+      "description": "Small omni GPT for cheap multimodal assistance and production-scale traffic",
+      "family": "gpt-mini",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2023-09",
+      "release_date": "2024-07-18",
+      "last_updated": "2024-07-18",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 0.075,
+        "output": 0.3,
+        "cache_read": 0.0375
+      },
+      "display_name": "GPT-4o mini",
+      "type": "chat"
+    },
+    {
+      "id": "openai/gpt-4.1",
+      "name": "GPT-4.1",
+      "description": "Long-lived GPT workhorse for coding, instruction following, and production apps",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-04",
+      "release_date": "2025-04-14",
+      "last_updated": "2025-04-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1047576,
+        "output": 32768
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 2,
+        "output": 8,
+        "cache_read": 0.5
+      },
+      "display_name": "GPT-4.1",
+      "type": "chat"
+    },
+    {
+      "id": "openai/gpt-5.4-nano",
+      "name": "GPT-5.4 nano",
+      "description": "Cheapest GPT-5.4 lane for simple routing, extraction, and bulk automation",
+      "family": "gpt-nano",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-17",
+      "last_updated": "2026-03-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "input": 272000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 1.25,
+        "cache_read": 0.02
+      },
+      "display_name": "GPT-5.4 nano",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5.5-pro",
+      "name": "GPT-5.5 Pro",
+      "description": "Highest-accuracy GPT-5.5 tier for slower, precision-heavy reasoning and coding",
+      "family": "gpt-pro",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-12-01",
+      "release_date": "2026-04-23",
+      "last_updated": "2026-04-23",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "input": 922000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 30,
+        "output": 180
+      },
+      "display_name": "GPT-5.5 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5.4-mini",
+      "name": "GPT-5.4 mini",
+      "description": "Strong small GPT for coding subagents, quick tool use, and high-volume work",
+      "family": "gpt-mini",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-17",
+      "last_updated": "2026-03-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "input": 272000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 0.75,
+        "output": 4.5,
+        "cache_read": 0.075
+      },
+      "display_name": "GPT-5.4 mini",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
           ],
           "verbosity": "medium",
           "verbosity_options": [
@@ -1406,10 +1981,81 @@
       }
     },
     {
-      "id": "openai/gpt-5.6-luna",
-      "name": "GPT-5.6 Luna",
-      "description": "Cost-efficient GPT-5.6 model for fast, high-volume workloads",
-      "family": "gpt-luna",
+      "id": "openai/gpt-5.4-pro",
+      "name": "GPT-5.4 Pro",
+      "description": "More exact GPT-5.4 tier for demanding professional reasoning and agent tasks",
+      "family": "gpt-pro",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": false,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-05",
+      "last_updated": "2026-03-05",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "input": 922000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 30,
+        "output": 180
+      },
+      "display_name": "GPT-5.4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5.6-terra",
+      "name": "GPT-5.6 Terra",
+      "description": "Balanced GPT-5.6 model for capable, cost-efficient everyday work",
+      "family": "gpt-terra",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1454,12 +2100,12 @@
         "npm": "@ai-sdk/openai"
       },
       "cost": {
-        "input": 0.2,
-        "output": 1.2,
-        "cache_read": 0.02,
-        "cache_write": 0.25
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2,
+        "cache_write": 2.5
       },
-      "display_name": "GPT-5.6 Luna",
+      "display_name": "GPT-5.6 Terra",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1486,73 +2132,32 @@
       }
     },
     {
-      "id": "openai/gpt-4.1-nano",
-      "name": "GPT-4.1 nano",
-      "description": "Tiny GPT-4.1 option for classification, routing, and very high-volume tasks",
-      "family": "gpt-nano",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-04",
-      "release_date": "2025-04-14",
-      "last_updated": "2025-04-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 32768
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 0.1,
-        "output": 0.4,
-        "cache_read": 0.025
-      },
-      "display_name": "GPT-4.1 nano",
-      "type": "chat"
-    },
-    {
-      "id": "openai/gpt-5.4-mini",
-      "name": "GPT-5.4 mini",
-      "description": "Strong small GPT for coding subagents, quick tool use, and high-volume work",
-      "family": "gpt-mini",
+      "id": "openai/gpt-5",
+      "name": "GPT-5",
+      "description": "Original GPT-5 workhorse for reasoning, coding, writing, and tool workflows",
+      "family": "gpt",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": false
+        "default": true
       },
       "reasoning_options": [
         {
           "type": "effort",
           "values": [
-            "none",
+            "minimal",
             "low",
             "medium",
-            "high",
-            "xhigh"
+            "high"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-17",
-      "last_updated": "2026-03-17",
+      "temperature": false,
+      "knowledge": "2024-09-30",
+      "release_date": "2025-08-07",
+      "last_updated": "2025-08-07",
       "modalities": {
         "input": [
           "text",
@@ -1572,27 +2177,155 @@
         "npm": "@ai-sdk/openai"
       },
       "cost": {
-        "input": 0.75,
-        "output": 4.5,
-        "cache_read": 0.075
+        "input": 1.25,
+        "output": 10,
+        "cache_read": 0.125
       },
-      "display_name": "GPT-5.4 mini",
+      "display_name": "GPT-5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": false,
+          "default_enabled": true,
           "mode": "effort",
-          "effort": "none",
+          "effort": "medium",
           "effort_options": [
-            "none",
+            "minimal",
             "low",
             "medium",
-            "high",
-            "xhigh"
+            "high"
           ],
           "verbosity": "medium",
           "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/o4-mini",
+      "name": "o4-mini",
+      "description": "Fast o-series model for compact reasoning, coding, and tool use",
+      "family": "o-mini",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2024-05",
+      "release_date": "2025-04-16",
+      "last_updated": "2025-04-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 100000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 1.1,
+        "output": 4.4,
+        "cache_read": 0.275
+      },
+      "display_name": "o4-mini",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/o3-mini",
+      "name": "o3-mini",
+      "description": "Smaller o-series reasoner for economical coding, math, and planning tasks",
+      "family": "o-mini",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2024-05",
+      "release_date": "2024-12-20",
+      "last_updated": "2025-01-29",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 100000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 1.1,
+        "output": 4.4,
+        "cache_read": 0.55
+      },
+      "display_name": "o3-mini",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
             "low",
             "medium",
             "high"
@@ -1743,51 +2476,66 @@
       }
     },
     {
-      "id": "openai/gpt-4.1",
-      "name": "GPT-4.1",
-      "description": "Long-lived GPT workhorse for coding, instruction following, and production apps",
-      "family": "gpt",
+      "id": "moonshotai/kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
       "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-04",
-      "release_date": "2025-04-14",
-      "last_updated": "2025-04-14",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
           "text",
           "image",
-          "pdf"
+          "video"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 1047576,
-        "output": 32768
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
+        "context": 1048576,
+        "output": 131072
       },
       "cost": {
-        "input": 2,
-        "output": 8,
-        "cache_read": 0.5
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3
       },
-      "display_name": "GPT-4.1",
-      "type": "chat"
+      "display_name": "Kimi K3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
-      "id": "openai/gpt-5.6-terra",
-      "name": "GPT-5.6 Terra",
-      "description": "Balanced GPT-5.6 model for capable, cost-efficient everyday work",
-      "family": "gpt-terra",
+      "id": "xai/grok-4.3",
+      "name": "Grok 4.3",
+      "description": "xAI's default Grok for chat, coding, agentic tools, and lower hallucination risk",
+      "family": "grok",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1800,162 +2548,15 @@
             "none",
             "low",
             "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-02-16",
-      "release_date": "2026-07-09",
-      "last_updated": "2026-07-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 2,
-        "output": 12,
-        "cache_read": 0.2,
-        "cache_write": 2.5
-      },
-      "display_name": "GPT-5.6 Terra",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
             "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "openai/o4-mini",
-      "name": "o4-mini",
-      "description": "Fast o-series model for compact reasoning, coding, and tool use",
-      "family": "o-mini",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2024-05",
-      "release_date": "2025-04-16",
-      "last_updated": "2025-04-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 100000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 1.1,
-        "output": 4.4,
-        "cache_read": 0.275
-      },
-      "display_name": "o4-mini",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-5.4",
-      "name": "GPT-5.4",
-      "description": "Agent-ready GPT for coding and computer-use workflows at a lower cost",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-05",
-      "last_updated": "2026-03-05",
+      "release_date": "2026-04-17",
+      "last_updated": "2026-04-17",
       "modalities": {
         "input": [
           "text",
@@ -1969,48 +2570,66 @@
       "open_weights": false,
       "limit": {
         "context": 1000000,
-        "input": 922000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
+        "output": 30000
       },
       "cost": {
-        "input": 2.5,
-        "output": 15,
-        "cache_read": 0.25
+        "input": 1.25,
+        "output": 2.5,
+        "cache_read": 0.2
       },
-      "display_name": "GPT-5.4",
+      "display_name": "Grok 4.3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "none",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
+          "supported": true
         }
       }
     },
     {
-      "id": "openai/o3-mini",
-      "name": "o3-mini",
-      "description": "Smaller o-series reasoner for economical coding, math, and planning tasks",
-      "family": "o-mini",
-      "attachment": false,
+      "id": "xai/grok-4.20-0309-reasoning",
+      "name": "Grok 4.20 (Reasoning)",
+      "description": "Reasoning Grok for document-heavy analysis and long-horizon tool use",
+      "family": "grok",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-03-09",
+      "last_updated": "2026-03-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 2000000,
+        "output": 30000
+      },
+      "cost": {
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.2
+      },
+      "display_name": "Grok 4.20 (Reasoning)",
+      "type": "chat"
+    },
+    {
+      "id": "xai/grok-4.5",
+      "name": "Grok 4.5",
+      "description": "xAI's Grok model for chat, coding, agentic tools, and lower hallucination risk",
+      "family": "grok",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -2027,117 +2646,9 @@
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": false,
-      "knowledge": "2024-05",
-      "release_date": "2024-12-20",
-      "last_updated": "2025-01-29",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 100000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 1.1,
-        "output": 4.4,
-        "cache_read": 0.55
-      },
-      "display_name": "o3-mini",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-4.1-mini",
-      "name": "GPT-4.1 mini",
-      "description": "Affordable GPT-4.1 lane for fast coding help and structured extraction",
-      "family": "gpt-mini",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "knowledge": "2024-04",
-      "release_date": "2025-04-14",
-      "last_updated": "2025-04-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1047576,
-        "output": 32768
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 0.4,
-        "output": 1.6,
-        "cache_read": 0.1
-      },
-      "display_name": "GPT-4.1 mini",
-      "type": "chat"
-    },
-    {
-      "id": "openai/gpt-5.4-nano",
-      "name": "GPT-5.4 nano",
-      "description": "Cheapest GPT-5.4 lane for simple routing, extraction, and bulk automation",
-      "family": "gpt-nano",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-17",
-      "last_updated": "2026-03-17",
+      "release_date": "2026-07-08",
+      "last_updated": "2026-07-08",
       "modalities": {
         "input": [
           "text",
@@ -2149,114 +2660,19 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 128000,
-        "input": 272000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
+        "context": 500000,
+        "output": 500000
       },
       "cost": {
-        "input": 0.2,
-        "output": 1.25,
-        "cache_read": 0.02
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.3
       },
-      "display_name": "GPT-5.4 nano",
+      "display_name": "Grok 4.5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "none",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-5.1",
-      "name": "GPT-5.1",
-      "description": "Sharper GPT-5 generation for coding, product work, and tool-assisted tasks",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-09-30",
-      "release_date": "2025-11-13",
-      "last_updated": "2025-11-13",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 128000,
-        "input": 272000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.125
-      },
-      "display_name": "GPT-5.1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "none",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
+          "supported": true
         }
       }
     },
@@ -2314,58 +2730,6 @@
       }
     },
     {
-      "id": "xai/grok-4.5",
-      "name": "Grok 4.5",
-      "description": "xAI's Grok model for chat, coding, agentic tools, and lower hallucination risk",
-      "family": "grok",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-07-08",
-      "last_updated": "2026-07-08",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 500000,
-        "output": 500000
-      },
-      "cost": {
-        "input": 2,
-        "output": 6,
-        "cache_read": 0.3
-      },
-      "display_name": "Grok 4.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
       "id": "xai/grok-4.20-0309-non-reasoning",
       "name": "Grok 4.20 (Non-Reasoning)",
       "description": "Grok model for agentic tool use, reasoning, coding, and live assistance",
@@ -2401,370 +2765,6 @@
       },
       "display_name": "Grok 4.20 (Non-Reasoning)",
       "type": "chat"
-    },
-    {
-      "id": "xai/grok-4.20-0309-reasoning",
-      "name": "Grok 4.20 (Reasoning)",
-      "description": "Reasoning Grok for document-heavy analysis and long-horizon tool use",
-      "family": "grok",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-03-09",
-      "last_updated": "2026-03-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 2000000,
-        "output": 30000
-      },
-      "cost": {
-        "input": 2,
-        "output": 6,
-        "cache_read": 0.2
-      },
-      "display_name": "Grok 4.20 (Reasoning)",
-      "type": "chat"
-    },
-    {
-      "id": "xai/grok-4.3",
-      "name": "Grok 4.3",
-      "description": "xAI's default Grok for chat, coding, agentic tools, and lower hallucination risk",
-      "family": "grok",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-17",
-      "last_updated": "2026-04-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 30000
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 2.5,
-        "cache_read": 0.2
-      },
-      "display_name": "Grok 4.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "alibaba/qwen3.7-max",
-      "name": "Qwen3.7 Max",
-      "description": "Qwen frontier model tuned for agent frameworks, coding assistants, and long tasks",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens"
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-05-21",
-      "last_updated": "2026-05-21",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 65536
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 3.75,
-        "cache_read": 0.25
-      },
-      "display_name": "Qwen3.7 Max",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "alibaba/qwen3.5-397b-a17b",
-      "name": "Qwen3.5 397B-A17B",
-      "description": "Large open Qwen multimodal MoE for visual agents and long technical tasks",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens"
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-02-15",
-      "last_updated": "2026-02-15",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.6,
-        "output": 3.6
-      },
-      "display_name": "Qwen3.5 397B-A17B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "alibaba/qwen3.8-max",
-      "name": "Qwen3.8 Max",
-      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "xhigh"
-          ]
-        },
-        {
-          "type": "budget_tokens",
-          "min": 0,
-          "max": 262144
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-08-03",
-      "last_updated": "2026-08-03",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 2,
-        "output": 6,
-        "cache_read": 0.25
-      },
-      "display_name": "Qwen3.8 Max",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "alibaba/qwen3.7-plus",
-      "name": "Qwen3.7 Plus",
-      "description": "Multimodal Qwen workhorse for long-context agents, visual inputs, and coding",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens"
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2026-06-02",
-      "last_updated": "2026-06-02",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 0.32,
-        "output": 1.28,
-        "cache_read": 0.064
-      },
-      "display_name": "Qwen3.7 Plus",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "alibaba/qwen3-max",
-      "name": "Qwen3 Max",
-      "description": "Flagship Qwen3 model for coding agents, complex reasoning, and tool use",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-09-23",
-      "last_updated": "2025-09-23",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 262144,
-        "output": 65536
-      },
-      "cost": {
-        "input": 1.2,
-        "output": 6
-      },
-      "display_name": "Qwen3 Max",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
     }
   ]
 }
