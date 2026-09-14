@@ -52,7 +52,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     const result = await synthesizeCustomProvider();
 
     assert.equal(result.models.length, result.catalog.maxModels);
-    assert.equal(result.models.length, 37);
+    assert.equal(result.models.length, 42);
     assert.deepEqual(
       new Set(result.models.map(model => model.id)),
       new Set(result.catalog.sources.flatMap(source => source.models.map(model => model.id))),
@@ -60,15 +60,15 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     assert.deepEqual(
       result.summaries.map(summary => [summary.displayName, summary.selected]),
       [
-        ['OpenAI', 5],
-        ['Anthropic', 4],
-        ['Gemini', 5],
+        ['OpenAI', 6],
+        ['Anthropic', 5],
+        ['Gemini', 6],
         ['Kimi', 5],
-        ['DeepSeek', 3],
+        ['DeepSeek', 4],
         ['Zhipu', 3],
         ['MiniMax', 3],
         ['StepFun', 3],
-        ['Qwen', 6],
+        ['Qwen', 7],
       ],
     );
     assert.equal(
@@ -92,6 +92,11 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
 test('creates valid normalized model cards in the provider output shape', async () => {
   await withoutApiKeys(async () => {
     const result = await synthesizeCustomProvider();
+    const seededDeepSeekFlash = result.models.find(item => item.id === 'deepseek-flash');
+    const seededGpt6Astra = result.models.find(item => item.id === 'gpt-6-astra');
+    const seededClaudeFable51 = result.models.find(item => item.id === 'claude-fable-5-1');
+    const seededGemini38Flash = result.models.find(item => item.id === 'gemini-3.8-flash');
+    const seededQwen37Flash = result.models.find(item => item.id === 'qwen3.7-flash');
     const seededDeepSeekV4Flash = result.models.find(item => item.id === 'deepseek-v4-flash');
     const seededDeepSeekV4FlashVision = result.models.find(
       item => item.id === 'deepseek-v4-flash-vision-exp',
@@ -143,7 +148,7 @@ test('creates valid normalized model cards in the provider output shape', async 
     );
     assert.equal(seededKimiK25?.extraCapabilities?.reasoning?.default_enabled, true);
     assert.equal(seededKimiK25?.metadata?.lifecycle, 'legacy');
-    assert.equal(seededKimiK25?.metadata?.apiStatus, 'sunset-scheduled');
+    assert.equal(seededKimiK25?.metadata?.apiStatus, 'retired');
     assert.equal(seededKimiK25?.metadata?.officialSunsetDate, '2026-08-31');
 
     applyReasoningPortraits(providerData);
@@ -163,16 +168,24 @@ test('creates valid normalized model cards in the provider output shape', async 
       id: _gpt56Id,
       name: _gpt56Name,
       display_name: _gpt56DisplayName,
+      metadata: _gpt56Metadata,
       ...gpt56Comparable
     } = gpt56;
     const {
       id: _gpt56SolId,
       name: _gpt56SolName,
       display_name: _gpt56SolDisplayName,
+      metadata: _gpt56SolMetadata,
       ...gpt56SolComparable
     } = gpt56Sol;
 
     assert.deepEqual(gpt56Comparable, gpt56SolComparable);
+    assert.equal(gpt56.metadata?.pricingValidUntil, '2026-11-21');
+    assert.equal(gpt56Sol.metadata?.pricingValidUntil, '2026-11-21');
+    assert.equal(gpt56.cost?.input, 4);
+    assert.equal(gpt56.cost?.output, 20);
+    assert.equal(gpt56.cost?.cache_read, 0.4);
+    assert.equal(gpt56.cost?.cache_write, 5);
     for (const gpt56Model of [gpt56, gpt56Sol, gpt56Terra, gpt56Luna]) {
       assert.deepEqual(gpt56Model.extra_capabilities?.reasoning?.effort_options, [
         'none',
@@ -226,6 +239,33 @@ test('creates valid normalized model cards in the provider output shape', async 
       'max',
     ]);
     assert.equal(deepSeekChat, undefined);
+    assert.equal(seededDeepSeekFlash?.vision, true);
+    assert.equal(seededDeepSeekFlash?.attachment, true);
+    assert.equal(seededDeepSeekFlash?.cost?.input, 0.3);
+    assert.equal(seededDeepSeekFlash?.cost?.output, 1.2);
+    assert.equal(seededDeepSeekFlash?.cost?.cacheRead, 0.006);
+    assert.equal(seededDeepSeekFlash?.metadata?.pricingBasis, 'peak');
+    assert.deepEqual(seededDeepSeekFlash?.reasoningOptions, [
+      { type: 'toggle', values: undefined },
+      { type: 'effort', values: ['low', 'high', 'max'] },
+    ]);
+    assert.equal(seededGpt6Astra?.cost?.input, 10);
+    assert.equal(seededGpt6Astra?.cost?.output, 50);
+    assert.equal(seededGpt6Astra?.limit?.context, 1050000);
+    assert.deepEqual(seededGpt6Astra?.extraCapabilities?.reasoning?.effort_options, [
+      'low',
+      'medium',
+      'high',
+      'xhigh',
+      'max',
+    ]);
+    assert.equal(seededClaudeFable51?.cost?.cacheRead, 0.25);
+    assert.equal(seededClaudeFable51?.limit?.context, 1000000);
+    assert.equal(seededClaudeFable51?.metadata?.apiStatus, 'active');
+    assert.equal(seededGemini38Flash?.cost?.input, 0.75);
+    assert.equal(seededGemini38Flash?.metadata?.pricingValidUntil, '2026-12-31');
+    assert.equal(seededQwen37Flash?.cost?.input, 0.03);
+    assert.equal(seededQwen37Flash?.limit?.context, 1000000);
     assert.ok(claudeOpus5);
     assert.ok(gemini36Flash);
     assert.equal(kimiK3?.limit?.context, 1048576);
@@ -260,7 +300,11 @@ test('preserves model-specific controls and modalities through normalization and
     assert.equal(gemini37.extra_capabilities?.reasoning?.level, 'medium');
     assert.deepEqual(gemini37.extra_capabilities?.reasoning?.level_options, ['low', 'medium', 'high']);
     assert.deepEqual(gemini37.reasoning_options, [{ type: 'effort', values: ['low', 'medium', 'high'] }]);
+    assert.equal(gemini37.release_date, '2026-08-13');
+    assert.ok(getModel('gemini-3.8-flash').extra_capabilities?.reasoning?.level_options?.includes('minimal') === false);
     assert.ok(getModel('gemini-3.6-flash').extra_capabilities?.reasoning?.level_options?.includes('minimal'));
+    assert.equal(getModel('gemini-3.6-flash').cost?.input, 0.75);
+    assert.equal(getModel('gemini-3.6-flash').cost?.input_audio, undefined);
 
     const kimiCode = getModel('kimi-k2.7-code');
     const kimiHighspeed = getModel('kimi-k2.7-code-highspeed');
@@ -274,6 +318,8 @@ test('preserves model-specific controls and modalities through normalization and
     assert.equal(kimiHighspeed.cost?.input, 1.9);
     assert.equal(kimiCode.cost?.output, 4);
     assert.equal(kimiHighspeed.cost?.output, 8);
+    assert.equal(kimiCode.release_date, '2026-06-12');
+    assert.equal(kimiHighspeed.release_date, undefined);
     assert.equal(getModel('kimi-k2.6').reasoning_options?.[0].type, 'toggle');
 
     for (const id of ['glm-5.3', 'glm-5.3-flash']) {
@@ -281,8 +327,13 @@ test('preserves model-specific controls and modalities through normalization and
       assert.equal(model.limit?.context, 1000000);
       assert.equal(model.limit?.output, 131072);
       assert.equal(model.extra_capabilities?.reasoning?.effort, 'max');
+      assert.equal(model.cost?.cache_write, 0);
       assert.deepEqual(model.reasoning_options, [{ type: 'effort', values: ['low', 'high', 'max'] }]);
     }
+    assert.equal(getModel('glm-5.3').release_date, '2026-08-18');
+    assert.equal(getModel('glm-5.3-flash').release_date, '2026-08-26');
+    assert.equal(getModel('glm-5.3-flash').cost?.input, 0.15);
+    assert.equal(getModel('glm-5.2').release_date, '2026-06-16');
     assert.equal(getModel('glm-5.3').vision, false);
     assert.equal(getModel('glm-5.3-flash').vision, true);
     assert.equal(getModel('glm-5.2').reasoning_options?.[0].type, 'toggle');
@@ -297,14 +348,25 @@ test('preserves model-specific controls and modalities through normalization and
     assert.equal(step35.reasoning_options, undefined);
     assert.equal(step35.vision, false);
 
-    for (const id of ['qwen3.8-max', 'qwen3.7-plus', 'qwen3.8-flash']) {
+    for (const id of ['qwen3.8-max', 'qwen3.7-plus', 'qwen3.8-flash', 'qwen3.7-flash']) {
       const model = getModel(id);
       assert.equal(model.limit?.context, 1000000);
       assert.equal(model.limit?.output, 131072);
       assert.equal(model.vision, true);
       assert.equal(model.extra_capabilities?.reasoning?.mode, 'budget');
       assert.equal(model.extra_capabilities?.reasoning?.budget?.max, 262144);
-      assert.deepEqual(model.reasoning_options?.map(option => option.type), ['toggle', 'budget']);
+    }
+    for (const id of ['qwen3.8-max', 'qwen3.8-flash']) {
+      assert.deepEqual(
+        getModel(id).reasoning_options?.map(option => option.type),
+        ['toggle', 'budget', 'effort'],
+      );
+    }
+    for (const id of ['qwen3.7-plus', 'qwen3.7-flash']) {
+      assert.deepEqual(
+        getModel(id).reasoning_options?.map(option => option.type),
+        ['toggle', 'budget'],
+      );
     }
     for (const id of ['qwen3-coder-plus', 'qwen3-coder-flash', 'qwen3-coder-next']) {
       const model = getModel(id);
@@ -312,7 +374,8 @@ test('preserves model-specific controls and modalities through normalization and
       assert.deepEqual(model.reasoning, { supported: false });
       assert.equal(model.extra_capabilities?.reasoning?.supported, false);
       assert.equal(model.reasoning_options, undefined);
-      assert.equal(model.tool_call, true);
+      assert.equal(model.tool_call, false);
+      assert.equal(model.metadata?.lifecycle, 'legacy');
       assert.equal(model.limit?.output, 65536);
     }
     assert.equal(getModel('qwen3-coder-next').limit?.context, 262144);

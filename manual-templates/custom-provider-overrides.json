@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-08-31T00:00:00.000Z",
-  "maxModels": 37,
+  "updatedAt": "2026-09-14T00:00:00.000Z",
+  "maxModels": 42,
   "provider": {
     "id": "custom-provider",
     "name": "custom provider",
@@ -29,6 +29,47 @@
       ],
       "models": [
         {
+          "id": "gpt-6-astra",
+          "name": "GPT-6 Astra",
+          "family": "gpt",
+          "contextLength": 1050000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["low", "medium", "high", "xhigh", "max"] }
+          ],
+          "knowledge": "2026-04-30",
+          "releaseDate": "2026-09-03",
+          "lastUpdated": "2026-09-03",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image"], "output": ["text"] },
+          "cost": { "input": 10, "output": 50, "cacheRead": 1, "cacheWrite": 12.5 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort_options": ["low", "medium", "high", "xhigh", "max"],
+              "verbosity": "medium",
+              "verbosity_options": ["low", "medium", "high"],
+              "visibility": "hidden"
+            }
+          },
+          "metadata": {
+            "selection": ["frontier", "sota", "coding", "reasoning"],
+            "lifecycle": "active",
+            "apiStatus": "active",
+            "availability": ["api"],
+            "notes": ["Does not support the none reasoning effort level.", "Prompts with more than 272K input tokens are priced at 2x input and cache rates and 1.5x output for the full request.", "Tool calling requires the Responses API."]
+          },
+          "selectionRank": 1
+        },
+        {
           "id": "gpt-5.6",
           "name": "GPT-5.6",
           "family": "gpt",
@@ -49,7 +90,7 @@
           "lastUpdated": "2026-07-09",
           "openWeights": false,
           "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
-          "cost": { "input": 5, "output": 30, "cacheRead": 0.5, "cacheWrite": 6.25 },
+          "cost": { "input": 4, "output": 20, "cacheRead": 0.4, "cacheWrite": 5 },
           "extraCapabilities": {
             "reasoning": {
               "supported": true,
@@ -66,7 +107,9 @@
             "selection": ["frontier", "coding", "reasoning"],
             "lifecycle": "active",
             "apiStatus": "active",
-            "availability": ["api", "chatgpt", "codex"]
+            "availability": ["api", "chatgpt", "codex"],
+            "pricingValidUntil": "2026-11-21",
+            "notes": ["The gpt-5.6 alias routes requests to gpt-5.6-sol; the two names share pricing.", "Promotional pricing is available at least through November 21, 2026.", "Prompts with more than 272K input tokens are priced at 2x input and cache rates and 1.5x output for the full request."]
           },
           "selectionRank": 1
         },
@@ -91,7 +134,7 @@
           "lastUpdated": "2026-07-09",
           "openWeights": false,
           "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
-          "cost": { "input": 5, "output": 30, "cacheRead": 0.5, "cacheWrite": 6.25 },
+          "cost": { "input": 4, "output": 20, "cacheRead": 0.4, "cacheWrite": 5 },
           "extraCapabilities": {
             "reasoning": {
               "supported": true,
@@ -108,7 +151,9 @@
             "selection": ["frontier", "coding", "reasoning"],
             "lifecycle": "active",
             "apiStatus": "active",
-            "availability": ["api", "chatgpt", "codex"]
+            "availability": ["api", "chatgpt", "codex"],
+            "pricingValidUntil": "2026-11-21",
+            "notes": ["Promotional pricing is available at least through November 21, 2026.", "Prompts with more than 272K input tokens are priced at 2x input and cache rates and 1.5x output for the full request."]
           },
           "selectionRank": 2
         },
@@ -210,7 +255,7 @@
               "default_enabled": true,
               "mode": "effort",
               "effort": "medium",
-              "effort_options": ["low", "medium", "high", "xhigh"],
+              "effort_options": ["none", "low", "medium", "high", "xhigh"],
               "verbosity": "medium",
               "verbosity_options": ["low", "medium", "high"],
               "visibility": "hidden"
@@ -237,6 +282,50 @@
       ],
       "models": [
         {
+          "id": "claude-fable-5-1",
+          "name": "Claude Fable 5.1",
+          "family": "claude-fable",
+          "contextLength": 1000000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["low", "medium", "high", "xhigh", "max"] }
+          ],
+          "knowledge": "2026-06",
+          "releaseDate": "2026-09-01",
+          "lastUpdated": "2026-09-01",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 10, "output": 50, "cacheRead": 0.25, "cacheWrite": 12.5 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "high",
+              "effort_options": ["low", "medium", "high", "xhigh", "max"],
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "omitted",
+              "continuation": ["thinking_blocks"],
+              "notes": ["Adaptive thinking is always on; thinking.type = \"enabled\" or \"disabled\" is rejected.", "Forced tool use is not supported: tool_choice any or a named tool returns a 400 invalid_request_error.", "One-hour cache writes are billed at $20 per million tokens."]
+            }
+          },
+          "metadata": {
+            "selection": ["frontier", "agentic", "reasoning", "long-context"],
+            "lifecycle": "active",
+            "apiStatus": "active",
+            "notes": ["Retirement is scheduled no sooner than September 1, 2027."]
+          },
+          "selectionRank": 1
+        },
+        {
           "id": "claude-opus-5",
           "name": "Claude Opus 5",
           "family": "claude-opus",
@@ -250,6 +339,7 @@
           "toolCall": true,
           "structuredOutput": true,
           "reasoningOptions": [
+            { "type": "toggle" },
             { "type": "effort", "values": ["low", "medium", "high", "xhigh", "max"] }
           ],
           "knowledge": "2026-05",
@@ -260,7 +350,13 @@
           "cost": { "input": 5, "output": 25, "cacheRead": 0.5, "cacheWrite": 6.25 },
           "extraCapabilities": {
             "reasoning": {
-              "supported": true
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "high",
+              "effort_options": ["low", "medium", "high", "xhigh", "max"],
+              "visibility": "hidden",
+              "notes": ["Thinking can be disabled with thinking.type = \"disabled\" only at effort high or lower; combining disabled with xhigh or max returns a 400 error."]
             }
           },
           "metadata": { "selection": ["sota", "agentic-coding", "reasoning"], "lifecycle": "active" },
@@ -284,7 +380,7 @@
             { "type": "effort", "values": ["low", "medium", "high", "xhigh", "max"] }
           ],
           "knowledge": "2026-01-31",
-          "releaseDate": "2026-06-29",
+          "releaseDate": "2026-06-30",
           "lastUpdated": "2026-06-30",
           "openWeights": false,
           "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
@@ -294,7 +390,7 @@
               "supported": true
             }
           },
-          "metadata": { "selection": ["balanced", "coding", "reasoning"], "lifecycle": "active" },
+          "metadata": { "selection": ["balanced", "coding", "reasoning"], "lifecycle": "active", "notes": ["The $2/$10 introductory pricing became the standard price on September 1, 2026."] },
           "selectionRank": 2
         },
         {
@@ -313,7 +409,8 @@
           "reasoningOptions": [
             { "type": "effort", "values": ["low", "medium", "high", "xhigh", "max"] }
           ],
-          "releaseDate": "2026-06-07",
+          "knowledge": "2026-01",
+          "releaseDate": "2026-06-09",
           "lastUpdated": "2026-06-09",
           "openWeights": false,
           "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
@@ -332,7 +429,7 @@
               "notes": ["Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.", "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.", "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."]
             }
           },
-          "metadata": { "selection": ["creative", "agentic", "reasoning"], "lifecycle": "active" },
+          "metadata": { "selection": ["creative", "agentic", "reasoning"], "lifecycle": "legacy", "apiStatus": "active-legacy", "notes": ["Anthropic lists this model as Active (legacy); retirement is scheduled no sooner than June 9, 2027."] },
           "selectionRank": 3
         },
         {
@@ -347,7 +444,7 @@
           "attachment": true,
           "temperature": true,
           "toolCall": true,
-          "structuredOutput": false,
+          "structuredOutput": true,
           "knowledge": "2025-02-28",
           "releaseDate": "2025-10-15",
           "lastUpdated": "2025-10-15",
@@ -377,6 +474,50 @@
         "https://ai.google.dev/gemini-api/docs/pricing"
       ],
       "models": [
+        {
+          "id": "gemini-3.8-flash",
+          "name": "Gemini 3.8 Flash",
+          "family": "gemini-flash",
+          "contextLength": 1048576,
+          "maxTokens": 65536,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["low", "medium", "high"] }
+          ],
+          "knowledge": "2026-03",
+          "releaseDate": "2026-09-02",
+          "lastUpdated": "2026-09-02",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "video", "audio", "pdf"], "output": ["text"] },
+          "cost": { "input": 0.75, "output": 3.75, "cacheRead": 0.075 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "level",
+              "level": "medium",
+              "level_options": ["low", "medium", "high"],
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thought_signatures"],
+              "notes": ["The thinkingLevel parameter does not accept minimal.", "The default thinkingLevel is medium."]
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "fast", "multimodal", "reasoning"],
+            "lifecycle": "active",
+            "pricingBasis": "standard-introductory",
+            "pricingValidUntil": "2026-12-31",
+            "notes": ["Pricing shown is the introductory Global rate through December 31, 2026; standard pricing from January 1, 2027 is $1.50 input / $7.50 output with $0.15 cached input.", "Knowledge cutoff is March 2026; some domains remain limited to January 2025."]
+          },
+          "selectionRank": 1
+        },
         {
           "id": "gemini-3.1-pro-preview",
           "name": "Gemini 3.1 Pro Preview",
@@ -408,7 +549,7 @@
               "continuation": ["thought_signatures"]
             }
           },
-          "metadata": { "selection": ["frontier", "multimodal", "coding"], "lifecycle": "preview" },
+          "metadata": { "selection": ["frontier", "multimodal", "coding"], "lifecycle": "preview", "pricingBasis": "input-up-to-200k", "notes": ["Inputs above 200K tokens are billed at $4 input / $18 output with $0.40 cached input."] },
           "selectionRank": 1
         },
         {
@@ -427,6 +568,8 @@
           "reasoningOptions": [
             { "type": "effort", "values": ["low", "medium", "high"] }
           ],
+          "knowledge": "2026-03",
+          "releaseDate": "2026-08-13",
           "lastUpdated": "2026-08-31",
           "openWeights": false,
           "modalities": { "input": ["text", "image", "video", "audio", "pdf"], "output": ["text"] },
@@ -448,7 +591,8 @@
             "selection": ["latest", "fast", "multimodal", "reasoning"],
             "lifecycle": "active",
             "pricingBasis": "standard-introductory",
-            "pricingValidUntil": "2026-12-31"
+            "pricingValidUntil": "2026-12-31",
+            "notes": ["Knowledge cutoff is March 2026; some domains remain limited to January 2025."]
           },
           "selectionRank": 2
         },
@@ -473,22 +617,26 @@
           "lastUpdated": "2026-07-21",
           "openWeights": false,
           "modalities": { "input": ["text", "image", "video", "audio", "pdf"], "output": ["text"] },
-          "cost": { "input": 1.5, "output": 7.5, "cacheRead": 0.15, "inputAudio": 1.5 },
+          "cost": { "input": 0.75, "output": 3.75, "cacheRead": 0.075 },
           "extraCapabilities": {
             "reasoning": {
               "supported": true,
               "default_enabled": true,
               "mode": "level",
-              "level": "high",
+              "level": "medium",
               "level_options": ["minimal", "low", "medium", "high"],
               "summaries": true,
               "visibility": "summary",
-              "continuation": ["thought_signatures"]
+              "continuation": ["thought_signatures"],
+              "notes": ["The default thinkingLevel is medium."]
             }
           },
           "metadata": {
             "selection": ["fast", "multimodal", "reasoning"],
-            "lifecycle": "active"
+            "lifecycle": "active",
+            "pricingBasis": "standard-introductory",
+            "pricingValidUntil": "2026-12-31",
+            "notes": ["Pricing shown is the introductory Global rate through December 31, 2026; standard pricing from January 1, 2027 is $1.50 input / $7.50 output with $0.15 cached input."]
           },
           "selectionRank": 3
         },
@@ -635,6 +783,7 @@
           "temperature": false,
           "toolCall": true,
           "structuredOutput": true,
+          "releaseDate": "2026-06-12",
           "lastUpdated": "2026-08-31",
           "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
           "cost": { "input": 0.95, "output": 4, "cacheRead": 0.19 },
@@ -670,8 +819,6 @@
           "temperature": false,
           "toolCall": true,
           "structuredOutput": true,
-          "knowledge": "2025-01",
-          "releaseDate": "2026-04-21",
           "lastUpdated": "2026-08-31",
           "openWeights": true,
           "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
@@ -691,7 +838,8 @@
           },
           "metadata": {
             "selection": ["latest", "coding", "agentic"],
-            "lifecycle": "active"
+            "lifecycle": "active",
+            "notes": ["The official API release date for this endpoint is not documented; it serves the same model as kimi-k2.7-code with faster output."]
           },
           "selectionRank": 3
         },
@@ -769,9 +917,9 @@
           "metadata": {
             "selection": ["compatibility", "multimodal", "reasoning", "coding"],
             "lifecycle": "legacy",
-            "apiStatus": "sunset-scheduled",
+            "apiStatus": "retired",
             "officialSunsetDate": "2026-08-31",
-            "notes": ["Retained for third-party metadata fallback. Kimi schedules full official API retirement for August 31, 2026; inclusion does not imply official availability. Pricing is historical."]
+            "notes": ["Retained for third-party metadata fallback. Kimi retired the kimi-k2.5 and moonshot-v1 series on August 31, 2026; calls to these model names now return a 404 error, and inclusion does not imply official availability. Pricing is historical."]
           },
           "selectionRank": 5,
           "reasoningOptions": [
@@ -792,6 +940,37 @@
         "https://api-docs.deepseek.com/updates/"
       ],
       "models": [
+        {
+          "id": "deepseek-flash",
+          "name": "DeepSeek V4.1 Flash",
+          "family": "deepseek-flash",
+          "contextLength": 1000000,
+          "maxTokens": 384000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "toggle" },
+            { "type": "effort", "values": ["low", "high", "max"] }
+          ],
+          "releaseDate": "2026-09-10",
+          "lastUpdated": "2026-09-10",
+          "openWeights": true,
+          "modalities": { "input": ["text", "image"], "output": ["text"] },
+          "cost": { "input": 0.3, "output": 1.2, "reasoning": 1.2, "cacheRead": 0.006 },
+          "interleaved": { "field": "reasoning_content" },
+          "metadata": {
+            "selection": ["latest", "frontier", "reasoning", "multimodal", "long-context"],
+            "lifecycle": "active",
+            "pricingBasis": "peak",
+            "notes": ["USD per million tokens at peak hours; official off-peak prices are half these rates.", "Temperature is effective only with thinking disabled; thinking mode ignores sampling parameters.", "Successor to the retired V4 Flash and V4 Flash Vision Exp models. The legacy model names deepseek-v4-flash and deepseek-v4-flash-vision-exp temporarily route to this model and bill at Flash rates."]
+          },
+          "selectionRank": 1
+        },
         {
           "id": "deepseek-v4-flash",
           "name": "DeepSeek V4 Flash",
@@ -915,10 +1094,11 @@
           "temperature": true,
           "toolCall": true,
           "structuredOutput": true,
+          "releaseDate": "2026-08-18",
           "lastUpdated": "2026-08-31",
           "openWeights": true,
           "modalities": { "input": ["text"], "output": ["text"] },
-          "cost": { "input": 1.4, "output": 4.4, "cacheRead": 0.26 },
+          "cost": { "input": 1.4, "output": 4.4, "cacheRead": 0.26, "cacheWrite": 0 },
           "interleaved": { "field": "reasoning_content" },
           "extraCapabilities": {
             "reasoning": {
@@ -936,7 +1116,8 @@
           },
           "metadata": {
             "selection": ["latest", "coding", "long-context", "reasoning"],
-            "lifecycle": "active"
+            "lifecycle": "active",
+            "notes": ["Zhipu release notes list the release date as 2026-08-18; the official model blog references 2026-08-14."]
           },
           "selectionRank": 1,
           "reasoningOptions": [
@@ -956,10 +1137,11 @@
           "temperature": true,
           "toolCall": true,
           "structuredOutput": true,
+          "releaseDate": "2026-08-26",
           "lastUpdated": "2026-08-31",
           "openWeights": true,
           "modalities": { "input": ["text", "image", "video", "file"], "output": ["text"] },
-          "cost": { "input": 0.075, "output": 0.25, "cacheRead": 0.015 },
+          "cost": { "input": 0.15, "output": 0.5, "cacheRead": 0.03, "cacheWrite": 0 },
           "interleaved": { "field": "reasoning_content" },
           "extraCapabilities": {
             "reasoning": {
@@ -978,8 +1160,7 @@
           "metadata": {
             "selection": ["latest", "multimodal", "coding", "cost-efficient"],
             "lifecycle": "active",
-            "pricingBasis": "promotional",
-            "pricingValidUntil": "2026-09-10T00:00:00+08:00"
+            "notes": ["The $0.075/$0.25/$0.015 promotional pricing ended on September 10, 2026; the current standard rate is $0.15 input / $0.50 output with $0.03 cached input."]
           },
           "selectionRank": 2,
           "reasoningOptions": [
@@ -999,8 +1180,8 @@
           "temperature": true,
           "toolCall": true,
           "structuredOutput": true,
-          "releaseDate": "2026-06-13",
-          "lastUpdated": "2026-06-13",
+          "releaseDate": "2026-06-16",
+          "lastUpdated": "2026-06-16",
           "openWeights": true,
           "modalities": { "input": ["text"], "output": ["text"] },
           "cost": { "input": 1.4, "output": 4.4, "cacheRead": 0.26, "cacheWrite": 0 },
@@ -1011,11 +1192,12 @@
               "default_enabled": true,
               "mode": "effort",
               "effort": "max",
-              "effort_options": ["high", "max"],
+              "effort_options": ["none", "minimal", "low", "medium", "high", "xhigh", "max"],
               "interleaved": true,
               "summaries": true,
               "visibility": "summary",
-              "continuation": ["thinking_blocks"]
+              "continuation": ["thinking_blocks"],
+              "notes": ["none and minimal stop thinking; low and medium map to high; xhigh maps to max.", "The same page also states that low is only supported by GLM-5.3 and GLM-5.3-Flash, which conflicts with the GLM-5.2 option list."]
             }
           },
           "metadata": {
@@ -1025,7 +1207,7 @@
           "selectionRank": 3,
           "reasoningOptions": [
             { "type": "toggle" },
-            { "type": "effort", "values": ["high", "max"] }
+            { "type": "effort", "values": ["none", "minimal", "low", "medium", "high", "xhigh", "max"] }
           ]
         }
       ]
@@ -1066,10 +1248,15 @@
               "interleaved": true,
               "summaries": true,
               "visibility": "summary",
-              "continuation": ["thinking_blocks"]
+              "continuation": ["thinking_blocks"],
+              "notes": ["Thinking is controlled with thinking.type = \"adaptive\" or \"disabled\"; M2.x models accept disabled but keep thinking on.", "The OpenAI-compatible API page states thinking is on by default when omitted, while the Anthropic-compatible page states it is off by default."]
             }
           },
-          "metadata": { "selection": ["latest", "multimodal", "long-context", "agentic"], "lifecycle": "active" },
+          "metadata": {
+            "selection": ["latest", "multimodal", "long-context", "agentic"],
+            "lifecycle": "active",
+            "notes": ["Pay-as-you-go prices are the permanent 50%-off rates in USD per million tokens for the standard tier at up to 512k input tokens; above 512k input the standard tier is $0.60 input / $2.40 output with $0.12 cache read. The priority tier is 1.5x the standard tier."]
+          },
           "selectionRank": 1
         },
         {
@@ -1276,7 +1463,8 @@
           "structuredOutput": true,
           "reasoningOptions": [
             { "type": "toggle" },
-            { "type": "budget" }
+            { "type": "budget" },
+            { "type": "effort", "values": ["none", "low", "medium", "xhigh"] }
           ],
           "lastUpdated": "2026-08-31",
           "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
@@ -1302,7 +1490,7 @@
             "pricingRegion": "Singapore",
             "pricingScope": "International",
             "pricingBasis": "standard",
-            "notes": ["Thinking mode has a 983616-token input limit and a separate 262144-token reasoning budget.", "Cache prices refer to explicit caching. Longer inputs may use higher pricing tiers."]
+            "notes": ["Thinking mode has a 983616-token input limit and a separate 262144-token reasoning budget.", "Cache prices refer to explicit caching. Longer inputs may use higher pricing tiers.", "reasoning_effort defaults to xhigh and accepts xhigh, medium, and low; max maps to xhigh, minimal maps to low, and none disables thinking. reasoning_effort and thinking_budget cannot be set together, and Alibaba recommends reasoning_effort because enable_thinking will be deprecated."]
           },
           "selectionRank": 1
         },
@@ -1347,7 +1535,7 @@
             "pricingRegion": "Singapore",
             "pricingScope": "International",
             "pricingBasis": "input-up-to-256k",
-            "notes": ["Thinking mode has a 983616-token input limit and a separate 262144-token reasoning budget.", "Cache prices refer to explicit caching. Longer inputs may use higher pricing tiers."]
+            "notes": ["Thinking mode has a 983616-token input limit and a separate 262144-token reasoning budget.", "Cache prices refer to explicit caching. Longer inputs may use higher pricing tiers.", "The official reasoning.effort model list does not name the Qwen3.7 series, so no effort range is recorded for this model."]
           },
           "selectionRank": 2
         },
@@ -1366,7 +1554,8 @@
           "structuredOutput": true,
           "reasoningOptions": [
             { "type": "toggle" },
-            { "type": "budget" }
+            { "type": "budget" },
+            { "type": "effort", "values": ["none", "low", "medium", "xhigh"] }
           ],
           "lastUpdated": "2026-08-31",
           "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
@@ -1392,9 +1581,54 @@
             "pricingRegion": "Singapore",
             "pricingScope": "International",
             "pricingBasis": "standard",
-            "notes": ["Thinking mode has a 983616-token input limit and a separate 262144-token reasoning budget.", "Cache prices refer to explicit caching. Longer inputs may use higher pricing tiers."]
+            "notes": ["Thinking mode has a 983616-token input limit and a separate 262144-token reasoning budget.", "Cache prices refer to explicit caching. Longer inputs may use higher pricing tiers.", "reasoning_effort defaults to xhigh and accepts xhigh, medium, and low; max maps to xhigh, minimal maps to low, and none disables thinking. reasoning_effort and thinking_budget cannot be set together, and Alibaba recommends reasoning_effort because enable_thinking will be deprecated."]
           },
           "selectionRank": 3
+        },
+        {
+          "id": "qwen3.7-flash",
+          "name": "Qwen3.7 Flash",
+          "family": "qwen",
+          "contextLength": 1000000,
+          "maxTokens": 131072,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "toggle" },
+            { "type": "budget" }
+          ],
+          "lastUpdated": "2026-09-14",
+          "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
+          "cost": { "input": 0.03, "output": 0.13, "cacheRead": 0.003, "cacheWrite": 0.038 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "budget",
+              "budget": {
+                "max": 262144,
+                "default": 262144,
+                "unit": "tokens"
+              },
+              "interleaved": true,
+              "notes": ["Thinking mode has a 983616-token input limit and a separate 262144-token reasoning budget.", "Set preserve_thinking=true to retain reasoning_content across turns.", "The official reasoning.effort model list does not name the Qwen3.7 series."]
+            }
+          },
+          "metadata": {
+            "selection": ["fast", "multimodal", "reasoning", "cost-efficient"],
+            "lifecycle": "active",
+            "pricingRegion": "Singapore",
+            "pricingScope": "International",
+            "pricingBasis": "input-up-to-32k",
+            "notes": ["Prices shown are the up-to-32k-input tier; 32k-256k input is billed at $0.10 input / $0.40 output with $0.125 explicit cache creation and $0.010 cache read, and 256k-1m input at $0.20 / $0.80 with $0.25 creation and $0.020 read.", "Cache prices refer to explicit caching."]
+          },
+          "selectionRank": 4
         },
         {
           "id": "qwen3-coder-plus",
@@ -1403,11 +1637,11 @@
           "contextLength": 1000000,
           "maxTokens": 65536,
           "vision": false,
-          "functionCall": true,
+          "functionCall": false,
           "reasoning": { "supported": false, "default": false },
           "attachment": false,
           "temperature": true,
-          "toolCall": true,
+          "toolCall": false,
           "structuredOutput": false,
           "lastUpdated": "2026-08-31",
           "modalities": { "input": ["text"], "output": ["text"] },
@@ -1417,11 +1651,11 @@
           },
           "metadata": {
             "selection": ["coding", "agentic"],
-            "lifecycle": "active",
+            "lifecycle": "legacy",
             "pricingRegion": "Singapore",
             "pricingScope": "International",
             "pricingBasis": "input-up-to-32k",
-            "notes": ["Tool support follows the Qwen function-calling guide; hosted model cards list regional restrictions. Coder models do not expose thinking controls.", "Cache prices, when present, refer to explicit caching. Longer inputs may use higher pricing tiers."]
+            "notes": ["Alibaba lists this model as legacy and no longer recommended. Function calling is unsupported on the International and Global endpoints; the China (Beijing) endpoint documents it as supported.", "Cache prices, when present, refer to explicit caching. Longer inputs may use higher pricing tiers."]
           },
           "selectionRank": 4
         },
@@ -1432,11 +1666,11 @@
           "contextLength": 1000000,
           "maxTokens": 65536,
           "vision": false,
-          "functionCall": true,
+          "functionCall": false,
           "reasoning": { "supported": false, "default": false },
           "attachment": false,
           "temperature": true,
-          "toolCall": true,
+          "toolCall": false,
           "structuredOutput": false,
           "lastUpdated": "2026-08-31",
           "modalities": { "input": ["text"], "output": ["text"] },
@@ -1446,11 +1680,11 @@
           },
           "metadata": {
             "selection": ["coding", "agentic"],
-            "lifecycle": "active",
+            "lifecycle": "legacy",
             "pricingRegion": "Singapore",
             "pricingScope": "International",
             "pricingBasis": "input-up-to-32k",
-            "notes": ["Tool support follows the Qwen function-calling guide; hosted model cards list regional restrictions. Coder models do not expose thinking controls.", "Cache prices, when present, refer to explicit caching. Longer inputs may use higher pricing tiers."]
+            "notes": ["Alibaba lists this model as legacy and no longer recommended. Function calling is unsupported on the International and Global endpoints; the China (Beijing) endpoint documents it as supported.", "Cache prices, when present, refer to explicit caching. Longer inputs may use higher pricing tiers."]
           },
           "selectionRank": 5
         },
@@ -1461,11 +1695,11 @@
           "contextLength": 262144,
           "maxTokens": 65536,
           "vision": false,
-          "functionCall": true,
+          "functionCall": false,
           "reasoning": { "supported": false, "default": false },
           "attachment": false,
           "temperature": true,
-          "toolCall": true,
+          "toolCall": false,
           "structuredOutput": false,
           "lastUpdated": "2026-08-31",
           "openWeights": true,
@@ -1476,11 +1710,11 @@
           },
           "metadata": {
             "selection": ["coding", "agentic"],
-            "lifecycle": "active",
+            "lifecycle": "legacy",
             "pricingRegion": "Singapore",
             "pricingScope": "International",
             "pricingBasis": "input-up-to-32k",
-            "notes": ["Tool support follows the Qwen function-calling guide; hosted model cards list regional restrictions. Coder models do not expose thinking controls.", "Cache prices, when present, refer to explicit caching. Longer inputs may use higher pricing tiers."]
+            "notes": ["Alibaba lists this model as legacy and no longer recommended. The model detail page lists function calling as unsupported even though its prose claims multi-turn tool support.", "Cache prices, when present, refer to explicit caching. Longer inputs may use higher pricing tiers."]
           },
           "selectionRank": 6
         }

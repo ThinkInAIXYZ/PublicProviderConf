@@ -2,7 +2,7 @@
   "id": "zenmux",
   "name": "ZenMux",
   "display_name": "ZenMux",
-  "updated_at": "2026-09-09T08:13:25.219Z",
+  "updated_at": "2026-09-14T11:39:52.380Z",
   "models": [
     {
       "id": "alibaba/wan3.0-video",
@@ -15,10 +15,12 @@
       "tool_call": false,
       "modalities": {
         "input": [
-          "image",
           "text",
+          "image",
+          "video",
           "audio",
-          "video"
+          "document",
+          "link"
         ]
       },
       "cost": {
@@ -35,10 +37,12 @@
           "video"
         ],
         "inputModalities": [
-          "image",
           "text",
+          "image",
+          "video",
           "audio",
-          "video"
+          "document",
+          "link"
         ],
         "pricing": {
           "input": 2,
@@ -59,10 +63,12 @@
       "tool_call": false,
       "modalities": {
         "input": [
-          "image",
           "text",
+          "image",
+          "video",
           "audio",
-          "video"
+          "document",
+          "link"
         ]
       },
       "cost": {
@@ -79,10 +85,12 @@
           "video"
         ],
         "inputModalities": [
-          "image",
           "text",
+          "image",
+          "video",
           "audio",
-          "video"
+          "document",
+          "link"
         ],
         "pricing": {
           "input": 2,
@@ -961,6 +969,40 @@
       }
     },
     {
+      "id": "atria-asi/atria-dawn-preview",
+      "name": "Atria: Atria Dawn Preview (Free)",
+      "display_name": "Atria: Atria Dawn Preview (Free)",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0,
+        "cache_write": 0
+      },
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "metadata": {
+        "ownedBy": "atria-asi",
+        "created": 1789364855,
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "baidu/ernie-5.0-thinking-preview",
       "name": "Baidu: ERNIE 5.0",
       "display_name": "Baidu: ERNIE 5.0",
@@ -1798,9 +1840,9 @@
         ]
       },
       "cost": {
-        "input": 0.44,
-        "output": 1.32,
-        "cache_read": 0.014
+        "input": 0.22,
+        "output": 0.66,
+        "cache_read": 0.007
       },
       "limit": {
         "context": 1048576,
@@ -1889,6 +1931,50 @@
           "notes": [
             "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
           ]
+        }
+      }
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "name": "DeepSeek: DeepSeek V4.1 Flash",
+      "display_name": "DeepSeek: DeepSeek V4.1 Flash",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "open_weights": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.6,
+        "cache_read": 0.003
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
         }
       }
     },
@@ -3898,7 +3984,7 @@
       "temperature": true,
       "tool_call": true,
       "knowledge": "2024-11",
-      "release_date": "2024-11-01",
+      "release_date": "2025-12-02",
       "last_updated": "2025-12-02",
       "open_weights": true,
       "modalities": {
@@ -4105,6 +4191,42 @@
       }
     },
     {
+      "id": "moonshotai/kimi-k2.8-preview",
+      "name": "MoonshotAI: Kimi K2.8 Preview",
+      "display_name": "MoonshotAI: Kimi K2.8 Preview",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 6.5,
+        "output": 27,
+        "cache_read": 1.7
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "metadata": {
+        "ownedBy": "moonshotai",
+        "created": 1789379421,
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "moonshotai/kimi-k3",
       "name": "MoonshotAI: Kimi K3",
       "display_name": "MoonshotAI: Kimi K3",
@@ -4147,41 +4269,6 @@
           "supported": true
         }
       }
-    },
-    {
-      "id": "nex-agi/nex-n2-pro",
-      "name": "Nex AGI: Nex-N2-Pro",
-      "display_name": "Nex AGI: Nex-N2-Pro",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 0.5,
-        "output": 2.5,
-        "cache_read": 0.25
-      },
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "metadata": {
-        "ownedBy": "nex-agi",
-        "created": 1787207684,
-        "source": "public-provider-conf"
-      },
-      "vision": true
     },
     {
       "id": "openai/chat-latest",
@@ -4497,43 +4584,6 @@
       }
     },
     {
-      "id": "openai/gpt-5-chat",
-      "name": "OpenAI: GPT-5 Chat",
-      "display_name": "OpenAI: GPT-5 Chat",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "temperature": false,
-      "tool_call": true,
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 1.1,
-        "output": 9,
-        "cache_read": 0.11
-      },
-      "limit": {
-        "context": 128000,
-        "output": 16384
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "openai/gpt-5-codex",
       "name": "OpenAI: GPT-5 Codex",
       "display_name": "OpenAI: GPT-5 Codex",
@@ -4829,45 +4879,6 @@
       }
     },
     {
-      "id": "openai/gpt-5.1-chat",
-      "name": "OpenAI: GPT-5.1 Chat",
-      "display_name": "OpenAI: GPT-5.1 Chat",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2025-01-01",
-      "release_date": "2025-11-13",
-      "last_updated": "2025-11-13",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "pdf",
-          "image",
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 10,
-        "cache_read": 0.12
-      },
-      "limit": {
-        "context": 128000,
-        "output": 64000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "openai/gpt-5.1-codex",
       "name": "OpenAI: GPT-5.1-Codex",
       "display_name": "OpenAI: GPT-5.1-Codex",
@@ -5043,44 +5054,6 @@
       }
     },
     {
-      "id": "openai/gpt-5.2-chat",
-      "name": "OpenAI: GPT-5.2 Chat",
-      "display_name": "OpenAI: GPT-5.2 Chat",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "temperature": false,
-      "tool_call": true,
-      "release_date": "2025-12-10",
-      "last_updated": "2025-12-10",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "pdf",
-          "image",
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 1.75,
-        "output": 14,
-        "cache_read": 0.175
-      },
-      "limit": {
-        "context": 128000,
-        "output": 32000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "openai/gpt-5.2-pro",
       "name": "OpenAI: GPT-5.2 Pro",
       "display_name": "OpenAI: GPT-5.2 Pro",
@@ -5198,42 +5171,6 @@
           "visibility": "hidden"
         }
       }
-    },
-    {
-      "id": "openai/gpt-5.3-chat",
-      "name": "OpenAI: GPT-5.3 Chat",
-      "display_name": "OpenAI: GPT-5.3 Chat",
-      "type": "chat",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "temperature": true,
-      "tool_call": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-20",
-      "last_updated": "2026-03-20",
-      "open_weights": false,
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "cost": {
-        "input": 1.75,
-        "output": 14
-      },
-      "limit": {
-        "context": 128000,
-        "output": 16380
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": false
     },
     {
       "id": "openai/gpt-5.3-codex",
@@ -7277,6 +7214,45 @@
       "vision": true
     },
     {
+      "id": "sakana/fugu-ultra-v2",
+      "name": "SakanaAI:Fugu Ultra v2",
+      "display_name": "SakanaAI:Fugu Ultra v2",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": false,
+      "tool_call": true,
+      "release_date": "2026-09-11",
+      "last_updated": "2026-09-11",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 5,
+        "output": 30,
+        "cache_read": 0.5
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "sapiens-ai/agnes-2.5-flash",
       "name": "Sapiens AI: Agnes 2.5 Flash",
       "display_name": "Sapiens AI: Agnes 2.5 Flash",
@@ -8253,8 +8229,8 @@
       },
       "cost": {
         "input": 0.072,
-        "output": 0.43,
-        "cache_read": 0.015
+        "output": 0.4,
+        "cache_read": 0.01
       },
       "limit": {
         "context": 200000,

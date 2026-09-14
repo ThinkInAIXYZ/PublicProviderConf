@@ -15,6 +15,8 @@
       },
       "tool_call": true,
       "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-08",
       "release_date": "2025-11-04",
       "last_updated": "2026-06-11",
       "modalities": {
@@ -363,7 +365,7 @@
       "name": "Mistral Small 3.2 24B Instruct",
       "description": "Efficient Mistral model for fast chat, extraction, and production assistants",
       "family": "mistral-small",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": false
       },
@@ -373,7 +375,8 @@
       "last_updated": "2026-06-11",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -401,7 +404,17 @@
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
@@ -1245,10 +1258,10 @@
           "type": "effort",
           "values": [
             "none",
-            "minimal",
             "low",
             "medium",
-            "high"
+            "high",
+            "xhigh"
           ]
         }
       ],
@@ -1279,6 +1292,55 @@
         "cache_read": 0.313
       },
       "display_name": "GPT-5.4",
+      "type": "chat"
+    },
+    {
+      "id": "deepseek-v4-1-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "description": "Fast DeepSeek model for efficient chat, coding help, and agent loops",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.375,
+        "output": 1.5,
+        "cache_read": 0.0075
+      },
+      "display_name": "DeepSeek V4.1 Flash",
       "type": "chat"
     },
     {
@@ -2264,10 +2326,9 @@
           "type": "effort",
           "values": [
             "none",
-            "minimal",
-            "low",
             "medium",
-            "high"
+            "high",
+            "xhigh"
           ]
         }
       ],
@@ -2570,10 +2631,10 @@
           "type": "effort",
           "values": [
             "none",
-            "minimal",
             "low",
             "medium",
-            "high"
+            "high",
+            "xhigh"
           ]
         }
       ],
@@ -2965,10 +3026,10 @@
           "type": "effort",
           "values": [
             "none",
-            "minimal",
             "low",
             "medium",
-            "high"
+            "high",
+            "xhigh"
           ]
         }
       ],
@@ -3635,10 +3696,10 @@
           "type": "effort",
           "values": [
             "none",
-            "minimal",
             "low",
             "medium",
-            "high"
+            "high",
+            "xhigh"
           ]
         }
       ],
@@ -4180,6 +4241,44 @@
         "cache_read": 0.2125
       },
       "display_name": "Inkling",
+      "type": "chat"
+    },
+    {
+      "id": "qwen-3-8-flash",
+      "name": "Qwen 3.8 Flash",
+      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "structured_output": true,
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.14,
+        "output": 0.49,
+        "cache_read": 0.014
+      },
+      "display_name": "Qwen 3.8 Flash",
       "type": "chat"
     },
     {
@@ -4947,7 +5046,17 @@
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
