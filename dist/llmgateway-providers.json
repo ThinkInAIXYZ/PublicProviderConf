@@ -6,6 +6,54 @@
   "display_name": "LLM Gateway",
   "models": [
     {
+      "id": "atria/atria-dawn-preview",
+      "name": "Atria Dawn Preview (Atria)",
+      "description": "Preview model for early access evaluation, prototyping, and compatibility testing",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-09-12",
+      "last_updated": "2026-09-12",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "display_name": "Atria Dawn Preview (Atria)",
+      "type": "chat"
+    },
+    {
       "id": "vertex-openai/glm-4.7",
       "name": "GLM-4.7 (Vertex AI (OpenAI-compatible))",
       "description": "Mature GLM model for dependable coding, reasoning, and structured agent tasks",
@@ -5710,6 +5758,57 @@
       }
     },
     {
+      "id": "alibaba/glm-5.3",
+      "name": "GLM-5.3 (Alibaba Cloud)",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 0.28
+      },
+      "display_name": "GLM-5.3 (Alibaba Cloud)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "alibaba/qwen-plus-latest",
       "name": "Qwen Plus Latest (Alibaba Cloud)",
       "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
@@ -5859,7 +5958,7 @@
         "output": 131072
       },
       "cost": {
-        "input": 0.8,
+        "input": 0.88,
         "output": 2.55,
         "cache_read": 0.16
       },
@@ -6041,7 +6140,7 @@
       "id": "scx-ai-gp/glm-5.3-flash",
       "name": "GLM-5.3 Flash (SCX.ai)",
       "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -8795,7 +8894,7 @@
       "id": "vichar-ai/glm-5.3-flash",
       "name": "GLM-5.3 Flash (vichar-ai)",
       "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm",
+      "family": "glm-flash",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -9067,56 +9166,6 @@
       }
     },
     {
-      "id": "together-ai/gpt-oss-20b",
-      "name": "GPT OSS 20B (Together AI)",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.05,
-        "output": 0.2
-      },
-      "display_name": "GPT OSS 20B (Together AI)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
       "id": "together-ai/deepseek-v4.1-flash",
       "name": "DeepSeek V4.1 Flash (Together AI)",
       "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
@@ -9212,57 +9261,6 @@
         "cache_read": 0.3
       },
       "display_name": "Kimi K3 (Together AI)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "together-ai/gemma-4-31b-it",
-      "name": "Gemma 4 31B IT (Together AI)",
-      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
-      "family": "gemma",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.39,
-        "output": 0.97
-      },
-      "display_name": "Gemma 4 31B IT (Together AI)",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -12351,7 +12349,7 @@
       "id": "novita/glm-5.3-flash",
       "name": "GLM-5.3 Flash (NovitaAI)",
       "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -14836,8 +14834,8 @@
         "output": 32768
       },
       "cost": {
-        "input": 0.2,
-        "output": 2,
+        "input": 0.08,
+        "output": 0.35,
         "cache_read": 0.05
       },
       "display_name": "Qwen3.8 27B (Consensus Protocol)",
@@ -14974,8 +14972,20 @@
       "family": "deepseek-flash",
       "attachment": false,
       "reasoning": {
-        "supported": true
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
       "tool_call": false,
       "structured_output": false,
       "temperature": true,
@@ -14997,7 +15007,7 @@
       },
       "cost": {
         "input": 0.2,
-        "output": 1,
+        "output": 0.6,
         "cache_read": 0.005
       },
       "display_name": "DeepSeek V4.1 Flash (Consensus Protocol)",
@@ -15012,7 +15022,7 @@
       "id": "consensusprotocol/glm-5.3-flash",
       "name": "GLM-5.3 Flash (Consensus Protocol)",
       "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -20738,7 +20748,7 @@
       "id": "zai/glm-4.6v-flashx",
       "name": "GLM-4.6V FlashX (Z AI)",
       "description": "GLM vision model for visual reasoning, documents, and multimodal agents",
-      "family": "glm",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -20916,7 +20926,7 @@
       "id": "zai/glm-5.3-flash",
       "name": "GLM-5.3 Flash (Z AI)",
       "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -22924,7 +22934,7 @@
       "id": "runware/glm-5.3-flash",
       "name": "GLM-5.3 Flash (Runware)",
       "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,

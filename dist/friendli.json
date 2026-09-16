@@ -7,8 +7,8 @@
   "models": [
     {
       "id": "deepseek-ai/DeepSeek-V3.2",
-      "name": "DeepSeek-V3.2",
-      "description": "DeepSeek chat model for instruction following, coding, and analysis",
+      "name": "DeepSeek V3.2",
+      "description": "Hybrid-reasoning DeepSeek model with thinking and non-thinking modes, sparse attention, and tool-use",
       "family": "deepseek",
       "attachment": false,
       "reasoning": {
@@ -18,6 +18,9 @@
       "reasoning_options": [
         {
           "type": "toggle"
+        },
+        {
+          "type": "budget_tokens"
         }
       ],
       "tool_call": true,
@@ -26,6 +29,7 @@
       },
       "structured_output": true,
       "temperature": true,
+      "knowledge": "2024-07",
       "release_date": "2025-12-01",
       "last_updated": "2025-12-01",
       "modalities": {
@@ -39,14 +43,14 @@
       "open_weights": true,
       "limit": {
         "context": 163840,
-        "output": 163840
+        "output": 64000
       },
       "cost": {
         "input": 0.5,
         "output": 1.5,
         "cache_read": 0.25
       },
-      "display_name": "DeepSeek-V3.2",
+      "display_name": "DeepSeek V3.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -73,9 +77,15 @@
       "reasoning_options": [
         {
           "type": "toggle"
+        },
+        {
+          "type": "budget_tokens"
         }
       ],
       "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "structured_output": true,
       "temperature": true,
       "release_date": "2026-04-02",
@@ -102,7 +112,13 @@
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -116,7 +132,14 @@
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens"
+        }
+      ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
@@ -136,7 +159,7 @@
       "open_weights": true,
       "limit": {
         "context": 202752,
-        "output": 202752
+        "output": 131072
       },
       "cost": {
         "input": 1.4,
@@ -177,9 +200,7 @@
           ]
         },
         {
-          "type": "budget_tokens",
-          "min": -1,
-          "max": 1048576
+          "type": "budget_tokens"
         }
       ],
       "tool_call": true,
@@ -201,12 +222,12 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 1048576
+        "output": 131072
       },
       "cost": {
-        "input": 1.4,
-        "output": 4.4,
-        "cache_read": 0.26
+        "input": 1.26,
+        "output": 3.96,
+        "cache_read": 0.234
       },
       "display_name": "GLM-5.3",
       "type": "chat",
@@ -234,11 +255,17 @@
       },
       "reasoning_options": [
         {
+          "type": "toggle"
+        },
+        {
           "type": "effort",
           "values": [
             "high",
             "max"
           ]
+        },
+        {
+          "type": "budget_tokens"
         }
       ],
       "tool_call": true,
@@ -259,7 +286,7 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
+        "context": 1048576,
         "output": 131072
       },
       "cost": {
@@ -268,6 +295,71 @@
         "cache_read": 0.26
       },
       "display_name": "GLM-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "zai-org/GLM-5.3-Flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        },
+        {
+          "type": "budget_tokens"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.5,
+        "cache_read": 0.03
+      },
+      "display_name": "GLM-5.3-Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -291,7 +383,11 @@
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "budget_tokens"
+        }
+      ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
@@ -311,7 +407,7 @@
       "open_weights": true,
       "limit": {
         "context": 196608,
-        "output": 196608
+        "output": 131072
       },
       "cost": {
         "input": 0.3,

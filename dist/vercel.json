@@ -1751,53 +1751,6 @@
       }
     },
     {
-      "id": "alibaba/qwen3.8-flash-next",
-      "name": "Qwen 3.8 Flash Next",
-      "description": "Open-weight experimental preview of the Qwen4 architecture: hybrid-attention MoE (125B total, 6B active) with vision encoder for coding, agent tasks, and image and video understanding",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-27",
-      "last_updated": "2026-08-27",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 0.12,
-        "output": 0.4,
-        "cache_read": 0.01
-      },
-      "display_name": "Qwen 3.8 Flash Next",
-      "type": "chat"
-    },
-    {
       "id": "alibaba/qwen3-coder-30b-a3b",
       "name": "Qwen 3 Coder 30B A3B Instruct",
       "description": "Qwen coding model for software agents, repository edits, and code reasoning",
@@ -1939,7 +1892,7 @@
       "cost": {
         "input": 0.5,
         "output": 3,
-        "cache_read": 0.1,
+        "cache_read": 0.05,
         "cache_write": 0.625
       },
       "display_name": "Qwen 3.6 Plus",
@@ -2266,7 +2219,7 @@
       "cost": {
         "input": 0.1,
         "output": 0.4,
-        "cache_read": 0.001,
+        "cache_read": 0.01,
         "cache_write": 0.125
       },
       "display_name": "Qwen 3.5 Flash",
@@ -2966,7 +2919,7 @@
         "output": 128000
       },
       "cost": {
-        "input": 0.16,
+        "input": 0.15,
         "output": 0.47,
         "cache_read": 0.016,
         "cache_write": 0.2
@@ -3105,7 +3058,7 @@
       "cost": {
         "input": 1.3,
         "output": 7.8,
-        "cache_read": 0.26,
+        "cache_read": 0.13,
         "cache_write": 1.625
       },
       "display_name": "Qwen 3.6 Max Preview",
@@ -3346,7 +3299,7 @@
       },
       "cost": {
         "input": 0.4,
-        "output": 2.4,
+        "output": 2.5,
         "cache_read": 0.04,
         "cache_write": 0.5
       },
@@ -3627,7 +3580,8 @@
       },
       "cost": {
         "input": 0.05,
-        "output": 0.24
+        "output": 0.2,
+        "cache_read": 0.025
       },
       "display_name": "Nemotron 3 Nano 30B A3B",
       "type": "chat",
@@ -4165,6 +4119,8 @@
       },
       "reasoning_options": [],
       "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
       "release_date": "2025-11-19",
       "last_updated": "2025-11-19",
       "modalities": {
@@ -5980,6 +5936,40 @@
       "type": "chat"
     },
     {
+      "id": "google/gemini-3.8-live",
+      "name": "Gemini 3.8 Live",
+      "description": "Speech generation model for controllable voice, narration, and audio delivery",
+      "family": "gemini",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2026-09-15",
+      "last_updated": "2026-09-15",
+      "modalities": {
+        "input": [
+          "text",
+          "audio"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.75,
+        "output": 4.5
+      },
+      "display_name": "Gemini 3.8 Live",
+      "type": "chat"
+    },
+    {
       "id": "google/gemini-3.1-flash-lite",
       "name": "Gemini 3.1 Flash Lite",
       "description": "Low-latency Gemini model for high-volume multimodal and agent workloads",
@@ -6061,6 +6051,40 @@
         "output": 1536
       },
       "display_name": "Text Embedding 005",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemini-3.8-live-extended-thinking",
+      "name": "Gemini 3.8 Live Extended Thinking",
+      "description": "Speech generation model for controllable voice, narration, and audio delivery",
+      "family": "gemini",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2026-09-15",
+      "last_updated": "2026-09-15",
+      "modalities": {
+        "input": [
+          "text",
+          "audio"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.75,
+        "output": 4.5
+      },
+      "display_name": "Gemini 3.8 Live Extended Thinking",
       "type": "chat"
     },
     {
@@ -7452,7 +7476,18 @@
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
       "tool_call": true,
       "release_date": "2026-08-05",
       "last_updated": "2026-08-05",
@@ -7523,7 +7558,18 @@
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
       "tool_call": true,
       "release_date": "2026-09-02",
       "last_updated": "2026-09-02",
@@ -8044,6 +8090,55 @@
         "cache_read": 0.05
       },
       "display_name": "Seed 1.8",
+      "type": "chat"
+    },
+    {
+      "id": "bytedance/seed-2.1-turbo",
+      "name": "Seed 2.1 Turbo",
+      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
+      "family": "seed",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "release_date": "2026-06-23",
+      "last_updated": "2026-06-23",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 2.5,
+        "cache_read": 0.1
+      },
+      "display_name": "Seed 2.1 Turbo",
       "type": "chat"
     },
     {
@@ -8649,6 +8744,96 @@
       "type": "chat"
     },
     {
+      "id": "sakana/fugu-max",
+      "name": "Fugu Max",
+      "description": "Multi-agent model for routing expert agents across complex analytical tasks",
+      "family": "fugu",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "cost": {
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.25
+      },
+      "display_name": "Fugu Max",
+      "type": "chat"
+    },
+    {
+      "id": "sakana/fugu-ultra-v2",
+      "name": "Fugu Ultra v2",
+      "description": "Quality-first multi-agent model for hard research, analysis, and competitions",
+      "family": "fugu",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "cost": {
+        "input": 5,
+        "output": 30,
+        "cache_read": 0.5
+      },
+      "display_name": "Fugu Ultra v2",
+      "type": "chat"
+    },
+    {
       "id": "sakana/namazu",
       "name": "Sakana Namazu",
       "description": "Multi-agent model for routing expert agents across complex analytical tasks",
@@ -9004,13 +9189,13 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 393216
+        "context": 1000000,
+        "output": 384000
       },
       "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.006
+        "input": 0.15,
+        "output": 0.6,
+        "cache_read": 0.015
       },
       "display_name": "DeepSeek V4.1 Flash",
       "type": "chat",
@@ -9481,9 +9666,9 @@
         "output": 32000
       },
       "cost": {
-        "input": 0.06,
-        "output": 0.18,
-        "cache_read": 0.012
+        "input": 0.021,
+        "output": 0.063,
+        "cache_read": 0.0042
       },
       "display_name": "Ling 3.0 Flash",
       "type": "chat",
@@ -9492,6 +9677,45 @@
           "supported": true
         }
       }
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash-vl-free",
+      "name": "Ling 3.0 Flash VL (Free)",
+      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
+      "family": "ling",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "release_date": "2026-09-08",
+      "last_updated": "2026-09-08",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 256000,
+        "output": 32000
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "display_name": "Ling 3.0 Flash VL (Free)",
+      "type": "chat"
     },
     {
       "id": "inclusionai/ling-3.0-flash-fin",
@@ -9635,6 +9859,45 @@
         "output": 0
       },
       "display_name": "Ling 3.0 Flash Fin (Free)",
+      "type": "chat"
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash-vl",
+      "name": "Ling 3.0 Flash VL",
+      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
+      "family": "ling",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "release_date": "2026-09-08",
+      "last_updated": "2026-09-08",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 256000,
+        "output": 32000
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "display_name": "Ling 3.0 Flash VL",
       "type": "chat"
     },
     {
@@ -10884,10 +11147,10 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "knowledge": "2024-10",
       "release_date": "2025-10-29",
-      "last_updated": "2024-12-01",
+      "last_updated": "2025-10-29",
       "modalities": {
         "input": [
           "text"
@@ -10896,7 +11159,7 @@
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
         "context": 128000,
         "input": 112000,
@@ -11865,6 +12128,36 @@
       },
       "display_name": "GPT Image 1 Mini",
       "type": "image-generation"
+    },
+    {
+      "id": "openai/gpt-live-1",
+      "name": "GPT-Live 1",
+      "description": "Speech generation model for controllable voice, narration, and audio delivery",
+      "family": "gpt",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "audio"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "display_name": "GPT-Live 1",
+      "type": "chat"
     },
     {
       "id": "openai/gpt-5.6-terra-fast",
@@ -14120,6 +14413,72 @@
       }
     },
     {
+      "id": "inference-net/schematron-v2-small",
+      "name": "Schematron V2 Small",
+      "description": "Efficient model for low-latency assistance, extraction, and routine automation",
+      "family": "o",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 4096
+      },
+      "cost": {
+        "input": 0.05,
+        "output": 0.23,
+        "cache_read": 0.05
+      },
+      "display_name": "Schematron V2 Small",
+      "type": "chat"
+    },
+    {
+      "id": "inference-net/schematron-v2-turbo",
+      "name": "Schematron V2 Turbo",
+      "description": "Efficient model for low-latency assistance, extraction, and routine automation",
+      "family": "o",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 128000,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.03,
+        "output": 0.15,
+        "cache_read": 0.03
+      },
+      "display_name": "Schematron V2 Turbo",
+      "type": "chat"
+    },
+    {
       "id": "cohere/rerank-v4-pro",
       "name": "Cohere Rerank 4 Pro",
       "description": "Reranking model for improving retrieval quality in search and recommendation systems",
@@ -14792,7 +15151,7 @@
       "id": "zai/glm-5.3-flash",
       "name": "GLM 5.3 Flash",
       "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -15259,110 +15618,6 @@
       }
     },
     {
-      "id": "mistral/devstral-2",
-      "name": "Devstral 2",
-      "description": "Mistral coding agent model for repository tasks and software engineering workflows",
-      "family": "devstral",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-12-09",
-      "last_updated": "2025-12-09",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "cost": {
-        "input": 0.4,
-        "output": 2
-      },
-      "display_name": "Devstral 2",
-      "type": "chat"
-    },
-    {
-      "id": "mistral/mistral-medium",
-      "name": "Mistral Medium 3.1",
-      "description": "Mistral model for multilingual chat, reasoning, and tool-assisted workflows",
-      "family": "mistral-medium",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-05-07",
-      "last_updated": "2025-05-07",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 128000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 0.4,
-        "output": 2
-      },
-      "display_name": "Mistral Medium 3.1",
-      "type": "chat"
-    },
-    {
-      "id": "mistral/devstral-small-2",
-      "name": "Devstral Small 2",
-      "description": "Mistral coding agent model for repository tasks and software engineering workflows",
-      "family": "devstral",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-10",
-      "release_date": "2025-12-09",
-      "last_updated": "2025-05-07",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "cost": {
-        "input": 0.1,
-        "output": 0.3
-      },
-      "display_name": "Devstral Small 2",
-      "type": "chat"
-    },
-    {
       "id": "mistral/mistral-embed",
       "name": "Mistral Embed",
       "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
@@ -15416,12 +15671,13 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 256000,
+        "context": 262144,
         "output": 256000
       },
       "cost": {
         "input": 0.5,
-        "output": 1.5
+        "output": 1.5,
+        "cache_read": 0.05
       },
       "display_name": "Mistral Large 3",
       "type": "chat"
@@ -15442,8 +15698,7 @@
       "last_updated": "2024-07-01",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -15451,12 +15706,12 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 128000,
-        "output": 128000
+        "context": 60288,
+        "output": 16000
       },
       "cost": {
-        "input": 0.15,
-        "output": 0.15
+        "input": 0.04,
+        "output": 0.17
       },
       "display_name": "Mistral Nemo",
       "type": "chat"
@@ -15515,12 +15770,13 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 32000,
+        "context": 262144,
         "output": 4000
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.3
+        "input": 0.15,
+        "output": 0.6,
+        "cache_read": 0.015
       },
       "display_name": "Mistral Small (latest)",
       "type": "chat"
@@ -15551,12 +15807,13 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 256000,
+        "context": 262144,
         "output": 256000
       },
       "cost": {
         "input": 0.2,
-        "output": 0.2
+        "output": 0.2,
+        "cache_read": 0.02
       },
       "display_name": "Ministral 14B",
       "type": "chat"
@@ -15595,12 +15852,13 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 256000,
+        "context": 262144,
         "output": 256000
       },
       "cost": {
         "input": 1.5,
-        "output": 7.5
+        "output": 7.5,
+        "cache_read": 0.15
       },
       "display_name": "Mistral Medium Latest",
       "type": "chat"
@@ -15705,41 +15963,6 @@
         "output": 0.04
       },
       "display_name": "Ministral 3B (latest)",
-      "type": "chat"
-    },
-    {
-      "id": "mistral/pixtral-12b",
-      "name": "Pixtral 12B",
-      "description": "Mistral vision-language model for image understanding and multimodal chat",
-      "family": "pixtral",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-09",
-      "release_date": "2024-09-01",
-      "last_updated": "2024-09-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.15
-      },
-      "display_name": "Pixtral 12B",
       "type": "chat"
     },
     {
