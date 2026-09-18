@@ -5,6 +5,41 @@
   "display_name": "Cloudflare AI Gateway",
   "models": [
     {
+      "id": "unbiased/pareto",
+      "name": "Pareto",
+      "description": "Blended multimodal model that runs multiple language models in parallel and returns a synthesized answer",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-09-17",
+      "last_updated": "2026-09-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 131072
+      },
+      "cost": {
+        "input": 2.5,
+        "output": 7.5,
+        "cache_read": 0.25
+      },
+      "display_name": "Pareto",
+      "type": "chat"
+    },
+    {
       "id": "alibaba/qwen3.7-max",
       "name": "Qwen3.7 Max",
       "description": "Qwen frontier model tuned for agent frameworks, coding assistants, and long tasks",
@@ -1384,6 +1419,83 @@
       }
     },
     {
+      "id": "openai/gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
+      "family": "gpt-astra",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-04-30",
+      "release_date": "2026-09-04",
+      "last_updated": "2026-09-04",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 10,
+        "output": 50,
+        "cache_read": 1,
+        "cache_write": 12,
+        "tiers": [
+          {
+            "input": 20,
+            "output": 75,
+            "cache_read": 2,
+            "cache_write": 25,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 20,
+          "output": 75,
+          "cache_read": 2,
+          "cache_write": 25
+        }
+      },
+      "display_name": "GPT-6 Astra",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "openai/gpt-4.1-mini",
       "name": "GPT-4.1 mini",
       "description": "Affordable GPT-4.1 lane for fast coding help and structured extraction",
@@ -2747,7 +2859,23 @@
       "cost": {
         "input": 2,
         "output": 6,
-        "cache_read": 0.3
+        "cache_read": 0.3,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 12,
+            "cache_read": 0.6,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 12,
+          "cache_read": 0.6
+        }
       },
       "display_name": "Grok 4.5",
       "type": "chat",
@@ -2800,7 +2928,23 @@
       "cost": {
         "input": 2,
         "output": 6,
-        "cache_read": 0.5
+        "cache_read": 0.5,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 12,
+            "cache_read": 1,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 12,
+          "cache_read": 1
+        }
       },
       "display_name": "Grok 4.6",
       "type": "chat",
@@ -2845,6 +2989,40 @@
         "cache_read": 0.2
       },
       "display_name": "Grok 4.20 (Non-Reasoning)",
+      "type": "chat"
+    },
+    {
+      "id": "typesafe/jev",
+      "name": "Jev",
+      "description": "System One model for fast, typed probabilistic decisions over text or structured state",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-09-15",
+      "last_updated": "2026-09-15",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 32000,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.042,
+        "output": 0,
+        "cache_read": 0
+      },
+      "display_name": "Jev",
       "type": "chat"
     }
   ]
