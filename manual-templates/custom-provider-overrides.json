@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-14T00:00:00.000Z",
-  "maxModels": 42,
+  "updatedAt": "2026-09-20T00:00:00.000Z",
+  "maxModels": 44,
   "provider": {
     "id": "custom-provider",
     "name": "custom provider",
@@ -1168,6 +1168,47 @@
           ]
         },
         {
+          "id": "glm-5.3-flashx",
+          "name": "GLM-5.3 FlashX",
+          "family": "glm",
+          "contextLength": 1000000,
+          "maxTokens": 131072,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "lastUpdated": "2026-09-20",
+          "modalities": { "input": ["text", "image", "video", "file"], "output": ["text"] },
+          "cost": { "input": 0.37, "output": 1.25, "cacheRead": 0.075, "cacheWrite": 0 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "max",
+              "effort_options": ["low", "high", "max"],
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"],
+              "notes": ["Thinking cannot be disabled; reasoning_effort defaults to max. Set thinking.clear_thinking to false to preserve reasoning across turns."]
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "multimodal", "fast", "cost-efficient"],
+            "lifecycle": "active",
+            "notes": ["FlashX serves GLM-5.3-Flash at about 200 tokens per second and is not yet available on the GLM Coding Plan."]
+          },
+          "selectionRank": 3,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["low", "high", "max"] }
+          ]
+        },
+        {
           "id": "glm-5.2",
           "name": "GLM-5.2",
           "family": "glm",
@@ -1204,7 +1245,7 @@
             "selection": ["coding", "long-context", "optional-thinking"],
             "lifecycle": "active"
           },
-          "selectionRank": 3,
+          "selectionRank": 4,
           "reasoningOptions": [
             { "type": "toggle" },
             { "type": "effort", "values": ["none", "minimal", "low", "medium", "high", "xhigh", "max"] }
@@ -1319,6 +1360,7 @@
       "id": "stepfun",
       "displayName": "StepFun",
       "docs": [
+        "https://platform.stepfun.ai/docs/en/guides/models/step-5-preview",
         "https://platform.stepfun.ai/docs/en/guides/models/step-3.7-flash",
         "https://platform.stepfun.ai/docs/en/guides/models/step-3.5-flash",
         "https://platform.stepfun.ai/docs/en/api-reference/chat/chat-completion-create",
@@ -1327,6 +1369,42 @@
         "https://huggingface.co/stepfun-ai/Step-3.7-Flash"
       ],
       "models": [
+        {
+          "id": "step-5-preview",
+          "name": "Step 5 Preview",
+          "family": "step",
+          "contextLength": 1000000,
+          "maxTokens": 384000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["low", "medium", "high"] }
+          ],
+          "lastUpdated": "2026-09-20",
+          "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
+          "cost": { "input": 1, "output": 2.7, "cacheRead": 0.05 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "medium",
+              "effort_options": ["low", "medium", "high"],
+              "notes": ["The API returns reasoning by default; reasoning_format=deepseek-style switches the response field to reasoning_content."]
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "frontier", "multimodal", "agentic", "long-context"],
+            "lifecycle": "preview",
+            "notes": ["Official maximum input and output are both 1M tokens and max_tokens defaults to INF; 384000 is recorded as a conservative default output ceiling.", "Cache-miss input billing includes writing new content to the cache; output tokens include both the reasoning process and the final answer."]
+          },
+          "selectionRank": 1
+        },
         {
           "id": "step-3.7-flash",
           "name": "Step 3.7 Flash",
@@ -1362,7 +1440,7 @@
             "lifecycle": "active",
             "notes": ["max_tokens is bounded by the shared input/output context window. Structured output support refers to JSON mode."]
           },
-          "selectionRank": 1
+          "selectionRank": 2
         },
         {
           "id": "step-3.5-flash-2603",
@@ -1397,7 +1475,7 @@
             "lifecycle": "active",
             "notes": ["max_tokens is bounded by the shared input/output context window. Structured output support refers to JSON mode."]
           },
-          "selectionRank": 2
+          "selectionRank": 3
         },
         {
           "id": "step-3.5-flash",
@@ -1428,7 +1506,7 @@
             "lifecycle": "active",
             "notes": ["max_tokens is bounded by the shared input/output context window. Structured output support refers to JSON mode."]
           },
-          "selectionRank": 3
+          "selectionRank": 4
         }
       ]
     },

@@ -52,7 +52,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     const result = await synthesizeCustomProvider();
 
     assert.equal(result.models.length, result.catalog.maxModels);
-    assert.equal(result.models.length, 42);
+    assert.equal(result.models.length, 44);
     assert.deepEqual(
       new Set(result.models.map(model => model.id)),
       new Set(result.catalog.sources.flatMap(source => source.models.map(model => model.id))),
@@ -65,9 +65,9 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
         ['Gemini', 6],
         ['Kimi', 5],
         ['DeepSeek', 4],
-        ['Zhipu', 3],
+        ['Zhipu', 4],
         ['MiniMax', 3],
-        ['StepFun', 3],
+        ['StepFun', 4],
         ['Qwen', 7],
       ],
     );
@@ -97,6 +97,8 @@ test('creates valid normalized model cards in the provider output shape', async 
     const seededClaudeFable51 = result.models.find(item => item.id === 'claude-fable-5-1');
     const seededGemini38Flash = result.models.find(item => item.id === 'gemini-3.8-flash');
     const seededQwen37Flash = result.models.find(item => item.id === 'qwen3.7-flash');
+    const seededStep5Preview = result.models.find(item => item.id === 'step-5-preview');
+    const seededGlm53FlashX = result.models.find(item => item.id === 'glm-5.3-flashx');
     const seededDeepSeekV4Flash = result.models.find(item => item.id === 'deepseek-v4-flash');
     const seededDeepSeekV4FlashVision = result.models.find(
       item => item.id === 'deepseek-v4-flash-vision-exp',
@@ -266,6 +268,24 @@ test('creates valid normalized model cards in the provider output shape', async 
     assert.equal(seededGemini38Flash?.metadata?.pricingValidUntil, '2026-12-31');
     assert.equal(seededQwen37Flash?.cost?.input, 0.03);
     assert.equal(seededQwen37Flash?.limit?.context, 1000000);
+    assert.equal(seededStep5Preview?.cost?.input, 1);
+    assert.equal(seededStep5Preview?.cost?.output, 2.7);
+    assert.equal(seededStep5Preview?.cost?.cacheRead, 0.05);
+    assert.equal(seededStep5Preview?.limit?.context, 1000000);
+    assert.equal(seededStep5Preview?.limit?.output, 384000);
+    assert.equal(seededStep5Preview?.vision, true);
+    assert.equal(seededStep5Preview?.metadata?.lifecycle, 'preview');
+    assert.deepEqual(
+      seededStep5Preview?.extraCapabilities?.reasoning?.effort_options,
+      ['low', 'medium', 'high'],
+    );
+    assert.equal(seededStep5Preview?.extraCapabilities?.reasoning?.effort, 'medium');
+    assert.equal(seededGlm53FlashX?.cost?.input, 0.37);
+    assert.equal(seededGlm53FlashX?.cost?.output, 1.25);
+    assert.equal(seededGlm53FlashX?.cost?.cacheRead, 0.075);
+    assert.equal(seededGlm53FlashX?.limit?.context, 1000000);
+    assert.equal(seededGlm53FlashX?.limit?.output, 131072);
+    assert.equal(seededGlm53FlashX?.vision, true);
     assert.ok(claudeOpus5);
     assert.ok(gemini36Flash);
     assert.equal(kimiK3?.limit?.context, 1048576);
@@ -341,12 +361,27 @@ test('preserves model-specific controls and modalities through normalization and
     const step37 = getModel('step-3.7-flash');
     const step35 = getModel('step-3.5-flash');
     const step35March = getModel('step-3.5-flash-2603');
+    const step5 = getModel('step-5-preview');
+    const glm53FlashX = getModel('glm-5.3-flashx');
     assert.deepEqual(step37.modalities?.input, ['text', 'image', 'video']);
     assert.equal(step37.extra_capabilities?.reasoning?.effort, 'medium');
     assert.deepEqual(step37.reasoning_options, [{ type: 'effort', values: ['low', 'medium', 'high'] }]);
     assert.deepEqual(step35March.reasoning_options, [{ type: 'effort', values: ['low', 'high'] }]);
     assert.equal(step35.reasoning_options, undefined);
     assert.equal(step35.vision, false);
+    assert.deepEqual(step5.modalities?.input, ['text', 'image', 'video']);
+    assert.equal(step5.vision, true);
+    assert.equal(step5.tool_call, true);
+    assert.equal(step5.structured_output, true);
+    assert.equal(step5.limit?.context, 1000000);
+    assert.equal(step5.limit?.output, 384000);
+    assert.equal(step5.extra_capabilities?.reasoning?.effort, 'medium');
+    assert.deepEqual(step5.extra_capabilities?.reasoning?.effort_options, ['low', 'medium', 'high']);
+    assert.deepEqual(step5.reasoning_options, [{ type: 'effort', values: ['low', 'medium', 'high'] }]);
+    assert.equal(glm53FlashX.vision, true);
+    assert.deepEqual(glm53FlashX.modalities?.input, ['text', 'image', 'video', 'file']);
+    assert.equal(glm53FlashX.extra_capabilities?.reasoning?.effort, 'max');
+    assert.deepEqual(glm53FlashX.reasoning_options, [{ type: 'effort', values: ['low', 'high', 'max'] }]);
 
     for (const id of ['qwen3.8-max', 'qwen3.7-plus', 'qwen3.8-flash', 'qwen3.7-flash']) {
       const model = getModel(id);
