@@ -4,6 +4,7 @@ import {
   ModelsDevApiResponse,
   ModelsDevModel,
   ModelsDevProvider,
+  getProviderId,
   normalizeProvidersList,
   normalizeModelsDevModelFormat,
 } from '../models/models-dev';
@@ -17,6 +18,34 @@ interface RemappedProviderIdentity {
   id: string;
   name: string;
   display_name: string;
+}
+
+interface ProviderAliasRule {
+  sourceId: string;
+  aliasId: string;
+  aliasName: string;
+}
+
+/**
+ * Upstream providers that get an extra copy under a legacy id so existing
+ * clients keep working. The source provider stays untouched in the dataset.
+ */
+const PROVIDER_ALIAS_RULES: ProviderAliasRule[] = [
+  {
+    sourceId: 'kimi-code-plan-cn',
+    aliasId: 'kimi-for-coding',
+    aliasName: 'Kimi For Coding',
+  },
+];
+
+function createAliasProvider(source: ModelsDevProvider, rule: ProviderAliasRule): ModelsDevProvider {
+  return {
+    ...source,
+    id: rule.aliasId,
+    name: rule.aliasName,
+    display_name: rule.aliasName,
+    models: (source.models ?? []).map(model => ({ ...model })),
+  };
 }
 
 function normalizeProviderKey(rawId: string): string {
@@ -124,6 +153,7 @@ export class ModelsDevClient {
             : await this.client.getJson<unknown>(source);
 
           const data = this.normalizeApiResponse(rawData);
+          this.injectProviderAliases(data);
           this.ensureValidResponse(data);
           this.logProviderCount(data, isFile ? `Loaded` : 'Fetched');
           return data;
@@ -220,6 +250,57 @@ export class ModelsDevClient {
       ...response,
       providers: normalizedRecord,
     };
+  }
+
+  private injectProviderAliases(data: ModelsDevApiResponse): void {
+    const providers = data.providers;
+    if (!providers) {
+      return;
+    }
+
+    if (Array.isArray(providers)) {
+      for (const rule of PROVIDER_ALIAS_RULES) {
+        const hasAlias = providers.some(
+          provider => normalizeProviderKey(getProviderId(provider)) === rule.aliasId,
+        );
+        if (hasAlias) {
+          continue;
+        }
+
+        const source = providers.find(
+          provider => normalizeProviderKey(getProviderId(provider)) === rule.sourceId,
+        );
+        if (!source) {
+          continue;
+        }
+
+        providers.push(createAliasProvider(source, rule));
+      }
+      return;
+    }
+
+    if (typeof providers === 'object') {
+      const record = providers as Record<string, ModelsDevProvider>;
+      const existingIds = new Set(
+        Object.values(record).map(provider => normalizeProviderKey(getProviderId(provider))),
+      );
+
+      for (const rule of PROVIDER_ALIAS_RULES) {
+        if (existingIds.has(rule.aliasId)) {
+          continue;
+        }
+
+        const source = Object.values(record).find(
+          provider => normalizeProviderKey(getProviderId(provider)) === rule.sourceId,
+        );
+        if (!source) {
+          continue;
+        }
+
+        record[rule.aliasId] = createAliasProvider(source, rule);
+        existingIds.add(rule.aliasId);
+      }
+    }
   }
 
   private normalizeProvider(provider: unknown, fallbackId: string): ModelsDevProvider {
