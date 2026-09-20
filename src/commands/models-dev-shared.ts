@@ -44,6 +44,93 @@ export function normalizeProviderId(providerId: string): string {
   return PROVIDER_ALIASES[normalized] ?? normalized;
 }
 
+/**
+ * Some upstream providers report `limit.output` equal to (or larger than)
+ * `limit.context`, which is physically meaningless: a model cannot emit more
+ * tokens than its entire context window. The providers below get those values
+ * repaired.
+ */
+export const LIMIT_OUTPUT_REPAIR_PROVIDERS = new Set([
+  'siliconflow',
+  'siliconflow-com',
+]);
+
+interface OutputLimitRule {
+  match: RegExp;
+  maxOutput: number;
+}
+
+/**
+ * Known output-token ceilings per model family, cross-checked against the same
+ * models served by other providers in the models.dev dataset (official vendors
+ * first, then the most common consensus value).
+ */
+export const OUTPUT_LIMIT_RULES: OutputLimitRule[] = [
+  { match: /deepseek-v3\.2/i, maxOutput: 65536 },
+  { match: /deepseek-(v3\.1|v3|r1)/i, maxOutput: 8192 },
+  { match: /deepseek-ocr/i, maxOutput: 8192 },
+  { match: /qwen3-vl/i, maxOutput: 32768 },
+  { match: /qwen3-coder/i, maxOutput: 65536 },
+  { match: /qwen3-235b-a22b-thinking/i, maxOutput: 131072 },
+  { match: /qwen3/i, maxOutput: 32768 },
+  { match: /qwen2\.5/i, maxOutput: 8192 },
+  { match: /glm-5/i, maxOutput: 131072 },
+  { match: /glm-4\.5/i, maxOutput: 98304 },
+  { match: /kimi-k2/i, maxOutput: 262144 },
+  { match: /step-3/i, maxOutput: 256000 },
+  { match: /hunyuan/i, maxOutput: 117964 },
+];
+
+/** Fallback for model families that match no rule above. */
+export const DEFAULT_OUTPUT_RATIO = 0.38;
+
+/**
+ * Repairs pathological `limit.output` values (output >= context) for the
+ * providers listed in `LIMIT_OUTPUT_REPAIR_PROVIDERS`, using the per-family
+ * ceilings from `OUTPUT_LIMIT_RULES` and falling back to a fraction of the
+ * context window. Runs after template merging so stale template values cannot
+ * resurrect the bad numbers.
+ */
+export function correctLimitOutput(
+  providers: ModelsDevApiResponse['providers'],
+  rules: OutputLimitRule[] = OUTPUT_LIMIT_RULES,
+  fallbackRatio: number = DEFAULT_OUTPUT_RATIO,
+): number {
+  let corrected = 0;
+
+  for (const provider of normalizeProvidersList(providers)) {
+    if (!LIMIT_OUTPUT_REPAIR_PROVIDERS.has(normalizeProviderId(getModelsDevProviderId(provider)))) {
+      continue;
+    }
+
+    for (const model of provider.models ?? []) {
+      const limit = model.limit;
+      if (!limit) {
+        continue;
+      }
+
+      const { context, output } = limit;
+      if (typeof context !== 'number' || typeof output !== 'number') {
+        continue;
+      }
+      if (context <= 0 || output < context) {
+        continue;
+      }
+
+      const rule = rules.find(entry => entry.match.test(model.id ?? ''));
+      let nextOutput = rule ? rule.maxOutput : Math.round(context * fallbackRatio);
+      if (nextOutput >= context) {
+        // The family ceiling does not fit this context window; stay below it.
+        nextOutput = Math.round(context * fallbackRatio);
+      }
+      limit.output = nextOutput;
+      corrected += 1;
+    }
+  }
+
+  return corrected;
+}
+
 export function createProvider(providerId: string, config: ProviderConfig): Provider | null {
   try {
     const normalizedId = normalizeProviderId(providerId);
@@ -263,6 +350,13 @@ export async function loadBaseContext(): Promise<BaseContext> {
     ...baseData,
     providers: baseProvidersWithTemplates,
   };
+
+  const correctedLimitOutputs = correctLimitOutput(baseDataWithTemplates.providers);
+  if (correctedLimitOutputs > 0) {
+    console.log(
+      `ℹ️  Repaired limit.output for ${correctedLimitOutputs} model(s) where upstream reported output >= context.`,
+    );
+  }
 
   const existingProviderIds = new Set(
     normalizeProvidersList(baseDataWithTemplates.providers).map(provider =>
