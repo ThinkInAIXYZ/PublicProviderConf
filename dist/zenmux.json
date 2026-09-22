@@ -2,7 +2,7 @@
   "id": "zenmux",
   "name": "ZenMux",
   "display_name": "ZenMux",
-  "updated_at": "2026-09-22T00:13:26.224Z",
+  "updated_at": "2026-09-22T04:13:53.271Z",
   "models": [
     {
       "id": "alibaba/wan3.0-video",
@@ -2104,7 +2104,8 @@
           "text",
           "image",
           "video",
-          "audio"
+          "audio",
+          "pdf"
         ],
         "output": [
           "text"
@@ -2174,8 +2175,7 @@
       "cost": {
         "input": 0.25,
         "output": 1.5,
-        "cache_read": 0.025,
-        "cache_write": 0.08333
+        "cache_read": 0.025
       },
       "limit": {
         "context": 1048576,
@@ -2212,7 +2212,8 @@
           "text",
           "image",
           "video",
-          "audio"
+          "audio",
+          "pdf"
         ],
         "output": [
           "text"
@@ -2221,8 +2222,7 @@
       "cost": {
         "input": 2,
         "output": 12,
-        "cache_read": 0.2,
-        "cache_write": 0.375
+        "cache_read": 0.2
       },
       "limit": {
         "context": 1048576,
@@ -2271,7 +2271,8 @@
           "text",
           "image",
           "video",
-          "audio"
+          "audio",
+          "pdf"
         ],
         "output": [
           "text"
@@ -2280,8 +2281,7 @@
       "cost": {
         "input": 1.5,
         "output": 9,
-        "cache_read": 0.15,
-        "cache_write": 0.083333
+        "cache_read": 0.15
       },
       "limit": {
         "context": 1048576,
@@ -2342,8 +2342,7 @@
       "cost": {
         "input": 0.3,
         "output": 2.5,
-        "cache_read": 0.03,
-        "cache_write": 0.08333
+        "cache_read": 0.03
       },
       "limit": {
         "context": 1048576,
@@ -2390,8 +2389,7 @@
       "cost": {
         "input": 0.75,
         "output": 3.75,
-        "cache_read": 0.075,
-        "cache_write": 0.041667
+        "cache_read": 0.075
       },
       "limit": {
         "context": 1048576,
@@ -2452,8 +2450,7 @@
       "cost": {
         "input": 0.75,
         "output": 3.75,
-        "cache_read": 0.075,
-        "cache_write": 0.041667
+        "cache_read": 0.075
       },
       "limit": {
         "context": 1048576,
@@ -2513,8 +2510,7 @@
       "cost": {
         "input": 0.75,
         "output": 3.75,
-        "cache_read": 0.075,
-        "cache_write": 0.041667
+        "cache_read": 0.075
       },
       "limit": {
         "context": 1048576,
@@ -2553,7 +2549,7 @@
       "reasoning": {
         "supported": false
       },
-      "temperature": true,
+      "temperature": false,
       "tool_call": false,
       "knowledge": "2025-11",
       "release_date": "2026-04-22",
@@ -2567,9 +2563,13 @@
           "text"
         ]
       },
+      "cost": {
+        "input": 0.2,
+        "output": 0
+      },
       "limit": {
         "context": 8192,
-        "output": 8192
+        "output": 1
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2594,21 +2594,15 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
         ]
       },
-      "cost": {
-        "input": 0.12,
-        "output": 0.38,
-        "cache_read": 0.06
-      },
       "limit": {
         "context": 262144,
-        "output": 131072
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2633,21 +2627,15 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
         ]
       },
-      "cost": {
-        "input": 0.1,
-        "output": 0.45,
-        "cache_read": 0.05
-      },
       "limit": {
         "context": 262144,
-        "output": 131072
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -7634,6 +7622,45 @@
       }
     },
     {
+      "id": "x-ai/grok-4.7",
+      "name": "xAI: Grok 4.7",
+      "display_name": "xAI: Grok 4.7",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2026-05",
+      "release_date": "2026-09-21",
+      "last_updated": "2026-09-21",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 1.6,
+        "output": 4.8,
+        "cache_read": 0.4
+      },
+      "limit": {
+        "context": 500000,
+        "output": 500000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "x-ai/grok-build-0.1",
       "name": "xAI: Grok Build 0.1",
       "display_name": "xAI: Grok Build 0.1",
@@ -7846,6 +7873,122 @@
         "source": "public-provider-conf"
       },
       "vision": false
+    },
+    {
+      "id": "xiaomi/mimo-v2.6-flash",
+      "name": "Xiaomi: MiMo-V2.6-Flash",
+      "display_name": "Xiaomi: MiMo-V2.6-Flash",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2026-09-22",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.14,
+        "output": 0.28,
+        "cache_read": 0.0028
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "xiaomi/mimo-v2.6-pro",
+      "name": "Xiaomi: MiMo-V2.6-Pro",
+      "display_name": "Xiaomi: MiMo-V2.6-Pro",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "knowledge": "2026-09-22",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 0.435,
+        "output": 0.87,
+        "cache_read": 0.0036
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "xiaomi/mimo-v2.6-pro-ultraspeed",
+      "name": "Xiaomi: MiMo-V2.6-Pro-UltraSpeed",
+      "display_name": "Xiaomi: MiMo-V2.6-Pro-UltraSpeed",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "release_date": "2026-09-21",
+      "last_updated": "2026-09-21",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 4.35,
+        "output": 8.7,
+        "cache_read": 0.036
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "z-ai/glm-4.5",
