@@ -13,6 +13,12 @@ interface OpenRouterModel {
     output_modalities?: string[] | null;
   } | null;
   supported_parameters?: string[] | null;
+  reasoning?: {
+    supported_efforts?: string[] | null;
+    default_effort?: string;
+    default_enabled?: boolean;
+    mandatory?: boolean;
+  } | null;
   default_parameters?: {
     temperature?: number | null;
     [key: string]: unknown;
@@ -129,7 +135,7 @@ function uniqueById(models: ModelInfo[]): ModelInfo[] {
   return output;
 }
 
-function mapOpenRouterModel(model: OpenRouterModel): ModelInfo | null {
+export function mapOpenRouterModel(model: OpenRouterModel): ModelInfo | null {
   const id = (model.id || '').trim();
   if (!id) return null;
   const normalizedId = id.toLowerCase();
@@ -166,6 +172,42 @@ function mapOpenRouterModel(model: OpenRouterModel): ModelInfo | null {
   const vision = modelHasVisionCapability(modalities);
 
   const overrides: Partial<Omit<ModelInfo, 'id' | 'name' | 'contextLength' | 'maxTokens' | 'vision' | 'functionCall' | 'reasoning' | 'type'>> = {};
+
+  const reasoningMetadata = model.reasoning;
+  if (reasoningMetadata && hasReasoningParameter) {
+    const allEfforts = ['none', 'minimal', 'low', 'medium', 'high', 'xhigh', 'max'];
+    const rawEfforts = reasoningMetadata.supported_efforts;
+    const effortOptions = allEfforts.filter(effort =>
+      (rawEfforts === null || (Array.isArray(rawEfforts) && rawEfforts.includes(effort))) &&
+      !(reasoningMetadata.mandatory === true && effort === 'none'),
+    );
+    const defaultEffort = reasoningMetadata.default_effort;
+    const effort = defaultEffort && effortOptions.includes(defaultEffort) ? defaultEffort : undefined;
+    if (reasoningMetadata.mandatory === true) {
+      reasoningConfig.default = true;
+    } else if (typeof reasoningMetadata.default_enabled === 'boolean') {
+      reasoningConfig.default = reasoningMetadata.default_enabled;
+    } else if (effort === 'none') {
+      reasoningConfig.default = false;
+    }
+    delete reasoningConfig.effort;
+    if (effort) reasoningConfig.effort = effort;
+    overrides.reasoningOptions = [
+      ...(reasoningMetadata.mandatory === false ? [{ type: 'toggle' }] : []),
+      ...(effortOptions.length ? [{ type: 'effort', values: effortOptions }] : []),
+    ];
+    overrides.extraCapabilities = {
+      reasoning: {
+        supported: true,
+        default_enabled: reasoningConfig.default,
+        ...(effortOptions.length
+          ? { mode: 'effort' }
+          : reasoningMetadata.mandatory === true ? { mode: 'fixed' } : {}),
+        effort_options: effortOptions,
+        ...(effort ? { effort } : {}),
+      },
+    };
+  }
 
   if (modalities) {
     overrides.modalities = modalities;
