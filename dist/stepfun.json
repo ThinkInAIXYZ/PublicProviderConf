@@ -156,6 +156,85 @@
       "type": "chat"
     },
     {
+      "id": "step-5-preview",
+      "name": "Step 5 Preview",
+      "description": "StepFun frontier model for large-scale agent applications, coding, and knowledge work",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "release_date": "2026-09-16",
+      "last_updated": "2026-09-20",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "input": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.96,
+        "output": 2.74,
+        "cache_read": 0.048
+      },
+      "display_name": "Step 5 Preview",
+      "metadata": {
+        "source": "public-provider-conf-template",
+        "lifecycle": "preview",
+        "notes": [
+          "Official maximum input and output are both 1M tokens and max_tokens defaults to INF; 384000 is recorded as a conservative default output ceiling.",
+          "Output tokens include both the reasoning process and the final answer; cache-miss input billing includes writing new content to the cache.",
+          "China list prices are CNY 7 input (cache miss), CNY 0.35 cache hit, and CNY 20 output per 1M tokens, converted to USD at 7.3 CNY/USD."
+        ]
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "mode": "effort",
+          "effort": "medium"
+        }
+      },
+      "temperature": true,
+      "type": "chat",
+      "vision": true
+    },
+    {
       "id": "step-2-16k",
       "name": "Step 2 (16K)",
       "description": "StepFun flash model for efficient multimodal reasoning, coding, and tool use",
@@ -341,83 +420,6 @@
       },
       "display_name": "Step 1 (32K)",
       "type": "chat"
-    },
-    {
-      "id": "step-5-preview",
-      "name": "Step 5 Preview",
-      "description": "StepFun frontier model for large-scale agent applications, coding, and knowledge work",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "last_updated": "2026-09-20",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1000000,
-        "input": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.96,
-        "output": 2.74,
-        "cache_read": 0.048
-      },
-      "display_name": "Step 5 Preview",
-      "type": "chat",
-      "vision": true,
-      "metadata": {
-        "source": "public-provider-conf-template",
-        "lifecycle": "preview",
-        "notes": [
-          "Official maximum input and output are both 1M tokens and max_tokens defaults to INF; 384000 is recorded as a conservative default output ceiling.",
-          "Output tokens include both the reasoning process and the final answer; cache-miss input billing includes writing new content to the cache.",
-          "China list prices are CNY 7 input (cache miss), CNY 0.35 cache hit, and CNY 20 output per 1M tokens, converted to USD at 7.3 CNY/USD."
-        ]
-      },
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "effort_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "mode": "effort",
-          "effort": "medium"
-        }
-      }
     }
   ]
 }
