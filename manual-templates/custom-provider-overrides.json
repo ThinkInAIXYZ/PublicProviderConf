@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-20T00:00:00.000Z",
-  "maxModels": 44,
+  "updatedAt": "2026-09-23T00:00:00.000Z",
+  "maxModels": 48,
   "provider": {
     "id": "custom-provider",
     "name": "custom provider",
@@ -22,6 +22,8 @@
       "docs": [
         "https://developers.openai.com/api/docs/models",
         "https://developers.openai.com/api/docs/guides/latest-model",
+        "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "https://developers.openai.com/api/docs/models/gpt-6-luna",
         "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
         "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
         "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
@@ -268,6 +270,88 @@
             "availability": ["api", "chatgpt", "codex"]
           },
           "selectionRank": 5
+        },
+        {
+          "id": "gpt-6-sol",
+          "name": "GPT-6 Sol",
+          "family": "gpt",
+          "contextLength": 1050000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["none", "low", "medium", "high", "xhigh", "max"] }
+          ],
+          "releaseDate": "2026-09-22",
+          "lastUpdated": "2026-09-22",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 2, "output": 10, "cacheRead": 0.2, "cacheWrite": 2.5 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "medium",
+              "effort_options": ["none", "low", "medium", "high", "xhigh", "max"],
+              "visibility": "hidden",
+              "notes": ["The default reasoning effort is medium.", "Chat Completions function calling requires reasoning_effort = none; use Responses for tool calling with reasoning enabled."]
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "coding", "agentic", "reasoning"],
+            "lifecycle": "active",
+            "apiStatus": "active",
+            "availability": ["api"],
+            "pricingBasis": "standard-up-to-272k-input",
+            "notes": ["For prompts above 272K input tokens, input and cache rates double and output is 1.5x for the full request."]
+          },
+          "selectionRank": 1
+        },
+        {
+          "id": "gpt-6-luna",
+          "name": "GPT-6 Luna",
+          "family": "gpt",
+          "contextLength": 1050000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["none", "low", "medium", "high", "xhigh", "max"] }
+          ],
+          "releaseDate": "2026-09-22",
+          "lastUpdated": "2026-09-22",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 0.1, "output": 0.5, "cacheRead": 0.01, "cacheWrite": 0.125 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "medium",
+              "effort_options": ["none", "low", "medium", "high", "xhigh", "max"],
+              "visibility": "hidden",
+              "notes": ["The default reasoning effort is medium.", "Chat Completions function calling requires reasoning_effort = none; use Responses for tool calling with reasoning enabled."]
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "fast", "high-volume", "cost-efficient", "reasoning"],
+            "lifecycle": "active",
+            "apiStatus": "active",
+            "availability": ["api"],
+            "pricingBasis": "standard-up-to-272k-input",
+            "notes": ["For prompts above 272K input tokens, input and cache rates double and output is 1.5x for the full request."]
+          },
+          "selectionRank": 2
         }
       ]
     },
@@ -278,7 +362,8 @@
       "apiKeyEnv": "ANTHROPIC_API_KEY",
       "docs": [
         "https://platform.claude.com/docs/en/about-claude/models/overview",
-        "https://docs.anthropic.com/en/api/models-list"
+        "https://docs.anthropic.com/en/api/models-list",
+        "https://www.anthropic.com/claude-opus-5-5"
       ],
       "models": [
         {
@@ -458,6 +543,44 @@
           },
           "metadata": { "selection": ["fast", "near-frontier", "cost-efficient"], "lifecycle": "active", "snapshotId": "claude-haiku-4-5-20251001" },
           "selectionRank": 4
+        },
+        {
+          "id": "claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "family": "claude-opus",
+          "contextLength": 1000000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "releaseDate": "2026-09-22",
+          "lastUpdated": "2026-09-22",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 4, "output": 20, "cacheRead": 0.2, "cacheWrite": 5 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "adaptive",
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "omitted",
+              "continuation": ["thinking_blocks"]
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "agentic-coding", "reasoning", "cost-efficient"],
+            "lifecycle": "active",
+            "apiStatus": "active",
+            "pricingBasis": "standard",
+            "availability": ["api"],
+            "notes": ["Adaptive thinking is always on and cannot be disabled.", "Preserve prior thinking blocks for API accounts created on or after August 31, 2026."]
+          },
+          "selectionRank": 2
         }
       ]
     },
@@ -1515,7 +1638,10 @@
       "displayName": "Qwen",
       "docs": [
         "https://www.alibabacloud.com/help/en/model-studio/models",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
         "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-omni-flash",
+        "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen-omni",
         "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-7-plus",
         "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-flash",
         "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-plus",
@@ -1571,6 +1697,51 @@
             "notes": ["Thinking mode has a 983616-token input limit and a separate 262144-token reasoning budget.", "Cache prices refer to explicit caching. Longer inputs may use higher pricing tiers.", "reasoning_effort defaults to xhigh and accepts xhigh, medium, and low; max maps to xhigh, minimal maps to low, and none disables thinking. reasoning_effort and thinking_budget cannot be set together, and Alibaba recommends reasoning_effort because enable_thinking will be deprecated."]
           },
           "selectionRank": 1
+        },
+        {
+          "id": "qwen3.8-omni-flash",
+          "name": "Qwen3.8 Omni Flash",
+          "family": "qwen3.8-omni",
+          "contextLength": 1000000,
+          "maxTokens": 131072,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": true,
+          "toolCall": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["none", "minimal", "low", "medium", "high", "xhigh", "max"] }
+          ],
+          "releaseDate": "2026-09-17",
+          "lastUpdated": "2026-09-17",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "audio", "video"], "output": ["text"] },
+          "cost": { "input": 0.15, "output": 0.47, "cacheRead": 0.016 },
+          "interleaved": { "field": "reasoning_content" },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "xhigh",
+              "effort_options": ["none", "minimal", "low", "medium", "high", "xhigh", "max"],
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "summary",
+              "continuation": ["thinking_blocks"],
+              "notes": ["Default effort is xhigh. minimal maps to low; high and max map to xhigh. none disables thinking.", "Do not combine reasoning_effort with thinking_budget."]
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "multimodal", "audio-video-understanding", "reasoning"],
+            "lifecycle": "active",
+            "pricingRegion": "Singapore",
+            "pricingScope": "International",
+            "pricingBasis": "standard",
+            "notes": ["Accepts text, image, audio, and video input and returns text.", "Model Studio API keys are region-specific; endpoint availability varies by region."]
+          },
+          "selectionRank": 2
         },
         {
           "id": "qwen3.7-plus",
