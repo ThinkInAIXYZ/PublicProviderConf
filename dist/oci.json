@@ -6,19 +6,31 @@
   "display_name": "OCI Generative AI",
   "models": [
     {
-      "id": "meta.llama-4-maverick-17b-128e-instruct-fp8",
-      "name": "Llama 4 Maverick 17B Instruct",
-      "description": "Open multimodal Llama for strong reasoning with efficient everyday serving",
-      "family": "llama",
+      "id": "xai.grok-4.3",
+      "name": "Grok 4.3",
+      "description": "xAI's default Grok for chat, coding, agentic tools, and lower hallucination risk",
+      "family": "grok",
       "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "knowledge": "2024-08",
-      "release_date": "2025-04-05",
-      "last_updated": "2025-04-05",
+      "release_date": "2026-04-17",
+      "last_updated": "2026-04-17",
       "modalities": {
         "input": [
           "text",
@@ -28,16 +40,119 @@
           "text"
         ]
       },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 30000
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 2.5,
+        "cache_read": 0.2,
+        "tiers": [
+          {
+            "input": 2.5,
+            "output": 5,
+            "cache_read": 0.4,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 2.5,
+          "output": 5,
+          "cache_read": 0.4
+        }
+      },
+      "display_name": "Grok 4.3",
+      "type": "chat"
+    },
+    {
+      "id": "xai.grok-4.20-non-reasoning",
+      "name": "Grok 4.20 (Non-Reasoning)",
+      "description": "Grok model for agentic tool use, reasoning, coding, and live assistance",
+      "family": "grok",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-03-09",
+      "last_updated": "2026-03-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 30000
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 2.5,
+        "cache_read": 0.2,
+        "tiers": [
+          {
+            "input": 2.5,
+            "output": 5,
+            "cache_read": 0.4,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 2.5,
+          "output": 5,
+          "cache_read": 0.4
+        }
+      },
+      "display_name": "Grok 4.20 (Non-Reasoning)",
+      "type": "chat"
+    },
+    {
+      "id": "meta.llama-3.3-70b-instruct",
+      "name": "Llama-3.3-70B-Instruct",
+      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-12-06",
+      "last_updated": "2024-12-06",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
       "open_weights": true,
       "limit": {
-        "context": 512000,
-        "output": 16384
+        "context": 128000,
+        "output": 4096
       },
       "cost": {
         "input": 0.72,
         "output": 0.72
       },
-      "display_name": "Llama 4 Maverick 17B Instruct",
+      "display_name": "Llama-3.3-70B-Instruct",
       "type": "chat"
     },
     {
@@ -73,40 +188,6 @@
         "output": 0.72
       },
       "display_name": "Llama 4 Scout 17B Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "meta.llama-3.3-70b-instruct",
-      "name": "Llama-3.3-70B-Instruct",
-      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-12-06",
-      "last_updated": "2024-12-06",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 4096
-      },
-      "cost": {
-        "input": 0.72,
-        "output": 0.72
-      },
-      "display_name": "Llama-3.3-70B-Instruct",
       "type": "chat"
     },
     {
@@ -175,90 +256,23 @@
       "type": "chat"
     },
     {
-      "id": "xai.grok-4.20-reasoning",
-      "name": "Grok 4.20 (Reasoning)",
-      "description": "Reasoning Grok for document-heavy analysis and long-horizon tool use",
-      "family": "grok",
+      "id": "meta.llama-4-maverick-17b-128e-instruct-fp8",
+      "name": "Llama 4 Maverick 17B Instruct",
+      "description": "Open multimodal Llama for strong reasoning with efficient everyday serving",
+      "family": "llama",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [],
-      "tool_call": true,
-      "structured_output": true,
+      "tool_call": false,
       "temperature": true,
-      "release_date": "2026-03-09",
-      "last_updated": "2026-03-09",
+      "knowledge": "2024-08",
+      "release_date": "2025-04-05",
+      "last_updated": "2025-04-05",
       "modalities": {
         "input": [
           "text",
           "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 30000
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 2.5,
-        "cache_read": 0.2,
-        "tiers": [
-          {
-            "input": 2.5,
-            "output": 5,
-            "cache_read": 0.4,
-            "tier": {
-              "type": "context",
-              "size": 200000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 2.5,
-          "output": 5,
-          "cache_read": 0.4
-        }
-      },
-      "display_name": "Grok 4.20 (Reasoning)",
-      "type": "chat"
-    },
-    {
-      "id": "openai.gpt-oss-20b",
-      "name": "GPT OSS 20B",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
         ],
         "output": [
           "text"
@@ -266,89 +280,14 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128000,
+        "context": 512000,
         "output": 16384
       },
       "cost": {
-        "input": 0.07,
-        "output": 0.3
+        "input": 0.72,
+        "output": 0.72
       },
-      "display_name": "GPT OSS 20B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "xai.grok-4.3",
-      "name": "Grok 4.3",
-      "description": "xAI's default Grok for chat, coding, agentic tools, and lower hallucination risk",
-      "family": "grok",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-17",
-      "last_updated": "2026-04-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 30000
-      },
-      "cost": {
-        "input": 1.25,
-        "output": 2.5,
-        "cache_read": 0.2,
-        "tiers": [
-          {
-            "input": 2.5,
-            "output": 5,
-            "cache_read": 0.4,
-            "tier": {
-              "type": "context",
-              "size": 200000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 2.5,
-          "output": 5,
-          "cache_read": 0.4
-        }
-      },
-      "display_name": "Grok 4.3",
+      "display_name": "Llama 4 Maverick 17B Instruct",
       "type": "chat"
     },
     {
@@ -411,14 +350,75 @@
       }
     },
     {
-      "id": "xai.grok-4.20-non-reasoning",
-      "name": "Grok 4.20 (Non-Reasoning)",
-      "description": "Grok model for agentic tool use, reasoning, coding, and live assistance",
+      "id": "openai.gpt-oss-20b",
+      "name": "GPT OSS 20B",
+      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
+      "cost": {
+        "input": 0.07,
+        "output": 0.3
+      },
+      "display_name": "GPT OSS 20B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "xai.grok-4.20-reasoning",
+      "name": "Grok 4.20 (Reasoning)",
+      "description": "Reasoning Grok for document-heavy analysis and long-horizon tool use",
       "family": "grok",
       "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
@@ -459,7 +459,7 @@
           "cache_read": 0.4
         }
       },
-      "display_name": "Grok 4.20 (Non-Reasoning)",
+      "display_name": "Grok 4.20 (Reasoning)",
       "type": "chat"
     }
   ]

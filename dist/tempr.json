@@ -6,10 +6,10 @@
   "display_name": "Tempr",
   "models": [
     {
-      "id": "anthropic/claude-sonnet-4-6",
-      "name": "Claude Sonnet 4.6",
-      "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
-      "family": "claude-sonnet",
+      "id": "anthropic/claude-haiku-4-5",
+      "name": "Claude Haiku 4.5 (latest)",
+      "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
+      "family": "claude-haiku",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -20,15 +20,6 @@
           "type": "toggle"
         },
         {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ]
-        },
-        {
           "type": "budget_tokens",
           "min": 1024
         }
@@ -36,9 +27,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-02-17",
-      "last_updated": "2026-03-13",
+      "knowledge": "2025-02-28",
+      "release_date": "2025-10-15",
+      "last_updated": "2025-10-15",
       "modalities": {
         "input": [
           "text",
@@ -51,33 +42,26 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
+        "context": 200000,
         "output": 64000
       },
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
+        "input": 1,
+        "output": 5,
+        "cache_read": 0.1,
+        "cache_write": 1.25
       },
-      "display_name": "Claude Sonnet 4.6",
+      "display_name": "Claude Haiku 4.5 (latest)",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
           "default_enabled": false,
-          "mode": "mixed",
+          "mode": "budget",
           "budget": {
             "min": 1024,
             "unit": "tokens"
           },
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
@@ -85,66 +69,9 @@
             "thinking_blocks"
           ],
           "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
-            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
           ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-opus-5",
-      "name": "Claude Opus 5",
-      "description": "Strongest Claude Opus model for coding, agents, and professional work",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-05",
-      "release_date": "2026-07-24",
-      "last_updated": "2026-07-24",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
-      },
-      "display_name": "Claude Opus 5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
         }
       }
     },
@@ -233,6 +160,76 @@
       }
     },
     {
+      "id": "anthropic/claude-sonnet-4-5",
+      "name": "Claude Sonnet 4.5 (latest)",
+      "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens",
+          "min": 1024
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-07-31",
+      "release_date": "2025-09-29",
+      "last_updated": "2025-09-29",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
+      },
+      "display_name": "Claude Sonnet 4.5 (latest)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
       "id": "anthropic/claude-fable-5-1",
       "name": "Claude Fable 5.1",
       "description": "Claude model for demanding reasoning and long-horizon agentic work",
@@ -307,6 +304,436 @@
             "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
             "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
           ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-4-5-20251101",
+      "name": "Claude Opus 4.5",
+      "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        {
+          "type": "budget_tokens",
+          "min": 1024
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2025-11-01",
+      "last_updated": "2025-11-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
+      },
+      "display_name": "Claude Opus 4.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.5 uses manual thinking.type = \"enabled\" with budget_tokens; effort can be used alongside the thinking budget.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-5",
+      "name": "Claude Opus 5",
+      "description": "Strongest Claude Opus model for coding, agents, and professional work",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-05",
+      "release_date": "2026-07-24",
+      "last_updated": "2026-07-24",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
+      },
+      "display_name": "Claude Opus 5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-fable-5",
+      "name": "Claude Fable 5",
+      "description": "Claude model for creative writing, analysis, and controlled agent workflows",
+      "family": "claude-fable",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-06-09",
+      "last_updated": "2026-06-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 10,
+        "output": 50,
+        "cache_read": 1,
+        "cache_write": 12.5
+      },
+      "display_name": "Claude Fable 5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
+            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
+            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-opus-4-8",
+      "name": "Claude Opus 4.8",
+      "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-01",
+      "release_date": "2026-05-28",
+      "last_updated": "2026-05-28",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
+      },
+      "display_name": "Claude Opus 4.8",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-sonnet-4-5-20250929",
+      "name": "Claude Sonnet 4.5",
+      "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens",
+          "min": 1024
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-07-31",
+      "release_date": "2025-09-29",
+      "last_updated": "2025-09-29",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
+      },
+      "display_name": "Claude Sonnet 4.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-06-30",
+      "last_updated": "2026-06-30",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.2,
+        "cache_write": 2.5
+      },
+      "display_name": "Claude Sonnet 5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
         }
       }
     },
@@ -397,10 +824,10 @@
       }
     },
     {
-      "id": "anthropic/claude-sonnet-4-5-20250929",
-      "name": "Claude Sonnet 4.5",
-      "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
-      "family": "claude-sonnet",
+      "id": "anthropic/claude-haiku-4-5-20251001",
+      "name": "Claude Haiku 4.5",
+      "description": "Fast Claude model for responsive assistance, classification, and lightweight agents",
+      "family": "claude-haiku",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -418,9 +845,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-07-31",
-      "release_date": "2025-09-29",
-      "last_updated": "2025-09-29",
+      "knowledge": "2025-02-28",
+      "release_date": "2025-10-15",
+      "last_updated": "2025-10-15",
       "modalities": {
         "input": [
           "text",
@@ -437,12 +864,12 @@
         "output": 64000
       },
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
+        "input": 1,
+        "output": 5,
+        "cache_read": 0.1,
+        "cache_write": 1.25
       },
-      "display_name": "Claude Sonnet 4.5",
+      "display_name": "Claude Haiku 4.5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -462,6 +889,92 @@
           "notes": [
             "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
             "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "anthropic/claude-sonnet-4-6",
+      "name": "Claude Sonnet 4.6",
+      "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        },
+        {
+          "type": "budget_tokens",
+          "min": 1024
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-02-17",
+      "last_updated": "2026-03-13",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3.75
+      },
+      "display_name": "Claude Sonnet 4.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
           ]
         }
       }
@@ -548,80 +1061,10 @@
       }
     },
     {
-      "id": "anthropic/claude-haiku-4-5-20251001",
-      "name": "Claude Haiku 4.5",
-      "description": "Fast Claude model for responsive assistance, classification, and lightweight agents",
-      "family": "claude-haiku",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens",
-          "min": 1024
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-02-28",
-      "release_date": "2025-10-15",
-      "last_updated": "2025-10-15",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 1,
-        "output": 5,
-        "cache_read": 0.1,
-        "cache_write": 1.25
-      },
-      "display_name": "Claude Haiku 4.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-fable-5",
-      "name": "Claude Fable 5",
-      "description": "Claude model for creative writing, analysis, and controlled agent workflows",
-      "family": "claude-fable",
+      "id": "google/gemini-flash-latest",
+      "name": "Gemini Flash Latest",
+      "description": "High-efficiency Gemini model for agentic workflows, coding, and multimodal reasoning",
+      "family": "gemini-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -633,22 +1076,22 @@
           "values": [
             "low",
             "medium",
-            "high",
-            "xhigh",
-            "max"
+            "high"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-06-09",
-      "last_updated": "2026-06-09",
+      "temperature": true,
+      "knowledge": "2026-03",
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-13",
       "modalities": {
         "input": [
           "text",
           "image",
+          "video",
+          "audio",
           "pdf"
         ],
         "output": [
@@ -657,405 +1100,209 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 1048576,
+        "output": 65536
       },
       "cost": {
-        "input": 10,
-        "output": 50,
-        "cache_read": 1,
-        "cache_write": 12.5
+        "input": 0.75,
+        "output": 3.75,
+        "cache_read": 0.075,
+        "input_audio": 0.75
       },
-      "display_name": "Claude Fable 5",
+      "display_name": "Gemini Flash Latest",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemma-4-31b-it",
+      "name": "Gemma 4 31B IT",
+      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "display_name": "Gemma 4 31B IT",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemini-flash-lite-latest",
+      "name": "Gemini Flash-Lite Latest",
+      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
+      "family": "gemini-flash-lite",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2026-03",
+      "release_date": "2026-07-21",
+      "last_updated": "2026-07-21",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 2.5,
+        "cache_read": 0.03
+      },
+      "display_name": "Gemini Flash-Lite Latest",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemini-embedding-2",
+      "name": "Gemini Embedding 2",
+      "description": "Multimodal embedding model mapping text, images, video, audio, and PDFs into a unified embedding space",
+      "family": "gemini",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "knowledge": "2025-11",
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 8192,
+        "output": 1
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 0
+      },
+      "display_name": "Gemini Embedding 2",
+      "type": "embedding"
+    },
+    {
+      "id": "google/gemini-3.6-flash",
+      "name": "Gemini 3.6 Flash",
+      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
+      "family": "gemini-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2026-03",
+      "release_date": "2026-07-21",
+      "last_updated": "2026-07-21",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.75,
+        "output": 3.75,
+        "cache_read": 0.075,
+        "input_audio": 0.75
+      },
+      "display_name": "Gemini 3.6 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
           "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
-            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
-            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-haiku-4-5",
-      "name": "Claude Haiku 4.5 (latest)",
-      "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
-      "family": "claude-haiku",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens",
-          "min": 1024
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-02-28",
-      "release_date": "2025-10-15",
-      "last_updated": "2025-10-15",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 1,
-        "output": 5,
-        "cache_read": 0.1,
-        "cache_write": 1.25
-      },
-      "display_name": "Claude Haiku 4.5 (latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-sonnet-4-5",
-      "name": "Claude Sonnet 4.5 (latest)",
-      "description": "Balanced Claude model for coding, analysis, agent workflows, and cost control",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens",
-          "min": 1024
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-07-31",
-      "release_date": "2025-09-29",
-      "last_updated": "2025-09-29",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3.75
-      },
-      "display_name": "Claude Sonnet 4.5 (latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-opus-4-8",
-      "name": "Claude Opus 4.8",
-      "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-01",
-      "release_date": "2026-05-28",
-      "last_updated": "2026-05-28",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
-      },
-      "display_name": "Claude Opus 4.8",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
-            "task_budget is separate from thinking control and should not be treated as a thinking budget."
-          ]
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-sonnet-5",
-      "name": "Claude Sonnet 5",
-      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-06-30",
-      "last_updated": "2026-06-30",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 2,
-        "output": 10,
-        "cache_read": 0.2,
-        "cache_write": 2.5
-      },
-      "display_name": "Claude Sonnet 5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "anthropic/claude-opus-4-5-20251101",
-      "name": "Claude Opus 4.5",
-      "description": "Flagship Claude model for deep reasoning, coding, and long-horizon agents",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        },
-        {
-          "type": "budget_tokens",
-          "min": 1024
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2025-11-01",
-      "last_updated": "2025-11-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
-      },
-      "display_name": "Claude Opus 4.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "mixed",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "effort": "high",
-          "effort_options": [
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "minimal",
             "low",
             "medium",
             "high"
           ],
-          "interleaved": true,
           "summaries": true,
           "visibility": "summary",
           "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.5 uses manual thinking.type = \"enabled\" with budget_tokens; effort can be used alongside the thinking budget.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header."
+            "thought_signatures"
           ]
         }
       }
@@ -1098,10 +1345,10 @@
       "type": "chat"
     },
     {
-      "id": "google/gemini-3.1-pro-preview-customtools",
-      "name": "Gemini 3.1 Pro Preview Custom Tools",
-      "description": "Advanced Gemini model for complex reasoning, coding, and multimodal analysis",
-      "family": "gemini-pro",
+      "id": "google/gemini-3.5-flash-lite",
+      "name": "Gemini 3.5 Flash Lite",
+      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
+      "family": "gemini-flash-lite",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1111,6 +1358,7 @@
         {
           "type": "effort",
           "values": [
+            "minimal",
             "low",
             "medium",
             "high"
@@ -1120,9 +1368,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-02-19",
-      "last_updated": "2026-02-19",
+      "knowledge": "2026-03",
+      "release_date": "2026-07-21",
+      "last_updated": "2026-07-21",
       "modalities": {
         "input": [
           "text",
@@ -1141,43 +1389,15 @@
         "output": 65536
       },
       "cost": {
-        "input": 2,
-        "output": 12,
-        "cache_read": 0.2,
-        "tiers": [
-          {
-            "input": 4,
-            "output": 18,
-            "cache_read": 0.4,
-            "tier": {
-              "type": "context",
-              "size": 200000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 4,
-          "output": 18,
-          "cache_read": 0.4
-        }
+        "input": 0.3,
+        "output": 2.5,
+        "cache_read": 0.03
       },
-      "display_name": "Gemini 3.1 Pro Preview Custom Tools",
+      "display_name": "Gemini 3.5 Flash Lite",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "low",
-            "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
+          "supported": true
         }
       }
     },
@@ -1266,136 +1486,6 @@
       }
     },
     {
-      "id": "google/gemini-3.6-flash",
-      "name": "Gemini 3.6 Flash",
-      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
-      "family": "gemini-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2026-03",
-      "release_date": "2026-07-21",
-      "last_updated": "2026-07-21",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.75,
-        "output": 3.75,
-        "cache_read": 0.075,
-        "input_audio": 0.75
-      },
-      "display_name": "Gemini 3.6 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
-    },
-    {
-      "id": "google/gemini-3.1-flash-lite",
-      "name": "Gemini 3.1 Flash Lite",
-      "description": "Low-latency Gemini model for high-volume multimodal and agent workloads",
-      "family": "gemini-flash-lite",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-05-07",
-      "last_updated": "2026-05-07",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.25,
-        "output": 1.5,
-        "cache_read": 0.025,
-        "input_audio": 0.5
-      },
-      "display_name": "Gemini 3.1 Flash Lite",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
       "id": "google/gemini-3.5-flash",
       "name": "Gemini 3.5 Flash",
       "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
@@ -1468,44 +1558,10 @@
       }
     },
     {
-      "id": "google/gemini-embedding-001",
-      "name": "Gemini Embedding 001",
-      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
-      "family": "gemini",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "knowledge": "2025-05",
-      "release_date": "2025-05-20",
-      "last_updated": "2025-05-20",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 2048,
-        "output": 1
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0
-      },
-      "display_name": "Gemini Embedding 001",
-      "type": "embedding"
-    },
-    {
-      "id": "google/gemini-3.5-flash-lite",
-      "name": "Gemini 3.5 Flash Lite",
-      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
-      "family": "gemini-flash-lite",
+      "id": "google/gemini-3.7-flash",
+      "name": "Gemini 3.7 Flash",
+      "description": "High-efficiency Gemini model for agentic workflows, coding, and multimodal reasoning",
+      "family": "gemini-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1515,7 +1571,6 @@
         {
           "type": "effort",
           "values": [
-            "minimal",
             "low",
             "medium",
             "high"
@@ -1526,8 +1581,8 @@
       "structured_output": true,
       "temperature": true,
       "knowledge": "2026-03",
-      "release_date": "2026-07-21",
-      "last_updated": "2026-07-21",
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-13",
       "modalities": {
         "input": [
           "text",
@@ -1546,23 +1601,38 @@
         "output": 65536
       },
       "cost": {
-        "input": 0.3,
-        "output": 2.5,
-        "cache_read": 0.03
+        "input": 0.75,
+        "output": 3.75,
+        "cache_read": 0.075,
+        "input_audio": 0.75
       },
-      "display_name": "Gemini 3.5 Flash Lite",
+      "display_name": "Gemini 3.7 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
         }
       }
     },
     {
-      "id": "google/gemini-flash-lite-latest",
-      "name": "Gemini Flash-Lite Latest",
-      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
-      "family": "gemini-flash-lite",
+      "id": "google/gemini-3.1-pro-preview-customtools",
+      "name": "Gemini 3.1 Pro Preview Custom Tools",
+      "description": "Advanced Gemini model for complex reasoning, coding, and multimodal analysis",
+      "family": "gemini-pro",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1572,7 +1642,6 @@
         {
           "type": "effort",
           "values": [
-            "minimal",
             "low",
             "medium",
             "high"
@@ -1582,9 +1651,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2026-03",
-      "release_date": "2026-07-21",
-      "last_updated": "2026-07-21",
+      "knowledge": "2025-01",
+      "release_date": "2026-02-19",
+      "last_updated": "2026-02-19",
       "modalities": {
         "input": [
           "text",
@@ -1603,83 +1672,45 @@
         "output": 65536
       },
       "cost": {
-        "input": 0.3,
-        "output": 2.5,
-        "cache_read": 0.03
-      },
-      "display_name": "Gemini Flash-Lite Latest",
-      "type": "chat"
-    },
-    {
-      "id": "google/gemma-4-31b-it",
-      "name": "Gemma 4 31B IT",
-      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
-      "family": "gemma",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 18,
+            "cache_read": 0.4,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 18,
+          "cache_read": 0.4
         }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
       },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 32768
-      },
-      "display_name": "Gemma 4 31B IT",
-      "type": "chat"
-    },
-    {
-      "id": "google/gemini-embedding-2",
-      "name": "Gemini Embedding 2",
-      "description": "Multimodal embedding model mapping text, images, video, audio, and PDFs into a unified embedding space",
-      "family": "gemini",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "knowledge": "2025-11",
-      "release_date": "2026-04-22",
-      "last_updated": "2026-04-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 8192,
-        "output": 1
-      },
-      "cost": {
-        "input": 0.2,
-        "output": 0
-      },
-      "display_name": "Gemini Embedding 2",
-      "type": "embedding"
+      "display_name": "Gemini 3.1 Pro Preview Custom Tools",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "low",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
     },
     {
       "id": "google/gemini-3-flash-preview",
@@ -1824,10 +1855,44 @@
       }
     },
     {
-      "id": "google/gemini-3.7-flash",
-      "name": "Gemini 3.7 Flash",
-      "description": "High-efficiency Gemini model for agentic workflows, coding, and multimodal reasoning",
-      "family": "gemini-flash",
+      "id": "google/gemini-embedding-001",
+      "name": "Gemini Embedding 001",
+      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
+      "family": "gemini",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "knowledge": "2025-05",
+      "release_date": "2025-05-20",
+      "last_updated": "2025-05-20",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 2048,
+        "output": 1
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0
+      },
+      "display_name": "Gemini Embedding 001",
+      "type": "embedding"
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite",
+      "name": "Gemini 3.1 Flash Lite",
+      "description": "Low-latency Gemini model for high-volume multimodal and agent workloads",
+      "family": "gemini-flash-lite",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1837,89 +1902,19 @@
         {
           "type": "effort",
           "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2026-03",
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-13",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.75,
-        "output": 3.75,
-        "cache_read": 0.075,
-        "input_audio": 0.75
-      },
-      "display_name": "Gemini 3.7 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
             "minimal",
             "low",
             "medium",
             "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
-    },
-    {
-      "id": "google/gemini-flash-latest",
-      "name": "Gemini Flash Latest",
-      "description": "High-efficiency Gemini model for agentic workflows, coding, and multimodal reasoning",
-      "family": "gemini-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2026-03",
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-13",
+      "knowledge": "2025-01",
+      "release_date": "2026-05-07",
+      "last_updated": "2026-05-07",
       "modalities": {
         "input": [
           "text",
@@ -1938,13 +1933,18 @@
         "output": 65536
       },
       "cost": {
-        "input": 0.75,
-        "output": 3.75,
-        "cache_read": 0.075,
-        "input_audio": 0.75
+        "input": 0.25,
+        "output": 1.5,
+        "cache_read": 0.025,
+        "input_audio": 0.5
       },
-      "display_name": "Gemini Flash Latest",
-      "type": "chat"
+      "display_name": "Gemini 3.1 Flash Lite",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     }
   ]
 }
