@@ -58,21 +58,80 @@
       }
     },
     {
-      "id": "gemma-4-26b-a4b-it",
-      "name": "Gemma 4 26B A4B IT",
-      "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
-      "family": "gemma",
+      "id": "qwen3.8-27b",
+      "name": "Qwen3.8 27B",
+      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 3,
+        "cache_read": 0.1
+      },
+      "display_name": "Qwen3.8 27B",
+      "type": "chat"
+    },
+    {
+      "id": "qwen3.8-2.4t-a95b",
+      "name": "Qwen3.8 2.4T A95B",
+      "description": "Open-weight sparse MoE (2.4T total, 95B active), the open-weight twin of Qwen3.8 Max for coding, research, complex reasoning, and agentic workflows",
+      "family": "qwen",
       "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-04-30",
-      "last_updated": "2026-07-22",
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text"
@@ -83,23 +142,28 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 256000,
-        "output": 25600
+        "context": 1000000,
+        "output": 128000
       },
       "cost": {
-        "input": 0.098,
-        "output": 0.334,
-        "cache_read": 0.049
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.25
       },
-      "display_name": "Gemma 4 26B A4B IT",
-      "type": "chat"
+      "display_name": "Qwen3.8 2.4T A95B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
-      "id": "deepseek-v4-pro-0813",
-      "name": "DeepSeek V4 Pro 0813",
-      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
-      "family": "deepseek-thinking",
-      "attachment": false,
+      "id": "glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -117,11 +181,12 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-31",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -129,15 +194,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 262144
+        "context": 1048576,
+        "output": 131072
       },
       "cost": {
-        "input": 1.437216,
-        "output": 4.311648,
-        "cache_read": 0.047907
+        "input": 0.16332,
+        "output": 0.5444,
+        "cache_read": 0.031575
       },
-      "display_name": "DeepSeek V4 Pro 0813",
+      "display_name": "GLM-5.3-Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -198,9 +263,9 @@
       }
     },
     {
-      "id": "qwen3.8-27b",
-      "name": "Qwen3.8 27B",
-      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8 Max Preview",
+      "description": "Preview Qwen flagship for million-token multimodal reasoning and long-horizon agentic workflows",
       "family": "qwen",
       "attachment": true,
       "reasoning": {
@@ -220,10 +285,9 @@
         }
       ],
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
+      "release_date": "2026-07-19",
+      "last_updated": "2026-07-19",
       "modalities": {
         "input": [
           "text",
@@ -233,109 +297,17 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
         "context": 1000000,
-        "output": 128000
+        "output": 65536
       },
       "cost": {
-        "input": 0.5,
-        "output": 3,
-        "cache_read": 0.1
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.25
       },
-      "display_name": "Qwen3.8 27B",
-      "type": "chat"
-    },
-    {
-      "id": "minimax-m2.7",
-      "name": "MiniMax-M2.7",
-      "description": "Open MiniMax flagship for coding agents, office automation, and complex environments",
-      "family": "minimax",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-06-05",
-      "last_updated": "2026-07-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262100,
-        "output": 6553
-      },
-      "cost": {
-        "input": 0.484,
-        "output": 1.852,
-        "cache_read": 0.242
-      },
-      "display_name": "MiniMax-M2.7",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "glm-5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-30",
-      "last_updated": "2026-07-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 32768
-      },
-      "cost": {
-        "input": 1.52432,
-        "output": 4.79072,
-        "cache_read": 0.152432
-      },
-      "display_name": "GLM-5.2",
+      "display_name": "Qwen3.8 Max Preview",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -344,10 +316,10 @@
       }
     },
     {
-      "id": "minimax-m3",
-      "name": "MiniMax-M3",
-      "description": "MiniMax multimodal model for long-context coding, perception, and agent planning",
-      "family": "minimax",
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -357,128 +329,17 @@
         {
           "type": "effort",
           "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-07-30",
-      "last_updated": "2026-07-31",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 512000,
-        "output": 512000
-      },
-      "cost": {
-        "input": 0.32664,
-        "output": 1.30656,
-        "cache_read": 0.064239
-      },
-      "display_name": "MiniMax-M3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash",
-      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
-      "family": "deepseek-flash",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-07-06",
-      "last_updated": "2026-07-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.2,
-        "output": 0.4,
-        "cache_read": 0.04
-      },
-      "display_name": "DeepSeek V4 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
             "low",
             "high",
             "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
           ]
         }
-      }
-    },
-    {
-      "id": "kimi-k2.7-code",
-      "name": "Kimi K2.7 Code",
-      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
-      "family": "kimi-k2",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
+      ],
       "tool_call": true,
       "structured_output": true,
       "temperature": false,
-      "knowledge": "2025-01",
-      "release_date": "2026-07-03",
-      "last_updated": "2026-07-22",
+      "release_date": "2026-07-27",
+      "last_updated": "2026-07-30",
       "modalities": {
         "input": [
           "text",
@@ -490,67 +351,19 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 256000,
+        "context": 1048576,
         "output": 16000
       },
       "cost": {
-        "input": 1.03436,
-        "output": 4.3552,
-        "cache_read": 0.206872
+        "input": 3.2664,
+        "output": 16.332,
+        "cache_read": 0.32664
       },
-      "display_name": "Kimi K2.7 Code",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true
-        }
-      }
-    },
-    {
-      "id": "kimi-k2-thinking",
-      "name": "Kimi K2 Thinking",
-      "description": "Thinking Kimi model for slower research passes, planning, and hard technical questions",
-      "family": "kimi-thinking",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-08",
-      "release_date": "2026-09-02",
-      "last_updated": "2026-09-02",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 26214
-      },
-      "cost": {
-        "input": 0.6,
-        "output": 2.5,
-        "cache_read": 0.3
-      },
-      "display_name": "Kimi K2 Thinking",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
         }
       }
     },
@@ -663,34 +476,24 @@
       }
     },
     {
-      "id": "kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
-      "attachment": true,
+      "id": "kimi-k2-thinking",
+      "name": "Kimi K2 Thinking",
+      "description": "Thinking Kimi model for slower research passes, planning, and hard technical questions",
+      "family": "kimi-thinking",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
+      "reasoning_options": [],
       "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-27",
-      "last_updated": "2026-07-30",
+      "temperature": true,
+      "knowledge": "2024-08",
+      "release_date": "2026-09-02",
+      "last_updated": "2026-09-02",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -698,51 +501,47 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 16000
+        "context": 262144,
+        "output": 26214
       },
       "cost": {
-        "input": 3.2664,
-        "output": 16.332,
-        "cache_read": 0.32664
+        "input": 0.6,
+        "output": 2.5,
+        "cache_read": 0.3
       },
-      "display_name": "Kimi K3",
+      "display_name": "Kimi K2 Thinking",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
     {
-      "id": "glm-5.3-flash",
-      "name": "GLM-5.3-Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
-      "attachment": true,
+      "id": "gemma-4-26b-a4b-it",
+      "name": "Gemma 4 26B A4B IT",
+      "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
+      "family": "gemma",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
+      "reasoning_options": [],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-31",
+      "release_date": "2026-04-30",
+      "last_updated": "2026-07-22",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -750,27 +549,69 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 131072
+        "context": 256000,
+        "output": 25600
       },
       "cost": {
-        "input": 0.16332,
-        "output": 0.5444,
-        "cache_read": 0.031575
+        "input": 0.098,
+        "output": 0.334,
+        "cache_read": 0.049
       },
-      "display_name": "GLM-5.3-Flash",
+      "display_name": "Gemma 4 26B A4B IT",
+      "type": "chat"
+    },
+    {
+      "id": "minimax-m2.7",
+      "name": "MiniMax-M2.7",
+      "description": "Open MiniMax flagship for coding agents, office automation, and complex environments",
+      "family": "minimax",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-06-05",
+      "last_updated": "2026-07-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262100,
+        "output": 6553
+      },
+      "cost": {
+        "input": 0.484,
+        "output": 1.852,
+        "cache_read": 0.242
+      },
+      "display_name": "MiniMax-M2.7",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
     {
-      "id": "qwen3.8-2.4t-a95b",
-      "name": "Qwen3.8 2.4T A95B",
-      "description": "Open-weight sparse MoE (2.4T total, 95B active), the open-weight twin of Qwen3.8 Max for coding, research, complex reasoning, and agentic workflows",
-      "family": "qwen",
+      "id": "deepseek-v4-pro-0813",
+      "name": "DeepSeek V4 Pro 0813",
+      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
+      "family": "deepseek-thinking",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -780,18 +621,17 @@
         {
           "type": "effort",
           "values": [
-            "minimal",
             "low",
-            "medium",
-            "high"
+            "high",
+            "max"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
           "text"
@@ -803,14 +643,114 @@
       "open_weights": true,
       "limit": {
         "context": 1000000,
-        "output": 128000
+        "output": 262144
       },
       "cost": {
-        "input": 2,
-        "output": 6,
-        "cache_read": 0.25
+        "input": 1.437216,
+        "output": 4.311648,
+        "cache_read": 0.047907
       },
-      "display_name": "Qwen3.8 2.4T A95B",
+      "display_name": "DeepSeek V4 Pro 0813",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "inkling",
+      "name": "Inkling",
+      "description": "Multimodal MoE reasoning model (975B total, 41B active) for text, image, and audio",
+      "family": "ling",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-08-15",
+      "last_updated": "2026-09-05",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 32768
+      },
+      "cost": {
+        "input": 1.0888,
+        "output": 4.40964,
+        "cache_read": 0.185096
+      },
+      "display_name": "Inkling",
+      "type": "chat"
+    },
+    {
+      "id": "minimax-m3",
+      "name": "MiniMax-M3",
+      "description": "MiniMax multimodal model for long-context coding, perception, and agent planning",
+      "family": "minimax",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-07-30",
+      "last_updated": "2026-07-31",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 512000,
+        "output": 512000
+      },
+      "cost": {
+        "input": 0.32664,
+        "output": 1.30656,
+        "cache_read": 0.064239
+      },
+      "display_name": "MiniMax-M3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -872,11 +812,11 @@
       }
     },
     {
-      "id": "inkling",
-      "name": "Inkling",
-      "description": "Multimodal MoE reasoning model (975B total, 41B active) for text, image, and audio",
-      "family": "ling",
-      "attachment": true,
+      "id": "glm-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -885,23 +825,19 @@
         {
           "type": "effort",
           "values": [
-            "none",
-            "minimal",
-            "low",
-            "medium",
             "high",
             "xhigh"
           ]
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-15",
-      "last_updated": "2026-09-05",
+      "release_date": "2026-06-30",
+      "last_updated": "2026-07-22",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -909,117 +845,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 32768
       },
       "cost": {
-        "input": 1.0888,
-        "output": 4.40964,
-        "cache_read": 0.185096
+        "input": 1.52432,
+        "output": 4.79072,
+        "cache_read": 0.152432
       },
-      "display_name": "Inkling",
-      "type": "chat"
-    },
-    {
-      "id": "qwen3.8-max",
-      "name": "Qwen3.8 Max Preview",
-      "description": "Preview Qwen flagship for million-token multimodal reasoning and long-horizon agentic workflows",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-07-19",
-      "last_updated": "2026-07-19",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 65536
-      },
-      "cost": {
-        "input": 2,
-        "output": 6,
-        "cache_read": 0.25
-      },
-      "display_name": "Qwen3.8 Max Preview",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "qwen3.7-plus",
-      "name": "Qwen3.7 Plus",
-      "description": "Multimodal Qwen workhorse for long-context agents, visual inputs, and coding",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2026-06-15",
-      "last_updated": "2026-07-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 1.2,
-        "output": 4.8,
-        "cache_read": 0.24
-      },
-      "display_name": "Qwen3.7 Plus",
+      "display_name": "GLM-5.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1194,6 +1028,172 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true
+        }
+      }
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
+      "family": "kimi-k2",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-01",
+      "release_date": "2026-07-03",
+      "last_updated": "2026-07-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 256000,
+        "output": 16000
+      },
+      "cost": {
+        "input": 1.03436,
+        "output": 4.3552,
+        "cache_read": 0.206872
+      },
+      "display_name": "Kimi K2.7 Code",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "qwen3.7-plus",
+      "name": "Qwen3.7 Plus",
+      "description": "Multimodal Qwen workhorse for long-context agents, visual inputs, and coding",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-04",
+      "release_date": "2026-06-15",
+      "last_updated": "2026-07-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 1.2,
+        "output": 4.8,
+        "cache_read": 0.24
+      },
+      "display_name": "Qwen3.7 Plus",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-07-06",
+      "last_updated": "2026-07-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 0.4,
+        "cache_read": 0.04
+      },
+      "display_name": "DeepSeek V4 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
         }
       }
     }
