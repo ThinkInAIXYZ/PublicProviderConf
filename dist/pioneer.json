@@ -6945,9 +6945,24 @@
       "description": "Classification-tuned GLiNER2 large. Entities, relations, and JSON extraction still work.",
       "attachment": false,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
       "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
       "release_date": "2026-09-24",
       "last_updated": "2026-09-24",
       "modalities": {
@@ -6970,7 +6985,18 @@
         "cache_write": 0.15
       },
       "display_name": "GLiNER-2.5-Decide",
-      "type": "chat"
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "openai/gpt-oss-20b",
