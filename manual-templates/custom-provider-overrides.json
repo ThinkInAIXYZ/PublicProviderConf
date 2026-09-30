@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-09-23T00:00:00.000Z",
-  "maxModels": 48,
+  "updatedAt": "2026-09-30T00:00:00.000Z",
+  "maxModels": 49,
   "provider": {
     "id": "custom-provider",
     "name": "custom provider",
@@ -22,6 +22,7 @@
       "docs": [
         "https://developers.openai.com/api/docs/models",
         "https://developers.openai.com/api/docs/guides/latest-model",
+        "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
         "https://developers.openai.com/api/docs/models/gpt-6-sol",
         "https://developers.openai.com/api/docs/models/gpt-6-luna",
         "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
@@ -352,6 +353,49 @@
             "notes": ["For prompts above 272K input tokens, input and cache rates double and output is 1.5x for the full request."]
           },
           "selectionRank": 2
+        },
+        {
+          "id": "gpt-6.1-sol",
+          "name": "GPT-6.1 Sol",
+          "family": "gpt",
+          "contextLength": 1050000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["low", "medium", "high", "xhigh", "max"] }
+          ],
+          "knowledge": "2026-04-30",
+          "releaseDate": "2026-09-29",
+          "lastUpdated": "2026-09-29",
+          "openWeights": false,
+          "temperature": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 2, "output": 10, "cacheRead": 0.1, "cacheWrite": 2.5 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "medium",
+              "effort_options": ["low", "medium", "high", "xhigh", "max"],
+              "visibility": "hidden",
+              "notes": ["The default reasoning effort is medium."]
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "coding", "agentic", "reasoning"],
+            "lifecycle": "active",
+            "apiStatus": "active",
+            "availability": ["api"],
+            "pricingBasis": "standard-up-to-272k-input",
+            "notes": ["Does not support the none reasoning effort level.", "Prompts with more than 272K input tokens are priced at 2x input and cache rates and 1.5x output for the full request."]
+          },
+          "selectionRank": 1
         }
       ]
     },
