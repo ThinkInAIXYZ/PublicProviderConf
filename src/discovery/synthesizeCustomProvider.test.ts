@@ -52,7 +52,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     const result = await synthesizeCustomProvider();
 
     assert.equal(result.models.length, result.catalog.maxModels);
-    assert.equal(result.models.length, 44);
+    assert.equal(result.models.length, 49);
     assert.deepEqual(
       new Set(result.models.map(model => model.id)),
       new Set(result.catalog.sources.flatMap(source => source.models.map(model => model.id))),
@@ -60,15 +60,15 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     assert.deepEqual(
       result.summaries.map(summary => [summary.displayName, summary.selected]),
       [
-        ['OpenAI', 6],
-        ['Anthropic', 5],
+        ['OpenAI', 9],
+        ['Anthropic', 6],
         ['Gemini', 6],
         ['Kimi', 5],
         ['DeepSeek', 4],
         ['Zhipu', 4],
         ['MiniMax', 3],
         ['StepFun', 4],
-        ['Qwen', 7],
+        ['Qwen', 8],
       ],
     );
     assert.equal(
@@ -94,6 +94,7 @@ test('creates valid normalized model cards in the provider output shape', async 
     const result = await synthesizeCustomProvider();
     const seededDeepSeekFlash = result.models.find(item => item.id === 'deepseek-flash');
     const seededGpt6Astra = result.models.find(item => item.id === 'gpt-6-astra');
+    const seededGpt61Sol = result.models.find(item => item.id === 'gpt-6.1-sol');
     const seededClaudeFable51 = result.models.find(item => item.id === 'claude-fable-5-1');
     const seededGemini38Flash = result.models.find(item => item.id === 'gemini-3.8-flash');
     const seededQwen37Flash = result.models.find(item => item.id === 'qwen3.7-flash');
@@ -121,6 +122,7 @@ test('creates valid normalized model cards in the provider output shape', async 
     const gpt56Sol = provider.models.find(item => item.id === 'gpt-5.6-sol');
     const gpt56Terra = provider.models.find(item => item.id === 'gpt-5.6-terra');
     const gpt56Luna = provider.models.find(item => item.id === 'gpt-5.6-luna');
+    const gpt61Sol = provider.models.find(item => item.id === 'gpt-6.1-sol');
     const deepSeekV4Flash = provider.models.find(item => item.id === 'deepseek-v4-flash');
     const deepSeekV4FlashVision = provider.models.find(
       item => item.id === 'deepseek-v4-flash-vision-exp',
@@ -165,6 +167,11 @@ test('creates valid normalized model cards in the provider output shape', async 
     assert.ok(gpt56Sol);
     assert.ok(gpt56Terra);
     assert.ok(gpt56Luna);
+    assert.ok(gpt61Sol);
+    assert.deepEqual(gpt61Sol?.reasoning_options, [
+      { type: 'effort', values: ['low', 'medium', 'high', 'xhigh', 'max'] },
+    ]);
+    assert.equal(gpt61Sol?.extra_capabilities?.reasoning?.effort, 'medium');
 
     const {
       id: _gpt56Id,
@@ -261,6 +268,21 @@ test('creates valid normalized model cards in the provider output shape', async 
       'xhigh',
       'max',
     ]);
+    assert.equal(seededGpt61Sol?.cost?.input, 2);
+    assert.equal(seededGpt61Sol?.cost?.output, 10);
+    assert.equal(seededGpt61Sol?.cost?.cacheRead, 0.1);
+    assert.equal(seededGpt61Sol?.limit?.context, 1050000);
+    assert.equal(seededGpt61Sol?.limit?.output, 128000);
+    assert.equal(seededGpt61Sol?.vision, true);
+    assert.equal(seededGpt61Sol?.metadata?.lifecycle, 'active');
+    assert.deepEqual(seededGpt61Sol?.extraCapabilities?.reasoning?.effort_options, [
+      'low',
+      'medium',
+      'high',
+      'xhigh',
+      'max',
+    ]);
+    assert.equal(seededGpt61Sol?.extraCapabilities?.reasoning?.effort, 'medium');
     assert.equal(seededClaudeFable51?.cost?.cacheRead, 0.25);
     assert.equal(seededClaudeFable51?.limit?.context, 1000000);
     assert.equal(seededClaudeFable51?.metadata?.apiStatus, 'active');
