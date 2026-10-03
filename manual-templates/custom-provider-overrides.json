@@ -1692,6 +1692,7 @@
         "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-flash",
         "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-next",
         "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
+        "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-chat-completions",
         "https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling",
         "https://huggingface.co/Qwen/Qwen3-Coder-Next"
       ],
@@ -1712,7 +1713,7 @@
           "reasoningOptions": [
             { "type": "toggle" },
             { "type": "budget" },
-            { "type": "effort", "values": ["none", "low", "medium", "xhigh"] }
+            { "type": "effort", "values": ["none", "low", "medium", "xhigh"], "exclusive_with": ["budget"] }
           ],
           "lastUpdated": "2026-08-31",
           "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
@@ -1722,14 +1723,16 @@
             "reasoning": {
               "supported": true,
               "default_enabled": true,
-              "mode": "budget",
+              "mode": "effort",
+              "effort": "xhigh",
+              "effort_options": ["none", "low", "medium", "xhigh"],
               "budget": {
+                "min": 0,
                 "max": 262144,
-                "default": 262144,
                 "unit": "tokens"
               },
               "interleaved": true,
-              "notes": ["enable_thinking toggles reasoning; thinking_budget caps it. Set preserve_thinking=true to retain reasoning_content across turns."]
+              "notes": ["Prefer reasoning_effort; none disables thinking. thinking_budget is an alternative control and must not be sent with effort.", "Omitting both controls uses the API default; explicitly selecting xhigh maps to 262144 budget tokens, not the omitted budget default of 131072.", "Set preserve_thinking=true to retain reasoning_content across turns."]
             }
           },
           "metadata": {
@@ -1769,7 +1772,7 @@
               "default_enabled": true,
               "mode": "effort",
               "effort": "xhigh",
-              "effort_options": ["none", "minimal", "low", "medium", "high", "xhigh", "max"],
+              "effort_options": ["none", "low", "medium", "xhigh"],
               "interleaved": true,
               "summaries": true,
               "visibility": "summary",
@@ -1848,7 +1851,7 @@
           "reasoningOptions": [
             { "type": "toggle" },
             { "type": "budget" },
-            { "type": "effort", "values": ["none", "low", "medium", "xhigh"] }
+            { "type": "effort", "values": ["none", "low", "medium", "xhigh"], "exclusive_with": ["budget"] }
           ],
           "lastUpdated": "2026-08-31",
           "modalities": { "input": ["text", "image", "video"], "output": ["text"] },
@@ -1858,14 +1861,16 @@
             "reasoning": {
               "supported": true,
               "default_enabled": true,
-              "mode": "budget",
+              "mode": "effort",
+              "effort": "xhigh",
+              "effort_options": ["none", "low", "medium", "xhigh"],
               "budget": {
+                "min": 0,
                 "max": 262144,
-                "default": 262144,
                 "unit": "tokens"
               },
               "interleaved": true,
-              "notes": ["enable_thinking toggles reasoning; thinking_budget caps it. Set preserve_thinking=true to retain reasoning_content across turns."]
+              "notes": ["Prefer reasoning_effort; none disables thinking. thinking_budget is an alternative control and must not be sent with effort.", "Omitting both controls uses the API default; explicitly selecting xhigh maps to 262144 budget tokens, not the omitted budget default of 131072.", "Set preserve_thinking=true to retain reasoning_content across turns."]
             }
           },
           "metadata": {

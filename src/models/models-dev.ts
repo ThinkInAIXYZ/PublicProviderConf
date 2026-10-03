@@ -239,6 +239,7 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
     reasoning_options: model.reasoningOptions?.map(option => ({
       ...option,
       values: option.values ? [...option.values] : undefined,
+      ...(option.exclusive_with ? { exclusive_with: [...option.exclusive_with] } : {}),
     })),
     knowledge: model.knowledge,
     release_date: model.releaseDate,

@@ -604,9 +604,13 @@
         {
           "type": "effort",
           "values": [
+            "none",
             "low",
             "medium",
             "xhigh"
+          ],
+          "exclusive_with": [
+            "budget_tokens"
           ]
         },
         {
@@ -650,12 +654,30 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
           ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "budget": {
+            "min": 0,
+            "max": 262144,
+            "unit": "tokens"
+          },
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "xhigh"
+          ],
+          "notes": [
+            "Prefer reasoning_effort; thinking_budget is an alternative, not an additional control.",
+            "Omitting both controls differs from explicitly selecting xhigh, which maps to 262144 budget tokens."
+          ],
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "xhigh"
         }
       },
       "type": "chat"
@@ -1412,7 +1434,16 @@
           "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ]
+          ],
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "xhigh"
+          ],
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "xhigh"
         }
       },
       "type": "chat"
@@ -2178,13 +2209,18 @@
         {
           "type": "effort",
           "values": [
+            "none",
             "low",
             "medium",
             "xhigh"
+          ],
+          "exclusive_with": [
+            "budget_tokens"
           ]
         },
         {
           "type": "budget_tokens",
+          "min": 0,
           "max": 262144
         }
       ],
@@ -2221,12 +2257,30 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
           ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "budget": {
+            "min": 0,
+            "max": 262144,
+            "unit": "tokens"
+          },
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "xhigh"
+          ],
+          "notes": [
+            "Prefer reasoning_effort; thinking_budget is an alternative, not an additional control.",
+            "Omitting both controls differs from explicitly selecting xhigh, which maps to 262144 budget tokens."
+          ],
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "xhigh"
         }
       },
       "type": "chat"

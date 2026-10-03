@@ -56,6 +56,31 @@ Zhipu GLM, MiniMax, StepFun, and Qwen use official documentation-derived seeds. 
 
 Missing API keys only skip that source's live API refresh. The provider still uses the maintained official documentation-derived seed entries for that source.
 
+## Qwen Reasoning Controls
+
+Qwen3.8 Max and Flash use effort as their primary control: `none`, `low`, `medium`,
+and `xhigh`. `none` disables thinking; the other three values are the distinct
+thinking levels. Omni Flash uses the same portrait options, while its legacy
+`reasoning_options` retains the accepted aliases for compatibility.
+
+Max and Flash retain a 0–262144 token budget as an explicit advanced alternative.
+The effort option declares `exclusive_with: ["budget"]` in this fallback catalog;
+the official `alibaba` and `alibaba-cn` entries reference their existing
+`budget_tokens` option instead. Neither form permits sending effort and budget
+together. No budget default is emitted for these effort-first models, preventing
+older consumers from automatically injecting a conflicting parameter.
+
+The [Alibaba Chat API reference](https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-chat-completions)
+(September 28, 2026) still supports `thinking_budget`. It documents an omitted
+budget of 131072 and an effort default of `xhigh`, but explicitly selecting `xhigh`
+maps to 262144 tokens. Therefore a client's "Use default" choice must omit both
+controls rather than materialize either default. This catalog does not translate
+effort into budgets; native effort should be sent where the endpoint supports it.
+
+Qwen3.7 Plus and Flash remain budget-controlled. No effort capability is inferred
+from a Qwen family name. These changes do not assert that a third-party proxy
+accepts the official API's parameters, nor that a model has been retired.
+
 ## Refresh Commands
 
 Generate only the custom provider:

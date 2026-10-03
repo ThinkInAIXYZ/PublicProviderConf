@@ -410,16 +410,33 @@ test('preserves model-specific controls and modalities through normalization and
       assert.equal(model.limit?.context, 1000000);
       assert.equal(model.limit?.output, 131072);
       assert.equal(model.vision, true);
-      assert.equal(model.extra_capabilities?.reasoning?.mode, 'budget');
       assert.equal(model.extra_capabilities?.reasoning?.budget?.max, 262144);
     }
     for (const id of ['qwen3.8-max', 'qwen3.8-flash']) {
+      const model = getModel(id);
+      const portrait = model.extra_capabilities?.reasoning;
+      assert.equal(portrait?.mode, 'effort');
+      assert.equal(portrait?.effort, 'xhigh');
+      assert.deepEqual(portrait?.effort_options, ['none', 'low', 'medium', 'xhigh']);
+      assert.deepEqual(portrait?.budget, { min: 0, max: 262144, unit: 'tokens' });
       assert.deepEqual(
-        getModel(id).reasoning_options?.map(option => option.type),
+        model.reasoning_options?.find(option => option.type === 'effort')?.exclusive_with,
+        ['budget'],
+      );
+      assert.deepEqual(
+        model.reasoning_options?.map(option => option.type),
         ['toggle', 'budget', 'effort'],
       );
     }
+    const omni = getModel('qwen3.8-omni-flash');
+    assert.deepEqual(omni.extra_capabilities?.reasoning?.effort_options, ['none', 'low', 'medium', 'xhigh']);
+    assert.equal(omni.extra_capabilities?.reasoning?.budget, undefined);
+    assert.deepEqual(omni.reasoning_options?.[0].values, ['none', 'minimal', 'low', 'medium', 'high', 'xhigh', 'max']);
     for (const id of ['qwen3.7-plus', 'qwen3.7-flash']) {
+      const portrait = getModel(id).extra_capabilities?.reasoning;
+      assert.equal(portrait?.mode, 'budget');
+      assert.equal(portrait?.budget?.default, 262144);
+      assert.equal(portrait?.effort_options, undefined);
       assert.deepEqual(
         getModel(id).reasoning_options?.map(option => option.type),
         ['toggle', 'budget'],

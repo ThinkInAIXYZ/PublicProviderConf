@@ -2,6 +2,71 @@
   "id": "alibaba-cn",
   "models": [
     {
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "reasoning_options": [
+        { "type": "toggle" },
+        { "type": "effort", "values": ["none", "low", "medium", "xhigh"], "exclusive_with": ["budget_tokens"] },
+        { "type": "budget_tokens", "min": 0, "max": 262144 }
+      ],
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "xhigh",
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": ["thinking_blocks"],
+          "effort_options": ["none", "low", "medium", "xhigh"],
+          "budget": { "min": 0, "max": 262144, "unit": "tokens" },
+          "notes": ["Prefer reasoning_effort; thinking_budget is an alternative, not an additional control.", "Omitting both controls differs from explicitly selecting xhigh, which maps to 262144 budget tokens."]
+        }
+      }
+    },
+    {
+      "id": "qwen3.8-flash",
+      "name": "Qwen3.8 Flash",
+      "reasoning_options": [
+        { "type": "toggle" },
+        { "type": "effort", "values": ["none", "low", "medium", "xhigh"], "exclusive_with": ["budget_tokens"] },
+        { "type": "budget_tokens", "min": 0, "max": 262144 }
+      ],
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "xhigh",
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": ["thinking_blocks"],
+          "effort_options": ["none", "low", "medium", "xhigh"],
+          "budget": { "min": 0, "max": 262144, "unit": "tokens" },
+          "notes": ["Prefer reasoning_effort; thinking_budget is an alternative, not an additional control.", "Omitting both controls differs from explicitly selecting xhigh, which maps to 262144 budget tokens."]
+        }
+      }
+    },
+    {
+      "id": "qwen3.8-omni-flash",
+      "name": "Qwen3.8 Omni Flash",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "xhigh",
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": ["thinking_blocks"],
+          "effort_options": ["none", "low", "medium", "xhigh"]
+        }
+      }
+    },
+    {
       "id": "qwen-mt-turbo",
       "name": "Qwen Mt Turbo",
       "display_name": "Qwen Mt Turbo",

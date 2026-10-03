@@ -49,6 +49,7 @@ function cloneReasoningOptions(options?: ModelInfo['reasoningOptions']): ModelIn
   return options?.map(option => ({
     ...option,
     values: cloneArray(option.values),
+    ...(option.exclusive_with ? { exclusive_with: [...option.exclusive_with] } : {}),
   }));
 }
 

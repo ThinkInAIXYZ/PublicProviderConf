@@ -34,6 +34,8 @@ export interface ModelLimit {
 export interface ReasoningOption {
   type: string;
   values?: string[];
+  /** Other option types that cannot be sent together with this control. */
+  exclusive_with?: string[];
   [key: string]: string | string[] | undefined;
 }
 

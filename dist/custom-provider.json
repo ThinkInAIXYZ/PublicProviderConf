@@ -3563,6 +3563,7 @@
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-flash",
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-next",
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
+          "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-chat-completions",
           "https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling",
           "https://huggingface.co/Qwen/Qwen3-Coder-Next"
         ],
@@ -3636,6 +3637,7 @@
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-flash",
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-next",
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
+          "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-chat-completions",
           "https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling",
           "https://huggingface.co/Qwen/Qwen3-Coder-Next"
         ],
@@ -3710,6 +3712,7 @@
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-flash",
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-next",
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
+          "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-chat-completions",
           "https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling",
           "https://huggingface.co/Qwen/Qwen3-Coder-Next"
         ],
@@ -3797,6 +3800,7 @@
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-flash",
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-next",
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
+          "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-chat-completions",
           "https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling",
           "https://huggingface.co/Qwen/Qwen3-Coder-Next"
         ],
@@ -3811,22 +3815,22 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
           "budget": {
             "max": 262144,
             "default": 262144,
             "unit": "tokens"
           },
-          "continuation": [
-            "thinking_blocks"
-          ],
           "notes": [
             "Thinking mode has a 983616-token input limit and a separate 262144-token reasoning budget.",
             "Set preserve_thinking=true to retain reasoning_content across turns.",
             "The official reasoning.effort model list does not name the Qwen3.7 series."
           ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "default_enabled": true,
           "mode": "budget"
         }
@@ -3904,6 +3908,7 @@
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-flash",
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-next",
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
+          "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-chat-completions",
           "https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling",
           "https://huggingface.co/Qwen/Qwen3-Coder-Next"
         ],
@@ -3918,20 +3923,20 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
           "budget": {
             "max": 262144,
             "default": 262144,
             "unit": "tokens"
           },
-          "continuation": [
-            "thinking_blocks"
-          ],
           "notes": [
             "enable_thinking toggles reasoning; thinking_budget caps it. Set preserve_thinking=true to retain reasoning_content across turns."
           ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "default_enabled": true,
           "mode": "budget"
         }
@@ -3965,6 +3970,9 @@
             "low",
             "medium",
             "xhigh"
+          ],
+          "exclusive_with": [
+            "budget"
           ]
         }
       ],
@@ -4018,6 +4026,7 @@
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-flash",
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-next",
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
+          "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-chat-completions",
           "https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling",
           "https://huggingface.co/Qwen/Qwen3-Coder-Next"
         ],
@@ -4032,22 +4041,31 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "budget": {
-            "max": 262144,
-            "default": 262144,
-            "unit": "tokens"
-          },
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "enable_thinking toggles reasoning; thinking_budget caps it. Set preserve_thinking=true to retain reasoning_content across turns."
-          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "budget": {
+            "min": 0,
+            "max": 262144,
+            "unit": "tokens"
+          },
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "xhigh"
+          ],
+          "notes": [
+            "Prefer reasoning_effort; none disables thinking. thinking_budget is an alternative control and must not be sent with effort.",
+            "Omitting both controls uses the API default; explicitly selecting xhigh maps to 262144 budget tokens, not the omitted budget default of 131072.",
+            "Set preserve_thinking=true to retain reasoning_content across turns."
+          ],
           "default_enabled": true,
-          "mode": "budget"
+          "mode": "effort",
+          "effort": "xhigh"
         }
       }
     },
@@ -4079,6 +4097,9 @@
             "low",
             "medium",
             "xhigh"
+          ],
+          "exclusive_with": [
+            "budget"
           ]
         }
       ],
@@ -4132,6 +4153,7 @@
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-flash",
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-next",
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
+          "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-chat-completions",
           "https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling",
           "https://huggingface.co/Qwen/Qwen3-Coder-Next"
         ],
@@ -4146,22 +4168,31 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "budget": {
-            "max": 262144,
-            "default": 262144,
-            "unit": "tokens"
-          },
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "enable_thinking toggles reasoning; thinking_budget caps it. Set preserve_thinking=true to retain reasoning_content across turns."
-          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "budget": {
+            "min": 0,
+            "max": 262144,
+            "unit": "tokens"
+          },
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "xhigh"
+          ],
+          "notes": [
+            "Prefer reasoning_effort; none disables thinking. thinking_budget is an alternative control and must not be sent with effort.",
+            "Omitting both controls uses the API default; explicitly selecting xhigh maps to 262144 budget tokens, not the omitted budget default of 131072.",
+            "Set preserve_thinking=true to retain reasoning_content across turns."
+          ],
           "default_enabled": true,
-          "mode": "budget"
+          "mode": "effort",
+          "effort": "xhigh"
         }
       }
     },
@@ -4244,6 +4275,7 @@
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-flash",
           "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-coder-next",
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
+          "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-chat-completions",
           "https://www.alibabacloud.com/help/en/model-studio/qwen-function-calling",
           "https://huggingface.co/Qwen/Qwen3-Coder-Next"
         ],
@@ -4266,12 +4298,9 @@
           ],
           "effort_options": [
             "none",
-            "minimal",
             "low",
             "medium",
-            "high",
-            "xhigh",
-            "max"
+            "xhigh"
           ],
           "notes": [
             "Default effort is xhigh. minimal maps to low; high and max map to xhigh. none disables thinking.",

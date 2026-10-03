@@ -1,10 +1,53 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import type { ModelsDevProvider } from '../models/models-dev';
+import { applyReasoningPortraits, type ModelsDevProvider } from '../models/models-dev';
 import {
   mergeProviderWithTemplate,
   ModelsDevTemplateManager,
 } from './models-dev-template-manager';
+
+test('keeps official Qwen effort and exclusive budget controls through template merging', async () => {
+  const templates = await new ModelsDevTemplateManager().loadAllTemplates();
+  for (const providerId of ['alibaba', 'alibaba-cn']) {
+    const untouched = { id: 'qwen3.7-flash', name: 'Qwen3.7 Flash', reasoning: true };
+    const provider = mergeProviderWithTemplate({
+      id: providerId,
+      name: providerId,
+      models: [
+        { id: 'qwen3.8-max', name: 'Qwen3.8 Max', cost: { input: 2, output: 6 } },
+        untouched,
+      ],
+    }, templates.get(providerId));
+    applyReasoningPortraits({ providers: { [providerId]: provider } });
+
+    for (const id of ['qwen3.8-max', 'qwen3.8-flash', 'qwen3.8-omni-flash']) {
+      const model = provider.models.find(model => model.id === id);
+      assert.ok(model, `${providerId}/${id}`);
+      const portrait = model.extra_capabilities?.reasoning;
+      assert.equal(portrait?.mode, 'effort');
+      assert.equal(portrait?.effort, 'xhigh');
+      assert.deepEqual(portrait?.effort_options, ['none', 'low', 'medium', 'xhigh']);
+      assert.equal(portrait?.budget?.default, undefined);
+      assert.equal(portrait?.interleaved, true);
+      assert.deepEqual(portrait?.continuation, ['thinking_blocks']);
+      if (id !== 'qwen3.8-omni-flash') {
+        assert.deepEqual(portrait?.budget, { min: 0, max: 262144, unit: 'tokens' });
+        assert.deepEqual(
+          model.reasoning_options?.find(option => option.type === 'effort')?.exclusive_with,
+          ['budget_tokens'],
+        );
+      } else {
+        assert.equal(portrait?.budget, undefined);
+      }
+    }
+    assert.deepEqual(provider.models.find(model => model.id === 'qwen3.8-max')?.cost, { input: 2, output: 6 });
+    const legacy = provider.models.find(model => model.id === untouched.id);
+    assert.ok(legacy);
+    assert.deepEqual(legacy.reasoning, { supported: true, default: true });
+    assert.equal(legacy.extra_capabilities, undefined);
+    assert.equal(legacy.reasoning_options, undefined);
+  }
+});
 
 test('adds template-only models to the upstream provider', () => {
   const upstream: ModelsDevProvider = {

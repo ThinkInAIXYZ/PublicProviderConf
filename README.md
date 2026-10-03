@@ -62,7 +62,7 @@ When we need richer model-level metadata, we add it under `extra_capabilities` i
 ### `extra_capabilities.reasoning` Fields
 - `supported`: whether the model family supports reasoning
 - `default_enabled`: whether reasoning should be enabled by default in the model portrait
-- `mode`: one of `budget`, `effort`, `level`, `fixed`, or `mixed`
+- `mode`: one of `budget`, `effort`, `level`, `fixed`, or `mixed`; the primary control, not an exhaustive capability list. An effort-first model can still support an advanced budget control.
 - `budget`: token-budget style reasoning controls such as min/max/default/auto/off
 - `effort`: default reasoning effort for this portrait, which may be a client-friendly default rather than the upstream provider's raw default
 - `effort_options`: distinct model-effective effort levels after aliases or mappings; provider-specific controls remain in legacy `reasoning_options`
@@ -75,6 +75,37 @@ When we need richer model-level metadata, we add it under `extra_capabilities` i
 - `visibility`: one of `hidden`, `summary`, `full`, `mixed`, or `omitted`; normalized across providers rather than mirroring vendor-native parameter names
 - `continuation`: continuation mechanism hints such as `thinking_blocks` or `thought_signatures`
 - `notes`: short implementation notes when the model family has important quirks
+
+### Provider Control Constraints
+
+`reasoning_options` describes controls exposed by this provider's API. Each option may
+include `exclusive_with`, an array of other option `type` values in the same model's
+list. A declaration in either direction means the pair cannot be sent together:
+
+```json
+[
+  { "type": "effort", "values": ["none", "low", "medium", "xhigh"], "exclusive_with": ["budget_tokens"] },
+  { "type": "budget_tokens", "min": 0, "max": 262144 }
+]
+```
+
+- References use catalog control types, not wire parameter names. Both `budget` and
+  `budget_tokens` exist in legacy data; adapters translate the declared control into
+  the endpoint's native parameter (for example, Alibaba's `thinking_budget`).
+- An absent constraint means unknown, not permission to combine controls. Do not
+  infer exclusivity for every model: some Claude models accept effort plus budget.
+- Model portraits do not prove a proxy exposes the same controls. Provider-local
+  declarations take precedence; `custom-provider` is official-source fallback
+  metadata, not an endpoint capability guarantee.
+- For effort-first models with an exclusive budget alternative, omit `budget.default`
+  so older consumers do not automatically inject a conflicting budget. Keep the
+  range for an explicit advanced override. Defaults describe a starting point;
+  they are not instructions to send every default on every request.
+- Consumers should retain one active user choice (provider default, effort, or
+  explicit budget), then resolve it against the provider before serializing. Switching
+  between exclusive controls must not send a stale value from the inactive control.
+  "Provider default" sends neither override; it is not equivalent to choosing the
+  highest effort or copying a numeric budget default.
 
 ### Current Coverage
 The initial portrait registry covers these model families:
