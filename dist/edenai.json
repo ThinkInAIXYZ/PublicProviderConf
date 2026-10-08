@@ -2265,7 +2265,7 @@
       "cost": {
         "input": 2,
         "output": 10,
-        "cache_read": 0.2,
+        "cache_read": 0.1,
         "cache_write": 2.5
       },
       "canonical_model_id": "anthropic/claude-sonnet-5-5",
@@ -2785,6 +2785,72 @@
       }
     },
     {
+      "id": "anthropic/claude-haiku-5-5",
+      "name": "Claude Haiku 5.5",
+      "description": "Fast Claude model for responsive assistance, classification, and lightweight agents",
+      "family": "claude-haiku",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-10-07",
+      "last_updated": "2026-10-07",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "cache_write": 0.125,
+        "tiers": [
+          {
+            "input": 0.5,
+            "output": 2.5,
+            "cache_read": 0.05,
+            "cache_write": 0.625,
+            "tier": {
+              "type": "context",
+              "size": 100000
+            }
+          }
+        ]
+      },
+      "canonical_model_id": "anthropic/claude-haiku-5-5",
+      "display_name": "Claude Haiku 5.5",
+      "type": "chat"
+    },
+    {
       "id": "anthropic/claude-sonnet-4-6",
       "name": "Claude Sonnet 4.6",
       "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
@@ -2910,7 +2976,7 @@
       "cost": {
         "input": 2,
         "output": 10,
-        "cache_read": 0.2,
+        "cache_read": 0.1,
         "cache_write": 2.5
       },
       "canonical_model_id": "anthropic/claude-sonnet-5-5",
@@ -7049,9 +7115,9 @@
         "output": 384000
       },
       "cost": {
-        "input": 0.45076,
-        "output": 0.90152,
-        "cache_read": 0.090152
+        "input": 0.44708,
+        "output": 0.89416,
+        "cache_read": 0.089416
       },
       "canonical_model_id": "deepseek/deepseek-v4-flash-0731",
       "display_name": "DeepSeek V4 Flash 0731 (Scaleway)",
@@ -7091,8 +7157,8 @@
         "output": 4096
       },
       "cost": {
-        "input": 1.01421,
-        "output": 1.01421
+        "input": 1.005931,
+        "output": 1.005931
       },
       "canonical_model_id": "meta/llama-3.3-70b-instruct",
       "display_name": "Llama-3.3-70B-Instruct (Scaleway)",
@@ -7137,8 +7203,8 @@
         "output": 32768
       },
       "cost": {
-        "input": 0.169035,
-        "output": 0.67614
+        "input": 0.167655,
+        "output": 0.67062
       },
       "canonical_model_id": "openai/gpt-oss-120b",
       "display_name": "GPT OSS 120B (Scaleway)",
@@ -7178,8 +7244,8 @@
         "output": 4096
       },
       "cost": {
-        "input": 0.732485,
-        "output": 0.732485
+        "input": 0.726505,
+        "output": 0.726505
       },
       "canonical_model_id": "meta/llama-3.3-70b-instruct",
       "display_name": "Llama-3.3-70B-Instruct (IONOS)",
@@ -7224,8 +7290,8 @@
         "output": 32768
       },
       "cost": {
-        "input": 0.169035,
-        "output": 0.732485
+        "input": 0.167655,
+        "output": 0.726505
       },
       "canonical_model_id": "openai/gpt-oss-120b",
       "display_name": "GPT OSS 120B (IONOS)",
@@ -11463,7 +11529,15 @@
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high"
+          ]
+        }
+      ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
@@ -11662,6 +11736,43 @@
       },
       "canonical_model_id": "mistral/mistral-medium-2604",
       "display_name": "Mistral Medium 3.5",
+      "type": "chat"
+    },
+    {
+      "id": "mistral/codestral-2508",
+      "name": "Codestral 25.08",
+      "description": "Mistral code model for low-latency completion, fill-in-the-middle, and code generation",
+      "family": "codestral",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2025-07-30",
+      "last_updated": "2025-07-30",
+      "modalities": {
+        "input": [
+          "text",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 256000,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 0.9,
+        "cache_read": 0.03
+      },
+      "canonical_model_id": "mistral/codestral-2508",
+      "display_name": "Codestral 25.08",
       "type": "chat"
     },
     {
@@ -15491,8 +15602,8 @@
         "output": 262144
       },
       "cost": {
-        "input": 0.33807,
-        "output": 0.45076
+        "input": 0.33531,
+        "output": 0.44708
       },
       "canonical_model_id": "mistral/ministral-3-14b-instruct-2512",
       "display_name": "Ministral 3 14B (Infomaniak)",

@@ -6,6 +6,63 @@
   "display_name": "LLM Gateway",
   "models": [
     {
+      "id": "entrim/glm-5.3-flash",
+      "name": "GLM-5.3 Flash (entrim)",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0.35,
+        "cache_read": 0.0175
+      },
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3 Flash (entrim)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "entrim/deepseek-v4.1-flash",
       "name": "DeepSeek V4.1 Flash (entrim)",
       "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
@@ -1105,59 +1162,6 @@
       "type": "chat"
     },
     {
-      "id": "deepinfra/hy3",
-      "name": "Hy3 (DeepInfra)",
-      "description": "Tencent Hy reasoning model for coding, instruction following, and agent tasks",
-      "family": "Hy",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-07-06",
-      "last_updated": "2026-07-06",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "input": 192000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.14,
-        "output": 0.58,
-        "cache_read": 0.035
-      },
-      "canonical_model_id": "tencent/hy3",
-      "display_name": "Hy3 (DeepInfra)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
       "id": "deepinfra/deepseek-v4-pro",
       "name": "DeepSeek V4 Pro (DeepInfra)",
       "description": "Open MoE flagship with million-token context for coding and long agent runs",
@@ -2112,6 +2116,42 @@
           "visibility": "summary"
         }
       }
+    },
+    {
+      "id": "scx-ai-gp/glm-5.3-fast",
+      "name": "GLM 5.3 Fast (SCX.ai)",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 2.8,
+        "output": 8.8,
+        "cache_read": 0.56
+      },
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM 5.3 Fast (SCX.ai)",
+      "type": "chat"
     },
     {
       "id": "zai/glm-4.6v",
@@ -4143,6 +4183,59 @@
       "type": "chat"
     },
     {
+      "id": "aws-bedrock/claude-haiku-5-5",
+      "name": "Claude Haiku 5.5 (AWS Bedrock)",
+      "description": "Fast Claude model for responsive assistance, classification, and lightweight agents",
+      "family": "claude-haiku",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-10-07",
+      "last_updated": "2026-10-07",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "cache_write": 0.125
+      },
+      "canonical_model_id": "anthropic/claude-haiku-5-5",
+      "display_name": "Claude Haiku 5.5 (AWS Bedrock)",
+      "type": "chat"
+    },
+    {
       "id": "aws-bedrock/claude-sonnet-4-6",
       "name": "Claude Sonnet 4.6 (AWS Bedrock)",
       "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
@@ -4916,7 +5009,6 @@
         {
           "type": "effort",
           "values": [
-            "minimal",
             "low",
             "medium",
             "high"
@@ -6163,6 +6255,59 @@
           ]
         }
       }
+    },
+    {
+      "id": "anthropic/claude-haiku-5-5",
+      "name": "Claude Haiku 5.5 (Anthropic)",
+      "description": "Fast Claude model for responsive assistance, classification, and lightweight agents",
+      "family": "claude-haiku",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-10-07",
+      "last_updated": "2026-10-07",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "cache_write": 0.125
+      },
+      "canonical_model_id": "anthropic/claude-haiku-5-5",
+      "display_name": "Claude Haiku 5.5 (Anthropic)",
+      "type": "chat"
     },
     {
       "id": "anthropic/claude-sonnet-4-6",
@@ -9573,6 +9718,52 @@
         "output": 0.7
       },
       "display_name": "Qwen3 VL 30B A3B Instruct (NovitaAI)",
+      "type": "chat"
+    },
+    {
+      "id": "novita/ling-3.1-flash",
+      "name": "Ling 3.1 Flash (NovitaAI)",
+      "description": "Efficient model for low-latency assistance, extraction, and routine automation",
+      "family": "ling",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "release_date": "2026-09-29",
+      "last_updated": "2026-09-29",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "canonical_model_id": "inclusionai/ling-3.1-flash",
+      "display_name": "Ling 3.1 Flash (NovitaAI)",
       "type": "chat"
     },
     {
@@ -22563,7 +22754,6 @@
         {
           "type": "effort",
           "values": [
-            "minimal",
             "low",
             "medium",
             "high"
