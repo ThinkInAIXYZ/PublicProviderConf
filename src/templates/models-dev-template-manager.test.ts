@@ -6,6 +6,40 @@ import {
   ModelsDevTemplateManager,
 } from './models-dev-template-manager';
 
+test('disables Argon sampling without freezing upstream prices or output limits', async () => {
+  const templates = await new ModelsDevTemplateManager().loadAllTemplates();
+  for (const cost of [
+    { input: 2, output: 10, cache_read: 0.1 },
+    { input: 4, output: 20, cache_read: 0.2 },
+  ]) {
+    const upstream: ModelsDevProvider = {
+      id: 'google',
+      name: 'Google',
+      models: [
+        {
+          id: 'gemini-4-argon',
+          name: 'Gemini 4 Argon',
+          temperature: true,
+          cost,
+          limit: { context: 1048576, output: 32768 },
+          metadata: { upstream: true },
+        },
+        { id: 'gemini-3.8-flash', name: 'Gemini 3.8 Flash', temperature: true },
+      ],
+    };
+    const merged = mergeProviderWithTemplate(upstream, templates.get('google'));
+    const argon = merged.models.find(model => model.id === 'gemini-4-argon');
+
+    assert.equal(argon?.temperature, false);
+    assert.deepEqual(argon?.cost, cost);
+    assert.deepEqual(argon?.limit, upstream.models[0].limit);
+    assert.equal(argon?.metadata?.upstream, true);
+    assert.equal(argon?.metadata?.pricingValidUntil, '2026-11-30');
+    assert.equal(merged.models.find(model => model.id === 'gemini-3.8-flash')?.temperature, true);
+    assert.equal(upstream.models[0].temperature, true);
+  }
+});
+
 test('keeps official Qwen effort and exclusive budget controls through template merging', async () => {
   const templates = await new ModelsDevTemplateManager().loadAllTemplates();
   for (const providerId of ['alibaba', 'alibaba-cn']) {
