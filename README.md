@@ -178,6 +178,8 @@ Adding a new provider usually involves implementing `Provider` under `src/provid
 AIHubMix is fetched live from `https://aihubmix.com/api/v1/models` so you have a ready-made fallback dataset for models that aren't yet covered by the primary `models.dev` catalog. Keeping the provider enabled ensures `dist/aihubmix.json` stays current without manual snapshots.
 BurnCloud rides exclusively on `manual-templates/burncloud.json`, which is regenerated from `models.txt` snapshots so the CLI can ship the latest catalog without hitting proprietary endpoints. Keep that template up to date (and re-run `jq -c` to refresh `dist/burncloud.json`) whenever BurnCloud publishes new models or capability metadata.
 
+The Google entry for `gemini-4-argon` sets `temperature: false` because Google ignores `temperature`, `top_p`, and `top_k`. Its introductory prices are $2 input / $10 output and $0.10 cached input per million tokens through November 30, 2026; from December 1, 2026, these become $4 / $20 and $0.20. The template records `metadata.pricingValidUntil` and the scheduled rates without overriding upstream costs or automatically switching prices. Its 32,768 output limit is a conservative catalog setting. Argon is outside the curated `custom-provider` selection. See the [official migration and pricing guide](https://ai.google.dev/gemini-api/docs/latest-model).
+
 ## Project Structure
 ```
 src/
