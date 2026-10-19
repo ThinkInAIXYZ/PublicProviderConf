@@ -6,36 +6,62 @@
   "display_name": "Xiaomi Token Plan (China)",
   "models": [
     {
-      "id": "mimo-v2.5-tts-voiceclone",
-      "name": "MiMo-V2.5-TTS-VoiceClone",
-      "description": "Speech generation model for controllable voice, narration, and audio delivery",
+      "id": "mimo-v2.6-flash",
+      "name": "MiMo-V2.6-Flash",
+      "description": "MiMo Flash model for multimodal coding agents and long-context automation",
       "family": "mimo",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
-      "release_date": "2026-04-22",
-      "last_updated": "2026-04-22",
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "audio",
+          "video"
         ],
         "output": [
-          "audio"
+          "text"
         ]
       },
       "open_weights": true,
       "limit": {
-        "context": 8192,
-        "output": 8192
+        "context": 1048576,
+        "output": 131072
       },
       "cost": {
         "input": 0,
-        "output": 0
+        "output": 0,
+        "cache_read": 0
       },
-      "display_name": "MiMo-V2.5-TTS-VoiceClone",
-      "type": "chat"
+      "canonical_model_id": "xiaomi/mimo-v2.6-flash",
+      "display_name": "MiMo-V2.6-Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "mimo-v2.5-tts",
@@ -102,61 +128,36 @@
       "type": "chat"
     },
     {
-      "id": "mimo-v2.5-pro",
-      "name": "MiMo-V2.5-Pro",
-      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
+      "id": "mimo-v2-tts",
+      "name": "MiMo-V2-TTS",
+      "description": "Speech generation model for controllable voice, narration, and audio delivery",
       "family": "mimo",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "knowledge": "2024-12",
-      "release_date": "2026-04-22",
-      "last_updated": "2026-04-22",
+      "tool_call": false,
+      "release_date": "2026-03-18",
+      "last_updated": "2026-03-18",
       "modalities": {
         "input": [
           "text"
         ],
         "output": [
-          "text"
+          "audio"
         ]
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 131072
+        "context": 8192,
+        "output": 8192
       },
-      "status": "deprecated",
       "cost": {
         "input": 0,
-        "output": 0,
-        "cache_read": 0
+        "output": 0
       },
-      "canonical_model_id": "xiaomi/mimo-v2.5-pro",
-      "display_name": "MiMo-V2.5-Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "display_name": "MiMo-V2-TTS",
+      "type": "chat"
     },
     {
       "id": "mimo-v2.6-pro",
@@ -217,8 +218,8 @@
       }
     },
     {
-      "id": "mimo-v2-tts",
-      "name": "MiMo-V2-TTS",
+      "id": "mimo-v2.5-tts-voiceclone",
+      "name": "MiMo-V2.5-TTS-VoiceClone",
       "description": "Speech generation model for controllable voice, narration, and audio delivery",
       "family": "mimo",
       "attachment": false,
@@ -226,8 +227,8 @@
         "supported": false
       },
       "tool_call": false,
-      "release_date": "2026-03-18",
-      "last_updated": "2026-03-18",
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
       "modalities": {
         "input": [
           "text"
@@ -245,68 +246,8 @@
         "input": 0,
         "output": 0
       },
-      "display_name": "MiMo-V2-TTS",
+      "display_name": "MiMo-V2.5-TTS-VoiceClone",
       "type": "chat"
-    },
-    {
-      "id": "mimo-v2.5",
-      "name": "MiMo-V2.5",
-      "description": "Open MiMo model for multimodal coding agents and long-context automation",
-      "family": "mimo",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "knowledge": "2024-12",
-      "release_date": "2026-04-22",
-      "last_updated": "2026-04-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 131072
-      },
-      "status": "deprecated",
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0
-      },
-      "canonical_model_id": "xiaomi/mimo-v2.5",
-      "display_name": "MiMo-V2.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
     },
     {
       "id": "mimo-v2-pro",
@@ -366,9 +307,66 @@
       }
     },
     {
-      "id": "mimo-v2.6-flash",
-      "name": "MiMo-V2.6-Flash",
-      "description": "MiMo Flash model for multimodal coding agents and long-context automation",
+      "id": "mimo-v2.5-pro",
+      "name": "MiMo-V2.5-Pro",
+      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
+      "family": "mimo",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2024-12",
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "canonical_model_id": "xiaomi/mimo-v2.5-pro",
+      "display_name": "MiMo-V2.5-Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "mimo-v2.5",
+      "name": "MiMo-V2.5",
+      "description": "Open MiMo model for multimodal coding agents and long-context automation",
       "family": "mimo",
       "attachment": true,
       "reasoning": {
@@ -385,8 +383,9 @@
         "field": "reasoning_content"
       },
       "temperature": true,
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
+      "knowledge": "2024-12",
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
       "modalities": {
         "input": [
           "text",
@@ -403,13 +402,14 @@
         "context": 1048576,
         "output": 131072
       },
+      "status": "deprecated",
       "cost": {
         "input": 0,
         "output": 0,
         "cache_read": 0
       },
-      "canonical_model_id": "xiaomi/mimo-v2.6-flash",
-      "display_name": "MiMo-V2.6-Flash",
+      "canonical_model_id": "xiaomi/mimo-v2.5",
+      "display_name": "MiMo-V2.5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
