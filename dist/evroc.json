@@ -6,6 +6,86 @@
   "display_name": "evroc",
   "models": [
     {
+      "id": "mistralai/Mistral-Medium-3.5-128B",
+      "name": "Mistral Medium 3.5",
+      "description": "Balanced Mistral model for enterprise assistants, multilingual work, and tools",
+      "family": "mistral-medium",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-29",
+      "last_updated": "2026-04-29",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 1.725,
+        "output": 6.9
+      },
+      "canonical_model_id": "mistral/mistral-medium-2604",
+      "display_name": "Mistral Medium 3.5",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/Voxtral-Small-24B-2507",
+      "name": "Voxtral Small 24B",
+      "description": "Efficient Mistral model for fast chat, extraction, and production assistants",
+      "family": "voxtral",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2025-03-01",
+      "last_updated": "2025-03-01",
+      "modalities": {
+        "input": [
+          "audio",
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 32000,
+        "output": 32000
+      },
+      "cost": {
+        "input": 0.0023,
+        "output": 0.0023,
+        "output_audio": 2.3
+      },
+      "display_name": "Voxtral Small 24B",
+      "type": "chat"
+    },
+    {
       "id": "intfloat/multilingual-e5-large-instruct",
       "name": "E5 Multi-Lingual Large Embeddings 0.6B",
       "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
@@ -94,45 +174,10 @@
       }
     },
     {
-      "id": "nvidia/Llama-3.3-70B-Instruct-FP8",
-      "name": "Llama-3.3-70B-Instruct",
-      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-12-06",
-      "last_updated": "2024-12-06",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 4096
-      },
-      "cost": {
-        "input": 1.15,
-        "output": 1.15
-      },
-      "canonical_model_id": "meta/llama-3.3-70b-instruct",
-      "display_name": "Llama-3.3-70B-Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "google/gemma-4-26B-A4B-it",
-      "name": "Gemma 4 26B A4B IT",
-      "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
-      "family": "gemma",
+      "id": "moonshotai/Kimi-K2.6",
+      "name": "Kimi K2.6",
+      "description": "Multimodal Kimi workhorse for agent loops, coding tasks, and visual context",
+      "family": "kimi-k2",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -140,18 +185,20 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
+          "type": "budget_tokens"
         }
       ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
+      "knowledge": "2025-01",
+      "release_date": "2026-04-21",
+      "last_updated": "2026-04-21",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -160,15 +207,20 @@
       "open_weights": true,
       "limit": {
         "context": 262144,
-        "output": 32768
+        "output": 262144
       },
       "cost": {
-        "input": 0.144,
-        "output": 0.575
+        "input": 1.4375,
+        "output": 5.75
       },
-      "canonical_model_id": "google/gemma-4-26b-a4b-it",
-      "display_name": "Gemma 4 26B A4B IT",
-      "type": "chat"
+      "canonical_model_id": "moonshotai/kimi-k2.6",
+      "display_name": "Kimi K2.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "zai-org/GLM-5.2",
@@ -222,202 +274,6 @@
           "supported": true
         }
       }
-    },
-    {
-      "id": "KBLab/kb-whisper-large",
-      "name": "KB Whisper",
-      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
-      "family": "whisper",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "release_date": "2024-10-01",
-      "last_updated": "2024-10-01",
-      "modalities": {
-        "input": [
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 448,
-        "output": 448
-      },
-      "cost": {
-        "input": 0.0023,
-        "output": 0.0023,
-        "output_audio": 2.3
-      },
-      "display_name": "KB Whisper",
-      "type": "chat"
-    },
-    {
-      "id": "mistralai/Mistral-Medium-3.5-128B",
-      "name": "Mistral Medium 3.5",
-      "description": "Balanced Mistral model for enterprise assistants, multilingual work, and tools",
-      "family": "mistral-medium",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-29",
-      "last_updated": "2026-04-29",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "cost": {
-        "input": 1.725,
-        "output": 6.9
-      },
-      "canonical_model_id": "mistral/mistral-medium-2604",
-      "display_name": "Mistral Medium 3.5",
-      "type": "chat"
-    },
-    {
-      "id": "mistralai/Voxtral-Small-24B-2507",
-      "name": "Voxtral Small 24B",
-      "description": "Efficient Mistral model for fast chat, extraction, and production assistants",
-      "family": "voxtral",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "release_date": "2025-03-01",
-      "last_updated": "2025-03-01",
-      "modalities": {
-        "input": [
-          "audio",
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 32000,
-        "output": 32000
-      },
-      "cost": {
-        "input": 0.0023,
-        "output": 0.0023,
-        "output_audio": 2.3
-      },
-      "display_name": "Voxtral Small 24B",
-      "type": "chat"
-    },
-    {
-      "id": "moonshotai/Kimi-K2.6",
-      "name": "Kimi K2.6",
-      "description": "Multimodal Kimi workhorse for agent loops, coding tasks, and visual context",
-      "family": "kimi-k2",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "budget_tokens"
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-04-21",
-      "last_updated": "2026-04-21",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "cost": {
-        "input": 1.4375,
-        "output": 5.75
-      },
-      "canonical_model_id": "moonshotai/kimi-k2.6",
-      "display_name": "Kimi K2.6",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "openai/whisper-large-v3-turbo",
-      "name": "Whisper Large v3 Turbo",
-      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
-      "family": "whisper",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "release_date": "2024-10-01",
-      "last_updated": "2024-10-01",
-      "modalities": {
-        "input": [
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 448,
-        "output": 448
-      },
-      "cost": {
-        "input": 0.0023,
-        "output": 0.0023,
-        "output_audio": 2.3
-      },
-      "canonical_model_id": "openai/whisper-large-v3-turbo",
-      "display_name": "Whisper Large v3 Turbo",
-      "type": "chat"
     },
     {
       "id": "openai/gpt-oss-120b",
@@ -499,6 +355,40 @@
       },
       "canonical_model_id": "openai/whisper-large-v3",
       "display_name": "Whisper 3 Large",
+      "type": "chat"
+    },
+    {
+      "id": "openai/whisper-large-v3-turbo",
+      "name": "Whisper Large v3 Turbo",
+      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
+      "family": "whisper",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2024-10-01",
+      "last_updated": "2024-10-01",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 448,
+        "output": 448
+      },
+      "cost": {
+        "input": 0.0023,
+        "output": 0.0023,
+        "output_audio": 2.3
+      },
+      "canonical_model_id": "openai/whisper-large-v3-turbo",
+      "display_name": "Whisper Large v3 Turbo",
       "type": "chat"
     },
     {
@@ -669,6 +559,116 @@
           ]
         }
       }
+    },
+    {
+      "id": "nvidia/Llama-3.3-70B-Instruct-FP8",
+      "name": "Llama-3.3-70B-Instruct",
+      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-12-06",
+      "last_updated": "2024-12-06",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 4096
+      },
+      "cost": {
+        "input": 1.15,
+        "output": 1.15
+      },
+      "canonical_model_id": "meta/llama-3.3-70b-instruct",
+      "display_name": "Llama-3.3-70B-Instruct",
+      "type": "chat"
+    },
+    {
+      "id": "google/gemma-4-26B-A4B-it",
+      "name": "Gemma 4 26B A4B IT",
+      "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.144,
+        "output": 0.575
+      },
+      "canonical_model_id": "google/gemma-4-26b-a4b-it",
+      "display_name": "Gemma 4 26B A4B IT",
+      "type": "chat"
+    },
+    {
+      "id": "KBLab/kb-whisper-large",
+      "name": "KB Whisper",
+      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
+      "family": "whisper",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2024-10-01",
+      "last_updated": "2024-10-01",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 448,
+        "output": 448
+      },
+      "cost": {
+        "input": 0.0023,
+        "output": 0.0023,
+        "output_audio": 2.3
+      },
+      "display_name": "KB Whisper",
+      "type": "chat"
     }
   ]
 }
