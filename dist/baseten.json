@@ -6,6 +6,72 @@
   "display_name": "Baseten",
   "models": [
     {
+      "id": "openai/gpt-oss-120b",
+      "name": "OpenAI GPT 120B",
+      "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128072,
+        "output": 128072
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.1
+      },
+      "canonical_model_id": "openai/gpt-oss-120b",
+      "display_name": "OpenAI GPT 120B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
       "id": "MiniMaxAI/MiniMax-M2.5",
       "name": "MiniMax-M2.5",
       "description": "Legacy model retained for compatibility with older integrations",
@@ -54,69 +120,6 @@
           "interleaved": true,
           "summaries": true,
           "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "deepseek-ai/DeepSeek-V4.1-Flash-Fast",
-      "name": "DeepSeek V4.1 Flash Fast",
-      "description": "Fast DeepSeek model for efficient chat, coding help, and agent loops",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.6,
-        "output": 2.4,
-        "cache_read": 0.014
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "DeepSeek V4.1 Flash Fast",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
         }
       }
     },
@@ -170,68 +173,6 @@
       },
       "canonical_model_id": "deepseek/deepseek-v4.1-flash",
       "display_name": "DeepSeek V4.1 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "deepseek-ai/DeepSeek-V4-Pro-0813",
-      "name": "DeepSeek V4 Pro 0813",
-      "description": "Flagship DeepSeek model for coding, reasoning, and agentic work",
-      "family": "deepseek-thinking",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 262144
-      },
-      "cost": {
-        "input": 1.32,
-        "output": 3.96,
-        "cache_read": 0.132
-      },
-      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
-      "display_name": "DeepSeek V4 Pro 0813",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -423,6 +364,131 @@
       }
     },
     {
+      "id": "deepseek-ai/DeepSeek-V4-Pro-0813",
+      "name": "DeepSeek V4 Pro 0813",
+      "description": "Flagship DeepSeek model for coding, reasoning, and agentic work",
+      "family": "deepseek-thinking",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 262144
+      },
+      "cost": {
+        "input": 1.32,
+        "output": 3.96,
+        "cache_read": 0.132
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
+      "display_name": "DeepSeek V4 Pro 0813",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V4-Flash-0731",
+      "name": "DeepSeek V4 Flash 0731",
+      "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-07-31",
+      "last_updated": "2026-07-31",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.13,
+        "output": 0.26,
+        "cache_read": 0.028
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-flash-0731",
+      "display_name": "DeepSeek V4 Flash 0731",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
       "id": "deepseek-ai/DeepSeek-V4.1-Flash-1017-Fast",
       "name": "DeepSeek V4.1 Flash 1017 Fast",
       "description": "Fast DeepSeek model for efficient chat, coding help, and agent loops",
@@ -488,11 +554,74 @@
       }
     },
     {
-      "id": "deepseek-ai/DeepSeek-V4-Flash-0731",
-      "name": "DeepSeek V4 Flash 0731",
-      "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
+      "id": "deepseek-ai/DeepSeek-V4.1-Flash-Fast",
+      "name": "DeepSeek V4.1 Flash Fast",
+      "description": "Fast DeepSeek model for efficient chat, coding help, and agent loops",
       "family": "deepseek-flash",
-      "attachment": false,
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.6,
+        "output": 2.4,
+        "cache_read": 0.014
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash Fast",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "moonshotai/Kimi-K3",
+      "name": "Kimi K3",
+      "description": "Kimi multimodal agent model for visual understanding, coding, and planning",
+      "family": "kimi-k3",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -514,12 +643,12 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-07-31",
-      "last_updated": "2026-07-31",
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -528,15 +657,15 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 384000
+        "output": 262144
       },
       "cost": {
-        "input": 0.13,
-        "output": 0.26,
-        "cache_read": 0.028
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3
       },
-      "canonical_model_id": "deepseek/deepseek-v4-flash-0731",
-      "display_name": "DeepSeek V4 Flash 0731",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -728,24 +857,18 @@
       }
     },
     {
-      "id": "moonshotai/Kimi-K3",
-      "name": "Kimi K3",
-      "description": "Kimi multimodal agent model for visual understanding, coding, and planning",
-      "family": "kimi-k3",
-      "attachment": true,
+      "id": "nvidia/Nemotron-120B-A12B",
+      "name": "Nemotron Super",
+      "description": "Nemotron middle tier for collaborative agents and high-volume reasoning workloads",
+      "family": "nemotron",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
         {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
+          "type": "toggle"
         }
       ],
       "tool_call": true,
@@ -754,12 +877,12 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "knowledge": "2025-06",
+      "release_date": "2026-03-11",
+      "last_updated": "2026-03-11",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -767,82 +890,17 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 262144
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3
-      },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "thinkingmachines/inkling",
-      "name": "Inkling",
-      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
-      "family": "ling",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "minimal",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-07-15",
-      "last_updated": "2026-07-15",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 32768
+        "context": 202800,
+        "output": 202800
       },
       "status": "deprecated",
       "cost": {
-        "input": 1,
-        "output": 4.05
+        "input": 0.3,
+        "output": 0.75,
+        "cache_read": 0.06
       },
-      "canonical_model_id": "thinkingmachines/inkling",
-      "display_name": "Inkling",
+      "canonical_model_id": "nvidia/nemotron-3-super-120b-a12b",
+      "display_name": "Nemotron Super",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -857,11 +915,11 @@
       }
     },
     {
-      "id": "thinkingmachines/inkling-small",
-      "name": "Inkling Small",
-      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
-      "family": "ling",
-      "attachment": true,
+      "id": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B",
+      "name": "Nemotron Ultra",
+      "description": "Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy",
+      "family": "nemotron",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -871,12 +929,7 @@
           "type": "effort",
           "values": [
             "none",
-            "minimal",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
+            "high"
           ]
         }
       ],
@@ -886,12 +939,12 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-07-30",
-      "last_updated": "2026-07-30",
+      "knowledge": "2025-09",
+      "release_date": "2026-06-04",
+      "last_updated": "2026-06-04",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -899,17 +952,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 32768
+        "context": 202800,
+        "output": 202800
       },
-      "status": "deprecated",
       "cost": {
-        "input": 0.5,
-        "output": 1.2,
-        "cache_read": 0.1
+        "input": 0.6,
+        "output": 2.4,
+        "cache_read": 0.12
       },
-      "canonical_model_id": "thinkingmachines/inkling-small",
-      "display_name": "Inkling Small",
+      "canonical_model_id": "nvidia/nemotron-3-ultra-550b-a55b",
+      "display_name": "Nemotron Ultra",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1043,9 +1095,9 @@
       }
     },
     {
-      "id": "zai-org/GLM-5.2",
-      "name": "GLM 5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "id": "zai-org/GLM-5.3-Fast",
+      "name": "GLM 5.3 Fast",
+      "description": "GLM vision model for visual reasoning, documents, and multimodal agents",
       "family": "glm",
       "attachment": true,
       "reasoning": {
@@ -1056,7 +1108,54 @@
         {
           "type": "effort",
           "values": [
-            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 262144
+      },
+      "cost": {
+        "input": 2.1,
+        "output": 6.6,
+        "cache_read": 0.21
+      },
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM 5.3 Fast",
+      "type": "chat"
+    },
+    {
+      "id": "zai-org/GLM-5.3",
+      "name": "GLM 5.3",
+      "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
+      "family": "glm",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
             "low",
             "high",
             "max"
@@ -1069,8 +1168,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
           "text",
@@ -1090,8 +1189,8 @@
         "output": 4.4,
         "cache_read": 0.14
       },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM 5.2",
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM 5.3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1169,9 +1268,67 @@
       }
     },
     {
-      "id": "zai-org/GLM-5.3",
-      "name": "GLM 5.3",
+      "id": "zai-org/GLM-4.7",
+      "name": "GLM 4.7",
       "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-04",
+      "release_date": "2025-12-22",
+      "last_updated": "2025-12-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 200000,
+        "output": 200000
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 0.6,
+        "output": 2.2,
+        "cache_read": 0.12
+      },
+      "canonical_model_id": "zhipuai/glm-4.7",
+      "display_name": "GLM 4.7",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "zai-org/GLM-5.2",
+      "name": "GLM 5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
       "family": "glm",
       "attachment": true,
       "reasoning": {
@@ -1182,6 +1339,7 @@
         {
           "type": "effort",
           "values": [
+            "none",
             "low",
             "high",
             "max"
@@ -1194,8 +1352,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
       "modalities": {
         "input": [
           "text",
@@ -1215,8 +1373,8 @@
         "output": 4.4,
         "cache_read": 0.14
       },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM 5.3",
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM 5.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1289,117 +1447,11 @@
       }
     },
     {
-      "id": "zai-org/GLM-4.7",
-      "name": "GLM 4.7",
-      "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2025-12-22",
-      "last_updated": "2025-12-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 200000,
-        "output": 200000
-      },
-      "status": "deprecated",
-      "cost": {
-        "input": 0.6,
-        "output": 2.2,
-        "cache_read": 0.12
-      },
-      "canonical_model_id": "zhipuai/glm-4.7",
-      "display_name": "GLM 4.7",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "zai-org/GLM-5.3-Fast",
-      "name": "GLM 5.3 Fast",
-      "description": "GLM vision model for visual reasoning, documents, and multimodal agents",
-      "family": "glm",
+      "id": "thinkingmachines/inkling-small",
+      "name": "Inkling Small",
+      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
+      "family": "ling",
       "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 262144
-      },
-      "cost": {
-        "input": 2.1,
-        "output": 6.6,
-        "cache_read": 0.21
-      },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM 5.3 Fast",
-      "type": "chat"
-    },
-    {
-      "id": "openai/gpt-oss-120b",
-      "name": "OpenAI GPT 120B",
-      "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
-      "family": "gpt-oss",
-      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -1424,12 +1476,12 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
+      "release_date": "2026-07-30",
+      "last_updated": "2026-07-30",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -1437,77 +1489,17 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128072,
-        "output": 128072
+        "context": 1048576,
+        "output": 32768
       },
+      "status": "deprecated",
       "cost": {
-        "input": 0.1,
-        "output": 0.5,
+        "input": 0.5,
+        "output": 1.2,
         "cache_read": 0.1
       },
-      "canonical_model_id": "openai/gpt-oss-120b",
-      "display_name": "OpenAI GPT 120B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B",
-      "name": "Nemotron Ultra",
-      "description": "Largest Nemotron 3 model for maximum open-weight reasoning and agent accuracy",
-      "family": "nemotron",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-09",
-      "release_date": "2026-06-04",
-      "last_updated": "2026-06-04",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 202800,
-        "output": 202800
-      },
-      "cost": {
-        "input": 0.6,
-        "output": 2.4,
-        "cache_read": 0.12
-      },
-      "canonical_model_id": "nvidia/nemotron-3-ultra-550b-a55b",
-      "display_name": "Nemotron Ultra",
+      "canonical_model_id": "thinkingmachines/inkling-small",
+      "display_name": "Inkling Small",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1522,18 +1514,27 @@
       }
     },
     {
-      "id": "nvidia/Nemotron-120B-A12B",
-      "name": "Nemotron Super",
-      "description": "Nemotron middle tier for collaborative agents and high-volume reasoning workloads",
-      "family": "nemotron",
-      "attachment": false,
+      "id": "thinkingmachines/inkling",
+      "name": "Inkling",
+      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
+      "family": "ling",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
         {
-          "type": "toggle"
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
         }
       ],
       "tool_call": true,
@@ -1542,12 +1543,12 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-06",
-      "release_date": "2026-03-11",
-      "last_updated": "2026-03-11",
+      "release_date": "2026-07-15",
+      "last_updated": "2026-07-15",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -1555,17 +1556,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 202800,
-        "output": 202800
+        "context": 1048576,
+        "output": 32768
       },
       "status": "deprecated",
       "cost": {
-        "input": 0.3,
-        "output": 0.75,
-        "cache_read": 0.06
+        "input": 1,
+        "output": 4.05
       },
-      "canonical_model_id": "nvidia/nemotron-3-super-120b-a12b",
-      "display_name": "Nemotron Super",
+      "canonical_model_id": "thinkingmachines/inkling",
+      "display_name": "Inkling",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
