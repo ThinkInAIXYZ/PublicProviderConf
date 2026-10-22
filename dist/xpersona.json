@@ -6,6 +6,81 @@
   "display_name": "Xpersona",
   "models": [
     {
+      "id": "claude-haiku-4-5",
+      "name": "Claude Haiku 4.5 (latest)",
+      "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
+      "family": "claude-haiku",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-02-28",
+      "release_date": "2025-10-15",
+      "last_updated": "2025-10-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.6,
+        "output": 3.7,
+        "reasoning": 3.7,
+        "cache_read": 0.06
+      },
+      "canonical_model_id": "anthropic/claude-haiku-4-5",
+      "display_name": "Claude Haiku 4.5 (latest)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
       "id": "claude-opus-4-8",
       "name": "Claude Opus 4.8",
       "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
@@ -86,93 +161,10 @@
       }
     },
     {
-      "id": "gpt-5.6-terra",
-      "name": "GPT-5.6 Terra",
-      "description": "Balanced GPT-5.6 model for capable, cost-efficient everyday work",
-      "family": "gpt-terra",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-02-16",
-      "release_date": "2026-07-09",
-      "last_updated": "2026-07-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 372000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 1.5,
-        "output": 2,
-        "reasoning": 2,
-        "cache_read": 0.15
-      },
-      "canonical_model_id": "openai/gpt-5.6-terra",
-      "display_name": "GPT-5.6 Terra",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true
-        }
-      }
-    },
-    {
-      "id": "claude-haiku-4-5",
-      "name": "Claude Haiku 4.5 (latest)",
-      "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
-      "family": "claude-haiku",
+      "id": "gpt-5.4",
+      "name": "GPT-5.4",
+      "description": "Agent-ready GPT for coding and computer-use workflows at a lower cost",
+      "family": "gpt",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -194,10 +186,11 @@
       "interleaved": {
         "field": "reasoning_content"
       },
+      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-02-28",
-      "release_date": "2025-10-15",
-      "last_updated": "2025-10-15",
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-05",
+      "last_updated": "2026-03-05",
       "modalities": {
         "input": [
           "text",
@@ -209,37 +202,43 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 200000,
+        "context": 1050000,
         "output": 128000
       },
       "cost": {
-        "input": 0.6,
-        "output": 3.7,
-        "reasoning": 3.7,
-        "cache_read": 0.06
+        "input": 0.75,
+        "output": 6,
+        "reasoning": 6,
+        "cache_read": 0.075
       },
-      "canonical_model_id": "anthropic/claude-haiku-4-5",
-      "display_name": "Claude Haiku 4.5 (latest)",
+      "canonical_model_id": "openai/gpt-5.4",
+      "display_name": "GPT-5.4",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
           "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
           "visibility": "summary",
           "continuation": [
             "thinking_blocks"
           ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
+          "interleaved": true,
+          "summaries": true
         }
       }
     },
@@ -325,6 +324,56 @@
       }
     },
     {
+      "id": "xpersona-frieren-coder",
+      "name": "Xpersona Frieren 1",
+      "description": "Coding model for repository understanding, refactors, and agentic engineering tasks",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-12-30",
+      "release_date": "2026-05-01",
+      "last_updated": "2026-05-25",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 1.5,
+        "output": 6,
+        "reasoning": 6,
+        "cache_read": 0.15
+      },
+      "display_name": "Xpersona Frieren 1",
+      "type": "chat"
+    },
+    {
       "id": "claude-sonnet-4-6",
       "name": "Claude Sonnet 4.6",
       "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
@@ -407,14 +456,97 @@
       }
     },
     {
-      "id": "gpt-5.4",
-      "name": "GPT-5.4",
-      "description": "Agent-ready GPT for coding and computer-use workflows at a lower cost",
-      "family": "gpt",
+      "id": "gpt-5.6-sol",
+      "name": "GPT-5.6 Sol",
+      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
+      "family": "gpt-sol",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": false
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 372000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 1.5,
+        "output": 12,
+        "reasoning": 12,
+        "cache_read": 0.15
+      },
+      "canonical_model_id": "openai/gpt-5.6-sol",
+      "display_name": "GPT-5.6 Sol",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true
+        }
+      }
+    },
+    {
+      "id": "gemini-3.5-flash",
+      "name": "Gemini 3.5 Flash",
+      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
+      "family": "gemini-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
       },
       "reasoning_options": [
         {
@@ -434,9 +566,9 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-05",
-      "last_updated": "2026-03-05",
+      "knowledge": "2025-01",
+      "release_date": "2026-05-19",
+      "last_updated": "2026-05-19",
       "modalities": {
         "input": [
           "text",
@@ -448,30 +580,106 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1050000,
+        "context": 1000000,
         "output": 128000
       },
       "cost": {
-        "input": 0.75,
-        "output": 6,
-        "reasoning": 6,
-        "cache_read": 0.075
+        "input": 1.55,
+        "output": 12.2,
+        "reasoning": 12.2,
+        "cache_read": 0.155
       },
-      "canonical_model_id": "openai/gpt-5.4",
-      "display_name": "GPT-5.4",
+      "canonical_model_id": "google/gemini-3.5-flash",
+      "display_name": "Gemini 3.5 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": false,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true
+        }
+      }
+    },
+    {
+      "id": "gpt-5.6",
+      "name": "GPT-5.6",
+      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
+      "family": "gpt-sol",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 372000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 1.5,
+        "output": 12,
+        "reasoning": 12,
+        "cache_read": 0.15
+      },
+      "canonical_model_id": "openai/gpt-5.6-sol",
+      "display_name": "GPT-5.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
           "mode": "effort",
-          "effort": "none",
+          "effort": "medium",
           "effort_options": [
             "none",
             "low",
             "medium",
             "high",
-            "xhigh"
+            "xhigh",
+            "max"
           ],
           "verbosity": "medium",
           "verbosity_options": [
@@ -569,10 +777,10 @@
       }
     },
     {
-      "id": "gpt-5.6-sol",
-      "name": "GPT-5.6 Sol",
-      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
-      "family": "gpt-sol",
+      "id": "gpt-5.6-terra",
+      "name": "GPT-5.6 Terra",
+      "description": "Balanced GPT-5.6 model for capable, cost-efficient everyday work",
+      "family": "gpt-terra",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -615,95 +823,12 @@
       },
       "cost": {
         "input": 1.5,
-        "output": 12,
-        "reasoning": 12,
+        "output": 2,
+        "reasoning": 2,
         "cache_read": 0.15
       },
-      "canonical_model_id": "openai/gpt-5.6-sol",
-      "display_name": "GPT-5.6 Sol",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true
-        }
-      }
-    },
-    {
-      "id": "gpt-5.6",
-      "name": "GPT-5.6",
-      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
-      "family": "gpt-sol",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-02-16",
-      "release_date": "2026-07-09",
-      "last_updated": "2026-07-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 372000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 1.5,
-        "output": 12,
-        "reasoning": 12,
-        "cache_read": 0.15
-      },
-      "canonical_model_id": "openai/gpt-5.6-sol",
-      "display_name": "GPT-5.6",
+      "canonical_model_id": "openai/gpt-5.6-terra",
+      "display_name": "GPT-5.6 Terra",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -800,131 +925,6 @@
           ]
         }
       }
-    },
-    {
-      "id": "gemini-3.5-flash",
-      "name": "Gemini 3.5 Flash",
-      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
-      "family": "gemini-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-05-19",
-      "last_updated": "2026-05-19",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 1.55,
-        "output": 12.2,
-        "reasoning": 12.2,
-        "cache_read": 0.155
-      },
-      "canonical_model_id": "google/gemini-3.5-flash",
-      "display_name": "Gemini 3.5 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true
-        }
-      }
-    },
-    {
-      "id": "xpersona-frieren-coder",
-      "name": "Xpersona Frieren 1",
-      "description": "Coding model for repository understanding, refactors, and agentic engineering tasks",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-12-30",
-      "release_date": "2026-05-01",
-      "last_updated": "2026-05-25",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 1.5,
-        "output": 6,
-        "reasoning": 6,
-        "cache_read": 0.15
-      },
-      "display_name": "Xpersona Frieren 1",
-      "type": "chat"
     },
     {
       "id": "gpt-5.4-mini",
