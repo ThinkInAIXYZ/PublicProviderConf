@@ -6,10 +6,10 @@
   "display_name": "NaN",
   "models": [
     {
-      "id": "gemma4",
-      "name": "Gemma 4 26B A4B IT",
-      "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
-      "family": "gemma",
+      "id": "qwen3.8-flash",
+      "name": "Qwen3.8 Flash",
+      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "family": "qwen",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -20,9 +20,11 @@
           "type": "effort",
           "values": [
             "none",
+            "minimal",
             "low",
             "medium",
             "high",
+            "xhigh",
             "max"
           ]
         }
@@ -30,8 +32,8 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text",
@@ -41,18 +43,23 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
-        "context": 262144,
-        "output": 32768
+        "context": 1048576,
+        "output": 131072
       },
       "cost": {
         "input": 0,
         "output": 0
       },
-      "canonical_model_id": "google/gemma-4-26b-a4b-it",
-      "display_name": "Gemma 4 26B A4B IT",
-      "type": "chat"
+      "canonical_model_id": "alibaba/qwen3.8-flash",
+      "display_name": "Qwen3.8 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "glm5.3-flash",
@@ -105,6 +112,55 @@
       "type": "chat"
     },
     {
+      "id": "mimo-v2.6-flash",
+      "name": "MiMo-V2.6-Flash",
+      "description": "MiMo Flash model for multimodal coding agents and long-context automation",
+      "family": "mimo",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "canonical_model_id": "xiaomi/mimo-v2.6-flash",
+      "display_name": "MiMo-V2.6-Flash",
+      "type": "chat"
+    },
+    {
       "id": "qwen3.6",
       "name": "Qwen3.6 35B-A3B",
       "description": "Open multimodal Qwen MoE for local agents that need vision, audio, and code",
@@ -152,80 +208,6 @@
       "canonical_model_id": "alibaba/qwen3.6-35b-a3b",
       "display_name": "Qwen3.6 35B-A3B",
       "type": "chat"
-    },
-    {
-      "id": "deepseek-v4-flash",
-      "name": "DeepSeek V4.1 Flash",
-      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "minimal",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "DeepSeek V4.1 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
-        }
-      }
     },
     {
       "id": "glm5.3",
@@ -311,10 +293,10 @@
       "display_name": "Qwen-Image-2.1"
     },
     {
-      "id": "qwen3.8-flash",
-      "name": "Qwen3.8 Flash",
-      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
-      "family": "qwen",
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
+      "family": "deepseek-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -337,8 +319,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
       "modalities": {
         "input": [
           "text",
@@ -348,29 +331,46 @@
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 131072
+        "context": 1000000,
+        "output": 384000
       },
       "cost": {
         "input": 0,
         "output": 0
       },
-      "canonical_model_id": "alibaba/qwen3.8-flash",
-      "display_name": "Qwen3.8 Flash",
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
         }
       }
     },
     {
-      "id": "mimo-v2.6-flash",
-      "name": "MiMo-V2.6-Flash",
-      "description": "MiMo Flash model for multimodal coding agents and long-context automation",
-      "family": "mimo",
+      "id": "gemma4",
+      "name": "Gemma 4 26B A4B IT",
+      "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
+      "family": "gemma",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -389,14 +389,14 @@
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "audio"
+          "image"
         ],
         "output": [
           "text"
@@ -404,15 +404,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 131072
+        "context": 262144,
+        "output": 32768
       },
       "cost": {
         "input": 0,
         "output": 0
       },
-      "canonical_model_id": "xiaomi/mimo-v2.6-flash",
-      "display_name": "MiMo-V2.6-Flash",
+      "canonical_model_id": "google/gemma-4-26b-a4b-it",
+      "display_name": "Gemma 4 26B A4B IT",
       "type": "chat"
     }
   ]
