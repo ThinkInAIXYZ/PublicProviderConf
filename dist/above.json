@@ -6,10 +6,10 @@
   "display_name": "above.dev",
   "models": [
     {
-      "id": "mimo-v2.6-pro",
-      "name": "MiMo V2.6 Pro",
-      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
-      "family": "mimo",
+      "id": "glm-5.3-flash",
+      "name": "GLM 5.3 Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -17,22 +17,25 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
         }
       ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
       },
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "audio",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -40,26 +43,87 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 131072
       },
       "cost": {
-        "input": 0.5077,
-        "output": 1.0154,
-        "cache_read": 0.0042
+        "input": 0.165,
+        "output": 0.55,
+        "cache_read": 0.0319
       },
-      "canonical_model_id": "xiaomi/mimo-v2.6-pro",
-      "display_name": "MiMo V2.6 Pro",
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM 5.3 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "glm-5.2",
+      "name": "GLM 5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high",
+            "max"
           ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1.54,
+        "output": 4.84,
+        "cache_read": 0.154
+      },
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM 5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -122,6 +186,139 @@
       }
     },
     {
+      "id": "mimo-v2.6-pro",
+      "name": "MiMo V2.6 Pro",
+      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
+      "family": "mimo",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.5077,
+        "output": 1.0154,
+        "cache_read": 0.0042
+      },
+      "canonical_model_id": "xiaomi/mimo-v2.6-pro",
+      "display_name": "MiMo V2.6 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
+      "family": "deepseek-thinking",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.726,
+        "output": 2.178,
+        "reasoning": 2.178,
+        "cache_read": 0.0242
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
+      "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
       "id": "mimo-v2.6-pro-ultraspeed",
       "name": "MiMo V2.6 Pro UltraSpeed",
       "description": "MiMo pro model for strong multimodal reasoning and agent execution",
@@ -166,67 +363,6 @@
       },
       "canonical_model_id": "xiaomi/mimo-v2.6-pro-ultraspeed",
       "display_name": "MiMo V2.6 Pro UltraSpeed",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "glm-5.2-fast",
-      "name": "GLM 5.2 Fast",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 2.31,
-        "output": 7.26,
-        "cache_read": 0.231
-      },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM 5.2 Fast",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -320,10 +456,10 @@
       }
     },
     {
-      "id": "glm-5.3-flash",
-      "name": "GLM 5.3 Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
+      "id": "qwen3.8-max",
+      "name": "Qwen 3.8 Max",
+      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
+      "family": "qwen",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -331,21 +467,16 @@
       },
       "reasoning_options": [
         {
-          "type": "effort",
-          "values": [
-            "high",
-            "max"
-          ]
+          "type": "toggle"
         }
       ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
       },
-      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
+      "release_date": "2026-08-03",
+      "last_updated": "2026-08-03",
       "modalities": {
         "input": [
           "text",
@@ -355,18 +486,18 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
         "context": 1000000,
-        "output": 131072
+        "output": 32768
       },
       "cost": {
-        "input": 0.165,
-        "output": 0.55,
-        "cache_read": 0.0319
+        "input": 2.2,
+        "output": 6.6,
+        "cache_read": 0.275
       },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM 5.3 Flash",
+      "canonical_model_id": "alibaba/qwen3.8-max",
+      "display_name": "Qwen 3.8 Max",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -381,10 +512,10 @@
       }
     },
     {
-      "id": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
-      "family": "deepseek-thinking",
+      "id": "glm-5.2-fast",
+      "name": "GLM 5.2 Fast",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -392,11 +523,9 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        },
-        {
           "type": "effort",
           "values": [
+            "none",
             "high",
             "max"
           ]
@@ -408,8 +537,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-22",
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
       "modalities": {
         "input": [
           "text"
@@ -421,36 +550,24 @@
       "open_weights": true,
       "limit": {
         "context": 1000000,
-        "output": 384000
+        "output": 131072
       },
       "cost": {
-        "input": 0.726,
-        "output": 2.178,
-        "reasoning": 2.178,
-        "cache_read": 0.0242
+        "input": 2.31,
+        "output": 7.26,
+        "cache_read": 0.231
       },
-      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
-      "display_name": "DeepSeek V4 Pro",
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM 5.2 Fast",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
           ]
         }
       }
@@ -509,123 +626,6 @@
       },
       "canonical_model_id": "deepseek/deepseek-v4.1-flash",
       "display_name": "DeepSeek V4.1 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "qwen3.8-max",
-      "name": "Qwen 3.8 Max",
-      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-08-03",
-      "last_updated": "2026-08-03",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 32768
-      },
-      "cost": {
-        "input": 2.2,
-        "output": 6.6,
-        "cache_read": 0.275
-      },
-      "canonical_model_id": "alibaba/qwen3.8-max",
-      "display_name": "Qwen 3.8 Max",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "glm-5.2",
-      "name": "GLM 5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 1.54,
-        "output": 4.84,
-        "cache_read": 0.154
-      },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM 5.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
