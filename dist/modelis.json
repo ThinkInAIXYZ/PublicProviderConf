@@ -6,6 +6,234 @@
   "display_name": "Modelis",
   "models": [
     {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "Open MoE flagship with million-token context for coding and long agent runs",
+      "family": "deepseek-thinking",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.435,
+        "output": 0.87
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro",
+      "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-sonnet-4-6",
+      "name": "Claude Sonnet 4.6",
+      "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-02-17",
+      "last_updated": "2026-03-13",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 3,
+        "output": 15
+      },
+      "canonical_model_id": "anthropic/claude-sonnet-4-6",
+      "display_name": "Claude Sonnet 4.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
+        }
+      }
+    },
+    {
+      "id": "gemini-2.5-flash",
+      "name": "Gemini 2.5 Flash",
+      "description": "Fast Gemini workhorse for multimodal apps where latency and price matter",
+      "family": "gemini-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        },
+        {
+          "type": "budget_tokens"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2025-06-17",
+      "last_updated": "2025-06-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 2.5
+      },
+      "canonical_model_id": "google/gemini-2.5-flash",
+      "display_name": "Gemini 2.5 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "budget",
+          "budget": {
+            "min": 0,
+            "max": 24576,
+            "default": -1,
+            "auto": -1,
+            "off": 0,
+            "unit": "tokens"
+          },
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
+    },
+    {
       "id": "claude-fable-5",
       "name": "Claude Fable 5",
       "description": "Claude model for creative writing, analysis, and controlled agent workflows",
@@ -156,6 +384,75 @@
       }
     },
     {
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.0983,
+        "output": 0.1966
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-flash",
+      "display_name": "DeepSeek V4 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
       "id": "claude-opus-4-8",
       "name": "Claude Opus 4.8",
       "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
@@ -235,11 +532,11 @@
       }
     },
     {
-      "id": "gemini-2.5-flash",
-      "name": "Gemini 2.5 Flash",
-      "description": "Fast Gemini workhorse for multimodal apps where latency and price matter",
-      "family": "gemini-flash",
-      "attachment": true,
+      "id": "qwen/qwen3.7-max",
+      "name": "Qwen3.7 Max",
+      "description": "Qwen frontier model tuned for agent frameworks, coding assistants, and long tasks",
+      "family": "qwen",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -247,106 +544,18 @@
       "reasoning_options": [
         {
           "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "minimal",
-            "low",
-            "medium",
-            "high",
-            "max"
-          ]
         },
         {
           "type": "budget_tokens"
         }
       ],
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2025-06-17",
-      "last_updated": "2025-06-17",
+      "release_date": "2026-05-21",
+      "last_updated": "2026-05-21",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "audio",
-          "video",
-          "pdf"
-        ],
-        "output": [
           "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 2.5
-      },
-      "canonical_model_id": "google/gemini-2.5-flash",
-      "display_name": "Gemini 2.5 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "budget",
-          "budget": {
-            "min": 0,
-            "max": 24576,
-            "default": -1,
-            "auto": -1,
-            "off": 0,
-            "unit": "tokens"
-          },
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
-    },
-    {
-      "id": "claude-sonnet-4-6",
-      "name": "Claude Sonnet 4.6",
-      "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-02-17",
-      "last_updated": "2026-03-13",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
         ],
         "output": [
           "text"
@@ -355,179 +564,18 @@
       "open_weights": false,
       "limit": {
         "context": 1000000,
-        "output": 64000
+        "output": 131072
       },
       "cost": {
         "input": 3,
-        "output": 15
+        "output": 9
       },
-      "canonical_model_id": "anthropic/claude-sonnet-4-6",
-      "display_name": "Claude Sonnet 4.6",
+      "canonical_model_id": "alibaba/qwen3.7-max",
+      "display_name": "Qwen3.7 Max",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "mixed",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
-            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash",
-      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
-      "family": "deepseek-flash",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.0983,
-        "output": 0.1966
-      },
-      "canonical_model_id": "deepseek/deepseek-v4-flash",
-      "display_name": "DeepSeek V4 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "Open MoE flagship with million-token context for coding and long agent runs",
-      "family": "deepseek-thinking",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.435,
-        "output": 0.87
-      },
-      "canonical_model_id": "deepseek/deepseek-v4-pro",
-      "display_name": "DeepSeek V4 Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
+          "supported": true
         }
       }
     },
@@ -575,54 +623,6 @@
       },
       "canonical_model_id": "alibaba/qwen3.7-plus",
       "display_name": "Qwen3.7 Plus",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "qwen/qwen3.7-max",
-      "name": "Qwen3.7 Max",
-      "description": "Qwen frontier model tuned for agent frameworks, coding assistants, and long tasks",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens"
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-05-21",
-      "last_updated": "2026-05-21",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 3,
-        "output": 9
-      },
-      "canonical_model_id": "alibaba/qwen3.7-max",
-      "display_name": "Qwen3.7 Max",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
