@@ -6,11 +6,11 @@
   "display_name": "SenseNova (China)",
   "models": [
     {
-      "id": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash",
-      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
+      "id": "deepseek-v4.1-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "description": "DeepSeek V4.1 Flash is a high-performance conversational model by DeepSeek, supporting thinking/non-thinking modes, 1M context window, and tool calling.",
       "family": "deepseek-flash",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -20,7 +20,9 @@
           "type": "effort",
           "values": [
             "none",
-            "high"
+            "low",
+            "high",
+            "max"
           ]
         }
       ],
@@ -31,11 +33,12 @@
       "structured_output": true,
       "temperature": true,
       "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -43,7 +46,7 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
+        "context": 1048576,
         "output": 65536
       },
       "cost": {
@@ -51,29 +54,18 @@
         "output": 0,
         "cache_read": 0
       },
-      "canonical_model_id": "deepseek/deepseek-v4-flash",
-      "display_name": "DeepSeek V4 Flash",
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
           ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -140,117 +132,6 @@
       }
     },
     {
-      "id": "deepseek-v4.1-flash",
-      "name": "DeepSeek V4.1 Flash",
-      "description": "DeepSeek V4.1 Flash is a high-performance conversational model by DeepSeek, supporting thinking/non-thinking modes, 1M context window, and tool calling.",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "DeepSeek V4.1 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "sensenova-6.8-flash-lite",
-      "name": "SenseNova 6.8 Flash Lite",
-      "description": "SenseNova lightweight multimodal agent model for real-world complex tasks, data analysis, and complex information presentation",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-11",
-      "last_updated": "2026-08-28",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 262144,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0
-      },
-      "display_name": "SenseNova 6.8 Flash Lite",
-      "type": "chat"
-    },
-    {
       "id": "deepseek-v4-pro",
       "name": "DeepSeek V4 Pro",
       "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
@@ -300,6 +181,78 @@
       },
       "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
       "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-flash",
+      "display_name": "DeepSeek V4 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -383,6 +336,53 @@
           "visibility": "summary"
         }
       }
+    },
+    {
+      "id": "sensenova-6.8-flash-lite",
+      "name": "SenseNova 6.8 Flash Lite",
+      "description": "SenseNova lightweight multimodal agent model for real-world complex tasks, data analysis, and complex information presentation",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-11",
+      "last_updated": "2026-08-28",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "display_name": "SenseNova 6.8 Flash Lite",
+      "type": "chat"
     }
   ]
 }
