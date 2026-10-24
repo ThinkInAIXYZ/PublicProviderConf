@@ -6,11 +6,11 @@
   "display_name": "ai&",
   "models": [
     {
-      "id": "qwen/qwen3.8-27b",
-      "name": "Qwen3.8 27B",
-      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
-      "family": "qwen",
-      "attachment": true,
+      "id": "zai-org/glm-5.3",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -19,10 +19,9 @@
         {
           "type": "effort",
           "values": [
-            "none",
             "low",
-            "medium",
-            "xhigh"
+            "high",
+            "max"
           ]
         }
       ],
@@ -36,6 +35,128 @@
       "last_updated": "2026-08-14",
       "modalities": {
         "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1,
+        "output": 4,
+        "cache_read": 0.3
+      },
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "zai-org/glm-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1,
+        "output": 4,
+        "cache_read": 0.3
+      },
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "zai-org/glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
+      "modalities": {
+        "input": [
           "text",
           "image",
           "video",
@@ -47,26 +168,88 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 32768
+        "context": 1048550,
+        "output": 131072
       },
       "cost": {
-        "input": 0.4,
-        "output": 3,
-        "cache_read": 0.2
+        "input": 0.15,
+        "output": 0.5,
+        "cache_read": 0.03
       },
-      "canonical_model_id": "alibaba/qwen3.8-27b",
-      "display_name": "Qwen3.8 27B",
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3-Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
           ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.6,
+        "cache_read": 0.08
+      },
+      "canonical_model_id": "openai/gpt-oss-120b",
+      "display_name": "GPT OSS 120B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -134,10 +317,10 @@
       }
     },
     {
-      "id": "deepseek-ai/deepseek-v4.1-flash",
-      "name": "DeepSeek V4.1 Flash",
-      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
-      "family": "deepseek-flash",
+      "id": "qwen/qwen3.8-27b",
+      "name": "Qwen3.8 27B",
+      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
+      "family": "qwen",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -148,8 +331,9 @@
           "type": "effort",
           "values": [
             "none",
-            "high",
-            "max"
+            "low",
+            "medium",
+            "xhigh"
           ]
         }
       ],
@@ -159,13 +343,13 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
           "text",
           "image",
+          "video",
           "pdf"
         ],
         "output": [
@@ -174,16 +358,80 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 384000
+        "context": 262144,
+        "output": 32768
       },
       "cost": {
-        "input": 0.3,
-        "output": 0.6,
-        "cache_read": 0.02
+        "input": 0.4,
+        "output": 3,
+        "cache_read": 0.2
       },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "DeepSeek V4.1 Flash",
+      "canonical_model_id": "alibaba/qwen3.8-27b",
+      "display_name": "Qwen3.8 27B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "google/gemma-4-31b-it",
+      "name": "Gemma 4 31B IT",
+      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 0.5,
+        "cache_read": 0.05
+      },
+      "canonical_model_id": "google/gemma-4-31b-it",
+      "display_name": "Gemma 4 31B IT",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -344,11 +592,11 @@
       }
     },
     {
-      "id": "motif-technologies/motif-3",
-      "name": "Motif 3",
-      "description": "Motif 3 is a large-scale, decoder-only Mixture-of-Experts (MoE) language model with 314 billion total parameters and 13.2 billion parameters activated per token.",
-      "family": "motif",
-      "attachment": false,
+      "id": "deepseek-ai/deepseek-v4.1-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
+      "family": "deepseek-flash",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -358,7 +606,8 @@
           "type": "effort",
           "values": [
             "none",
-            "high"
+            "high",
+            "max"
           ]
         }
       ],
@@ -366,13 +615,16 @@
       "interleaved": {
         "field": "reasoning_content"
       },
-      "structured_output": false,
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-07",
-      "last_updated": "2026-08-07",
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -380,26 +632,26 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 1048576,
+        "output": 384000
       },
       "cost": {
-        "input": 0.5,
-        "output": 2,
-        "cache_read": 0.2
+        "input": 0.3,
+        "output": 0.6,
+        "cache_read": 0.02
       },
-      "canonical_model_id": "motif-technologies/motif-3",
-      "display_name": "Motif 3",
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ]
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -529,197 +781,11 @@
       }
     },
     {
-      "id": "zai-org/glm-5.3-flash",
-      "name": "GLM-5.3-Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048550,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.5,
-        "cache_read": 0.03
-      },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM-5.3-Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "zai-org/glm-5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
+      "id": "motif-technologies/motif-3",
+      "name": "Motif 3",
+      "description": "Motif 3 is a large-scale, decoder-only Mixture-of-Experts (MoE) language model with 314 billion total parameters and 13.2 billion parameters activated per token.",
+      "family": "motif",
       "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 131072
-      },
-      "cost": {
-        "input": 1,
-        "output": 4,
-        "cache_read": 0.3
-      },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "zai-org/glm-5.3",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 131072
-      },
-      "cost": {
-        "input": 1,
-        "output": 4,
-        "cache_read": 0.3
-      },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "google/gemma-4-31b-it",
-      "name": "Gemma 4 31B IT",
-      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
-      "family": "gemma",
-      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -737,17 +803,13 @@
       "interleaved": {
         "field": "reasoning_content"
       },
-      "structured_output": true,
+      "structured_output": false,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
+      "release_date": "2026-08-07",
+      "last_updated": "2026-08-07",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video",
-          "pdf"
+          "text"
         ],
         "output": [
           "text"
@@ -756,87 +818,25 @@
       "open_weights": true,
       "limit": {
         "context": 262144,
-        "output": 32768
+        "output": 262144
       },
       "cost": {
-        "input": 0.2,
-        "output": 0.5,
-        "cache_read": 0.05
+        "input": 0.5,
+        "output": 2,
+        "cache_read": 0.2
       },
-      "canonical_model_id": "google/gemma-4-31b-it",
-      "display_name": "Gemma 4 31B IT",
+      "canonical_model_id": "motif-technologies/motif-3",
+      "display_name": "Motif 3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
           ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.6,
-        "cache_read": 0.08
-      },
-      "canonical_model_id": "openai/gpt-oss-120b",
-      "display_name": "GPT OSS 120B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
         }
       }
     }
