@@ -6,10 +6,52 @@
   "display_name": "TokenGo",
   "models": [
     {
-      "id": "moonshotai/kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
+      "id": "minimax/minimax-m2.5",
+      "name": "MiniMax-M2.5",
+      "description": "Prior MiniMax coding model for agent workflows, office edits, and automation",
+      "family": "minimax",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-02-12",
+      "last_updated": "2026-02-12",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 204800,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": 0.03
+      },
+      "canonical_model_id": "minimax/MiniMax-M2.5",
+      "display_name": "MiniMax-M2.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3.5-397b-a17b",
+      "name": "Qwen3.5 397B-A17B",
+      "description": "Large open Qwen multimodal MoE for visual agents and long technical tasks",
+      "family": "qwen",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -18,21 +60,13 @@
       "reasoning_options": [
         {
           "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "temperature": true,
+      "release_date": "2026-02-15",
+      "last_updated": "2026-02-15",
       "modalities": {
         "input": [
           "text",
@@ -45,20 +79,26 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 131072
+        "context": 262144,
+        "output": 65536
       },
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3
+        "input": 0.4,
+        "output": 2.65,
+        "cache_read": 0.2
       },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
+      "canonical_model_id": "alibaba/qwen3.5-397b-a17b",
+      "display_name": "Qwen3.5 397B-A17B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -113,23 +153,38 @@
       }
     },
     {
-      "id": "minimax/minimax-m2.5",
-      "name": "MiniMax-M2.5",
-      "description": "Prior MiniMax coding model for agent workflows, office edits, and automation",
-      "family": "minimax",
-      "attachment": false,
+      "id": "moonshotai/kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
       "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-02-12",
-      "last_updated": "2026-02-12",
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -137,16 +192,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 204800,
+        "context": 1048576,
         "output": 131072
       },
       "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.03
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3
       },
-      "canonical_model_id": "minimax/MiniMax-M2.5",
-      "display_name": "MiniMax-M2.5",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -556,47 +611,6 @@
       }
     },
     {
-      "id": "deepseek/deepseek-v3.1",
-      "name": "DeepSeek-V3.1",
-      "description": "Hybrid-reasoning DeepSeek model with thinking and non-thinking modes",
-      "family": "deepseek",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2025-08-21",
-      "last_updated": "2025-08-21",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0.19,
-        "output": 0.71,
-        "cache_read": 0.06
-      },
-      "canonical_model_id": "deepseek/deepseek-v3.1",
-      "display_name": "DeepSeek-V3.1",
-      "type": "chat"
-    },
-    {
       "id": "deepseek/deepseek-v3.2",
       "name": "DeepSeek V3.2",
       "description": "Hybrid-reasoning DeepSeek model with thinking and non-thinking modes, sparse attention, and tool-use",
@@ -645,11 +659,11 @@
       }
     },
     {
-      "id": "qwen/qwen3.5-397b-a17b",
-      "name": "Qwen3.5 397B-A17B",
-      "description": "Large open Qwen multimodal MoE for visual agents and long technical tasks",
-      "family": "qwen",
-      "attachment": true,
+      "id": "deepseek/deepseek-v3.1",
+      "name": "DeepSeek-V3.1",
+      "description": "Hybrid-reasoning DeepSeek model with thinking and non-thinking modes",
+      "family": "deepseek",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -660,15 +674,12 @@
         }
       ],
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-02-15",
-      "last_updated": "2026-02-15",
+      "release_date": "2025-08-21",
+      "last_updated": "2025-08-21",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -676,28 +687,17 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 65536
+        "context": 131072,
+        "output": 8192
       },
       "cost": {
-        "input": 0.4,
-        "output": 2.65,
-        "cache_read": 0.2
+        "input": 0.19,
+        "output": 0.71,
+        "cache_read": 0.06
       },
-      "canonical_model_id": "alibaba/qwen3.5-397b-a17b",
-      "display_name": "Qwen3.5 397B-A17B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "canonical_model_id": "deepseek/deepseek-v3.1",
+      "display_name": "DeepSeek-V3.1",
+      "type": "chat"
     }
   ]
 }
