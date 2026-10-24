@@ -6,133 +6,9 @@
   "display_name": "evroc",
   "models": [
     {
-      "id": "nvidia/Llama-3.3-70B-Instruct-FP8",
-      "name": "Llama-3.3-70B-Instruct",
-      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-12-06",
-      "last_updated": "2024-12-06",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 4096
-      },
-      "cost": {
-        "input": 1.15,
-        "output": 1.15
-      },
-      "canonical_model_id": "meta/llama-3.3-70b-instruct",
-      "display_name": "Llama-3.3-70B-Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "openai/gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 65536,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.23,
-        "output": 0.92
-      },
-      "canonical_model_id": "openai/gpt-oss-120b",
-      "display_name": "GPT OSS 120B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "openai/whisper-large-v3",
+      "id": "KBLab/kb-whisper-large",
       "type": "transcription",
-      "name": "Whisper 3 Large",
-      "description": "Open Whisper checkpoint for robust multilingual transcription and captioning",
-      "family": "whisper",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2023-11-06",
-      "last_updated": "2023-11-06",
-      "modalities": {
-        "input": [
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 448,
-        "output": 4096
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 0.0023,
-        "output": 0.0023,
-        "output_audio": 2.3
-      },
-      "canonical_model_id": "openai/whisper-large-v3",
-      "display_name": "Whisper 3 Large"
-    },
-    {
-      "id": "openai/whisper-large-v3-turbo",
-      "type": "transcription",
-      "name": "Whisper Large v3 Turbo",
+      "name": "KB Whisper",
       "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
       "family": "whisper",
       "attachment": true,
@@ -140,7 +16,6 @@
         "supported": false
       },
       "tool_call": false,
-      "temperature": true,
       "release_date": "2024-10-01",
       "last_updated": "2024-10-01",
       "modalities": {
@@ -159,13 +34,54 @@
       "provider": {
         "npm": "@ai-sdk/openai"
       },
-      "cost": {
-        "input": 0.0023,
-        "output": 0.0023,
-        "output_audio": 2.3
+      "display_name": "KB Whisper"
+    },
+    {
+      "id": "google/gemma-4-26B-A4B-it",
+      "name": "Gemma 4 26B A4B IT",
+      "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
       },
-      "canonical_model_id": "openai/whisper-large-v3-turbo",
-      "display_name": "Whisper Large v3 Turbo"
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.144,
+        "output": 0.575
+      },
+      "canonical_model_id": "google/gemma-4-26b-a4b-it",
+      "display_name": "Gemma 4 26B A4B IT",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "Qwen/Qwen3.6-35B-A3B",
@@ -339,62 +255,6 @@
       "display_name": "Qwen3 Embedding 8B"
     },
     {
-      "id": "evroc/roc",
-      "name": "roc",
-      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "budget_tokens"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2026-01",
-      "release_date": "2026-06-06",
-      "last_updated": "2026-06-06",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "cost": {
-        "input": 2.875,
-        "output": 11.516
-      },
-      "display_name": "roc",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
       "id": "moonshotai/Kimi-K2.6",
       "name": "Kimi K2.6",
       "description": "Multimodal Kimi workhorse for agent loops, coding tasks, and visual context",
@@ -436,6 +296,59 @@
       },
       "canonical_model_id": "moonshotai/kimi-k2.6",
       "display_name": "Kimi K2.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "zai-org/GLM-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 524288,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1.4375,
+        "output": 5.75
+      },
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -522,10 +435,86 @@
       "type": "chat"
     },
     {
-      "id": "zai-org/GLM-5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
+      "id": "openai/whisper-large-v3",
+      "type": "transcription",
+      "name": "Whisper 3 Large",
+      "description": "Open Whisper checkpoint for robust multilingual transcription and captioning",
+      "family": "whisper",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2023-11-06",
+      "last_updated": "2023-11-06",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 448,
+        "output": 4096
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 0.0023,
+        "output": 0.0023,
+        "output_audio": 2.3
+      },
+      "canonical_model_id": "openai/whisper-large-v3",
+      "display_name": "Whisper 3 Large"
+    },
+    {
+      "id": "openai/whisper-large-v3-turbo",
+      "type": "transcription",
+      "name": "Whisper Large v3 Turbo",
+      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
+      "family": "whisper",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2024-10-01",
+      "last_updated": "2024-10-01",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 448,
+        "output": 448
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 0.0023,
+        "output": 0.0023,
+        "output_audio": 2.3
+      },
+      "canonical_model_id": "openai/whisper-large-v3-turbo",
+      "display_name": "Whisper Large v3 Turbo"
+    },
+    {
+      "id": "openai/gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
+      "family": "gpt-oss",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -533,21 +522,19 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        },
-        {
           "type": "effort",
           "values": [
-            "high",
-            "max"
+            "low",
+            "medium",
+            "high"
           ]
         }
       ],
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
       "modalities": {
         "input": [
           "text"
@@ -558,19 +545,110 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 524288,
-        "output": 131072
+        "context": 65536,
+        "output": 65536
       },
       "cost": {
-        "input": 1.4375,
-        "output": 5.75
+        "input": 0.23,
+        "output": 0.92
       },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
+      "canonical_model_id": "openai/gpt-oss-120b",
+      "display_name": "GPT OSS 120B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true
+        }
+      }
+    },
+    {
+      "id": "nvidia/Llama-3.3-70B-Instruct-FP8",
+      "name": "Llama-3.3-70B-Instruct",
+      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-12-06",
+      "last_updated": "2024-12-06",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 4096
+      },
+      "cost": {
+        "input": 1.15,
+        "output": 1.15
+      },
+      "canonical_model_id": "meta/llama-3.3-70b-instruct",
+      "display_name": "Llama-3.3-70B-Instruct",
+      "type": "chat"
+    },
+    {
+      "id": "evroc/roc",
+      "name": "roc",
+      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "budget_tokens"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2026-01",
+      "release_date": "2026-06-06",
+      "last_updated": "2026-06-06",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 2.875,
+        "output": 11.516
+      },
+      "display_name": "roc",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -605,84 +683,6 @@
         "output": 0.114
       },
       "display_name": "E5 Multi-Lingual Large Embeddings 0.6B"
-    },
-    {
-      "id": "KBLab/kb-whisper-large",
-      "type": "transcription",
-      "name": "KB Whisper",
-      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
-      "family": "whisper",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "release_date": "2024-10-01",
-      "last_updated": "2024-10-01",
-      "modalities": {
-        "input": [
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 448,
-        "output": 448
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "display_name": "KB Whisper"
-    },
-    {
-      "id": "google/gemma-4-26B-A4B-it",
-      "name": "Gemma 4 26B A4B IT",
-      "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
-      "family": "gemma",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.144,
-        "output": 0.575
-      },
-      "canonical_model_id": "google/gemma-4-26b-a4b-it",
-      "display_name": "Gemma 4 26B A4B IT",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
     }
   ]
 }
