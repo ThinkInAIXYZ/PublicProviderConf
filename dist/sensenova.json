@@ -6,11 +6,11 @@
   "display_name": "SenseNova (China)",
   "models": [
     {
-      "id": "glm-5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -19,8 +19,9 @@
         {
           "type": "effort",
           "values": [
-            "none",
-            "high"
+            "low",
+            "high",
+            "max"
           ]
         }
       ],
@@ -29,12 +30,13 @@
         "field": "reasoning_content"
       },
       "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -42,16 +44,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 131072
+        "context": 1048576,
+        "output": 65536
       },
       "cost": {
         "input": 0,
         "output": 0,
         "cache_read": 0
       },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -111,6 +113,80 @@
       },
       "display_name": "SenseNova 6.8 Flash Lite",
       "type": "chat"
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
+      "family": "deepseek-thinking",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
+      "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
     },
     {
       "id": "deepseek-v4-flash",
@@ -185,6 +261,66 @@
       }
     },
     {
+      "id": "glm-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
       "id": "deepseek-v4.1-flash",
       "name": "DeepSeek V4.1 Flash",
       "description": "DeepSeek V4.1 Flash is a high-performance conversational model by DeepSeek, supporting thinking/non-thinking modes, 1M context window, and tool calling.",
@@ -245,142 +381,6 @@
           "interleaved": true,
           "summaries": true,
           "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0
-      },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
-      "family": "deepseek-thinking",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0
-      },
-      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
-      "display_name": "DeepSeek V4 Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
         }
       }
     }

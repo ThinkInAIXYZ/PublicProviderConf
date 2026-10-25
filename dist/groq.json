@@ -5,36 +5,6 @@
   "display_name": "Groq",
   "models": [
     {
-      "id": "whisper-large-v3-turbo",
-      "type": "transcription",
-      "name": "Whisper Large V3 Turbo",
-      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
-      "family": "whisper",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2024-10-01",
-      "last_updated": "2024-10-01",
-      "modalities": {
-        "input": [
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 448,
-        "output": 448
-      },
-      "canonical_model_id": "openai/whisper-large-v3-turbo",
-      "display_name": "Whisper Large V3 Turbo"
-    },
-    {
       "id": "whisper-large-v3",
       "type": "transcription",
       "name": "Whisper",
@@ -65,20 +35,22 @@
       "display_name": "Whisper"
     },
     {
-      "id": "allam-2-7b",
-      "name": "ALLaM-2-7b",
-      "description": "ALLaM-2-7b instruction tuned model by SDAIA",
-      "attachment": false,
+      "id": "whisper-large-v3-turbo",
+      "type": "transcription",
+      "name": "Whisper Large V3 Turbo",
+      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
+      "family": "whisper",
+      "attachment": true,
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "temperature": true,
-      "release_date": "2025-01-23",
-      "last_updated": "2025-01-23",
+      "release_date": "2024-10-01",
+      "last_updated": "2024-10-01",
       "modalities": {
         "input": [
-          "text"
+          "audio"
         ],
         "output": [
           "text"
@@ -86,16 +58,11 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 4096,
-        "output": 4096
+        "context": 448,
+        "output": 448
       },
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "canonical_model_id": "sdaia/allam-2-7b",
-      "display_name": "ALLaM-2-7b",
-      "type": "chat"
+      "canonical_model_id": "openai/whisper-large-v3-turbo",
+      "display_name": "Whisper Large V3 Turbo"
     },
     {
       "id": "llama-3.3-70b-versatile",
@@ -134,6 +101,39 @@
       "type": "chat"
     },
     {
+      "id": "allam-2-7b",
+      "name": "ALLaM-2-7b",
+      "description": "ALLaM-2-7b instruction tuned model by SDAIA",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2025-01-23",
+      "last_updated": "2025-01-23",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 4096,
+        "output": 4096
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "canonical_model_id": "sdaia/allam-2-7b",
+      "display_name": "ALLaM-2-7b",
+      "type": "chat"
+    },
+    {
       "id": "llama-3.1-8b-instant",
       "name": "Llama 3.1 8B",
       "description": "Compact Llama instruction model for fast chat and local deployment",
@@ -167,6 +167,115 @@
       },
       "canonical_model_id": "meta/llama-3.1-8b-instruct",
       "display_name": "Llama 3.1 8B",
+      "type": "chat"
+    },
+    {
+      "id": "qwen/qwen3.6-27b",
+      "name": "Qwen3.6 27B",
+      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "default"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 0.6,
+        "output": 3,
+        "cache_read": 0.3
+      },
+      "canonical_model_id": "alibaba/qwen3.6-27b",
+      "display_name": "Qwen3.6 27B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3.8-27b",
+      "name": "Qwen3.8 27B",
+      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "default",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 16384
+      },
+      "status": "beta",
+      "cost": {
+        "input": 0.8,
+        "output": 4
+      },
+      "canonical_model_id": "alibaba/qwen3.8-27b",
+      "display_name": "Qwen3.8 27B",
       "type": "chat"
     },
     {
@@ -238,185 +347,6 @@
       "canonical_model_id": "meta/llama-prompt-guard-2-22m",
       "display_name": "Llama Prompt Guard 2 22M",
       "type": "chat"
-    },
-    {
-      "id": "qwen/qwen3.8-27b",
-      "name": "Qwen3.8 27B",
-      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "default",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 16384
-      },
-      "status": "beta",
-      "cost": {
-        "input": 0.8,
-        "output": 4
-      },
-      "canonical_model_id": "alibaba/qwen3.8-27b",
-      "display_name": "Qwen3.8 27B",
-      "type": "chat"
-    },
-    {
-      "id": "qwen/qwen3.6-27b",
-      "name": "Qwen3.6 27B",
-      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "default"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-22",
-      "last_updated": "2026-04-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 16384
-      },
-      "status": "deprecated",
-      "cost": {
-        "input": 0.6,
-        "output": 3,
-        "cache_read": 0.3
-      },
-      "canonical_model_id": "alibaba/qwen3.6-27b",
-      "display_name": "Qwen3.6 27B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "canopylabs/orpheus-arabic-saudi",
-      "type": "speech",
-      "name": "Canopy Labs Orpheus Arabic Saudi",
-      "description": "Speech generation model for controllable voice, narration, and audio delivery",
-      "family": "canopylabs",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2025-12-16",
-      "last_updated": "2025-12-16",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "audio"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 4000,
-        "output": 50000
-      },
-      "status": "beta",
-      "provider": {
-        "npm": "@ai-sdk/openai",
-        "api": "https://api.groq.com/openai/v1"
-      },
-      "canonical_model_id": "canopylabs/orpheus-arabic-saudi",
-      "display_name": "Canopy Labs Orpheus Arabic Saudi"
-    },
-    {
-      "id": "canopylabs/orpheus-v1-english",
-      "type": "speech",
-      "name": "Canopy Labs Orpheus V1 English",
-      "description": "Speech generation model for controllable voice, narration, and audio delivery",
-      "family": "canopylabs",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2025-12-19",
-      "last_updated": "2025-12-19",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "audio"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 4000,
-        "output": 50000
-      },
-      "status": "beta",
-      "provider": {
-        "npm": "@ai-sdk/openai",
-        "api": "https://api.groq.com/openai/v1"
-      },
-      "canonical_model_id": "canopylabs/orpheus-v1-english",
-      "display_name": "Canopy Labs Orpheus V1 English"
     },
     {
       "id": "openai/gpt-oss-120b",
@@ -571,6 +501,76 @@
       "canonical_model_id": "openai/gpt-oss-safeguard-20b",
       "display_name": "Safety GPT OSS 20B",
       "type": "chat"
+    },
+    {
+      "id": "canopylabs/orpheus-v1-english",
+      "type": "speech",
+      "name": "Canopy Labs Orpheus V1 English",
+      "description": "Speech generation model for controllable voice, narration, and audio delivery",
+      "family": "canopylabs",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2025-12-19",
+      "last_updated": "2025-12-19",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 4000,
+        "output": 50000
+      },
+      "status": "beta",
+      "provider": {
+        "npm": "@ai-sdk/openai",
+        "api": "https://api.groq.com/openai/v1"
+      },
+      "canonical_model_id": "canopylabs/orpheus-v1-english",
+      "display_name": "Canopy Labs Orpheus V1 English"
+    },
+    {
+      "id": "canopylabs/orpheus-arabic-saudi",
+      "type": "speech",
+      "name": "Canopy Labs Orpheus Arabic Saudi",
+      "description": "Speech generation model for controllable voice, narration, and audio delivery",
+      "family": "canopylabs",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2025-12-16",
+      "last_updated": "2025-12-16",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 4000,
+        "output": 50000
+      },
+      "status": "beta",
+      "provider": {
+        "npm": "@ai-sdk/openai",
+        "api": "https://api.groq.com/openai/v1"
+      },
+      "canonical_model_id": "canopylabs/orpheus-arabic-saudi",
+      "display_name": "Canopy Labs Orpheus Arabic Saudi"
     }
   ]
 }
