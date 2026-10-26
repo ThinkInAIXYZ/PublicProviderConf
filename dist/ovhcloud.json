@@ -6,8 +6,8 @@
   "display_name": "OVHcloud AI Endpoints",
   "models": [
     {
-      "id": "gpt-oss-20b",
-      "name": "gpt-oss-20b",
+      "id": "gpt-oss-120b",
+      "name": "gpt-oss-120b",
       "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
       "family": "gpt-oss",
       "attachment": false,
@@ -45,11 +45,11 @@
         "output": 131072
       },
       "cost": {
-        "input": 0.05,
-        "output": 0.18
+        "input": 0.09,
+        "output": 0.47
       },
-      "canonical_model_id": "openai/gpt-oss-20b",
-      "display_name": "gpt-oss-20b",
+      "canonical_model_id": "openai/gpt-oss-120b",
+      "display_name": "gpt-oss-120b",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -107,58 +107,6 @@
       "type": "chat"
     },
     {
-      "id": "gpt-oss-120b",
-      "name": "gpt-oss-120b",
-      "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.09,
-        "output": 0.47
-      },
-      "canonical_model_id": "openai/gpt-oss-120b",
-      "display_name": "gpt-oss-120b",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
       "id": "meta-llama-3_3-70b-instruct",
       "name": "Meta-Llama-3_3-70B-Instruct",
       "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
@@ -195,17 +143,20 @@
       "type": "chat"
     },
     {
-      "id": "qwen3guard-gen-0.6b",
-      "name": "Qwen3Guard-Gen-0.6B",
-      "description": "Open-weight instruction model for adaptable chat and self-hosted production workloads",
+      "id": "mistral-nemo-instruct-2407",
+      "name": "Mistral-Nemo-Instruct-2407",
+      "description": "Mistral model for multilingual chat, reasoning, and tool-assisted workflows",
+      "family": "mistral-nemo",
       "attachment": false,
       "reasoning": {
         "supported": false
       },
-      "tool_call": false,
+      "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-01-22",
-      "last_updated": "2026-01-22",
+      "knowledge": "2024-07",
+      "release_date": "2024-07-18",
+      "last_updated": "2024-07-18",
       "modalities": {
         "input": [
           "text"
@@ -216,14 +167,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 32768,
-        "output": 16384
+        "context": 65536,
+        "output": 65536
       },
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 0.14,
+        "output": 0.14
       },
-      "display_name": "Qwen3Guard-Gen-0.6B",
+      "canonical_model_id": "mistral/mistral-nemo",
+      "display_name": "Mistral-Nemo-Instruct-2407",
       "type": "chat"
     },
     {
@@ -264,8 +216,67 @@
       "type": "chat"
     },
     {
-      "id": "qwen3guard-gen-8b",
-      "name": "Qwen3Guard-Gen-8B",
+      "id": "qwen3.5-9b",
+      "name": "Qwen3.5-9B",
+      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-02-23",
+      "last_updated": "2026-02-23",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 0.12,
+        "output": 0.18
+      },
+      "canonical_model_id": "alibaba/qwen3.5-9b",
+      "display_name": "Qwen3.5-9B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen3guard-gen-0.6b",
+      "name": "Qwen3Guard-Gen-0.6B",
       "description": "Open-weight instruction model for adaptable chat and self-hosted production workloads",
       "attachment": false,
       "reasoning": {
@@ -292,104 +303,8 @@
         "input": 0,
         "output": 0
       },
-      "display_name": "Qwen3Guard-Gen-8B",
+      "display_name": "Qwen3Guard-Gen-0.6B",
       "type": "chat"
-    },
-    {
-      "id": "qwen2.5-vl-72b-instruct",
-      "name": "Qwen2.5-VL-72B-Instruct",
-      "description": "Multimodal model for analyzing text, images, documents, and rich media",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-04",
-      "release_date": "2025-01-26",
-      "last_updated": "2025-01-26",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 32768,
-        "output": 32768
-      },
-      "cost": {
-        "input": 1.01,
-        "output": 1.01
-      },
-      "canonical_model_id": "alibaba/qwen2-5-vl-72b-instruct",
-      "display_name": "Qwen2.5-VL-72B-Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "qwen3.5-397b-a17b",
-      "name": "Qwen3.5-397B-A17B",
-      "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-02-15",
-      "last_updated": "2026-02-15",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "cost": {
-        "input": 0.71,
-        "output": 4.25
-      },
-      "canonical_model_id": "alibaba/qwen3.5-397b-a17b",
-      "display_name": "Qwen3.5-397B-A17B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
     },
     {
       "id": "qwen3.6-27b",
@@ -452,8 +367,92 @@
       }
     },
     {
-      "id": "qwen3.5-9b",
-      "name": "Qwen3.5-9B",
+      "id": "qwen3guard-gen-8b",
+      "name": "Qwen3Guard-Gen-8B",
+      "description": "Open-weight instruction model for adaptable chat and self-hosted production workloads",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2026-01-22",
+      "last_updated": "2026-01-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 32768,
+        "output": 16384
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "display_name": "Qwen3Guard-Gen-8B",
+      "type": "chat"
+    },
+    {
+      "id": "gpt-oss-20b",
+      "name": "gpt-oss-20b",
+      "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.05,
+        "output": 0.18
+      },
+      "canonical_model_id": "openai/gpt-oss-20b",
+      "display_name": "gpt-oss-20b",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "qwen3.5-397b-a17b",
+      "name": "Qwen3.5-397B-A17B",
       "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
       "family": "qwen",
       "attachment": true,
@@ -475,8 +474,8 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-02-23",
-      "last_updated": "2026-02-23",
+      "release_date": "2026-02-15",
+      "last_updated": "2026-02-15",
       "modalities": {
         "input": [
           "text",
@@ -492,11 +491,11 @@
         "output": 262144
       },
       "cost": {
-        "input": 0.12,
-        "output": 0.18
+        "input": 0.71,
+        "output": 4.25
       },
-      "canonical_model_id": "alibaba/qwen3.5-9b",
-      "display_name": "Qwen3.5-9B",
+      "canonical_model_id": "alibaba/qwen3.5-397b-a17b",
+      "display_name": "Qwen3.5-397B-A17B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -511,23 +510,24 @@
       }
     },
     {
-      "id": "mistral-nemo-instruct-2407",
-      "name": "Mistral-Nemo-Instruct-2407",
-      "description": "Mistral model for multilingual chat, reasoning, and tool-assisted workflows",
-      "family": "mistral-nemo",
-      "attachment": false,
+      "id": "qwen2.5-vl-72b-instruct",
+      "name": "Qwen2.5-VL-72B-Instruct",
+      "description": "Multimodal model for analyzing text, images, documents, and rich media",
+      "family": "qwen",
+      "attachment": true,
       "reasoning": {
         "supported": false
       },
-      "tool_call": true,
+      "tool_call": false,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2024-07",
-      "release_date": "2024-07-18",
-      "last_updated": "2024-07-18",
+      "knowledge": "2024-04",
+      "release_date": "2025-01-26",
+      "last_updated": "2025-01-26",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -535,15 +535,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 65536,
-        "output": 65536
+        "context": 32768,
+        "output": 32768
       },
       "cost": {
-        "input": 0.14,
-        "output": 0.14
+        "input": 1.01,
+        "output": 1.01
       },
-      "canonical_model_id": "mistral/mistral-nemo",
-      "display_name": "Mistral-Nemo-Instruct-2407",
+      "canonical_model_id": "alibaba/qwen2-5-vl-72b-instruct",
+      "display_name": "Qwen2.5-VL-72B-Instruct",
       "type": "chat"
     }
   ]
