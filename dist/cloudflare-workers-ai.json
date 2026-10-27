@@ -6,10 +6,10 @@
   "display_name": "Cloudflare Workers AI",
   "models": [
     {
-      "id": "@cf/zai-org/glm-5.3",
-      "name": "Glm 5.3",
-      "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
-      "family": "glm",
+      "id": "@cf/openai/gpt-oss-20b",
+      "name": "GPT OSS 20B",
+      "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
+      "family": "gpt-oss",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -20,16 +20,17 @@
           "type": "effort",
           "values": [
             "low",
-            "high",
-            "max"
+            "medium",
+            "high"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
       "modalities": {
         "input": [
           "text"
@@ -40,22 +41,327 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 1048576
+        "context": 128000,
+        "output": 16384
       },
       "cost": {
-        "input": 1.4,
-        "output": 4.4,
-        "cache_read": 0.26
+        "input": 0.2,
+        "output": 0.3
       },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "Glm 5.3",
+      "canonical_model_id": "openai/gpt-oss-20b",
+      "display_name": "GPT OSS 20B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true
         }
       }
+    },
+    {
+      "id": "@cf/openai/gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
+      "cost": {
+        "input": 0.35,
+        "output": 0.75
+      },
+      "canonical_model_id": "openai/gpt-oss-120b",
+      "display_name": "GPT OSS 120B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "@cf/meta/llama-3.1-8b-instruct-fp8",
+      "name": "Llama 3.1 8B Instruct fp8",
+      "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-07-23",
+      "last_updated": "2024-07-23",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 32000,
+        "output": 32000
+      },
+      "cost": {
+        "input": 0.152,
+        "output": 0.287
+      },
+      "canonical_model_id": "meta/llama-3.1-8b-instruct",
+      "display_name": "Llama 3.1 8B Instruct fp8",
+      "type": "chat"
+    },
+    {
+      "id": "@cf/meta/llama-3.2-11b-vision-instruct",
+      "name": "Llama 3.2 11B Vision Instruct",
+      "description": "Open Llama multimodal model for image understanding and text reasoning",
+      "family": "llama",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-09-25",
+      "last_updated": "2024-09-25",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.0485,
+        "output": 0.676
+      },
+      "canonical_model_id": "meta/llama-3.2-11b-vision-instruct",
+      "display_name": "Llama 3.2 11B Vision Instruct",
+      "type": "chat"
+    },
+    {
+      "id": "@cf/meta/llama-4-scout-17b-16e-instruct",
+      "name": "Llama 4 Scout 17B 16E Instruct",
+      "description": "Open Llama with long-context vision for efficient multimodal agents",
+      "family": "llama",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2024-08",
+      "release_date": "2025-04-05",
+      "last_updated": "2025-04-05",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131000,
+        "output": 16384
+      },
+      "cost": {
+        "input": 0.27,
+        "output": 0.85
+      },
+      "canonical_model_id": "meta/llama-4-scout-17b-instruct",
+      "display_name": "Llama 4 Scout 17B 16E Instruct",
+      "type": "chat"
+    },
+    {
+      "id": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "name": "Llama 3.3 70B Instruct fp8 Fast",
+      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-12-06",
+      "last_updated": "2024-12-06",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 24000,
+        "output": 24000
+      },
+      "cost": {
+        "input": 0.293,
+        "output": 2.253
+      },
+      "canonical_model_id": "meta/llama-3.3-70b-instruct",
+      "display_name": "Llama 3.3 70B Instruct fp8 Fast",
+      "type": "chat"
+    },
+    {
+      "id": "@cf/meta/llama-3.2-3b-instruct",
+      "name": "Llama 3.2 3B Instruct",
+      "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-09-25",
+      "last_updated": "2024-09-25",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 80000,
+        "output": 80000
+      },
+      "cost": {
+        "input": 0.0509,
+        "output": 0.335
+      },
+      "canonical_model_id": "meta/llama-3.2-3b",
+      "display_name": "Llama 3.2 3B Instruct",
+      "type": "chat"
+    },
+    {
+      "id": "@cf/meta/llama-3.2-1b-instruct",
+      "name": "Llama 3.2 1B Instruct",
+      "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-09-25",
+      "last_updated": "2024-09-25",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 60000,
+        "output": 60000
+      },
+      "cost": {
+        "input": 0.027,
+        "output": 0.201
+      },
+      "canonical_model_id": "meta/llama-3.2-1b",
+      "display_name": "Llama 3.2 1B Instruct",
+      "type": "chat"
+    },
+    {
+      "id": "@cf/meta/llama-guard-3-8b",
+      "name": "Llama Guard 3 8B",
+      "description": "Safety model for policy screening, moderation, and risk-aware routing workflows",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-07-23",
+      "last_updated": "2024-07-23",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.484,
+        "output": 0.03
+      },
+      "canonical_model_id": "meta/llama-guard-3-8b",
+      "display_name": "Llama Guard 3 8B",
+      "type": "chat"
     },
     {
       "id": "@cf/zai-org/glm-5.3-flash",
@@ -103,58 +409,6 @@
       },
       "canonical_model_id": "zhipuai/glm-5.3-flash",
       "display_name": "Glm 5.3 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "@cf/zai-org/glm-5.2",
-      "name": "Glm 5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 256000
-      },
-      "cost": {
-        "input": 1.4,
-        "output": 4.4,
-        "cache_read": 0.26
-      },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "Glm 5.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -219,10 +473,10 @@
       }
     },
     {
-      "id": "@cf/openai/gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
+      "id": "@cf/zai-org/glm-5.2",
+      "name": "Glm 5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -232,18 +486,17 @@
         {
           "type": "effort",
           "values": [
-            "low",
-            "medium",
-            "high"
+            "none",
+            "high",
+            "max"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
       "modalities": {
         "input": [
           "text"
@@ -254,15 +507,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128000,
-        "output": 16384
+        "context": 262144,
+        "output": 256000
       },
       "cost": {
-        "input": 0.35,
-        "output": 0.75
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 0.26
       },
-      "canonical_model_id": "openai/gpt-oss-120b",
-      "display_name": "GPT OSS 120B",
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "Glm 5.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -271,10 +525,10 @@
       }
     },
     {
-      "id": "@cf/openai/gpt-oss-20b",
-      "name": "GPT OSS 20B",
-      "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
-      "family": "gpt-oss",
+      "id": "@cf/zai-org/glm-5.3",
+      "name": "Glm 5.3",
+      "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
+      "family": "glm",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -285,17 +539,16 @@
           "type": "effort",
           "values": [
             "low",
-            "medium",
-            "high"
+            "high",
+            "max"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
           "text"
@@ -306,19 +559,192 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128000,
-        "output": 16384
+        "context": 1048576,
+        "output": 1048576
       },
       "cost": {
-        "input": 0.2,
-        "output": 0.3
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 0.26
       },
-      "canonical_model_id": "openai/gpt-oss-20b",
-      "display_name": "GPT OSS 20B",
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "Glm 5.3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true
+        }
+      }
+    },
+    {
+      "id": "@cf/qwen/qwen3-30b-a3b-fp8",
+      "name": "Qwen3 30B A3b fp8",
+      "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
+      "family": "qwen",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2025-04-28",
+      "last_updated": "2025-04-28",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 32768,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.0509,
+        "output": 0.335
+      },
+      "canonical_model_id": "alibaba/qwen3-30b-a3b",
+      "display_name": "Qwen3 30B A3b fp8",
+      "type": "chat"
+    },
+    {
+      "id": "@cf/qwen/qwen3.8-27b",
+      "name": "Qwen3.8 27B",
+      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 0.45,
+        "output": 3.2,
+        "cache_read": 0.05
+      },
+      "canonical_model_id": "alibaba/qwen3.8-27b",
+      "display_name": "Qwen3.8 27B",
+      "type": "chat"
+    },
+    {
+      "id": "@cf/qwen/qwen2.5-coder-32b-instruct",
+      "name": "Qwen2.5 Coder 32B Instruct",
+      "description": "Qwen coding model for software agents, repository edits, and code reasoning",
+      "family": "qwen",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2024-11-12",
+      "last_updated": "2024-11-12",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 32768,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.66,
+        "output": 1
+      },
+      "canonical_model_id": "alibaba/qwen2.5-coder-32b-instruct",
+      "display_name": "Qwen2.5 Coder 32B Instruct",
+      "type": "chat"
+    },
+    {
+      "id": "@cf/qwen/qwq-32b",
+      "name": "Qwq 32B",
+      "description": "Qwen reasoning model for deliberate problem solving, math, and coding",
+      "family": "qwen",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2024-04",
+      "release_date": "2025-03-05",
+      "last_updated": "2025-03-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 24000,
+        "output": 24000
+      },
+      "cost": {
+        "input": 0.66,
+        "output": 1
+      },
+      "canonical_model_id": "alibaba/qwq-32b",
+      "display_name": "Qwq 32B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -356,6 +782,148 @@
       "canonical_model_id": "aisingapore/gemma-sea-lion-v4-27b-it",
       "display_name": "Gemma Sea Lion V4 27B It",
       "type": "chat"
+    },
+    {
+      "id": "@cf/ibm-granite/granite-4.0-h-micro",
+      "name": "Granite 4.0 H Micro",
+      "description": "Efficient model for low-latency assistance, extraction, and routine automation",
+      "family": "granite",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2025-10-02",
+      "last_updated": "2025-10-02",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131000,
+        "output": 131000
+      },
+      "cost": {
+        "input": 0.017,
+        "output": 0.112
+      },
+      "canonical_model_id": "ibm/granite-4-h-micro",
+      "display_name": "Granite 4.0 H Micro",
+      "type": "chat"
+    },
+    {
+      "id": "@cf/moonshotai/kimi-k2.6",
+      "name": "Kimi K2.6",
+      "description": "Multimodal Kimi workhorse for agent loops, coding tasks, and visual context",
+      "family": "kimi-k2",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-04-20",
+      "last_updated": "2026-04-20",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 256000
+      },
+      "cost": {
+        "input": 0.95,
+        "output": 4,
+        "cache_read": 0.16
+      },
+      "canonical_model_id": "moonshotai/kimi-k2.6",
+      "display_name": "Kimi K2.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "@cf/moonshotai/kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
+      "family": "kimi-k2",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-06-12",
+      "last_updated": "2026-06-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 0.95,
+        "output": 4,
+        "cache_read": 0.19
+      },
+      "canonical_model_id": "moonshotai/kimi-k2.7-code",
+      "display_name": "Kimi K2.7 Code",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "@cf/mistralai/mistral-small-3.1-24b-instruct",
@@ -451,574 +1019,6 @@
       }
     },
     {
-      "id": "@cf/moonshotai/kimi-k2.7-code",
-      "name": "Kimi K2.7 Code",
-      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
-      "family": "kimi-k2",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-06-12",
-      "last_updated": "2026-06-12",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "cost": {
-        "input": 0.95,
-        "output": 4,
-        "cache_read": 0.19
-      },
-      "canonical_model_id": "moonshotai/kimi-k2.7-code",
-      "display_name": "Kimi K2.7 Code",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "@cf/moonshotai/kimi-k2.6",
-      "name": "Kimi K2.6",
-      "description": "Multimodal Kimi workhorse for agent loops, coding tasks, and visual context",
-      "family": "kimi-k2",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-04-20",
-      "last_updated": "2026-04-20",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 256000
-      },
-      "cost": {
-        "input": 0.95,
-        "output": 4,
-        "cache_read": 0.16
-      },
-      "canonical_model_id": "moonshotai/kimi-k2.6",
-      "display_name": "Kimi K2.6",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "@cf/meta/llama-3.2-3b-instruct",
-      "name": "Llama 3.2 3B Instruct",
-      "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "structured_output": false,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-09-25",
-      "last_updated": "2024-09-25",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 80000,
-        "output": 80000
-      },
-      "cost": {
-        "input": 0.0509,
-        "output": 0.335
-      },
-      "canonical_model_id": "meta/llama-3.2-3b",
-      "display_name": "Llama 3.2 3B Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "@cf/meta/llama-4-scout-17b-16e-instruct",
-      "name": "Llama 4 Scout 17B 16E Instruct",
-      "description": "Open Llama with long-context vision for efficient multimodal agents",
-      "family": "llama",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "knowledge": "2024-08",
-      "release_date": "2025-04-05",
-      "last_updated": "2025-04-05",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131000,
-        "output": 16384
-      },
-      "cost": {
-        "input": 0.27,
-        "output": 0.85
-      },
-      "canonical_model_id": "meta/llama-4-scout-17b-instruct",
-      "display_name": "Llama 4 Scout 17B 16E Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "@cf/meta/llama-guard-3-8b",
-      "name": "Llama Guard 3 8B",
-      "description": "Safety model for policy screening, moderation, and risk-aware routing workflows",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "structured_output": false,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-07-23",
-      "last_updated": "2024-07-23",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.484,
-        "output": 0.03
-      },
-      "canonical_model_id": "meta/llama-guard-3-8b",
-      "display_name": "Llama Guard 3 8B",
-      "type": "chat"
-    },
-    {
-      "id": "@cf/meta/llama-3.2-11b-vision-instruct",
-      "name": "Llama 3.2 11B Vision Instruct",
-      "description": "Open Llama multimodal model for image understanding and text reasoning",
-      "family": "llama",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "structured_output": false,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-09-25",
-      "last_updated": "2024-09-25",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 0.0485,
-        "output": 0.676
-      },
-      "canonical_model_id": "meta/llama-3.2-11b-vision-instruct",
-      "display_name": "Llama 3.2 11B Vision Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "@cf/meta/llama-3.1-8b-instruct-fp8",
-      "name": "Llama 3.1 8B Instruct fp8",
-      "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "structured_output": false,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-07-23",
-      "last_updated": "2024-07-23",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 32000,
-        "output": 32000
-      },
-      "cost": {
-        "input": 0.152,
-        "output": 0.287
-      },
-      "canonical_model_id": "meta/llama-3.1-8b-instruct",
-      "display_name": "Llama 3.1 8B Instruct fp8",
-      "type": "chat"
-    },
-    {
-      "id": "@cf/meta/llama-3.2-1b-instruct",
-      "name": "Llama 3.2 1B Instruct",
-      "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "structured_output": false,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-09-25",
-      "last_updated": "2024-09-25",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 60000,
-        "output": 60000
-      },
-      "cost": {
-        "input": 0.027,
-        "output": 0.201
-      },
-      "canonical_model_id": "meta/llama-3.2-1b",
-      "display_name": "Llama 3.2 1B Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-      "name": "Llama 3.3 70B Instruct fp8 Fast",
-      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
-      "family": "llama",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-12-06",
-      "last_updated": "2024-12-06",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 24000,
-        "output": 24000
-      },
-      "cost": {
-        "input": 0.293,
-        "output": 2.253
-      },
-      "canonical_model_id": "meta/llama-3.3-70b-instruct",
-      "display_name": "Llama 3.3 70B Instruct fp8 Fast",
-      "type": "chat"
-    },
-    {
-      "id": "@cf/qwen/qwq-32b",
-      "name": "Qwq 32B",
-      "description": "Qwen reasoning model for deliberate problem solving, math, and coding",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": false,
-      "structured_output": false,
-      "temperature": true,
-      "knowledge": "2024-04",
-      "release_date": "2025-03-05",
-      "last_updated": "2025-03-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 24000,
-        "output": 24000
-      },
-      "cost": {
-        "input": 0.66,
-        "output": 1
-      },
-      "canonical_model_id": "alibaba/qwq-32b",
-      "display_name": "Qwq 32B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "@cf/qwen/qwen2.5-coder-32b-instruct",
-      "name": "Qwen2.5 Coder 32B Instruct",
-      "description": "Qwen coding model for software agents, repository edits, and code reasoning",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2024-11-12",
-      "last_updated": "2024-11-12",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 32768,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.66,
-        "output": 1
-      },
-      "canonical_model_id": "alibaba/qwen2.5-coder-32b-instruct",
-      "display_name": "Qwen2.5 Coder 32B Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "@cf/qwen/qwen3-30b-a3b-fp8",
-      "name": "Qwen3 30B A3b fp8",
-      "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2025-04-28",
-      "last_updated": "2025-04-28",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 32768,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.0509,
-        "output": 0.335
-      },
-      "canonical_model_id": "alibaba/qwen3-30b-a3b",
-      "display_name": "Qwen3 30B A3b fp8",
-      "type": "chat"
-    },
-    {
-      "id": "@cf/qwen/qwen3.8-27b",
-      "name": "Qwen3.8 27B",
-      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "cost": {
-        "input": 0.45,
-        "output": 3.2,
-        "cache_read": 0.05
-      },
-      "canonical_model_id": "alibaba/qwen3.8-27b",
-      "display_name": "Qwen3.8 27B",
-      "type": "chat"
-    },
-    {
-      "id": "@cf/ibm-granite/granite-4.0-h-micro",
-      "name": "Granite 4.0 H Micro",
-      "description": "Efficient model for low-latency assistance, extraction, and routine automation",
-      "family": "granite",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2025-10-02",
-      "last_updated": "2025-10-02",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131000,
-        "output": 131000
-      },
-      "cost": {
-        "input": 0.017,
-        "output": 0.112
-      },
-      "canonical_model_id": "ibm/granite-4-h-micro",
-      "display_name": "Granite 4.0 H Micro",
-      "type": "chat"
-    },
-    {
       "id": "@cf/deepseek-ai/deepseek-v4-pro-0813",
       "name": "DeepSeek V4 Pro 0813",
       "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
@@ -1073,9 +1073,9 @@
     },
     {
       "id": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
-      "name": "Deepseek V4.1 Flash 1017",
-      "description": "Fast DeepSeek model for efficient chat, coding help, and agent loops",
-      "family": "deepseek",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1095,6 +1095,7 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
+      "knowledge": "2025-05",
       "release_date": "2026-10-17",
       "last_updated": "2026-10-17",
       "modalities": {
@@ -1116,7 +1117,8 @@
         "output": 1.2,
         "cache_read": 0.006
       },
-      "display_name": "Deepseek V4.1 Flash 1017",
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek V4.1 Flash 1017",
       "type": "chat"
     },
     {
