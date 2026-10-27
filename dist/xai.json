@@ -5,42 +5,70 @@
   "display_name": "xai",
   "models": [
     {
-      "id": "grok-imagine-video-1.5",
-      "type": "video",
-      "name": "Grok Imagine Video 1.5",
-      "description": "Video model for text-to-video, image-to-video, and reference-to-video generation with optional voice references",
-      "family": "grok",
+      "id": "grok-build-0.1",
+      "name": "Grok Build 0.1",
+      "description": "Fast Grok coding model tuned for agentic engineering and iterative edits",
+      "family": "grok-build",
       "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2026-05-30",
-      "last_updated": "2026-05-30",
+      "reasoning_options": [],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
       "modalities": {
         "input": [
           "text",
           "image",
-          "audio"
+          "pdf"
         ],
         "output": [
-          "video"
+          "text"
         ]
       },
       "open_weights": false,
       "limit": {
-        "context": 1024,
-        "output": 8192
+        "context": 256000,
+        "output": 256000
       },
-      "canonical_model_id": "xai/grok-imagine-video-1.5",
-      "display_name": "Grok Imagine Video 1.5"
+      "cost": {
+        "input": 1,
+        "output": 2,
+        "cache_read": 0.2,
+        "tiers": [
+          {
+            "input": 2,
+            "output": 4,
+            "cache_read": 0.4,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 2,
+          "output": 4,
+          "cache_read": 0.4
+        }
+      },
+      "display_name": "Grok Build 0.1",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      },
+      "type": "chat"
     },
     {
-      "id": "grok-imagine-image-quality",
+      "id": "grok-imagine-image",
       "type": "image",
-      "name": "Grok Imagine Image Quality",
-      "description": "Higher-fidelity Grok Imagine image model for prompt-driven generation, editing, and visual design workflows",
+      "name": "Grok Imagine Image",
+      "description": "Image model for prompt-driven generation, editing, and visual design workflows",
       "family": "grok",
       "attachment": true,
       "reasoning": {
@@ -48,8 +76,8 @@
       },
       "tool_call": false,
       "temperature": false,
-      "release_date": "2026-04-03",
-      "last_updated": "2026-04-03",
+      "release_date": "2026-01-28",
+      "last_updated": "2026-01-28",
       "modalities": {
         "input": [
           "text",
@@ -64,9 +92,8 @@
         "context": 16000,
         "output": 8192
       },
-      "status": "deprecated",
-      "canonical_model_id": "xai/grok-imagine-image-quality",
-      "display_name": "Grok Imagine Image Quality"
+      "canonical_model_id": "xai/grok-imagine-image",
+      "display_name": "Grok Imagine Image"
     },
     {
       "id": "grok-4.20-0309-non-reasoning",
@@ -122,17 +149,98 @@
       "type": "chat"
     },
     {
-      "id": "grok-4.20-0309-reasoning",
-      "name": "Grok 4.20 (Reasoning)",
-      "description": "Reasoning Grok for document-heavy analysis and long-horizon tool use",
+      "id": "grok-4.5",
+      "name": "Grok 4.5",
+      "description": "xAI's Grok model for chat, coding, agentic tools, and lower hallucination risk",
       "family": "grok",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
       "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-07-08",
+      "last_updated": "2026-07-08",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 500000,
+        "output": 500000
+      },
+      "cost": {
+        "input": 2,
+        "output": 6,
+        "cache_read": 0.3,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 12,
+            "cache_read": 0.6,
+            "tier": {
+              "type": "context",
+              "size": 200000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 12,
+          "cache_read": 0.6
+        }
+      },
+      "canonical_model_id": "xai/grok-4.5",
+      "display_name": "Grok 4.5",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      },
+      "type": "chat"
+    },
+    {
+      "id": "grok-4.20-multi-agent-0309",
+      "name": "Grok 4.20 Multi-Agent",
+      "description": "Grok model for agentic tool use, reasoning, coding, and live assistance",
+      "family": "grok",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": false,
       "structured_output": true,
       "temperature": true,
       "release_date": "2026-03-09",
@@ -173,62 +281,7 @@
           "cache_read": 0.4
         }
       },
-      "display_name": "Grok 4.20 (Reasoning)",
-      "type": "chat"
-    },
-    {
-      "id": "grok-build-0.1",
-      "name": "Grok Build 0.1",
-      "description": "Fast Grok coding model tuned for agentic engineering and iterative edits",
-      "family": "grok-build",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-16",
-      "last_updated": "2026-04-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "cost": {
-        "input": 1,
-        "output": 2,
-        "cache_read": 0.2,
-        "tiers": [
-          {
-            "input": 2,
-            "output": 4,
-            "cache_read": 0.4,
-            "tier": {
-              "type": "context",
-              "size": 200000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 2,
-          "output": 4,
-          "cache_read": 0.4
-        }
-      },
-      "display_name": "Grok Build 0.1",
+      "display_name": "Grok 4.20 Multi-Agent",
       "extra_capabilities": {
         "reasoning": {
           "supported": true
@@ -304,10 +357,10 @@
       "type": "chat"
     },
     {
-      "id": "grok-imagine-video",
+      "id": "grok-imagine-video-1.5-lite",
       "type": "video",
-      "name": "Grok Imagine Video",
-      "description": "Image model for prompt-driven generation, editing, and visual design workflows",
+      "name": "Grok Imagine Video 1.5 Lite",
+      "description": "Cost-efficient video model for text-to-video and image-to-video generation",
       "family": "grok",
       "attachment": true,
       "reasoning": {
@@ -315,13 +368,12 @@
       },
       "tool_call": false,
       "temperature": false,
-      "release_date": "2026-01-28",
-      "last_updated": "2026-01-28",
+      "release_date": "2026-10-01",
+      "last_updated": "2026-10-01",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "video"
@@ -332,12 +384,45 @@
         "context": 1024,
         "output": 8192
       },
-      "display_name": "Grok Imagine Video"
+      "canonical_model_id": "xai/grok-imagine-video-1.5-lite",
+      "display_name": "Grok Imagine Video 1.5 Lite"
     },
     {
-      "id": "grok-4.5",
-      "name": "Grok 4.5",
-      "description": "xAI's Grok model for chat, coding, agentic tools, and lower hallucination risk",
+      "id": "grok-imagine-image-quality",
+      "type": "image",
+      "name": "Grok Imagine Image Quality",
+      "description": "Higher-fidelity Grok Imagine image model for prompt-driven generation, editing, and visual design workflows",
+      "family": "grok",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2026-04-03",
+      "last_updated": "2026-04-03",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 16000,
+        "output": 8192
+      },
+      "status": "deprecated",
+      "canonical_model_id": "xai/grok-imagine-image-quality",
+      "display_name": "Grok Imagine Image Quality"
+    },
+    {
+      "id": "grok-4.6",
+      "name": "Grok 4.6",
+      "description": "xAI's frontier model for long-running agents, coding, knowledge work, and visual projects",
       "family": "grok",
       "attachment": true,
       "reasoning": {
@@ -358,8 +443,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-07-08",
-      "last_updated": "2026-07-08",
+      "knowledge": "2026-02-01",
+      "release_date": "2026-08-12",
+      "last_updated": "2026-08-12",
       "modalities": {
         "input": [
           "text",
@@ -378,12 +464,12 @@
       "cost": {
         "input": 2,
         "output": 6,
-        "cache_read": 0.3,
+        "cache_read": 0.5,
         "tiers": [
           {
             "input": 4,
             "output": 12,
-            "cache_read": 0.6,
+            "cache_read": 1,
             "tier": {
               "type": "context",
               "size": 200000
@@ -393,11 +479,11 @@
         "context_over_200k": {
           "input": 4,
           "output": 12,
-          "cache_read": 0.6
+          "cache_read": 1
         }
       },
-      "canonical_model_id": "xai/grok-4.5",
-      "display_name": "Grok 4.5",
+      "canonical_model_id": "xai/grok-4.6",
+      "display_name": "Grok 4.6",
       "extra_capabilities": {
         "reasoning": {
           "supported": true
@@ -477,161 +563,17 @@
       "type": "chat"
     },
     {
-      "id": "grok-imagine-video-1.5-lite",
-      "type": "video",
-      "name": "Grok Imagine Video 1.5 Lite",
-      "description": "Cost-efficient video model for text-to-video and image-to-video generation",
-      "family": "grok",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2026-10-01",
-      "last_updated": "2026-10-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "video"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1024,
-        "output": 8192
-      },
-      "canonical_model_id": "xai/grok-imagine-video-1.5-lite",
-      "display_name": "Grok Imagine Video 1.5 Lite"
-    },
-    {
-      "id": "grok-4.6",
-      "name": "Grok 4.6",
-      "description": "xAI's frontier model for long-running agents, coding, knowledge work, and visual projects",
+      "id": "grok-4.20-0309-reasoning",
+      "name": "Grok 4.20 (Reasoning)",
+      "description": "Reasoning Grok for document-heavy analysis and long-horizon tool use",
       "family": "grok",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
+      "reasoning_options": [],
       "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2026-02-01",
-      "release_date": "2026-08-12",
-      "last_updated": "2026-08-12",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 500000,
-        "output": 500000
-      },
-      "cost": {
-        "input": 2,
-        "output": 6,
-        "cache_read": 0.5,
-        "tiers": [
-          {
-            "input": 4,
-            "output": 12,
-            "cache_read": 1,
-            "tier": {
-              "type": "context",
-              "size": 200000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 4,
-          "output": 12,
-          "cache_read": 1
-        }
-      },
-      "canonical_model_id": "xai/grok-4.6",
-      "display_name": "Grok 4.6",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      },
-      "type": "chat"
-    },
-    {
-      "id": "grok-imagine-image",
-      "type": "image",
-      "name": "Grok Imagine Image",
-      "description": "Image model for prompt-driven generation, editing, and visual design workflows",
-      "family": "grok",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2026-01-28",
-      "last_updated": "2026-01-28",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "image"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 16000,
-        "output": 8192
-      },
-      "canonical_model_id": "xai/grok-imagine-image",
-      "display_name": "Grok Imagine Image"
-    },
-    {
-      "id": "grok-4.20-multi-agent-0309",
-      "name": "Grok 4.20 Multi-Agent",
-      "description": "Grok model for agentic tool use, reasoning, coding, and live assistance",
-      "family": "grok",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": false,
       "structured_output": true,
       "temperature": true,
       "release_date": "2026-03-09",
@@ -672,13 +614,71 @@
           "cache_read": 0.4
         }
       },
-      "display_name": "Grok 4.20 Multi-Agent",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      },
+      "display_name": "Grok 4.20 (Reasoning)",
       "type": "chat"
+    },
+    {
+      "id": "grok-imagine-video-1.5",
+      "type": "video",
+      "name": "Grok Imagine Video 1.5",
+      "description": "Video model for text-to-video, image-to-video, and reference-to-video generation with optional voice references",
+      "family": "grok",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2026-05-30",
+      "last_updated": "2026-05-30",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1024,
+        "output": 8192
+      },
+      "canonical_model_id": "xai/grok-imagine-video-1.5",
+      "display_name": "Grok Imagine Video 1.5"
+    },
+    {
+      "id": "grok-imagine-video",
+      "type": "video",
+      "name": "Grok Imagine Video",
+      "description": "Image model for prompt-driven generation, editing, and visual design workflows",
+      "family": "grok",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2026-01-28",
+      "last_updated": "2026-01-28",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1024,
+        "output": 8192
+      },
+      "display_name": "Grok Imagine Video"
     },
     {
       "id": "grok-3-mini-fast-beta",

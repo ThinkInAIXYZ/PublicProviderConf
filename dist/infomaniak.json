@@ -75,61 +75,30 @@
       "display_name": "BGE Multilingual Gemma2"
     },
     {
-      "id": "swiss-ai/Apertus-v1.5-70B",
-      "name": "Apertus v1.5 70B",
-      "description": "Open, ethically-sourced Swiss AI model for multilingual, multimodal chat and instruction following",
+      "id": "Qwen/Qwen3.5-397B-A17B-FP8",
+      "name": "Qwen3.5 397B-A17B FP8",
+      "description": "Large open Qwen multimodal MoE for visual agents and long technical tasks",
+      "family": "qwen",
       "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-07-24",
-      "last_updated": "2026-08-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 100000,
-        "input": 100000,
-        "output": 8192
-      },
-      "status": "beta",
-      "cost": {
-        "input": 0.87,
-        "output": 3.1
-      },
-      "display_name": "Apertus v1.5 70B",
-      "type": "chat"
-    },
-    {
-      "id": "google/gemma-4-31B-it",
-      "name": "Gemma 4 31B IT",
-      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
-      "family": "gemma",
-      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
       "tool_call": true,
+      "interleaved": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
+      "release_date": "2026-02-15",
+      "last_updated": "2026-02-15",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -137,20 +106,27 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 100000,
-        "input": 100000,
-        "output": 32768
+        "context": 200000,
+        "input": 200000,
+        "output": 65536
       },
+      "status": "beta",
       "cost": {
-        "input": 0.25,
-        "output": 0.5
+        "input": 0.99,
+        "output": 4.46
       },
-      "canonical_model_id": "google/gemma-4-31b-it",
-      "display_name": "Gemma 4 31B IT",
+      "canonical_model_id": "alibaba/qwen3.5-397b-a17b",
+      "display_name": "Qwen3.5 397B-A17B FP8",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -211,11 +187,11 @@
       }
     },
     {
-      "id": "Qwen/Qwen3.5-397B-A17B-FP8",
-      "name": "Qwen3.5 397B-A17B FP8",
-      "description": "Large open Qwen multimodal MoE for visual agents and long technical tasks",
-      "family": "qwen",
-      "attachment": true,
+      "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8",
+      "name": "Nemotron 3 Nano 30B A3B FP8",
+      "description": "Small Nemotron 3 MoE for efficient coding, math, and long-context agents",
+      "family": "nemotron",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -227,14 +203,13 @@
       ],
       "tool_call": true,
       "interleaved": true,
-      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-02-15",
-      "last_updated": "2026-02-15",
+      "knowledge": "2025-06-25",
+      "release_date": "2025-12-15",
+      "last_updated": "2025-12-15",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -242,106 +217,17 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 200000,
-        "input": 200000,
-        "output": 65536
+        "context": 1000000,
+        "input": 1000000,
+        "output": 262144
       },
-      "status": "beta",
+      "status": "deprecated",
       "cost": {
-        "input": 0.99,
-        "output": 4.46
+        "input": 0.06,
+        "output": 0.25
       },
-      "canonical_model_id": "alibaba/qwen3.5-397b-a17b",
-      "display_name": "Qwen3.5 397B-A17B FP8",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "mistralai/Ministral-3-14B-Instruct-2512",
-      "name": "Ministral 3 14B Instruct",
-      "description": "Compact Mistral model for edge, latency-sensitive, and cost-efficient workloads",
-      "family": "ministral",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2025-12-02",
-      "last_updated": "2025-12-02",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 100000,
-        "input": 100000,
-        "output": 25600
-      },
-      "status": "beta",
-      "cost": {
-        "input": 0.37,
-        "output": 0.5
-      },
-      "canonical_model_id": "mistral/ministral-3-14b-instruct-2512",
-      "display_name": "Ministral 3 14B Instruct",
-      "type": "chat"
-    },
-    {
-      "id": "mistralai/Mistral-Small-4-119B-2603",
-      "name": "Mistral Small 4",
-      "description": "Fast Mistral production model for chat, extraction, and cost-sensitive agents",
-      "family": "mistral-small",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "interleaved": true,
-      "temperature": true,
-      "knowledge": "2025-06",
-      "release_date": "2026-03-16",
-      "last_updated": "2026-03-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 256000,
-        "input": 256000,
-        "output": 256000
-      },
-      "cost": {
-        "input": 0.25,
-        "output": 0.93
-      },
-      "canonical_model_id": "mistral/mistral-small-2603",
-      "display_name": "Mistral Small 4",
+      "canonical_model_id": "nvidia/nemotron-3-nano-30b-a3b",
+      "display_name": "Nemotron 3 Nano 30B A3B FP8",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -403,26 +289,22 @@
       }
     },
     {
-      "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8",
-      "name": "Nemotron 3 Nano 30B A3B FP8",
-      "description": "Small Nemotron 3 MoE for efficient coding, math, and long-context agents",
-      "family": "nemotron",
+      "id": "google/gemma-4-31B-it",
+      "name": "Gemma 4 31B IT",
+      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
+      "family": "gemma",
       "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
+      "reasoning_options": [],
       "tool_call": true,
-      "interleaved": true,
+      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-06-25",
-      "release_date": "2025-12-15",
-      "last_updated": "2025-12-15",
+      "knowledge": "2025-01",
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
       "modalities": {
         "input": [
           "text"
@@ -433,17 +315,97 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "input": 1000000,
-        "output": 262144
+        "context": 100000,
+        "input": 100000,
+        "output": 32768
       },
-      "status": "deprecated",
       "cost": {
-        "input": 0.06,
-        "output": 0.25
+        "input": 0.25,
+        "output": 0.5
       },
-      "canonical_model_id": "nvidia/nemotron-3-nano-30b-a3b",
-      "display_name": "Nemotron 3 Nano 30B A3B FP8",
+      "canonical_model_id": "google/gemma-4-31b-it",
+      "display_name": "Gemma 4 31B IT",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "swiss-ai/Apertus-v1.5-70B",
+      "name": "Apertus v1.5 70B",
+      "description": "Open, ethically-sourced Swiss AI model for multilingual, multimodal chat and instruction following",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-07-24",
+      "last_updated": "2026-08-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 100000,
+        "input": 100000,
+        "output": 8192
+      },
+      "status": "beta",
+      "cost": {
+        "input": 0.87,
+        "output": 3.1
+      },
+      "display_name": "Apertus v1.5 70B",
+      "type": "chat"
+    },
+    {
+      "id": "mistralai/Mistral-Small-4-119B-2603",
+      "name": "Mistral Small 4",
+      "description": "Fast Mistral production model for chat, extraction, and cost-sensitive agents",
+      "family": "mistral-small",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "interleaved": true,
+      "temperature": true,
+      "knowledge": "2025-06",
+      "release_date": "2026-03-16",
+      "last_updated": "2026-03-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 256000,
+        "input": 256000,
+        "output": 256000
+      },
+      "cost": {
+        "input": 0.25,
+        "output": 0.93
+      },
+      "canonical_model_id": "mistral/mistral-small-2603",
+      "display_name": "Mistral Small 4",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -451,6 +413,44 @@
           "interleaved": true
         }
       }
+    },
+    {
+      "id": "mistralai/Ministral-3-14B-Instruct-2512",
+      "name": "Ministral 3 14B Instruct",
+      "description": "Compact Mistral model for edge, latency-sensitive, and cost-efficient workloads",
+      "family": "ministral",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2025-12-02",
+      "last_updated": "2025-12-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 100000,
+        "input": 100000,
+        "output": 25600
+      },
+      "status": "beta",
+      "cost": {
+        "input": 0.37,
+        "output": 0.5
+      },
+      "canonical_model_id": "mistral/ministral-3-14b-instruct-2512",
+      "display_name": "Ministral 3 14B Instruct",
+      "type": "chat"
     }
   ]
 }

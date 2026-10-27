@@ -6,38 +6,29 @@
   "display_name": "Pioneer",
   "models": [
     {
-      "id": "claude-sonnet-5",
-      "name": "Claude Sonnet 5",
-      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
-      "family": "claude-sonnet",
+      "id": "claude-haiku-4-5",
+      "name": "Claude Haiku 4.5 (latest)",
+      "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
+      "family": "claude-haiku",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
+          "type": "budget_tokens",
+          "min": 1024
         }
       ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
       },
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-06-30",
-      "last_updated": "2026-06-30",
+      "temperature": true,
+      "knowledge": "2025-02-28",
+      "release_date": "2025-10-15",
+      "last_updated": "2025-10-15",
       "modalities": {
         "input": [
           "text",
@@ -50,28 +41,38 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 200000,
+        "output": 64000
       },
       "status": "deprecated",
       "cost": {
-        "input": 2,
-        "output": 10,
-        "cache_read": 0.2,
-        "cache_write": 2.5
+        "input": 1,
+        "output": 5,
+        "cache_read": 0.1,
+        "cache_write": 1.25
       },
-      "canonical_model_id": "anthropic/claude-sonnet-5",
-      "display_name": "Claude Sonnet 5",
+      "canonical_model_id": "anthropic/claude-haiku-4-5",
+      "display_name": "Claude Haiku 4.5 (latest)",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
           ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
         }
       }
     },
@@ -158,81 +159,10 @@
       }
     },
     {
-      "id": "claude-haiku-4-5",
-      "name": "Claude Haiku 4.5 (latest)",
-      "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
-      "family": "claude-haiku",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "budget_tokens",
-          "min": 1024
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "knowledge": "2025-02-28",
-      "release_date": "2025-10-15",
-      "last_updated": "2025-10-15",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "status": "deprecated",
-      "cost": {
-        "input": 1,
-        "output": 5,
-        "cache_read": 0.1,
-        "cache_write": 1.25
-      },
-      "canonical_model_id": "anthropic/claude-haiku-4-5",
-      "display_name": "Claude Haiku 4.5 (latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
-    },
-    {
-      "id": "claude-opus-5",
-      "name": "Claude Opus 5",
-      "description": "Strongest Claude Opus model for coding, agents, and professional work",
-      "family": "claude-opus",
+      "id": "gpt-5.6-luna",
+      "name": "GPT-5.6 Luna",
+      "description": "Cost-efficient GPT-5.6 model for fast, high-volume workloads",
+      "family": "gpt-luna",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -242,6 +172,7 @@
         {
           "type": "effort",
           "values": [
+            "none",
             "low",
             "medium",
             "high",
@@ -254,10 +185,11 @@
       "interleaved": {
         "field": "reasoning_content"
       },
+      "structured_output": true,
       "temperature": false,
-      "knowledge": "2026-05",
-      "release_date": "2026-07-24",
-      "last_updated": "2026-07-24",
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
       "modalities": {
         "input": [
           "text",
@@ -270,28 +202,46 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
+        "context": 1050000,
+        "input": 922000,
         "output": 128000
       },
       "status": "deprecated",
       "cost": {
-        "input": 5,
-        "output": 25,
-        "cache_read": 0.5,
-        "cache_write": 6.25
+        "input": 1,
+        "output": 6,
+        "cache_read": 0.1,
+        "cache_write": 1.25
       },
-      "canonical_model_id": "anthropic/claude-opus-5",
-      "display_name": "Claude Opus 5",
+      "canonical_model_id": "openai/gpt-5.6-luna",
+      "display_name": "GPT-5.6 Luna",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
           ],
           "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "summaries": true
         }
       }
     },
@@ -383,7 +333,7 @@
       }
     },
     {
-      "id": "claude-opus-5-fast",
+      "id": "claude-opus-5",
       "name": "Claude Opus 5",
       "description": "Strongest Claude Opus model for coding, agents, and professional work",
       "family": "claude-opus",
@@ -429,10 +379,10 @@
       },
       "status": "deprecated",
       "cost": {
-        "input": 10,
-        "output": 50,
-        "cache_read": 1,
-        "cache_write": 12.5
+        "input": 5,
+        "output": 25,
+        "cache_read": 0.5,
+        "cache_write": 6.25
       },
       "canonical_model_id": "anthropic/claude-opus-5",
       "display_name": "Claude Opus 5",
@@ -440,20 +390,20 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ]
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
     {
-      "id": "gpt-5.6-luna",
-      "name": "GPT-5.6 Luna",
-      "description": "Cost-efficient GPT-5.6 model for fast, high-volume workloads",
-      "family": "gpt-luna",
+      "id": "gpt-5.5",
+      "name": "GPT-5.5",
+      "description": "Default frontier GPT for coding, computer use, research, and knowledge work",
+      "family": "gpt",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -467,8 +417,7 @@
             "low",
             "medium",
             "high",
-            "xhigh",
-            "max"
+            "xhigh"
           ]
         }
       ],
@@ -478,9 +427,9 @@
       },
       "structured_output": true,
       "temperature": false,
-      "knowledge": "2026-02-16",
-      "release_date": "2026-07-09",
-      "last_updated": "2026-07-09",
+      "knowledge": "2025-12-01",
+      "release_date": "2026-04-23",
+      "last_updated": "2026-04-23",
       "modalities": {
         "input": [
           "text",
@@ -494,18 +443,17 @@
       "open_weights": false,
       "limit": {
         "context": 1050000,
-        "input": 922000,
         "output": 128000
       },
       "status": "deprecated",
       "cost": {
-        "input": 1,
-        "output": 6,
-        "cache_read": 0.1,
-        "cache_write": 1.25
+        "input": 5,
+        "output": 30,
+        "cache_read": 0.5,
+        "cache_write": 5
       },
-      "canonical_model_id": "openai/gpt-5.6-luna",
-      "display_name": "GPT-5.6 Luna",
+      "canonical_model_id": "openai/gpt-5.5",
+      "display_name": "GPT-5.5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -514,12 +462,10 @@
           "mode": "effort",
           "effort": "medium",
           "effort_options": [
-            "none",
             "low",
             "medium",
             "high",
-            "xhigh",
-            "max"
+            "xhigh"
           ],
           "verbosity": "medium",
           "verbosity_options": [
@@ -624,10 +570,10 @@
       }
     },
     {
-      "id": "gpt-5.5",
-      "name": "GPT-5.5",
-      "description": "Default frontier GPT for coding, computer use, research, and knowledge work",
-      "family": "gpt",
+      "id": "claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
+      "family": "claude-sonnet",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -635,13 +581,16 @@
       },
       "reasoning_options": [
         {
+          "type": "toggle"
+        },
+        {
           "type": "effort",
           "values": [
-            "none",
             "low",
             "medium",
             "high",
-            "xhigh"
+            "xhigh",
+            "max"
           ]
         }
       ],
@@ -649,11 +598,10 @@
       "interleaved": {
         "field": "reasoning_content"
       },
-      "structured_output": true,
       "temperature": false,
-      "knowledge": "2025-12-01",
-      "release_date": "2026-04-23",
-      "last_updated": "2026-04-23",
+      "knowledge": "2026-01-31",
+      "release_date": "2026-06-30",
+      "last_updated": "2026-06-30",
       "modalities": {
         "input": [
           "text",
@@ -666,98 +614,18 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1050000,
+        "context": 1000000,
         "output": 128000
       },
       "status": "deprecated",
       "cost": {
-        "input": 5,
-        "output": 30,
-        "cache_read": 0.5,
-        "cache_write": 5
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.2,
+        "cache_write": 2.5
       },
-      "canonical_model_id": "openai/gpt-5.5",
-      "display_name": "GPT-5.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true
-        }
-      }
-    },
-    {
-      "id": "zai-org/GLM-5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1040000,
-        "output": 128000
-      },
-      "status": "deprecated",
-      "cost": {
-        "input": 1.4,
-        "output": 4.4,
-        "cache_read": 0.26,
-        "cache_write": 1.4
-      },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
+      "canonical_model_id": "anthropic/claude-sonnet-5",
+      "display_name": "Claude Sonnet 5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -772,17 +640,102 @@
       }
     },
     {
-      "id": "fastino/gliner2-base-v1",
-      "name": "GLiNER2 Base",
-      "description": "Named entity recognition; zero-shot span extraction.",
+      "id": "claude-opus-5-fast",
+      "name": "Claude Opus 5",
+      "description": "Strongest Claude Opus model for coding, agents, and professional work",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": false,
+      "knowledge": "2026-05",
+      "release_date": "2026-07-24",
+      "last_updated": "2026-07-24",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 10,
+        "output": 50,
+        "cache_read": 1,
+        "cache_write": 12.5
+      },
+      "canonical_model_id": "anthropic/claude-opus-5",
+      "display_name": "Claude Opus 5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+      "name": "Nemotron 3.5 Lightning 30B A3B",
+      "description": "Fast NVIDIA Nemotron MoE for reliable agentic tasks across enterprise workloads",
+      "family": "nemotron",
       "attachment": false,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2025-06-30",
-      "last_updated": "2025-06-30",
+      "knowledge": "2025-09",
+      "release_date": "2026-08-11",
+      "last_updated": "2026-08-11",
       "modalities": {
         "input": [
           "text"
@@ -793,8 +746,118 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 2048,
-        "output": 2048
+        "context": 65536,
+        "output": 4096
+      },
+      "cost": {
+        "input": 0.07,
+        "output": 0.2,
+        "cache_read": 0.035,
+        "cache_write": 0.07
+      },
+      "canonical_model_id": "nvidia/nemotron-3.5-lightning",
+      "display_name": "Nemotron 3.5 Lightning 30B A3B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-NVFP4",
+      "name": "Nemotron 3.5 Super VL 120B A12B",
+      "description": "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
+      "family": "nemotron",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-10-15",
+      "last_updated": "2026-10-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 4096
+      },
+      "cost": {
+        "input": 0.08,
+        "output": 0.45,
+        "cache_read": 0.04,
+        "cache_write": 0.08
+      },
+      "canonical_model_id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "display_name": "Nemotron 3.5 Super VL 120B A12B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "fastino/gliner2-multi-large-v1",
+      "name": "GLiNER2 Multi Large",
+      "description": "High-accuracy multilingual NER and span extraction.",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2025-11-30",
+      "last_updated": "2025-11-30",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 8192,
+        "output": 8192
       },
       "cost": {
         "input": 0.03,
@@ -802,109 +865,7 @@
         "cache_read": 0.03,
         "cache_write": 0.03
       },
-      "display_name": "GLiNER2 Base",
-      "type": "chat"
-    },
-    {
-      "id": "fastino/gliguard-LLMGuardrails-300M",
-      "name": "GLiGuard LLM Guardrails 300M",
-      "description": "LLM safety, PII, and adversarial-attack guardrails; 300M-param encoder.",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2026-04-30",
-      "last_updated": "2026-04-30",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.15,
-        "cache_read": 0.15,
-        "cache_write": 0.15
-      },
-      "display_name": "GLiGuard LLM Guardrails 300M",
-      "type": "chat"
-    },
-    {
-      "id": "fastino/gliguard-PII-multi",
-      "name": "GLiNER2-Guardrails-PII-Multi",
-      "description": "A 300M-parameter multilingual model that runs LLM safety moderation and PII detection in a single forward pass.",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2026-07-08",
-      "last_updated": "2026-07-08",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.15,
-        "cache_read": 0.15,
-        "cache_write": 0.15
-      },
-      "display_name": "GLiNER2-Guardrails-PII-Multi",
-      "type": "chat"
-    },
-    {
-      "id": "fastino/gliner2-large-v1",
-      "name": "GLiNER2 Large",
-      "description": "Higher-accuracy NER; broader entity coverage.",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2025-06-30",
-      "last_updated": "2025-06-30",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0.03,
-        "output": 0,
-        "cache_read": 0.03,
-        "cache_write": 0.03
-      },
-      "display_name": "GLiNER2 Large",
+      "display_name": "GLiNER2 Multi Large",
       "type": "chat"
     },
     {
@@ -976,17 +937,17 @@
       "type": "chat"
     },
     {
-      "id": "fastino/gliner2-privacy-filter-PII-multi",
-      "name": "GLiNER2 Privacy Filter PII (Multi)",
-      "description": "Multilingual PII entity detection across 40+ languages; non-trainable encoder.",
+      "id": "fastino/gliner2-large-v1",
+      "name": "GLiNER2 Large",
+      "description": "Higher-accuracy NER; broader entity coverage.",
       "attachment": false,
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
       "temperature": true,
-      "release_date": "2026-04-30",
-      "last_updated": "2026-04-30",
+      "release_date": "2025-06-30",
+      "last_updated": "2025-06-30",
       "modalities": {
         "input": [
           "text"
@@ -1006,41 +967,7 @@
         "cache_read": 0.03,
         "cache_write": 0.03
       },
-      "display_name": "GLiNER2 Privacy Filter PII (Multi)",
-      "type": "chat"
-    },
-    {
-      "id": "fastino/gliner2-multi-large-v1",
-      "name": "GLiNER2 Multi Large",
-      "description": "High-accuracy multilingual NER and span extraction.",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2025-11-30",
-      "last_updated": "2025-11-30",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0.03,
-        "output": 0,
-        "cache_read": 0.03,
-        "cache_write": 0.03
-      },
-      "display_name": "GLiNER2 Multi Large",
+      "display_name": "GLiNER2 Large",
       "type": "chat"
     },
     {
@@ -1078,6 +1005,40 @@
       "type": "chat"
     },
     {
+      "id": "fastino/gliguard-LLMGuardrails-300M",
+      "name": "GLiGuard LLM Guardrails 300M",
+      "description": "LLM safety, PII, and adversarial-attack guardrails; 300M-param encoder.",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2026-04-30",
+      "last_updated": "2026-04-30",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.15,
+        "cache_read": 0.15,
+        "cache_write": 0.15
+      },
+      "display_name": "GLiGuard LLM Guardrails 300M",
+      "type": "chat"
+    },
+    {
       "id": "fastino/gliner2.5-multi-v1",
       "name": "GLiNER 2.5 Multi",
       "description": "Multilingual boundary NER and span extraction; non-trainable encoder.",
@@ -1112,38 +1073,20 @@
       "type": "chat"
     },
     {
-      "id": "moonshotai/Kimi-K3-Fast",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
-      "attachment": true,
+      "id": "fastino/gliner2-base-v1",
+      "name": "GLiNER2 Base",
+      "description": "Named entity recognition; zero-shot span extraction.",
+      "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2025-06-30",
+      "last_updated": "2025-06-30",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -1151,64 +1094,33 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 131072
+        "context": 2048,
+        "output": 2048
       },
-      "status": "deprecated",
       "cost": {
-        "input": 4.5,
-        "output": 22.5,
-        "cache_read": 0.45,
-        "cache_write": 4.5
+        "input": 0.03,
+        "output": 0,
+        "cache_read": 0.03,
+        "cache_write": 0.03
       },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "display_name": "GLiNER2 Base",
+      "type": "chat"
     },
     {
-      "id": "moonshotai/Kimi-K3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
-      "attachment": true,
+      "id": "fastino/gliguard-PII-multi",
+      "name": "GLiNER2-Guardrails-PII-Multi",
+      "description": "A 300M-parameter multilingual model that runs LLM safety moderation and PII detection in a single forward pass.",
+      "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2026-07-08",
+      "last_updated": "2026-07-08",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -1216,30 +1128,51 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 131072
+        "context": 8192,
+        "output": 8192
       },
-      "status": "deprecated",
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3
+        "input": 0.15,
+        "output": 0.15,
+        "cache_read": 0.15,
+        "cache_write": 0.15
       },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
+      "display_name": "GLiNER2-Guardrails-PII-Multi",
+      "type": "chat"
+    },
+    {
+      "id": "fastino/gliner2-privacy-filter-PII-multi",
+      "name": "GLiNER2 Privacy Filter PII (Multi)",
+      "description": "Multilingual PII entity detection across 40+ languages; non-trainable encoder.",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2026-04-30",
+      "last_updated": "2026-04-30",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.03,
+        "output": 0,
+        "cache_read": 0.03,
+        "cache_write": 0.03
+      },
+      "display_name": "GLiNER2 Privacy Filter PII (Multi)",
+      "type": "chat"
     },
     {
       "id": "deepseek-ai/DeepSeek-V4-Flash",
@@ -1320,10 +1253,75 @@
       }
     },
     {
-      "id": "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-NVFP4",
-      "name": "Nemotron 3.5 Super VL 120B A12B",
-      "description": "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
-      "family": "nemotron",
+      "id": "zai-org/GLM-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1040000,
+        "output": 128000
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 0.26,
+        "cache_write": 1.4
+      },
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "moonshotai/Kimi-K3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1334,9 +1332,8 @@
           "type": "effort",
           "values": [
             "low",
-            "medium",
             "high",
-            "xhigh"
+            "max"
           ]
         }
       ],
@@ -1344,9 +1341,10 @@
       "interleaved": {
         "field": "reasoning_content"
       },
-      "temperature": true,
-      "release_date": "2026-10-15",
-      "last_updated": "2026-10-15",
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
           "text",
@@ -1359,36 +1357,37 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 4096
+        "context": 1000000,
+        "output": 131072
       },
+      "status": "deprecated",
       "cost": {
-        "input": 0.08,
-        "output": 0.45,
-        "cache_read": 0.04,
-        "cache_write": 0.08
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3,
+        "cache_write": 3
       },
-      "canonical_model_id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
-      "display_name": "Nemotron 3.5 Super VL 120B A12B",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ]
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
     {
-      "id": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
-      "name": "Nemotron 3.5 Lightning 30B A3B",
-      "description": "Fast NVIDIA Nemotron MoE for reliable agentic tasks across enterprise workloads",
-      "family": "nemotron",
-      "attachment": false,
+      "id": "moonshotai/Kimi-K3-Fast",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -1398,9 +1397,8 @@
           "type": "effort",
           "values": [
             "low",
-            "medium",
             "high",
-            "xhigh"
+            "max"
           ]
         }
       ],
@@ -1409,13 +1407,14 @@
         "field": "reasoning_content"
       },
       "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-09",
-      "release_date": "2026-08-11",
-      "last_updated": "2026-08-11",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -1423,17 +1422,18 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 65536,
-        "output": 4096
+        "context": 1000000,
+        "output": 131072
       },
+      "status": "deprecated",
       "cost": {
-        "input": 0.07,
-        "output": 0.2,
-        "cache_read": 0.035,
-        "cache_write": 0.07
+        "input": 4.5,
+        "output": 22.5,
+        "cache_read": 0.45,
+        "cache_write": 4.5
       },
-      "canonical_model_id": "nvidia/nemotron-3.5-lightning",
-      "display_name": "Nemotron 3.5 Lightning 30B A3B",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
