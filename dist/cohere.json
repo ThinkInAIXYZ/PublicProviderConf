@@ -5,18 +5,30 @@
   "display_name": "Cohere",
   "models": [
     {
-      "id": "c4ai-aya-vision-32b",
-      "name": "Aya Vision 32B",
-      "description": "Open multilingual vision model for OCR, visual reasoning, and image question answering",
+      "id": "command-a-plus-05-2026",
+      "name": "Command A Plus",
+      "description": "Cohere's stronger command model for multilingual agents and enterprise workflows",
+      "family": "command-a",
       "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
-      "structured_output": false,
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens",
+          "min": 1
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2025-03-04",
-      "last_updated": "2025-05-14",
+      "knowledge": "2025-04-01",
+      "release_date": "2026-05-20",
+      "last_updated": "2026-06-09",
       "modalities": {
         "input": [
           "text",
@@ -28,11 +40,56 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 16000,
-        "output": 4000
+        "context": 128000,
+        "output": 64000
       },
-      "canonical_model_id": "cohere/c4ai-aya-vision-32b",
-      "display_name": "Aya Vision 32B",
+      "cost": {
+        "input": 2.5,
+        "output": 10
+      },
+      "canonical_model_id": "cohere/command-a-plus-05-2026",
+      "display_name": "Command A Plus",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "command-a-translate-08-2025",
+      "name": "Command A Translate",
+      "description": "Translation model for multilingual conversion, localization, and cross-language workflows",
+      "family": "command-a",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-06-01",
+      "release_date": "2025-08-28",
+      "last_updated": "2025-08-28",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 8000,
+        "output": 8000
+      },
+      "cost": {
+        "input": 2.5,
+        "output": 10
+      },
+      "canonical_model_id": "cohere/command-a-translate-08-2025",
+      "display_name": "Command A Translate",
       "type": "chat"
     },
     {
@@ -79,6 +136,210 @@
       },
       "canonical_model_id": "cohere/command-a-reasoning-08-2025",
       "display_name": "Command A Reasoning",
+      "type": "chat"
+    },
+    {
+      "id": "command-r-plus-08-2024",
+      "name": "Command R+",
+      "description": "Cohere's RAG workhorse for long-context enterprise search and tool use",
+      "family": "command-r",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-06-01",
+      "release_date": "2024-08-30",
+      "last_updated": "2024-08-30",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 4000
+      },
+      "cost": {
+        "input": 2.5,
+        "output": 10
+      },
+      "canonical_model_id": "cohere/command-r-plus-08-2024",
+      "display_name": "Command R+",
+      "type": "chat"
+    },
+    {
+      "id": "tiny-aya-water",
+      "name": "Tiny Aya Water",
+      "description": "Compact multilingual model specialized for European and Asia-Pacific languages",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-02-17",
+      "last_updated": "2026-02-17",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 8000,
+        "output": 8000
+      },
+      "canonical_model_id": "cohere/tiny-aya-water",
+      "display_name": "Tiny Aya Water",
+      "type": "chat"
+    },
+    {
+      "id": "command-r7b-12-2024",
+      "name": "Command R7B",
+      "description": "Cohere retrieval model for long-context chat and enterprise RAG workflows",
+      "family": "command-r",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-06-01",
+      "release_date": "2024-12-13",
+      "last_updated": "2024-12-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 4000
+      },
+      "cost": {
+        "input": 0.0375,
+        "output": 0.15
+      },
+      "canonical_model_id": "cohere/command-r7b-12-2024",
+      "display_name": "Command R7B",
+      "type": "chat"
+    },
+    {
+      "id": "north-small-translate-09-2026",
+      "name": "North Small Translate",
+      "description": "Open-weight translation model for more than 50 languages and locale variants",
+      "family": "north",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-09-09",
+      "last_updated": "2026-09-09",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 32768,
+        "output": 16000
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "canonical_model_id": "cohere/north-small-translate-1-0",
+      "display_name": "North Small Translate",
+      "type": "chat"
+    },
+    {
+      "id": "command-a-03-2025",
+      "name": "Command A",
+      "description": "Cohere command model for multilingual enterprise agents, tools, and chat",
+      "family": "command-a",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-06-01",
+      "release_date": "2025-03-13",
+      "last_updated": "2025-03-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 256000,
+        "output": 8000
+      },
+      "cost": {
+        "input": 2.5,
+        "output": 10
+      },
+      "canonical_model_id": "cohere/command-a-03-2025",
+      "display_name": "Command A",
+      "type": "chat"
+    },
+    {
+      "id": "c4ai-aya-vision-32b",
+      "name": "Aya Vision 32B",
+      "description": "Open multilingual vision model for OCR, visual reasoning, and image question answering",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2025-03-04",
+      "last_updated": "2025-05-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 16000,
+        "output": 4000
+      },
+      "canonical_model_id": "cohere/c4ai-aya-vision-32b",
+      "display_name": "Aya Vision 32B",
       "type": "chat"
     },
     {
@@ -183,6 +444,66 @@
       }
     },
     {
+      "id": "tiny-aya-earth",
+      "name": "Tiny Aya Earth",
+      "description": "Compact multilingual model specialized for West Asian and African languages",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-02-17",
+      "last_updated": "2026-02-17",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 8000,
+        "output": 8000
+      },
+      "canonical_model_id": "cohere/tiny-aya-earth",
+      "display_name": "Tiny Aya Earth",
+      "type": "chat"
+    },
+    {
+      "id": "tiny-aya-global",
+      "name": "Tiny Aya Global",
+      "description": "Compact multilingual model balanced across 70 languages and regions",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-02-17",
+      "last_updated": "2026-02-17",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 8000,
+        "output": 8000
+      },
+      "canonical_model_id": "cohere/tiny-aya-global",
+      "display_name": "Tiny Aya Global",
+      "type": "chat"
+    },
+    {
       "id": "c4ai-aya-expanse-32b",
       "name": "Aya Expanse 32B",
       "description": "Open multilingual model optimized for generation across 23 languages",
@@ -247,261 +568,6 @@
       "type": "chat"
     },
     {
-      "id": "command-r7b-arabic-02-2025",
-      "name": "Command R7B Arabic",
-      "description": "Open Command R model optimized for Arabic enterprise chat, RAG, and cultural knowledge",
-      "family": "command-r",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-06-01",
-      "release_date": "2025-02-27",
-      "last_updated": "2025-02-27",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 4000
-      },
-      "cost": {
-        "input": 0.0375,
-        "output": 0.15
-      },
-      "canonical_model_id": "cohere/command-r7b-arabic-02-2025",
-      "display_name": "Command R7B Arabic",
-      "type": "chat"
-    },
-    {
-      "id": "tiny-aya-earth",
-      "name": "Tiny Aya Earth",
-      "description": "Compact multilingual model specialized for West Asian and African languages",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-02-17",
-      "last_updated": "2026-02-17",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8000,
-        "output": 8000
-      },
-      "canonical_model_id": "cohere/tiny-aya-earth",
-      "display_name": "Tiny Aya Earth",
-      "type": "chat"
-    },
-    {
-      "id": "command-r-plus-08-2024",
-      "name": "Command R+",
-      "description": "Cohere's RAG workhorse for long-context enterprise search and tool use",
-      "family": "command-r",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-06-01",
-      "release_date": "2024-08-30",
-      "last_updated": "2024-08-30",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 4000
-      },
-      "cost": {
-        "input": 2.5,
-        "output": 10
-      },
-      "canonical_model_id": "cohere/command-r-plus-08-2024",
-      "display_name": "Command R+",
-      "type": "chat"
-    },
-    {
-      "id": "command-a-plus-05-2026",
-      "name": "Command A Plus",
-      "description": "Cohere's stronger command model for multilingual agents and enterprise workflows",
-      "family": "command-a",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens",
-          "min": 1
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-04-01",
-      "release_date": "2026-05-20",
-      "last_updated": "2026-06-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 2.5,
-        "output": 10
-      },
-      "canonical_model_id": "cohere/command-a-plus-05-2026",
-      "display_name": "Command A Plus",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "command-r7b-12-2024",
-      "name": "Command R7B",
-      "description": "Cohere retrieval model for long-context chat and enterprise RAG workflows",
-      "family": "command-r",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-06-01",
-      "release_date": "2024-12-13",
-      "last_updated": "2024-12-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 4000
-      },
-      "cost": {
-        "input": 0.0375,
-        "output": 0.15
-      },
-      "canonical_model_id": "cohere/command-r7b-12-2024",
-      "display_name": "Command R7B",
-      "type": "chat"
-    },
-    {
-      "id": "north-small-translate-09-2026",
-      "name": "North Small Translate",
-      "description": "Open-weight translation model for more than 50 languages and locale variants",
-      "family": "north",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-09-09",
-      "last_updated": "2026-09-09",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 32768,
-        "output": 16000
-      },
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "canonical_model_id": "cohere/north-small-translate-1-0",
-      "display_name": "North Small Translate",
-      "type": "chat"
-    },
-    {
-      "id": "tiny-aya-global",
-      "name": "Tiny Aya Global",
-      "description": "Compact multilingual model balanced across 70 languages and regions",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-02-17",
-      "last_updated": "2026-02-17",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8000,
-        "output": 8000
-      },
-      "canonical_model_id": "cohere/tiny-aya-global",
-      "display_name": "Tiny Aya Global",
-      "type": "chat"
-    },
-    {
       "id": "command-r-08-2024",
       "name": "Command R",
       "description": "Cohere retrieval model for long-context chat and enterprise RAG workflows",
@@ -538,10 +604,10 @@
       "type": "chat"
     },
     {
-      "id": "command-a-03-2025",
-      "name": "Command A",
-      "description": "Cohere command model for multilingual enterprise agents, tools, and chat",
-      "family": "command-a",
+      "id": "command-r7b-arabic-02-2025",
+      "name": "Command R7B Arabic",
+      "description": "Open Command R model optimized for Arabic enterprise chat, RAG, and cultural knowledge",
+      "family": "command-r",
       "attachment": false,
       "reasoning": {
         "supported": false
@@ -550,8 +616,8 @@
       "structured_output": true,
       "temperature": true,
       "knowledge": "2024-06-01",
-      "release_date": "2025-03-13",
-      "last_updated": "2025-03-13",
+      "release_date": "2025-02-27",
+      "last_updated": "2025-02-27",
       "modalities": {
         "input": [
           "text"
@@ -562,81 +628,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 256000,
-        "output": 8000
+        "context": 128000,
+        "output": 4000
       },
       "cost": {
-        "input": 2.5,
-        "output": 10
+        "input": 0.0375,
+        "output": 0.15
       },
-      "canonical_model_id": "cohere/command-a-03-2025",
-      "display_name": "Command A",
-      "type": "chat"
-    },
-    {
-      "id": "command-a-translate-08-2025",
-      "name": "Command A Translate",
-      "description": "Translation model for multilingual conversion, localization, and cross-language workflows",
-      "family": "command-a",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-06-01",
-      "release_date": "2025-08-28",
-      "last_updated": "2025-08-28",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8000,
-        "output": 8000
-      },
-      "cost": {
-        "input": 2.5,
-        "output": 10
-      },
-      "canonical_model_id": "cohere/command-a-translate-08-2025",
-      "display_name": "Command A Translate",
-      "type": "chat"
-    },
-    {
-      "id": "tiny-aya-water",
-      "name": "Tiny Aya Water",
-      "description": "Compact multilingual model specialized for European and Asia-Pacific languages",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-02-17",
-      "last_updated": "2026-02-17",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8000,
-        "output": 8000
-      },
-      "canonical_model_id": "cohere/tiny-aya-water",
-      "display_name": "Tiny Aya Water",
+      "canonical_model_id": "cohere/command-r7b-arabic-02-2025",
+      "display_name": "Command R7B Arabic",
       "type": "chat"
     }
   ]
