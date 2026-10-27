@@ -6,10 +6,44 @@
   "display_name": "NaN",
   "models": [
     {
-      "id": "qwen3.8-flash",
-      "name": "Qwen3.8 Flash",
-      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "id": "qwen-image-2.1",
+      "type": "image",
+      "name": "Qwen-Image-2.1",
+      "description": "Unified text-to-image generation and image editing model with native RGBA transparency and reference-image editing",
       "family": "qwen",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2026-09-14",
+      "last_updated": "2026-09-21",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "canonical_model_id": "alibaba/qwen-image-2.1",
+      "display_name": "Qwen-Image-2.1"
+    },
+    {
+      "id": "glm5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -19,7 +53,6 @@
         {
           "type": "effort",
           "values": [
-            "none",
             "minimal",
             "low",
             "medium",
@@ -43,23 +76,18 @@
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 131072
       },
       "cost": {
         "input": 0,
         "output": 0
       },
-      "canonical_model_id": "alibaba/qwen3.8-flash",
-      "display_name": "Qwen3.8 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3-Flash",
+      "type": "chat"
     },
     {
       "id": "glm5.3",
@@ -108,6 +136,55 @@
       },
       "canonical_model_id": "zhipuai/glm-5.3",
       "display_name": "GLM-5.3",
+      "type": "chat"
+    },
+    {
+      "id": "gemma4",
+      "name": "Gemma 4 26B A4B IT",
+      "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "canonical_model_id": "google/gemma-4-26b-a4b-it",
+      "display_name": "Gemma 4 26B A4B IT",
       "type": "chat"
     },
     {
@@ -234,10 +311,10 @@
       "type": "chat"
     },
     {
-      "id": "gemma4",
-      "name": "Gemma 4 26B A4B IT",
-      "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
-      "family": "gemma",
+      "id": "qwen3.8-flash",
+      "name": "Qwen3.8 Flash",
+      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "family": "qwen",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -248,9 +325,11 @@
           "type": "effort",
           "values": [
             "none",
+            "minimal",
             "low",
             "medium",
             "high",
+            "xhigh",
             "max"
           ]
         }
@@ -258,8 +337,8 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text",
@@ -269,18 +348,23 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
-        "context": 262144,
-        "output": 32768
+        "context": 1048576,
+        "output": 131072
       },
       "cost": {
         "input": 0,
         "output": 0
       },
-      "canonical_model_id": "google/gemma-4-26b-a4b-it",
-      "display_name": "Gemma 4 26B A4B IT",
-      "type": "chat"
+      "canonical_model_id": "alibaba/qwen3.8-flash",
+      "display_name": "Qwen3.8 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "mimo-v2.6-flash",
@@ -330,90 +414,6 @@
       "canonical_model_id": "xiaomi/mimo-v2.6-flash",
       "display_name": "MiMo-V2.6-Flash",
       "type": "chat"
-    },
-    {
-      "id": "glm5.3-flash",
-      "name": "GLM-5.3-Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "minimal",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM-5.3-Flash",
-      "type": "chat"
-    },
-    {
-      "id": "qwen-image-2.1",
-      "type": "image",
-      "name": "Qwen-Image-2.1",
-      "description": "Unified text-to-image generation and image editing model with native RGBA transparency and reference-image editing",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2026-09-14",
-      "last_updated": "2026-09-21",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "image"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "canonical_model_id": "alibaba/qwen-image-2.1",
-      "display_name": "Qwen-Image-2.1"
     }
   ]
 }
