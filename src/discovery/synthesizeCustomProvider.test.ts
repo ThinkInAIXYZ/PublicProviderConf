@@ -52,7 +52,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     const result = await synthesizeCustomProvider();
 
     assert.equal(result.models.length, result.catalog.maxModels);
-    assert.equal(result.models.length, 49);
+    assert.equal(result.models.length, 57);
     assert.deepEqual(
       new Set(result.models.map(model => model.id)),
       new Set(result.catalog.sources.flatMap(source => source.models.map(model => model.id))),
@@ -60,13 +60,13 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     assert.deepEqual(
       result.summaries.map(summary => [summary.displayName, summary.selected]),
       [
-        ['OpenAI', 9],
-        ['Anthropic', 6],
-        ['Gemini', 6],
-        ['Kimi', 5],
+        ['OpenAI', 10],
+        ['Anthropic', 8],
+        ['Gemini', 7],
+        ['Kimi', 7],
         ['DeepSeek', 4],
-        ['Zhipu', 4],
-        ['MiniMax', 3],
+        ['Zhipu', 5],
+        ['MiniMax', 4],
         ['StepFun', 4],
         ['Qwen', 8],
       ],
@@ -292,9 +292,9 @@ test('creates valid normalized model cards in the provider output shape', async 
     assert.equal(seededQwen37Flash?.limit?.context, 1000000);
     assert.equal(seededStep5Preview?.cost?.input, 1);
     assert.equal(seededStep5Preview?.cost?.output, 2.7);
-    assert.equal(seededStep5Preview?.cost?.cacheRead, 0.05);
+    assert.equal(seededStep5Preview?.cost?.cacheRead, 0.1);
     assert.equal(seededStep5Preview?.limit?.context, 1000000);
-    assert.equal(seededStep5Preview?.limit?.output, 384000);
+    assert.equal(seededStep5Preview?.limit?.output, 64000);
     assert.equal(seededStep5Preview?.vision, true);
     assert.equal(seededStep5Preview?.metadata?.lifecycle, 'preview');
     assert.deepEqual(
@@ -320,7 +320,7 @@ test('creates valid normalized model cards in the provider output shape', async 
     assert.equal(glm52?.limit?.output, 131072);
     assert.equal(glm52?.extra_capabilities?.reasoning?.effort_options?.includes('max'), true);
     assert.equal(miniMaxM3?.limit?.context, 1000000);
-    assert.equal(miniMaxM3?.limit?.output, 128000);
+    assert.equal(miniMaxM3?.limit?.output, 524288);
     assert.equal(miniMaxM27?.extra_capabilities?.reasoning?.interleaved, true);
   });
 });
@@ -396,7 +396,7 @@ test('preserves model-specific controls and modalities through normalization and
     assert.equal(step5.tool_call, true);
     assert.equal(step5.structured_output, true);
     assert.equal(step5.limit?.context, 1000000);
-    assert.equal(step5.limit?.output, 384000);
+    assert.equal(step5.limit?.output, 64000);
     assert.equal(step5.extra_capabilities?.reasoning?.effort, 'medium');
     assert.deepEqual(step5.extra_capabilities?.reasoning?.effort_options, ['low', 'medium', 'high']);
     assert.deepEqual(step5.reasoning_options, [{ type: 'effort', values: ['low', 'medium', 'high'] }]);
@@ -453,6 +453,77 @@ test('preserves model-specific controls and modalities through normalization and
       assert.equal(model.limit?.output, 65536);
     }
     assert.equal(getModel('qwen3-coder-next').limit?.context, 262144);
+  });
+});
+
+test('preserves October model limits, controls, and access restrictions in generated output', async () => {
+  await withoutApiKeys(async () => {
+    const result = await synthesizeCustomProvider();
+    const provider = createModelsDevProvider(createProviderInfo(
+      'custom-provider', 'custom provider', result.models,
+    ));
+    applyReasoningPortraits({ providers: { [provider.id]: provider } });
+    const getModel = (id: string) => {
+      const model = provider.models.find(item => item.id === id);
+      assert.ok(model, `Missing selected model: ${id}`);
+      return model;
+    };
+
+    const terra = getModel('gpt-6.1-terra');
+    assert.equal(terra.limit?.context, 1050000);
+    assert.equal(terra.limit?.input, 922000);
+    assert.equal(terra.limit?.output, 128000);
+    assert.equal(terra.cost?.cache_read, 0.05);
+    assert.equal(terra.extra_capabilities?.reasoning?.effort, 'medium');
+    assert.deepEqual(terra.extra_capabilities?.reasoning?.effort_options, [
+      'none', 'low', 'medium', 'high', 'xhigh', 'max',
+    ]);
+
+    const sonnet = getModel('claude-sonnet-5-5');
+    const haiku = getModel('claude-haiku-5-5');
+    assert.equal(sonnet.reasoning_options?.some(option => option.type === 'toggle'), false);
+    assert.equal(sonnet.extra_capabilities?.reasoning?.effort, 'high');
+    assert.equal(sonnet.cost?.cache_read, 0.1);
+    assert.equal(haiku.reasoning_options?.[0].type, 'toggle');
+    assert.equal(haiku.extra_capabilities?.reasoning?.effort, 'medium');
+    assert.equal(haiku.cost?.input, 0.1);
+    assert.equal(haiku.metadata?.pricingBasis, 'input-up-to-100k');
+
+    const argon = getModel('gemini-4-argon');
+    assert.equal(argon.limit?.context, 1048576);
+    assert.equal(argon.limit?.output, 65536);
+    assert.equal(argon.temperature, false);
+    assert.deepEqual(argon.extra_capabilities?.reasoning?.level_options, ['low', 'medium', 'high']);
+    assert.equal(argon.extra_capabilities?.reasoning?.level, 'medium');
+    assert.equal(argon.metadata?.pricingValidUntil, '2026-11-30');
+
+    for (const id of ['kimi-k3.1-pro', 'kimi-k3.1-pro-highspeed']) {
+      const model = getModel(id);
+      assert.equal(model.limit?.output, 1048576);
+      assert.equal(model.temperature, false);
+      assert.deepEqual(model.reasoning_options, [{ type: 'effort', values: ['low', 'high', 'max'] }]);
+      assert.equal(model.cost, undefined);
+      assert.equal(model.open_weights, undefined);
+    }
+    assert.equal(getModel('kimi-k2.6').metadata?.plannedRetirement, '2026-12');
+    for (const id of ['deepseek-v4-flash', 'deepseek-v4-flash-vision-exp']) {
+      const model = getModel(id);
+      assert.equal(model.metadata?.aliasOf, 'deepseek-flash');
+      assert.equal(model.metadata?.apiStatus, 'redirected');
+      assert.equal(model.vision, true);
+      assert.deepEqual(model.cost, getModel('deepseek-flash').cost);
+    }
+
+    assert.equal(getModel('glm-5.3-flashx-legal').metadata?.apiStatus, 'restricted');
+    assert.deepEqual(getModel('glm-5.3-flashx-legal').metadata?.availability, ['enterprise-application']);
+    const mini = getModel('MiniMax-M3.1-Flash');
+    assert.equal(mini.limit?.output, 524288);
+    assert.equal(mini.temperature, false);
+    assert.equal(mini.extra_capabilities?.reasoning?.effort, 'max');
+    assert.deepEqual(mini.reasoning_options, [{ type: 'effort', values: ['low', 'medium', 'high', 'xhigh', 'max'] }]);
+    assert.equal(mini.cost?.input, 0.15);
+    assert.equal(getModel('MiniMax-M3').temperature, false);
+    assert.equal(getModel('MiniMax-M2.7').metadata?.officialSunsetDate, '2026-11-18');
   });
 });
 

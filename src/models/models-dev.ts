@@ -211,6 +211,7 @@ export function createModelsDevModel(model: ModelInfo): ModelsDevModel {
   const baseLimit: ModelsDevLimit = model.limit
     ? {
         context: model.limit.context,
+        input: model.limit.input,
         output: model.limit.output,
         requests_per_minute: model.limit.requestsPerMinute,
         requests_per_day: model.limit.requestsPerDay,

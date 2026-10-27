@@ -25,6 +25,7 @@ export interface ModelCost {
 
 export interface ModelLimit {
   context?: number;
+  input?: number;
   output?: number;
   requestsPerMinute?: number;
   requestsPerDay?: number;
