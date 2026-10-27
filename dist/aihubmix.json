@@ -2,7 +2,7 @@
   "id": "aihubmix",
   "name": "AIHubMix",
   "display_name": "AIHubMix",
-  "updated_at": "2026-10-27T01:19:23.755Z",
+  "updated_at": "2026-10-27T02:19:30.423Z",
   "models": [
     {
       "id": "auto",
@@ -62,6 +62,58 @@
           "supported": true
         }
       }
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "name": "gpt-6.1-terra",
+      "display_name": "gpt-6.1-terra",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "GPT-6.1 Terra is OpenAI’s multimodal reasoning model, supporting text and image inputs for tasks such as product photo matching, technical drawing interpretation, application interface interaction, and text drafting and revision. It combines speed and efficiency with visual reasoning, precise computer use, and clear, natural writing.",
+        "typeHints": [
+          "llm"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "input": 0,
+          "output": 0,
+          "tiers": [
+            {
+              "cache_read": 0.1,
+              "cache_write": 2.5,
+              "input": 2,
+              "output": 7.5,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "kimi-k3.1-pro",
@@ -3623,56 +3675,84 @@
       }
     },
     {
-      "id": "deepseek-v4-flash-0731-fast",
-      "name": "deepseek-v4-flash-0731-fast",
-      "display_name": "deepseek-v4-flash-0731-fast",
+      "id": "wan3.0-video",
+      "name": "wan3.0-video",
+      "display_name": "wan3.0-video",
       "type": "chat",
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "tool_call": true,
+      "tool_call": false,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video",
+          "audio",
+          "document",
+          "link"
         ]
       },
-      "cost": {
-        "input": 0.28,
-        "output": 1.4,
-        "cache_read": 0.07
-      },
       "limit": {
-        "context": 1000000,
-        "output": 1000000
+        "context": 8192,
+        "output": 8192
       },
       "metadata": {
-        "description": "DeepSeek V4 Flash 0731 Fast is a high-speed deployment of DeepSeek’s agentic model provided by Wafer, designed for coding, tool use, and high-volume agent workloads. It preserves the capabilities of V4 Flash 0731 while delivering much faster inference. Compared with V4 Pro, it prioritizes latency and execution efficiency.",
+        "description": "Wan 3.0 (Tongyi Wanxiang 3.0) is an integrated video generation and editing model launched by Alibaba’s Tongyi Lab. It is suitable for scenarios such as advertising, e-commerce, short films, character animation, video editing, and document-to-video. Its advantages include native support for videos up to 30 seconds long and the unified handling of reference content such as text, images, audio, video, documents, spreadsheets, presentations, and web pages, delivering more realistic visuals and audio, stable character consistency, and capabilities for referencing, editing, replication, and driving. Compared with Wan 2.7, which split text-to-video, image-to-video, reference generation, and editing across multiple models, Wan 3.0 integrates these capabilities into a single model, making the creative workflow more unified and flexible.",
         "typeHints": [
-          "llm"
-        ],
-        "features": [
-          "tools",
-          "function_calling",
-          "structured_outputs",
-          "thinking"
+          "video"
         ],
         "inputModalities": [
-          "text"
+          "text",
+          "image",
+          "video",
+          "audio",
+          "document",
+          "link"
         ],
-        "pricing": {
-          "cache_read": 0.07,
-          "input": 0.28,
-          "output": 1.4
-        },
         "source": "public-provider-conf"
       },
-      "vision": false,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "vision": true
+    },
+    {
+      "id": "wan3.0-video-prime",
+      "name": "wan3.0-video-prime",
+      "display_name": "wan3.0-video-prime",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "document",
+          "link"
+        ]
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "Wan3.0 Video Prime is Alibaba Cloud’s preview high-speed edition of its All-in-One video model, positioned for faster-turnaround ads, ecommerce, short films, and editing. Aligned with Wan3.0 Video’s capabilities, it supports text-to-video, image-to-video, reference-based generation, document/webpage-to-video, up to 30 seconds at 30fps, 1080P output, adaptive aspect ratios, and native audio. It unifies modes that Wan 2.7 handled through separate task-specific models.",
+        "typeHints": [
+          "video"
+        ],
+        "inputModalities": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "document",
+          "link"
+        ],
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "mai-thinking-1",
@@ -3769,84 +3849,56 @@
       "vision": true
     },
     {
-      "id": "wan3.0-video",
-      "name": "wan3.0-video",
-      "display_name": "wan3.0-video",
+      "id": "deepseek-v4-flash-0731-fast",
+      "name": "deepseek-v4-flash-0731-fast",
+      "display_name": "deepseek-v4-flash-0731-fast",
       "type": "chat",
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
+      "tool_call": true,
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "document",
-          "link"
+          "text"
         ]
       },
-      "limit": {
-        "context": 8192,
-        "output": 8192
-      },
-      "metadata": {
-        "description": "Wan 3.0 (Tongyi Wanxiang 3.0) is an integrated video generation and editing model launched by Alibaba’s Tongyi Lab. It is suitable for scenarios such as advertising, e-commerce, short films, character animation, video editing, and document-to-video. Its advantages include native support for videos up to 30 seconds long and the unified handling of reference content such as text, images, audio, video, documents, spreadsheets, presentations, and web pages, delivering more realistic visuals and audio, stable character consistency, and capabilities for referencing, editing, replication, and driving. Compared with Wan 2.7, which split text-to-video, image-to-video, reference generation, and editing across multiple models, Wan 3.0 integrates these capabilities into a single model, making the creative workflow more unified and flexible.",
-        "typeHints": [
-          "video"
-        ],
-        "inputModalities": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "document",
-          "link"
-        ],
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "wan3.0-video-prime",
-      "name": "wan3.0-video-prime",
-      "display_name": "wan3.0-video-prime",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "document",
-          "link"
-        ]
+      "cost": {
+        "input": 0.28,
+        "output": 1.4,
+        "cache_read": 0.07
       },
       "limit": {
-        "context": 8192,
-        "output": 8192
+        "context": 1000000,
+        "output": 1000000
       },
       "metadata": {
-        "description": "Wan3.0 Video Prime is Alibaba Cloud’s preview high-speed edition of its All-in-One video model, positioned for faster-turnaround ads, ecommerce, short films, and editing. Aligned with Wan3.0 Video’s capabilities, it supports text-to-video, image-to-video, reference-based generation, document/webpage-to-video, up to 30 seconds at 30fps, 1080P output, adaptive aspect ratios, and native audio. It unifies modes that Wan 2.7 handled through separate task-specific models.",
+        "description": "DeepSeek V4 Flash 0731 Fast is a high-speed deployment of DeepSeek’s agentic model provided by Wafer, designed for coding, tool use, and high-volume agent workloads. It preserves the capabilities of V4 Flash 0731 while delivering much faster inference. Compared with V4 Pro, it prioritizes latency and execution efficiency.",
         "typeHints": [
-          "video"
+          "llm"
+        ],
+        "features": [
+          "tools",
+          "function_calling",
+          "structured_outputs",
+          "thinking"
         ],
         "inputModalities": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "document",
-          "link"
+          "text"
         ],
+        "pricing": {
+          "cache_read": 0.07,
+          "input": 0.28,
+          "output": 1.4
+        },
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "gpt-5.6-sol-disc",
