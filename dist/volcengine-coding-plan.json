@@ -6,87 +6,24 @@
   "display_name": "Volcengine Ark Coding Plan",
   "models": [
     {
-      "id": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "Open MoE flagship with million-token context for coding and long agent runs",
-      "family": "deepseek-thinking",
-      "attachment": false,
+      "id": "doubao-seed-2.0-lite",
+      "name": "Seed 2.0 Lite",
+      "description": "Cost-efficient ByteDance Seed 2.0 model for production chat, analysis, and structured generation",
+      "family": "seed",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cache_read": 0
-      },
-      "canonical_model_id": "deepseek/deepseek-v4-pro",
-      "display_name": "DeepSeek V4 Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
+          "type": "effort",
+          "values": [
+            "none",
             "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+            "high"
           ]
         }
-      }
-    },
-    {
-      "id": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash",
-      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
-      "family": "deepseek-flash",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
       ],
       "tool_call": true,
       "interleaved": {
@@ -94,49 +31,40 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
+      "release_date": "2026-02-14",
+      "last_updated": "2026-02-14",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 384000
+        "context": 256000,
+        "output": 32000
       },
+      "status": "deprecated",
       "cost": {
         "input": 0,
         "output": 0,
         "cache_read": 0
       },
-      "canonical_model_id": "deepseek/deepseek-v4-flash",
-      "display_name": "DeepSeek V4 Flash",
+      "canonical_model_id": "bytedance-seed/seed-2.0-lite",
+      "display_name": "Seed 2.0 Lite",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
           "interleaved": true,
           "summaries": true,
           "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
           ]
         }
       }
@@ -205,25 +133,27 @@
       }
     },
     {
-      "id": "kimi-k2.7-code",
-      "name": "Kimi K2.7 Code",
-      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
-      "family": "kimi-k2",
+      "id": "minimax-m3",
+      "name": "MiniMax-M3",
+      "description": "MiniMax multimodal model for long-context coding, perception, and agent planning",
+      "family": "minimax",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
       },
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-01",
-      "release_date": "2026-06-12",
-      "last_updated": "2026-06-12",
+      "temperature": true,
+      "release_date": "2026-06-01",
+      "last_updated": "2026-06-01",
       "modalities": {
         "input": [
           "text",
@@ -236,8 +166,8 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 1048576,
+        "output": 512000
       },
       "status": "deprecated",
       "cost": {
@@ -245,8 +175,8 @@
         "output": 0,
         "cache_read": 0
       },
-      "canonical_model_id": "moonshotai/kimi-k2.7-code",
-      "display_name": "Kimi K2.7 Code",
+      "canonical_model_id": "minimax/MiniMax-M3",
+      "display_name": "MiniMax-M3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -261,9 +191,9 @@
       }
     },
     {
-      "id": "doubao-seed-2.0-lite",
-      "name": "Seed 2.0 Lite",
-      "description": "Cost-efficient ByteDance Seed 2.0 model for production chat, analysis, and structured generation",
+      "id": "doubao-seed-2.1-turbo",
+      "name": "Seed 2.1 Turbo",
+      "description": "Faster ByteDance Seed 2.1 model for multimodal reasoning and latency-sensitive agent workflows",
       "family": "seed",
       "attachment": true,
       "reasoning": {
@@ -286,8 +216,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-02-14",
-      "last_updated": "2026-02-14",
+      "release_date": "2026-06-23",
+      "last_updated": "2026-06-23",
       "modalities": {
         "input": [
           "text",
@@ -301,7 +231,7 @@
       "open_weights": false,
       "limit": {
         "context": 256000,
-        "output": 32000
+        "output": 256000
       },
       "status": "deprecated",
       "cost": {
@@ -309,8 +239,8 @@
         "output": 0,
         "cache_read": 0
       },
-      "canonical_model_id": "bytedance-seed/seed-2.0-lite",
-      "display_name": "Seed 2.0 Lite",
+      "canonical_model_id": "bytedance-seed/seed-2.1-turbo",
+      "display_name": "Seed 2.1 Turbo",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -455,33 +385,25 @@
       }
     },
     {
-      "id": "doubao-seed-2.1-turbo",
-      "name": "Seed 2.1 Turbo",
-      "description": "Faster ByteDance Seed 2.1 model for multimodal reasoning and latency-sensitive agent workflows",
-      "family": "seed",
+      "id": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
+      "family": "kimi-k2",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high"
-          ]
-        }
-      ],
+      "reasoning_options": [],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
       },
       "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-23",
-      "last_updated": "2026-06-23",
+      "temperature": false,
+      "knowledge": "2025-01",
+      "release_date": "2026-06-12",
+      "last_updated": "2026-06-12",
       "modalities": {
         "input": [
           "text",
@@ -492,10 +414,10 @@
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 256000,
-        "output": 256000
+        "context": 262144,
+        "output": 262144
       },
       "status": "deprecated",
       "cost": {
@@ -503,27 +425,27 @@
         "output": 0,
         "cache_read": 0
       },
-      "canonical_model_id": "bytedance-seed/seed-2.1-turbo",
-      "display_name": "Seed 2.1 Turbo",
+      "canonical_model_id": "moonshotai/kimi-k2.7-code",
+      "display_name": "Kimi K2.7 Code",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ]
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
     {
-      "id": "minimax-m3",
-      "name": "MiniMax-M3",
-      "description": "MiniMax multimodal model for long-context coding, perception, and agent planning",
-      "family": "minimax",
-      "attachment": true,
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "Open MoE flagship with million-token context for coding and long agent runs",
+      "family": "deepseek-thinking",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -537,14 +459,14 @@
       "interleaved": {
         "field": "reasoning_content"
       },
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-06-01",
-      "last_updated": "2026-06-01",
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -552,27 +474,105 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 512000
+        "context": 1000000,
+        "output": 384000
       },
-      "status": "deprecated",
       "cost": {
         "input": 0,
         "output": 0,
         "cache_read": 0
       },
-      "canonical_model_id": "minimax/MiniMax-M3",
-      "display_name": "MiniMax-M3",
+      "canonical_model_id": "deepseek/deepseek-v4-pro",
+      "display_name": "DeepSeek V4 Pro",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
           ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0,
+        "output": 0,
+        "cache_read": 0
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-flash",
+      "display_name": "DeepSeek V4 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
         }
       }
     },
