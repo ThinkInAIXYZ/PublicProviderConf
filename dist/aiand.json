@@ -6,6 +6,69 @@
   "display_name": "ai&",
   "models": [
     {
+      "id": "moonshotai/kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 3,
+        "output": 12.5,
+        "cache_read": 0.5
+      },
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
       "id": "qwen/qwen3.6-27b",
       "name": "Qwen3.6 27B",
       "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
@@ -134,68 +197,6 @@
       }
     },
     {
-      "id": "openai/gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.6,
-        "cache_read": 0.08
-      },
-      "canonical_model_id": "openai/gpt-oss-120b",
-      "display_name": "GPT OSS 120B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
       "id": "google/gemma-4-31b-it",
       "name": "Gemma 4 31B IT",
       "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
@@ -246,6 +247,67 @@
       },
       "canonical_model_id": "google/gemma-4-31b-it",
       "display_name": "Gemma 4 31B IT",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "zai-org/glm-5.3",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1,
+        "output": 4,
+        "cache_read": 0.3
+      },
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -324,10 +386,10 @@
       }
     },
     {
-      "id": "zai-org/glm-5.3",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
+      "id": "openai/gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
+      "family": "gpt-oss",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -338,8 +400,8 @@
           "type": "effort",
           "values": [
             "low",
-            "high",
-            "max"
+            "medium",
+            "high"
           ]
         }
       ],
@@ -349,8 +411,9 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
       "modalities": {
         "input": [
           "text"
@@ -361,16 +424,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 131072
+        "context": 131072,
+        "output": 32768
       },
       "cost": {
-        "input": 1,
-        "output": 4,
-        "cache_read": 0.3
+        "input": 0.15,
+        "output": 0.6,
+        "cache_read": 0.08
       },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
+      "canonical_model_id": "openai/gpt-oss-120b",
+      "display_name": "GPT OSS 120B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -381,6 +444,66 @@
           "interleaved": true,
           "summaries": true,
           "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "motif-technologies/motif-3",
+      "name": "Motif 3",
+      "description": "Motif 3 is a large-scale, decoder-only Mixture-of-Experts (MoE) language model with 314 billion total parameters and 13.2 billion parameters activated per token.",
+      "family": "motif",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-08-07",
+      "last_updated": "2026-08-07",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 2,
+        "cache_read": 0.2
+      },
+      "canonical_model_id": "motif-technologies/motif-3",
+      "display_name": "Motif 3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -517,129 +640,6 @@
           ],
           "notes": [
             "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
-        }
-      }
-    },
-    {
-      "id": "moonshotai/kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 131072
-      },
-      "cost": {
-        "input": 3,
-        "output": 12.5,
-        "cache_read": 0.5
-      },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "motif-technologies/motif-3",
-      "name": "Motif 3",
-      "description": "Motif 3 is a large-scale, decoder-only Mixture-of-Experts (MoE) language model with 314 billion total parameters and 13.2 billion parameters activated per token.",
-      "family": "motif",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-08-07",
-      "last_updated": "2026-08-07",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "cost": {
-        "input": 0.5,
-        "output": 2,
-        "cache_read": 0.2
-      },
-      "canonical_model_id": "motif-technologies/motif-3",
-      "display_name": "Motif 3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
           ]
         }
       }
