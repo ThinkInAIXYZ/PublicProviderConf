@@ -6,10 +6,10 @@
   "display_name": "The Grid AI",
   "models": [
     {
-      "id": "glm-latest",
-      "name": "GLM Latest",
-      "description": "Lab latest market for GLM supply. You contract for the latest qualifying route, not a specific model.",
-      "attachment": false,
+      "id": "kimi-latest",
+      "name": "Kimi Latest",
+      "description": "Lab latest market for Kimi supply. You contract for the latest qualifying route, not a specific model.",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -31,10 +31,11 @@
       "structured_output": true,
       "temperature": false,
       "release_date": "2026-07-06",
-      "last_updated": "2026-08-18",
+      "last_updated": "2026-07-06",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -43,10 +44,10 @@
       "open_weights": false,
       "limit": {
         "context": 1048576,
-        "input": 917504,
-        "output": 131072
+        "input": 922000,
+        "output": 943718
       },
-      "display_name": "GLM Latest",
+      "display_name": "Kimi Latest",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -117,9 +118,9 @@
       }
     },
     {
-      "id": "code-prime",
-      "name": "Code Prime",
-      "description": "Reliable models for everyday software tasks, code completion, review, and standard debugging. Any model that meets the contract spec can serve your request.",
+      "id": "agent-prime",
+      "name": "Agent Prime",
+      "description": "Reliable models for dependable agentic applications, multi-step tool use, and reasoning workflows. Any model that meets the contract spec can serve your request.",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -158,7 +159,7 @@
         "output": 131072
       },
       "status": "beta",
-      "display_name": "Code Prime",
+      "display_name": "Agent Prime",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -173,9 +174,9 @@
       }
     },
     {
-      "id": "bytedance-pro-latest",
-      "name": "ByteDance Pro Latest",
-      "description": "Lab latest market for ByteDance Pro supply. You contract for the latest qualifying route, not a specific model.",
+      "id": "agent-standard",
+      "name": "Agent Standard",
+      "description": "Price-optimized models for fast tool calls, simple agent loops, high-throughput automation, and orchestration. Any model that meets the contract spec can serve your request.",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -196,9 +197,9 @@
         "field": "reasoning_content"
       },
       "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-06",
-      "last_updated": "2026-07-06",
+      "temperature": true,
+      "release_date": "2026-05-04",
+      "last_updated": "2026-10-06",
       "modalities": {
         "input": [
           "text"
@@ -209,11 +210,12 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 262144,
-        "input": 256000,
-        "output": 131072
+        "context": 128000,
+        "input": 120000,
+        "output": 65536
       },
-      "display_name": "ByteDance Pro Latest",
+      "status": "beta",
+      "display_name": "Agent Standard",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -339,25 +341,20 @@
       }
     },
     {
-      "id": "claude-opus-latest",
-      "name": "Claude Opus Latest",
-      "description": "Lab latest market for Claude Opus frontier supply. You contract for the latest qualifying route, not a specific model.",
-      "attachment": true,
+      "id": "glm-latest",
+      "name": "GLM Latest",
+      "description": "Lab latest market for GLM supply. You contract for the latest qualifying route, not a specific model.",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        },
-        {
           "type": "effort",
           "values": [
             "low",
-            "medium",
             "high",
-            "xhigh",
             "max"
           ]
         }
@@ -369,7 +366,62 @@
       "structured_output": true,
       "temperature": false,
       "release_date": "2026-07-06",
-      "last_updated": "2026-07-30",
+      "last_updated": "2026-08-18",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "input": 917504,
+        "output": 131072
+      },
+      "display_name": "GLM Latest",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gemini-pro-latest",
+      "name": "Gemini Pro Latest",
+      "description": "Lab latest market for Gemini Pro frontier supply. You contract for the latest qualifying route, not a specific model.",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-07-06",
+      "last_updated": "2026-07-06",
       "modalities": {
         "input": [
           "text",
@@ -383,9 +435,65 @@
       "limit": {
         "context": 1000000,
         "input": 922000,
-        "output": 128000
+        "output": 65536
       },
-      "display_name": "Claude Opus Latest",
+      "display_name": "Gemini Pro Latest",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "code-prime",
+      "name": "Code Prime",
+      "description": "Reliable models for everyday software tasks, code completion, review, and standard debugging. Any model that meets the contract spec can serve your request.",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-05-04",
+      "last_updated": "2026-07-15",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 196608,
+        "input": 120000,
+        "output": 131072
+      },
+      "status": "beta",
+      "display_name": "Code Prime",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -462,6 +570,183 @@
       }
     },
     {
+      "id": "claude-opus-latest",
+      "name": "Claude Opus Latest",
+      "description": "Lab latest market for Claude Opus frontier supply. You contract for the latest qualifying route, not a specific model.",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-07-06",
+      "last_updated": "2026-07-30",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "input": 922000,
+        "output": 128000
+      },
+      "display_name": "Claude Opus Latest",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bytedance-pro-latest",
+      "name": "ByteDance Pro Latest",
+      "description": "Lab latest market for ByteDance Pro supply. You contract for the latest qualifying route, not a specific model.",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-07-06",
+      "last_updated": "2026-07-06",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "input": 256000,
+        "output": 131072
+      },
+      "display_name": "ByteDance Pro Latest",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "text-max",
+      "name": "Text Max",
+      "description": "Frontier models for deep reasoning, long context, and complex workflows. Any model that meets the contract spec can serve your request.",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-02-26",
+      "last_updated": "2026-07-30",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "input": 922000,
+        "output": 128000
+      },
+      "display_name": "Text Max",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
       "id": "minimax-latest",
       "name": "MiniMax Latest",
       "description": "Lab latest market for MiniMax supply. You contract for the latest qualifying route, not a specific model.",
@@ -503,62 +788,6 @@
         "output": 512000
       },
       "display_name": "MiniMax Latest",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "agent-standard",
-      "name": "Agent Standard",
-      "description": "Price-optimized models for fast tool calls, simple agent loops, high-throughput automation, and orchestration. Any model that meets the contract spec can serve your request.",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-05-04",
-      "last_updated": "2026-10-06",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 128000,
-        "input": 120000,
-        "output": 65536
-      },
-      "status": "beta",
-      "display_name": "Agent Standard",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -628,10 +857,10 @@
       }
     },
     {
-      "id": "kimi-latest",
-      "name": "Kimi Latest",
-      "description": "Lab latest market for Kimi supply. You contract for the latest qualifying route, not a specific model.",
-      "attachment": true,
+      "id": "text-prime",
+      "name": "Text Prime",
+      "description": "Reliable models for everyday text generation, editing, and analysis across diverse workflows. Any model that meets the contract spec can serve your request.",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -641,8 +870,8 @@
           "type": "effort",
           "values": [
             "low",
-            "high",
-            "max"
+            "medium",
+            "high"
           ]
         }
       ],
@@ -651,13 +880,12 @@
         "field": "reasoning_content"
       },
       "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-06",
-      "last_updated": "2026-07-06",
+      "temperature": true,
+      "release_date": "2026-02-26",
+      "last_updated": "2026-07-15",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -665,11 +893,11 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1048576,
-        "input": 922000,
-        "output": 943718
+        "context": 196608,
+        "input": 120000,
+        "output": 131072
       },
-      "display_name": "Kimi Latest",
+      "display_name": "Text Prime",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -732,234 +960,6 @@
       },
       "status": "beta",
       "display_name": "Code Max",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "gemini-pro-latest",
-      "name": "Gemini Pro Latest",
-      "description": "Lab latest market for Gemini Pro frontier supply. You contract for the latest qualifying route, not a specific model.",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-06",
-      "last_updated": "2026-07-06",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "input": 922000,
-        "output": 65536
-      },
-      "display_name": "Gemini Pro Latest",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "text-prime",
-      "name": "Text Prime",
-      "description": "Reliable models for everyday text generation, editing, and analysis across diverse workflows. Any model that meets the contract spec can serve your request.",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-02-26",
-      "last_updated": "2026-07-15",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 196608,
-        "input": 120000,
-        "output": 131072
-      },
-      "display_name": "Text Prime",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "agent-prime",
-      "name": "Agent Prime",
-      "description": "Reliable models for dependable agentic applications, multi-step tool use, and reasoning workflows. Any model that meets the contract spec can serve your request.",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-05-04",
-      "last_updated": "2026-07-15",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 196608,
-        "input": 120000,
-        "output": 131072
-      },
-      "status": "beta",
-      "display_name": "Agent Prime",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "text-max",
-      "name": "Text Max",
-      "description": "Frontier models for deep reasoning, long context, and complex workflows. Any model that meets the contract spec can serve your request.",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-02-26",
-      "last_updated": "2026-07-30",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "input": 922000,
-        "output": 128000
-      },
-      "display_name": "Text Max",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
