@@ -6,22 +6,32 @@
   "display_name": "Crusoe",
   "models": [
     {
-      "id": "meta-llama/Llama-3.3-70B-Instruct",
-      "name": "Llama-3.3-70B-Instruct",
-      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
-      "family": "llama",
-      "attachment": false,
+      "id": "moonshotai/Kimi-K2.6",
+      "name": "Kimi K2.6",
+      "description": "Multimodal Kimi workhorse for agent loops, coding tasks, and visual context",
+      "family": "kimi-k2",
+      "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
       "tool_call": true,
+      "interleaved": true,
+      "structured_output": true,
       "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-12-06",
-      "last_updated": "2024-12-06",
+      "knowledge": "2025-01",
+      "release_date": "2026-04-20",
+      "last_updated": "2026-04-20",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -29,18 +39,76 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128000,
-        "output": 4096
+        "context": 262144,
+        "output": 262144
       },
       "status": "deprecated",
       "cost": {
-        "input": 0.25,
-        "output": 0.75,
-        "cache_read": 0.13
+        "input": 0.7,
+        "output": 3.5,
+        "cache_read": 0.35
       },
-      "canonical_model_id": "meta/llama-3.3-70b-instruct",
-      "display_name": "Llama-3.3-70B-Instruct",
-      "type": "chat"
+      "canonical_model_id": "moonshotai/kimi-k2.6",
+      "display_name": "Kimi K2.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true
+        }
+      }
+    },
+    {
+      "id": "nvidia/Nemotron-3-Nano-Omni-Reasoning-30B-A3B",
+      "name": "Nemotron 3 Nano Omni 30B A3B Reasoning",
+      "description": "Open Nemotron omni model combining reasoning with text, vision, and audio",
+      "family": "nemotron",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": true,
+      "temperature": true,
+      "release_date": "2026-04-28",
+      "last_updated": "2026-04-28",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 256000,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 1.83,
+        "cache_read": 0.3,
+        "input_audio": 0.5
+      },
+      "canonical_model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "display_name": "Nemotron 3 Nano Omni 30B A3B Reasoning",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true
+        }
+      }
     },
     {
       "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
@@ -132,78 +200,18 @@
       }
     },
     {
-      "id": "nvidia/Nemotron-3-Nano-Omni-Reasoning-30B-A3B",
-      "name": "Nemotron 3 Nano Omni 30B A3B Reasoning",
-      "description": "Open Nemotron omni model combining reasoning with text, vision, and audio",
-      "family": "nemotron",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": true,
-      "temperature": true,
-      "release_date": "2026-04-28",
-      "last_updated": "2026-04-28",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 256000,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 1.83,
-        "cache_read": 0.3,
-        "input_audio": 0.5
-      },
-      "canonical_model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
-      "display_name": "Nemotron 3 Nano Omni 30B A3B Reasoning",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true
-        }
-      }
-    },
-    {
-      "id": "zai/GLM-5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
+      "id": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "name": "Qwen3 235B-A22B Instruct 2507",
+      "description": "Updated large open Qwen3 MoE instruct model for multilingual chat, coding, and tool use",
+      "family": "qwen",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
       "tool_call": true,
-      "interleaved": true,
-      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
+      "release_date": "2025-07-21",
+      "last_updated": "2025-07-21",
       "modalities": {
         "input": [
           "text"
@@ -214,70 +222,18 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 131072
+        "context": 262144,
+        "output": 16384
       },
       "status": "deprecated",
       "cost": {
-        "input": 1.4,
-        "output": 4.4,
-        "cache_read": 0.26
+        "input": 0.22,
+        "output": 0.8,
+        "cache_read": 0.11
       },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true
-        }
-      }
-    },
-    {
-      "id": "zai/GLM-5.1",
-      "name": "GLM-5.1",
-      "description": "Strong GLM coding model for agentic engineering, terminals, and repository generation",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "interleaved": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-07",
-      "last_updated": "2026-04-07",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 200000,
-        "output": 131072
-      },
-      "status": "deprecated",
-      "cost": {
-        "input": 1.2,
-        "output": 4.4,
-        "cache_read": 0.25
-      },
-      "canonical_model_id": "zhipuai/glm-5.1",
-      "display_name": "GLM-5.1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true
-        }
-      }
+      "canonical_model_id": "alibaba/qwen3-235b-a22b-instruct-2507",
+      "display_name": "Qwen3 235B-A22B Instruct 2507",
+      "type": "chat"
     },
     {
       "id": "openai/gpt-oss-120b",
@@ -420,11 +376,11 @@
       "type": "chat"
     },
     {
-      "id": "moonshotai/Kimi-K2.6",
-      "name": "Kimi K2.6",
-      "description": "Multimodal Kimi workhorse for agent loops, coding tasks, and visual context",
-      "family": "kimi-k2",
-      "attachment": true,
+      "id": "zai/GLM-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -438,14 +394,11 @@
       "interleaved": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-04-20",
-      "last_updated": "2026-04-20",
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -453,17 +406,17 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 1000000,
+        "output": 131072
       },
       "status": "deprecated",
       "cost": {
-        "input": 0.7,
-        "output": 3.5,
-        "cache_read": 0.35
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 0.26
       },
-      "canonical_model_id": "moonshotai/kimi-k2.6",
-      "display_name": "Kimi K2.6",
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -473,18 +426,22 @@
       }
     },
     {
-      "id": "Qwen/Qwen3-235B-A22B-Instruct-2507",
-      "name": "Qwen3 235B-A22B Instruct 2507",
-      "description": "Updated large open Qwen3 MoE instruct model for multilingual chat, coding, and tool use",
-      "family": "qwen",
+      "id": "zai/GLM-5.1",
+      "name": "GLM-5.1",
+      "description": "Strong GLM coding model for agentic engineering, terminals, and repository generation",
+      "family": "glm",
       "attachment": false,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [],
       "tool_call": true,
+      "interleaved": true,
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2025-07-21",
-      "last_updated": "2025-07-21",
+      "release_date": "2026-04-07",
+      "last_updated": "2026-04-07",
       "modalities": {
         "input": [
           "text"
@@ -495,17 +452,60 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 16384
+        "context": 200000,
+        "output": 131072
       },
       "status": "deprecated",
       "cost": {
-        "input": 0.22,
-        "output": 0.8,
-        "cache_read": 0.11
+        "input": 1.2,
+        "output": 4.4,
+        "cache_read": 0.25
       },
-      "canonical_model_id": "alibaba/qwen3-235b-a22b-instruct-2507",
-      "display_name": "Qwen3 235B-A22B Instruct 2507",
+      "canonical_model_id": "zhipuai/glm-5.1",
+      "display_name": "GLM-5.1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true
+        }
+      }
+    },
+    {
+      "id": "meta-llama/Llama-3.3-70B-Instruct",
+      "name": "Llama-3.3-70B-Instruct",
+      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-12-06",
+      "last_updated": "2024-12-06",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 4096
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 0.25,
+        "output": 0.75,
+        "cache_read": 0.13
+      },
+      "canonical_model_id": "meta/llama-3.3-70b-instruct",
+      "display_name": "Llama-3.3-70B-Instruct",
       "type": "chat"
     }
   ]

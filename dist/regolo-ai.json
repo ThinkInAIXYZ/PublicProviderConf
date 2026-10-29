@@ -6,6 +6,42 @@
   "display_name": "Regolo AI",
   "models": [
     {
+      "id": "llama-3.3-70b-instruct",
+      "name": "Llama 3.3 70B Instruct",
+      "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-12-06",
+      "last_updated": "2024-12-06",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 0.6,
+        "output": 2.7
+      },
+      "canonical_model_id": "meta/llama-3.3-70b-instruct",
+      "display_name": "Llama 3.3 70B Instruct",
+      "type": "chat"
+    },
+    {
       "id": "qwen3-embedding-8b",
       "type": "embedding",
       "name": "Qwen3-Embedding-8B",
@@ -40,26 +76,17 @@
       "display_name": "Qwen3-Embedding-8B"
     },
     {
-      "id": "gemma4-31b",
-      "name": "Gemma 4 31B IT",
-      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
-      "family": "gemma",
+      "id": "deepseek-ocr-2",
+      "name": "DeepSeek OCR 2",
+      "description": "High-accuracy OCR model for extracting text from documents, screenshots, receipts, and natural scenes",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
+      "tool_call": false,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
+      "release_date": "2026-01-27",
+      "last_updated": "2026-01-27",
       "modalities": {
         "input": [
           "text",
@@ -71,23 +98,23 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 100000,
-        "output": 100000
+        "context": 4000,
+        "output": 4000
       },
       "cost": {
-        "input": 0.46,
-        "output": 2.42
+        "input": 0,
+        "output": 0
       },
-      "canonical_model_id": "google/gemma-4-31b-it",
-      "display_name": "Gemma 4 31B IT",
+      "canonical_model_id": "deepseek/deepseek-ocr-2",
+      "display_name": "DeepSeek OCR 2",
       "type": "chat"
     },
     {
-      "id": "mistral-small-4-119b",
-      "name": "Mistral Small 4 119B",
-      "description": "Efficient Mistral model for fast chat, extraction, and production assistants",
-      "family": "mistral-small",
-      "attachment": true,
+      "id": "qwen3-coder-next",
+      "name": "Qwen3-Coder-Next",
+      "description": "Qwen coding model for software agents, repository edits, and code reasoning",
+      "family": "qwen",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -95,13 +122,12 @@
       "reasoning_options": [],
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2025-06",
-      "release_date": "2026-03-16",
-      "last_updated": "2026-03-16",
+      "knowledge": "2025-09",
+      "release_date": "2026-02-03",
+      "last_updated": "2026-02-03",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -109,49 +135,62 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 256000,
+        "context": 262144,
         "output": 16384
       },
+      "status": "deprecated",
       "cost": {
-        "input": 0.56075,
-        "output": 2.35515
+        "input": 0.3,
+        "output": 1.2
       },
-      "canonical_model_id": "mistral/mistral-small-2603",
-      "display_name": "Mistral Small 4 119B",
+      "canonical_model_id": "alibaba/qwen3-coder-next",
+      "display_name": "Qwen3-Coder-Next",
       "type": "chat"
     },
     {
-      "id": "qwen-image",
-      "type": "image",
-      "name": "Qwen-Image",
-      "description": "Image model for prompt-driven generation, editing, and visual design workflows",
-      "family": "qwen",
+      "id": "glm5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
       "attachment": false,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-03-01",
-      "last_updated": "2026-03-01",
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
       "modalities": {
         "input": [
           "text"
         ],
         "output": [
-          "image"
+          "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 8192,
-        "output": 4096
+        "context": 96000,
+        "output": 96000
       },
       "cost": {
-        "input": 0.5,
-        "output": 2
+        "input": 2.31,
+        "output": 6
       },
-      "display_name": "Qwen-Image"
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
+      "type": "chat"
     },
     {
       "id": "qwen3.5-122b",
@@ -202,30 +241,22 @@
       }
     },
     {
-      "id": "qwen3.8-27b",
-      "name": "Qwen3.8 27B",
-      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
-      "family": "qwen",
+      "id": "faster-whisper-large-v3",
+      "type": "transcription",
+      "name": "Faster Whisper Large v3",
+      "description": "Open Whisper checkpoint for robust multilingual transcription and captioning",
+      "family": "whisper",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
+      "tool_call": false,
       "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
+      "release_date": "2023-11-06",
+      "last_updated": "2023-11-06",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "audio"
         ],
         "output": [
           "text"
@@ -233,61 +264,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 120000,
-        "output": 120000
+        "context": 448,
+        "output": 4096
       },
       "cost": {
-        "input": 0.58,
-        "output": 2.42
+        "input": 0,
+        "output": 0
       },
-      "canonical_model_id": "alibaba/qwen3.8-27b",
-      "display_name": "Qwen3.8 27B",
-      "type": "chat"
-    },
-    {
-      "id": "glm5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 96000,
-        "output": 96000
-      },
-      "cost": {
-        "input": 2.31,
-        "output": 6
-      },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
-      "type": "chat"
+      "canonical_model_id": "openai/whisper-large-v3",
+      "display_name": "Faster Whisper Large v3"
     },
     {
       "id": "qwen3.5-9b",
@@ -336,6 +321,105 @@
           ]
         }
       }
+    },
+    {
+      "id": "qwen-image",
+      "type": "image",
+      "name": "Qwen-Image",
+      "description": "Image model for prompt-driven generation, editing, and visual design workflows",
+      "family": "qwen",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2026-03-01",
+      "last_updated": "2026-03-01",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 8192,
+        "output": 4096
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 2
+      },
+      "display_name": "Qwen-Image"
+    },
+    {
+      "id": "brick-complexity-pro",
+      "name": "Brick Complexity Pro",
+      "description": "Complexity classifier that powers the Brick semantic router by extracting query difficulty",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-02-06",
+      "last_updated": "2026-02-06",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 100000,
+        "output": 15000
+      },
+      "cost": {
+        "input": 0.12,
+        "output": 0.46
+      },
+      "display_name": "Brick Complexity Pro",
+      "type": "chat"
+    },
+    {
+      "id": "qwen3-reranker-4b",
+      "type": "rerank",
+      "name": "Qwen3-Reranker-4B",
+      "description": "Reranking model for improving retrieval quality in search and recommendation systems",
+      "family": "qwen",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2026-02-01",
+      "last_updated": "2026-02-01",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 32768,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.12,
+        "output": 0.12
+      },
+      "display_name": "Qwen3-Reranker-4B"
     },
     {
       "id": "brick-v1-beta",
@@ -424,212 +508,6 @@
       }
     },
     {
-      "id": "qwen3-reranker-4b",
-      "type": "rerank",
-      "name": "Qwen3-Reranker-4B",
-      "description": "Reranking model for improving retrieval quality in search and recommendation systems",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2026-02-01",
-      "last_updated": "2026-02-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 32768,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0.12,
-        "output": 0.12
-      },
-      "display_name": "Qwen3-Reranker-4B"
-    },
-    {
-      "id": "deepseek-ocr-2",
-      "name": "DeepSeek OCR 2",
-      "description": "High-accuracy OCR model for extracting text from documents, screenshots, receipts, and natural scenes",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2026-01-27",
-      "last_updated": "2026-01-27",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 4000,
-        "output": 4000
-      },
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "canonical_model_id": "deepseek/deepseek-ocr-2",
-      "display_name": "DeepSeek OCR 2",
-      "type": "chat"
-    },
-    {
-      "id": "brick-complexity-pro",
-      "name": "Brick Complexity Pro",
-      "description": "Complexity classifier that powers the Brick semantic router by extracting query difficulty",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-02-06",
-      "last_updated": "2026-02-06",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 100000,
-        "output": 15000
-      },
-      "cost": {
-        "input": 0.12,
-        "output": 0.46
-      },
-      "display_name": "Brick Complexity Pro",
-      "type": "chat"
-    },
-    {
-      "id": "faster-whisper-large-v3",
-      "type": "transcription",
-      "name": "Faster Whisper Large v3",
-      "description": "Open Whisper checkpoint for robust multilingual transcription and captioning",
-      "family": "whisper",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2023-11-06",
-      "last_updated": "2023-11-06",
-      "modalities": {
-        "input": [
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 448,
-        "output": 4096
-      },
-      "cost": {
-        "input": 0,
-        "output": 0
-      },
-      "canonical_model_id": "openai/whisper-large-v3",
-      "display_name": "Faster Whisper Large v3"
-    },
-    {
-      "id": "qwen3-coder-next",
-      "name": "Qwen3-Coder-Next",
-      "description": "Qwen coding model for software agents, repository edits, and code reasoning",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-09",
-      "release_date": "2026-02-03",
-      "last_updated": "2026-02-03",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 16384
-      },
-      "status": "deprecated",
-      "cost": {
-        "input": 0.3,
-        "output": 1.2
-      },
-      "canonical_model_id": "alibaba/qwen3-coder-next",
-      "display_name": "Qwen3-Coder-Next",
-      "type": "chat"
-    },
-    {
-      "id": "apertus-70b",
-      "name": "Apertus 70B",
-      "description": "Fully open 70B multilingual LLM supporting 1800+ languages with 65K context. Trained on 15T tokens of compliant open data. Apache 2.0, EU AI Act compliant.",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-09",
-      "release_date": "2025-09-02",
-      "last_updated": "2025-09-02",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 30000,
-        "output": 30000
-      },
-      "cost": {
-        "input": 0.46,
-        "output": 2.42
-      },
-      "canonical_model_id": "swiss-ai/apertus-70b",
-      "display_name": "Apertus 70B",
-      "type": "chat"
-    },
-    {
       "id": "gpt-oss-120b",
       "name": "GPT-OSS-120B",
       "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
@@ -681,19 +559,142 @@
       }
     },
     {
-      "id": "llama-3.3-70b-instruct",
-      "name": "Llama 3.3 70B Instruct",
-      "description": "Open Llama instruction model for multilingual chat, reasoning, and coding",
-      "family": "llama",
+      "id": "mistral-small-4-119b",
+      "name": "Mistral Small 4 119B",
+      "description": "Efficient Mistral model for fast chat, extraction, and production assistants",
+      "family": "mistral-small",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-06",
+      "release_date": "2026-03-16",
+      "last_updated": "2026-03-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 256000,
+        "output": 16384
+      },
+      "cost": {
+        "input": 0.56075,
+        "output": 2.35515
+      },
+      "canonical_model_id": "mistral/mistral-small-2603",
+      "display_name": "Mistral Small 4 119B",
+      "type": "chat"
+    },
+    {
+      "id": "gemma4-31b",
+      "name": "Gemma 4 31B IT",
+      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 100000,
+        "output": 100000
+      },
+      "cost": {
+        "input": 0.46,
+        "output": 2.42
+      },
+      "canonical_model_id": "google/gemma-4-31b-it",
+      "display_name": "Gemma 4 31B IT",
+      "type": "chat"
+    },
+    {
+      "id": "qwen3.8-27b",
+      "name": "Qwen3.8 27B",
+      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 120000,
+        "output": 120000
+      },
+      "cost": {
+        "input": 0.58,
+        "output": 2.42
+      },
+      "canonical_model_id": "alibaba/qwen3.8-27b",
+      "display_name": "Qwen3.8 27B",
+      "type": "chat"
+    },
+    {
+      "id": "apertus-70b",
+      "name": "Apertus 70B",
+      "description": "Fully open 70B multilingual LLM supporting 1800+ languages with 65K context. Trained on 15T tokens of compliant open data. Apache 2.0, EU AI Act compliant.",
       "attachment": false,
       "reasoning": {
         "supported": false
       },
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-12-06",
-      "last_updated": "2024-12-06",
+      "knowledge": "2025-09",
+      "release_date": "2025-09-02",
+      "last_updated": "2025-09-02",
       "modalities": {
         "input": [
           "text"
@@ -704,16 +705,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128000,
-        "output": 16384
+        "context": 30000,
+        "output": 30000
       },
-      "status": "deprecated",
       "cost": {
-        "input": 0.6,
-        "output": 2.7
+        "input": 0.46,
+        "output": 2.42
       },
-      "canonical_model_id": "meta/llama-3.3-70b-instruct",
-      "display_name": "Llama 3.3 70B Instruct",
+      "canonical_model_id": "swiss-ai/apertus-70b",
+      "display_name": "Apertus 70B",
       "type": "chat"
     }
   ]
