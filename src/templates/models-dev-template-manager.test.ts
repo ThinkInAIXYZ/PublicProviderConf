@@ -193,3 +193,39 @@ test('patches DeepSeek with the V4 Flash vision model', async () => {
   assert.deepEqual(model?.modalities?.input, ['text', 'image']);
   assert.deepEqual(model?.limit, { context: 1000000, output: 384000 });
 });
+
+test('adds GPT Image 2.5 variants with image pricing without replacing upstream limits', async () => {
+  const templates = await new ModelsDevTemplateManager().loadAllTemplates();
+  const provider = mergeProviderWithTemplate({
+    id: 'openai',
+    name: 'OpenAI',
+    models: [{
+      id: 'gpt-image-2.5-sunburst',
+      name: 'GPT Image 2.5 Sunburst',
+      limit: { context: 12345, output: 6789 },
+    }],
+  }, templates.get('openai'));
+
+  for (const id of ['gpt-image-2.5-sunburst', 'gpt-image-2.5-flare']) {
+    const model = provider.models.find(model => model.id === id);
+    assert.ok(model, `Missing template model ${id}`);
+    assert.equal(provider.models.filter(model => model.id === id).length, 1);
+    assert.equal(model.type, 'image-generation');
+    assert.deepEqual(model.modalities, { input: ['text', 'image'], output: ['image'] });
+    assert.deepEqual(model.cost, { input: 5, output: 30, cache_read: 1.25 });
+    assert.deepEqual(model.metadata?.pricing, {
+      text_input: 5,
+      text_cache_read: 1.25,
+      image_input: 8,
+      image_cache_read: 2,
+      image_output: 30,
+      unit: 'USD per 1M tokens',
+    });
+  }
+  assert.deepEqual(
+    provider.models.find(model => model.id === 'gpt-image-2.5-sunburst')?.limit,
+    { context: 12345, output: 6789 },
+  );
+  assert.equal(provider.models.find(model => model.id === 'gpt-image-2.5-flare')?.limit, undefined);
+  assert.ok(provider.models.some(model => model.id === 'gpt-image-2'));
+});
