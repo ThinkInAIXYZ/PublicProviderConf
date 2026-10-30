@@ -6,10 +6,10 @@
   "display_name": "Vancine",
   "models": [
     {
-      "id": "deepseek-v4.1-flash",
-      "name": "DeepSeek V4.1 Flash",
-      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
-      "family": "deepseek-flash",
+      "id": "qwen3.8-flash",
+      "name": "Qwen3.8 Flash",
+      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "family": "qwen",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -20,12 +20,8 @@
           "type": "toggle"
         },
         {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
+          "type": "budget_tokens",
+          "max": 262144
         }
       ],
       "tool_call": true,
@@ -34,30 +30,30 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
         "context": 1000000,
-        "output": 384000
+        "output": 131072
       },
       "cost": {
-        "input": 0.24,
-        "output": 0.96,
-        "cache_read": 0.0048
+        "input": 0.12,
+        "output": 0.38,
+        "cache_read": 0.013
       },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "DeepSeek V4.1 Flash",
+      "canonical_model_id": "alibaba/qwen3.8-flash",
+      "display_name": "Qwen3.8 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -143,11 +139,11 @@
       }
     },
     {
-      "id": "glm-5.3-flash",
-      "name": "GLM-5.3-Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
-      "attachment": true,
+      "id": "hy4-preview",
+      "name": "Hy4 preview",
+      "description": "A next-generation productivity model with significantly enhanced Agent and complex task execution capabilities.",
+      "family": "Hy",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -156,23 +152,18 @@
         {
           "type": "effort",
           "values": [
-            "low",
-            "high",
-            "max"
+            "none",
+            "high"
           ]
         }
       ],
       "tool_call": true,
-      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
+      "release_date": "2026-08-28",
+      "last_updated": "2026-08-28",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video",
-          "pdf"
+          "text"
         ],
         "output": [
           "text"
@@ -180,16 +171,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 131072
+        "context": 1024000,
+        "output": 64000
       },
       "cost": {
-        "input": 0.12,
-        "output": 0.4,
-        "cache_read": 0.024
+        "input": 0.67,
+        "output": 2,
+        "cache_read": 0.034
       },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM-5.3-Flash",
+      "canonical_model_id": "tencent/hy4-preview",
+      "display_name": "Hy4 preview",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -264,112 +255,10 @@
       }
     },
     {
-      "id": "hy4-preview",
-      "name": "Hy4 preview",
-      "description": "A next-generation productivity model with significantly enhanced Agent and complex task execution capabilities.",
-      "family": "Hy",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-08-28",
-      "last_updated": "2026-08-28",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1024000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 0.67,
-        "output": 2,
-        "cache_read": 0.034
-      },
-      "canonical_model_id": "tencent/hy4-preview",
-      "display_name": "Hy4 preview",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "glm-5.3",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 1.12,
-        "output": 3.52,
-        "cache_read": 0.208
-      },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "qwen3.8-flash",
-      "name": "Qwen3.8 Flash",
-      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
-      "family": "qwen",
+      "id": "deepseek-v4.1-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
+      "family": "deepseek-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -380,8 +269,12 @@
           "type": "toggle"
         },
         {
-          "type": "budget_tokens",
-          "max": 262144
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
         }
       ],
       "tool_call": true,
@@ -390,30 +283,30 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
         "context": 1000000,
-        "output": 131072
+        "output": 384000
       },
       "cost": {
-        "input": 0.12,
-        "output": 0.38,
-        "cache_read": 0.013
+        "input": 0.24,
+        "output": 0.96,
+        "cache_read": 0.0048
       },
-      "canonical_model_id": "alibaba/qwen3.8-flash",
-      "display_name": "Qwen3.8 Flash",
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -482,6 +375,113 @@
           "interleaved": true,
           "summaries": true,
           "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.12,
+        "output": 0.4,
+        "cache_read": 0.024
+      },
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3-Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1.12,
+        "output": 3.52,
+        "cache_read": 0.208
+      },
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
         }
       }
     }
