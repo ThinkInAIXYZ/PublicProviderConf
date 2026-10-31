@@ -6,10 +6,10 @@
   "display_name": "Tinfoil",
   "models": [
     {
-      "id": "gpt-oss-120b",
-      "name": "gpt-oss-120b",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
+      "id": "glm-5-3",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -20,17 +20,16 @@
           "type": "effort",
           "values": [
             "low",
-            "medium",
-            "high"
+            "high",
+            "max"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
           "text"
@@ -41,21 +40,17 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 131072,
-        "output": 32768
+        "context": 1048576,
+        "output": 131072
       },
       "cost": {
-        "input": 0.15,
-        "output": 0.6
+        "input": 1.8,
+        "output": 5.75,
+        "cache_read": 0.45
       },
-      "canonical_model_id": "openai/gpt-oss-120b",
-      "display_name": "gpt-oss-120b",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
+      "type": "chat"
     },
     {
       "id": "gpt-oss-safeguard-120b",
@@ -148,21 +143,35 @@
       "type": "chat"
     },
     {
-      "id": "nomic-embed-text",
-      "name": "Nomic Embed Text v1.5",
-      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
-      "attachment": false,
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
+      "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
-      "structured_output": false,
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
       "temperature": false,
-      "release_date": "2024-02",
-      "last_updated": "2024-02",
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -170,15 +179,22 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 8192,
-        "output": 768
+        "context": 262144,
+        "output": 131072
       },
       "cost": {
-        "input": 0.05,
-        "output": 0
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.8
       },
-      "display_name": "Nomic Embed Text v1.5",
-      "type": "chat"
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "llama3-3-70b",
@@ -216,30 +232,18 @@
       "type": "chat"
     },
     {
-      "id": "glm-5-3",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
+      "id": "nomic-embed-text",
+      "name": "Nomic Embed Text v1.5",
+      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
+      "tool_call": false,
+      "structured_output": false,
+      "temperature": false,
+      "release_date": "2024-02",
+      "last_updated": "2024-02",
       "modalities": {
         "input": [
           "text"
@@ -250,16 +254,14 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 131072
+        "context": 8192,
+        "output": 768
       },
       "cost": {
-        "input": 1.8,
-        "output": 5.75,
-        "cache_read": 0.45
+        "input": 0.05,
+        "output": 0
       },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
+      "display_name": "Nomic Embed Text v1.5",
       "type": "chat"
     },
     {
@@ -315,11 +317,11 @@
       "type": "chat"
     },
     {
-      "id": "kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
-      "attachment": true,
+      "id": "gpt-oss-120b",
+      "name": "gpt-oss-120b",
+      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
+      "family": "gpt-oss",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -329,21 +331,20 @@
           "type": "effort",
           "values": [
             "low",
-            "high",
-            "max"
+            "medium",
+            "high"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "temperature": true,
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -351,16 +352,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 131072
+        "context": 131072,
+        "output": 32768
       },
       "cost": {
-        "input": 4,
-        "output": 20,
-        "cache_read": 0.8
+        "input": 0.15,
+        "output": 0.6
       },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
+      "canonical_model_id": "openai/gpt-oss-120b",
+      "display_name": "gpt-oss-120b",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
