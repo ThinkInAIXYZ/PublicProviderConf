@@ -6,8 +6,8 @@
   "display_name": "Morph",
   "models": [
     {
-      "id": "morph-kimik3",
-      "name": "Kimi K3",
+      "id": "morph-kimik3-fast",
+      "name": "Kimi K3 Fast",
       "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
       "family": "kimi-k3",
       "attachment": true,
@@ -21,8 +21,7 @@
           "values": [
             "none",
             "low",
-            "high",
-            "max"
+            "high"
           ]
         }
       ],
@@ -49,12 +48,12 @@
         "output": 1048576
       },
       "cost": {
-        "input": 2.5,
-        "output": 14,
-        "cache_read": 0.29
+        "input": 6,
+        "output": 22.5,
+        "cache_read": 0.6
       },
       "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
+      "display_name": "Kimi K3 Fast",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -101,6 +100,67 @@
       "canonical_model_id": "morph/morph-v3-fast",
       "display_name": "Morph V3 Fast",
       "type": "chat"
+    },
+    {
+      "id": "morph-glm52-744b",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "cost": {
+        "input": 1.19,
+        "output": 6,
+        "cache_read": 0.1955
+      },
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "morph-dsv41flash",
@@ -168,6 +228,40 @@
       }
     },
     {
+      "id": "morph-v3-large",
+      "name": "Morph V3 Large",
+      "description": "Flagship model for demanding analysis, coding, and production agent workflows",
+      "family": "morph",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2025-07-07",
+      "last_updated": "2025-07-07",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.9,
+        "output": 1.9
+      },
+      "canonical_model_id": "morph/morph-v3-large",
+      "display_name": "Morph V3 Large",
+      "type": "chat"
+    },
+    {
       "id": "auto",
       "name": "Auto",
       "description": "Automatic model router for matching prompts to suitable backends and budgets",
@@ -202,68 +296,6 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true
-        }
-      }
-    },
-    {
-      "id": "morph-glm53-744b",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 1.19,
-        "output": 6,
-        "cache_read": 0.1955
-      },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
         }
       }
     },
@@ -332,9 +364,9 @@
       }
     },
     {
-      "id": "morph-glm52-744b",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "id": "morph-glm53-744b",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
       "family": "glm",
       "attachment": false,
       "reasoning": {
@@ -346,6 +378,7 @@
           "type": "effort",
           "values": [
             "none",
+            "low",
             "high",
             "max"
           ]
@@ -357,8 +390,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
           "text"
@@ -377,8 +410,8 @@
         "output": 6,
         "cache_read": 0.1955
       },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -458,42 +491,8 @@
       }
     },
     {
-      "id": "morph-v3-large",
-      "name": "Morph V3 Large",
-      "description": "Flagship model for demanding analysis, coding, and production agent workflows",
-      "family": "morph",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2025-07-07",
-      "last_updated": "2025-07-07",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 262144,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.9,
-        "output": 1.9
-      },
-      "canonical_model_id": "morph/morph-v3-large",
-      "display_name": "Morph V3 Large",
-      "type": "chat"
-    },
-    {
-      "id": "morph-kimik3-fast",
-      "name": "Kimi K3 Fast",
+      "id": "morph-kimik3",
+      "name": "Kimi K3",
       "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
       "family": "kimi-k3",
       "attachment": true,
@@ -507,7 +506,8 @@
           "values": [
             "none",
             "low",
-            "high"
+            "high",
+            "max"
           ]
         }
       ],
@@ -534,12 +534,12 @@
         "output": 1048576
       },
       "cost": {
-        "input": 6,
-        "output": 22.5,
-        "cache_read": 0.6
+        "input": 2.5,
+        "output": 14,
+        "cache_read": 0.29
       },
       "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3 Fast",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
