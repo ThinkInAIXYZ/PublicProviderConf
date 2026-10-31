@@ -6,10 +6,50 @@
   "display_name": "DInference",
   "models": [
     {
-      "id": "minimax-m2.5",
-      "name": "MiniMax-M2.5",
-      "description": "Prior MiniMax coding model for agent workflows, office edits, and automation",
-      "family": "minimax",
+      "id": "gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
+      "family": "gpt-oss",
+      "attachment": false,
+      "reasoning": {
+        "supported": true
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 131072,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.0675,
+        "output": 0.27
+      },
+      "canonical_model_id": "openai/gpt-oss-120b",
+      "display_name": "GPT OSS 120B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "glm-5.1",
+      "name": "GLM-5.1",
+      "description": "Strong GLM coding model for agentic engineering, terminals, and repository generation",
+      "family": "glm",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -17,9 +57,13 @@
       },
       "reasoning_options": [],
       "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-02-12",
-      "last_updated": "2026-02-12",
+      "release_date": "2026-04-07",
+      "last_updated": "2026-04-07",
       "modalities": {
         "input": [
           "text"
@@ -31,19 +75,25 @@
       "open_weights": true,
       "limit": {
         "context": 200000,
-        "output": 32000
+        "output": 128000
       },
       "status": "deprecated",
       "cost": {
-        "input": 0.22,
-        "output": 0.88
+        "input": 1.25,
+        "output": 3.89
       },
-      "canonical_model_id": "minimax/MiniMax-M2.5",
-      "display_name": "MiniMax-M2.5",
+      "canonical_model_id": "zhipuai/glm-5.1",
+      "display_name": "GLM-5.1",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -94,98 +144,6 @@
           "continuation": [
             "thinking_blocks"
           ]
-        }
-      }
-    },
-    {
-      "id": "glm-5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "status": "deprecated",
-      "cost": {
-        "input": 1.25,
-        "output": 3.89
-      },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true
-      },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.0675,
-        "output": 0.27
-      },
-      "canonical_model_id": "openai/gpt-oss-120b",
-      "display_name": "GPT OSS 120B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
         }
       }
     },
@@ -241,9 +199,51 @@
       }
     },
     {
-      "id": "glm-5.1",
-      "name": "GLM-5.1",
-      "description": "Strong GLM coding model for agentic engineering, terminals, and repository generation",
+      "id": "minimax-m2.5",
+      "name": "MiniMax-M2.5",
+      "description": "Prior MiniMax coding model for agent workflows, office edits, and automation",
+      "family": "minimax",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-02-12",
+      "last_updated": "2026-02-12",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 200000,
+        "output": 32000
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 0.22,
+        "output": 0.88
+      },
+      "canonical_model_id": "minimax/MiniMax-M2.5",
+      "display_name": "MiniMax-M2.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "glm-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
       "family": "glm",
       "attachment": false,
       "reasoning": {
@@ -257,8 +257,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-04-07",
-      "last_updated": "2026-04-07",
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
       "modalities": {
         "input": [
           "text"
@@ -269,7 +269,7 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 200000,
+        "context": 1000000,
         "output": 128000
       },
       "status": "deprecated",
@@ -277,8 +277,8 @@
         "input": 1.25,
         "output": 3.89
       },
-      "canonical_model_id": "zhipuai/glm-5.1",
-      "display_name": "GLM-5.1",
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
