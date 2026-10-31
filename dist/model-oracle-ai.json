@@ -6,10 +6,44 @@
   "display_name": "Model Oracle AI",
   "models": [
     {
-      "id": "gpt-5",
-      "name": "GPT-5",
-      "description": "Original GPT-5 workhorse for reasoning, coding, writing, and tool workflows",
-      "family": "gpt",
+      "id": "gpt-4.1-mini",
+      "name": "GPT-4.1 mini",
+      "description": "Affordable GPT-4.1 lane for fast coding help and structured extraction",
+      "family": "gpt-mini",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-04",
+      "release_date": "2025-04-14",
+      "last_updated": "2025-04-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1047576,
+        "output": 32768
+      },
+      "canonical_model_id": "openai/gpt-4.1-mini",
+      "display_name": "GPT-4.1 mini",
+      "type": "chat"
+    },
+    {
+      "id": "claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
+      "family": "claude-sonnet",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -19,23 +53,24 @@
         {
           "type": "effort",
           "values": [
-            "minimal",
             "low",
             "medium",
-            "high"
+            "high",
+            "xhigh",
+            "max"
           ]
         }
       ],
       "tool_call": true,
-      "structured_output": true,
       "temperature": false,
-      "knowledge": "2024-09-30",
-      "release_date": "2025-08-07",
-      "last_updated": "2025-08-07",
+      "knowledge": "2026-01-31",
+      "release_date": "2026-06-30",
+      "last_updated": "2026-06-30",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -43,32 +78,87 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 400000,
-        "input": 272000,
+        "context": 1000000,
         "output": 128000
       },
-      "canonical_model_id": "openai/gpt-5",
-      "display_name": "GPT-5",
+      "canonical_model_id": "anthropic/claude-sonnet-5",
+      "display_name": "Claude Sonnet 5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "claude-fable-5",
+      "name": "Claude Fable 5",
+      "description": "Claude model for creative writing, analysis, and controlled agent workflows",
+      "family": "claude-fable",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-06-09",
+      "last_updated": "2026-06-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "canonical_model_id": "anthropic/claude-fable-5",
+      "display_name": "Claude Fable 5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
           "default_enabled": true,
           "mode": "effort",
-          "effort": "medium",
+          "effort": "high",
           "effort_options": [
-            "minimal",
             "low",
             "medium",
-            "high"
+            "high",
+            "xhigh",
+            "max"
           ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
           ],
-          "visibility": "hidden"
+          "notes": [
+            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
+            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
+            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
+          ]
         }
       }
     },
@@ -141,14 +231,14 @@
       }
     },
     {
-      "id": "gpt-5.4",
-      "name": "GPT-5.4",
-      "description": "Agent-ready GPT for coding and computer-use workflows at a lower cost",
+      "id": "gpt-5",
+      "name": "GPT-5",
+      "description": "Original GPT-5 workhorse for reasoning, coding, writing, and tool workflows",
       "family": "gpt",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": false
+        "default": true
       },
       "reasoning_options": [
         {
@@ -163,15 +253,14 @@
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-05",
-      "last_updated": "2026-03-05",
+      "temperature": false,
+      "knowledge": "2024-09-30",
+      "release_date": "2025-08-07",
+      "last_updated": "2025-08-07",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -179,25 +268,24 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1050000,
-        "input": 922000,
+        "context": 400000,
+        "input": 272000,
         "output": 128000
       },
-      "canonical_model_id": "openai/gpt-5.4",
-      "display_name": "GPT-5.4",
+      "canonical_model_id": "openai/gpt-5",
+      "display_name": "GPT-5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": false,
+          "default_enabled": true,
           "mode": "effort",
-          "effort": "none",
+          "effort": "medium",
           "effort_options": [
-            "none",
+            "minimal",
             "low",
             "medium",
-            "high",
-            "xhigh"
+            "high"
           ],
           "verbosity": "medium",
           "verbosity_options": [
@@ -280,32 +368,20 @@
       }
     },
     {
-      "id": "claude-opus-4.8",
-      "name": "Claude Opus 4.8",
-      "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
-      "family": "claude-opus",
+      "id": "gpt-4.1",
+      "name": "GPT-4.1",
+      "description": "Long-lived GPT workhorse for coding, instruction following, and production apps",
+      "family": "gpt",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": false
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
       "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-01",
-      "release_date": "2026-05-28",
-      "last_updated": "2026-05-28",
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2024-04",
+      "release_date": "2025-04-14",
+      "last_updated": "2025-04-14",
       "modalities": {
         "input": [
           "text",
@@ -318,89 +394,12 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 1047576,
+        "output": 32768
       },
-      "canonical_model_id": "anthropic/claude-opus-4-8",
-      "display_name": "Claude Opus 4.8",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
-            "task_budget is separate from thinking control and should not be treated as a thinking budget."
-          ]
-        }
-      }
-    },
-    {
-      "id": "claude-sonnet-5",
-      "name": "Claude Sonnet 5",
-      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-06-30",
-      "last_updated": "2026-06-30",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "canonical_model_id": "anthropic/claude-sonnet-5",
-      "display_name": "Claude Sonnet 5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "canonical_model_id": "openai/gpt-4.1",
+      "display_name": "GPT-4.1",
+      "type": "chat"
     },
     {
       "id": "o4-mini",
@@ -512,10 +511,10 @@
       }
     },
     {
-      "id": "gpt-5.4-mini",
-      "name": "GPT-5.4 mini",
-      "description": "Strong small GPT for coding subagents, quick tool use, and high-volume work",
-      "family": "gpt-mini",
+      "id": "claude-opus-4.8",
+      "name": "Claude Opus 4.8",
+      "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
+      "family": "claude-opus",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -525,23 +524,24 @@
         {
           "type": "effort",
           "values": [
-            "minimal",
             "low",
             "medium",
-            "high"
+            "high",
+            "xhigh",
+            "max"
           ]
         }
       ],
       "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-03-17",
-      "last_updated": "2026-03-17",
+      "temperature": false,
+      "knowledge": "2026-01",
+      "release_date": "2026-05-28",
+      "last_updated": "2026-05-28",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -549,33 +549,36 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 400000,
-        "input": 272000,
+        "context": 1000000,
         "output": 128000
       },
-      "canonical_model_id": "openai/gpt-5.4-mini",
-      "display_name": "GPT-5.4 mini",
+      "canonical_model_id": "anthropic/claude-opus-4-8",
+      "display_name": "Claude Opus 4.8",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
           "default_enabled": false,
           "mode": "effort",
-          "effort": "none",
+          "effort": "high",
           "effort_options": [
-            "none",
             "low",
             "medium",
             "high",
-            "xhigh"
+            "xhigh",
+            "max"
           ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
           ],
-          "visibility": "hidden"
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
         }
       }
     },
@@ -647,40 +650,6 @@
       }
     },
     {
-      "id": "gpt-4.1-mini",
-      "name": "GPT-4.1 mini",
-      "description": "Affordable GPT-4.1 lane for fast coding help and structured extraction",
-      "family": "gpt-mini",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-04",
-      "release_date": "2025-04-14",
-      "last_updated": "2025-04-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1047576,
-        "output": 32768
-      },
-      "canonical_model_id": "openai/gpt-4.1-mini",
-      "display_name": "GPT-4.1 mini",
-      "type": "chat"
-    },
-    {
       "id": "gpt-5.4-nano",
       "name": "GPT-5.4 nano",
       "description": "Cheapest GPT-5.4 lane for simple routing, extraction, and bulk automation",
@@ -749,66 +718,32 @@
       }
     },
     {
-      "id": "gpt-4.1",
-      "name": "GPT-4.1",
-      "description": "Long-lived GPT workhorse for coding, instruction following, and production apps",
+      "id": "gpt-5.4",
+      "name": "GPT-5.4",
+      "description": "Agent-ready GPT for coding and computer-use workflows at a lower cost",
       "family": "gpt",
       "attachment": true,
       "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-04",
-      "release_date": "2025-04-14",
-      "last_updated": "2025-04-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1047576,
-        "output": 32768
-      },
-      "canonical_model_id": "openai/gpt-4.1",
-      "display_name": "GPT-4.1",
-      "type": "chat"
-    },
-    {
-      "id": "claude-fable-5",
-      "name": "Claude Fable 5",
-      "description": "Claude model for creative writing, analysis, and controlled agent workflows",
-      "family": "claude-fable",
-      "attachment": true,
-      "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "reasoning_options": [
         {
           "type": "effort",
           "values": [
+            "minimal",
             "low",
             "medium",
-            "high",
-            "xhigh",
-            "max"
+            "high"
           ]
         }
       ],
       "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-06-09",
-      "last_updated": "2026-06-09",
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-05",
+      "last_updated": "2026-03-05",
       "modalities": {
         "input": [
           "text",
@@ -821,36 +756,101 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
+        "context": 1050000,
+        "input": 922000,
         "output": 128000
       },
-      "canonical_model_id": "anthropic/claude-fable-5",
-      "display_name": "Claude Fable 5",
+      "canonical_model_id": "openai/gpt-5.4",
+      "display_name": "GPT-5.4",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
+          "default_enabled": false,
           "mode": "effort",
-          "effort": "high",
+          "effort": "none",
           "effort_options": [
+            "none",
             "low",
             "medium",
             "high",
-            "xhigh",
-            "max"
+            "xhigh"
           ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
           ],
-          "notes": [
-            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
-            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
-            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "gpt-5.4-mini",
+      "name": "GPT-5.4 mini",
+      "description": "Strong small GPT for coding subagents, quick tool use, and high-volume work",
+      "family": "gpt-mini",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
           ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-03-17",
+      "last_updated": "2026-03-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "canonical_model_id": "openai/gpt-5.4-mini",
+      "display_name": "GPT-5.4 mini",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
         }
       }
     },
