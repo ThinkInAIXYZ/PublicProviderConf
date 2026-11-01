@@ -15710,20 +15710,25 @@
       }
     },
     {
-      "id": "mistral-large-3:675b",
-      "name": "mistral-large-3:675b",
-      "description": "Flagship Mistral model for advanced reasoning, coding, and multilingual work",
-      "family": "mistral-large",
+      "id": "mimo-v2.6-flash",
+      "name": "MiMo-V2.6-Flash",
+      "description": "MiMo Flash model for multimodal coding agents and long-context automation",
+      "family": "mimo",
       "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
       "tool_call": true,
       "structured_output": false,
       "temperature": true,
-      "knowledge": "2024-11",
-      "release_date": "2025-12-02",
-      "last_updated": "2025-12-02",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
       "modalities": {
         "input": [
           "text",
@@ -15735,15 +15740,69 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 1048576,
+        "output": 131072
       },
       "cost": {
-        "input": 0.5,
-        "output": 1.5
+        "input": 0.14,
+        "output": 0.28,
+        "cache_read": 0.0028
       },
-      "canonical_model_id": "mistral/mistral-large-2512",
-      "display_name": "mistral-large-3:675b",
+      "canonical_model_id": "xiaomi/mimo-v2.6-flash",
+      "display_name": "MiMo-V2.6-Flash",
+      "type": "chat"
+    },
+    {
+      "id": "muse-spark-open",
+      "name": "Muse Spark Open",
+      "description": "Muse Spark Open is an 816B total / 42B active open-weight multimodal reasoning model from Meta for coding and long-horizon agentic work, with 1M-token context.",
+      "family": "muse",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2026-01-04",
+      "release_date": "2026-10-15",
+      "last_updated": "2026-10-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1.25,
+        "output": 4.25,
+        "cache_read": 0.15
+      },
+      "canonical_model_id": "meta/muse-spark-open",
+      "display_name": "Muse Spark Open",
       "type": "chat"
     },
     {
@@ -15813,9 +15872,68 @@
       "type": "chat"
     },
     {
-      "id": "kimi-k2.6",
-      "name": "kimi-k2.6",
-      "description": "Kimi multimodal agent model for visual understanding, coding, and planning",
+      "id": "minimax-m3",
+      "name": "minimax-m3",
+      "description": "MiniMax multimodal coding model for long-context reasoning and agent tasks",
+      "family": "minimax",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-06-01",
+      "last_updated": "2026-06-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 512000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.6,
+        "output": 2.4,
+        "cache_read": 0.12
+      },
+      "canonical_model_id": "minimax/MiniMax-M3",
+      "display_name": "minimax-m3",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      },
+      "type": "chat"
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "name": "kimi-k2.7-code",
+      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
       "family": "kimi-k2",
       "attachment": true,
       "reasoning": {
@@ -15829,10 +15947,10 @@
       ],
       "tool_call": true,
       "structured_output": false,
-      "temperature": true,
+      "temperature": false,
       "knowledge": "2025-01",
-      "release_date": "2026-04-20",
-      "last_updated": "2026-04-20",
+      "release_date": "2026-06-12",
+      "last_updated": "2026-06-12",
       "modalities": {
         "input": [
           "text",
@@ -15850,101 +15968,15 @@
       "cost": {
         "input": 0.95,
         "output": 4,
-        "cache_read": 0.16
+        "cache_read": 0.19
       },
-      "canonical_model_id": "moonshotai/kimi-k2.6",
-      "display_name": "kimi-k2.6",
+      "canonical_model_id": "moonshotai/kimi-k2.7-code",
+      "display_name": "kimi-k2.7-code",
       "extra_capabilities": {
         "reasoning": {
           "supported": true
         }
       },
-      "type": "chat"
-    },
-    {
-      "id": "mimo-v2.6-flash",
-      "name": "MiMo-V2.6-Flash",
-      "description": "MiMo Flash model for multimodal coding agents and long-context automation",
-      "family": "mimo",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.14,
-        "output": 0.28,
-        "cache_read": 0.0028
-      },
-      "canonical_model_id": "xiaomi/mimo-v2.6-flash",
-      "display_name": "MiMo-V2.6-Flash",
-      "type": "chat"
-    },
-    {
-      "id": "mimo-v2.6-pro",
-      "name": "MiMo-V2.6-Pro",
-      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
-      "family": "mimo",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.435,
-        "output": 0.87,
-        "cache_read": 0.0036
-      },
-      "canonical_model_id": "xiaomi/mimo-v2.6-pro",
-      "display_name": "MiMo-V2.6-Pro",
       "type": "chat"
     },
     {
@@ -15999,10 +16031,108 @@
       "type": "chat"
     },
     {
-      "id": "muse-spark-open",
-      "name": "Muse Spark Open",
-      "description": "Muse Spark Open is an 816B total / 42B active open-weight multimodal reasoning model from Meta for coding and long-horizon agentic work, with 1M-token context.",
-      "family": "muse",
+      "id": "minimax-m2.7",
+      "name": "minimax-m2.7",
+      "description": "MiniMax model for chat, coding, office work, and agentic tasks",
+      "family": "minimax",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-03-18",
+      "last_updated": "2026-03-18",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 196608,
+        "output": 196608
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": 0.06
+      },
+      "canonical_model_id": "minimax/MiniMax-M2.7",
+      "display_name": "minimax-m2.7",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      },
+      "type": "chat"
+    },
+    {
+      "id": "kimi-k2.6",
+      "name": "kimi-k2.6",
+      "description": "Kimi multimodal agent model for visual understanding, coding, and planning",
+      "family": "kimi-k2",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-04-20",
+      "last_updated": "2026-04-20",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 0.95,
+        "output": 4,
+        "cache_read": 0.16
+      },
+      "canonical_model_id": "moonshotai/kimi-k2.6",
+      "display_name": "kimi-k2.6",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      },
+      "type": "chat"
+    },
+    {
+      "id": "deepseek-v4.1-flash:1017",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -16016,18 +16146,20 @@
           "type": "effort",
           "values": [
             "low",
-            "medium",
             "high",
             "max"
           ]
         }
       ],
       "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "structured_output": false,
       "temperature": true,
-      "knowledge": "2026-01-04",
-      "release_date": "2026-10-15",
-      "last_updated": "2026-10-15",
+      "knowledge": "2025-05",
+      "release_date": "2026-10-17",
+      "last_updated": "2026-10-17",
       "modalities": {
         "input": [
           "text",
@@ -16040,15 +16172,26 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 131072
+        "output": 384000
       },
       "cost": {
-        "input": 1.25,
-        "output": 4.25,
-        "cache_read": 0.15
+        "input": 0.15,
+        "output": 0.6,
+        "cache_read": 0.003
       },
-      "canonical_model_id": "meta/muse-spark-open",
-      "display_name": "Muse Spark Open",
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek V4.1 Flash 1017",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      },
       "type": "chat"
     },
     {
@@ -16115,26 +16258,20 @@
       "type": "chat"
     },
     {
-      "id": "kimi-k2.7-code",
-      "name": "kimi-k2.7-code",
-      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
-      "family": "kimi-k2",
+      "id": "mistral-large-3:675b",
+      "name": "mistral-large-3:675b",
+      "description": "Flagship Mistral model for advanced reasoning, coding, and multilingual work",
+      "family": "mistral-large",
       "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
       "tool_call": true,
       "structured_output": false,
-      "temperature": false,
-      "knowledge": "2025-01",
-      "release_date": "2026-06-12",
-      "last_updated": "2026-06-12",
+      "temperature": true,
+      "knowledge": "2024-11",
+      "release_date": "2025-12-02",
+      "last_updated": "2025-12-02",
       "modalities": {
         "input": [
           "text",
@@ -16150,24 +16287,18 @@
         "output": 262144
       },
       "cost": {
-        "input": 0.95,
-        "output": 4,
-        "cache_read": 0.19
+        "input": 0.5,
+        "output": 1.5
       },
-      "canonical_model_id": "moonshotai/kimi-k2.7-code",
-      "display_name": "kimi-k2.7-code",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      },
+      "canonical_model_id": "mistral/mistral-large-2512",
+      "display_name": "mistral-large-3:675b",
       "type": "chat"
     },
     {
-      "id": "minimax-m3",
-      "name": "minimax-m3",
-      "description": "MiniMax multimodal coding model for long-context reasoning and agent tasks",
-      "family": "minimax",
+      "id": "mimo-v2.6-pro",
+      "name": "MiMo-V2.6-Pro",
+      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
+      "family": "mimo",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -16176,28 +16307,17 @@
       "reasoning_options": [
         {
           "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ]
         }
       ],
       "tool_call": true,
       "structured_output": false,
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-06-01",
-      "last_updated": "2026-06-01",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -16205,21 +16325,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 512000,
+        "context": 1048576,
         "output": 131072
       },
       "cost": {
-        "input": 0.6,
-        "output": 2.4,
-        "cache_read": 0.12
+        "input": 0.435,
+        "output": 0.87,
+        "cache_read": 0.0036
       },
-      "canonical_model_id": "minimax/MiniMax-M3",
-      "display_name": "minimax-m3",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      },
+      "canonical_model_id": "xiaomi/mimo-v2.6-pro",
+      "display_name": "MiMo-V2.6-Pro",
       "type": "chat"
     },
     {
@@ -16270,56 +16385,6 @@
       "type": "chat"
     },
     {
-      "id": "deepseek-v4-pro:0813",
-      "name": "DeepSeek V4 Pro 0813",
-      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
-      "family": "deepseek-thinking",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 0.66,
-        "output": 1.98,
-        "cache_read": 0.022
-      },
-      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
-      "display_name": "DeepSeek V4 Pro 0813",
-      "type": "chat"
-    },
-    {
       "id": "beam",
       "name": "Beam 1.0 501B A23B",
       "description": "Sparse mixture-of-experts reasoning model with 23B active parameters for coding and agentic workflows",
@@ -16362,55 +16427,6 @@
       },
       "canonical_model_id": "reflection/beam-1.0-501b-a23b",
       "display_name": "Beam 1.0 501B A23B",
-      "type": "chat"
-    },
-    {
-      "id": "minimax-m2.7",
-      "name": "minimax-m2.7",
-      "description": "MiniMax model for chat, coding, office work, and agentic tasks",
-      "family": "minimax",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-03-18",
-      "last_updated": "2026-03-18",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 196608,
-        "output": 196608
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.06
-      },
-      "canonical_model_id": "minimax/MiniMax-M2.7",
-      "display_name": "minimax-m2.7",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      },
       "type": "chat"
     },
     {
@@ -16530,11 +16546,11 @@
       "type": "chat"
     },
     {
-      "id": "deepseek-v4.1-flash:1017",
-      "name": "DeepSeek V4.1 Flash 1017",
-      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
-      "family": "deepseek-flash",
-      "attachment": true,
+      "id": "deepseek-v4-pro:0813",
+      "name": "DeepSeek V4 Pro 0813",
+      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
+      "family": "deepseek-thinking",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -16553,18 +16569,13 @@
         }
       ],
       "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "structured_output": false,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-10-17",
-      "last_updated": "2026-10-17",
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-22",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -16573,26 +16584,15 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 384000
+        "output": 1048576
       },
       "cost": {
-        "input": 0.15,
-        "output": 0.6,
-        "cache_read": 0.003
+        "input": 0.66,
+        "output": 1.98,
+        "cache_read": 0.022
       },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "display_name": "DeepSeek V4.1 Flash 1017",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
+      "display_name": "DeepSeek V4 Pro 0813",
       "type": "chat"
     }
   ],
