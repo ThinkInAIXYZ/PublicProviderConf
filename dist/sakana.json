@@ -6,10 +6,10 @@
   "display_name": "Sakana AI",
   "models": [
     {
-      "id": "sakana-namazu",
-      "name": "Sakana Namazu",
-      "description": "Japanese-specialized reasoning model based on Kimi K2.6 and tuned for Japanese language, culture, and business workflows",
-      "family": "sakana-namazu",
+      "id": "fugu-ultra",
+      "name": "Fugu Ultra",
+      "description": "Quality-first multi-agent model for hard research, analysis, and competitions",
+      "family": "fugu",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -17,19 +17,22 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
+          "type": "effort",
+          "values": [
+            "high",
+            "xhigh"
+          ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-03",
-      "last_updated": "2026-08-03",
+      "temperature": false,
+      "release_date": "2026-06-15",
+      "last_updated": "2026-06-15",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -37,16 +40,35 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 262144,
-        "output": 65536
+        "context": 1000000,
+        "output": 1000000
+      },
+      "provider": {
+        "shape": "responses"
       },
       "cost": {
-        "input": 0.95,
-        "output": 4,
-        "cache_read": 0.15
+        "input": 5,
+        "output": 30,
+        "cache_read": 0.5,
+        "tiers": [
+          {
+            "input": 10,
+            "output": 45,
+            "cache_read": 1,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 10,
+          "output": 45,
+          "cache_read": 1
+        }
       },
-      "canonical_model_id": "sakana/sakana-namazu",
-      "display_name": "Sakana Namazu",
+      "canonical_model_id": "sakana/fugu-ultra",
+      "display_name": "Fugu Ultra",
       "type": "chat"
     },
     {
@@ -116,6 +138,50 @@
       "type": "chat"
     },
     {
+      "id": "sakana-namazu",
+      "name": "Sakana Namazu",
+      "description": "Japanese-specialized reasoning model based on Kimi K2.6 and tuned for Japanese language, culture, and business workflows",
+      "family": "sakana-namazu",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-03",
+      "last_updated": "2026-08-03",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.95,
+        "output": 4,
+        "cache_read": 0.15
+      },
+      "canonical_model_id": "sakana/sakana-namazu",
+      "display_name": "Sakana Namazu",
+      "type": "chat"
+    },
+    {
       "id": "fugu",
       "name": "Fugu",
       "description": "Multi-agent model for routing expert agents across complex analytical tasks",
@@ -158,72 +224,6 @@
       },
       "canonical_model_id": "sakana/fugu",
       "display_name": "Fugu",
-      "type": "chat"
-    },
-    {
-      "id": "fugu-ultra",
-      "name": "Fugu Ultra",
-      "description": "Quality-first multi-agent model for hard research, analysis, and competitions",
-      "family": "fugu",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-06-15",
-      "last_updated": "2026-06-15",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 1000000
-      },
-      "provider": {
-        "shape": "responses"
-      },
-      "cost": {
-        "input": 5,
-        "output": 30,
-        "cache_read": 0.5,
-        "tiers": [
-          {
-            "input": 10,
-            "output": 45,
-            "cache_read": 1,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 10,
-          "output": 45,
-          "cache_read": 1
-        }
-      },
-      "canonical_model_id": "sakana/fugu-ultra",
-      "display_name": "Fugu Ultra",
       "type": "chat"
     }
   ]
