@@ -6,6 +6,41 @@
   "display_name": "Infomaniak",
   "models": [
     {
+      "id": "mini_lm_l12_v2",
+      "type": "embedding",
+      "name": "All-MiniLM-L12-v2",
+      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
+      "family": "text-embedding",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2021-08-30",
+      "last_updated": "2021-08-30",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128,
+        "input": 128,
+        "output": 384
+      },
+      "cost": {
+        "input": 0,
+        "output": 0
+      },
+      "canonical_model_id": "sentence-transformers/all-minilm-l12-v2",
+      "display_name": "All-MiniLM-L12-v2"
+    },
+    {
       "id": "bge_multilingual_gemma2",
       "type": "embedding",
       "name": "BGE Multilingual Gemma2",
@@ -40,22 +75,30 @@
       "display_name": "BGE Multilingual Gemma2"
     },
     {
-      "id": "mini_lm_l12_v2",
-      "type": "embedding",
-      "name": "All-MiniLM-L12-v2",
-      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
-      "family": "text-embedding",
-      "attachment": false,
+      "id": "Qwen/Qwen3.5-122B-A10B-FP8",
+      "name": "Qwen3.5 122B-A10B FP8",
+      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "family": "qwen",
+      "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2021-08-30",
-      "last_updated": "2021-08-30",
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-02-23",
+      "last_updated": "2026-02-23",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -63,16 +106,29 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128,
-        "input": 128,
-        "output": 384
+        "context": 200000,
+        "input": 200000,
+        "output": 65536
       },
+      "status": "deprecated",
       "cost": {
-        "input": 0,
-        "output": 0
+        "input": 0.5,
+        "output": 3.97
       },
-      "canonical_model_id": "sentence-transformers/all-minilm-l12-v2",
-      "display_name": "All-MiniLM-L12-v2"
+      "canonical_model_id": "alibaba/qwen3.5-122b-a10b",
+      "display_name": "Qwen3.5 122B-A10B FP8",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "Qwen/Qwen3.5-397B-A17B-FP8",
@@ -131,10 +187,10 @@
       }
     },
     {
-      "id": "Qwen/Qwen3.5-122B-A10B-FP8",
-      "name": "Qwen3.5 122B-A10B FP8",
-      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
-      "family": "qwen",
+      "id": "moonshotai/Kimi-K2.6",
+      "name": "Kimi K2.6",
+      "description": "Multimodal Kimi workhorse for agent loops, coding tasks, and visual context",
+      "family": "kimi-k2",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -149,8 +205,9 @@
       "interleaved": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-02-23",
-      "last_updated": "2026-02-23",
+      "knowledge": "2025-01",
+      "release_date": "2026-04-20",
+      "last_updated": "2026-04-20",
       "modalities": {
         "input": [
           "text",
@@ -162,27 +219,72 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 200000,
-        "input": 200000,
-        "output": 65536
+        "context": 256000,
+        "input": 256000,
+        "output": 256000
       },
-      "status": "deprecated",
+      "status": "beta",
       "cost": {
-        "input": 0.5,
-        "output": 3.97
+        "input": 0.74,
+        "output": 3.72
       },
-      "canonical_model_id": "alibaba/qwen3.5-122b-a10b",
-      "display_name": "Qwen3.5 122B-A10B FP8",
+      "canonical_model_id": "moonshotai/kimi-k2.6",
+      "display_name": "Kimi K2.6",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
+          "interleaved": true
+        }
+      }
+    },
+    {
+      "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8",
+      "name": "Nemotron 3 Nano 30B A3B FP8",
+      "description": "Small Nemotron 3 MoE for efficient coding, math, and long-context agents",
+      "family": "nemotron",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": true,
+      "temperature": true,
+      "knowledge": "2025-06-25",
+      "release_date": "2025-12-15",
+      "last_updated": "2025-12-15",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "input": 1000000,
+        "output": 262144
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 0.06,
+        "output": 0.25
+      },
+      "canonical_model_id": "nvidia/nemotron-3-nano-30b-a3b",
+      "display_name": "Nemotron 3 Nano 30B A3B FP8",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true
         }
       }
     },
@@ -262,108 +364,6 @@
       },
       "canonical_model_id": "mistral/mistral-small-2603",
       "display_name": "Mistral Small 4",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true
-        }
-      }
-    },
-    {
-      "id": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8",
-      "name": "Nemotron 3 Nano 30B A3B FP8",
-      "description": "Small Nemotron 3 MoE for efficient coding, math, and long-context agents",
-      "family": "nemotron",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": true,
-      "temperature": true,
-      "knowledge": "2025-06-25",
-      "release_date": "2025-12-15",
-      "last_updated": "2025-12-15",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "input": 1000000,
-        "output": 262144
-      },
-      "status": "deprecated",
-      "cost": {
-        "input": 0.06,
-        "output": 0.25
-      },
-      "canonical_model_id": "nvidia/nemotron-3-nano-30b-a3b",
-      "display_name": "Nemotron 3 Nano 30B A3B FP8",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true
-        }
-      }
-    },
-    {
-      "id": "moonshotai/Kimi-K2.6",
-      "name": "Kimi K2.6",
-      "description": "Multimodal Kimi workhorse for agent loops, coding tasks, and visual context",
-      "family": "kimi-k2",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-04-20",
-      "last_updated": "2026-04-20",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 256000,
-        "input": 256000,
-        "output": 256000
-      },
-      "status": "beta",
-      "cost": {
-        "input": 0.74,
-        "output": 3.72
-      },
-      "canonical_model_id": "moonshotai/kimi-k2.6",
-      "display_name": "Kimi K2.6",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
