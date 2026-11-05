@@ -6,9 +6,112 @@
   "display_name": "Vultr",
   "models": [
     {
-      "id": "qwen3.8-flash-next",
-      "name": "Qwen3.8 Flash Next",
-      "description": "Open-weight experimental preview of the Qwen4 architecture: hybrid-attention MoE (125B total, 6B active) with vision encoder for coding, agent tasks, and image and video understanding",
+      "id": "minimax-m3",
+      "name": "MiniMax-M3",
+      "description": "MiniMax multimodal model for long-context coding, perception, and agent planning",
+      "family": "minimax",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-06-01",
+      "last_updated": "2026-06-01",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 524288,
+        "output": 512000
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 0.9
+      },
+      "canonical_model_id": "minimax/MiniMax-M3",
+      "display_name": "MiniMax-M3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4.1-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.6
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "qwen3.8-27b",
+      "name": "Qwen3.8 27B",
+      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
       "family": "qwen",
       "attachment": true,
       "reasoning": {
@@ -16,6 +119,9 @@
         "default": true
       },
       "reasoning_options": [
+        {
+          "type": "toggle"
+        },
         {
           "type": "effort",
           "values": [
@@ -28,8 +134,8 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-27",
-      "last_updated": "2026-08-27",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
           "text",
@@ -43,14 +149,14 @@
       "open_weights": true,
       "limit": {
         "context": 262144,
-        "output": 131072
+        "output": 32768
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.2
+        "input": 0.15,
+        "output": 1
       },
-      "canonical_model_id": "alibaba/qwen3.8-flash-next",
-      "display_name": "Qwen3.8 Flash Next",
+      "canonical_model_id": "alibaba/qwen3.8-27b",
+      "display_name": "Qwen3.8 27B",
       "type": "chat"
     },
     {
@@ -107,11 +213,11 @@
       }
     },
     {
-      "id": "mimo-v2.6-flash-rl",
-      "name": "MiMo-V2.6-Flash",
-      "description": "MiMo Flash model for multimodal coding agents and long-context automation",
-      "family": "mimo",
-      "attachment": true,
+      "id": "glm-5.x-menthol",
+      "name": "GLM-5",
+      "description": "General GLM flagship for coding, analysis, and tool-heavy engineering workflows",
+      "family": "glm",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -123,14 +229,11 @@
       ],
       "tool_call": true,
       "temperature": true,
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
+      "release_date": "2026-02-12",
+      "last_updated": "2026-02-12",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "audio",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -138,63 +241,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
+        "context": 202752,
         "output": 131072
       },
       "cost": {
-        "input": 0.1,
-        "output": 0.25
+        "input": 0.4,
+        "output": 1.75
       },
-      "canonical_model_id": "xiaomi/mimo-v2.6-flash",
-      "display_name": "MiMo-V2.6-Flash",
+      "canonical_model_id": "zhipuai/glm-5",
+      "display_name": "GLM-5",
       "type": "chat"
-    },
-    {
-      "id": "minimax-m3",
-      "name": "MiniMax-M3",
-      "description": "MiniMax multimodal model for long-context coding, perception, and agent planning",
-      "family": "minimax",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-06-01",
-      "last_updated": "2026-06-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 524288,
-        "output": 512000
-      },
-      "cost": {
-        "input": 0.2,
-        "output": 0.9
-      },
-      "canonical_model_id": "minimax/MiniMax-M3",
-      "display_name": "MiniMax-M3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
     },
     {
       "id": "laguna-s-2.1",
@@ -237,57 +293,6 @@
       "canonical_model_id": "poolside/laguna-s-2.1",
       "display_name": "Laguna S 2.1",
       "type": "chat"
-    },
-    {
-      "id": "glm-5.3",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.75,
-        "output": 3
-      },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
     },
     {
       "id": "muse-glimmer-30b",
@@ -340,60 +345,9 @@
       "type": "chat"
     },
     {
-      "id": "qwen3.8-27b",
-      "name": "Qwen3.8 27B",
-      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 32768
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 1
-      },
-      "canonical_model_id": "alibaba/qwen3.8-27b",
-      "display_name": "Qwen3.8 27B",
-      "type": "chat"
-    },
-    {
-      "id": "mimo-v2.6-pro-rl",
-      "name": "MiMo-V2.6-Pro",
-      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
+      "id": "mimo-v2.6-flash-rl",
+      "name": "MiMo-V2.6-Flash",
+      "description": "MiMo Flash model for multimodal coding agents and long-context automation",
       "family": "mimo",
       "attachment": true,
       "reasoning": {
@@ -426,11 +380,11 @@
         "output": 131072
       },
       "cost": {
-        "input": 0.4,
-        "output": 0.8
+        "input": 0.1,
+        "output": 0.25
       },
-      "canonical_model_id": "xiaomi/mimo-v2.6-pro",
-      "display_name": "MiMo-V2.6-Pro",
+      "canonical_model_id": "xiaomi/mimo-v2.6-flash",
+      "display_name": "MiMo-V2.6-Flash",
       "type": "chat"
     },
     {
@@ -480,37 +434,35 @@
       }
     },
     {
-      "id": "deepseek-v4-flash-0731",
-      "name": "DeepSeek V4 Flash 0731",
-      "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
-      "family": "deepseek-flash",
-      "attachment": false,
+      "id": "qwen3.8-flash-next",
+      "name": "Qwen3.8 Flash Next",
+      "description": "Open-weight experimental preview of the Qwen4 architecture: hybrid-attention MoE (125B total, 6B active) with vision encoder for coding, agent tasks, and image and video understanding",
+      "family": "qwen",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        },
-        {
           "type": "effort",
           "values": [
             "low",
-            "high",
-            "max"
+            "medium",
+            "xhigh"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-07-31",
-      "last_updated": "2026-07-31",
+      "release_date": "2026-08-27",
+      "last_updated": "2026-08-27",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -518,27 +470,21 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 384000
+        "context": 262144,
+        "output": 131072
       },
-      "status": "deprecated",
       "cost": {
         "input": 0.1,
-        "output": 0.25
+        "output": 0.2
       },
-      "canonical_model_id": "deepseek/deepseek-v4-flash-0731",
-      "display_name": "DeepSeek V4 Flash 0731",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "canonical_model_id": "alibaba/qwen3.8-flash-next",
+      "display_name": "Qwen3.8 Flash Next",
+      "type": "chat"
     },
     {
-      "id": "glm-5.x-menthol",
-      "name": "GLM-5",
-      "description": "General GLM flagship for coding, analysis, and tool-heavy engineering workflows",
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
       "family": "glm",
       "attachment": false,
       "reasoning": {
@@ -547,49 +493,6 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-02-12",
-      "last_updated": "2026-02-12",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 202752,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.4,
-        "output": 1.75
-      },
-      "canonical_model_id": "zhipuai/glm-5",
-      "display_name": "GLM-5",
-      "type": "chat"
-    },
-    {
-      "id": "deepseek-v4.1-flash",
-      "name": "DeepSeek V4.1 Flash",
-      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
           "type": "effort",
           "values": [
             "low",
@@ -601,13 +504,11 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -616,14 +517,14 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 384000
+        "output": 131072
       },
       "cost": {
-        "input": 0.15,
-        "output": 0.6
+        "input": 0.75,
+        "output": 3
       },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "DeepSeek V4.1 Flash",
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -729,6 +630,105 @@
           "supported": true
         }
       }
+    },
+    {
+      "id": "deepseek-v4-flash-0731",
+      "name": "DeepSeek V4 Flash 0731",
+      "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-07-31",
+      "last_updated": "2026-07-31",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 384000
+      },
+      "status": "deprecated",
+      "cost": {
+        "input": 0.1,
+        "output": 0.25
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-flash-0731",
+      "display_name": "DeepSeek V4 Flash 0731",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "mimo-v2.6-pro-rl",
+      "name": "MiMo-V2.6-Pro",
+      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
+      "family": "mimo",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.4,
+        "output": 0.8
+      },
+      "canonical_model_id": "xiaomi/mimo-v2.6-pro",
+      "display_name": "MiMo-V2.6-Pro",
+      "type": "chat"
     }
   ]
 }

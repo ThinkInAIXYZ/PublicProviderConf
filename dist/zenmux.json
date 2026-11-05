@@ -2,7 +2,7 @@
   "id": "zenmux",
   "name": "ZenMux",
   "display_name": "ZenMux",
-  "updated_at": "2026-11-05T11:19:19.654Z",
+  "updated_at": "2026-11-05T12:19:18.508Z",
   "models": [
     {
       "id": "alibaba/wan3.0-video",
@@ -170,7 +170,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -178,7 +179,9 @@
       },
       "cost": {
         "input": 10,
-        "output": 50
+        "output": 50,
+        "cache_read": 0.25,
+        "cache_write": 12.5
       },
       "limit": {
         "context": 1000000,
@@ -255,6 +258,7 @@
         "source": "public-provider-conf"
       },
       "vision": true,
+      "interleaved": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -358,6 +362,7 @@
         "source": "public-provider-conf"
       },
       "vision": true,
+      "interleaved": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -402,26 +407,6 @@
       "release_date": "2026-02-05",
       "last_updated": "2026-03-13",
       "open_weights": false,
-      "experimental": {
-        "modes": {
-          "fast": {
-            "cost": {
-              "input": 30,
-              "output": 150,
-              "cache_read": 3,
-              "cache_write": 37.5
-            },
-            "provider": {
-              "body": {
-                "speed": "fast"
-              },
-              "headers": {
-                "anthropic-beta": "fast-mode-2026-02-01"
-              }
-            }
-          }
-        }
-      },
       "modalities": {
         "input": [
           "text",
@@ -446,6 +431,7 @@
         "source": "public-provider-conf"
       },
       "vision": true,
+      "interleaved": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -485,32 +471,12 @@
         "supported": true,
         "default": false
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2026-01-31",
       "release_date": "2026-04-16",
       "last_updated": "2026-04-16",
       "open_weights": false,
-      "experimental": {
-        "modes": {
-          "fast": {
-            "cost": {
-              "input": 30,
-              "output": 150,
-              "cache_read": 3,
-              "cache_write": 37.5
-            },
-            "provider": {
-              "body": {
-                "speed": "fast"
-              },
-              "headers": {
-                "anthropic-beta": "fast-mode-2026-02-01"
-              }
-            }
-          }
-        }
-      },
       "modalities": {
         "input": [
           "text",
@@ -572,7 +538,7 @@
         "supported": true,
         "default": false
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2026-01",
       "release_date": "2026-05-28",
@@ -694,7 +660,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -702,7 +669,9 @@
       },
       "cost": {
         "input": 4,
-        "output": 20
+        "output": 20,
+        "cache_read": 0.2,
+        "cache_write": 5
       },
       "limit": {
         "context": 1000000,
@@ -809,12 +778,13 @@
       },
       "limit": {
         "context": 1000000,
-        "output": 64000
+        "output": 128000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": true,
+      "interleaved": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -909,7 +879,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -917,7 +888,9 @@
       },
       "cost": {
         "input": 2,
-        "output": 10
+        "output": 10,
+        "cache_read": 0.1,
+        "cache_write": 2.5
       },
       "limit": {
         "context": 1000000,
@@ -1632,11 +1605,10 @@
       "type": "chat",
       "attachment": false,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": true
       },
       "temperature": true,
-      "tool_call": true,
+      "tool_call": false,
       "knowledge": "2024-07",
       "release_date": "2025-12-01",
       "last_updated": "2025-12-01",
@@ -1650,13 +1622,12 @@
         ]
       },
       "cost": {
-        "input": 0.28,
-        "output": 0.4,
-        "cache_read": 0.13
+        "input": 0.62,
+        "output": 1.85
       },
       "limit": {
         "context": 128000,
-        "output": 32768
+        "output": 8000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1693,10 +1664,9 @@
         ]
       },
       "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.006,
-        "cache_write": 0.1125
+        "input": 0.15,
+        "output": 0.6,
+        "cache_read": 0.003
       },
       "limit": {
         "context": 1000000,
@@ -1706,9 +1676,6 @@
         "source": "public-provider-conf"
       },
       "vision": false,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -1757,9 +1724,9 @@
         ]
       },
       "cost": {
-        "input": 1.32,
-        "output": 3.96,
-        "cache_read": 0.044
+        "input": 0.66,
+        "output": 1.98,
+        "cache_read": 0.022
       },
       "limit": {
         "context": 1000000,
@@ -1769,9 +1736,6 @@
         "source": "public-provider-conf"
       },
       "vision": false,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -2003,7 +1967,6 @@
         "input": [
           "text",
           "image",
-          "audio",
           "pdf"
         ],
         "output": [
@@ -2016,8 +1979,8 @@
         "cache_read": 0.03
       },
       "limit": {
-        "context": 1048576,
-        "output": 65536
+        "context": 1000000,
+        "output": 65535
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2064,7 +2027,6 @@
         "input": [
           "text",
           "image",
-          "audio",
           "pdf"
         ],
         "output": [
@@ -2077,8 +2039,8 @@
         "cache_read": 0.01
       },
       "limit": {
-        "context": 1000000,
-        "output": 65536
+        "context": 1048576,
+        "output": 65535
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2123,7 +2085,10 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "audio",
+          "video",
+          "pdf"
         ],
         "output": [
           "text"
@@ -2132,11 +2097,12 @@
       "cost": {
         "input": 0.5,
         "output": 3,
-        "cache_read": 0.05
+        "cache_read": 0.05,
+        "cache_write": 1
       },
       "limit": {
-        "context": 1048576,
-        "output": 65536
+        "context": 1048000,
+        "output": 65535
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2182,6 +2148,7 @@
         "input": [
           "text",
           "image",
+          "video",
           "audio",
           "pdf"
         ],
@@ -2192,10 +2159,10 @@
       "cost": {
         "input": 0.25,
         "output": 1.5,
-        "cache_read": 0.025
+        "cache_read": 0.03
       },
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 65536
       },
       "metadata": {
@@ -2228,8 +2195,6 @@
         "input": [
           "text",
           "image",
-          "video",
-          "audio",
           "pdf"
         ],
         "output": [
@@ -2242,8 +2207,8 @@
         "cache_read": 0.2
       },
       "limit": {
-        "context": 1048576,
-        "output": 65536
+        "context": 1000000,
+        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2287,6 +2252,7 @@
         "input": [
           "text",
           "image",
+          "video",
           "audio",
           "pdf"
         ],
@@ -2300,7 +2266,7 @@
         "cache_read": 0.15
       },
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 65536
       },
       "metadata": {
@@ -2361,7 +2327,7 @@
         "cache_read": 0.03
       },
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 65536
       },
       "metadata": {
@@ -2408,7 +2374,7 @@
         "cache_read": 0.15
       },
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 65536
       },
       "metadata": {
@@ -2464,9 +2430,10 @@
         ]
       },
       "cost": {
-        "input": 0.75,
-        "output": 3.75,
-        "cache_read": 0.075
+        "input": 1.5,
+        "output": 7.5,
+        "cache_read": 0.15,
+        "cache_write": 0.08334
       },
       "limit": {
         "context": 1048576,
@@ -2524,12 +2491,12 @@
         ]
       },
       "cost": {
-        "input": 0.75,
-        "output": 3.75,
-        "cache_read": 0.075
+        "input": 1.5,
+        "output": 7.5,
+        "cache_read": 0.15
       },
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 65536
       },
       "metadata": {
@@ -2590,7 +2557,7 @@
         "cache_read": 0.1
       },
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 65536
       },
       "metadata": {
@@ -2621,13 +2588,9 @@
           "text"
         ]
       },
-      "cost": {
-        "input": 0.2,
-        "output": 0
-      },
       "limit": {
         "context": 8192,
-        "output": 8192
+        "output": 3072
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -2639,36 +2602,39 @@
       "name": "Google: Gemma 4 26B A4B IT",
       "display_name": "Google: Gemma 4 26B A4B IT",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "temperature": true,
-      "tool_call": false,
+      "tool_call": true,
       "release_date": "2026-04-02",
       "last_updated": "2026-04-02",
       "open_weights": true,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.13,
-        "output": 0.4
+        "input": 0.15,
+        "output": 0.6,
+        "cache_read": 0.015
       },
       "limit": {
         "context": 262144,
-        "output": 65536
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true
@@ -2680,20 +2646,21 @@
       "name": "Google: Gemma 4 31B IT",
       "display_name": "Google: Gemma 4 31B IT",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": true
       },
       "temperature": true,
-      "tool_call": false,
+      "tool_call": true,
       "knowledge": "2025-01",
       "release_date": "2026-04-02",
       "last_updated": "2026-04-02",
       "open_weights": true,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -2705,12 +2672,12 @@
       },
       "limit": {
         "context": 262144,
-        "output": 65536
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true
@@ -2841,32 +2808,18 @@
         ]
       },
       "cost": {
-        "input": 0.06,
-        "output": 0.18,
-        "cache_read": 0.012
+        "input": 0.021,
+        "output": 0.063,
+        "cache_read": 0.0042
       },
       "limit": {
-        "context": 262144,
-        "output": 32768
+        "context": 256000,
+        "output": 32000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "vision": false
     },
     {
       "id": "inclusionai/ling-3.0-flash-fin",
@@ -2897,27 +2850,13 @@
         "cache_read": 0.015
       },
       "limit": {
-        "context": 262144,
-        "output": 32768
+        "context": 256000,
+        "output": 32000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "vision": false
     },
     {
       "id": "inclusionai/ling-3.0-flash-sante",
@@ -2948,27 +2887,13 @@
         "cache_read": 0.015
       },
       "limit": {
-        "context": 262144,
-        "output": 32768
+        "context": 256000,
+        "output": 32000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "vision": false
     },
     {
       "id": "inclusionai/ling-3.0-flash-vl",
@@ -2988,8 +2913,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -3001,27 +2925,13 @@
         "cache_read": 0.015
       },
       "limit": {
-        "context": 262144,
-        "output": 32768
+        "context": 256000,
+        "output": 32000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "inclusionai/ling-3.1-flash",
@@ -3052,27 +2962,13 @@
         "cache_read": 0.06
       },
       "limit": {
-        "context": 1000000,
-        "output": 262144
+        "context": 262144,
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "vision": false
     },
     {
       "id": "inclusionai/llada-image",
@@ -3667,7 +3563,7 @@
       },
       "limit": {
         "context": 1048576,
-        "output": 1048576
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -3754,7 +3650,7 @@
       },
       "limit": {
         "context": 1048576,
-        "output": 1048576
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -4050,13 +3946,20 @@
         "cache_write": 0.375
       },
       "limit": {
-        "context": 204800,
-        "output": 8192
+        "context": 205000,
+        "output": 196608
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "interleaved": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true
+        }
+      }
     },
     {
       "id": "minimax/minimax-m2-her",
@@ -4125,15 +4028,17 @@
       },
       "limit": {
         "context": 204800,
-        "output": 8192
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": false,
+      "interleaved": true,
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "interleaved": true
         }
       }
     },
@@ -4168,7 +4073,7 @@
       },
       "limit": {
         "context": 204800,
-        "output": 8192
+        "output": 131000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -4250,7 +4155,7 @@
       },
       "limit": {
         "context": 204800,
-        "output": 8192
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -4299,7 +4204,7 @@
       },
       "limit": {
         "context": 204800,
-        "output": 8192
+        "output": 131100
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -4335,7 +4240,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -4347,8 +4253,8 @@
         "cache_read": 0.06
       },
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 512000,
+        "output": 512000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -4390,8 +4296,8 @@
         "cache_read": 0.015
       },
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 1048576,
+        "output": 1048576
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -4422,9 +4328,13 @@
           "text"
         ]
       },
+      "cost": {
+        "input": 0.5,
+        "output": 1.5
+      },
       "limit": {
         "context": 262144,
-        "output": 262144
+        "output": 209715
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -4488,38 +4398,28 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.8,
-        "output": 3.4,
+        "input": 0.95,
+        "output": 4,
         "cache_read": 0.16
       },
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 262000,
+        "output": 262000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "supported": true
         }
       }
     },
@@ -4555,25 +4455,16 @@
         "cache_read": 0.19
       },
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 256000,
+        "output": 256000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "supported": true
         }
       }
     },
@@ -4689,29 +4580,19 @@
       "cost": {
         "input": 3,
         "output": 15,
-        "cache_read": 0.3,
-        "cache_write": 3
+        "cache_read": 0.3
       },
       "limit": {
-        "context": 1048576,
-        "output": 1048576
+        "context": 1000000,
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "supported": true
         }
       }
     },
@@ -4733,8 +4614,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -4743,31 +4623,16 @@
       "cost": {
         "input": 2,
         "output": 10,
-        "cache_read": 0.2,
-        "cache_write": 2
+        "cache_read": 0.2
       },
       "limit": {
-        "context": 1048576,
-        "output": 1048576
+        "context": 1000000,
+        "output": 262144
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "moonshotai/kimi-k3.1-pro-highspeed",
@@ -4779,7 +4644,6 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
       "tool_call": true,
       "release_date": "2026-10-23",
       "last_updated": "2026-10-23",
@@ -4787,8 +4651,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -4807,21 +4670,7 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "openai/chat-latest",
@@ -4914,6 +4763,22 @@
       "release_date": "2025-04-14",
       "last_updated": "2025-04-14",
       "open_weights": false,
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 3.5,
+              "output": 14,
+              "cache_read": 0.875
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
       "modalities": {
         "input": [
           "text",
@@ -4953,6 +4818,22 @@
       "release_date": "2025-04-14",
       "last_updated": "2025-04-14",
       "open_weights": false,
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 0.7,
+              "output": 2.8,
+              "cache_read": 0.175
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
       "modalities": {
         "input": [
           "text",
@@ -4992,6 +4873,22 @@
       "release_date": "2025-04-14",
       "last_updated": "2025-04-14",
       "open_weights": false,
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 0.2,
+              "output": 0.8,
+              "cache_read": 0.06
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
       "modalities": {
         "input": [
           "text",
@@ -5005,7 +4902,7 @@
       "cost": {
         "input": 0.1,
         "output": 0.4,
-        "cache_read": 0.025
+        "cache_read": 0.03
       },
       "limit": {
         "context": 1047576,
@@ -5031,6 +4928,22 @@
       "release_date": "2024-05-13",
       "last_updated": "2024-08-06",
       "open_weights": false,
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 4.25,
+              "output": 17,
+              "cache_read": 2.125
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
       "modalities": {
         "input": [
           "text",
@@ -5070,6 +4983,22 @@
       "release_date": "2024-07-18",
       "last_updated": "2024-07-18",
       "open_weights": false,
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 0.25,
+              "output": 1,
+              "cache_read": 0.125
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
       "modalities": {
         "input": [
           "text",
@@ -5110,6 +5039,34 @@
       "release_date": "2025-08-07",
       "last_updated": "2025-08-07",
       "open_weights": false,
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 2.5,
+              "output": 20,
+              "cache_read": 0.25
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          },
+          "flex": {
+            "cost": {
+              "input": 0.625,
+              "output": 5,
+              "cache_read": 0.0625
+            },
+            "provider": {
+              "body": {
+                "service_tier": "flex"
+              }
+            }
+          }
+        }
+      },
       "modalities": {
         "input": [
           "text",
@@ -5174,7 +5131,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -5183,7 +5141,7 @@
       "cost": {
         "input": 1.25,
         "output": 10,
-        "cache_read": 0.125
+        "cache_read": 0.13
       },
       "limit": {
         "context": 400000,
@@ -5231,6 +5189,34 @@
       "release_date": "2025-08-07",
       "last_updated": "2025-08-07",
       "open_weights": false,
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 0.45,
+              "output": 3.6,
+              "cache_read": 0.045
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          },
+          "flex": {
+            "cost": {
+              "input": 0.125,
+              "output": 1,
+              "cache_read": 0.0125
+            },
+            "provider": {
+              "body": {
+                "service_tier": "flex"
+              }
+            }
+          }
+        }
+      },
       "modalities": {
         "input": [
           "text",
@@ -5292,6 +5278,22 @@
       "release_date": "2025-08-07",
       "last_updated": "2025-08-07",
       "open_weights": false,
+      "experimental": {
+        "modes": {
+          "flex": {
+            "cost": {
+              "input": 0.025,
+              "output": 0.2,
+              "cache_read": 0.0025
+            },
+            "provider": {
+              "body": {
+                "service_tier": "flex"
+              }
+            }
+          }
+        }
+      },
       "modalities": {
         "input": [
           "text",
@@ -5347,7 +5349,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2024-09-30",
       "release_date": "2025-10-06",
@@ -5356,7 +5358,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -5408,8 +5411,8 @@
       "open_weights": false,
       "modalities": {
         "input": [
-          "text",
           "image",
+          "text",
           "pdf"
         ],
         "output": [
@@ -5461,7 +5464,7 @@
         "supported": true,
         "default": false
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2024-09-30",
       "release_date": "2025-11-13",
@@ -5470,7 +5473,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -5479,7 +5483,7 @@
       "cost": {
         "input": 1.25,
         "output": 10,
-        "cache_read": 0.125
+        "cache_read": 0.13
       },
       "limit": {
         "context": 400000,
@@ -5521,7 +5525,7 @@
         "supported": true,
         "default": false
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2024-09-30",
       "release_date": "2025-11-13",
@@ -5530,7 +5534,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -5539,7 +5544,7 @@
       "cost": {
         "input": 0.25,
         "output": 2,
-        "cache_read": 0.025
+        "cache_read": 0.03
       },
       "limit": {
         "context": 400000,
@@ -5643,7 +5648,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2025-08-31",
       "release_date": "2025-12-11",
@@ -5652,7 +5657,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -5664,7 +5670,7 @@
       },
       "limit": {
         "context": 400000,
-        "output": 272000
+        "output": 128000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -5701,7 +5707,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2025-08-31",
       "release_date": "2025-12-11",
@@ -5829,22 +5835,6 @@
       "release_date": "2026-03-05",
       "last_updated": "2026-03-05",
       "open_weights": false,
-      "experimental": {
-        "modes": {
-          "fast": {
-            "cost": {
-              "input": 5,
-              "output": 30,
-              "cache_read": 0.5
-            },
-            "provider": {
-              "body": {
-                "service_tier": "priority"
-              }
-            }
-          }
-        }
-      },
       "modalities": {
         "input": [
           "text",
@@ -5907,22 +5897,6 @@
       "release_date": "2026-03-17",
       "last_updated": "2026-03-17",
       "open_weights": false,
-      "experimental": {
-        "modes": {
-          "fast": {
-            "cost": {
-              "input": 1.5,
-              "output": 9,
-              "cache_read": 0.15
-            },
-            "provider": {
-              "body": {
-                "service_tier": "priority"
-              }
-            }
-          }
-        }
-      },
       "modalities": {
         "input": [
           "text",
@@ -6041,7 +6015,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2025-08-31",
       "release_date": "2026-03-05",
@@ -6050,7 +6024,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -6099,28 +6074,12 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2025-12-01",
       "release_date": "2026-04-23",
       "last_updated": "2026-04-23",
       "open_weights": false,
-      "experimental": {
-        "modes": {
-          "fast": {
-            "cost": {
-              "input": 12.5,
-              "output": 75,
-              "cache_read": 1.25
-            },
-            "provider": {
-              "body": {
-                "service_tier": "priority"
-              }
-            }
-          }
-        }
-      },
       "modalities": {
         "input": [
           "text",
@@ -6137,7 +6096,7 @@
         "cache_read": 0.5
       },
       "limit": {
-        "context": 1050000,
+        "context": 1000000,
         "output": 128000
       },
       "metadata": {
@@ -6176,7 +6135,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2025-12-01",
       "release_date": "2026-04-23",
@@ -6197,7 +6156,7 @@
         "output": 180
       },
       "limit": {
-        "context": 1050000,
+        "context": 1000000,
         "output": 128000
       },
       "metadata": {
@@ -6220,7 +6179,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2026-02-16",
       "release_date": "2026-07-09",
@@ -6284,7 +6243,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2026-02-16",
       "release_date": "2026-07-09",
@@ -6301,9 +6260,9 @@
         ]
       },
       "cost": {
-        "input": 5,
-        "output": 30,
-        "cache_read": 0.5,
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.4,
         "cache_write": 5
       },
       "limit": {
@@ -6348,7 +6307,7 @@
         "supported": true,
         "default": true
       },
-      "temperature": false,
+      "temperature": true,
       "tool_call": true,
       "knowledge": "2026-02-16",
       "release_date": "2026-07-09",
@@ -6421,7 +6380,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -6466,7 +6426,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -6506,7 +6467,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -6546,7 +6508,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -6586,7 +6549,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -6630,8 +6594,13 @@
           "image"
         ]
       },
+      "cost": {
+        "input": 5,
+        "output": 32,
+        "cache_read": 1.25
+      },
       "limit": {
-        "context": 128000,
+        "context": 8192,
         "output": 8192
       },
       "metadata": {
@@ -6662,8 +6631,13 @@
           "image"
         ]
       },
+      "cost": {
+        "input": 5,
+        "output": 30,
+        "cache_read": 1.25
+      },
       "limit": {
-        "context": 128000,
+        "context": 8192,
         "output": 8192
       },
       "metadata": {
@@ -6746,6 +6720,90 @@
       "vision": true
     },
     {
+      "id": "openai/gpt-image-2.6-flare",
+      "name": "OpenAI: GPT-Image-2.6-Flare",
+      "display_name": "OpenAI: GPT-Image-2.6-Flare",
+      "type": "image-generation",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 5,
+        "output": 30,
+        "cache_read": 1.25
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "GPT-Image-2.6 Flare is OpenAI’s image generation and editing model for posters, product imagery, and rapid creative iteration. The Images 2.6 family delivers 50% faster image generation, with Flare producing images in as little as six seconds at low quality and improving layout quality for professional visuals. It supports GIF creation, SVG exports, markup-guided editing, and a complexity parameter for controlling scene planning.",
+        "typeHints": [
+          "image_generation"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 1.25,
+          "input": 5,
+          "output": 30
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "openai/gpt-image-2.6-sunburst",
+      "name": "OpenAI: GPT-Image-2.6-Sunburst",
+      "display_name": "OpenAI: GPT-Image-2.6-Sunburst",
+      "type": "image-generation",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ]
+      },
+      "cost": {
+        "input": 5,
+        "output": 30,
+        "cache_read": 1.25
+      },
+      "limit": {
+        "context": 8192,
+        "output": 8192
+      },
+      "metadata": {
+        "description": "GPT-Image-2.6 Sunburst is OpenAI’s image generation and editing model for visual work requiring detail, precision, and consistency across edits. The Images 2.6 family delivers 50% faster image generation, while Sunburst offers higher-quality generation and greater consistency at medium or high quality settings. It supports GIF creation, SVG exports, markup-guided editing, and a complexity parameter for controlling scene planning.",
+        "typeHints": [
+          "image_generation"
+        ],
+        "inputModalities": [
+          "text",
+          "image"
+        ],
+        "pricing": {
+          "cache_read": 1.25,
+          "input": 5,
+          "output": 30
+        },
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "openai/o4-mini",
       "name": "OpenAI: o4 Mini",
       "display_name": "OpenAI: o4 Mini",
@@ -6761,6 +6819,34 @@
       "release_date": "2025-04-16",
       "last_updated": "2025-04-16",
       "open_weights": false,
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 2,
+              "output": 8,
+              "cache_read": 0.5
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          },
+          "flex": {
+            "cost": {
+              "input": 0.55,
+              "output": 2.2,
+              "cache_read": 0.1375
+            },
+            "provider": {
+              "body": {
+                "service_tier": "flex"
+              }
+            }
+          }
+        }
+      },
       "modalities": {
         "input": [
           "text",
@@ -7150,14 +7236,13 @@
         ]
       },
       "cost": {
-        "input": 0.143,
-        "output": 1.434,
-        "cache_read": 0.0286,
-        "cache_write": 0.17875
+        "input": 0.2,
+        "output": 1.6,
+        "cache_read": 0.04
       },
       "limit": {
-        "context": 262144,
-        "output": 65536
+        "context": 256000,
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -7180,38 +7265,41 @@
       "name": "Qwen: Qwen3.5-Flash",
       "display_name": "Qwen: Qwen3.5-Flash",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "temperature": true,
       "tool_call": true,
+      "knowledge": "2025-01-01",
       "release_date": "2026-02-23",
       "last_updated": "2026-02-23",
       "open_weights": false,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.029,
-        "output": 0.287,
-        "cache_read": 0.0058,
-        "cache_write": 0.03625
+        "input": 0.1,
+        "output": 0.4,
+        "cache_read": 0.02,
+        "cache_write": 0.125
       },
       "limit": {
-        "context": 1000000,
-        "output": 250000
+        "context": 1020000,
+        "output": 1020000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -7229,7 +7317,7 @@
       "name": "Qwen: Qwen3.5-Plus",
       "display_name": "Qwen: Qwen3.5-Plus",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -7242,26 +7330,26 @@
       "open_weights": false,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.115,
-        "output": 0.688,
-        "cache_read": 0.023,
-        "cache_write": 0.14375
+        "input": 0.4,
+        "output": 2.4
       },
       "limit": {
         "context": 1000000,
-        "output": 250000
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -7279,7 +7367,7 @@
       "name": "Qwen: Qwen3.6 Flash",
       "display_name": "Qwen: Qwen3.6 Flash",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -7291,26 +7379,26 @@
       "open_weights": false,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.165,
-        "output": 0.99,
-        "cache_read": 0.033,
-        "cache_write": 0.20625
+        "input": 0.25,
+        "output": 1.5
       },
       "limit": {
         "context": 1000000,
-        "output": 250000
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -7328,7 +7416,7 @@
       "name": "Qwen: Qwen3.6-Plus",
       "display_name": "Qwen: Qwen3.6-Plus",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -7341,26 +7429,26 @@
       "open_weights": false,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.276,
-        "output": 1.651,
-        "cache_read": 0.0552,
-        "cache_write": 0.345
+        "input": 0.5,
+        "output": 3
       },
       "limit": {
         "context": 1000000,
-        "output": 250000
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -7399,14 +7487,14 @@
         ]
       },
       "cost": {
-        "input": 0.03,
+        "input": 0.04,
         "output": 0.13,
-        "cache_read": 0.006,
-        "cache_write": 0.038
+        "cache_read": 0.01,
+        "cache_write": 0.04
       },
       "limit": {
         "context": 1000000,
-        "output": 131072
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -7442,14 +7530,14 @@
         ]
       },
       "cost": {
-        "input": 0.825,
-        "output": 2.4755,
-        "cache_read": 0.165,
-        "cache_write": 1.03125
+        "input": 1.25,
+        "output": 3.75,
+        "cache_read": 0.25,
+        "cache_write": 1.5625
       },
       "limit": {
         "context": 1000000,
-        "output": 250000
+        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -7480,7 +7568,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -7488,11 +7577,12 @@
       },
       "cost": {
         "input": 0.4,
-        "output": 1.6
+        "output": 1.6,
+        "cache_read": 0.08
       },
       "limit": {
         "context": 1000000,
-        "output": 65536
+        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -7515,7 +7605,7 @@
         "default": true
       },
       "temperature": true,
-      "tool_call": false,
+      "tool_call": true,
       "release_date": "2026-08-12",
       "last_updated": "2026-08-12",
       "open_weights": true,
@@ -7529,12 +7619,11 @@
       },
       "cost": {
         "input": 2.5,
-        "output": 6.25,
-        "cache_read": 0.5
+        "output": 6.25
       },
       "limit": {
         "context": 262144,
-        "output": 262144
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -7564,7 +7653,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -7573,11 +7663,11 @@
       "cost": {
         "input": 0.4,
         "output": 3,
-        "cache_read": 0.05
+        "cache_read": 0.04
       },
       "limit": {
         "context": 262144,
-        "output": 65536
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -7589,7 +7679,7 @@
       "name": "Qwen: Qwen3.8-Flash",
       "display_name": "Qwen: Qwen3.8-Flash",
       "type": "chat",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -7601,25 +7691,27 @@
       "open_weights": false,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "cost": {
-        "input": 0.15,
+        "input": 0.16,
         "output": 0.47,
         "cache_read": 0.016
       },
       "limit": {
-        "context": 977000,
-        "output": 128000
+        "context": 1000000,
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true
@@ -7644,7 +7736,9 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video",
+          "pdf"
         ],
         "output": [
           "text"
@@ -7689,7 +7783,8 @@
         "input": [
           "text",
           "image",
-          "video"
+          "video",
+          "pdf"
         ],
         "output": [
           "text"
@@ -7698,8 +7793,7 @@
       "cost": {
         "input": 2,
         "output": 6,
-        "cache_read": 0.25,
-        "cache_write": 2.5
+        "cache_read": 0.25
       },
       "limit": {
         "context": 1000000,
@@ -7738,7 +7832,8 @@
       },
       "cost": {
         "input": 0.15,
-        "output": 0.47
+        "output": 0.47,
+        "cache_read": 0.016
       },
       "limit": {
         "context": 1000000,
@@ -7768,8 +7863,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "pdf"
+          "image"
         ],
         "output": [
           "text"
@@ -7782,7 +7876,7 @@
       },
       "limit": {
         "context": 1000000,
-        "output": 128000
+        "output": 1000000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -7962,27 +8056,13 @@
         "cache_read": 0.04
       },
       "limit": {
-        "context": 262144,
+        "context": 256000,
         "output": 256000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "stepfun/step-5-preview",
@@ -8012,30 +8092,16 @@
       "cost": {
         "input": 1,
         "output": 2.7,
-        "cache_read": 0.1
+        "cache_read": 0.05
       },
       "limit": {
         "context": 1000000,
-        "output": 64000
+        "output": 1000000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "tencent/hy3",
@@ -8073,18 +8139,9 @@
         "source": "public-provider-conf"
       },
       "vision": false,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "supported": true
         }
       }
     },
@@ -8113,13 +8170,13 @@
         ]
       },
       "cost": {
-        "input": 0.834,
-        "output": 2.501,
-        "cache_read": 0.042
+        "input": 0.417,
+        "output": 1.2505,
+        "cache_read": 0.021
       },
       "limit": {
-        "context": 1000000,
-        "output": 65536
+        "context": 1024000,
+        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -8155,25 +8212,16 @@
         "cache_read": 0.042
       },
       "limit": {
-        "context": 1000000,
+        "context": 1024000,
         "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": false,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "supported": true
         }
       }
     },
@@ -8313,7 +8361,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
@@ -8322,11 +8371,11 @@
       "cost": {
         "input": 2,
         "output": 6,
-        "cache_read": 0.3
+        "cache_read": 0.5
       },
       "limit": {
         "context": 500000,
-        "output": 450000
+        "output": 500000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -8365,11 +8414,12 @@
       },
       "cost": {
         "input": 2,
-        "output": 6
+        "output": 6,
+        "cache_read": 0.5
       },
       "limit": {
         "context": 500000,
-        "output": 450000
+        "output": 500000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -8571,9 +8621,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "audio",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -8585,7 +8633,7 @@
         "cache_read": 0.0028
       },
       "limit": {
-        "context": 1000000,
+        "context": 1048576,
         "output": 131072
       },
       "metadata": {
@@ -8611,9 +8659,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "audio",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -8625,7 +8671,7 @@
         "cache_read": 0.0036
       },
       "limit": {
-        "context": 1000000,
+        "context": 1048576,
         "output": 131072
       },
       "metadata": {
@@ -8651,9 +8697,7 @@
       "modalities": {
         "input": [
           "text",
-          "image",
-          "audio",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -8662,8 +8706,7 @@
       "cost": {
         "input": 4.35,
         "output": 8.7,
-        "cache_read": 0.036,
-        "cache_write": 0
+        "cache_read": 0.036
       },
       "limit": {
         "context": 1048576,
@@ -8803,10 +8846,11 @@
       "type": "chat",
       "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
       "temperature": true,
-      "tool_call": false,
+      "tool_call": true,
       "knowledge": "2025-04",
       "release_date": "2025-12-08",
       "last_updated": "2025-12-08",
@@ -8822,18 +8866,32 @@
         ]
       },
       "cost": {
-        "input": 0.3,
-        "output": 0.9,
-        "cache_read": 0.15
+        "input": 0.3174,
+        "output": 0.9522,
+        "cache_read": 0.05819
       },
       "limit": {
-        "context": 128000,
-        "output": 24000
+        "context": 131072,
+        "output": 32768
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "interleaved": {
+        "field": "reasoning_details"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "z-ai/glm-4.6v-flash-free",
@@ -8938,14 +8996,13 @@
         ]
       },
       "cost": {
-        "input": 0.6,
-        "output": 2.2,
-        "cache_read": 0.11,
-        "cache_write": 0
+        "input": 0.2911,
+        "output": 1.1645,
+        "cache_read": 0.0582
       },
       "limit": {
-        "context": 204800,
-        "output": 131072
+        "context": 200000,
+        "output": 128000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -8991,21 +9048,30 @@
         ]
       },
       "cost": {
-        "input": 0.07,
-        "output": 0.4,
-        "cache_read": 0.01
+        "input": 0.13225,
+        "output": 0.529,
+        "cache_read": 0.01058
       },
       "limit": {
-        "context": 200000,
-        "output": 128000
+        "context": 202752,
+        "output": 16384
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": false,
+      "interleaved": {
+        "field": "reasoning_details"
+      },
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -9085,10 +9151,9 @@
         ]
       },
       "cost": {
-        "input": 1,
-        "output": 3.2,
-        "cache_read": 0.26,
-        "cache_write": 0
+        "input": 0.6,
+        "output": 2.08,
+        "cache_read": 0.12
       },
       "limit": {
         "context": 204800,
@@ -9120,7 +9185,8 @@
       "type": "chat",
       "attachment": false,
       "reasoning": {
-        "supported": true
+        "supported": true,
+        "default": true
       },
       "temperature": true,
       "tool_call": true,
@@ -9141,7 +9207,7 @@
         "cache_read": 0.24
       },
       "limit": {
-        "context": 202800,
+        "context": 262144,
         "output": 131072
       },
       "metadata": {
@@ -9178,10 +9244,9 @@
         ]
       },
       "cost": {
-        "input": 1.4,
-        "output": 4.4,
-        "cache_read": 0.26,
-        "cache_write": 0
+        "input": 1.05,
+        "output": 3.5,
+        "cache_read": 0.205
       },
       "limit": {
         "context": 200000,
@@ -9191,18 +9256,9 @@
         "source": "public-provider-conf"
       },
       "vision": false,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "supported": true
         }
       }
     },
@@ -9236,7 +9292,7 @@
       },
       "limit": {
         "context": 1000000,
-        "output": 131072
+        "output": 128000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -9281,13 +9337,13 @@
         ]
       },
       "cost": {
-        "input": 1.26,
-        "output": 3.96,
-        "cache_read": 0.234
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 0.26
       },
       "limit": {
         "context": 1000000,
-        "output": 131072
+        "output": 128000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -9341,24 +9397,15 @@
       },
       "limit": {
         "context": 1000000,
-        "output": 128000
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
       "vision": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "supported": true
         }
       }
     },
@@ -9446,7 +9493,8 @@
       "type": "chat",
       "attachment": true,
       "reasoning": {
-        "supported": false
+        "supported": true,
+        "default": true
       },
       "temperature": true,
       "tool_call": true,
@@ -9457,7 +9505,8 @@
         "input": [
           "text",
           "image",
-          "video"
+          "video",
+          "pdf"
         ],
         "output": [
           "text"
@@ -9469,7 +9518,7 @@
         "cache_read": 0.24
       },
       "limit": {
-        "context": 202800,
+        "context": 202752,
         "output": 131072
       },
       "metadata": {
