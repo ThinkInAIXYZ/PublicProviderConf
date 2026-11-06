@@ -94,6 +94,13 @@ export function getDefaultConfig(): AppConfig {
     30
   );
 
+  providers['cheaper-inference'] = createProviderConfig(
+    'https://api.cheaperinference.com/public/models',
+    undefined,
+    10,
+    30
+  );
+
   providers['ollama'] = createProviderConfig(
     'manual-templates/ollama.json',
     undefined,
