@@ -159,6 +159,9 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
       case 'aihubmix':
         return new providers.AiHubMixProvider(config.apiUrl);
 
+      case 'cheaper-inference':
+        return new providers.CheaperInferenceProvider(config.apiUrl);
+
       case 'groq': {
         const groqApiKey = config.getApiKey();
         if (groqApiKey) {
