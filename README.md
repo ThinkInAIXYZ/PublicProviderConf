@@ -180,6 +180,19 @@ BurnCloud rides exclusively on `manual-templates/burncloud.json`, which is regen
 
 The Google entry for `gemini-4-argon` sets `temperature: false` because Google ignores `temperature`, `top_p`, and `top_k`. Its introductory prices are $2 input / $10 output and $0.10 cached input per million tokens through November 30, 2026; from December 1, 2026, these become $4 / $20 and $0.20. The template records `metadata.pricingValidUntil` and the scheduled rates without overriding upstream costs or automatically switching prices. Its 32,768 output limit is a conservative catalog setting. Argon is outside the curated `custom-provider` selection. See the [official migration and pricing guide](https://ai.google.dev/gemini-api/docs/latest-model).
 
+The OpenAI template supplements the catalog with `gpt-image-2.5-sunburst` and
+`gpt-image-2.5-flare`, following the existing `gpt-image-2` pricing structure.
+Standard processing uses $5 text input / $1.25 cached text input and $8 image
+input / $2 cached image input / $30 image output per million tokens. Generic
+`cost` fields retain text input, cached text input, and image output rates;
+`metadata.pricing` preserves the separate image input rates. Equal token rates
+do not imply equal cost per image. Cached input pricing applies only to the
+Responses API image generation tool, not direct Images API requests. No
+unverified context/output token limits or release dates are added. See the
+official [Sunburst model](https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst),
+[Flare model](https://developers.openai.com/api/docs/models/gpt-image-2.5-flare), and
+[image generation pricing guidance](https://developers.openai.com/api/docs/guides/image-generation#cached-input-pricing).
+
 ## Project Structure
 ```
 src/
