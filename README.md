@@ -170,6 +170,7 @@ Options:
 - TokenFlux (marketplace API)
 - Groq (requires `GROQ_API_KEY`)
 - AIHubMix (live API)
+- Cheaper Inference (live API, no key needed)
 - BurnCloud (manual template)
 - Ollama (snapshot templates)
 - SiliconFlow (snapshot templates)
