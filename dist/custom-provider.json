@@ -3,7 +3,7 @@
   "name": "custom provider",
   "display_name": "custom provider",
   "description": "Generated first-tier fallback catalog combining official high-signal chat, coding, reasoning, and frontier model metadata.",
-  "updated_at": "2026-10-27T00:00:00.000Z",
+  "updated_at": "2026-11-10T00:00:00.000Z",
   "doc": "docs/custom-provider.md",
   "tags": [
     "fallback",
@@ -84,7 +84,10 @@
           "https://www.anthropic.com/claude-opus-5-5",
           "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
           "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+          "https://platform.claude.com/docs/en/build-with-claude/thinking",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -189,7 +192,10 @@
           "https://www.anthropic.com/claude-opus-5-5",
           "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
           "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+          "https://platform.claude.com/docs/en/build-with-claude/thinking",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -219,6 +225,123 @@
             "Adaptive thinking is always on; thinking.type = \"enabled\" or \"disabled\" is rejected.",
             "Forced tool use is not supported: tool_choice any or a named tool returns a 400 invalid_request_error.",
             "One-hour cache writes are billed at $20 per million tokens."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-fable-5-2",
+      "name": "Claude Fable 5.2",
+      "family": "claude-fable",
+      "display_name": "Claude Fable 5.2",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": false,
+      "tool_call": true,
+      "structured_output": true,
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "knowledge": "2026-06",
+      "release_date": "2026-11-09",
+      "last_updated": "2026-11-09",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 8,
+        "output": 40,
+        "cache_read": 0.2,
+        "cache_write": 10
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "selection": [
+          "latest",
+          "frontier",
+          "agentic",
+          "reasoning",
+          "long-context"
+        ],
+        "lifecycle": "active",
+        "apiStatus": "active",
+        "availability": [
+          "api"
+        ],
+        "pricingBasis": "standard",
+        "notes": [
+          "Omit temperature, top_p, and top_k.",
+          "Requires 30-day data retention unless Anthropic expressly authorizes zero data retention.",
+          "Cache-write pricing uses five-minute retention; one-hour retention costs $16 per million tokens.",
+          "Structured outputs and strict tool use are unavailable in organizations using customer-managed encryption keys.",
+          "Computer use requires computer_toolset_20260801; computer_20251124 returns 400 except on Amazon Bedrock."
+        ],
+        "sourceProvider": "anthropic",
+        "sourceProviderName": "Anthropic",
+        "sourceApiUrl": "https://api.anthropic.com/v1/models",
+        "sourceDocs": [
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://docs.anthropic.com/en/api/models-list",
+          "https://www.anthropic.com/claude-opus-5-5",
+          "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
+        ],
+        "sourceStatus": "seed",
+        "apiListed": false,
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Adaptive thinking is always on; enabled and disabled thinking modes return 400.",
+            "Forced tool use is unsupported; use tool_choice=auto.",
+            "Preserve the conversation prefix and prior thinking blocks on every account."
           ]
         }
       }
@@ -278,7 +401,10 @@
           "https://www.anthropic.com/claude-opus-5-5",
           "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
           "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+          "https://platform.claude.com/docs/en/build-with-claude/thinking",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -386,7 +512,10 @@
           "https://www.anthropic.com/claude-opus-5-5",
           "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
           "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+          "https://platform.claude.com/docs/en/build-with-claude/thinking",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -397,7 +526,7 @@
         "reasoning": {
           "supported": true,
           "default_enabled": true,
-          "mode": "adaptive",
+          "mode": "effort",
           "interleaved": true,
           "summaries": true,
           "visibility": "omitted",
@@ -411,6 +540,124 @@
             "high",
             "xhigh",
             "max"
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-mythos-5-2",
+      "name": "Claude Mythos 5.2",
+      "family": "claude-mythos",
+      "display_name": "Claude Mythos 5.2",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": false,
+      "tool_call": true,
+      "structured_output": true,
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "knowledge": "2026-06",
+      "release_date": "2026-11-09",
+      "last_updated": "2026-11-09",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 8,
+        "output": 40,
+        "cache_read": 0.2,
+        "cache_write": 10
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "selection": [
+          "latest",
+          "frontier",
+          "agentic",
+          "reasoning",
+          "long-context"
+        ],
+        "lifecycle": "active",
+        "apiStatus": "restricted",
+        "availability": [
+          "organization-verification"
+        ],
+        "pricingBasis": "standard",
+        "notes": [
+          "Access requires an organization verified through Anthropic's verification programs.",
+          "Omit temperature, top_p, and top_k.",
+          "Requires 30-day data retention unless Anthropic expressly authorizes zero data retention.",
+          "Cache-write pricing uses five-minute retention; one-hour retention costs $16 per million tokens.",
+          "Structured outputs and strict tool use are unavailable in organizations using customer-managed encryption keys.",
+          "Computer use requires computer_toolset_20260801; computer_20251124 returns 400 except on Amazon Bedrock."
+        ],
+        "sourceProvider": "anthropic",
+        "sourceProviderName": "Anthropic",
+        "sourceApiUrl": "https://api.anthropic.com/v1/models",
+        "sourceDocs": [
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://docs.anthropic.com/en/api/models-list",
+          "https://www.anthropic.com/claude-opus-5-5",
+          "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
+        ],
+        "sourceStatus": "seed",
+        "apiListed": false,
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Adaptive thinking is always on; enabled and disabled thinking modes return 400.",
+            "Forced tool use is unsupported; use tool_choice=auto.",
+            "Preserve the conversation prefix and prior thinking blocks on every account."
           ]
         }
       }
@@ -484,7 +731,10 @@
           "https://www.anthropic.com/claude-opus-5-5",
           "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
           "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+          "https://platform.claude.com/docs/en/build-with-claude/thinking",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -573,7 +823,10 @@
           "https://www.anthropic.com/claude-opus-5-5",
           "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
           "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+          "https://platform.claude.com/docs/en/build-with-claude/thinking",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -584,7 +837,7 @@
         "reasoning": {
           "supported": true,
           "default_enabled": true,
-          "mode": "adaptive",
+          "mode": "effort",
           "interleaved": true,
           "summaries": true,
           "visibility": "omitted",
@@ -666,7 +919,10 @@
           "https://www.anthropic.com/claude-opus-5-5",
           "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
           "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+          "https://platform.claude.com/docs/en/build-with-claude/thinking",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -755,7 +1011,10 @@
           "https://www.anthropic.com/claude-opus-5-5",
           "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
           "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+          "https://platform.claude.com/docs/en/build-with-claude/thinking",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -766,7 +1025,7 @@
         "reasoning": {
           "supported": true,
           "default_enabled": true,
-          "mode": "adaptive",
+          "mode": "effort",
           "interleaved": true,
           "summaries": true,
           "visibility": "omitted",
@@ -2422,7 +2681,9 @@
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "https://developers.openai.com/api/docs/models/gpt-5.5",
           "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-          "https://developers.openai.com/api/docs/pricing"
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -2536,7 +2797,9 @@
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "https://developers.openai.com/api/docs/models/gpt-5.5",
           "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-          "https://developers.openai.com/api/docs/pricing"
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -2646,7 +2909,9 @@
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "https://developers.openai.com/api/docs/models/gpt-5.5",
           "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-          "https://developers.openai.com/api/docs/pricing"
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -2760,7 +3025,9 @@
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "https://developers.openai.com/api/docs/models/gpt-5.5",
           "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-          "https://developers.openai.com/api/docs/pricing"
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -2870,7 +3137,9 @@
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "https://developers.openai.com/api/docs/models/gpt-5.5",
           "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-          "https://developers.openai.com/api/docs/pricing"
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -2980,7 +3249,9 @@
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "https://developers.openai.com/api/docs/models/gpt-5.5",
           "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-          "https://developers.openai.com/api/docs/pricing"
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -3006,6 +3277,88 @@
           "mode": "effort",
           "verbosity": "medium",
           "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "gpt-6-cyber",
+      "name": "GPT-6 Cyber",
+      "family": "gpt-cyber",
+      "display_name": "GPT-6 Cyber",
+      "type": "chat",
+      "reasoning": {
+        "supported": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "release_date": "2026-11-05",
+      "last_updated": "2026-11-05",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "cost": {
+        "input": 20,
+        "output": 100,
+        "cache_read": 2,
+        "cache_write": 25
+      },
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "metadata": {
+        "selection": [
+          "specialized",
+          "cybersecurity",
+          "reasoning",
+          "agentic"
+        ],
+        "lifecycle": "active",
+        "apiStatus": "restricted",
+        "availability": [
+          "daybreak-red-approval"
+        ],
+        "pricingBasis": "standard-up-to-272k-input",
+        "notes": [
+          "Access requires OpenAI Daybreak Red and GPT-6-Cyber approval plus project setup.",
+          "Standard rates above 272K input tokens are $40 input, $4 cached input, and $150 output per million tokens; cache-write pricing is not offered for this tier.",
+          "Cache-write pricing uses 30-minute retention; 12-hour retention costs $50 per million tokens for prompts up to 272K input tokens.",
+          "Hosted tools listed in the model documentation use the Responses API."
+        ],
+        "sourceProvider": "openai",
+        "sourceProviderName": "OpenAI",
+        "sourceApiUrl": "https://api.openai.com/v1/models",
+        "sourceDocs": [
+          "https://developers.openai.com/api/docs/models",
+          "https://developers.openai.com/api/docs/guides/latest-model",
+          "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "https://developers.openai.com/api/docs/models/gpt-6-sol",
+          "https://developers.openai.com/api/docs/models/gpt-6-luna",
+          "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+          "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+          "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+          "https://developers.openai.com/api/docs/models/gpt-5.5",
+          "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
+        ],
+        "sourceStatus": "seed",
+        "apiListed": false,
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
         }
       }
     },
@@ -3089,7 +3442,9 @@
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "https://developers.openai.com/api/docs/models/gpt-5.5",
           "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-          "https://developers.openai.com/api/docs/pricing"
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -3197,7 +3552,9 @@
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "https://developers.openai.com/api/docs/models/gpt-5.5",
           "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-          "https://developers.openai.com/api/docs/pricing"
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -3307,7 +3664,9 @@
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "https://developers.openai.com/api/docs/models/gpt-5.5",
           "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-          "https://developers.openai.com/api/docs/pricing"
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
         ],
         "sourceStatus": "seed",
         "apiListed": false,
@@ -3418,7 +3777,9 @@
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "https://developers.openai.com/api/docs/models/gpt-5.5",
           "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-          "https://developers.openai.com/api/docs/pricing"
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+          "https://developers.openai.com/api/docs/guides/daybreak"
         ],
         "sourceStatus": "seed",
         "apiListed": false,

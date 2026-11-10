@@ -6,16 +6,16 @@ It combines compact, high-signal model cards from official sources into a normal
 - `dist/custom-provider.json`
 - `dist/all.json` provider entry: `custom-provider`
 
-The catalog contains 57 selected chat, coding, reasoning, and frontier models across nine sources. It is designed to be used before AIHubMix, while AIHubMix remains available as the broader lower-tier fallback source. Inclusion provides capability metadata; it does not guarantee that an official or third-party endpoint serves the model.
+The catalog contains 60 selected chat, coding, reasoning, and frontier models across nine sources. It is designed to be used before AIHubMix, while AIHubMix remains available as the broader lower-tier fallback source. Inclusion provides capability metadata; it does not guarantee that an official or third-party endpoint serves the model.
 
 ## Selected Models
 
-The maintained selection is dated October 27, 2026. Model IDs are exact API identifiers; product names and release dates are not synthesized into additional aliases.
+The maintained selection is dated November 10, 2026. Model IDs are exact API identifiers; product names and release dates are not synthesized into additional aliases.
 
 | Official source | Count | Model IDs |
 | --- | ---: | --- |
-| [OpenAI](https://developers.openai.com/api/docs/models) | 10 | `gpt-6.1-terra`, `gpt-6.1-sol`, `gpt-6-astra`, `gpt-6-sol`, `gpt-6-luna`, `gpt-5.6`, `gpt-5.6-sol`, `gpt-5.6-terra`, `gpt-5.6-luna`, `gpt-5.5` |
-| [Anthropic](https://platform.claude.com/docs/en/about-claude/models/overview) · [Opus 5.5 announcement](https://www.anthropic.com/claude-opus-5-5) | 8 | `claude-sonnet-5-5`, `claude-haiku-5-5`, `claude-fable-5-1`, `claude-opus-5-5`, `claude-opus-5`, `claude-sonnet-5`, `claude-fable-5`, `claude-haiku-4-5` |
+| [OpenAI](https://developers.openai.com/api/docs/models) | 11 | `gpt-6-cyber`, `gpt-6.1-terra`, `gpt-6.1-sol`, `gpt-6-astra`, `gpt-6-sol`, `gpt-6-luna`, `gpt-5.6`, `gpt-5.6-sol`, `gpt-5.6-terra`, `gpt-5.6-luna`, `gpt-5.5` |
+| [Anthropic](https://platform.claude.com/docs/en/about-claude/models/overview) · [Opus 5.5 announcement](https://www.anthropic.com/claude-opus-5-5) | 10 | `claude-fable-5-2`, `claude-mythos-5-2`, `claude-sonnet-5-5`, `claude-haiku-5-5`, `claude-fable-5-1`, `claude-opus-5-5`, `claude-opus-5`, `claude-sonnet-5`, `claude-fable-5`, `claude-haiku-4-5` |
 | [Google Gemini](https://ai.google.dev/gemini-api/docs/models) | 7 | `gemini-4-argon`, `gemini-3.8-flash`, `gemini-3.1-pro-preview`, `gemini-3.7-flash`, `gemini-3.6-flash`, `gemini-3.5-flash`, `gemini-3.5-flash-lite` |
 | [Kimi / Moonshot](https://platform.kimi.ai/docs/models) | 7 | `kimi-k3.1-pro`, `kimi-k3.1-pro-highspeed`, `kimi-k3`, `kimi-k2.7-code`, `kimi-k2.7-code-highspeed`, `kimi-k2.6`, `kimi-k2.5` |
 | [DeepSeek](https://api-docs.deepseek.com/quick_start/pricing/) | 4 | `deepseek-flash`, `deepseek-v4-flash`, `deepseek-v4-pro`, `deepseek-v4-flash-vision-exp` |
@@ -40,7 +40,12 @@ Kimi K2.5 is a compatibility entry with `metadata.lifecycle = "legacy"`, `metada
 - Step 5 Preview is StepFun's frontier model: 1M context, text/image/video input, tool calling, structured output, and prompt caching, with `low`, `medium`, and `high` reasoning effort. The current model card caps output at 64k tokens, recorded as 64,000 here; the generic API description of `max_tokens = INF` does not override that model-specific limit. Cached input costs $0.10 per million tokens. Step 3.7 Flash supports image/video input and `low`, `medium`, and `high` reasoning effort. Step 3.5 Flash 2603 supports `low` and `high`; the base 3.5 entry does not advertise effort controls. StepFun returns reasoning in the `reasoning` field by default; `reasoning_format=deepseek-style` selects `reasoning_content`. Output shares the context window, and structured output support refers to JSON mode.
 - Qwen3.8 Omni Flash, released September 17, supports text, image, audio, and video input, text output, function calling, web search, a 1M context window, and 131,072 output tokens. Thinking defaults to `xhigh`; `minimal` maps to `low`, `high` and `max` map to `xhigh`, and `none` disables thinking. Its Singapore International text rates are $0.15 input / $0.47 output per million tokens, with $0.016 cache-hit input. Qwen3.8 Max/Flash and Qwen3.7 Plus support thinking toggles and token budgets, and the Qwen3.8 series also accepts `reasoning.effort` (`none`, `low`, `medium`, `xhigh`, default `xhigh`); effort and `thinking_budget` cannot be combined. Their thinking input limit is 983,616 tokens, and their maximum reasoning budget is 262,144 tokens. Qwen3.7 Flash and Qwen3.7 Plus keep only the toggle and budget controls because the official effort list does not name the Qwen3.7 series. The Qwen3 Coder entries are legacy, do not expose thinking controls, and are documented without function calling on the International endpoints. Tool support follows Qwen's function-calling guide; hosted model cards list regional restrictions, so endpoint-specific capabilities take precedence over this fallback metadata.
 
-Costs are documentation snapshots in USD per million tokens. DeepSeek uses peak prices; off-peak rates are half those values. Qwen uses Singapore International pricing and explicit cache rates, with the input tier recorded in `metadata.pricingBasis`. Gemini 3.6 Flash, 3.7 Flash, and 3.8 Flash carry introductory Global prices annotated with `metadata.pricingValidUntil`. GPT-6 Sol, GPT-6.1 Sol, and GPT-6 Luna rates are standard rates for prompts up to 272K input tokens; longer prompts have separate input, cache, and output rates. GPT-5.6 Sol plus the `gpt-5.6` alias carry promotional prices annotated with `metadata.pricingValidUntil`. GLM-5.3-Flash returned to its standard rate when its promotional period ended on September 10, 2026. MiniMax M3 prices are permanent 50%-off standard-tier rates, with multi-tier and priority pricing recorded in `metadata.notes`. The generator does not calculate regional tiers, discounts, or future prices.
+Costs are documentation snapshots in USD per million tokens. DeepSeek uses peak prices; off-peak rates are half those values. Qwen uses Singapore International pricing and explicit cache rates, with the input tier recorded in `metadata.pricingBasis`. Gemini 3.6 Flash, 3.7 Flash, and 3.8 Flash carry introductory Global prices annotated with `metadata.pricingValidUntil`. GPT-6 Cyber, GPT-6 Sol, GPT-6.1 Sol, and GPT-6 Luna rates are standard rates for prompts up to 272K input tokens; longer prompts have separate input, cache, and output rates. GPT-5.6 Sol plus the `gpt-5.6` alias carry promotional prices annotated with `metadata.pricingValidUntil`. GLM-5.3-Flash returned to its standard rate when its promotional period ended on September 10, 2026. MiniMax M3 prices are permanent 50%-off standard-tier rates, with multi-tier and priority pricing recorded in `metadata.notes`. The generator does not calculate regional tiers, discounts, or future prices.
+
+## November Model Details
+
+- [GPT-6 Cyber](https://developers.openai.com/api/docs/models/gpt-6-cyber) was released on November 5, 2026 and accepts text and image input with text output. It has a 1,050,000-token context window, a 922,000-token input limit, 128,000 output tokens, function calling, and structured outputs. Standard short-context rates are $20 input / $100 output, $2 cached input, and $25 for 30-minute cache writes per million tokens; prompts above 272K input tokens cost $40 input / $4 cached input / $150 output. Twelve-hour cache writes cost $50 for prompts up to 272K input tokens; cache-write pricing is not offered for the longer-input tier. Access requires Daybreak Red and GPT-6-Cyber approval plus project setup. Reasoning is supported, but the exact effort controls, default, knowledge cutoff, and sampling constraints are left unspecified rather than inferred.
+- [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2) and [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) were released on November 9, 2026 with 1M context, 128K output, text/image/PDF input, and text output. Adaptive thinking is always on across `low` through `max` effort and defaults to `high`; there is no toggle or token budget, so sampling parameters are omitted. Forced tool use with `any` or `tool` returns 400. Requests require 30-day data retention unless Anthropic expressly authorizes zero data retention, and editing the account prefix invalidates prior thinking blocks on every account. `computer_20251124` returns 400 except on Amazon Bedrock; use `computer_toolset_20260801`. Organizations using CMEK cannot use strict tool use or structured outputs. Rates are $8 input / $40 output, $0.20 cache reads, $10 five-minute cache writes, and $16 one-hour cache writes per million tokens. Fable is available to all API customers; Mythos requires organization verification. These entries describe official API capabilities and do not assert third-party endpoint availability.
 
 ## October Model Details
 
@@ -97,8 +102,13 @@ accepts the official API's parameters, nor that a model has been retired.
 Generate only the custom provider:
 
 ```bash
-node build/cli.js fetch-providers -p custom-provider -o dist
+out="$(mktemp -d)"
+node build/cli.js fetch-providers -p custom-provider -o "$out"
+cp "$out/custom-provider.json" dist/custom-provider.json
+rm -rf "$out"
 ```
+
+A scoped run writes every provider file plus `all.json` into its output directory, so generating directly into `dist` rewrites unrelated providers from the current models.dev snapshot. Write to a temporary directory and copy only `custom-provider.json`.
 
 Generate the full catalog:
 
@@ -110,7 +120,10 @@ For development:
 
 ```bash
 pnpm build
-node build/cli.js fetch-providers -p custom-provider -o dist
+out="$(mktemp -d)"
+node build/cli.js fetch-providers -p custom-provider -o "$out"
+cp "$out/custom-provider.json" dist/custom-provider.json
+rm -rf "$out"
 ```
 
 ## Seeds And Overrides

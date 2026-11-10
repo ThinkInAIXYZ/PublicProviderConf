@@ -37,6 +37,23 @@ test('createModelsDevModel preserves extended cost fields in snake case', () => 
   });
 });
 
+test('createModelsDevModel preserves unknown and explicit reasoning defaults', () => {
+  for (const [reasoning, expected] of [
+    [{ supported: true }, { supported: true }],
+    [{ supported: true, default: false }, { supported: true, default: false }],
+    [{ supported: true, default: true }, { supported: true, default: true }],
+    [{ supported: false, default: true }, { supported: false }],
+    [true, { supported: true, default: true }],
+    [false, { supported: false }],
+  ] as const) {
+    const model = createModelInfo(
+      'example-model', 'Example Model', 8192, 4096, false, true, reasoning, ModelType.Chat,
+    );
+    assert.deepEqual(createModelsDevModel(model).reasoning, expected);
+    assert.deepEqual(model.reasoning, reasoning);
+  }
+});
+
 test('buildAiHubMixReasoningHintMap detects extra capabilities and interleaved metadata', () => {
   const provider: ModelsDevProvider = {
     id: 'aihubmix',
