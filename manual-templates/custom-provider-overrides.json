@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-27T00:00:00.000Z",
-  "maxModels": 57,
+  "updatedAt": "2026-11-10T00:00:00.000Z",
+  "maxModels": 60,
   "provider": {
     "id": "custom-provider",
     "name": "custom provider",
@@ -30,7 +30,9 @@
         "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
         "https://developers.openai.com/api/docs/models/gpt-5.5",
         "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
-        "https://developers.openai.com/api/docs/pricing"
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/models/gpt-6-cyber",
+        "https://developers.openai.com/api/docs/guides/daybreak"
       ],
       "models": [
         {
@@ -442,6 +444,43 @@
           "metadata": {"selection": ["latest", "coding", "agentic", "reasoning"], "lifecycle": "active", "apiStatus": "active", "availability": ["api"], "pricingBasis": "standard-up-to-272k-input", "notes": ["Tool calling requires the Responses API.", "Prompts with more than 272K input tokens are priced at 2x input and cache rates and 1.5x output for the full request.", "Cache-write pricing uses 30-minute retention; 12-hour retention costs $2.50 per million tokens before long-context adjustments."]},
           "selectionRank": 1,
           "limit": {"context": 1050000, "input": 922000, "output": 128000}
+        },
+        {
+          "id": "gpt-6-cyber",
+          "name": "GPT-6 Cyber",
+          "family": "gpt-cyber",
+          "contextLength": 1050000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true },
+          "toolCall": true,
+          "structuredOutput": true,
+          "releaseDate": "2026-11-05",
+          "lastUpdated": "2026-11-05",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image"], "output": ["text"] },
+          "limit": { "context": 1050000, "input": 922000, "output": 128000 },
+          "cost": { "input": 20, "output": 100, "cacheRead": 2, "cacheWrite": 25 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true
+            }
+          },
+          "metadata": {
+            "selection": ["specialized", "cybersecurity", "reasoning", "agentic"],
+            "lifecycle": "active",
+            "apiStatus": "restricted",
+            "availability": ["daybreak-red-approval"],
+            "pricingBasis": "standard-up-to-272k-input",
+            "notes": [
+              "Access requires OpenAI Daybreak Red and GPT-6-Cyber approval plus project setup.",
+              "Standard rates above 272K input tokens are $40 input, $4 cached input, and $150 output per million tokens; cache-write pricing is not offered for this tier.",
+              "Cache-write pricing uses 30-minute retention; 12-hour retention costs $50 per million tokens for prompts up to 272K input tokens.",
+              "Hosted tools listed in the model documentation use the Responses API."
+            ]
+          },
+          "selectionRank": 1
         }
       ]
     },
@@ -456,7 +495,10 @@
         "https://www.anthropic.com/claude-opus-5-5",
         "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
         "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
-        "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        "https://platform.claude.com/docs/en/build-with-claude/thinking",
+        "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+        "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+        "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
       ],
       "models": [
         {
@@ -658,7 +700,7 @@
             "reasoning": {
               "supported": true,
               "default_enabled": true,
-              "mode": "adaptive",
+              "mode": "effort",
               "interleaved": true,
               "summaries": true,
               "visibility": "omitted",
@@ -696,7 +738,7 @@
             "reasoning": {
               "supported": true,
               "default_enabled": true,
-              "mode": "adaptive",
+              "mode": "effort",
               "interleaved": true,
               "summaries": true,
               "visibility": "omitted",
@@ -740,7 +782,7 @@
             "reasoning": {
               "supported": true,
               "default_enabled": true,
-              "mode": "adaptive",
+              "mode": "effort",
               "interleaved": true,
               "summaries": true,
               "visibility": "omitted",
@@ -762,6 +804,119 @@
           "temperature": false,
           "knowledge": "2026-06",
           "reasoningOptions": [{"type": "toggle"}, {"type": "effort", "values": ["low", "medium", "high", "xhigh", "max"]}]
+        },
+        {
+          "id": "claude-fable-5-2",
+          "name": "Claude Fable 5.2",
+          "family": "claude-fable",
+          "contextLength": 1000000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["low", "medium", "high", "xhigh", "max"] }
+          ],
+          "knowledge": "2026-06",
+          "releaseDate": "2026-11-09",
+          "lastUpdated": "2026-11-09",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 8, "output": 40, "cacheRead": 0.2, "cacheWrite": 10 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "high",
+              "effort_options": ["low", "medium", "high", "xhigh", "max"],
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "omitted",
+              "continuation": ["thinking_blocks"],
+              "notes": [
+                "Adaptive thinking is always on; enabled and disabled thinking modes return 400.",
+                "Forced tool use is unsupported; use tool_choice=auto.",
+                "Preserve the conversation prefix and prior thinking blocks on every account."
+              ]
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "frontier", "agentic", "reasoning", "long-context"],
+            "lifecycle": "active",
+            "apiStatus": "active",
+            "availability": ["api"],
+            "pricingBasis": "standard",
+            "notes": [
+              "Omit temperature, top_p, and top_k.",
+              "Requires 30-day data retention unless Anthropic expressly authorizes zero data retention.",
+              "Cache-write pricing uses five-minute retention; one-hour retention costs $16 per million tokens.",
+              "Structured outputs and strict tool use are unavailable in organizations using customer-managed encryption keys.",
+              "Computer use requires computer_toolset_20260801; computer_20251124 returns 400 except on Amazon Bedrock."
+            ]
+          },
+          "selectionRank": 1
+        },
+        {
+          "id": "claude-mythos-5-2",
+          "name": "Claude Mythos 5.2",
+          "family": "claude-mythos",
+          "contextLength": 1000000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["low", "medium", "high", "xhigh", "max"] }
+          ],
+          "knowledge": "2026-06",
+          "releaseDate": "2026-11-09",
+          "lastUpdated": "2026-11-09",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "cost": { "input": 8, "output": 40, "cacheRead": 0.2, "cacheWrite": 10 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort": "high",
+              "effort_options": ["low", "medium", "high", "xhigh", "max"],
+              "interleaved": true,
+              "summaries": true,
+              "visibility": "omitted",
+              "continuation": ["thinking_blocks"],
+              "notes": [
+                "Adaptive thinking is always on; enabled and disabled thinking modes return 400.",
+                "Forced tool use is unsupported; use tool_choice=auto.",
+                "Preserve the conversation prefix and prior thinking blocks on every account."
+              ]
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "frontier", "agentic", "reasoning", "long-context"],
+            "lifecycle": "active",
+            "apiStatus": "restricted",
+            "availability": ["organization-verification"],
+            "pricingBasis": "standard",
+            "notes": [
+              "Access requires an organization verified through Anthropic's verification programs.",
+              "Omit temperature, top_p, and top_k.",
+              "Requires 30-day data retention unless Anthropic expressly authorizes zero data retention.",
+              "Cache-write pricing uses five-minute retention; one-hour retention costs $16 per million tokens.",
+              "Structured outputs and strict tool use are unavailable in organizations using customer-managed encryption keys.",
+              "Computer use requires computer_toolset_20260801; computer_20251124 returns 400 except on Amazon Bedrock."
+            ]
+          },
+          "selectionRank": 1
         }
       ]
     },

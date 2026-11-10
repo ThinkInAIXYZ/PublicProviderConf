@@ -1,5 +1,4 @@
 import { ModelInfo, ModelType, type ReasoningOption } from './model-info';
-import { normalizeToggleInPlace, ToggleConfig } from '../utils/toggles';
 import { ProviderInfo } from './provider-info';
 import { type ReasoningEffort, type ReasoningVerbosity } from './openai-reasoning-profile';
 import {
@@ -163,7 +162,10 @@ function toModelsDevReasoning(reasoning: ModelInfo['reasoning']): ReasoningConfi
 
   if (reasoning && typeof reasoning === 'object') {
     const normalized: ReasoningConfig = { ...reasoning };
-    normalizeToggleInPlace(normalized as unknown as ToggleConfig);
+    // Support alone does not establish whether reasoning is enabled by default.
+    if (normalized.supported === false) {
+      delete normalized.default;
+    }
     return normalized;
   }
 

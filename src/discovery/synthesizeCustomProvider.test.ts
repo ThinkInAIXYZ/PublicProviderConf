@@ -52,7 +52,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     const result = await synthesizeCustomProvider();
 
     assert.equal(result.models.length, result.catalog.maxModels);
-    assert.equal(result.models.length, 57);
+    assert.equal(result.models.length, 60);
     assert.deepEqual(
       new Set(result.models.map(model => model.id)),
       new Set(result.catalog.sources.flatMap(source => source.models.map(model => model.id))),
@@ -60,8 +60,8 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     assert.deepEqual(
       result.summaries.map(summary => [summary.displayName, summary.selected]),
       [
-        ['OpenAI', 10],
-        ['Anthropic', 8],
+        ['OpenAI', 11],
+        ['Anthropic', 10],
         ['Gemini', 7],
         ['Kimi', 7],
         ['DeepSeek', 4],
@@ -76,7 +76,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
       true,
     );
     const selectedIds = new Set(result.models.map(model => model.id));
-    for (const id of ['gpt-5.5', 'kimi-k2.5', 'gemini-3.5-flash', 'gemini-3.5-flash-lite']) {
+    for (const id of ['gpt-5.5', 'claude-fable-5-1', 'kimi-k2.5', 'gemini-3.5-flash', 'gemini-3.5-flash-lite']) {
       assert.ok(selectedIds.has(id), `Missing compatibility model: ${id}`);
     }
     for (const id of [
@@ -524,6 +524,75 @@ test('preserves October model limits, controls, and access restrictions in gener
     assert.equal(mini.cost?.input, 0.15);
     assert.equal(getModel('MiniMax-M3').temperature, false);
     assert.equal(getModel('MiniMax-M2.7').metadata?.officialSunsetDate, '2026-11-18');
+  });
+});
+
+test('preserves November model pricing, controls, and access restrictions in generated output', async () => {
+  await withoutApiKeys(async () => {
+    const result = await synthesizeCustomProvider();
+    const providerInfo = createProviderInfo('custom-provider', 'custom provider', result.models);
+    JsonValidator.validateProviderInfo(providerInfo);
+    const provider = createModelsDevProvider(providerInfo);
+    applyReasoningPortraits({ providers: { [provider.id]: provider } });
+    const getModel = (id: string) => {
+      const model = provider.models.find(item => item.id === id);
+      assert.ok(model, `Missing selected model: ${id}`);
+      return model;
+    };
+
+    const cyber = getModel('gpt-6-cyber');
+    assert.equal(cyber.limit?.context, 1050000);
+    assert.equal(cyber.limit?.input, 922000);
+    assert.equal(cyber.limit?.output, 128000);
+    assert.equal(cyber.vision, true);
+    assert.equal(cyber.tool_call, true);
+    assert.equal(cyber.structured_output, true);
+    assert.deepEqual(cyber.modalities, { input: ['text', 'image'], output: ['text'] });
+    assert.deepEqual(cyber.cost, { input: 20, output: 100, cache_read: 2, cache_write: 25 });
+    assert.deepEqual(cyber.reasoning, { supported: true });
+    assert.equal(cyber.extra_capabilities?.reasoning?.supported, true);
+    assert.equal(cyber.extra_capabilities?.reasoning?.default_enabled, undefined);
+    assert.equal(cyber.extra_capabilities?.reasoning?.effort, undefined);
+    assert.equal(cyber.extra_capabilities?.reasoning?.effort_options, undefined);
+    assert.equal(cyber.reasoning_options, undefined);
+    assert.equal(cyber.temperature, undefined);
+    assert.equal(cyber.attachment, undefined);
+    assert.equal(cyber.knowledge, undefined);
+    assert.equal(cyber.release_date, '2026-11-05');
+    assert.equal(cyber.metadata?.apiStatus, 'restricted');
+    assert.deepEqual(cyber.metadata?.availability, ['daybreak-red-approval']);
+    assert.equal(cyber.metadata?.pricingBasis, 'standard-up-to-272k-input');
+    assert.equal(cyber.metadata?.apiListed, false);
+
+    for (const id of ['claude-fable-5-2', 'claude-mythos-5-2']) {
+      const model = getModel(id);
+      assert.equal(model.limit?.context, 1000000);
+      assert.equal(model.limit?.output, 128000);
+      assert.equal(model.vision, true);
+      assert.equal(model.attachment, true);
+      assert.equal(model.tool_call, true);
+      assert.equal(model.structured_output, true);
+      assert.equal(model.temperature, false);
+      assert.equal(model.knowledge, '2026-06');
+      assert.equal(model.release_date, '2026-11-09');
+      assert.deepEqual(model.modalities, { input: ['text', 'image', 'pdf'], output: ['text'] });
+      assert.deepEqual(model.cost, { input: 8, output: 40, cache_read: 0.2, cache_write: 10 });
+      assert.deepEqual(model.reasoning, { supported: true, default: true });
+      assert.deepEqual(model.reasoning_options, [
+        { type: 'effort', values: ['low', 'medium', 'high', 'xhigh', 'max'] },
+      ]);
+      const portrait = model.extra_capabilities?.reasoning;
+      assert.equal(portrait?.mode, 'effort');
+      assert.equal(portrait?.effort, 'high');
+      assert.equal(portrait?.default_enabled, true);
+      assert.equal(portrait?.budget, undefined);
+      assert.deepEqual(portrait?.effort_options, ['low', 'medium', 'high', 'xhigh', 'max']);
+      assert.deepEqual(portrait?.continuation, ['thinking_blocks']);
+      assert.equal(model.metadata?.apiListed, false);
+    }
+    assert.equal(getModel('claude-fable-5-2').metadata?.apiStatus, 'active');
+    assert.equal(getModel('claude-mythos-5-2').metadata?.apiStatus, 'restricted');
+    assert.deepEqual(getModel('claude-mythos-5-2').metadata?.availability, ['organization-verification']);
   });
 });
 
