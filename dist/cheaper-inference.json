@@ -2,12 +2,12 @@
   "id": "cheaper-inference",
   "name": "Cheaper Inference",
   "display_name": "Cheaper Inference",
-  "updated_at": "2026-11-10T01:20:01.454Z",
+  "updated_at": "2026-11-10T01:58:53.235Z",
   "models": [
     {
-      "id": "claude-fable-5",
-      "name": "claude-fable-5",
-      "display_name": "claude-fable-5",
+      "id": "beam",
+      "name": "beam",
+      "display_name": "beam",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -17,47 +17,20 @@
       "structured_output": true,
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 1048576,
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
-            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
-            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
-          ]
-        }
-      }
+      "vision": false
     },
     {
       "id": "claude-fable-5.1-batch",
@@ -114,13 +87,13 @@
       }
     },
     {
-      "id": "claude-haiku-4.5",
-      "name": "claude-haiku-4.5",
-      "display_name": "claude-haiku-4.5",
+      "id": "claude-fable-5.2",
+      "name": "claude-fable-5.2",
+      "display_name": "claude-fable-5.2",
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": false
+        "default": true
       },
       "tool_call": true,
       "structured_output": true,
@@ -134,8 +107,8 @@
         ]
       },
       "limit": {
-        "context": 200000,
-        "output": 64000
+        "context": 1000000,
+        "output": 128000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -144,35 +117,41 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary",
+          "visibility": "omitted",
           "continuation": [
             "thinking_blocks"
           ],
           "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
+            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
+            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
           ]
         }
       }
     },
     {
-      "id": "claude-haiku-5.5-batch",
-      "name": "claude-haiku-5.5-batch",
-      "display_name": "claude-haiku-5.5-batch",
+      "id": "claude-haiku-5.5",
+      "name": "claude-haiku-5.5",
+      "display_name": "claude-haiku-5.5",
       "type": "chat",
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "tool_call": false,
+      "tool_call": true,
+      "structured_output": true,
       "modalities": {
         "input": [
           "text",
@@ -183,8 +162,8 @@
         ]
       },
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 100000,
+        "output": 100000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -202,6 +181,60 @@
       },
       "tool_call": true,
       "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4.7-batch",
+      "name": "claude-opus-4.7-batch",
+      "display_name": "claude-opus-4.7-batch",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": false,
       "modalities": {
         "input": [
           "text",
@@ -302,16 +335,15 @@
       }
     },
     {
-      "id": "claude-opus-4.8-fast",
-      "name": "claude-opus-4.8-fast",
-      "display_name": "claude-opus-4.8-fast",
+      "id": "claude-opus-4.8-batch",
+      "name": "claude-opus-4.8-batch",
+      "display_name": "claude-opus-4.8-batch",
       "type": "chat",
       "reasoning": {
         "supported": true,
         "default": false
       },
-      "tool_call": true,
-      "structured_output": true,
+      "tool_call": false,
       "modalities": {
         "input": [
           "text",
@@ -357,40 +389,6 @@
       }
     },
     {
-      "id": "claude-opus-5",
-      "name": "claude-opus-5",
-      "display_name": "claude-opus-5",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
       "id": "claude-opus-5-fast",
       "name": "claude-opus-5-fast",
       "display_name": "claude-opus-5-fast",
@@ -420,13 +418,13 @@
       "vision": true
     },
     {
-      "id": "claude-sonnet-4.6",
-      "name": "claude-sonnet-4.6",
-      "display_name": "claude-sonnet-4.6",
+      "id": "claude-opus-5.5",
+      "name": "claude-opus-5.5",
+      "display_name": "claude-opus-5.5",
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": false
+        "default": true
       },
       "tool_call": true,
       "structured_output": true,
@@ -446,35 +444,7 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "mixed",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
-            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
-          ]
-        }
-      }
+      "vision": true
     },
     {
       "id": "claude-sonnet-4.6-batch",
@@ -589,70 +559,6 @@
       "vision": false
     },
     {
-      "id": "deepseek-r1",
-      "name": "deepseek-r1",
-      "display_name": "deepseek-r1",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 160000,
-        "output": 8192
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": false,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-v3.2-thinking",
-      "name": "deepseek-v3.2-thinking",
-      "display_name": "deepseek-v3.2-thinking",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 128000,
-        "output": 8000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "deepseek-v4-flash",
       "name": "deepseek-v4-flash",
       "display_name": "deepseek-v4-flash",
@@ -699,6 +605,39 @@
           "notes": [
             "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
           ]
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4-flash-0731",
+      "name": "deepseek-v4-flash-0731",
+      "display_name": "deepseek-v4-flash-0731",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 393216
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
         }
       }
     },
@@ -754,9 +693,9 @@
       }
     },
     {
-      "id": "deepseek-v4.1-flash",
-      "name": "deepseek-v4.1-flash",
-      "display_name": "deepseek-v4.1-flash",
+      "id": "deepseek-v4-pro-0813",
+      "name": "deepseek-v4-pro-0813",
+      "display_name": "deepseek-v4-pro-0813",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -766,8 +705,7 @@
       "structured_output": true,
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -780,7 +718,7 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
+      "vision": false,
       "extra_capabilities": {
         "reasoning": {
           "supported": true
@@ -810,6 +748,35 @@
       "limit": {
         "context": 1048576,
         "output": 393216
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "deepseek-v4.1-flash-1017-fast",
+      "name": "deepseek-v4.1-flash-1017-fast",
+      "display_name": "deepseek-v4.1-flash-1017-fast",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 262144
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -868,35 +835,6 @@
       "limit": {
         "context": 1048576,
         "output": 32768
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "ember-1",
-      "name": "ember-1",
-      "display_name": "ember-1",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1034,53 +972,6 @@
       }
     },
     {
-      "id": "gemini-2.5-flash-lite-batch",
-      "name": "gemini-2.5-flash-lite-batch",
-      "display_name": "gemini-2.5-flash-lite-batch",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1048576,
-        "output": 65535
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 512,
-            "max": 24576,
-            "default": -1,
-            "auto": -1,
-            "unit": "tokens"
-          },
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
-    },
-    {
       "id": "gemini-2.5-pro",
       "name": "gemini-2.5-pro",
       "display_name": "gemini-2.5-pro",
@@ -1178,56 +1069,6 @@
       }
     },
     {
-      "id": "gemini-2.5-pro-preview-06-05",
-      "name": "gemini-2.5-pro-preview-06-05",
-      "display_name": "gemini-2.5-pro-preview-06-05",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "budget",
-          "budget": {
-            "min": 128,
-            "max": 32768,
-            "default": -1,
-            "auto": -1,
-            "unit": "tokens"
-          },
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
-    },
-    {
       "id": "gemini-3-flash",
       "name": "gemini-3-flash",
       "display_name": "gemini-3-flash",
@@ -1252,53 +1093,6 @@
       "limit": {
         "context": 256000,
         "output": 65536
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
-    },
-    {
-      "id": "gemini-3-flash-batch",
-      "name": "gemini-3-flash-batch",
-      "display_name": "gemini-3-flash-batch",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1000000,
-        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1384,6 +1178,51 @@
       "limit": {
         "context": 1000000,
         "output": 65536
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "low",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gemini-3.1-pro-preview-batch",
+      "name": "gemini-3.1-pro-preview-batch",
+      "display_name": "gemini-3.1-pro-preview-batch",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1494,9 +1333,9 @@
       }
     },
     {
-      "id": "gemini-3.7-flash",
-      "name": "gemini-3.7-flash",
-      "display_name": "gemini-3.7-flash",
+      "id": "gemini-3.6-flash",
+      "name": "gemini-3.6-flash",
+      "display_name": "gemini-3.6-flash",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -1516,58 +1355,8 @@
         ]
       },
       "limit": {
-        "context": 1048576,
-        "output": 65535
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
-    },
-    {
-      "id": "gemini-3.8-flash",
-      "name": "gemini-3.8-flash",
-      "display_name": "gemini-3.8-flash",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1048576,
-        "output": 65535
+        "context": 1000000,
+        "output": 65536
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1625,6 +1414,35 @@
       "vision": true
     },
     {
+      "id": "gemini-omni-1.2-flash",
+      "name": "gemini-omni-1.2-flash",
+      "display_name": "gemini-omni-1.2-flash",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 57920
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "gemini-omni-flash-preview",
       "name": "gemini-omni-flash-preview",
       "display_name": "gemini-omni-flash-preview",
@@ -1655,12 +1473,13 @@
       "vision": true
     },
     {
-      "id": "gemma-4-26b-a4b-it",
-      "name": "gemma-4-26b-a4b-it",
-      "display_name": "gemma-4-26b-a4b-it",
+      "id": "gemma-4-31b-it",
+      "name": "gemma-4-31b-it",
+      "display_name": "gemma-4-31b-it",
       "type": "chat",
       "reasoning": {
-        "supported": true
+        "supported": true,
+        "default": true
       },
       "tool_call": true,
       "structured_output": true,
@@ -1675,7 +1494,7 @@
       },
       "limit": {
         "context": 262144,
-        "output": 131072
+        "output": 262144
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1746,9 +1565,9 @@
       "vision": true
     },
     {
-      "id": "glm-4.7",
-      "name": "glm-4.7",
-      "display_name": "glm-4.7",
+      "id": "glm-4.6",
+      "name": "glm-4.6",
+      "display_name": "glm-4.6",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -1765,8 +1584,8 @@
         ]
       },
       "limit": {
-        "context": 128000,
-        "output": 128000
+        "context": 198000,
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -1774,13 +1593,7 @@
       "vision": false,
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
+          "supported": true
         }
       }
     },
@@ -1818,9 +1631,9 @@
       }
     },
     {
-      "id": "glm-5.2-fast",
-      "name": "glm-5.2-fast",
-      "display_name": "glm-5.2-fast",
+      "id": "glm-5.2",
+      "name": "glm-5.2",
+      "display_name": "glm-5.2",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -1837,13 +1650,18 @@
         ]
       },
       "limit": {
-        "context": 1000000,
-        "output": 128000
+        "context": 1048576,
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "glm-5.3",
@@ -1877,6 +1695,34 @@
           "supported": true
         }
       }
+    },
+    {
+      "id": "glm-5.3-fast",
+      "name": "glm-5.3-fast",
+      "display_name": "glm-5.3-fast",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 262144
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
     },
     {
       "id": "glm-5.3-flash",
@@ -1914,68 +1760,9 @@
       }
     },
     {
-      "id": "glm-5.3-flashx",
-      "name": "glm-5.3-flashx",
-      "display_name": "glm-5.3-flashx",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1048576,
-        "output": 131072
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "glm-5v-turbo",
-      "name": "glm-5v-turbo",
-      "display_name": "glm-5v-turbo",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 200000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "gpt-4.1",
-      "name": "gpt-4.1",
-      "display_name": "gpt-4.1",
+      "id": "gpt-4.1-mini",
+      "name": "gpt-4.1-mini",
+      "display_name": "gpt-4.1-mini",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -2002,42 +1789,15 @@
       "vision": true
     },
     {
-      "id": "gpt-4.1-fast",
-      "name": "gpt-4.1-fast",
-      "display_name": "gpt-4.1-fast",
+      "id": "gpt-4.1-nano",
+      "name": "gpt-4.1-nano",
+      "display_name": "gpt-4.1-nano",
       "type": "chat",
       "reasoning": {
         "supported": false
       },
       "tool_call": true,
       "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1047576,
-        "output": 32768
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "gpt-4.1-mini-batch",
-      "name": "gpt-4.1-mini-batch",
-      "display_name": "gpt-4.1-mini-batch",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
       "modalities": {
         "input": [
           "text",
@@ -2085,6 +1845,33 @@
       "vision": true
     },
     {
+      "id": "gpt-4o-batch",
+      "name": "gpt-4o-batch",
+      "display_name": "gpt-4o-batch",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "gpt-4o-fast",
       "name": "gpt-4o-fast",
       "display_name": "gpt-4o-fast",
@@ -2094,6 +1881,61 @@
       },
       "tool_call": true,
       "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gpt-4o-mini",
+      "name": "gpt-4o-mini",
+      "display_name": "gpt-4o-mini",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 128000,
+        "output": 16384
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gpt-4o-mini-batch",
+      "name": "gpt-4o-mini-batch",
+      "display_name": "gpt-4o-mini-batch",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
       "modalities": {
         "input": [
           "text",
@@ -2163,34 +2005,6 @@
       }
     },
     {
-      "id": "gpt-5-batch",
-      "name": "gpt-5-batch",
-      "display_name": "gpt-5-batch",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "gpt-5-mini",
       "name": "gpt-5-mini",
       "display_name": "gpt-5-mini",
@@ -2241,37 +2055,9 @@
       }
     },
     {
-      "id": "gpt-5-mini-batch",
-      "name": "gpt-5-mini-batch",
-      "display_name": "gpt-5-mini-batch",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "gpt-5-nano",
-      "name": "gpt-5-nano",
-      "display_name": "gpt-5-nano",
+      "id": "gpt-5-mini-fast",
+      "name": "gpt-5-mini-fast",
+      "display_name": "gpt-5-mini-fast",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -2279,55 +2065,6 @@
       },
       "tool_call": true,
       "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "gpt-5-nano-batch",
-      "name": "gpt-5-nano-batch",
-      "display_name": "gpt-5-nano-batch",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
       "modalities": {
         "input": [
           "text",
@@ -2498,6 +2235,56 @@
       }
     },
     {
+      "id": "gpt-5.2-codex",
+      "name": "gpt-5.2-codex",
+      "display_name": "gpt-5.2-codex",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 256000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
       "id": "gpt-5.3-codex",
       "name": "gpt-5.3-codex",
       "display_name": "gpt-5.3-codex",
@@ -2548,13 +2335,13 @@
       }
     },
     {
-      "id": "gpt-5.3-codex-fast",
-      "name": "gpt-5.3-codex-fast",
-      "display_name": "gpt-5.3-codex-fast",
+      "id": "gpt-5.4",
+      "name": "gpt-5.4",
+      "display_name": "gpt-5.4",
       "type": "chat",
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "tool_call": true,
       "structured_output": true,
@@ -2568,7 +2355,7 @@
         ]
       },
       "limit": {
-        "context": 400000,
+        "context": 1000000,
         "output": 128000
       },
       "metadata": {
@@ -2578,10 +2365,61 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
+          "default_enabled": false,
           "mode": "effort",
-          "effort": "medium",
+          "effort": "none",
           "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "gpt-5.4-batch",
+      "name": "gpt-5.4-batch",
+      "display_name": "gpt-5.4-batch",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "none",
+          "effort_options": [
+            "none",
             "low",
             "medium",
             "high",
@@ -2608,157 +2446,6 @@
       },
       "tool_call": true,
       "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "none",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "gpt-5.4-mini-batch",
-      "name": "gpt-5.4-mini-batch",
-      "display_name": "gpt-5.4-mini-batch",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "tool_call": false,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "none",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "gpt-5.4-nano",
-      "name": "gpt-5.4-nano",
-      "display_name": "gpt-5.4-nano",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 400000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "none",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "gpt-5.4-nano-batch",
-      "name": "gpt-5.4-nano-batch",
-      "display_name": "gpt-5.4-nano-batch",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "tool_call": false,
       "modalities": {
         "input": [
           "text",
@@ -2954,15 +2641,16 @@
       }
     },
     {
-      "id": "gpt-5.6-sol-batch",
-      "name": "gpt-5.6-sol-batch",
-      "display_name": "gpt-5.6-sol-batch",
+      "id": "gpt-5.6-terra",
+      "name": "gpt-5.6-terra",
+      "display_name": "gpt-5.6-terra",
       "type": "chat",
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "tool_call": false,
+      "tool_call": true,
+      "structured_output": true,
       "modalities": {
         "input": [
           "text",
@@ -2979,7 +2667,30 @@
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
     },
     {
       "id": "gpt-6-astra",
@@ -3014,35 +2725,6 @@
           "supported": true
         }
       }
-    },
-    {
-      "id": "gpt-6-astra-fast",
-      "name": "gpt-6-astra-fast",
-      "display_name": "gpt-6-astra-fast",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1050000,
-        "output": 128000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
     },
     {
       "id": "gpt-6-luna",
@@ -3103,9 +2785,66 @@
       "vision": true
     },
     {
+      "id": "gpt-6-sol-batch",
+      "name": "gpt-6-sol-batch",
+      "display_name": "gpt-6-sol-batch",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "gpt-6-sol-fast",
       "name": "gpt-6-sol-fast",
       "display_name": "gpt-6-sol-fast",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gpt-6.1-sol",
+      "name": "gpt-6.1-sol",
+      "display_name": "gpt-6.1-sol",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -3160,6 +2899,64 @@
       "vision": true
     },
     {
+      "id": "gpt-6.1-sol-fast",
+      "name": "gpt-6.1-sol-fast",
+      "display_name": "gpt-6.1-sol-fast",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "name": "gpt-6.1-terra",
+      "display_name": "gpt-6.1-terra",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1050000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "gpt-oss-20b",
       "name": "gpt-oss-20b",
       "display_name": "gpt-oss-20b",
@@ -3193,9 +2990,9 @@
       }
     },
     {
-      "id": "gpt-oss-safeguard-120b",
-      "name": "gpt-oss-safeguard-120b",
-      "display_name": "gpt-oss-safeguard-120b",
+      "id": "gpt-oss-safeguard-20b",
+      "name": "gpt-oss-safeguard-20b",
+      "display_name": "gpt-oss-safeguard-20b",
       "type": "chat",
       "reasoning": {
         "supported": false
@@ -3220,35 +3017,6 @@
       "vision": false
     },
     {
-      "id": "grok-4.1-fast-reasoning",
-      "name": "grok-4.1-fast-reasoning",
-      "display_name": "grok-4.1-fast-reasoning",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1000000,
-        "output": 1000000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "grok-4.20-multi-agent",
       "name": "grok-4.20-multi-agent",
       "display_name": "grok-4.20-multi-agent",
@@ -3259,34 +3027,6 @@
       },
       "tool_call": true,
       "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 2000000,
-        "output": 2000000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "grok-4.20-multi-agent-batch",
-      "name": "grok-4.20-multi-agent-batch",
-      "display_name": "grok-4.20-multi-agent-batch",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": false,
       "modalities": {
         "input": [
           "text",
@@ -3335,12 +3075,69 @@
       "vision": true
     },
     {
+      "id": "grok-4.20-non-reasoning",
+      "name": "grok-4.20-non-reasoning",
+      "display_name": "grok-4.20-non-reasoning",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 2000000,
+        "output": 2000000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
       "id": "grok-4.20-non-reasoning-beta",
       "name": "grok-4.20-non-reasoning-beta",
       "display_name": "grok-4.20-non-reasoning-beta",
       "type": "chat",
       "reasoning": {
         "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 2000000,
+        "output": 2000000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "grok-4.20-reasoning",
+      "name": "grok-4.20-reasoning",
+      "display_name": "grok-4.20-reasoning",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
       },
       "tool_call": true,
       "structured_output": true,
@@ -3494,71 +3291,30 @@
       "vision": true
     },
     {
-      "id": "grok-build-0.1",
-      "name": "grok-build-0.1",
-      "display_name": "grok-build-0.1",
+      "id": "hy-mt2-lite",
+      "name": "hy-mt2-lite",
+      "display_name": "hy-mt2-lite",
       "type": "chat",
       "reasoning": {
-        "supported": true
+        "supported": false
       },
-      "tool_call": true,
-      "structured_output": true,
+      "tool_call": false,
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
       "limit": {
-        "context": 256000,
-        "output": 256000
+        "context": 8000,
+        "output": 4000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "grok-code-fast-1",
-      "name": "grok-code-fast-1",
-      "display_name": "grok-code-fast-1",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": false,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "vision": false
     },
     {
       "id": "hy3",
@@ -3628,13 +3384,98 @@
       }
     },
     {
-      "id": "kimi-k2-thinking",
-      "name": "kimi-k2-thinking",
-      "display_name": "kimi-k2-thinking",
+      "id": "inkling",
+      "name": "inkling",
+      "display_name": "inkling",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 256000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "inkling-small",
+      "name": "inkling-small",
+      "display_name": "inkling-small",
       "type": "chat",
       "reasoning": {
         "supported": true,
         "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "interfaze-beta",
+      "name": "interfaze-beta",
+      "display_name": "interfaze-beta",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 32000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "kimi-k2",
+      "name": "kimi-k2",
+      "display_name": "kimi-k2",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
       },
       "tool_call": true,
       "structured_output": true,
@@ -3648,23 +3489,12 @@
       },
       "limit": {
         "context": 256000,
-        "output": 98304
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "vision": false
     },
     {
       "id": "kimi-k2.5",
@@ -3778,76 +3608,6 @@
       }
     },
     {
-      "id": "kimi-k2.7-code-highspeed",
-      "name": "kimi-k2.7-code-highspeed",
-      "display_name": "kimi-k2.7-code-highspeed",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 262144,
-        "output": 32768
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "kimi-k3",
-      "name": "kimi-k3",
-      "display_name": "kimi-k3",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1000000,
-        "output": 1000000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
       "id": "kimi-k3-fast",
       "name": "kimi-k3-fast",
       "display_name": "kimi-k3-fast",
@@ -3907,34 +3667,6 @@
       "vision": true
     },
     {
-      "id": "ling-3.0-flash-fin",
-      "name": "ling-3.0-flash-fin",
-      "display_name": "ling-3.0-flash-fin",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 262144,
-        "output": 32000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "ling-3.0-flash-sante",
       "name": "ling-3.0-flash-sante",
       "display_name": "ling-3.0-flash-sante",
@@ -3962,36 +3694,6 @@
       "vision": false
     },
     {
-      "id": "ling-3.0-flash-vl",
-      "name": "ling-3.0-flash-vl",
-      "display_name": "ling-3.0-flash-vl",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 256000,
-        "output": 32000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
       "id": "ling-3.1-flash",
       "name": "ling-3.1-flash",
       "display_name": "ling-3.1-flash",
@@ -4011,6 +3713,33 @@
       },
       "limit": {
         "context": 262144,
+        "output": 262144
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "ling-3.1-flash-1019",
+      "name": "ling-3.1-flash-1019",
+      "display_name": "ling-3.1-flash-1019",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
         "output": 262144
       },
       "metadata": {
@@ -4045,6 +3774,33 @@
       "vision": false
     },
     {
+      "id": "llama-3.1-8b",
+      "name": "llama-3.1-8b",
+      "display_name": "llama-3.1-8b",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 16384,
+        "output": 8192
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "llama-3.3-70b",
       "name": "llama-3.3-70b",
       "display_name": "llama-3.3-70b",
@@ -4070,62 +3826,6 @@
         "source": "public-provider-conf"
       },
       "vision": false
-    },
-    {
-      "id": "llama-4-maverick",
-      "name": "llama-4-maverick",
-      "display_name": "llama-4-maverick",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 128000,
-        "output": 8192
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "llama-4-scout",
-      "name": "llama-4-scout",
-      "display_name": "llama-4-scout",
-      "type": "chat",
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 128000,
-        "output": 8192
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
     },
     {
       "id": "longcat-2.5-preview",
@@ -4213,34 +3913,6 @@
       "vision": false
     },
     {
-      "id": "mercury-3",
-      "name": "mercury-3",
-      "display_name": "mercury-3",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": false
-    },
-    {
       "id": "mimo-v2.5-pro",
       "name": "mimo-v2.5-pro",
       "display_name": "mimo-v2.5-pro",
@@ -4267,6 +3939,37 @@
         "source": "public-provider-conf"
       },
       "vision": false
+    },
+    {
+      "id": "mimo-v2.6-flash",
+      "name": "mimo-v2.6-flash",
+      "display_name": "mimo-v2.6-flash",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "mimo-v2.6-pro",
@@ -4300,9 +4003,9 @@
       "vision": true
     },
     {
-      "id": "minimax-m1-80k",
-      "name": "minimax-m1-80k",
-      "display_name": "minimax-m1-80k",
+      "id": "mimo-v2.6-pro-ultraspeed",
+      "name": "mimo-v2.6-pro-ultraspeed",
+      "display_name": "mimo-v2.6-pro-ultraspeed",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -4312,20 +4015,23 @@
       "structured_output": true,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "audio",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "limit": {
-        "context": 1000000,
-        "output": 40000
+        "context": 1048576,
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false
+      "vision": true
     },
     {
       "id": "minimax-m2.1",
@@ -4428,9 +4134,9 @@
       }
     },
     {
-      "id": "minimax-m2.7-highspeed",
-      "name": "minimax-m2.7-highspeed",
-      "display_name": "minimax-m2.7-highspeed",
+      "id": "minimax-m3",
+      "name": "minimax-m3",
+      "display_name": "minimax-m3",
       "type": "chat",
       "reasoning": {
         "supported": true
@@ -4439,31 +4145,83 @@
       "structured_output": true,
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "limit": {
-        "context": 204800,
-        "output": 131100
+        "context": 200000,
+        "output": 200000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": false,
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
+          "supported": true
         }
       }
+    },
+    {
+      "id": "ministral-14b",
+      "name": "ministral-14b",
+      "display_name": "ministral-14b",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 128000,
+        "output": 128000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "ministral-8b",
+      "name": "ministral-8b",
+      "display_name": "ministral-8b",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 128000,
+        "output": 4000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "mistral-large-3",
@@ -4487,35 +4245,6 @@
       "limit": {
         "context": 256000,
         "output": 256000
-      },
-      "metadata": {
-        "source": "public-provider-conf"
-      },
-      "vision": true
-    },
-    {
-      "id": "mistral-large-4",
-      "name": "mistral-large-4",
-      "display_name": "mistral-large-4",
-      "type": "chat",
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "tool_call": true,
-      "structured_output": true,
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "limit": {
-        "context": 524288,
-        "output": 262144
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -4548,6 +4277,65 @@
         "source": "public-provider-conf"
       },
       "vision": false
+    },
+    {
+      "id": "muse-ember",
+      "name": "muse-ember",
+      "display_name": "muse-ember",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "muse-glimmer-30b",
+      "name": "muse-glimmer-30b",
+      "display_name": "muse-glimmer-30b",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 131072,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "muse-spark-1.1",
@@ -4616,6 +4404,42 @@
       "vision": true
     },
     {
+      "id": "muse-spark-1.3",
+      "name": "muse-spark-1.3",
+      "display_name": "muse-spark-1.3",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "muse-spark-open",
       "name": "muse-spark-open",
       "display_name": "muse-spark-open",
@@ -4678,33 +4502,31 @@
       "vision": true
     },
     {
-      "id": "namazu",
-      "name": "namazu",
-      "display_name": "namazu",
+      "id": "nemotron-3-nano-30b-a3b",
+      "name": "nemotron-3-nano-30b-a3b",
+      "display_name": "nemotron-3-nano-30b-a3b",
       "type": "chat",
       "reasoning": {
-        "supported": true,
-        "default": true
+        "supported": false
       },
       "tool_call": true,
       "structured_output": true,
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
       "limit": {
-        "context": 256000,
-        "output": 256000
+        "context": 128000,
+        "output": 128000
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true
+      "vision": false
     },
     {
       "id": "nemotron-3-super-120b-a12b",
@@ -4732,6 +4554,65 @@
         "source": "public-provider-conf"
       },
       "vision": false
+    },
+    {
+      "id": "nemotron-3.5-super-vl",
+      "name": "nemotron-3.5-super-vl",
+      "display_name": "nemotron-3.5-super-vl",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "nemotron-nano-12b-v2-vl",
+      "name": "nemotron-nano-12b-v2-vl",
+      "display_name": "nemotron-nano-12b-v2-vl",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 131072,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
     },
     {
       "id": "nova-2-lite",
@@ -4793,9 +4674,9 @@
       "vision": true
     },
     {
-      "id": "o3-fast",
-      "name": "o3-fast",
-      "display_name": "o3-fast",
+      "id": "nvidia-nemotron-3.5-lightning-30b-a3b",
+      "name": "nvidia-nemotron-3.5-lightning-30b-a3b",
+      "display_name": "nvidia-nemotron-3.5-lightning-30b-a3b",
       "type": "chat",
       "reasoning": {
         "supported": true,
@@ -4805,35 +4686,20 @@
       "structured_output": true,
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
       "limit": {
-        "context": 200000,
-        "output": 100000
+        "context": 1000000,
+        "output": 131072
       },
       "metadata": {
         "source": "public-provider-conf"
       },
-      "vision": true,
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
+      "vision": false
     },
     {
       "id": "o4-mini",
@@ -4898,6 +4764,34 @@
       },
       "limit": {
         "context": 262144,
+        "output": 16384
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
+      "id": "qwen-3-30b",
+      "name": "qwen-3-30b",
+      "display_name": "qwen-3-30b",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 40960,
         "output": 16384
       },
       "metadata": {
@@ -5051,6 +4945,33 @@
       "vision": false
     },
     {
+      "id": "qwen3-coder-30b-a3b-instruct",
+      "name": "qwen3-coder-30b-a3b-instruct",
+      "display_name": "qwen3-coder-30b-a3b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 256000,
+        "output": 8192
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "qwen3-coder-next",
       "name": "qwen3-coder-next",
       "display_name": "qwen3-coder-next",
@@ -5076,6 +4997,45 @@
         "source": "public-provider-conf"
       },
       "vision": false
+    },
+    {
+      "id": "qwen3-max-thinking",
+      "name": "qwen3-max-thinking",
+      "display_name": "qwen3-max-thinking",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 256000,
+        "output": 65536
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "qwen3-next-80b-a3b-thinking",
@@ -5104,6 +5064,143 @@
         "source": "public-provider-conf"
       },
       "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen3-vl-235b-a22b-instruct",
+      "name": "qwen3-vl-235b-a22b-instruct",
+      "display_name": "qwen3-vl-235b-a22b-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 256000,
+        "output": 256000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "qwen3-vl-instruct",
+      "name": "qwen3-vl-instruct",
+      "display_name": "qwen3-vl-instruct",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "qwen3.5-27b",
+      "name": "qwen3.5-27b",
+      "display_name": "qwen3.5-27b",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144,
+        "output": 65536
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen3.5-35b-a3b",
+      "name": "qwen3.5-35b-a3b",
+      "display_name": "qwen3.5-35b-a3b",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 256000,
+        "output": 65536
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
@@ -5181,6 +5278,45 @@
       "limit": {
         "context": 256000,
         "output": 65536
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen3.5-flash",
+      "name": "qwen3.5-flash",
+      "display_name": "qwen3.5-flash",
+      "type": "chat",
+      "reasoning": {
+        "supported": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 64000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -5347,6 +5483,40 @@
       }
     },
     {
+      "id": "qwen3.8-2.4t-a95b",
+      "name": "qwen3.8-2.4t-a95b",
+      "display_name": "qwen3.8-2.4t-a95b",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "qwen3.8-27b",
       "name": "qwen3.8-27b",
       "display_name": "qwen3.8-27b",
@@ -5375,6 +5545,41 @@
         "source": "public-provider-conf"
       },
       "vision": true
+    },
+    {
+      "id": "qwen3.8-flash",
+      "name": "qwen3.8-flash",
+      "display_name": "qwen3.8-flash",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "qwen3.8-max-0902",
@@ -5437,6 +5642,63 @@
       "vision": true
     },
     {
+      "id": "qwen3.8-omni-flash",
+      "name": "qwen3.8-omni-flash",
+      "display_name": "qwen3.8-omni-flash",
+      "type": "chat",
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "tool_call": true,
+      "structured_output": true,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": true
+    },
+    {
+      "id": "scaledown-summarize-1",
+      "name": "scaledown-summarize-1",
+      "display_name": "scaledown-summarize-1",
+      "type": "chat",
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 1000
+      },
+      "metadata": {
+        "source": "public-provider-conf"
+      },
+      "vision": false
+    },
+    {
       "id": "seed-1.6",
       "name": "seed-1.6",
       "display_name": "seed-1.6",
@@ -5496,28 +5758,29 @@
       "vision": true
     },
     {
-      "id": "sonar",
-      "name": "sonar",
-      "display_name": "sonar",
+      "id": "seed-2.1-turbo",
+      "name": "seed-2.1-turbo",
+      "display_name": "seed-2.1-turbo",
       "type": "chat",
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "tool_call": false,
+      "tool_call": true,
       "structured_output": true,
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
       "limit": {
-        "context": 127000,
-        "output": 8000
+        "context": 256000,
+        "output": 256000
       },
       "metadata": {
         "source": "public-provider-conf"
@@ -5585,14 +5848,14 @@
       "vision": true
     },
     {
-      "id": "wizardlm-2-8x22b",
-      "name": "wizardlm-2-8x22b",
-      "display_name": "wizardlm-2-8x22b",
+      "id": "toast-1",
+      "name": "toast-1",
+      "display_name": "toast-1",
       "type": "chat",
       "reasoning": {
         "supported": false
       },
-      "tool_call": false,
+      "tool_call": true,
       "structured_output": true,
       "modalities": {
         "input": [
@@ -5603,8 +5866,8 @@
         ]
       },
       "limit": {
-        "context": 65535,
-        "output": 8000
+        "context": 131000,
+        "output": 4000
       },
       "metadata": {
         "source": "public-provider-conf"
