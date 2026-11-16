@@ -6,21 +6,21 @@
   "display_name": "Kunavo",
   "models": [
     {
-      "id": "claude-haiku-4-5",
-      "name": "Claude Haiku 4.5 (latest)",
-      "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
-      "family": "claude-haiku",
+      "id": "claude-opus-5-5",
+      "name": "Claude Opus 5.5",
+      "description": "Claude model for long-running agentic coding and knowledge work",
+      "family": "claude-opus",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": false
+        "default": true
       },
       "reasoning_options": [],
       "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-02-28",
-      "release_date": "2025-10-15",
-      "last_updated": "2025-10-15",
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
       "modalities": {
         "input": [
           "text",
@@ -33,39 +33,18 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 200000,
-        "output": 64000
+        "context": 1000000,
+        "output": 128000
       },
       "cost": {
-        "input": 0.7,
-        "output": 3.5,
-        "cache_read": 0.07,
-        "cache_write": 0.875
+        "input": 2.8,
+        "output": 14,
+        "cache_read": 0.14,
+        "cache_write": 3.5
       },
-      "canonical_model_id": "anthropic/claude-haiku-4-5",
-      "display_name": "Claude Haiku 4.5 (latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
-        }
-      }
+      "canonical_model_id": "anthropic/claude-opus-5-5",
+      "display_name": "Claude Opus 5.5",
+      "type": "chat"
     },
     {
       "id": "gpt-6-astra",
@@ -144,216 +123,6 @@
       }
     },
     {
-      "id": "claude-sonnet-5",
-      "name": "Claude Sonnet 5",
-      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-06-30",
-      "last_updated": "2026-06-30",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 1.4,
-        "output": 7,
-        "cache_read": 0.14,
-        "cache_write": 1.75
-      },
-      "canonical_model_id": "anthropic/claude-sonnet-5",
-      "display_name": "Claude Sonnet 5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "claude-sonnet-4-6",
-      "name": "Claude Sonnet 4.6",
-      "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-02-17",
-      "last_updated": "2026-03-13",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 64000
-      },
-      "cost": {
-        "input": 2.1,
-        "output": 10.5,
-        "cache_read": 0.21,
-        "cache_write": 2.625
-      },
-      "canonical_model_id": "anthropic/claude-sonnet-4-6",
-      "display_name": "Claude Sonnet 4.6",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "mixed",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
-            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
-          ]
-        }
-      }
-    },
-    {
-      "id": "gpt-5-6-terra",
-      "name": "GPT-5.6 Terra",
-      "description": "Balanced GPT-5.6 model for capable, cost-efficient everyday work",
-      "family": "gpt-terra",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2026-02-16",
-      "release_date": "2026-07-09",
-      "last_updated": "2026-07-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 0.7,
-        "output": 4.2,
-        "cache_read": 0.07,
-        "cache_write": 0.875,
-        "tiers": [
-          {
-            "input": 1.4,
-            "output": 6.3,
-            "cache_read": 0.14,
-            "cache_write": 1.75,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 1.4,
-          "output": 6.3,
-          "cache_read": 0.14,
-          "cache_write": 1.75
-        }
-      },
-      "canonical_model_id": "openai/gpt-5.6-terra",
-      "display_name": "GPT-5.6 Terra",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
       "id": "claude-fable-5-1",
       "name": "Claude Fable 5.1",
       "description": "Claude model for demanding reasoning and long-horizon agentic work",
@@ -392,527 +161,6 @@
       },
       "canonical_model_id": "anthropic/claude-fable-5-1",
       "display_name": "Claude Fable 5.1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
-            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
-            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
-          ]
-        }
-      }
-    },
-    {
-      "id": "gpt-5-5",
-      "name": "GPT-5.5",
-      "description": "Default frontier GPT for coding, computer use, research, and knowledge work",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-12-01",
-      "release_date": "2026-04-23",
-      "last_updated": "2026-04-23",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 2,
-        "output": 12,
-        "cache_read": 0.2,
-        "cache_write": 2,
-        "tiers": [
-          {
-            "input": 4,
-            "output": 18,
-            "cache_read": 0.4,
-            "cache_write": 4,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 4,
-          "output": 18,
-          "cache_read": 0.4,
-          "cache_write": 4
-        }
-      },
-      "canonical_model_id": "openai/gpt-5.5",
-      "display_name": "GPT-5.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "claude-opus-4-8",
-      "name": "Claude Opus 4.8",
-      "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-01",
-      "release_date": "2026-05-28",
-      "last_updated": "2026-05-28",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 3.5,
-        "output": 17.5,
-        "cache_read": 0.35,
-        "cache_write": 4.375
-      },
-      "canonical_model_id": "anthropic/claude-opus-4-8",
-      "display_name": "Claude Opus 4.8",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
-            "task_budget is separate from thinking control and should not be treated as a thinking budget."
-          ]
-        }
-      }
-    },
-    {
-      "id": "claude-opus-4-7",
-      "name": "Claude Opus 4.7",
-      "description": "Stronger Opus tier for advanced software work and high-stakes reasoning",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-04-16",
-      "last_updated": "2026-04-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 3.5,
-        "output": 17.5,
-        "cache_read": 0.35,
-        "cache_write": 4.375
-      },
-      "canonical_model_id": "anthropic/claude-opus-4-7",
-      "display_name": "Claude Opus 4.7",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
-            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
-            "task_budget is separate from thinking control and should not be treated as a thinking budget."
-          ]
-        }
-      }
-    },
-    {
-      "id": "claude-opus-4-6",
-      "name": "Claude Opus 4.6",
-      "description": "High-end Claude for difficult coding, planning, and slower expert reasoning",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-05-31",
-      "release_date": "2026-02-05",
-      "last_updated": "2026-03-13",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 3.5,
-        "output": 17.5,
-        "cache_read": 0.35,
-        "cache_write": 4.375
-      },
-      "canonical_model_id": "anthropic/claude-opus-4-6",
-      "display_name": "Claude Opus 4.6",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "mixed",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
-            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
-          ]
-        }
-      }
-    },
-    {
-      "id": "claude-opus-5",
-      "name": "Claude Opus 5",
-      "description": "Strongest Claude Opus model for coding, agents, and professional work",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-05",
-      "release_date": "2026-07-24",
-      "last_updated": "2026-07-24",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 3.5,
-        "output": 17.5,
-        "cache_read": 0.35,
-        "cache_write": 4.375
-      },
-      "canonical_model_id": "anthropic/claude-opus-5",
-      "display_name": "Claude Opus 5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "claude-opus-5-5",
-      "name": "Claude Opus 5.5",
-      "description": "Claude model for long-running agentic coding and knowledge work",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-06",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 2.8,
-        "output": 14,
-        "cache_read": 0.14,
-        "cache_write": 3.5
-      },
-      "canonical_model_id": "anthropic/claude-opus-5-5",
-      "display_name": "Claude Opus 5.5",
-      "type": "chat"
-    },
-    {
-      "id": "gpt-6-luna",
-      "name": "GPT-6 Luna",
-      "description": "OpenAI's most efficient model for focused, high-volume tasks",
-      "family": "gpt-luna",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2026-05-18",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 0.04,
-        "output": 0.2,
-        "cache_read": 0.004,
-        "cache_write": 0.05,
-        "tiers": [
-          {
-            "input": 0.08,
-            "output": 0.3,
-            "cache_read": 0.008,
-            "cache_write": 0.1,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 0.08,
-          "output": 0.3,
-          "cache_read": 0.008,
-          "cache_write": 0.1
-        }
-      },
-      "canonical_model_id": "openai/gpt-6-luna",
-      "display_name": "GPT-6 Luna",
-      "type": "chat"
-    },
-    {
-      "id": "claude-fable-5",
-      "name": "Claude Fable 5",
-      "description": "Claude model for creative writing, analysis, and controlled agent workflows",
-      "family": "claude-fable",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-01-31",
-      "release_date": "2026-06-09",
-      "last_updated": "2026-06-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 7,
-        "output": 35,
-        "cache_read": 0.7,
-        "cache_write": 8.75
-      },
-      "canonical_model_id": "anthropic/claude-fable-5",
-      "display_name": "Claude Fable 5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1033,6 +281,758 @@
             "high"
           ],
           "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "claude-sonnet-4-6",
+      "name": "Claude Sonnet 4.6",
+      "description": "Claude workhorse for coding agents, careful analysis, and production cost control",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-02-17",
+      "last_updated": "2026-03-13",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 2.1,
+        "output": 10.5,
+        "cache_read": 0.21,
+        "cache_write": 2.625
+      },
+      "canonical_model_id": "anthropic/claude-sonnet-4-6",
+      "display_name": "Claude Sonnet 4.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "description": "Everyday Claude agent model for coding, planning, browsing, and general work",
+      "family": "claude-sonnet",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-06-30",
+      "last_updated": "2026-06-30",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 1.4,
+        "output": 7,
+        "cache_read": 0.14,
+        "cache_write": 1.75
+      },
+      "canonical_model_id": "anthropic/claude-sonnet-5",
+      "display_name": "Claude Sonnet 5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "gpt-5-6-terra",
+      "name": "GPT-5.6 Terra",
+      "description": "Balanced GPT-5.6 model for capable, cost-efficient everyday work",
+      "family": "gpt-terra",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.7,
+        "output": 4.2,
+        "cache_read": 0.07,
+        "cache_write": 0.875,
+        "tiers": [
+          {
+            "input": 1.4,
+            "output": 6.3,
+            "cache_read": 0.14,
+            "cache_write": 1.75,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 1.4,
+          "output": 6.3,
+          "cache_read": 0.14,
+          "cache_write": 1.75
+        }
+      },
+      "canonical_model_id": "openai/gpt-5.6-terra",
+      "display_name": "GPT-5.6 Terra",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "claude-haiku-4-5",
+      "name": "Claude Haiku 4.5 (latest)",
+      "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
+      "family": "claude-haiku",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-02-28",
+      "release_date": "2025-10-15",
+      "last_updated": "2025-10-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 200000,
+        "output": 64000
+      },
+      "cost": {
+        "input": 0.7,
+        "output": 3.5,
+        "cache_read": 0.07,
+        "cache_write": 0.875
+      },
+      "canonical_model_id": "anthropic/claude-haiku-4-5",
+      "display_name": "Claude Haiku 4.5 (latest)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
+        }
+      }
+    },
+    {
+      "id": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "description": "OpenAI's most efficient model for focused, high-volume tasks",
+      "family": "gpt-luna",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2026-05-18",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.04,
+        "output": 0.2,
+        "cache_read": 0.004,
+        "cache_write": 0.05,
+        "tiers": [
+          {
+            "input": 0.08,
+            "output": 0.3,
+            "cache_read": 0.008,
+            "cache_write": 0.1,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 0.08,
+          "output": 0.3,
+          "cache_read": 0.008,
+          "cache_write": 0.1
+        }
+      },
+      "canonical_model_id": "openai/gpt-6-luna",
+      "display_name": "GPT-6 Luna",
+      "type": "chat"
+    },
+    {
+      "id": "claude-opus-4-6",
+      "name": "Claude Opus 4.6",
+      "description": "High-end Claude for difficult coding, planning, and slower expert reasoning",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-05-31",
+      "release_date": "2026-02-05",
+      "last_updated": "2026-03-13",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 3.5,
+        "output": 17.5,
+        "cache_read": 0.35,
+        "cache_write": 4.375
+      },
+      "canonical_model_id": "anthropic/claude-opus-4-6",
+      "display_name": "Claude Opus 4.6",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "mixed",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Anthropic recommends adaptive thinking with effort for Claude 4.6; budget_tokens remains a deprecated compatibility path.",
+            "Anthropic API defaults effort to high; lower effort levels should be chosen per workload."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-7",
+      "name": "Claude Opus 4.7",
+      "description": "Stronger Opus tier for advanced software work and high-stakes reasoning",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-04-16",
+      "last_updated": "2026-04-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 3.5,
+        "output": 17.5,
+        "cache_read": 0.35,
+        "cache_write": 4.375
+      },
+      "canonical_model_id": "anthropic/claude-opus-4-7",
+      "display_name": "Claude Opus 4.7",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-5",
+      "name": "Claude Opus 5",
+      "description": "Strongest Claude Opus model for coding, agents, and professional work",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-05",
+      "release_date": "2026-07-24",
+      "last_updated": "2026-07-24",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 3.5,
+        "output": 17.5,
+        "cache_read": 0.35,
+        "cache_write": 4.375
+      },
+      "canonical_model_id": "anthropic/claude-opus-5",
+      "display_name": "Claude Opus 5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "gpt-5-5",
+      "name": "GPT-5.5",
+      "description": "Default frontier GPT for coding, computer use, research, and knowledge work",
+      "family": "gpt",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-12-01",
+      "release_date": "2026-04-23",
+      "last_updated": "2026-04-23",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2,
+        "cache_write": 2,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 18,
+            "cache_read": 0.4,
+            "cache_write": 4,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 18,
+          "cache_read": 0.4,
+          "cache_write": 4
+        }
+      },
+      "canonical_model_id": "openai/gpt-5.5",
+      "display_name": "GPT-5.5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "claude-fable-5",
+      "name": "Claude Fable 5",
+      "description": "Claude model for creative writing, analysis, and controlled agent workflows",
+      "family": "claude-fable",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-01-31",
+      "release_date": "2026-06-09",
+      "last_updated": "2026-06-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 7,
+        "output": 35,
+        "cache_read": 0.7,
+        "cache_write": 8.75
+      },
+      "canonical_model_id": "anthropic/claude-fable-5",
+      "display_name": "Claude Fable 5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
+            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
+            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-4-8",
+      "name": "Claude Opus 4.8",
+      "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": false
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-01",
+      "release_date": "2026-05-28",
+      "last_updated": "2026-05-28",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 3.5,
+        "output": 17.5,
+        "cache_read": 0.35,
+        "cache_write": 4.375
+      },
+      "canonical_model_id": "anthropic/claude-opus-4-8",
+      "display_name": "Claude Opus 4.8",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": false,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude Opus 4.7 and newer Opus models require thinking.type = \"adaptive\" to enable thinking explicitly.",
+            "Manual budget_tokens requests return 400 on Claude Opus 4.7 and newer adaptive-only Opus models.",
+            "task_budget is separate from thinking control and should not be treated as a thinking budget."
+          ]
         }
       }
     },
