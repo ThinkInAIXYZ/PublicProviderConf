@@ -6,10 +6,10 @@
   "display_name": "Synthorai",
   "models": [
     {
-      "id": "claude-opus-5-5",
-      "name": "Claude Opus 5.5",
-      "description": "Claude model for long-running agentic coding and knowledge work",
-      "family": "claude-opus",
+      "id": "gpt-6-sol",
+      "name": "GPT-6 Sol",
+      "description": "OpenAI model for complex coding and agentic workflows",
+      "family": "gpt-sol",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -19,6 +19,7 @@
         {
           "type": "effort",
           "values": [
+            "none",
             "low",
             "medium",
             "high",
@@ -29,8 +30,8 @@
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-06",
+      "temperature": true,
+      "knowledge": "2026-04-20",
       "release_date": "2026-09-22",
       "last_updated": "2026-09-22",
       "modalities": {
@@ -45,70 +46,33 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 4,
-        "output": 20,
-        "cache_read": 0.2,
-        "cache_write": 5
-      },
-      "canonical_model_id": "anthropic/claude-opus-5-5",
-      "display_name": "Claude Opus 5.5",
-      "type": "chat"
-    },
-    {
-      "id": "claude-sonnet-5-5",
-      "name": "Claude Sonnet 5.5",
-      "description": "Fast Claude model for everyday coding, agents, and knowledge work",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-06",
-      "release_date": "2026-09-28",
-      "last_updated": "2026-09-28",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
+        "context": 1050000,
+        "input": 922000,
         "output": 128000
       },
       "cost": {
         "input": 2,
         "output": 10,
-        "cache_read": 0.1,
-        "cache_write": 2.5
+        "cache_read": 0.2,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 15,
+            "cache_read": 0.4,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 15,
+          "cache_read": 0.4
+        }
       },
-      "canonical_model_id": "anthropic/claude-sonnet-5-5",
-      "display_name": "Claude Sonnet 5.5",
+      "canonical_model_id": "openai/gpt-6-sol",
+      "display_name": "GPT-6 Sol",
       "type": "chat"
     },
     {
@@ -197,10 +161,10 @@
       }
     },
     {
-      "id": "deepseek-v4.1-flash",
-      "name": "DeepSeek V4.1 Flash",
-      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
-      "family": "deepseek-flash",
+      "id": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5",
+      "description": "Fast Claude model for everyday coding, agents, and knowledge work",
+      "family": "claude-sonnet",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -208,50 +172,46 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        },
-        {
           "type": "effort",
           "values": [
             "low",
+            "medium",
             "high",
+            "xhigh",
             "max"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-09-28",
+      "last_updated": "2026-09-28",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
         "context": 1000000,
-        "output": 393216
+        "output": 128000
       },
       "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.006
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.1,
+        "cache_write": 2.5
       },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "DeepSeek V4.1 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "canonical_model_id": "anthropic/claude-sonnet-5-5",
+      "display_name": "Claude Sonnet 5.5",
+      "type": "chat"
     },
     {
       "id": "glm-5.3",
@@ -304,76 +264,6 @@
           "supported": true
         }
       }
-    },
-    {
-      "id": "gpt-6-luna",
-      "name": "GPT-6 Luna",
-      "description": "OpenAI's most efficient model for focused, high-volume tasks",
-      "family": "gpt-luna",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2026-05-18",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 0.1,
-        "output": 0.5,
-        "cache_read": 0.01,
-        "tiers": [
-          {
-            "input": 0.2,
-            "output": 0.75,
-            "cache_read": 0.02,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 0.2,
-          "output": 0.75,
-          "cache_read": 0.02
-        }
-      },
-      "canonical_model_id": "openai/gpt-6-luna",
-      "display_name": "GPT-6 Luna",
-      "type": "chat"
     },
     {
       "id": "claude-opus-5",
@@ -434,10 +324,10 @@
       }
     },
     {
-      "id": "gpt-6.1-sol",
-      "name": "GPT-6.1 Sol",
-      "description": "Near-Astra performance for complex coding, computer use, and professional work at a lower cost.",
-      "family": "gpt-sol",
+      "id": "claude-opus-5-5",
+      "name": "Claude Opus 5.5",
+      "description": "Claude model for long-running agentic coding and knowledge work",
+      "family": "claude-opus",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -458,9 +348,9 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": false,
-      "knowledge": "2026-04-30",
-      "release_date": "2026-09-29",
-      "last_updated": "2026-09-29",
+      "knowledge": "2026-06",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
       "modalities": {
         "input": [
           "text",
@@ -473,46 +363,33 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1050000,
-        "input": 922000,
+        "context": 1000000,
         "output": 128000
       },
       "cost": {
-        "input": 2,
-        "output": 10,
-        "cache_read": 0.1,
-        "tiers": [
-          {
-            "input": 4,
-            "output": 15,
-            "cache_read": 0.2,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 4,
-          "output": 15,
-          "cache_read": 0.2
-        }
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.2,
+        "cache_write": 5
       },
-      "canonical_model_id": "openai/gpt-6.1-sol",
-      "display_name": "GPT-6.1 Sol",
+      "canonical_model_id": "anthropic/claude-opus-5-5",
+      "display_name": "Claude Opus 5.5",
       "type": "chat"
     },
     {
-      "id": "kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
-      "attachment": true,
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro 0813",
+      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
+      "family": "deepseek-thinking",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
+        {
+          "type": "toggle"
+        },
         {
           "type": "effort",
           "values": [
@@ -524,9 +401,82 @@
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "temperature": true,
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 393216
+      },
+      "cost": {
+        "input": 1.32,
+        "output": 3.96,
+        "cache_read": 0.132
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
+      "display_name": "DeepSeek V4 Pro 0813",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4.1-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
       "modalities": {
         "input": [
           "text",
@@ -538,16 +488,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 1048576
+        "context": 1000000,
+        "output": 393216
       },
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": 0.006
       },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -624,10 +574,79 @@
       "type": "chat"
     },
     {
-      "id": "gpt-6-sol",
-      "name": "GPT-6 Sol",
-      "description": "OpenAI model for complex coding and agentic workflows",
+      "id": "gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "description": "Near-Astra performance for complex coding, computer use, and professional work at a lower cost.",
       "family": "gpt-sol",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-04-30",
+      "release_date": "2026-09-29",
+      "last_updated": "2026-09-29",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.1,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 15,
+            "cache_read": 0.2,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 15,
+          "cache_read": 0.2
+        }
+      },
+      "canonical_model_id": "openai/gpt-6.1-sol",
+      "display_name": "GPT-6.1 Sol",
+      "type": "chat"
+    },
+    {
+      "id": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "description": "OpenAI's most efficient model for focused, high-volume tasks",
+      "family": "gpt-luna",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -649,7 +668,7 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2026-04-20",
+      "knowledge": "2026-05-18",
       "release_date": "2026-09-22",
       "last_updated": "2026-09-22",
       "modalities": {
@@ -669,14 +688,14 @@
         "output": 128000
       },
       "cost": {
-        "input": 2,
-        "output": 10,
-        "cache_read": 0.2,
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
         "tiers": [
           {
-            "input": 4,
-            "output": 15,
-            "cache_read": 0.4,
+            "input": 0.2,
+            "output": 0.75,
+            "cache_read": 0.02,
             "tier": {
               "type": "context",
               "size": 272000
@@ -684,29 +703,26 @@
           }
         ],
         "context_over_200k": {
-          "input": 4,
-          "output": 15,
-          "cache_read": 0.4
+          "input": 0.2,
+          "output": 0.75,
+          "cache_read": 0.02
         }
       },
-      "canonical_model_id": "openai/gpt-6-sol",
-      "display_name": "GPT-6 Sol",
+      "canonical_model_id": "openai/gpt-6-luna",
+      "display_name": "GPT-6 Luna",
       "type": "chat"
     },
     {
-      "id": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro 0813",
-      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
-      "family": "deepseek-thinking",
-      "attachment": false,
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
-        {
-          "type": "toggle"
-        },
         {
           "type": "effort",
           "values": [
@@ -718,12 +734,13 @@
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-22",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -731,37 +748,20 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 393216
+        "context": 1048576,
+        "output": 1048576
       },
       "cost": {
-        "input": 1.32,
-        "output": 3.96,
-        "cache_read": 0.132
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3
       },
-      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
-      "display_name": "DeepSeek V4 Pro 0813",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
+          "supported": true
         }
       }
     }
