@@ -6,10 +6,136 @@
   "display_name": "UplinkSwitch",
   "models": [
     {
-      "id": "kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
+      "id": "gpt-5.3-codex",
+      "name": "GPT-5.3 Codex",
+      "description": "Coding-optimized GPT model for repository edits, reviews, and agentic software work",
+      "family": "gpt-codex",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-08-31",
+      "release_date": "2026-02-05",
+      "last_updated": "2026-02-05",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 400000,
+        "input": 272000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 1.75,
+        "output": 14,
+        "cache_read": 0.18
+      },
+      "canonical_model_id": "openai/gpt-5.3-codex",
+      "display_name": "GPT-5.3 Codex",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "description": "OpenAI's most efficient model for focused, high-volume tasks",
+      "family": "gpt-luna",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2026-05-18",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 0.0625,
+        "output": 0.2,
+        "cache_read": 0.0125
+      },
+      "canonical_model_id": "openai/gpt-6-luna",
+      "display_name": "GPT-6 Luna",
+      "type": "chat"
+    },
+    {
+      "id": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "description": "Google's flagship reasoning model for complex software engineering, deep math and science, and long-horizon autonomous agents",
+      "family": "gemini",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -20,37 +146,92 @@
           "type": "effort",
           "values": [
             "low",
-            "high",
-            "max"
+            "medium",
+            "high"
           ]
         }
       ],
       "tool_call": true,
       "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "knowledge": "2026-03",
+      "release_date": "2026-10-13",
+      "last_updated": "2026-10-13",
       "modalities": {
         "input": [
           "text",
           "image",
-          "video"
+          "video",
+          "audio",
+          "pdf"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
         "context": 1048576,
-        "output": 1048576
+        "output": 65536
       },
       "cost": {
-        "input": 0.9,
-        "output": 4.5,
-        "cache_read": 0.12
+        "input": 0.6,
+        "output": 3,
+        "cache_read": 0.06
       },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
+      "canonical_model_id": "google/gemini-4-argon",
+      "display_name": "Gemini 4 Argon",
+      "type": "chat"
+    },
+    {
+      "id": "gemini-3.5-flash-lite",
+      "name": "Gemini 3.5 Flash Lite",
+      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
+      "family": "gemini-flash-lite",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2026-03",
+      "release_date": "2026-07-21",
+      "last_updated": "2026-07-21",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.225,
+        "output": 1.875,
+        "cache_read": 0.0225
+      },
+      "canonical_model_id": "google/gemini-3.5-flash-lite",
+      "display_name": "Gemini 3.5 Flash Lite",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -111,10 +292,10 @@
       "type": "chat"
     },
     {
-      "id": "gpt-6-astra",
-      "name": "GPT-6 Astra",
-      "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
-      "family": "gpt-astra",
+      "id": "glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -125,41 +306,38 @@
           "type": "effort",
           "values": [
             "low",
-            "medium",
             "high",
-            "xhigh",
             "max"
           ]
         }
       ],
       "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-04-30",
-      "release_date": "2026-09-04",
-      "last_updated": "2026-09-04",
+      "temperature": true,
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text",
           "image",
+          "video",
           "pdf"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
+        "context": 1000000,
+        "output": 131072
       },
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3
+        "input": 0.0873,
+        "output": 0.1455,
+        "cache_read": 0.010864
       },
-      "canonical_model_id": "openai/gpt-6-astra",
-      "display_name": "GPT-6 Astra",
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3-Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -219,75 +397,6 @@
       "canonical_model_id": "openai/gpt-6-sol",
       "display_name": "GPT-6 Sol",
       "type": "chat"
-    },
-    {
-      "id": "gemini-3.8-flash",
-      "name": "Gemini 3.8 Flash",
-      "description": "Google's most intelligent Flash model, engineered for long-horizon software engineering, autonomous agents, and complex enterprise workflows",
-      "family": "gemini-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-09-02",
-      "last_updated": "2026-09-02",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.492502,
-        "output": 2.25,
-        "cache_read": 0.049251
-      },
-      "canonical_model_id": "google/gemini-3.8-flash",
-      "display_name": "Gemini 3.8 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
     },
     {
       "id": "gpt-5.5",
@@ -363,10 +472,10 @@
       }
     },
     {
-      "id": "gemini-3.5-flash-lite",
-      "name": "Gemini 3.5 Flash Lite",
-      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
-      "family": "gemini-flash-lite",
+      "id": "gemini-3.8-flash",
+      "name": "Gemini 3.8 Flash",
+      "description": "Google's most intelligent Flash model, engineered for long-horizon software engineering, autonomous agents, and complex enterprise workflows",
+      "family": "gemini-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -376,7 +485,6 @@
         {
           "type": "effort",
           "values": [
-            "minimal",
             "low",
             "medium",
             "high"
@@ -385,9 +493,8 @@
       ],
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2026-03",
-      "release_date": "2026-07-21",
-      "last_updated": "2026-07-21",
+      "release_date": "2026-09-02",
+      "last_updated": "2026-09-02",
       "modalities": {
         "input": [
           "text",
@@ -406,16 +513,30 @@
         "output": 65536
       },
       "cost": {
-        "input": 0.225,
-        "output": 1.875,
-        "cache_read": 0.0225
+        "input": 0.492502,
+        "output": 2.25,
+        "cache_read": 0.049251
       },
-      "canonical_model_id": "google/gemini-3.5-flash-lite",
-      "display_name": "Gemini 3.5 Flash Lite",
+      "canonical_model_id": "google/gemini-3.8-flash",
+      "display_name": "Gemini 3.8 Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
         }
       }
     },
@@ -471,83 +592,10 @@
       }
     },
     {
-      "id": "gpt-5.3-codex",
-      "name": "GPT-5.3 Codex",
-      "description": "Coding-optimized GPT model for repository edits, reviews, and agentic software work",
-      "family": "gpt-codex",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-08-31",
-      "release_date": "2026-02-05",
-      "last_updated": "2026-02-05",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 400000,
-        "input": 272000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 1.75,
-        "output": 14,
-        "cache_read": 0.18
-      },
-      "canonical_model_id": "openai/gpt-5.3-codex",
-      "display_name": "GPT-5.3 Codex",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "glm-5.3-flash",
-      "name": "GLM-5.3-Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -564,15 +612,14 @@
         }
       ],
       "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
           "text",
           "image",
-          "video",
-          "pdf"
+          "video"
         ],
         "output": [
           "text"
@@ -580,16 +627,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 131072
+        "context": 1048576,
+        "output": 1048576
       },
       "cost": {
-        "input": 0.0873,
-        "output": 0.1455,
-        "cache_read": 0.010864
+        "input": 0.9,
+        "output": 4.5,
+        "cache_read": 0.12
       },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM-5.3-Flash",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -598,10 +645,10 @@
       }
     },
     {
-      "id": "gemini-4-argon",
-      "name": "Gemini 4 Argon",
-      "description": "Google's flagship reasoning model for complex software engineering, deep math and science, and long-horizon autonomous agents",
-      "family": "gemini",
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
+      "family": "gpt-astra",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -611,58 +658,6 @@
         {
           "type": "effort",
           "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-03",
-      "release_date": "2026-10-13",
-      "last_updated": "2026-10-13",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.6,
-        "output": 3,
-        "cache_read": 0.06
-      },
-      "canonical_model_id": "google/gemini-4-argon",
-      "display_name": "Gemini 4 Argon",
-      "type": "chat"
-    },
-    {
-      "id": "gpt-6-luna",
-      "name": "GPT-6 Luna",
-      "description": "OpenAI's most efficient model for focused, high-volume tasks",
-      "family": "gpt-luna",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
             "low",
             "medium",
             "high",
@@ -672,10 +667,10 @@
         }
       ],
       "tool_call": true,
-      "temperature": true,
-      "knowledge": "2026-05-18",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
+      "temperature": false,
+      "knowledge": "2026-04-30",
+      "release_date": "2026-09-04",
+      "last_updated": "2026-09-04",
       "modalities": {
         "input": [
           "text",
@@ -693,13 +688,18 @@
         "output": 128000
       },
       "cost": {
-        "input": 0.0625,
-        "output": 0.2,
-        "cache_read": 0.0125
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3
       },
-      "canonical_model_id": "openai/gpt-6-luna",
-      "display_name": "GPT-6 Luna",
-      "type": "chat"
+      "canonical_model_id": "openai/gpt-6-astra",
+      "display_name": "GPT-6 Astra",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     }
   ]
 }
