@@ -6,6 +6,156 @@
   "display_name": "SandBase",
   "models": [
     {
+      "id": "deepseek/deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": 0.006
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-flash",
+      "display_name": "DeepSeek V4 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "Open MoE flagship with million-token context for coding and long agent runs",
+      "family": "deepseek-thinking",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 1.32,
+        "output": 3.96,
+        "cache_read": 0.043956
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro",
+      "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
       "id": "z-ai/glm-5.3-flash",
       "name": "GLM-5.3-Flash",
       "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
@@ -115,350 +265,6 @@
       },
       "canonical_model_id": "zhipuai/glm-5.3",
       "display_name": "GLM-5.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-5.6-terra",
-      "name": "GPT-5.6 Terra",
-      "description": "Balanced GPT-5.6 model for capable, cost-efficient everyday work",
-      "family": "gpt-terra",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2026-02-16",
-      "release_date": "2026-07-09",
-      "last_updated": "2026-07-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 2,
-        "output": 12,
-        "cache_read": 0.2,
-        "tiers": [
-          {
-            "input": 4,
-            "output": 18,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 4,
-          "output": 18
-        }
-      },
-      "canonical_model_id": "openai/gpt-5.6-terra",
-      "display_name": "GPT-5.6 Terra",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-5.6-sol",
-      "name": "GPT-5.6 Sol",
-      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
-      "family": "gpt-sol",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2026-02-16",
-      "release_date": "2026-07-09",
-      "last_updated": "2026-07-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 4,
-        "output": 20,
-        "cache_read": 0.4,
-        "tiers": [
-          {
-            "input": 8,
-            "output": 30,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 8,
-          "output": 30
-        }
-      },
-      "canonical_model_id": "openai/gpt-5.6-sol",
-      "display_name": "GPT-5.6 Sol",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-5.6-luna",
-      "name": "GPT-5.6 Luna",
-      "description": "Cost-efficient GPT-5.6 model for fast, high-volume workloads",
-      "family": "gpt-luna",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2026-02-16",
-      "release_date": "2026-07-09",
-      "last_updated": "2026-07-09",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 0.2,
-        "output": 1.2,
-        "cache_read": 0.02,
-        "tiers": [
-          {
-            "input": 0.4,
-            "output": 1.8,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 0.4,
-          "output": 1.8
-        }
-      },
-      "canonical_model_id": "openai/gpt-5.6-luna",
-      "display_name": "GPT-5.6 Luna",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
-    },
-    {
-      "id": "moonshotai/kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3
-      },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -606,11 +412,11 @@
       }
     },
     {
-      "id": "deepseek/deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "Open MoE flagship with million-token context for coding and long agent runs",
-      "family": "deepseek-thinking",
-      "attachment": false,
+      "id": "moonshotai/kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -632,13 +438,14 @@
       "interleaved": {
         "field": "reasoning_content"
       },
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -646,112 +453,305 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 384000
+        "context": 1048576,
+        "output": 1048576
       },
       "cost": {
-        "input": 1.32,
-        "output": 3.96,
-        "cache_read": 0.043956
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3
       },
-      "canonical_model_id": "deepseek/deepseek-v4-pro",
-      "display_name": "DeepSeek V4 Pro",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
           ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
     {
-      "id": "deepseek/deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash",
-      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
-      "family": "deepseek-flash",
-      "attachment": false,
+      "id": "openai/gpt-5.6-sol",
+      "name": "GPT-5.6 Sol",
+      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
+      "family": "gpt-sol",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        },
-        {
           "type": "effort",
           "values": [
+            "none",
             "low",
+            "medium",
             "high",
+            "xhigh",
             "max"
           ]
         }
       ],
       "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 384000
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
       },
       "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.006
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.4,
+        "tiers": [
+          {
+            "input": 8,
+            "output": 30,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 8,
+          "output": 30
+        }
       },
-      "canonical_model_id": "deepseek/deepseek-v4-flash",
-      "display_name": "DeepSeek V4 Flash",
+      "canonical_model_id": "openai/gpt-5.6-sol",
+      "display_name": "GPT-5.6 Sol",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
           "default_enabled": true,
           "mode": "effort",
-          "effort": "high",
+          "effort": "medium",
           "effort_options": [
+            "none",
             "low",
+            "medium",
             "high",
+            "xhigh",
             "max"
           ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
           ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5.6-terra",
+      "name": "GPT-5.6 Terra",
+      "description": "Balanced GPT-5.6 model for capable, cost-efficient everyday work",
+      "family": "gpt-terra",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
           ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 2,
+        "output": 12,
+        "cache_read": 0.2,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 18,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 18
+        }
+      },
+      "canonical_model_id": "openai/gpt-5.6-terra",
+      "display_name": "GPT-5.6 Terra",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "openai/gpt-5.6-luna",
+      "name": "GPT-5.6 Luna",
+      "description": "Cost-efficient GPT-5.6 model for fast, high-volume workloads",
+      "family": "gpt-luna",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 1.2,
+        "cache_read": 0.02,
+        "tiers": [
+          {
+            "input": 0.4,
+            "output": 1.8,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 0.4,
+          "output": 1.8
+        }
+      },
+      "canonical_model_id": "openai/gpt-5.6-luna",
+      "display_name": "GPT-5.6 Luna",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "medium",
+          "effort_options": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "visibility": "hidden"
         }
       }
     }
