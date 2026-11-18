@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-10T00:00:00.000Z",
-  "maxModels": 60,
+  "updatedAt": "2026-11-18T00:00:00.000Z",
+  "maxModels": 62,
   "provider": {
     "id": "custom-provider",
     "name": "custom provider",
@@ -22,6 +22,11 @@
       "docs": [
         "https://developers.openai.com/api/docs/models",
         "https://developers.openai.com/api/docs/guides/latest-model",
+        "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+        "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+        "https://developers.openai.com/api/docs/guides/reasoning",
+        "https://developers.openai.com/api/docs/guides/pdf-files",
+        "https://developers.openai.com/codex/whats-new/gpt-62-astra-sol",
         "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
         "https://developers.openai.com/api/docs/models/gpt-6-sol",
         "https://developers.openai.com/api/docs/models/gpt-6-luna",
@@ -35,6 +40,106 @@
         "https://developers.openai.com/api/docs/guides/daybreak"
       ],
       "models": [
+        {
+          "id": "gpt-6.2-astra",
+          "name": "GPT-6.2 Astra",
+          "family": "gpt",
+          "contextLength": 1050000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["low", "medium", "high", "xhigh", "max"] }
+          ],
+          "knowledge": "2026-05-18",
+          "releaseDate": "2026-11-17",
+          "lastUpdated": "2026-11-17",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "limit": { "context": 1050000, "input": 922000, "output": 128000 },
+          "cost": { "input": 8, "output": 40, "cacheRead": 0.4, "cacheWrite": 10 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort_options": ["low", "medium", "high", "xhigh", "max"],
+              "visibility": "hidden"
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "frontier", "coding", "agentic", "reasoning"],
+            "lifecycle": "active",
+            "apiStatus": "active",
+            "availability": ["api", "chatgpt-work", "codex"],
+            "pricingBasis": "standard-up-to-272k-input",
+            "notes": [
+              "The documented effort levels are low, medium, high, xhigh, and max; none is rejected. Medium is a recommended starting point, not a documented API default.",
+              "Tool calling requires the Responses API.",
+              "Omit temperature, top_p, and log-probability parameters when migrating requests.",
+              "PDF input follows the documented vision-model file-input processing rules.",
+              "Prompts with more than 272K input tokens are priced at 2x input and cache rates and 1.5x output for the full request.",
+              "Cache-write pricing uses 30-minute retention; 12-hour retention costs $20 per million tokens before long-context adjustments.",
+              "The API drops prior reasoning items after conversation prefix edits, model downgrades, or end-user or organization changes; keep the prefix unchanged to preserve reasoning and prompt-cache eligibility."
+            ]
+          },
+          "selectionRank": 0
+        },
+        {
+          "id": "gpt-6.2-sol",
+          "name": "GPT-6.2 Sol",
+          "family": "gpt",
+          "contextLength": 1050000,
+          "maxTokens": 128000,
+          "vision": true,
+          "functionCall": true,
+          "reasoning": { "supported": true, "default": true },
+          "attachment": true,
+          "temperature": false,
+          "toolCall": true,
+          "structuredOutput": true,
+          "reasoningOptions": [
+            { "type": "effort", "values": ["low", "medium", "high", "xhigh", "max"] }
+          ],
+          "knowledge": "2026-06-01",
+          "releaseDate": "2026-11-17",
+          "lastUpdated": "2026-11-17",
+          "openWeights": false,
+          "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] },
+          "limit": { "context": 1050000, "input": 922000, "output": 128000 },
+          "cost": { "input": 2, "output": 10, "cacheRead": 0.1, "cacheWrite": 2.5 },
+          "extraCapabilities": {
+            "reasoning": {
+              "supported": true,
+              "default_enabled": true,
+              "mode": "effort",
+              "effort_options": ["low", "medium", "high", "xhigh", "max"],
+              "visibility": "hidden"
+            }
+          },
+          "metadata": {
+            "selection": ["latest", "balanced", "coding", "agentic", "reasoning"],
+            "lifecycle": "active",
+            "apiStatus": "active",
+            "availability": ["api", "chatgpt-work", "codex"],
+            "pricingBasis": "standard-up-to-272k-input",
+            "notes": [
+              "The documented effort levels are low, medium, high, xhigh, and max; none is rejected. Medium is a recommended starting point, not a documented API default.",
+              "Tool calling requires the Responses API.",
+              "Omit temperature, top_p, and log-probability parameters when migrating requests.",
+              "PDF input follows the documented vision-model file-input processing rules.",
+              "Prompts with more than 272K input tokens are priced at 2x input and cache rates and 1.5x output for the full request.",
+              "Cache-write pricing uses 30-minute retention; 12-hour retention costs $5 per million tokens before long-context adjustments.",
+              "The API drops prior reasoning items after conversation prefix edits, model downgrades, or end-user or organization changes; keep the prefix unchanged to preserve reasoning and prompt-cache eligibility."
+            ]
+          },
+          "selectionRank": 0
+        },
         {
           "id": "gpt-6-astra",
           "name": "GPT-6 Astra",
