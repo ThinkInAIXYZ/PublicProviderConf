@@ -52,7 +52,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     const result = await synthesizeCustomProvider();
 
     assert.equal(result.models.length, result.catalog.maxModels);
-    assert.equal(result.models.length, 60);
+    assert.equal(result.models.length, 62);
     assert.deepEqual(
       new Set(result.models.map(model => model.id)),
       new Set(result.catalog.sources.flatMap(source => source.models.map(model => model.id))),
@@ -60,7 +60,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     assert.deepEqual(
       result.summaries.map(summary => [summary.displayName, summary.selected]),
       [
-        ['OpenAI', 11],
+        ['OpenAI', 13],
         ['Anthropic', 10],
         ['Gemini', 7],
         ['Kimi', 7],
@@ -593,6 +593,76 @@ test('preserves November model pricing, controls, and access restrictions in gen
     assert.equal(getModel('claude-fable-5-2').metadata?.apiStatus, 'active');
     assert.equal(getModel('claude-mythos-5-2').metadata?.apiStatus, 'restricted');
     assert.deepEqual(getModel('claude-mythos-5-2').metadata?.availability, ['organization-verification']);
+  });
+});
+
+test('preserves GPT-6.2 limits, reasoning controls, and pricing in generated output', async () => {
+  await withoutApiKeys(async () => {
+    const result = await synthesizeCustomProvider();
+    const providerInfo = createProviderInfo('custom-provider', 'custom provider', result.models);
+    JsonValidator.validateProviderInfo(providerInfo);
+    const provider = createModelsDevProvider(providerInfo);
+    applyReasoningPortraits({ providers: { [provider.id]: provider } });
+
+    const expectedModels = [
+      {
+        id: 'gpt-6.2-astra',
+        knowledge: '2026-05-18',
+        cost: { input: 8, output: 40, cache_read: 0.4, cache_write: 10 },
+        cacheWrite12h: 20,
+      },
+      {
+        id: 'gpt-6.2-sol',
+        knowledge: '2026-06-01',
+        cost: { input: 2, output: 10, cache_read: 0.1, cache_write: 2.5 },
+        cacheWrite12h: 5,
+      },
+    ];
+    for (const expected of expectedModels) {
+      const model = provider.models.find(item => item.id === expected.id);
+      assert.ok(model, `Missing selected model: ${expected.id}`);
+      assert.equal(model.limit?.context, 1050000);
+      assert.equal(model.limit?.input, 922000);
+      assert.equal(model.limit?.output, 128000);
+      assert.equal(model.vision, true);
+      assert.equal(model.attachment, true);
+      assert.equal(model.tool_call, true);
+      assert.equal(model.structured_output, true);
+      assert.equal(model.temperature, false);
+      assert.deepEqual(model.modalities, { input: ['text', 'image', 'pdf'], output: ['text'] });
+      assert.deepEqual(model.cost, expected.cost);
+      assert.equal(model.knowledge, expected.knowledge);
+      assert.equal(model.release_date, '2026-11-17');
+      assert.equal(model.last_updated, '2026-11-17');
+      assert.equal(model.open_weights, false);
+      assert.deepEqual(model.reasoning, { supported: true, default: true });
+      assert.deepEqual(model.reasoning_options, [
+        { type: 'effort', values: ['low', 'medium', 'high', 'xhigh', 'max'] },
+      ]);
+      const portrait = model.extra_capabilities?.reasoning;
+      assert.equal(portrait?.mode, 'effort');
+      assert.equal(portrait?.default_enabled, true);
+      assert.deepEqual(portrait?.effort_options, ['low', 'medium', 'high', 'xhigh', 'max']);
+      assert.equal(portrait?.effort, undefined);
+      assert.equal(portrait?.budget, undefined);
+      assert.equal(portrait?.verbosity, undefined);
+      assert.equal(model.metadata?.sourceProvider, 'openai');
+      assert.equal(model.metadata?.lifecycle, 'active');
+      assert.equal(model.metadata?.apiStatus, 'active');
+      assert.equal(model.metadata?.apiListed, false);
+      assert.equal(model.metadata?.pricingBasis, 'standard-up-to-272k-input');
+      const sourceDocs = model.metadata?.sourceDocs as string[];
+      assert.ok(sourceDocs.includes(`https://developers.openai.com/api/docs/models/${expected.id}`));
+      const notes = model.metadata?.notes as string[];
+      assert.ok(notes.includes('Tool calling requires the Responses API.'));
+      assert.ok(notes.some(note => note.includes('not a documented API default')));
+      assert.ok(notes.includes('Prompts with more than 272K input tokens are priced at 2x input and cache rates and 1.5x output for the full request.'));
+      assert.ok(notes.some(note =>
+        note.includes('30-minute retention; 12-hour retention costs')
+        && note.endsWith(expected.cacheWrite12h + ' per million tokens before long-context adjustments.'),
+      ));
+      assert.ok(notes.some(note => note.includes('prefix edits')));
+    }
   });
 });
 
