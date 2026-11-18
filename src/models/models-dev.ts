@@ -100,6 +100,7 @@ export interface ModelsDevModel {
   reasoning?: ReasoningConfig | boolean;
   temperature?: boolean;
   tool_call?: boolean;
+  tool_choice?: boolean;
   structured_output?: boolean;
   reasoning_options?: ReasoningOption[];
   knowledge?: string;

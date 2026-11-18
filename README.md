@@ -107,6 +107,9 @@ list. A declaration in either direction means the pair cannot be sent together:
   "Provider default" sends neither override; it is not equivalent to choosing the
   highest effort or copying a numeric budget default.
 
+For `zai` models `glm-5.3`, `glm-5.3-flash`, and `glm-5.3-flashx`, `tool_choice: true`
+means the endpoint accepts only `"auto"` for [`tool_choice`](https://docs.z.ai/guides/capabilities/function-calling#core-parameter-description).
+
 ### Current Coverage
 The initial portrait registry covers these model families:
 - OpenAI: `gpt-5`, `gpt-5.1`, `o3`, `o4-mini`, and close variants/aliases

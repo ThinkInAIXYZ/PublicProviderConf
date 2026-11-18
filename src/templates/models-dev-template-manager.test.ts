@@ -83,6 +83,21 @@ test('keeps official Qwen effort and exclusive budget controls through template 
   }
 });
 
+test('declares tool choice only for the verified Z.AI GLM 5.3 models', async () => {
+  const templates = await new ModelsDevTemplateManager().loadAllTemplates();
+  const verifiedIds = ['glm-5.3', 'glm-5.3-flash', 'glm-5.3-flashx'];
+  const provider = mergeProviderWithTemplate({
+    id: 'zai',
+    name: 'Z.AI',
+    models: [...verifiedIds, 'glm-5.2'].map(id => ({ id, name: id, tool_call: true })),
+  }, templates.get('zai'));
+
+  const declarations = provider.models
+    .filter(model => model.tool_choice !== undefined)
+    .map(model => [model.id, model.tool_choice]);
+  assert.deepEqual(declarations, verifiedIds.map(id => [id, true]));
+});
+
 test('adds template-only models to the upstream provider', () => {
   const upstream: ModelsDevProvider = {
     id: 'moonshot-ai',
