@@ -6,73 +6,10 @@
   "display_name": "Tenstorrent",
   "models": [
     {
-      "id": "MiniMaxAI/MiniMax-M3.1-Flash",
-      "name": "MiniMax-M3.1-Flash",
-      "description": "Frontier multimodal coding model with 1M context window and tunable thinking depth",
-      "family": "minimax",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-10-19",
-      "last_updated": "2026-10-19",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 512000
-      },
-      "cost": {
-        "input": 0.05,
-        "output": 0.2,
-        "cache_read": 0.005
-      },
-      "canonical_model_id": "minimax/MiniMax-M3.1-Flash",
-      "display_name": "MiniMax-M3.1-Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "Qwen/Qwen3.8-27B",
-      "name": "Qwen3.8 27B",
-      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
-      "family": "qwen",
+      "id": "zai-org/GLM-5.3-Flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -82,18 +19,20 @@
         {
           "type": "effort",
           "values": [
-            "none",
             "low",
-            "medium",
-            "xhigh"
+            "high",
+            "max"
           ]
         }
       ],
       "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text",
@@ -106,17 +45,28 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 65536
+        "context": 262000,
+        "output": 131000
       },
       "cost": {
-        "input": 0.15,
-        "output": 2,
-        "cache_read": 0.05
+        "input": 0.075,
+        "output": 0.25,
+        "cache_read": 0.015
       },
-      "canonical_model_id": "alibaba/qwen3.8-27b",
-      "display_name": "Qwen3.8 27B",
-      "type": "chat"
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3-Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
     },
     {
       "id": "zai-org/GLM-5.3",
@@ -179,10 +129,10 @@
       }
     },
     {
-      "id": "zai-org/GLM-5.3-Flash",
-      "name": "GLM-5.3-Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
+      "id": "Qwen/Qwen3.8-27B",
+      "name": "Qwen3.8 27B",
+      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
+      "family": "qwen",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -192,20 +142,18 @@
         {
           "type": "effort",
           "values": [
+            "none",
             "low",
-            "high",
-            "max"
+            "medium",
+            "xhigh"
           ]
         }
       ],
       "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
           "text",
@@ -218,26 +166,78 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262000,
-        "output": 131000
+        "context": 262144,
+        "output": 65536
       },
       "cost": {
-        "input": 0.075,
-        "output": 0.25,
-        "cache_read": 0.015
+        "input": 0.15,
+        "output": 2,
+        "cache_read": 0.05
       },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM-5.3-Flash",
+      "canonical_model_id": "alibaba/qwen3.8-27b",
+      "display_name": "Qwen3.8 27B",
+      "type": "chat"
+    },
+    {
+      "id": "MiniMaxAI/MiniMax-M3.1-Flash",
+      "name": "MiniMax-M3.1-Flash",
+      "description": "Frontier multimodal coding model with 1M context window and tunable thinking depth",
+      "family": "minimax",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-10-19",
+      "last_updated": "2026-10-19",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 512000
+      },
+      "cost": {
+        "input": 0.05,
+        "output": 0.2,
+        "cache_read": 0.005
+      },
+      "canonical_model_id": "minimax/MiniMax-M3.1-Flash",
+      "display_name": "MiniMax-M3.1-Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     }
