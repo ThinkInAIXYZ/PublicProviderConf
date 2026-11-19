@@ -77,6 +77,11 @@ function toNumber(value: unknown): number | undefined {
   return undefined;
 }
 
+function toTokenCount(value: unknown): number | undefined {
+  const count = toNumber(value);
+  return count !== undefined && Number.isSafeInteger(count) && count > 0 ? count : undefined;
+}
+
 function normalizeModalities(values?: string[] | null): string[] | undefined {
   if (!Array.isArray(values)) {
     return undefined;
@@ -241,13 +246,10 @@ function resolveTokenCounts(
 function mapModelsDevModel(
   model: ModelsDevModel,
   zenmuxId: string,
+  { contextLength, maxTokens }: Pick<ModelInfo, 'contextLength' | 'maxTokens'>,
   nameOverride?: string,
 ): ModelInfo {
   const name = (nameOverride ?? model.display_name ?? model.name ?? zenmuxId).trim() || zenmuxId;
-
-  const contextLengthRaw = toNumber(model.context_length ?? model.limit?.context);
-  const maxTokensRaw = toNumber(model.max_output_tokens ?? model.limit?.output);
-  const { contextLength, maxTokens } = resolveTokenCounts(contextLengthRaw, maxTokensRaw);
 
   const modalities: ModelModalities | undefined = model.modalities
     ? {
@@ -304,7 +306,7 @@ function mapModelsDevModel(
   }
   const limit = convertLimit(model.limit);
   if (limit) {
-    overrides.limit = limit;
+    overrides.limit = { ...limit, context: contextLength, output: maxTokens };
   }
   if (model.metadata) {
     overrides.metadata = { ...model.metadata };
@@ -457,11 +459,17 @@ export class ZenMuxProvider implements Provider {
     }
 
     const nameOverride = raw.display_name?.trim();
-    const match = this.matchModelId(id);
-    if (match.model) {
+    const { model: matchedModel, source } = this.matchModelId(id);
+    const tokenCounts = resolveTokenCounts(
+      toTokenCount(raw.context_length) ??
+        toTokenCount(matchedModel?.context_length) ?? toTokenCount(matchedModel?.limit?.context),
+      toTokenCount(raw.max_output_tokens) ?? toTokenCount(raw.max_tokens) ??
+        toTokenCount(matchedModel?.max_output_tokens) ?? toTokenCount(matchedModel?.limit?.output),
+    );
+    if (matchedModel) {
       return {
-        model: mapModelsDevModel(match.model, id, nameOverride),
-        source: match.source,
+        model: mapModelsDevModel(matchedModel, id, tokenCounts, nameOverride),
+        source,
       };
     }
 
@@ -470,9 +478,7 @@ export class ZenMuxProvider implements Provider {
     const outputModalities = normalizeModalities(raw.output_modalities);
     const modalities = inputModalities || outputModalities ? { input: inputModalities, output: outputModalities } : undefined;
 
-    const contextLengthRaw = toNumber(raw.context_length);
-    const maxTokensRaw = toNumber(raw.max_output_tokens ?? raw.max_tokens);
-    const { contextLength, maxTokens } = resolveTokenCounts(contextLengthRaw, maxTokensRaw);
+    const { contextLength, maxTokens } = tokenCounts;
 
     const capabilities = raw.capabilities ?? undefined;
     const functionCall = Boolean(capabilities?.tool_calling || capabilities?.function_calling);
