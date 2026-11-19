@@ -460,10 +460,13 @@ export class ZenMuxProvider implements Provider {
 
     const nameOverride = raw.display_name?.trim();
     const { model: matchedModel, source } = this.matchModelId(id);
+    const upstreamOutput = toTokenCount(raw.max_output_tokens) ?? toTokenCount(raw.max_tokens);
+    const matchedContext =
+      toTokenCount(matchedModel?.context_length) ?? toTokenCount(matchedModel?.limit?.context);
     const tokenCounts = resolveTokenCounts(
-      toTokenCount(raw.context_length) ??
-        toTokenCount(matchedModel?.context_length) ?? toTokenCount(matchedModel?.limit?.context),
-      toTokenCount(raw.max_output_tokens) ?? toTokenCount(raw.max_tokens) ??
+      // A fallback context must accommodate the upstream output limit.
+      toTokenCount(raw.context_length) ?? Math.max(matchedContext ?? 0, upstreamOutput ?? 0),
+      upstreamOutput ??
         toTokenCount(matchedModel?.max_output_tokens) ?? toTokenCount(matchedModel?.limit?.output),
     );
     if (matchedModel) {
