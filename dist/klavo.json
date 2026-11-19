@@ -6,36 +6,28 @@
   "display_name": "Klavo AI",
   "models": [
     {
-      "id": "minimax/minimax-m3.1-flash",
-      "name": "MiniMax-M3.1-Flash",
-      "description": "Frontier multimodal coding model with 1M context window and tunable thinking depth",
-      "family": "minimax",
-      "attachment": true,
+      "id": "qwen/qwen3.6-35b-a3b",
+      "name": "Qwen3.6 35B-A3B",
+      "description": "Open multimodal Qwen MoE for local agents that need vision, audio, and code",
+      "family": "qwen",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
         {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
+          "type": "toggle"
         }
       ],
       "tool_call": true,
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-10-19",
-      "last_updated": "2026-10-19",
+      "release_date": "2026-04-17",
+      "last_updated": "2026-04-17",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -43,16 +35,78 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 524288
+        "context": 208192,
+        "output": 8192
       },
       "cost": {
-        "input": 0.2907,
-        "output": 1.1508,
-        "cache_read": 0.0303
+        "input": 0.3392,
+        "output": 2.0594,
+        "cache_read": 0.0727
       },
-      "canonical_model_id": "minimax/MiniMax-M3.1-Flash",
-      "display_name": "MiniMax-M3.1-Flash",
+      "canonical_model_id": "alibaba/qwen3.6-35b-a3b",
+      "display_name": "Qwen3.6 35B-A3B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3.8-27b",
+      "name": "Qwen3.8 27B",
+      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
+      "family": "qwen",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1001536,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.5088,
+        "output": 3.0285,
+        "cache_read": 0.0969
+      },
+      "canonical_model_id": "alibaba/qwen3.8-27b",
+      "display_name": "Qwen3.8 27B",
       "type": "chat"
     },
     {
@@ -160,6 +214,56 @@
           "supported": true
         }
       }
+    },
+    {
+      "id": "minimax/minimax-m3.1-flash",
+      "name": "MiniMax-M3.1-Flash",
+      "description": "Frontier multimodal coding model with 1M context window and tunable thinking depth",
+      "family": "minimax",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-10-19",
+      "last_updated": "2026-10-19",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 524288
+      },
+      "cost": {
+        "input": 0.2907,
+        "output": 1.1508,
+        "cache_read": 0.0303
+      },
+      "canonical_model_id": "minimax/MiniMax-M3.1-Flash",
+      "display_name": "MiniMax-M3.1-Flash",
+      "type": "chat"
     },
     {
       "id": "deepseek/deepseek-v4-flash-0731",
@@ -423,110 +527,6 @@
           "supported": true
         }
       }
-    },
-    {
-      "id": "qwen/qwen3.6-35b-a3b",
-      "name": "Qwen3.6 35B-A3B",
-      "description": "Open multimodal Qwen MoE for local agents that need vision, audio, and code",
-      "family": "qwen",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-04-17",
-      "last_updated": "2026-04-17",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 208192,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0.3392,
-        "output": 2.0594,
-        "cache_read": 0.0727
-      },
-      "canonical_model_id": "alibaba/qwen3.6-35b-a3b",
-      "display_name": "Qwen3.6 35B-A3B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "qwen/qwen3.8-27b",
-      "name": "Qwen3.8 27B",
-      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1001536,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.5088,
-        "output": 3.0285,
-        "cache_read": 0.0969
-      },
-      "canonical_model_id": "alibaba/qwen3.8-27b",
-      "display_name": "Qwen3.8 27B",
-      "type": "chat"
     }
   ]
 }
