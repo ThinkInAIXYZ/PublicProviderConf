@@ -6,6 +6,146 @@
   "display_name": "AIGROW",
   "models": [
     {
+      "id": "claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "description": "Claude model for long-running agentic coding and knowledge work",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic",
+        "api": "https://aigrow.gg/v1"
+      },
+      "cost": {
+        "input": 1.6,
+        "output": 8,
+        "cache_read": 0.2,
+        "cache_write": 3.2
+      },
+      "canonical_model_id": "anthropic/claude-opus-5-5",
+      "display_name": "Claude Opus 5.5",
+      "type": "chat"
+    },
+    {
+      "id": "claude-fable-5.2",
+      "name": "Claude Fable 5.2",
+      "description": "Claude model for demanding reasoning and long-horizon agentic work",
+      "family": "claude-fable",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": false,
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-11-09",
+      "last_updated": "2026-11-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic",
+        "api": "https://aigrow.gg/v1"
+      },
+      "cost": {
+        "input": 3.2,
+        "output": 16,
+        "cache_read": 0.2,
+        "cache_write": 6.4
+      },
+      "canonical_model_id": "anthropic/claude-fable-5-2",
+      "display_name": "Claude Fable 5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
+            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
+            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
+          ]
+        }
+      }
+    },
+    {
       "id": "gpt-6.1-sol",
       "name": "GPT-6.1 Sol",
       "description": "Near-Astra performance for complex coding, computer use, and professional work at a lower cost.",
@@ -57,57 +197,6 @@
       },
       "canonical_model_id": "openai/gpt-6.1-sol",
       "display_name": "GPT-6.1 Sol",
-      "type": "chat"
-    },
-    {
-      "id": "grok-4.7",
-      "name": "Grok 4.7",
-      "description": "xAI's frontier model for long-running agents, coding, knowledge work, and visual projects",
-      "family": "grok",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2026-05",
-      "release_date": "2026-09-21",
-      "last_updated": "2026-09-21",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 500000,
-        "output": 500000
-      },
-      "cost": {
-        "input": 0.5,
-        "output": 1.5,
-        "cache_read": 0.125,
-        "cache_write": 0.625
-      },
-      "canonical_model_id": "xai/grok-4.7",
-      "display_name": "Grok 4.7",
       "type": "chat"
     },
     {
@@ -223,6 +312,57 @@
       "type": "chat"
     },
     {
+      "id": "grok-4.7",
+      "name": "Grok 4.7",
+      "description": "xAI's frontier model for long-running agents, coding, knowledge work, and visual projects",
+      "family": "grok",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2026-05",
+      "release_date": "2026-09-21",
+      "last_updated": "2026-09-21",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 500000,
+        "output": 500000
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 1.5,
+        "cache_read": 0.125,
+        "cache_write": 0.625
+      },
+      "canonical_model_id": "xai/grok-4.7",
+      "display_name": "Grok 4.7",
+      "type": "chat"
+    },
+    {
       "id": "gemini-4-argon",
       "name": "Gemini 4 Argon",
       "description": "Google's flagship reasoning model for complex software engineering, deep math and science, and long-horizon autonomous agents",
@@ -271,146 +411,6 @@
       },
       "canonical_model_id": "google/gemini-4-argon",
       "display_name": "Gemini 4 Argon",
-      "type": "chat"
-    },
-    {
-      "id": "claude-fable-5.1",
-      "name": "Claude Fable 5.1",
-      "description": "Claude model for demanding reasoning and long-horizon agentic work",
-      "family": "claude-fable",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": false,
-      "knowledge": "2026-06",
-      "release_date": "2026-09-01",
-      "last_updated": "2026-09-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/anthropic",
-        "api": "https://aigrow.gg/v1"
-      },
-      "cost": {
-        "input": 4,
-        "output": 20,
-        "cache_read": 0.25,
-        "cache_write": 8
-      },
-      "canonical_model_id": "anthropic/claude-fable-5-1",
-      "display_name": "Claude Fable 5.1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
-            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
-            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
-          ]
-        }
-      }
-    },
-    {
-      "id": "claude-opus-5.5",
-      "name": "Claude Opus 5.5",
-      "description": "Claude model for long-running agentic coding and knowledge work",
-      "family": "claude-opus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": false,
-      "temperature": false,
-      "knowledge": "2026-06",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/anthropic",
-        "api": "https://aigrow.gg/v1"
-      },
-      "cost": {
-        "input": 1.6,
-        "output": 8,
-        "cache_read": 0.2,
-        "cache_write": 3.2
-      },
-      "canonical_model_id": "anthropic/claude-opus-5-5",
-      "display_name": "Claude Opus 5.5",
       "type": "chat"
     },
     {
@@ -473,8 +473,8 @@
       }
     },
     {
-      "id": "claude-fable-5.2",
-      "name": "Claude Fable 5.2",
+      "id": "claude-fable-5.1",
+      "name": "Claude Fable 5.1",
       "description": "Claude model for demanding reasoning and long-horizon agentic work",
       "family": "claude-fable",
       "attachment": true,
@@ -498,8 +498,8 @@
       "structured_output": false,
       "temperature": false,
       "knowledge": "2026-06",
-      "release_date": "2026-11-09",
-      "last_updated": "2026-11-09",
+      "release_date": "2026-09-01",
+      "last_updated": "2026-09-01",
       "modalities": {
         "input": [
           "text",
@@ -520,13 +520,13 @@
         "api": "https://aigrow.gg/v1"
       },
       "cost": {
-        "input": 3.2,
-        "output": 16,
-        "cache_read": 0.2,
-        "cache_write": 6.4
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.25,
+        "cache_write": 8
       },
-      "canonical_model_id": "anthropic/claude-fable-5-2",
-      "display_name": "Claude Fable 5.2",
+      "canonical_model_id": "anthropic/claude-fable-5-1",
+      "display_name": "Claude Fable 5.1",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
