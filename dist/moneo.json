@@ -57,19 +57,50 @@
       "type": "chat"
     },
     {
-      "id": "deepseek-v4-flash:web",
-      "name": "DeepSeek V4 Flash (Web)",
-      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
-      "family": "deepseek-flash",
+      "id": "MiniMax-M2.7:web",
+      "name": "MiniMax M2.7 (Web)",
+      "description": "Open MiniMax flagship for coding agents, office automation, and complex environments",
+      "family": "minimax",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-03-18",
+      "last_updated": "2026-03-18",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 198000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.35,
+        "output": 1.5
+      },
+      "canonical_model_id": "minimax/MiniMax-M2.7",
+      "display_name": "MiniMax M2.7 (Web)",
+      "type": "chat"
+    },
+    {
+      "id": "z-ai-glm-5-3-flash",
+      "name": "GLM 5.3 Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
       "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
-        {
-          "type": "toggle"
-        },
         {
           "type": "effort",
           "values": [
@@ -81,9 +112,8 @@
       ],
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text"
@@ -95,14 +125,14 @@
       "open_weights": true,
       "limit": {
         "context": 1000000,
-        "output": 384000
+        "output": 131072
       },
       "cost": {
         "input": 0.15,
-        "output": 0.3
+        "output": 0.5
       },
-      "canonical_model_id": "deepseek/deepseek-v4-flash",
-      "display_name": "DeepSeek V4 Flash (Web)",
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM 5.3 Flash",
       "type": "chat"
     },
     {
@@ -144,6 +174,98 @@
       },
       "canonical_model_id": "alibaba/qwen3-235b-a22b",
       "display_name": "Qwen3 235B (Web)",
+      "type": "chat"
+    },
+    {
+      "id": "deepseek-v4-1-flash-1017-uncensored",
+      "name": "DeepSeek V4.1 Flash 1017 Uncensored",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-10-17",
+      "last_updated": "2026-10-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.33,
+        "output": 1.32
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek V4.1 Flash 1017 Uncensored",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
+      "name": "Nemotron 3.5 Super VL 120B",
+      "description": "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
+      "family": "nemotron",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-10-15",
+      "last_updated": "2026-10-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 8192
+      },
+      "cost": {
+        "input": 0.2,
+        "output": 0.5
+      },
+      "canonical_model_id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "display_name": "Nemotron 3.5 Super VL 120B",
       "type": "chat"
     },
     {
@@ -222,48 +344,6 @@
       }
     },
     {
-      "id": "nvidia-nemotron-3-5-super-vl-120b-a12b",
-      "name": "Nemotron 3.5 Super VL 120B",
-      "description": "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
-      "family": "nemotron",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-10-15",
-      "last_updated": "2026-10-15",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 8192
-      },
-      "cost": {
-        "input": 0.2,
-        "output": 0.5
-      },
-      "canonical_model_id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
-      "display_name": "Nemotron 3.5 Super VL 120B",
-      "type": "chat"
-    },
-    {
       "id": "gemma-4-31b:web",
       "name": "Gemma 4 31B (Web)",
       "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
@@ -297,45 +377,6 @@
       },
       "canonical_model_id": "google/gemma-4-31b-it",
       "display_name": "Gemma 4 31B (Web)",
-      "type": "chat"
-    },
-    {
-      "id": "kimi-k2.7-code:web",
-      "name": "Kimi K2.7 Code (Web)",
-      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
-      "family": "kimi-k2",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "temperature": false,
-      "knowledge": "2025-01",
-      "release_date": "2026-06-12",
-      "last_updated": "2026-06-12",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 256000,
-        "output": 256000
-      },
-      "cost": {
-        "input": 0.75,
-        "output": 4
-      },
-      "canonical_model_id": "moonshotai/kimi-k2.7-code",
-      "display_name": "Kimi K2.7 Code (Web)",
       "type": "chat"
     },
     {
@@ -379,90 +420,11 @@
       }
     },
     {
-      "id": "z-ai-glm-5-3-flash",
-      "name": "GLM 5.3 Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.5
-      },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM 5.3 Flash",
-      "type": "chat"
-    },
-    {
-      "id": "MiniMax-M2.7:web",
-      "name": "MiniMax M2.7 (Web)",
-      "description": "Open MiniMax flagship for coding agents, office automation, and complex environments",
-      "family": "minimax",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-03-18",
-      "last_updated": "2026-03-18",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 198000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.35,
-        "output": 1.5
-      },
-      "canonical_model_id": "minimax/MiniMax-M2.7",
-      "display_name": "MiniMax M2.7 (Web)",
-      "type": "chat"
-    },
-    {
-      "id": "deepseek-v4-1-flash-1017-uncensored",
-      "name": "DeepSeek V4.1 Flash 1017 Uncensored",
-      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "id": "deepseek-v4-flash:web",
+      "name": "DeepSeek V4 Flash (Web)",
+      "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
       "family": "deepseek-flash",
-      "attachment": true,
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -483,12 +445,11 @@
       "tool_call": true,
       "temperature": true,
       "knowledge": "2025-05",
-      "release_date": "2026-10-17",
-      "last_updated": "2026-10-17",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -500,11 +461,50 @@
         "output": 384000
       },
       "cost": {
-        "input": 0.33,
-        "output": 1.32
+        "input": 0.15,
+        "output": 0.3
       },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "display_name": "DeepSeek V4.1 Flash 1017 Uncensored",
+      "canonical_model_id": "deepseek/deepseek-v4-flash",
+      "display_name": "DeepSeek V4 Flash (Web)",
+      "type": "chat"
+    },
+    {
+      "id": "kimi-k2.7-code:web",
+      "name": "Kimi K2.7 Code (Web)",
+      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
+      "family": "kimi-k2",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2025-01",
+      "release_date": "2026-06-12",
+      "last_updated": "2026-06-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 256000,
+        "output": 256000
+      },
+      "cost": {
+        "input": 0.75,
+        "output": 4
+      },
+      "canonical_model_id": "moonshotai/kimi-k2.7-code",
+      "display_name": "Kimi K2.7 Code (Web)",
       "type": "chat"
     },
     {
