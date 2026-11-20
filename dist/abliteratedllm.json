@@ -6,10 +6,10 @@
   "display_name": "AbliteratedLLM",
   "models": [
     {
-      "id": "kimi-k3-fast",
-      "name": "Kimi K3 Fast",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi-k3",
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
+      "family": "qwen",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -17,80 +17,12 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        },
-        {
           "type": "effort",
           "values": [
+            "none",
             "low",
             "medium",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 4.05,
-        "output": 20.25,
-        "cache_read": 0.405
-      },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3 Fast",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4.1-flash-original",
-      "name": "DeepSeek V4.1 Flash (original)",
-      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
+            "xhigh"
           ]
         }
       ],
@@ -100,9 +32,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
+      "release_date": "2026-08-03",
+      "last_updated": "2026-08-03",
       "modalities": {
         "input": [
           "text",
@@ -112,18 +43,18 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
-        "context": 1048576,
-        "output": 1048576
+        "context": 262144,
+        "output": 262144
       },
       "experimental": {
         "modes": {
           "priority": {
             "cost": {
-              "input": 0.3375,
-              "output": 1.35,
-              "cache_read": 0.00675
+              "input": 2.7,
+              "output": 8.1,
+              "cache_read": 0.3375
             },
             "provider": {
               "body": {
@@ -134,22 +65,22 @@
         }
       },
       "cost": {
-        "input": 0.27,
-        "output": 1.08,
-        "cache_read": 0.0054
+        "input": 1.8,
+        "output": 5.4,
+        "cache_read": 0.225
       },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "DeepSeek V4.1 Flash (original)",
+      "canonical_model_id": "alibaba/qwen3.8-max",
+      "display_name": "Qwen3.8 Max",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ]
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -201,68 +132,6 @@
       },
       "canonical_model_id": "zhipuai/glm-5.3",
       "display_name": "GLM-5.3 Fast",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "glm-5.3-flash-abliterated",
-      "name": "GLM-5.3 Flash Abliterated",
-      "description": "Abliterated GLM-5.3-Flash (open weights: orcarouter/GLM-5.3-Flash-Uncensored-FP8) with the refusal direction removed from the weights, served in native FP8 by AbliteratedLLM",
-      "family": "glm-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.0977,
-        "output": 0.3421,
-        "cache_read": 0.0098
-      },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM-5.3 Flash Abliterated",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -422,214 +291,6 @@
       }
     },
     {
-      "id": "minimax-m3",
-      "name": "MiniMax-M3",
-      "description": "MiniMax multimodal model for long-context coding, perception, and agent planning",
-      "family": "minimax",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-01",
-      "last_updated": "2026-06-01",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 512000,
-        "output": 512000
-      },
-      "experimental": {
-        "modes": {
-          "priority": {
-            "cost": {
-              "input": 0.405,
-              "output": 1.62,
-              "cache_read": 0.081
-            },
-            "provider": {
-              "body": {
-                "service_tier": "priority"
-              }
-            }
-          }
-        }
-      },
-      "cost": {
-        "input": 0.27,
-        "output": 1.08,
-        "cache_read": 0.054
-      },
-      "canonical_model_id": "minimax/MiniMax-M3",
-      "display_name": "MiniMax-M3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "ember-1",
-      "name": "Ember-1",
-      "description": "Specialized model from Fireworks built on Kimi K3, producing shorter reasoning traces with approximately 40% fewer tokens while maintaining comparable quality",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 2.7,
-        "output": 13.5,
-        "cache_read": 0.27
-      },
-      "canonical_model_id": "fireworks/ember-1",
-      "display_name": "Ember-1",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4.1-flash-1017-ultrafast",
-      "name": "DeepSeek V4.1 Flash 1017 Ultrafast",
-      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
-      "family": "deepseek-flash",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-10-17",
-      "last_updated": "2026-10-17",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 2.16,
-        "output": 8.64,
-        "cache_read": 0.0432
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "display_name": "DeepSeek V4.1 Flash 1017 Ultrafast",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
       "id": "deepseek-v4.1-flash-1017",
       "name": "DeepSeek V4.1 Flash 1017",
       "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
@@ -708,6 +369,83 @@
           "continuation": [
             "thinking_blocks"
           ]
+        }
+      }
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "experimental": {
+        "modes": {
+          "priority": {
+            "cost": {
+              "input": 1.575,
+              "output": 4.95,
+              "cache_read": 0.2925
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
+      "cost": {
+        "input": 1.26,
+        "output": 3.96,
+        "cache_read": 0.234
+      },
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -791,10 +529,10 @@
       }
     },
     {
-      "id": "qwen3.8-max",
-      "name": "Qwen3.8 Max",
-      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
-      "family": "qwen",
+      "id": "minimax-m3",
+      "name": "MiniMax-M3",
+      "description": "MiniMax multimodal model for long-context coding, perception, and agent planning",
+      "family": "minimax",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -804,10 +542,9 @@
         {
           "type": "effort",
           "values": [
-            "none",
             "low",
             "medium",
-            "xhigh"
+            "high"
           ]
         }
       ],
@@ -817,8 +554,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-03",
-      "last_updated": "2026-08-03",
+      "release_date": "2026-06-01",
+      "last_updated": "2026-06-01",
       "modalities": {
         "input": [
           "text",
@@ -828,18 +565,18 @@
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 262144
+        "context": 512000,
+        "output": 512000
       },
       "experimental": {
         "modes": {
           "priority": {
             "cost": {
-              "input": 2.7,
-              "output": 8.1,
-              "cache_read": 0.3375
+              "input": 0.405,
+              "output": 1.62,
+              "cache_read": 0.081
             },
             "provider": {
               "body": {
@@ -850,12 +587,12 @@
         }
       },
       "cost": {
-        "input": 1.8,
-        "output": 5.4,
-        "cache_read": 0.225
+        "input": 0.27,
+        "output": 1.08,
+        "cache_read": 0.054
       },
-      "canonical_model_id": "alibaba/qwen3.8-max",
-      "display_name": "Qwen3.8 Max",
+      "canonical_model_id": "minimax/MiniMax-M3",
+      "display_name": "MiniMax-M3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -870,10 +607,10 @@
       }
     },
     {
-      "id": "muse-spark-open",
-      "name": "Muse Spark Open",
-      "description": "Muse Spark Open is an 816B total / 42B active open-weight multimodal reasoning model from Meta for coding and long-horizon agentic work, with 1M-token context.",
-      "family": "muse",
+      "id": "glm-5.3-flash-abliterated",
+      "name": "GLM-5.3 Flash Abliterated",
+      "description": "Abliterated GLM-5.3-Flash (open weights: orcarouter/GLM-5.3-Flash-Uncensored-FP8) with the refusal direction removed from the weights, served in native FP8 by AbliteratedLLM",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -884,9 +621,8 @@
           "type": "effort",
           "values": [
             "low",
-            "medium",
             "high",
-            "xhigh"
+            "max"
           ]
         }
       ],
@@ -896,9 +632,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2026-01-04",
-      "release_date": "2026-10-15",
-      "last_updated": "2026-10-15",
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text",
@@ -911,31 +646,15 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 1048576
-      },
-      "experimental": {
-        "modes": {
-          "priority": {
-            "cost": {
-              "input": 1.6875,
-              "output": 5.7375,
-              "cache_read": 0.2025
-            },
-            "provider": {
-              "body": {
-                "service_tier": "priority"
-              }
-            }
-          }
-        }
+        "output": 131072
       },
       "cost": {
-        "input": 1.125,
-        "output": 3.825,
-        "cache_read": 0.135
+        "input": 0.0977,
+        "output": 0.3421,
+        "cache_read": 0.0098
       },
-      "canonical_model_id": "meta/muse-spark-open",
-      "display_name": "Muse Spark Open",
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3 Flash Abliterated",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1032,16 +751,19 @@
       }
     },
     {
-      "id": "glm-5.3",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
+      "id": "deepseek-v4.1-flash-1017-ultrafast",
+      "name": "DeepSeek V4.1 Flash 1017 Ultrafast",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
       "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
+        {
+          "type": "toggle"
+        },
         {
           "type": "effort",
           "values": [
@@ -1057,11 +779,78 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
+      "knowledge": "2025-05",
+      "release_date": "2026-10-17",
+      "last_updated": "2026-10-17",
       "modalities": {
         "input": [
           "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "cost": {
+        "input": 2.16,
+        "output": 8.64,
+        "cache_read": 0.0432
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek V4.1 Flash 1017 Ultrafast",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4.1-flash-original",
+      "name": "DeepSeek V4.1 Flash (original)",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -1076,9 +865,9 @@
         "modes": {
           "priority": {
             "cost": {
-              "input": 1.575,
-              "output": 4.95,
-              "cache_read": 0.2925
+              "input": 0.3375,
+              "output": 1.35,
+              "cache_read": 0.00675
             },
             "provider": {
               "body": {
@@ -1089,22 +878,233 @@
         }
       },
       "cost": {
-        "input": 1.26,
-        "output": 3.96,
-        "cache_read": 0.234
+        "input": 0.27,
+        "output": 1.08,
+        "cache_read": 0.0054
       },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash (original)",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kimi-k3-fast",
+      "name": "Kimi K3 Fast",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi-k3",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "cost": {
+        "input": 4.05,
+        "output": 20.25,
+        "cache_read": 0.405
+      },
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3 Fast",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "muse-spark-open",
+      "name": "Muse Spark Open",
+      "description": "Muse Spark Open is an 816B total / 42B active open-weight multimodal reasoning model from Meta for coding and long-horizon agentic work, with 1M-token context.",
+      "family": "muse",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2026-01-04",
+      "release_date": "2026-10-15",
+      "last_updated": "2026-10-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "experimental": {
+        "modes": {
+          "priority": {
+            "cost": {
+              "input": 1.6875,
+              "output": 5.7375,
+              "cache_read": 0.2025
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
+      "cost": {
+        "input": 1.125,
+        "output": 3.825,
+        "cache_read": 0.135
+      },
+      "canonical_model_id": "meta/muse-spark-open",
+      "display_name": "Muse Spark Open",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ember-1",
+      "name": "Ember-1",
+      "description": "Specialized model from Fireworks built on Kimi K3, producing shorter reasoning traces with approximately 40% fewer tokens while maintaining comparable quality",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "cost": {
+        "input": 2.7,
+        "output": 13.5,
+        "cache_read": 0.27
+      },
+      "canonical_model_id": "fireworks/ember-1",
+      "display_name": "Ember-1",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     }
