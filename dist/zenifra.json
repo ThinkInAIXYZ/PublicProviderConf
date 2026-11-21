@@ -6,10 +6,10 @@
   "display_name": "Zenifra",
   "models": [
     {
-      "id": "zenifra/qwen3.8-max",
-      "name": "Qwen3.8 Max",
-      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
-      "family": "qwen-max",
+      "id": "zenifra/qwen3.6-plus",
+      "name": "Qwen3.6 Plus",
+      "description": "Earlier Qwen multimodal workhorse for million-token agent and document tasks",
+      "family": "qwen-plus",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -18,14 +18,6 @@
       "reasoning_options": [
         {
           "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "xhigh"
-          ]
         },
         {
           "type": "budget_tokens"
@@ -37,8 +29,9 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-03",
-      "last_updated": "2026-08-03",
+      "knowledge": "2025-04",
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
       "modalities": {
         "input": [
           "text",
@@ -51,26 +44,42 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 131072
+        "context": 991808,
+        "output": 65536
       },
       "cost": {
-        "input": 1.5414,
-        "output": 4.6422,
-        "cache_read": 0.1995
+        "input": 0.2593,
+        "output": 1.5432,
+        "cache_read": 0.0272,
+        "tiers": [
+          {
+            "input": 1.03,
+            "output": 6.1673,
+            "cache_read": 0.1052,
+            "tier": {
+              "type": "context",
+              "size": 256000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 1.03,
+          "output": 6.1673,
+          "cache_read": 0.1052
+        }
       },
-      "canonical_model_id": "alibaba/qwen3.8-max",
-      "display_name": "Qwen3.8 Max",
+      "canonical_model_id": "alibaba/qwen3.6-plus",
+      "display_name": "Qwen3.6 Plus",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -140,9 +149,9 @@
       }
     },
     {
-      "id": "zenifra/kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "id": "zenifra/kimi-k2.5",
+      "name": "Kimi K2.5",
+      "description": "Earlier Kimi frontier model for long-context agents, coding, and multimodal work",
       "family": "kimi",
       "attachment": true,
       "reasoning": {
@@ -151,26 +160,23 @@
       },
       "reasoning_options": [
         {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
+          "type": "toggle"
         }
       ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
       },
-      "structured_output": true,
+      "structured_output": false,
       "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "knowledge": "2025-01",
+      "release_date": "2026-01-27",
+      "last_updated": "2026-01-27",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -178,26 +184,26 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 1048576
+        "context": 229376,
+        "output": 16384
       },
       "cost": {
-        "input": 2.6657,
-        "output": 13.3264,
-        "cache_read": 0.272
+        "input": 0.544,
+        "output": 2.847,
+        "cache_read": 0.1088
       },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
+      "canonical_model_id": "moonshotai/kimi-k2.5",
+      "display_name": "Kimi K2.5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -269,11 +275,148 @@
       }
     },
     {
-      "id": "zenifra/qwen3.7-plus",
-      "name": "Qwen3.7 Plus",
-      "description": "Multimodal Qwen workhorse for long-context agents, visual inputs, and coding",
-      "family": "qwen-plus",
+      "id": "zenifra/deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
+      "family": "deepseek-pro",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 393216
+      },
+      "cost": {
+        "input": 1.5414,
+        "output": 3.0827,
+        "cache_read": 0.1269
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
+      "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "zenifra/kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi",
       "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "cost": {
+        "input": 2.6657,
+        "output": 13.3264,
+        "cache_read": 0.272
+      },
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "zenifra/qwen3.7-max",
+      "name": "Qwen3.7 Max",
+      "description": "Qwen frontier model tuned for agent frameworks, coding assistants, and long tasks",
+      "family": "qwen-max",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -292,14 +435,11 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2026-06-02",
-      "last_updated": "2026-06-02",
+      "release_date": "2026-05-21",
+      "last_updated": "2026-05-21",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -311,28 +451,12 @@
         "output": 131072
       },
       "cost": {
-        "input": 0.272,
-        "output": 1.0336,
-        "cache_read": 0.0725,
-        "tiers": [
-          {
-            "input": 0.7979,
-            "output": 3.119,
-            "cache_read": 0.1632,
-            "tier": {
-              "type": "context",
-              "size": 256000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 0.7979,
-          "output": 3.119,
-          "cache_read": 0.1632
-        }
+        "input": 1.5414,
+        "output": 4.6241,
+        "cache_read": 0.3083
       },
-      "canonical_model_id": "alibaba/qwen3.7-plus",
-      "display_name": "Qwen3.7 Plus",
+      "canonical_model_id": "alibaba/qwen3.7-max",
+      "display_name": "Qwen3.7 Max",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -347,30 +471,38 @@
       }
     },
     {
-      "id": "zenifra/kimi-k2.7-code",
-      "name": "Kimi K2.7 Code",
-      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
-      "family": "kimi-code",
-      "attachment": true,
+      "id": "zenifra/glm-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
-      "reasoning_options": [],
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
+        }
+      ],
       "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
       },
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-01",
-      "release_date": "2026-06-12",
-      "last_updated": "2026-06-12",
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -378,16 +510,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 229376,
-        "output": 16384
+        "context": 1048576,
+        "output": 131072
       },
       "cost": {
-        "input": 0.8523,
-        "output": 3.5179,
-        "cache_read": 0.0635
+        "input": 1.0336,
+        "output": 3.6267,
+        "cache_read": 0.2539
       },
-      "canonical_model_id": "moonshotai/kimi-k2.7-code",
-      "display_name": "Kimi K2.7 Code",
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -471,84 +603,6 @@
       }
     },
     {
-      "id": "zenifra/qwen3.6-plus",
-      "name": "Qwen3.6 Plus",
-      "description": "Earlier Qwen multimodal workhorse for million-token agent and document tasks",
-      "family": "qwen-plus",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 991808,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.2593,
-        "output": 1.5432,
-        "cache_read": 0.0272,
-        "tiers": [
-          {
-            "input": 1.03,
-            "output": 6.1673,
-            "cache_read": 0.1052,
-            "tier": {
-              "type": "context",
-              "size": 256000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 1.03,
-          "output": 6.1673,
-          "cache_read": 0.1052
-        }
-      },
-      "canonical_model_id": "alibaba/qwen3.6-plus",
-      "display_name": "Qwen3.6 Plus",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
       "id": "zenifra/qwen3.6-flash",
       "name": "Qwen3.6 Flash",
       "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
@@ -626,208 +680,11 @@
       }
     },
     {
-      "id": "zenifra/deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
-      "family": "deepseek-pro",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 393216
-      },
-      "cost": {
-        "input": 1.5414,
-        "output": 3.0827,
-        "cache_read": 0.1269
-      },
-      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
-      "display_name": "DeepSeek V4 Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
-        }
-      }
-    },
-    {
-      "id": "zenifra/kimi-k2.5",
-      "name": "Kimi K2.5",
-      "description": "Earlier Kimi frontier model for long-context agents, coding, and multimodal work",
-      "family": "kimi",
+      "id": "zenifra/qwen3.7-plus",
+      "name": "Qwen3.7 Plus",
+      "description": "Multimodal Qwen workhorse for long-context agents, visual inputs, and coding",
+      "family": "qwen-plus",
       "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": false,
-      "temperature": false,
-      "knowledge": "2025-01",
-      "release_date": "2026-01-27",
-      "last_updated": "2026-01-27",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 229376,
-        "output": 16384
-      },
-      "cost": {
-        "input": 0.544,
-        "output": 2.847,
-        "cache_read": 0.1088
-      },
-      "canonical_model_id": "moonshotai/kimi-k2.5",
-      "display_name": "Kimi K2.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "zenifra/glm-5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 131072
-      },
-      "cost": {
-        "input": 1.0336,
-        "output": 3.6267,
-        "cache_read": 0.2539
-      },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "zenifra/qwen3.7-max",
-      "name": "Qwen3.7 Max",
-      "description": "Qwen frontier model tuned for agent frameworks, coding assistants, and long tasks",
-      "family": "qwen-max",
-      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -846,11 +703,99 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-05-21",
-      "last_updated": "2026-05-21",
+      "knowledge": "2025-04",
+      "release_date": "2026-06-02",
+      "last_updated": "2026-06-02",
       "modalities": {
         "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
           "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.272,
+        "output": 1.0336,
+        "cache_read": 0.0725,
+        "tiers": [
+          {
+            "input": 0.7979,
+            "output": 3.119,
+            "cache_read": 0.1632,
+            "tier": {
+              "type": "context",
+              "size": 256000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 0.7979,
+          "output": 3.119,
+          "cache_read": 0.1632
+        }
+      },
+      "canonical_model_id": "alibaba/qwen3.7-plus",
+      "display_name": "Qwen3.7 Plus",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "zenifra/qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
+      "family": "qwen-max",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "xhigh"
+          ]
+        },
+        {
+          "type": "budget_tokens"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-03",
+      "last_updated": "2026-08-03",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -863,11 +808,66 @@
       },
       "cost": {
         "input": 1.5414,
-        "output": 4.6241,
-        "cache_read": 0.3083
+        "output": 4.6422,
+        "cache_read": 0.1995
       },
-      "canonical_model_id": "alibaba/qwen3.7-max",
-      "display_name": "Qwen3.7 Max",
+      "canonical_model_id": "alibaba/qwen3.8-max",
+      "display_name": "Qwen3.8 Max",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "zenifra/kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
+      "family": "kimi-code",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-01",
+      "release_date": "2026-06-12",
+      "last_updated": "2026-06-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 229376,
+        "output": 16384
+      },
+      "cost": {
+        "input": 0.8523,
+        "output": 3.5179,
+        "cache_read": 0.0635
+      },
+      "canonical_model_id": "moonshotai/kimi-k2.7-code",
+      "display_name": "Kimi K2.7 Code",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
