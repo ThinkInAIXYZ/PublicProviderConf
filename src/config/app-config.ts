@@ -94,6 +94,13 @@ export function getDefaultConfig(): AppConfig {
     30
   );
 
+  providers['lazu'] = createProviderConfig(
+    'https://lazu.ai/api/pricing',
+    undefined,
+    10,
+    30
+  );
+
   providers['ollama'] = createProviderConfig(
     'manual-templates/ollama.json',
     undefined,

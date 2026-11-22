@@ -72,6 +72,9 @@ export function createProvider(providerId: string, config: ProviderConfig): Prov
       case 'aihubmix':
         return new providers.AiHubMixProvider(config.apiUrl);
 
+      case 'lazu':
+        return new providers.LazuProvider(config.apiUrl);
+
       case 'groq': {
         const groqApiKey = config.getApiKey();
         if (groqApiKey) {

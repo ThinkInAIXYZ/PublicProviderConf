@@ -138,6 +138,7 @@ Options:
 - TokenFlux (marketplace API)
 - Groq (requires `GROQ_API_KEY`)
 - AIHubMix (live API)
+- Lazu (live API, no key needed)
 - BurnCloud (manual template)
 - Ollama (snapshot templates)
 - SiliconFlow (snapshot templates)
