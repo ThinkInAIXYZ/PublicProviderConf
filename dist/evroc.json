@@ -6,6 +6,37 @@
   "display_name": "evroc",
   "models": [
     {
+      "id": "KBLab/kb-whisper-large",
+      "type": "transcription",
+      "name": "KB Whisper",
+      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
+      "family": "whisper",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "release_date": "2024-10-01",
+      "last_updated": "2024-10-01",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 448,
+        "output": 448
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "display_name": "KB Whisper"
+    },
+    {
       "id": "evroc/roc",
       "name": "roc",
       "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
@@ -62,44 +93,6 @@
       }
     },
     {
-      "id": "openai/whisper-large-v3-turbo",
-      "type": "transcription",
-      "name": "Whisper Large v3 Turbo",
-      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
-      "family": "whisper",
-      "attachment": true,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": true,
-      "release_date": "2024-10-01",
-      "last_updated": "2024-10-01",
-      "modalities": {
-        "input": [
-          "audio"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 448,
-        "output": 448
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 0.0023,
-        "output": 0.0023,
-        "output_audio": 2.3
-      },
-      "canonical_model_id": "openai/whisper-large-v3-turbo",
-      "display_name": "Whisper Large v3 Turbo"
-    },
-    {
       "id": "openai/gpt-oss-120b",
       "name": "GPT OSS 120B",
       "description": "Open-weight GPT model for self-hosted reasoning and instruction-following workloads",
@@ -151,6 +144,44 @@
       }
     },
     {
+      "id": "openai/whisper-large-v3-turbo",
+      "type": "transcription",
+      "name": "Whisper Large v3 Turbo",
+      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
+      "family": "whisper",
+      "attachment": true,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": false,
+      "temperature": true,
+      "release_date": "2024-10-01",
+      "last_updated": "2024-10-01",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 448,
+        "output": 448
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 0.0023,
+        "output": 0.0023,
+        "output_audio": 2.3
+      },
+      "canonical_model_id": "openai/whisper-large-v3-turbo",
+      "display_name": "Whisper Large v3 Turbo"
+    },
+    {
       "id": "openai/whisper-large-v3",
       "type": "transcription",
       "name": "Whisper 3 Large",
@@ -187,6 +218,59 @@
       },
       "canonical_model_id": "openai/whisper-large-v3",
       "display_name": "Whisper 3 Large"
+    },
+    {
+      "id": "zai-org/GLM-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 524288,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1.4375,
+        "output": 5.75
+      },
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     },
     {
       "id": "google/gemma-4-26B-A4B-it",
@@ -234,6 +318,41 @@
           "supported": true
         }
       }
+    },
+    {
+      "id": "nvidia/Llama-3.3-70B-Instruct-FP8",
+      "name": "Llama-3.3-70B-Instruct",
+      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
+      "family": "llama",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2023-12",
+      "release_date": "2024-12-06",
+      "last_updated": "2024-12-06",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 128000,
+        "output": 4096
+      },
+      "cost": {
+        "input": 1.15,
+        "output": 1.15
+      },
+      "canonical_model_id": "meta/llama-3.3-70b-instruct",
+      "display_name": "Llama-3.3-70B-Instruct",
+      "type": "chat"
     },
     {
       "id": "Qwen/Qwen3-Reranker-4B",
@@ -319,40 +438,6 @@
       "type": "chat"
     },
     {
-      "id": "Qwen/Qwen3-Embedding-8B",
-      "type": "embedding",
-      "name": "Qwen3 Embedding 8B",
-      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
-      "family": "qwen-embedding",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "temperature": false,
-      "release_date": "2025-06-05",
-      "last_updated": "2025-06-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 40960,
-        "output": 4096
-      },
-      "cost": {
-        "input": 0.115,
-        "output": 0.115
-      },
-      "canonical_model_id": "alibaba/qwen3-embedding-8b",
-      "display_name": "Qwen3 Embedding 8B"
-    },
-    {
       "id": "Qwen/Qwen3.6-35B-A3B",
       "name": "Qwen3.6 35B-A3B",
       "description": "Open multimodal Qwen MoE for local agents that need vision, audio, and code",
@@ -407,19 +492,19 @@
       }
     },
     {
-      "id": "nvidia/Llama-3.3-70B-Instruct-FP8",
-      "name": "Llama-3.3-70B-Instruct",
-      "description": "Popular open Llama workhorse for multilingual chat, coding, and self-hosting",
-      "family": "llama",
+      "id": "Qwen/Qwen3-Embedding-8B",
+      "type": "embedding",
+      "name": "Qwen3 Embedding 8B",
+      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
+      "family": "qwen-embedding",
       "attachment": false,
       "reasoning": {
         "supported": false
       },
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2023-12",
-      "release_date": "2024-12-06",
-      "last_updated": "2024-12-06",
+      "tool_call": false,
+      "temperature": false,
+      "release_date": "2025-06-05",
+      "last_updated": "2025-06-05",
       "modalities": {
         "input": [
           "text"
@@ -430,33 +515,32 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 128000,
+        "context": 40960,
         "output": 4096
       },
       "cost": {
-        "input": 1.15,
-        "output": 1.15
+        "input": 0.115,
+        "output": 0.115
       },
-      "canonical_model_id": "meta/llama-3.3-70b-instruct",
-      "display_name": "Llama-3.3-70B-Instruct",
-      "type": "chat"
+      "canonical_model_id": "alibaba/qwen3-embedding-8b",
+      "display_name": "Qwen3 Embedding 8B"
     },
     {
-      "id": "KBLab/kb-whisper-large",
-      "type": "transcription",
-      "name": "KB Whisper",
-      "description": "Speech transcription model for accurate audio-to-text and captioning workflows",
-      "family": "whisper",
-      "attachment": true,
+      "id": "intfloat/multilingual-e5-large-instruct",
+      "type": "embedding",
+      "name": "E5 Multi-Lingual Large Embeddings 0.6B",
+      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
+      "family": "text-embedding",
+      "attachment": false,
       "reasoning": {
         "supported": false
       },
       "tool_call": false,
-      "release_date": "2024-10-01",
-      "last_updated": "2024-10-01",
+      "release_date": "2024-06-01",
+      "last_updated": "2024-06-01",
       "modalities": {
         "input": [
-          "audio"
+          "text"
         ],
         "output": [
           "text"
@@ -464,13 +548,14 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 448,
-        "output": 448
+        "context": 512,
+        "output": 512
       },
-      "provider": {
-        "npm": "@ai-sdk/openai"
+      "cost": {
+        "input": 0.114,
+        "output": 0.114
       },
-      "display_name": "KB Whisper"
+      "display_name": "E5 Multi-Lingual Large Embeddings 0.6B"
     },
     {
       "id": "mistralai/Mistral-Medium-3.5-128B",
@@ -551,38 +636,6 @@
       "display_name": "Voxtral Small 24B"
     },
     {
-      "id": "intfloat/multilingual-e5-large-instruct",
-      "type": "embedding",
-      "name": "E5 Multi-Lingual Large Embeddings 0.6B",
-      "description": "Embedding model for semantic search, retrieval, clustering, and ranking pipelines",
-      "family": "text-embedding",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": false,
-      "release_date": "2024-06-01",
-      "last_updated": "2024-06-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 512,
-        "output": 512
-      },
-      "cost": {
-        "input": 0.114,
-        "output": 0.114
-      },
-      "display_name": "E5 Multi-Lingual Large Embeddings 0.6B"
-    },
-    {
       "id": "moonshotai/Kimi-K2.6",
       "name": "Kimi K2.6",
       "description": "Multimodal Kimi workhorse for agent loops, coding tasks, and visual context",
@@ -624,59 +677,6 @@
       },
       "canonical_model_id": "moonshotai/kimi-k2.6",
       "display_name": "Kimi K2.6",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "zai-org/GLM-5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 524288,
-        "output": 131072
-      },
-      "cost": {
-        "input": 1.4375,
-        "output": 5.75
-      },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {

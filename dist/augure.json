@@ -6,11 +6,10 @@
   "display_name": "Augure",
   "models": [
     {
-      "id": "open-qwen-3.8-flash-next",
-      "name": "Qwen3.8 Flash Next",
-      "description": "Open-weight experimental preview of the Qwen4 architecture: hybrid-attention MoE (125B total, 6B active) with vision encoder for coding, agent tasks, and image and video understanding",
-      "family": "qwen-flash",
-      "attachment": false,
+      "id": "ossington-5",
+      "name": "Ossington 5",
+      "description": "Augure's flagship reasoning model: fastest of the reasoning tiers, strong at code, structured output and general analysis, served on Canadian infrastructure",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -19,9 +18,11 @@
         {
           "type": "effort",
           "values": [
+            "none",
+            "minimal",
             "low",
             "medium",
-            "xhigh"
+            "high"
           ]
         }
       ],
@@ -31,28 +32,29 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-27",
-      "last_updated": "2026-08-27",
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-13",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
         "context": 262144,
         "output": 32768
       },
-      "status": "beta",
       "cost": {
-        "input": 1.42,
-        "output": 2.85
+        "input": 1.07,
+        "output": 2.14,
+        "cache_read": 0.43
       },
-      "canonical_model_id": "alibaba/qwen3.8-flash-next",
-      "display_name": "Qwen3.8 Flash Next",
+      "display_name": "Ossington 5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -129,9 +131,9 @@
       }
     },
     {
-      "id": "ossington-5",
-      "name": "Ossington 5",
-      "description": "Augure's flagship reasoning model: fastest of the reasoning tiers, strong at code, structured output and general analysis, served on Canadian infrastructure",
+      "id": "rosedale-1",
+      "name": "Rosedale One",
+      "description": "Augure's premium reasoning model with a 1M-token context for whole-document analysis, reliable tool calling and agent loops, served on Canadian infrastructure",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -141,7 +143,6 @@
         {
           "type": "effort",
           "values": [
-            "none",
             "minimal",
             "low",
             "medium",
@@ -155,8 +156,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-13",
+      "release_date": "2026-08",
+      "last_updated": "2026-08",
       "modalities": {
         "input": [
           "text",
@@ -169,15 +170,75 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 262144,
+        "context": 1048576,
         "output": 32768
       },
       "cost": {
-        "input": 1.07,
-        "output": 2.14,
-        "cache_read": 0.43
+        "input": 1.78,
+        "output": 4.27
       },
-      "display_name": "Ossington 5",
+      "display_name": "Rosedale One",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "open-qwen-3.8-flash-next",
+      "name": "Qwen3.8 Flash Next",
+      "description": "Open-weight experimental preview of the Qwen4 architecture: hybrid-attention MoE (125B total, 6B active) with vision encoder for coding, agent tasks, and image and video understanding",
+      "family": "qwen-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-27",
+      "last_updated": "2026-08-27",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "status": "beta",
+      "cost": {
+        "input": 1.42,
+        "output": 2.85
+      },
+      "canonical_model_id": "alibaba/qwen3.8-flash-next",
+      "display_name": "Qwen3.8 Flash Next",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -230,67 +291,6 @@
       },
       "canonical_model_id": "zhipuai/glm-5.3",
       "display_name": "GLM-5.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "rosedale-1",
-      "name": "Rosedale One",
-      "description": "Augure's premium reasoning model with a 1M-token context for whole-document analysis, reliable tool calling and agent loops, served on Canadian infrastructure",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08",
-      "last_updated": "2026-08",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1048576,
-        "output": 32768
-      },
-      "cost": {
-        "input": 1.78,
-        "output": 4.27
-      },
-      "display_name": "Rosedale One",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
