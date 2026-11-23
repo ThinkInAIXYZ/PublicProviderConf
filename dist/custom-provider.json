@@ -3,7 +3,7 @@
   "name": "custom provider",
   "display_name": "custom provider",
   "description": "Generated first-tier fallback catalog combining official high-signal chat, coding, reasoning, and frontier model metadata.",
-  "updated_at": "2026-11-18T00:00:00.000Z",
+  "updated_at": "2026-11-23T00:00:00.000Z",
   "doc": "docs/custom-provider.md",
   "tags": [
     "fallback",
@@ -2615,6 +2615,105 @@
           ],
           "notes": [
             "Thinking cannot be disabled; reasoning_effort defaults to max. Set thinking.clear_thinking to false to preserve reasoning across turns."
+          ],
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "max"
+        }
+      }
+    },
+    {
+      "id": "glm-5.4",
+      "name": "GLM-5.4",
+      "family": "glm",
+      "display_name": "GLM-5.4",
+      "type": "chat",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "temperature": true,
+      "tool_call": true,
+      "structured_output": true,
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "release_date": "2026-11-23",
+      "last_updated": "2026-11-23",
+      "open_weights": false,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "metadata": {
+        "selection": [
+          "latest",
+          "frontier",
+          "multimodal",
+          "coding",
+          "long-context"
+        ],
+        "lifecycle": "active",
+        "apiStatus": "coding-plan-only",
+        "availability": [
+          "glm-coding-plan"
+        ],
+        "notes": [
+          "Available to GLM Coding Plan users. Z.AI had not published a public pay-as-you-go price or a dedicated model guide when this entry was added, so cost is intentionally omitted."
+        ],
+        "sourceProvider": "zhipu",
+        "sourceProviderName": "Zhipu",
+        "sourceDocs": [
+          "https://docs.z.ai/guides/llm/glm-5.3",
+          "https://docs.z.ai/guides/vlm/glm-5.3-flash",
+          "https://docs.z.ai/guides/llm/glm-5.2",
+          "https://docs.z.ai/guides/capabilities/thinking-mode",
+          "https://docs.z.ai/guides/overview/pricing"
+        ],
+        "sourceStatus": "seed",
+        "apiListed": false,
+        "source": "public-provider-conf"
+      },
+      "vision": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "notes": [
+            "Thinking cannot be disabled; reasoning_effort defaults to max. Set thinking.clear_thinking to false to preserve reasoning across turns.",
+            "Public Z.AI documentation had not yet listed GLM-5.4 when this entry was added; capabilities follow the coding-plan model listing."
           ],
           "default_enabled": true,
           "mode": "effort",
