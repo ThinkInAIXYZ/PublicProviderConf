@@ -6,11 +6,11 @@
   "display_name": "Infer by Flow7",
   "models": [
     {
-      "id": "infer/gpt-6-astra:official",
-      "name": "GPT-6 Astra (Official API)",
-      "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
-      "family": "gpt-astra",
-      "attachment": true,
+      "id": "infer/grok-4.7:low-cost",
+      "name": "Grok 4.7 (Low cost)",
+      "description": "xAI's frontier model for long-running agents, coding, knowledge work, and visual projects",
+      "family": "grok",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -22,22 +22,19 @@
             "low",
             "medium",
             "high",
-            "xhigh",
-            "max"
+            "xhigh"
           ]
         }
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-04-30",
-      "release_date": "2026-09-04",
-      "last_updated": "2026-09-04",
+      "temperature": true,
+      "knowledge": "2026-05",
+      "release_date": "2026-09-21",
+      "last_updated": "2026-09-21",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "pdf"
+          "text"
         ],
         "output": [
           "text"
@@ -45,20 +42,16 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 271999,
-        "output": 128000
-      },
-      "provider": {
-        "shape": "responses"
+        "context": 199999,
+        "output": 199999
       },
       "cost": {
-        "input": 12.5,
-        "output": 62.5,
-        "cache_read": 1.25,
-        "cache_write": 15.625
+        "input": 0.44,
+        "output": 1.3,
+        "cache_read": 0.11
       },
-      "canonical_model_id": "openai/gpt-6-astra",
-      "display_name": "GPT-6 Astra (Official API)",
+      "canonical_model_id": "xai/grok-4.7",
+      "display_name": "Grok 4.7 (Low cost)",
       "type": "chat"
     },
     {
@@ -113,200 +106,6 @@
       "type": "chat"
     },
     {
-      "id": "infer/claude-fable-5-1:low-cost",
-      "name": "Claude Fable 5.1 (Low cost)",
-      "description": "Claude model for demanding reasoning and long-horizon agentic work",
-      "family": "claude-fable",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-06",
-      "release_date": "2026-09-01",
-      "last_updated": "2026-09-01",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 4.91,
-        "output": 24.53,
-        "cache_read": 0.13,
-        "cache_write": 6.14
-      },
-      "canonical_model_id": "anthropic/claude-fable-5-1",
-      "display_name": "Claude Fable 5.1 (Low cost)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "omitted",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
-            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
-            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
-          ]
-        }
-      }
-    },
-    {
-      "id": "infer/gemini-3.1-pro-preview:low-cost",
-      "name": "Gemini 3.1 Pro Preview (Low cost)",
-      "description": "Reasoning-first Gemini preview for agentic coding and complex problem solving",
-      "family": "gemini-pro",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-02-19",
-      "last_updated": "2026-02-19",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 199999,
-        "output": 65536
-      },
-      "cost": {
-        "input": 1.18,
-        "output": 5.3,
-        "cache_read": 0.12,
-        "cache_write": 1.33
-      },
-      "canonical_model_id": "google/gemini-3.1-pro-preview",
-      "display_name": "Gemini 3.1 Pro Preview (Low cost)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "low",
-            "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
-    },
-    {
-      "id": "infer/claude-opus-5-5:low-cost",
-      "name": "Claude Opus 5.5 (Low cost)",
-      "description": "Claude model for long-running agentic coding and knowledge work",
-      "family": "claude-opus",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-06",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 1.97,
-        "output": 9.81,
-        "cache_read": 0.1,
-        "cache_write": 2.46
-      },
-      "canonical_model_id": "anthropic/claude-opus-5-5",
-      "display_name": "Claude Opus 5.5 (Low cost)",
-      "type": "chat"
-    },
-    {
       "id": "infer/claude-sonnet-5-5:low-cost",
       "name": "Claude Sonnet 5.5 (Low cost)",
       "description": "Fast Claude model for everyday coding, agents, and knowledge work",
@@ -358,10 +157,10 @@
       "type": "chat"
     },
     {
-      "id": "infer/gpt-5.6-sol:official",
-      "name": "GPT-5.6 Sol (Official API)",
-      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
-      "family": "gpt-sol",
+      "id": "infer/gpt-6-astra:official",
+      "name": "GPT-6 Astra (Official API)",
+      "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
+      "family": "gpt-astra",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -371,7 +170,6 @@
         {
           "type": "effort",
           "values": [
-            "none",
             "low",
             "medium",
             "high",
@@ -382,10 +180,10 @@
       ],
       "tool_call": true,
       "structured_output": true,
-      "temperature": true,
-      "knowledge": "2026-02-16",
-      "release_date": "2026-07-09",
-      "last_updated": "2026-07-09",
+      "temperature": false,
+      "knowledge": "2026-04-30",
+      "release_date": "2026-09-04",
+      "last_updated": "2026-09-04",
       "modalities": {
         "input": [
           "text",
@@ -405,62 +203,13 @@
         "shape": "responses"
       },
       "cost": {
-        "input": 2.5,
-        "output": 12.5,
-        "cache_read": 0.25,
-        "cache_write": 3.125
+        "input": 12.5,
+        "output": 62.5,
+        "cache_read": 1.25,
+        "cache_write": 15.625
       },
-      "canonical_model_id": "openai/gpt-5.6-sol",
-      "display_name": "GPT-5.6 Sol (Official API)",
-      "type": "chat"
-    },
-    {
-      "id": "infer/grok-4.7:low-cost",
-      "name": "Grok 4.7 (Low cost)",
-      "description": "xAI's frontier model for long-running agents, coding, knowledge work, and visual projects",
-      "family": "grok",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2026-05",
-      "release_date": "2026-09-21",
-      "last_updated": "2026-09-21",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 199999,
-        "output": 199999
-      },
-      "cost": {
-        "input": 0.44,
-        "output": 1.3,
-        "cache_read": 0.11
-      },
-      "canonical_model_id": "xai/grok-4.7",
-      "display_name": "Grok 4.7 (Low cost)",
+      "canonical_model_id": "openai/gpt-6-astra",
+      "display_name": "GPT-6 Astra (Official API)",
       "type": "chat"
     },
     {
@@ -580,6 +329,257 @@
           ]
         }
       }
+    },
+    {
+      "id": "infer/claude-fable-5-1:low-cost",
+      "name": "Claude Fable 5.1 (Low cost)",
+      "description": "Claude model for demanding reasoning and long-horizon agentic work",
+      "family": "claude-fable",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-09-01",
+      "last_updated": "2026-09-01",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 4.91,
+        "output": 24.53,
+        "cache_read": 0.13,
+        "cache_write": 6.14
+      },
+      "canonical_model_id": "anthropic/claude-fable-5-1",
+      "display_name": "Claude Fable 5.1 (Low cost)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "omitted",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Adaptive thinking is always on for Claude Fable 5 and Claude Mythos 5; thinking.type = \"disabled\" is rejected.",
+            "Manual budget_tokens requests return 400 on Claude Fable 5 and Claude Mythos 5.",
+            "thinking.display defaults to omitted; set display to summarized to receive readable thinking summaries."
+          ]
+        }
+      }
+    },
+    {
+      "id": "infer/gpt-5.6-sol:official",
+      "name": "GPT-5.6 Sol (Official API)",
+      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
+      "family": "gpt-sol",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2026-02-16",
+      "release_date": "2026-07-09",
+      "last_updated": "2026-07-09",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 271999,
+        "output": 128000
+      },
+      "provider": {
+        "shape": "responses"
+      },
+      "cost": {
+        "input": 2.5,
+        "output": 12.5,
+        "cache_read": 0.25,
+        "cache_write": 3.125
+      },
+      "canonical_model_id": "openai/gpt-5.6-sol",
+      "display_name": "GPT-5.6 Sol (Official API)",
+      "type": "chat"
+    },
+    {
+      "id": "infer/gemini-3.1-pro-preview:low-cost",
+      "name": "Gemini 3.1 Pro Preview (Low cost)",
+      "description": "Reasoning-first Gemini preview for agentic coding and complex problem solving",
+      "family": "gemini-pro",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-02-19",
+      "last_updated": "2026-02-19",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 199999,
+        "output": 65536
+      },
+      "cost": {
+        "input": 1.18,
+        "output": 5.3,
+        "cache_read": 0.12,
+        "cache_write": 1.33
+      },
+      "canonical_model_id": "google/gemini-3.1-pro-preview",
+      "display_name": "Gemini 3.1 Pro Preview (Low cost)",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "low",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
+        }
+      }
+    },
+    {
+      "id": "infer/claude-opus-5-5:low-cost",
+      "name": "Claude Opus 5.5 (Low cost)",
+      "description": "Claude model for long-running agentic coding and knowledge work",
+      "family": "claude-opus",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 1.97,
+        "output": 9.81,
+        "cache_read": 0.1,
+        "cache_write": 2.46
+      },
+      "canonical_model_id": "anthropic/claude-opus-5-5",
+      "display_name": "Claude Opus 5.5 (Low cost)",
+      "type": "chat"
     }
   ]
 }
