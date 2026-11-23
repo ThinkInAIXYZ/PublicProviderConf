@@ -52,7 +52,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
     const result = await synthesizeCustomProvider();
 
     assert.equal(result.models.length, result.catalog.maxModels);
-    assert.equal(result.models.length, 62);
+    assert.equal(result.models.length, 63);
     assert.deepEqual(
       new Set(result.models.map(model => model.id)),
       new Set(result.catalog.sources.flatMap(source => source.models.map(model => model.id))),
@@ -65,7 +65,7 @@ test('uses official doc-derived seeds when API keys are missing', async () => {
         ['Gemini', 7],
         ['Kimi', 7],
         ['DeepSeek', 4],
-        ['Zhipu', 5],
+        ['Zhipu', 6],
         ['MiniMax', 4],
         ['StepFun', 4],
         ['Qwen', 8],
@@ -593,6 +593,36 @@ test('preserves November model pricing, controls, and access restrictions in gen
     assert.equal(getModel('claude-fable-5-2').metadata?.apiStatus, 'active');
     assert.equal(getModel('claude-mythos-5-2').metadata?.apiStatus, 'restricted');
     assert.deepEqual(getModel('claude-mythos-5-2').metadata?.availability, ['organization-verification']);
+  });
+});
+
+test('preserves GLM-5.4 coding-plan capabilities in generated output', async () => {
+  await withoutApiKeys(async () => {
+    const result = await synthesizeCustomProvider();
+    const providerInfo = createProviderInfo('custom-provider', 'custom provider', result.models);
+    JsonValidator.validateProviderInfo(providerInfo);
+    const provider = createModelsDevProvider(providerInfo);
+    applyReasoningPortraits({ providers: { [provider.id]: provider } });
+
+    const model = provider.models.find(item => item.id === 'glm-5.4');
+    assert.ok(model);
+    assert.equal(model.limit?.context, 1000000);
+    assert.equal(model.limit?.output, 131072);
+    assert.equal(model.vision, true);
+    assert.equal(model.attachment, true);
+    assert.equal(model.tool_call, true);
+    assert.equal(model.structured_output, true);
+    assert.equal(model.temperature, true);
+    assert.deepEqual(model.modalities, { input: ['text', 'image', 'video', 'pdf'], output: ['text'] });
+    assert.deepEqual(model.reasoning, { supported: true, default: true });
+    assert.deepEqual(model.reasoning_options, [{ type: 'effort', values: ['low', 'high', 'max'] }]);
+    assert.equal(model.extra_capabilities?.reasoning?.effort, 'max');
+    assert.equal(model.extra_capabilities?.reasoning?.default_enabled, true);
+    assert.deepEqual(model.extra_capabilities?.reasoning?.continuation, ['thinking_blocks']);
+    assert.equal(model.cost, undefined);
+    assert.equal(model.release_date, '2026-11-23');
+    assert.equal(model.metadata?.apiStatus, 'coding-plan-only');
+    assert.deepEqual(model.metadata?.availability, ['glm-coding-plan']);
   });
 });
 
