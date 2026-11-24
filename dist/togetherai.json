@@ -5,10 +5,10 @@
   "display_name": "Together AI",
   "models": [
     {
-      "id": "MiniMaxAI/MiniMax-M3.1-Flash",
-      "name": "MiniMax-M3.1-Flash",
-      "description": "Frontier multimodal coding model with 1M context window and tunable thinking depth",
-      "family": "minimax-m-flash",
+      "id": "meta-models/Muse-Glimmer-30B",
+      "name": "Muse Glimmer 30B",
+      "description": "Muse Glimmer is a 30-billion-parameter open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark for always-on local agents, tool use, coding, and image understanding.",
+      "family": "muse-glimmer",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -21,21 +21,23 @@
             "low",
             "medium",
             "high",
-            "xhigh",
-            "max"
+            "xhigh"
           ]
         }
       ],
       "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-10-19",
-      "last_updated": "2026-10-19",
+      "knowledge": "2026-01-04",
+      "release_date": "2026-08-10",
+      "last_updated": "2026-08-10",
       "modalities": {
         "input": [
           "text",
-          "image",
-          "video"
+          "image"
         ],
         "output": [
           "text"
@@ -43,17 +45,28 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 512000
+        "context": 131072,
+        "output": 131072
       },
       "cost": {
-        "input": 0.15,
-        "output": 0.6,
-        "cache_read": 0.015
+        "input": 0.35,
+        "output": 1.5,
+        "cache_read": 0.04
       },
-      "canonical_model_id": "minimax/MiniMax-M3.1-Flash",
-      "display_name": "MiniMax-M3.1-Flash",
-      "type": "chat"
+      "canonical_model_id": "meta/muse-glimmer-30b",
+      "display_name": "Muse Glimmer 30B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "meta-models/Muse-Spark-Open-816B-A42B",
@@ -122,11 +135,11 @@
       }
     },
     {
-      "id": "meta-models/Muse-Glimmer-30B",
-      "name": "Muse Glimmer 30B",
-      "description": "Muse Glimmer is a 30-billion-parameter open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark for always-on local agents, tool use, coding, and image understanding.",
-      "family": "muse-glimmer",
-      "attachment": true,
+      "id": "openai/gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
+      "family": "gpt-oss",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -137,24 +150,19 @@
           "values": [
             "low",
             "medium",
-            "high",
-            "xhigh"
+            "high"
           ]
         }
       ],
       "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2026-01-04",
-      "release_date": "2026-08-10",
-      "last_updated": "2026-08-10",
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -166,404 +174,15 @@
         "output": 131072
       },
       "cost": {
-        "input": 0.35,
-        "output": 1.5,
-        "cache_read": 0.04
+        "input": 0.15,
+        "output": 0.6
       },
-      "canonical_model_id": "meta/muse-glimmer-30b",
-      "display_name": "Muse Glimmer 30B",
+      "canonical_model_id": "openai/gpt-oss-120b",
+      "display_name": "GPT OSS 120B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "moonshotai/Kimi-K3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and always-on thinking for long-horizon agent work",
-      "family": "kimi",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3
-      },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "moonshotai/Kimi-K3.1-Pro",
-      "name": "Kimi K3.1 Pro",
-      "description": "Multimodal Kimi model with a 1M-token context window and always-on reasoning, for coding, 3D creation and financial research",
-      "family": "kimi-pro",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-10-23",
-      "last_updated": "2026-10-23",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 2,
-        "output": 10,
-        "cache_read": 0.2
-      },
-      "canonical_model_id": "moonshotai/kimi-k3.1-pro",
-      "display_name": "Kimi K3.1 Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
-      "name": "DeepSeek V4.1 Flash 1017",
-      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-10-17",
-      "last_updated": "2026-10-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.006
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "display_name": "DeepSeek V4.1 Flash 1017",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-ai/DeepSeek-V4-Pro-0813",
-      "name": "DeepSeek V4 Pro 0813",
-      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
-      "family": "deepseek-pro",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 384000
-      },
-      "cost": {
-        "input": 1.32,
-        "output": 3.96,
-        "cache_read": 0.13
-      },
-      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
-      "display_name": "DeepSeek V4 Pro 0813",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "deepseek-ai/DeepSeek-V4.1-Flash-1017-fast",
-      "name": "DeepSeek V4.1 Flash 1017 Fast",
-      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-10-17",
-      "last_updated": "2026-10-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.6,
-        "output": 2.4,
-        "cache_read": 0.012
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "display_name": "DeepSeek V4.1 Flash 1017 Fast",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-ai/DeepSeek-V4.1-Flash",
-      "name": "DeepSeek V4.1 Flash",
-      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.3,
-        "output": 1.2,
-        "cache_read": 0.006
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "DeepSeek V4.1 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+          "supported": true
         }
       }
     },
@@ -755,11 +374,11 @@
       }
     },
     {
-      "id": "elorian-labs/glimpse-1.0",
-      "name": "Glimpse 1.0",
-      "description": "Visual thinking model that reasons over images and video, post-trained by Elorian on an open-weights base",
-      "family": "glimpse",
-      "attachment": true,
+      "id": "reflection/Beam-1.0-501B-A23B",
+      "name": "Beam 1.0 501B A23B",
+      "description": "Sparse mixture-of-experts reasoning model with 23B active parameters for coding and agentic workflows",
+      "family": "beam",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -768,10 +387,12 @@
         {
           "type": "effort",
           "values": [
-            "none",
+            "minimal",
             "low",
             "medium",
-            "xhigh"
+            "high",
+            "xhigh",
+            "max"
           ]
         }
       ],
@@ -781,30 +402,29 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-10-16",
+      "knowledge": "2026-06-30",
+      "release_date": "2026-10-05",
       "last_updated": "2026-10-16",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 256000
+        "context": 1048576,
+        "output": 131072
       },
       "cost": {
-        "input": 0.6,
-        "output": 3,
-        "cache_read": 0.06
+        "input": 0.4,
+        "output": 1.2,
+        "cache_read": 0.04
       },
-      "canonical_model_id": "elorian-labs/glimpse-1.0",
-      "display_name": "Glimpse 1.0",
+      "canonical_model_id": "reflection/beam-1.0-501b-a23b",
+      "display_name": "Beam 1.0 501B A23B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -867,168 +487,6 @@
       },
       "canonical_model_id": "tencent/hy4",
       "display_name": "Hy4",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "openai/gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 131072,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.6
-      },
-      "canonical_model_id": "openai/gpt-oss-120b",
-      "display_name": "GPT OSS 120B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "Qwen/Qwen3.8-Flash",
-      "name": "Qwen3.8 Flash",
-      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
-      "family": "qwen-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.47
-      },
-      "canonical_model_id": "alibaba/qwen3.8-flash",
-      "display_name": "Qwen3.8 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "Qwen/Qwen3.5-9B",
-      "name": "Qwen3.5 9B",
-      "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
-      "family": "qwen",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-02-23",
-      "last_updated": "2026-02-23",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 65536
-      },
-      "cost": {
-        "input": 0.17,
-        "output": 0.25
-      },
-      "canonical_model_id": "alibaba/qwen3.5-9b",
-      "display_name": "Qwen3.5 9B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1127,11 +585,11 @@
       }
     },
     {
-      "id": "Qwen/Qwen3.6-Plus",
-      "name": "Qwen3.6 Plus",
-      "description": "Earlier Qwen multimodal workhorse for million-token agent and document tasks",
-      "family": "qwen-plus",
-      "attachment": false,
+      "id": "Qwen/Qwen3.5-9B",
+      "name": "Qwen3.5 9B",
+      "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
+      "family": "qwen",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -1144,28 +602,29 @@
       "tool_call": true,
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-04",
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
+      "release_date": "2026-02-23",
+      "last_updated": "2026-02-23",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 1000000,
+        "context": 262144,
         "output": 65536
       },
       "cost": {
-        "input": 0.5,
-        "output": 3
+        "input": 0.17,
+        "output": 0.25
       },
-      "canonical_model_id": "alibaba/qwen3.6-plus",
-      "display_name": "Qwen3.6 Plus",
+      "canonical_model_id": "alibaba/qwen3.5-9b",
+      "display_name": "Qwen3.5 9B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1223,6 +682,224 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true
+        }
+      }
+    },
+    {
+      "id": "Qwen/Qwen3.8-Flash",
+      "name": "Qwen3.8 Flash",
+      "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
+      "family": "qwen-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "xhigh"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.47
+      },
+      "canonical_model_id": "alibaba/qwen3.8-flash",
+      "display_name": "Qwen3.8 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "Qwen/Qwen3.6-Plus",
+      "name": "Qwen3.6 Plus",
+      "description": "Earlier Qwen multimodal workhorse for million-token agent and document tasks",
+      "family": "qwen-plus",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-04",
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.5,
+        "output": 3
+      },
+      "canonical_model_id": "alibaba/qwen3.6-plus",
+      "display_name": "Qwen3.6 Plus",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "MiniMaxAI/MiniMax-M3.1-Flash",
+      "name": "MiniMax-M3.1-Flash",
+      "description": "Frontier multimodal coding model with 1M context window and tunable thinking depth",
+      "family": "minimax-m-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-10-19",
+      "last_updated": "2026-10-19",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 512000
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.6,
+        "cache_read": 0.015
+      },
+      "canonical_model_id": "minimax/MiniMax-M3.1-Flash",
+      "display_name": "MiniMax-M3.1-Flash",
+      "type": "chat"
+    },
+    {
+      "id": "nvidia/NVIDIA-Nemotron-3.5-Super-VL",
+      "name": "Nemotron 3.5 Super VL 120B A12B",
+      "description": "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
+      "family": "nemotron-super",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-10-15",
+      "last_updated": "2026-10-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 0.15,
+        "output": 0.5,
+        "cache_read": 0.02
+      },
+      "canonical_model_id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "display_name": "Nemotron 3.5 Super VL 120B A12B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -1359,10 +1036,10 @@
       }
     },
     {
-      "id": "nvidia/NVIDIA-Nemotron-3.5-Super-VL",
-      "name": "Nemotron 3.5 Super VL 120B A12B",
-      "description": "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
-      "family": "nemotron-super",
+      "id": "elorian-labs/glimpse-1.0",
+      "name": "Glimpse 1.0",
+      "description": "Visual thinking model that reasons over images and video, post-trained by Elorian on an open-weights base",
+      "family": "glimpse",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -1370,7 +1047,13 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "xhigh"
+          ]
         }
       ],
       "tool_call": true,
@@ -1379,8 +1062,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-10-15",
-      "last_updated": "2026-10-15",
+      "release_date": "2026-10-16",
+      "last_updated": "2026-10-16",
       "modalities": {
         "input": [
           "text",
@@ -1391,18 +1074,18 @@
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
         "context": 262144,
-        "output": 262144
+        "output": 256000
       },
       "cost": {
-        "input": 0.15,
-        "output": 0.5,
-        "cache_read": 0.02
+        "input": 0.6,
+        "output": 3,
+        "cache_read": 0.06
       },
-      "canonical_model_id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
-      "display_name": "Nemotron 3.5 Super VL 120B A12B",
+      "canonical_model_id": "elorian-labs/glimpse-1.0",
+      "display_name": "Glimpse 1.0",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1417,11 +1100,11 @@
       }
     },
     {
-      "id": "reflection/Beam-1.0-501B-A23B",
-      "name": "Beam 1.0 501B A23B",
-      "description": "Sparse mixture-of-experts reasoning model with 23B active parameters for coding and agentic workflows",
-      "family": "beam",
-      "attachment": false,
+      "id": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -1430,11 +1113,9 @@
         {
           "type": "effort",
           "values": [
-            "minimal",
+            "none",
             "low",
-            "medium",
             "high",
-            "xhigh",
             "max"
           ]
         }
@@ -1445,9 +1126,73 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2026-06-30",
-      "release_date": "2026-10-05",
-      "last_updated": "2026-10-16",
+      "knowledge": "2025-05",
+      "release_date": "2026-10-17",
+      "last_updated": "2026-10-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": 0.006
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek V4.1 Flash 1017",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V4-Pro-0813",
+      "name": "DeepSeek V4 Pro 0813",
+      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
+      "family": "deepseek-pro",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-22",
       "modalities": {
         "input": [
           "text"
@@ -1459,15 +1204,143 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 131072
+        "output": 384000
       },
       "cost": {
-        "input": 0.4,
-        "output": 1.2,
-        "cache_read": 0.04
+        "input": 1.32,
+        "output": 3.96,
+        "cache_read": 0.13
       },
-      "canonical_model_id": "reflection/beam-1.0-501b-a23b",
-      "display_name": "Beam 1.0 501B A23B",
+      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
+      "display_name": "DeepSeek V4 Pro 0813",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "name": "DeepSeek V4.1 Flash",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.3,
+        "output": 1.2,
+        "cache_read": 0.006
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "deepseek-ai/DeepSeek-V4.1-Flash-1017-fast",
+      "name": "DeepSeek V4.1 Flash 1017 Fast",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-10-17",
+      "last_updated": "2026-10-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.6,
+        "output": 2.4,
+        "cache_read": 0.012
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek V4.1 Flash 1017 Fast",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -1478,6 +1351,133 @@
           "continuation": [
             "thinking_blocks"
           ]
+        }
+      }
+    },
+    {
+      "id": "moonshotai/Kimi-K3.1-Pro",
+      "name": "Kimi K3.1 Pro",
+      "description": "Multimodal Kimi model with a 1M-token context window and always-on reasoning, for coding, 3D creation and financial research",
+      "family": "kimi-pro",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-10-23",
+      "last_updated": "2026-10-23",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "cost": {
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.2
+      },
+      "canonical_model_id": "moonshotai/kimi-k3.1-pro",
+      "display_name": "Kimi K3.1 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "moonshotai/Kimi-K3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and always-on thinking for long-horizon agent work",
+      "family": "kimi",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3
+      },
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     }
