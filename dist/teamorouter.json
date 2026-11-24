@@ -6,11 +6,11 @@
   "display_name": "TeamoRouter",
   "models": [
     {
-      "id": "glm-5.3",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
-      "attachment": false,
+      "id": "gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "description": "Near-Astra performance for complex coding, computer use, and professional work at a lower cost.",
+      "family": "gpt-sol",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -20,57 +20,68 @@
           "type": "effort",
           "values": [
             "low",
+            "medium",
             "high",
+            "xhigh",
             "max"
           ]
         }
       ],
       "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
       "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
+      "temperature": false,
+      "knowledge": "2026-04-30",
+      "release_date": "2026-09-29",
+      "last_updated": "2026-09-29",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 131072
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
       },
       "cost": {
-        "input": 1.4,
-        "output": 4.4,
-        "cache_read": 0.26
-      },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.1,
+        "tiers": [
+          {
+            "input": 4,
+            "output": 15,
+            "cache_read": 0.2,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 4,
+          "output": 15,
+          "cache_read": 0.2
         }
-      }
+      },
+      "canonical_model_id": "openai/gpt-6.1-sol",
+      "display_name": "GPT-6.1 Sol",
+      "type": "chat"
     },
     {
-      "id": "claude-opus-5-5",
-      "name": "Claude Opus 5.5",
-      "description": "Claude model for long-running agentic coding and knowledge work",
-      "family": "claude-opus",
+      "id": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5",
+      "description": "Fast Claude model for everyday coding, agents, and knowledge work",
+      "family": "claude-sonnet",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -92,8 +103,8 @@
       "structured_output": true,
       "temperature": false,
       "knowledge": "2026-06",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
+      "release_date": "2026-09-28",
+      "last_updated": "2026-09-28",
       "modalities": {
         "input": [
           "text",
@@ -113,13 +124,13 @@
         "npm": "@ai-sdk/anthropic"
       },
       "cost": {
-        "input": 4,
-        "output": 20,
-        "cache_read": 0.2,
-        "cache_write": 5
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.1,
+        "cache_write": 2.5
       },
-      "canonical_model_id": "anthropic/claude-opus-5-5",
-      "display_name": "Claude Opus 5.5",
+      "canonical_model_id": "anthropic/claude-sonnet-5-5",
+      "display_name": "Claude Sonnet 5.5",
       "type": "chat"
     },
     {
@@ -190,10 +201,87 @@
       }
     },
     {
-      "id": "claude-sonnet-5-5",
-      "name": "Claude Sonnet 5.5",
-      "description": "Fast Claude model for everyday coding, agents, and knowledge work",
-      "family": "claude-sonnet",
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
+      "family": "gpt-astra",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-04-30",
+      "release_date": "2026-09-04",
+      "last_updated": "2026-09-04",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/openai"
+      },
+      "cost": {
+        "input": 10,
+        "output": 50,
+        "cache_read": 1,
+        "tiers": [
+          {
+            "input": 20,
+            "output": 75,
+            "cache_read": 2,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
+        ],
+        "context_over_200k": {
+          "input": 20,
+          "output": 75,
+          "cache_read": 2
+        }
+      },
+      "canonical_model_id": "openai/gpt-6-astra",
+      "display_name": "GPT-6 Astra",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "claude-opus-5-5",
+      "name": "Claude Opus 5.5",
+      "description": "Claude model for long-running agentic coding and knowledge work",
+      "family": "claude-opus",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -215,8 +303,8 @@
       "structured_output": true,
       "temperature": false,
       "knowledge": "2026-06",
-      "release_date": "2026-09-28",
-      "last_updated": "2026-09-28",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
       "modalities": {
         "input": [
           "text",
@@ -236,20 +324,20 @@
         "npm": "@ai-sdk/anthropic"
       },
       "cost": {
-        "input": 2,
-        "output": 10,
-        "cache_read": 0.1,
-        "cache_write": 2.5
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.2,
+        "cache_write": 5
       },
-      "canonical_model_id": "anthropic/claude-sonnet-5-5",
-      "display_name": "Claude Sonnet 5.5",
+      "canonical_model_id": "anthropic/claude-opus-5-5",
+      "display_name": "Claude Opus 5.5",
       "type": "chat"
     },
     {
-      "id": "deepseek-v4-flash",
-      "name": "DeepSeek V4 Flash",
-      "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
-      "family": "deepseek-flash",
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
+      "family": "deepseek-pro",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -274,9 +362,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-07-31",
-      "last_updated": "2026-07-31",
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-22",
       "modalities": {
         "input": [
           "text"
@@ -291,13 +378,13 @@
         "output": 384000
       },
       "cost": {
-        "input": 0.44,
-        "output": 1.32,
-        "reasoning": 1.32,
-        "cache_read": 0.014
+        "input": 0.66,
+        "output": 1.98,
+        "reasoning": 1.98,
+        "cache_read": 0.022
       },
-      "canonical_model_id": "deepseek/deepseek-v4-flash-0731",
-      "display_name": "DeepSeek V4 Flash",
+      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
+      "display_name": "DeepSeek V4 Pro",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -386,11 +473,88 @@
       }
     },
     {
-      "id": "gpt-6.1-sol",
-      "name": "GPT-6.1 Sol",
-      "description": "Near-Astra performance for complex coding, computer use, and professional work at a lower cost.",
-      "family": "gpt-sol",
-      "attachment": true,
+      "id": "deepseek-v4-flash",
+      "name": "DeepSeek V4 Flash",
+      "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
+      "family": "deepseek-flash",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-07-31",
+      "last_updated": "2026-07-31",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.44,
+        "output": 1.32,
+        "reasoning": 1.32,
+        "cache_read": 0.014
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-flash-0731",
+      "display_name": "DeepSeek V4 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -400,62 +564,51 @@
           "type": "effort",
           "values": [
             "low",
-            "medium",
             "high",
-            "xhigh",
             "max"
           ]
         }
       ],
       "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-04-30",
-      "release_date": "2026-09-29",
-      "last_updated": "2026-09-29",
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "pdf"
+          "text"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
+        "context": 1000000,
+        "output": 131072
       },
       "cost": {
-        "input": 2,
-        "output": 10,
-        "cache_read": 0.1,
-        "tiers": [
-          {
-            "input": 4,
-            "output": 15,
-            "cache_read": 0.2,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 4,
-          "output": 15,
-          "cache_read": 0.2
-        }
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 0.26
       },
-      "canonical_model_id": "openai/gpt-6.1-sol",
-      "display_name": "GPT-6.1 Sol",
-      "type": "chat"
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
     },
     {
       "id": "qwen3.8-max",
@@ -525,159 +678,6 @@
           "interleaved": true,
           "summaries": true,
           "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
-      "family": "deepseek-pro",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-22",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.66,
-        "output": 1.98,
-        "reasoning": 1.98,
-        "cache_read": 0.022
-      },
-      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
-      "display_name": "DeepSeek V4 Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
-        }
-      }
-    },
-    {
-      "id": "gpt-6-astra",
-      "name": "GPT-6 Astra",
-      "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
-      "family": "gpt-astra",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-04-30",
-      "release_date": "2026-09-04",
-      "last_updated": "2026-09-04",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/openai"
-      },
-      "cost": {
-        "input": 10,
-        "output": 50,
-        "cache_read": 1,
-        "tiers": [
-          {
-            "input": 20,
-            "output": 75,
-            "cache_read": 2,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 20,
-          "output": 75,
-          "cache_read": 2
-        }
-      },
-      "canonical_model_id": "openai/gpt-6-astra",
-      "display_name": "GPT-6 Astra",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
         }
       }
     }

@@ -6,10 +6,10 @@
   "display_name": "RuAPI",
   "models": [
     {
-      "id": "deepseek-flash",
-      "name": "DeepSeek Flash",
-      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
-      "family": "deepseek-flash",
+      "id": "claude-haiku-5-5",
+      "name": "Claude Haiku 5.5",
+      "description": "Fast Claude model for responsive assistance, classification, and lightweight agents",
+      "family": "claude-haiku",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -23,60 +23,65 @@
           "type": "effort",
           "values": [
             "low",
+            "medium",
             "high",
+            "xhigh",
             "max"
           ]
         }
       ],
       "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": false,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-10-17",
-      "last_updated": "2026-10-17",
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-10-07",
+      "last_updated": "2026-10-07",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
         "context": 1000000,
-        "output": 384000
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic",
+        "api": "https://www.ruapi.ai/v1"
       },
       "cost": {
-        "input": 0.168,
-        "output": 1.44,
-        "reasoning": 1.44,
-        "cache_read": 0.012
+        "input": 0.12,
+        "output": 0.6,
+        "cache_read": 0.012,
+        "cache_write": 0.15,
+        "tiers": [
+          {
+            "input": 0.6,
+            "output": 3,
+            "cache_read": 0.06,
+            "cache_write": 0.75,
+            "tier": {
+              "type": "context",
+              "size": 100000
+            }
+          }
+        ]
       },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "display_name": "DeepSeek Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "canonical_model_id": "anthropic/claude-haiku-5-5",
+      "display_name": "Claude Haiku 5.5",
+      "type": "chat"
     },
     {
-      "id": "claude-opus-5-5",
-      "name": "Claude Opus 5.5",
-      "description": "Claude model for long-running agentic coding and knowledge work",
-      "family": "claude-opus",
+      "id": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5",
+      "description": "Fast Claude model for everyday coding, agents, and knowledge work",
+      "family": "claude-sonnet",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -98,8 +103,8 @@
       "structured_output": true,
       "temperature": false,
       "knowledge": "2026-06",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
+      "release_date": "2026-09-28",
+      "last_updated": "2026-09-28",
       "modalities": {
         "input": [
           "text",
@@ -120,13 +125,13 @@
         "api": "https://www.ruapi.ai/v1"
       },
       "cost": {
-        "input": 4.8,
-        "output": 24,
-        "cache_read": 0.24,
-        "cache_write": 6
+        "input": 2.4,
+        "output": 12,
+        "cache_read": 0.12,
+        "cache_write": 3
       },
-      "canonical_model_id": "anthropic/claude-opus-5-5",
-      "display_name": "Claude Opus 5.5",
+      "canonical_model_id": "anthropic/claude-sonnet-5-5",
+      "display_name": "Claude Sonnet 5.5",
       "type": "chat"
     },
     {
@@ -221,63 +226,6 @@
       }
     },
     {
-      "id": "claude-sonnet-5-5",
-      "name": "Claude Sonnet 5.5",
-      "description": "Fast Claude model for everyday coding, agents, and knowledge work",
-      "family": "claude-sonnet",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-06",
-      "release_date": "2026-09-28",
-      "last_updated": "2026-09-28",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/anthropic",
-        "api": "https://www.ruapi.ai/v1"
-      },
-      "cost": {
-        "input": 2.4,
-        "output": 12,
-        "cache_read": 0.12,
-        "cache_write": 3
-      },
-      "canonical_model_id": "anthropic/claude-sonnet-5-5",
-      "display_name": "Claude Sonnet 5.5",
-      "type": "chat"
-    },
-    {
       "id": "gpt-5.4-mini",
       "name": "GPT-5.4 mini",
       "description": "Strong small GPT for coding subagents, quick tool use, and high-volume work",
@@ -350,6 +298,63 @@
           "visibility": "hidden"
         }
       }
+    },
+    {
+      "id": "claude-opus-5-5",
+      "name": "Claude Opus 5.5",
+      "description": "Claude model for long-running agentic coding and knowledge work",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2026-06",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 128000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic",
+        "api": "https://www.ruapi.ai/v1"
+      },
+      "cost": {
+        "input": 4.8,
+        "output": 24,
+        "cache_read": 0.24,
+        "cache_write": 6
+      },
+      "canonical_model_id": "anthropic/claude-opus-5-5",
+      "display_name": "Claude Opus 5.5",
+      "type": "chat"
     },
     {
       "id": "deepseek-v4-pro",
@@ -426,78 +431,6 @@
           ]
         }
       }
-    },
-    {
-      "id": "claude-haiku-5-5",
-      "name": "Claude Haiku 5.5",
-      "description": "Fast Claude model for responsive assistance, classification, and lightweight agents",
-      "family": "claude-haiku",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2026-06",
-      "release_date": "2026-10-07",
-      "last_updated": "2026-10-07",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 128000
-      },
-      "provider": {
-        "npm": "@ai-sdk/anthropic",
-        "api": "https://www.ruapi.ai/v1"
-      },
-      "cost": {
-        "input": 0.12,
-        "output": 0.6,
-        "cache_read": 0.012,
-        "cache_write": 0.15,
-        "tiers": [
-          {
-            "input": 0.6,
-            "output": 3,
-            "cache_read": 0.06,
-            "cache_write": 0.75,
-            "tier": {
-              "type": "context",
-              "size": 100000
-            }
-          }
-        ]
-      },
-      "canonical_model_id": "anthropic/claude-haiku-5-5",
-      "display_name": "Claude Haiku 5.5",
-      "type": "chat"
     },
     {
       "id": "gpt-5.6-terra",
@@ -682,6 +615,73 @@
             "high"
           ],
           "visibility": "hidden"
+        }
+      }
+    },
+    {
+      "id": "deepseek-flash",
+      "name": "DeepSeek Flash",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-10-17",
+      "last_updated": "2026-10-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.168,
+        "output": 1.44,
+        "reasoning": 1.44,
+        "cache_read": 0.012
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     }

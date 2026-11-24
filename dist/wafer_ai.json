@@ -6,11 +6,11 @@
   "display_name": "Wafer",
   "models": [
     {
-      "id": "GLM-5.2",
-      "name": "GLM-5.2",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
+      "id": "GLM-5.3-Flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -19,7 +19,6 @@
         {
           "type": "effort",
           "values": [
-            "none",
             "low",
             "high",
             "max"
@@ -31,12 +30,13 @@
         "field": "reasoning_content"
       },
       "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
+      "temperature": true,
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -45,15 +45,15 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 131072
+        "output": 196608
       },
       "cost": {
-        "input": 0.19,
-        "output": 4.4,
-        "cache_read": 0.18
+        "input": 0.05,
+        "output": 0.2,
+        "cache_read": 0.03
       },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3-Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -68,10 +68,10 @@
       }
     },
     {
-      "id": "Kimi-K3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
-      "family": "kimi",
+      "id": "Kimi-K3.1-Pro",
+      "name": "Kimi K3.1 Pro",
+      "description": "Multimodal Kimi model with 1M context and per-request reasoning (off by default on Wafer) for coding, 3D creation, financial research, and agentic work",
+      "family": "kimi-pro",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -93,8 +93,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "release_date": "2026-10-23",
+      "last_updated": "2026-10-23",
       "modalities": {
         "input": [
           "text",
@@ -110,22 +110,22 @@
         "output": 1048576
       },
       "cost": {
-        "input": 0.6,
-        "output": 15,
+        "input": 2,
+        "output": 10,
         "cache_read": 0.2
       },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
+      "canonical_model_id": "moonshotai/kimi-k3.1-pro",
+      "display_name": "Kimi K3.1 Pro",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -203,10 +203,10 @@
       }
     },
     {
-      "id": "GLM-5.3-Flash",
-      "name": "GLM-5.3-Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
+      "id": "Kimi-K3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+      "family": "kimi",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -216,7 +216,7 @@
         {
           "type": "effort",
           "values": [
-            "low",
+            "none",
             "high",
             "max"
           ]
@@ -228,8 +228,8 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
           "text",
@@ -242,15 +242,15 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 196608
+        "output": 1048576
       },
       "cost": {
-        "input": 0.05,
-        "output": 0.2,
-        "cache_read": 0.03
+        "input": 0.6,
+        "output": 15,
+        "cache_read": 0.2
       },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM-5.3-Flash",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -329,11 +329,11 @@
       }
     },
     {
-      "id": "Kimi-K3.1-Pro",
-      "name": "Kimi K3.1 Pro",
-      "description": "Multimodal Kimi model with 1M context and per-request reasoning (off by default on Wafer) for coding, 3D creation, financial research, and agentic work",
-      "family": "kimi-pro",
-      "attachment": true,
+      "id": "DeepSeek-V4-Flash-0731-Fast",
+      "name": "DeepSeek V4 Flash 0731 Fast",
+      "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
+      "family": "deepseek-flash",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -343,6 +343,7 @@
           "type": "effort",
           "values": [
             "none",
+            "low",
             "high",
             "max"
           ]
@@ -354,12 +355,12 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-10-23",
-      "last_updated": "2026-10-23",
+      "knowledge": "2025-05",
+      "release_date": "2026-07-31",
+      "last_updated": "2026-07-31",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -368,25 +369,87 @@
       "open_weights": true,
       "limit": {
         "context": 1048576,
-        "output": 1048576
+        "output": 384000
       },
       "cost": {
-        "input": 2,
-        "output": 10,
-        "cache_read": 0.2
+        "input": 0.13,
+        "output": 0.23,
+        "cache_read": 0.028
       },
-      "canonical_model_id": "moonshotai/kimi-k3.1-pro",
-      "display_name": "Kimi K3.1 Pro",
+      "canonical_model_id": "deepseek/deepseek-v4-flash-0731",
+      "display_name": "DeepSeek V4 Flash 0731 Fast",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "GLM-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
           ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.19,
+        "output": 4.4,
+        "cache_read": 0.18
+      },
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -454,73 +517,9 @@
       }
     },
     {
-      "id": "DeepSeek-V4.1-Flash-1017",
-      "name": "DeepSeek V4.1 Flash 1017",
-      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-10-17",
-      "last_updated": "2026-10-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.13,
-        "output": 0.5,
-        "cache_read": 0.008
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "display_name": "DeepSeek V4.1 Flash 1017",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "DeepSeek-V4-Flash-0731-Fast",
-      "name": "DeepSeek V4 Flash 0731 Fast",
-      "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
+      "id": "DeepSeek-V4-Flash-0423",
+      "name": "DeepSeek V4 Flash 0423",
+      "description": "Initial DeepSeek V4 Flash snapshot for economical reasoning, coding, and million-token agent workloads",
       "family": "deepseek-flash",
       "attachment": false,
       "reasoning": {
@@ -545,8 +544,8 @@
       "structured_output": true,
       "temperature": true,
       "knowledge": "2025-05",
-      "release_date": "2026-07-31",
-      "last_updated": "2026-07-31",
+      "release_date": "2026-04-23",
+      "last_updated": "2026-04-23",
       "modalities": {
         "input": [
           "text"
@@ -561,22 +560,22 @@
         "output": 384000
       },
       "cost": {
-        "input": 0.13,
-        "output": 0.23,
+        "input": 0.14,
+        "output": 0.28,
         "cache_read": 0.028
       },
-      "canonical_model_id": "deepseek/deepseek-v4-flash-0731",
-      "display_name": "DeepSeek V4 Flash 0731 Fast",
+      "canonical_model_id": "deepseek/deepseek-v4-flash-0423",
+      "display_name": "DeepSeek V4 Flash 0423",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -642,11 +641,11 @@
       }
     },
     {
-      "id": "DeepSeek-V4-Flash-0423",
-      "name": "DeepSeek V4 Flash 0423",
-      "description": "Initial DeepSeek V4 Flash snapshot for economical reasoning, coding, and million-token agent workloads",
+      "id": "DeepSeek-V4.1-Flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
       "family": "deepseek-flash",
-      "attachment": false,
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -669,11 +668,12 @@
       "structured_output": true,
       "temperature": true,
       "knowledge": "2025-05",
-      "release_date": "2026-04-23",
-      "last_updated": "2026-04-23",
+      "release_date": "2026-10-17",
+      "last_updated": "2026-10-17",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image"
         ],
         "output": [
           "text"
@@ -685,12 +685,12 @@
         "output": 384000
       },
       "cost": {
-        "input": 0.14,
-        "output": 0.28,
-        "cache_read": 0.028
+        "input": 0.13,
+        "output": 0.5,
+        "cache_read": 0.008
       },
-      "canonical_model_id": "deepseek/deepseek-v4-flash-0423",
-      "display_name": "DeepSeek V4 Flash 0423",
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek V4.1 Flash 1017",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
