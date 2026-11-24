@@ -6,6 +6,167 @@
   "display_name": "Sarvam AI",
   "models": [
     {
+      "id": "sarvam-105b-conversations",
+      "name": "Sarvam-105B Conversations",
+      "description": "Flagship Indian-language reasoning model for enterprise multilingual applications",
+      "family": "sarvam",
+      "attachment": false,
+      "reasoning": {
+        "supported": false
+      },
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-02-18",
+      "last_updated": "2026-02-18",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 32000,
+        "output": 32000
+      },
+      "cost": {
+        "input": 0.10638298,
+        "output": 0.26595745,
+        "cache_read": 0.00265957
+      },
+      "canonical_model_id": "sarvam/sarvam-105b",
+      "display_name": "Sarvam-105B Conversations",
+      "type": "chat"
+    },
+    {
+      "id": "gemma4",
+      "name": "Gemma 4 31B IT",
+      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
+      "family": "gemma",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-01",
+      "release_date": "2026-04-02",
+      "last_updated": "2026-04-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 32768
+      },
+      "cost": {
+        "input": 0.37234043,
+        "output": 0.95744681,
+        "cache_read": 0.10638298
+      },
+      "canonical_model_id": "google/gemma-4-31b-it",
+      "display_name": "Gemma 4 31B IT",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseekv4.1-flash-1017-interactive",
+      "name": "DeepSeek V4.1 Flash 1017 Interactive",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-10-17",
+      "last_updated": "2026-10-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.26595745,
+        "output": 1.11702128,
+        "cache_read": 0.00531915
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek V4.1 Flash 1017 Interactive",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
       "id": "glm5.3",
       "name": "GLM-5.3",
       "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
@@ -129,23 +290,25 @@
       }
     },
     {
-      "id": "gemma4",
-      "name": "Gemma 4 31B IT",
-      "description": "Largest Gemma 4 instruction model for open, self-hosted chat and reasoning",
-      "family": "gemma",
-      "attachment": true,
+      "id": "sarvam-105b",
+      "name": "Sarvam-105B",
+      "description": "Flagship Indian-language reasoning model for enterprise multilingual applications",
+      "family": "sarvam",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
         {
+          "type": "toggle"
+        },
+        {
           "type": "effort",
           "values": [
-            "none",
             "low",
-            "high",
-            "max"
+            "medium",
+            "high"
           ]
         }
       ],
@@ -154,13 +317,11 @@
         "field": "reasoning_content"
       },
       "temperature": true,
-      "knowledge": "2025-01",
-      "release_date": "2026-04-02",
-      "last_updated": "2026-04-02",
+      "release_date": "2026-02-18",
+      "last_updated": "2026-02-18",
       "modalities": {
         "input": [
-          "text",
-          "image"
+          "text"
         ],
         "output": [
           "text"
@@ -168,16 +329,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 32768
+        "context": 128000,
+        "output": 128000
       },
       "cost": {
-        "input": 0.37234043,
-        "output": 0.95744681,
-        "cache_read": 0.10638298
+        "input": 0.10638298,
+        "output": 0.26595745,
+        "cache_read": 0.00265957
       },
-      "canonical_model_id": "google/gemma-4-31b-it",
-      "display_name": "Gemma 4 31B IT",
+      "canonical_model_id": "sarvam/sarvam-105b",
+      "display_name": "Sarvam-105B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -239,167 +400,6 @@
       },
       "canonical_model_id": "zhipuai/glm-5.3-flash",
       "display_name": "GLM-5.3-Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseekv4.1-flash-1017-interactive",
-      "name": "DeepSeek V4.1 Flash 1017 Interactive",
-      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-10-17",
-      "last_updated": "2026-10-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.26595745,
-        "output": 1.11702128,
-        "cache_read": 0.00531915
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "display_name": "DeepSeek V4.1 Flash 1017 Interactive",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "sarvam-105b-conversations",
-      "name": "Sarvam-105B Conversations",
-      "description": "Flagship Indian-language reasoning model for enterprise multilingual applications",
-      "family": "sarvam",
-      "attachment": false,
-      "reasoning": {
-        "supported": false
-      },
-      "tool_call": true,
-      "temperature": true,
-      "release_date": "2026-02-18",
-      "last_updated": "2026-02-18",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 32000,
-        "output": 32000
-      },
-      "cost": {
-        "input": 0.10638298,
-        "output": 0.26595745,
-        "cache_read": 0.00265957
-      },
-      "canonical_model_id": "sarvam/sarvam-105b",
-      "display_name": "Sarvam-105B Conversations",
-      "type": "chat"
-    },
-    {
-      "id": "sarvam-105b",
-      "name": "Sarvam-105B",
-      "description": "Flagship Indian-language reasoning model for enterprise multilingual applications",
-      "family": "sarvam",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-02-18",
-      "last_updated": "2026-02-18",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 128000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 0.10638298,
-        "output": 0.26595745,
-        "cache_read": 0.00265957
-      },
-      "canonical_model_id": "sarvam/sarvam-105b",
-      "display_name": "Sarvam-105B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
