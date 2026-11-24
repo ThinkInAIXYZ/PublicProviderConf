@@ -6,11 +6,11 @@
   "display_name": "Tenstorrent",
   "models": [
     {
-      "id": "Qwen/Qwen3.8-27B",
-      "name": "Qwen3.8 27B",
-      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
-      "family": "qwen",
-      "attachment": true,
+      "id": "MiniMaxAI/MiniMax-M3.1-Flash",
+      "name": "MiniMax-M3.1-Flash",
+      "description": "Frontier multimodal coding model with 1M context window and tunable thinking depth",
+      "family": "minimax-m-flash",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -22,20 +22,22 @@
             "none",
             "low",
             "medium",
-            "xhigh"
+            "high",
+            "xhigh",
+            "max"
           ]
         }
       ],
       "tool_call": true,
-      "structured_output": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
       "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
+      "release_date": "2026-10-19",
+      "last_updated": "2026-10-19",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -43,17 +45,28 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 262144,
-        "output": 65536
+        "context": 1000000,
+        "output": 512000
       },
       "cost": {
-        "input": 0.15,
-        "output": 2,
-        "cache_read": 0.05
+        "input": 0.05,
+        "output": 0.2,
+        "cache_read": 0.005
       },
-      "canonical_model_id": "alibaba/qwen3.8-27b",
-      "display_name": "Qwen3.8 27B",
-      "type": "chat"
+      "canonical_model_id": "minimax/MiniMax-M3.1-Flash",
+      "display_name": "MiniMax-M3.1-Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
     },
     {
       "id": "zai-org/GLM-5.3-Flash",
@@ -179,11 +192,11 @@
       }
     },
     {
-      "id": "MiniMaxAI/MiniMax-M3.1-Flash",
-      "name": "MiniMax-M3.1-Flash",
-      "description": "Frontier multimodal coding model with 1M context window and tunable thinking depth",
-      "family": "minimax-m-flash",
-      "attachment": false,
+      "id": "Qwen/Qwen3.8-27B",
+      "name": "Qwen3.8 27B",
+      "description": "Dense 27B vision-language model for coding, agent tasks, and image and video understanding",
+      "family": "qwen",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -195,22 +208,20 @@
             "none",
             "low",
             "medium",
-            "high",
-            "xhigh",
-            "max"
+            "xhigh"
           ]
         }
       ],
       "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
+      "structured_output": true,
       "temperature": true,
-      "release_date": "2026-10-19",
-      "last_updated": "2026-10-19",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -218,28 +229,17 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 512000
+        "context": 262144,
+        "output": 65536
       },
       "cost": {
-        "input": 0.05,
-        "output": 0.2,
-        "cache_read": 0.005
+        "input": 0.15,
+        "output": 2,
+        "cache_read": 0.05
       },
-      "canonical_model_id": "minimax/MiniMax-M3.1-Flash",
-      "display_name": "MiniMax-M3.1-Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
+      "canonical_model_id": "alibaba/qwen3.8-27b",
+      "display_name": "Qwen3.8 27B",
+      "type": "chat"
     }
   ]
 }
