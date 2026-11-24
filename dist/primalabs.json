@@ -6,10 +6,10 @@
   "display_name": "PrimaLabs",
   "models": [
     {
-      "id": "primalabs-ai/Nemotron-3.5-Super-VL-NVFP4",
-      "name": "Nemotron 3.5 Super VL 120B A12B",
-      "description": "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
-      "family": "nemotron-super",
+      "id": "primalabs-ai/DeepSeek-V4.1-Flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -17,7 +17,13 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
         }
       ],
       "tool_call": true,
@@ -26,8 +32,9 @@
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-10-15",
-      "last_updated": "2026-10-15",
+      "knowledge": "2025-05",
+      "release_date": "2026-10-17",
+      "last_updated": "2026-10-17",
       "modalities": {
         "input": [
           "text",
@@ -43,12 +50,12 @@
         "output": 1048576
       },
       "cost": {
-        "input": 0.25,
-        "output": 1.5,
-        "cache_read": 0.05
+        "input": 0.24,
+        "output": 0.96,
+        "cache_read": 0.0048
       },
-      "canonical_model_id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
-      "display_name": "Nemotron 3.5 Super VL 120B A12B",
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek V4.1 Flash 1017",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -125,6 +132,126 @@
       }
     },
     {
+      "id": "primalabs-ai/Kimi-K3.1-Pro",
+      "name": "Kimi K3.1 Pro",
+      "description": "Multimodal Kimi model with a 1M-token context window and always-on reasoning, for coding, 3D creation and financial research",
+      "family": "kimi-pro",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "release_date": "2026-10-23",
+      "last_updated": "2026-10-23",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "cost": {
+        "input": 1.8,
+        "output": 9,
+        "cache_read": 0.18
+      },
+      "canonical_model_id": "moonshotai/kimi-k3.1-pro",
+      "display_name": "Kimi K3.1 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "primalabs-ai/Nemotron-3.5-Super-VL-NVFP4",
+      "name": "Nemotron 3.5 Super VL 120B A12B",
+      "description": "NVIDIA vision-language reasoning model for text, image, and video understanding and agentic tool use",
+      "family": "nemotron-super",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-10-15",
+      "last_updated": "2026-10-15",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 1048576
+      },
+      "cost": {
+        "input": 0.25,
+        "output": 1.5,
+        "cache_read": 0.05
+      },
+      "canonical_model_id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "display_name": "Nemotron 3.5 Super VL 120B A12B",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
       "id": "primalabs-ai/MiMo-V2.6-Pro",
       "name": "MiMo-V2.6-Pro",
       "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
@@ -166,70 +293,6 @@
       },
       "canonical_model_id": "xiaomi/mimo-v2.6-pro",
       "display_name": "MiMo-V2.6-Pro",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "primalabs-ai/DeepSeek-V4.1-Flash-1017",
-      "name": "DeepSeek V4.1 Flash 1017",
-      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-10-17",
-      "last_updated": "2026-10-17",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 0.24,
-        "output": 0.96,
-        "cache_read": 0.0048
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "display_name": "DeepSeek V4.1 Flash 1017",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -286,69 +349,6 @@
       },
       "canonical_model_id": "nvidia/nemotron-3.5-lightning",
       "display_name": "Nemotron 3.5 Lightning 30B A3B",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "primalabs-ai/Kimi-K3.1-Pro",
-      "name": "Kimi K3.1 Pro",
-      "description": "Multimodal Kimi model with a 1M-token context window and always-on reasoning, for coding, 3D creation and financial research",
-      "family": "kimi-pro",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-10-23",
-      "last_updated": "2026-10-23",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 1.8,
-        "output": 9,
-        "cache_read": 0.18
-      },
-      "canonical_model_id": "moonshotai/kimi-k3.1-pro",
-      "display_name": "Kimi K3.1 Pro",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
