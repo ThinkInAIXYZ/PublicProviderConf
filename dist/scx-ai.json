@@ -6,19 +6,16 @@
   "display_name": "SCX.ai",
   "models": [
     {
-      "id": "DeepSeek-V4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "Open MoE flagship with million-token context for coding and long agent runs",
-      "family": "deepseek-pro",
+      "id": "GLM-5.3",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
       "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
-        {
-          "type": "toggle"
-        },
         {
           "type": "effort",
           "values": [
@@ -32,11 +29,10 @@
       "interleaved": {
         "field": "reasoning_content"
       },
-      "structured_output": false,
+      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
           "text"
@@ -48,36 +44,141 @@
       "open_weights": true,
       "limit": {
         "context": 1000000,
-        "output": 384000
+        "output": 131072
       },
       "cost": {
-        "input": 1.65,
-        "output": 3.301,
-        "cache_read": 0.138
+        "input": 0.98,
+        "output": 3.08,
+        "cache_read": 0.18
       },
-      "canonical_model_id": "deepseek/deepseek-v4-pro",
-      "display_name": "DeepSeek V4 Pro",
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
           ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "GLM-5.2",
+      "name": "GLM-5.2",
+      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "high",
+            "max"
           ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-06-13",
+      "last_updated": "2026-06-13",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.61,
+        "output": 1.98,
+        "cache_read": 0.22
+      },
+      "canonical_model_id": "zhipuai/glm-5.2",
+      "display_name": "GLM-5.2",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "Kimi-K2.7-Code",
+      "name": "Kimi K2.7 Code",
+      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
+      "family": "kimi-code",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": false,
+      "knowledge": "2025-01",
+      "release_date": "2026-06-12",
+      "last_updated": "2026-06-12",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 262144,
+        "output": 262144
+      },
+      "cost": {
+        "input": 0.80451,
+        "output": 3.34179,
+        "cache_read": 0.16092
+      },
+      "canonical_model_id": "moonshotai/kimi-k2.7-code",
+      "display_name": "Kimi K2.7 Code",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -133,6 +234,82 @@
       },
       "canonical_model_id": "deepseek/deepseek-v4-flash",
       "display_name": "DeepSeek V4 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "DeepSeek-V4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "Open MoE flagship with million-token context for coding and long agent runs",
+      "family": "deepseek-pro",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 1.65,
+        "output": 3.301,
+        "cache_read": 0.138
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro",
+      "display_name": "DeepSeek V4 Pro",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -222,8 +399,8 @@
       }
     },
     {
-      "id": "GLM-5.2",
-      "name": "GLM-5.2",
+      "id": "GLM-5.2-Fast",
+      "name": "GLM-5.2 Turbo",
       "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
       "family": "glm",
       "attachment": false,
@@ -263,31 +440,31 @@
         "output": 131072
       },
       "cost": {
-        "input": 0.61,
-        "output": 1.98,
-        "cache_read": 0.22
+        "input": 1.99,
+        "output": 6.16,
+        "cache_read": 0.4
       },
       "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2",
+      "display_name": "GLM-5.2 Turbo",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
     {
-      "id": "Kimi-K3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and always-on thinking for long-horizon agent work",
-      "family": "kimi",
-      "attachment": true,
+      "id": "MiniMax-M2.7",
+      "name": "MiniMax-M2.7",
+      "description": "Open MiniMax flagship for coding agents, office automation, and complex environments",
+      "family": "minimax-m",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -296,26 +473,21 @@
         {
           "type": "effort",
           "values": [
-            "none",
             "low",
-            "high",
-            "max"
+            "medium",
+            "high"
           ]
         }
       ],
       "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
+      "interleaved": true,
       "structured_output": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "temperature": true,
+      "release_date": "2026-03-18",
+      "last_updated": "2026-03-18",
       "modalities": {
         "input": [
-          "text",
-          "image",
-          "video"
+          "text"
         ],
         "output": [
           "text"
@@ -323,26 +495,26 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 1048576
+        "context": 196608,
+        "output": 196608
       },
       "cost": {
-        "input": 2.827,
-        "output": 14.133,
-        "cache_read": 0.283
+        "input": 0.48,
+        "output": 1.79,
+        "cache_read": 0.05
       },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
+      "canonical_model_id": "minimax/MiniMax-M2.7",
+      "display_name": "MiniMax-M2.7",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
           "interleaved": true,
           "summaries": true,
-          "visibility": "summary"
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
         }
       }
     },
@@ -413,11 +585,11 @@
       }
     },
     {
-      "id": "gpt-oss-120b",
-      "name": "GPT OSS 120B",
-      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
-      "family": "gpt-oss",
-      "attachment": false,
+      "id": "Kimi-K3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and always-on thinking for long-horizon agent work",
+      "family": "kimi",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -426,9 +598,10 @@
         {
           "type": "effort",
           "values": [
+            "none",
             "low",
-            "medium",
-            "high"
+            "high",
+            "max"
           ]
         }
       ],
@@ -437,13 +610,14 @@
         "field": "reasoning_content"
       },
       "structured_output": true,
-      "temperature": true,
-      "knowledge": "2024-06",
-      "release_date": "2025-08-05",
-      "last_updated": "2025-08-05",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -451,15 +625,16 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 131072,
-        "output": 131072
+        "context": 1048576,
+        "output": 1048576
       },
       "cost": {
-        "input": 0.17,
-        "output": 0.55
+        "input": 2.827,
+        "output": 14.133,
+        "cache_read": 0.283
       },
-      "canonical_model_id": "openai/gpt-oss-120b",
-      "display_name": "GPT OSS 120B",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -540,131 +715,6 @@
       }
     },
     {
-      "id": "GLM-5.3-Flash",
-      "name": "GLM-5.3-Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.13,
-        "output": 0.4,
-        "cache_read": 0.024
-      },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM-5.3-Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "GLM-5.3",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.98,
-        "output": 3.08,
-        "cache_read": 0.18
-      },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
       "id": "Qwen3.8-Max",
       "name": "Qwen3.8 Max",
       "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
@@ -730,10 +780,74 @@
       }
     },
     {
-      "id": "MiniMax-M2.7",
-      "name": "MiniMax-M2.7",
-      "description": "Open MiniMax flagship for coding agents, office automation, and complex environments",
-      "family": "minimax-m",
+      "id": "GLM-5.3-Flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": true,
+      "temperature": true,
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.13,
+        "output": 0.4,
+        "cache_read": 0.024
+      },
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3-Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "description": "Open GPT reasoning model for self-hosted agents and controllable deployments",
+      "family": "gpt-oss",
       "attachment": false,
       "reasoning": {
         "supported": true,
@@ -750,72 +864,14 @@
         }
       ],
       "tool_call": true,
-      "interleaved": true,
-      "structured_output": true,
-      "temperature": true,
-      "release_date": "2026-03-18",
-      "last_updated": "2026-03-18",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 196608,
-        "output": 196608
-      },
-      "cost": {
-        "input": 0.48,
-        "output": 1.79,
-        "cache_read": 0.05
-      },
-      "canonical_model_id": "minimax/MiniMax-M2.7",
-      "display_name": "MiniMax-M2.7",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "GLM-5.2-Fast",
-      "name": "GLM-5.2 Turbo",
-      "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
       "interleaved": {
         "field": "reasoning_content"
       },
       "structured_output": true,
       "temperature": true,
-      "release_date": "2026-06-13",
-      "last_updated": "2026-06-13",
+      "knowledge": "2024-06",
+      "release_date": "2025-08-05",
+      "last_updated": "2025-08-05",
       "modalities": {
         "input": [
           "text"
@@ -826,71 +882,15 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
+        "context": 131072,
         "output": 131072
       },
       "cost": {
-        "input": 1.99,
-        "output": 6.16,
-        "cache_read": 0.4
+        "input": 0.17,
+        "output": 0.55
       },
-      "canonical_model_id": "zhipuai/glm-5.2",
-      "display_name": "GLM-5.2 Turbo",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "Kimi-K2.7-Code",
-      "name": "Kimi K2.7 Code",
-      "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
-      "family": "kimi-code",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": true,
-      "temperature": false,
-      "knowledge": "2025-01",
-      "release_date": "2026-06-12",
-      "last_updated": "2026-06-12",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 262144,
-        "output": 262144
-      },
-      "cost": {
-        "input": 0.80451,
-        "output": 3.34179,
-        "cache_read": 0.16092
-      },
-      "canonical_model_id": "moonshotai/kimi-k2.7-code",
-      "display_name": "Kimi K2.7 Code",
+      "canonical_model_id": "openai/gpt-oss-120b",
+      "display_name": "GPT OSS 120B",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
