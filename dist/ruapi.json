@@ -6,10 +6,10 @@
   "display_name": "RuAPI",
   "models": [
     {
-      "id": "claude-haiku-5-5",
-      "name": "Claude Haiku 5.5",
-      "description": "Fast Claude model for responsive assistance, classification, and lightweight agents",
-      "family": "claude-haiku",
+      "id": "deepseek-flash",
+      "name": "DeepSeek Flash",
+      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
+      "family": "deepseek-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -19,6 +19,70 @@
         {
           "type": "toggle"
         },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": false,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-10-17",
+      "last_updated": "2026-10-17",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.168,
+        "output": 1.44,
+        "reasoning": 1.44,
+        "cache_read": 0.012
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "display_name": "DeepSeek Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-opus-5-5",
+      "name": "Claude Opus 5.5",
+      "description": "Claude model for long-running agentic coding and knowledge work",
+      "family": "claude-opus",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
         {
           "type": "effort",
           "values": [
@@ -34,8 +98,8 @@
       "structured_output": true,
       "temperature": false,
       "knowledge": "2026-06",
-      "release_date": "2026-10-07",
-      "last_updated": "2026-10-07",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
       "modalities": {
         "input": [
           "text",
@@ -56,116 +120,14 @@
         "api": "https://www.ruapi.ai/v1"
       },
       "cost": {
-        "input": 0.12,
-        "output": 0.6,
-        "cache_read": 0.012,
-        "cache_write": 0.15,
-        "tiers": [
-          {
-            "input": 0.6,
-            "output": 3,
-            "cache_read": 0.06,
-            "cache_write": 0.75,
-            "tier": {
-              "type": "context",
-              "size": 100000
-            }
-          }
-        ]
+        "input": 4.8,
+        "output": 24,
+        "cache_read": 0.24,
+        "cache_write": 6
       },
-      "canonical_model_id": "anthropic/claude-haiku-5-5",
-      "display_name": "Claude Haiku 5.5",
+      "canonical_model_id": "anthropic/claude-opus-5-5",
+      "display_name": "Claude Opus 5.5",
       "type": "chat"
-    },
-    {
-      "id": "gpt-5.5",
-      "name": "GPT-5.5",
-      "description": "Default frontier GPT for coding, computer use, research, and knowledge work",
-      "family": "gpt",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "structured_output": true,
-      "temperature": true,
-      "knowledge": "2025-12-01",
-      "release_date": "2026-04-23",
-      "last_updated": "2026-04-23",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 6,
-        "output": 36,
-        "cache_read": 0.6,
-        "tiers": [
-          {
-            "input": 12,
-            "output": 54,
-            "cache_read": 1.2,
-            "tier": {
-              "type": "context",
-              "size": 272000
-            }
-          }
-        ],
-        "context_over_200k": {
-          "input": 12,
-          "output": 54,
-          "cache_read": 1.2
-        }
-      },
-      "canonical_model_id": "openai/gpt-5.5",
-      "display_name": "GPT-5.5",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "medium",
-          "effort_options": [
-            "low",
-            "medium",
-            "high",
-            "xhigh"
-          ],
-          "verbosity": "medium",
-          "verbosity_options": [
-            "low",
-            "medium",
-            "high"
-          ],
-          "visibility": "hidden"
-        }
-      }
     },
     {
       "id": "gpt-5.4",
@@ -390,16 +352,95 @@
       }
     },
     {
-      "id": "claude-opus-5-5",
-      "name": "Claude Opus 5.5",
-      "description": "Claude model for long-running agentic coding and knowledge work",
-      "family": "claude-opus",
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
+      "family": "deepseek-pro",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "structured_output": false,
+      "temperature": true,
+      "release_date": "2026-08-13",
+      "last_updated": "2026-08-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 1.584,
+        "output": 4.752,
+        "reasoning": 4.752,
+        "cache_read": 0.06
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
+      "display_name": "DeepSeek V4 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "claude-haiku-5-5",
+      "name": "Claude Haiku 5.5",
+      "description": "Fast Claude model for responsive assistance, classification, and lightweight agents",
+      "family": "claude-haiku",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
+        {
+          "type": "toggle"
+        },
         {
           "type": "effort",
           "values": [
@@ -415,8 +456,8 @@
       "structured_output": true,
       "temperature": false,
       "knowledge": "2026-06",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
+      "release_date": "2026-10-07",
+      "last_updated": "2026-10-07",
       "modalities": {
         "input": [
           "text",
@@ -437,13 +478,25 @@
         "api": "https://www.ruapi.ai/v1"
       },
       "cost": {
-        "input": 4.8,
-        "output": 24,
-        "cache_read": 0.24,
-        "cache_write": 6
+        "input": 0.12,
+        "output": 0.6,
+        "cache_read": 0.012,
+        "cache_write": 0.15,
+        "tiers": [
+          {
+            "input": 0.6,
+            "output": 3,
+            "cache_read": 0.06,
+            "cache_write": 0.75,
+            "tier": {
+              "type": "context",
+              "size": 100000
+            }
+          }
+        ]
       },
-      "canonical_model_id": "anthropic/claude-opus-5-5",
-      "display_name": "Claude Opus 5.5",
+      "canonical_model_id": "anthropic/claude-haiku-5-5",
+      "display_name": "Claude Haiku 5.5",
       "type": "chat"
     },
     {
@@ -543,10 +596,10 @@
       }
     },
     {
-      "id": "deepseek-flash",
-      "name": "DeepSeek Flash",
-      "description": "October 17 update of DeepSeek V4.1 Flash with improved reasoning, coding, agentic tasks, and visual understanding",
-      "family": "deepseek-flash",
+      "id": "gpt-5.5",
+      "name": "GPT-5.5",
+      "description": "Default frontier GPT for coding, computer use, research, and knowledge work",
+      "family": "gpt",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -554,134 +607,81 @@
       },
       "reasoning_options": [
         {
-          "type": "toggle"
-        },
-        {
           "type": "effort",
           "values": [
+            "none",
             "low",
+            "medium",
             "high",
-            "max"
+            "xhigh"
           ]
         }
       ],
       "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": false,
+      "structured_output": true,
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-10-17",
-      "last_updated": "2026-10-17",
+      "knowledge": "2025-12-01",
+      "release_date": "2026-04-23",
+      "last_updated": "2026-04-23",
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "pdf"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": true,
+      "open_weights": false,
       "limit": {
-        "context": 1000000,
-        "output": 384000
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
       },
       "cost": {
-        "input": 0.168,
-        "output": 1.44,
-        "reasoning": 1.44,
-        "cache_read": 0.012
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "display_name": "DeepSeek Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
-        }
-      }
-    },
-    {
-      "id": "deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
-      "family": "deepseek-pro",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "structured_output": false,
-      "temperature": true,
-      "release_date": "2026-08-13",
-      "last_updated": "2026-08-22",
-      "modalities": {
-        "input": [
-          "text"
+        "input": 6,
+        "output": 36,
+        "cache_read": 0.6,
+        "tiers": [
+          {
+            "input": 12,
+            "output": 54,
+            "cache_read": 1.2,
+            "tier": {
+              "type": "context",
+              "size": 272000
+            }
+          }
         ],
-        "output": [
-          "text"
-        ]
+        "context_over_200k": {
+          "input": 12,
+          "output": 54,
+          "cache_read": 1.2
+        }
       },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 1.584,
-        "output": 4.752,
-        "reasoning": 4.752,
-        "cache_read": 0.06
-      },
-      "canonical_model_id": "deepseek/deepseek-v4-pro-0813",
-      "display_name": "DeepSeek V4 Pro",
+      "canonical_model_id": "openai/gpt-5.5",
+      "display_name": "GPT-5.5",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
           "default_enabled": true,
           "mode": "effort",
-          "effort": "high",
+          "effort": "medium",
           "effort_options": [
             "low",
+            "medium",
             "high",
-            "max"
+            "xhigh"
           ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
+          "verbosity": "medium",
+          "verbosity_options": [
+            "low",
+            "medium",
+            "high"
           ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
+          "visibility": "hidden"
         }
       }
     }
