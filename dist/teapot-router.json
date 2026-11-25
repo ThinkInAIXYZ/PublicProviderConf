@@ -60,32 +60,28 @@
       "type": "chat"
     },
     {
-      "id": "gpt-6-astra",
-      "name": "GPT-6 Astra",
-      "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
-      "family": "gpt-astra",
+      "id": "claude-haiku-4-5",
+      "name": "Claude Haiku 4.5 (latest)",
+      "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
+      "family": "claude-haiku",
       "attachment": true,
       "reasoning": {
         "supported": true,
-        "default": true
+        "default": false
       },
       "reasoning_options": [
         {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
+          "type": "toggle"
+        },
+        {
+          "type": "budget_tokens"
         }
       ],
       "tool_call": true,
-      "temperature": false,
-      "knowledge": "2026-04-30",
-      "release_date": "2026-09-04",
-      "last_updated": "2026-09-04",
+      "temperature": true,
+      "knowledge": "2025-02-28",
+      "release_date": "2025-10-15",
+      "last_updated": "2025-10-15",
       "modalities": {
         "input": [
           "text",
@@ -98,20 +94,39 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
+        "context": 200000,
+        "output": 64000
+      },
+      "provider": {
+        "npm": "@ai-sdk/anthropic",
+        "api": "https://api.teapotrouter.com/v1"
       },
       "cost": {
-        "input": 3.5,
-        "output": 17.5
+        "input": 0.35,
+        "output": 1.75
       },
-      "canonical_model_id": "openai/gpt-6-astra",
-      "display_name": "GPT-6 Astra",
+      "canonical_model_id": "anthropic/claude-haiku-4-5",
+      "display_name": "Claude Haiku 4.5 (latest)",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
-          "supported": true
+          "supported": true,
+          "default_enabled": false,
+          "mode": "budget",
+          "budget": {
+            "min": 1024,
+            "unit": "tokens"
+          },
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
+            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
+          ]
         }
       }
     },
@@ -170,6 +185,62 @@
       },
       "canonical_model_id": "anthropic/claude-sonnet-5",
       "display_name": "Claude Sonnet 5",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
+      "family": "gpt-astra",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": false,
+      "knowledge": "2026-04-30",
+      "release_date": "2026-09-04",
+      "last_updated": "2026-09-04",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
+      },
+      "cost": {
+        "input": 3.5,
+        "output": 17.5
+      },
+      "canonical_model_id": "openai/gpt-6-astra",
+      "display_name": "GPT-6 Astra",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -338,77 +409,6 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true
-        }
-      }
-    },
-    {
-      "id": "claude-haiku-4-5",
-      "name": "Claude Haiku 4.5 (latest)",
-      "description": "Fast Claude lane for lightweight agents, office tasks, and responsive chat",
-      "family": "claude-haiku",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": false
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "budget_tokens"
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-02-28",
-      "release_date": "2025-10-15",
-      "last_updated": "2025-10-15",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 200000,
-        "output": 64000
-      },
-      "provider": {
-        "npm": "@ai-sdk/anthropic",
-        "api": "https://api.teapotrouter.com/v1"
-      },
-      "cost": {
-        "input": 0.35,
-        "output": 1.75
-      },
-      "canonical_model_id": "anthropic/claude-haiku-4-5",
-      "display_name": "Claude Haiku 4.5 (latest)",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": false,
-          "mode": "budget",
-          "budget": {
-            "min": 1024,
-            "unit": "tokens"
-          },
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "notes": [
-            "Claude 4 manual thinking uses thinking.type = \"enabled\" with budget_tokens.",
-            "Interleaved thinking requires the interleaved-thinking-2025-05-14 beta header for this model family."
-          ]
         }
       }
     }
