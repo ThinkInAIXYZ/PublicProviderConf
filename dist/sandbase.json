@@ -6,134 +6,11 @@
   "display_name": "SandBase",
   "models": [
     {
-      "id": "z-ai/glm-5.3-flash",
-      "name": "GLM-5.3-Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
+      "id": "moonshotai/kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and always-on thinking for long-horizon agent work",
+      "family": "kimi",
       "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.15,
-        "output": 0.5,
-        "cache_read": 0.03
-      },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM-5.3-Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "z-ai/glm-5.3",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 1.4,
-        "output": 4.4,
-        "cache_read": 0.25998
-      },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "deepseek/deepseek-v4-pro",
-      "name": "DeepSeek V4 Pro",
-      "description": "Open MoE flagship with million-token context for coding and long agent runs",
-      "family": "deepseek-pro",
-      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -155,13 +32,14 @@
       "interleaved": {
         "field": "reasoning_content"
       },
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-04-24",
-      "last_updated": "2026-04-24",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
-          "text"
+          "text",
+          "image",
+          "video"
         ],
         "output": [
           "text"
@@ -169,37 +47,26 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1000000,
-        "output": 384000
+        "context": 1048576,
+        "output": 1048576
       },
       "cost": {
-        "input": 1.32,
-        "output": 3.96,
-        "cache_read": 0.043956
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.3
       },
-      "canonical_model_id": "deepseek/deepseek-v4-pro",
-      "display_name": "DeepSeek V4 Pro",
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "default_enabled": true,
-          "mode": "effort",
-          "effort": "high",
-          "effort_options": [
-            "low",
-            "high",
-            "max"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
           ],
-          "notes": [
-            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
-          ]
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -254,6 +121,81 @@
       },
       "canonical_model_id": "deepseek/deepseek-v4-flash",
       "display_name": "DeepSeek V4 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "effort",
+          "effort": "high",
+          "effort_options": [
+            "low",
+            "high",
+            "max"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "notes": [
+            "The DeepSeek API maps medium and xhigh to high for V4 models; effort_options lists distinct model-effective levels."
+          ]
+        }
+      }
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "description": "Open MoE flagship with million-token context for coding and long agent runs",
+      "family": "deepseek-pro",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-04-24",
+      "last_updated": "2026-04-24",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 1.32,
+        "output": 3.96,
+        "cache_read": 0.043956
+      },
+      "canonical_model_id": "deepseek/deepseek-v4-pro",
+      "display_name": "DeepSeek V4 Pro",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -412,10 +354,10 @@
       }
     },
     {
-      "id": "openai/gpt-5.6-luna",
-      "name": "GPT-5.6 Luna",
-      "description": "Cost-efficient GPT-5.6 model for fast, high-volume workloads",
-      "family": "gpt-luna",
+      "id": "openai/gpt-5.6-sol",
+      "name": "GPT-5.6 Sol",
+      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
+      "family": "gpt-sol",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -459,13 +401,13 @@
         "npm": "@ai-sdk/openai"
       },
       "cost": {
-        "input": 0.2,
-        "output": 1.2,
-        "cache_read": 0.02,
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.4,
         "tiers": [
           {
-            "input": 0.4,
-            "output": 1.8,
+            "input": 8,
+            "output": 30,
             "tier": {
               "type": "context",
               "size": 272000
@@ -473,12 +415,12 @@
           }
         ],
         "context_over_200k": {
-          "input": 0.4,
-          "output": 1.8
+          "input": 8,
+          "output": 30
         }
       },
-      "canonical_model_id": "openai/gpt-5.6-luna",
-      "display_name": "GPT-5.6 Luna",
+      "canonical_model_id": "openai/gpt-5.6-sol",
+      "display_name": "GPT-5.6 Sol",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -598,10 +540,10 @@
       }
     },
     {
-      "id": "openai/gpt-5.6-sol",
-      "name": "GPT-5.6 Sol",
-      "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
-      "family": "gpt-sol",
+      "id": "openai/gpt-5.6-luna",
+      "name": "GPT-5.6 Luna",
+      "description": "Cost-efficient GPT-5.6 model for fast, high-volume workloads",
+      "family": "gpt-luna",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -645,13 +587,13 @@
         "npm": "@ai-sdk/openai"
       },
       "cost": {
-        "input": 4,
-        "output": 20,
-        "cache_read": 0.4,
+        "input": 0.2,
+        "output": 1.2,
+        "cache_read": 0.02,
         "tiers": [
           {
-            "input": 8,
-            "output": 30,
+            "input": 0.4,
+            "output": 1.8,
             "tier": {
               "type": "context",
               "size": 272000
@@ -659,12 +601,12 @@
           }
         ],
         "context_over_200k": {
-          "input": 8,
-          "output": 30
+          "input": 0.4,
+          "output": 1.8
         }
       },
-      "canonical_model_id": "openai/gpt-5.6-sol",
-      "display_name": "GPT-5.6 Sol",
+      "canonical_model_id": "openai/gpt-5.6-luna",
+      "display_name": "GPT-5.6 Luna",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -691,19 +633,16 @@
       }
     },
     {
-      "id": "moonshotai/kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and always-on thinking for long-horizon agent work",
-      "family": "kimi",
+      "id": "z-ai/glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
       "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
       },
       "reasoning_options": [
-        {
-          "type": "toggle"
-        },
         {
           "type": "effort",
           "values": [
@@ -717,14 +656,15 @@
       "interleaved": {
         "field": "reasoning_content"
       },
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
+      "temperature": true,
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text",
           "image",
-          "video"
+          "video",
+          "pdf"
         ],
         "output": [
           "text"
@@ -732,16 +672,76 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
-        "output": 1048576
+        "context": 1000000,
+        "output": 131072
       },
       "cost": {
-        "input": 3,
-        "output": 15,
-        "cache_read": 0.3
+        "input": 0.15,
+        "output": 0.5,
+        "cache_read": 0.03
       },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3-Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "z-ai/glm-5.3",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 1.4,
+        "output": 4.4,
+        "cache_read": 0.25998
+      },
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
