@@ -6,69 +6,6 @@
   "display_name": "Adzuki AI",
   "models": [
     {
-      "id": "glm-5.3-flash",
-      "name": "GLM-5.3-Flash",
-      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
-      "family": "glm-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 0.2286,
-        "output": 0.8,
-        "cache_read": 0.0657
-      },
-      "canonical_model_id": "zhipuai/glm-5.3-flash",
-      "display_name": "GLM-5.3-Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
       "id": "kimi-k3",
       "name": "Kimi K3",
       "description": "Multimodal Kimi model with 1M context and always-on thinking for long-horizon agent work",
@@ -206,11 +143,11 @@
       }
     },
     {
-      "id": "mimo-v2.5-pro",
-      "name": "MiMo-V2.5-Pro",
-      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
-      "family": "mimo-pro",
-      "attachment": false,
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8 Max",
+      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
+      "family": "qwen-max",
+      "attachment": true,
       "reasoning": {
         "supported": true,
         "default": true
@@ -218,6 +155,19 @@
       "reasoning_options": [
         {
           "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "xhigh"
+          ]
+        },
+        {
+          "type": "budget_tokens",
+          "min": 0,
+          "max": 262144
         }
       ],
       "tool_call": true,
@@ -225,9 +175,136 @@
         "field": "reasoning_content"
       },
       "temperature": true,
-      "knowledge": "2024-12",
-      "release_date": "2026-04-22",
-      "last_updated": "2026-04-22",
+      "release_date": "2026-08-03",
+      "last_updated": "2026-08-03",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1000000,
+        "output": 131072
+      },
+      "cost": {
+        "input": 3.4286,
+        "output": 10.2857,
+        "cache_read": 0.4286
+      },
+      "canonical_model_id": "alibaba/qwen3.8-max",
+      "display_name": "Qwen3.8 Max",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "deepseek-v4.1-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "toggle"
+        },
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1000000,
+        "output": 384000
+      },
+      "cost": {
+        "input": 0.5714,
+        "output": 2.2857,
+        "cache_read": 0.0114
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "DeepSeek V4.1 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "continuation": [
+            "thinking_blocks"
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
+        }
+      }
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+      "family": "glm",
+      "attachment": false,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "high",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-08-14",
+      "last_updated": "2026-08-14",
       "modalities": {
         "input": [
           "text"
@@ -238,26 +315,26 @@
       },
       "open_weights": true,
       "limit": {
-        "context": 1048576,
+        "context": 1000000,
         "output": 131072
       },
       "cost": {
-        "input": 0.8571,
-        "output": 1.7143,
-        "cache_read": 0.0071
+        "input": 2.2857,
+        "output": 8,
+        "cache_read": 0.5714
       },
-      "canonical_model_id": "xiaomi/mimo-v2.5-pro",
-      "display_name": "MiMo-V2.5-Pro",
+      "canonical_model_id": "zhipuai/glm-5.3",
+      "display_name": "GLM-5.3",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
           "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
           "continuation": [
             "thinking_blocks"
-          ]
+          ],
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary"
         }
       }
     },
@@ -385,11 +462,11 @@
       }
     },
     {
-      "id": "deepseek-v4.1-flash",
-      "name": "DeepSeek V4.1 Flash",
-      "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
-      "family": "deepseek-flash",
-      "attachment": true,
+      "id": "mimo-v2.5-pro",
+      "name": "MiMo-V2.5-Pro",
+      "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
+      "family": "mimo-pro",
+      "attachment": false,
       "reasoning": {
         "supported": true,
         "default": true
@@ -397,7 +474,60 @@
       "reasoning_options": [
         {
           "type": "toggle"
-        },
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "knowledge": "2024-12",
+      "release_date": "2026-04-22",
+      "last_updated": "2026-04-22",
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 1048576,
+        "output": 131072
+      },
+      "cost": {
+        "input": 0.8571,
+        "output": 1.7143,
+        "cache_read": 0.0071
+      },
+      "canonical_model_id": "xiaomi/mimo-v2.5-pro",
+      "display_name": "MiMo-V2.5-Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "description": "Native multimodal GLM model for efficient coding and long-horizon agent tasks",
+      "family": "glm-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
         {
           "type": "effort",
           "values": [
@@ -412,78 +542,8 @@
         "field": "reasoning_content"
       },
       "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1000000,
-        "output": 384000
-      },
-      "cost": {
-        "input": 0.5714,
-        "output": 2.2857,
-        "cache_read": 0.0114
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "DeepSeek V4.1 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "qwen3.8-max",
-      "name": "Qwen3.8 Max",
-      "description": "2.4-trillion-parameter MoE flagship for coding, professional work, multimodal understanding, and long-horizon agentic workflows",
-      "family": "qwen-max",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "toggle"
-        },
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "xhigh"
-          ]
-        },
-        {
-          "type": "budget_tokens",
-          "min": 0,
-          "max": 262144
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-08-03",
-      "last_updated": "2026-08-03",
+      "release_date": "2026-08-26",
+      "last_updated": "2026-08-26",
       "modalities": {
         "input": [
           "text",
@@ -495,78 +555,18 @@
           "text"
         ]
       },
-      "open_weights": false,
-      "limit": {
-        "context": 1000000,
-        "output": 131072
-      },
-      "cost": {
-        "input": 3.4286,
-        "output": 10.2857,
-        "cache_read": 0.4286
-      },
-      "canonical_model_id": "alibaba/qwen3.8-max",
-      "display_name": "Qwen3.8 Max",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "continuation": [
-            "thinking_blocks"
-          ],
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "glm-5.3",
-      "name": "GLM-5.3",
-      "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
-      "family": "glm",
-      "attachment": false,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "high",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-08-14",
-      "last_updated": "2026-08-14",
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ]
-      },
       "open_weights": true,
       "limit": {
         "context": 1000000,
         "output": 131072
       },
       "cost": {
-        "input": 2.2857,
-        "output": 8,
-        "cache_read": 0.5714
+        "input": 0.2286,
+        "output": 0.8,
+        "cache_read": 0.0657
       },
-      "canonical_model_id": "zhipuai/glm-5.3",
-      "display_name": "GLM-5.3",
+      "canonical_model_id": "zhipuai/glm-5.3-flash",
+      "display_name": "GLM-5.3-Flash",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
@@ -577,73 +577,6 @@
           "interleaved": true,
           "summaries": true,
           "visibility": "summary"
-        }
-      }
-    },
-    {
-      "id": "doubao-seed-2.0-lite",
-      "name": "Seed 2.0 Lite",
-      "description": "Cost-efficient ByteDance Seed 2.0 model for production chat, analysis, and structured generation",
-      "family": "seed-lite",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "minimal",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "interleaved": {
-        "field": "reasoning_content"
-      },
-      "temperature": true,
-      "release_date": "2026-02-14",
-      "last_updated": "2026-02-14",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 256000,
-        "output": 32000
-      },
-      "cost": {
-        "input": 0.1714,
-        "output": 1.0286,
-        "cache_read": 0.0343
-      },
-      "canonical_model_id": "bytedance-seed/seed-2.0-lite",
-      "display_name": "Seed 2.0 Lite",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "interleaved": true,
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thinking_blocks"
-          ]
         }
       }
     },
@@ -755,6 +688,73 @@
       },
       "canonical_model_id": "moonshotai/kimi-k3.1-pro",
       "display_name": "Kimi K3.1 Pro",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "interleaved": true,
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thinking_blocks"
+          ]
+        }
+      }
+    },
+    {
+      "id": "doubao-seed-2.0-lite",
+      "name": "Seed 2.0 Lite",
+      "description": "Cost-efficient ByteDance Seed 2.0 model for production chat, analysis, and structured generation",
+      "family": "seed-lite",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "interleaved": {
+        "field": "reasoning_content"
+      },
+      "temperature": true,
+      "release_date": "2026-02-14",
+      "last_updated": "2026-02-14",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 256000,
+        "output": 32000
+      },
+      "cost": {
+        "input": 0.1714,
+        "output": 1.0286,
+        "cache_read": 0.0343
+      },
+      "canonical_model_id": "bytedance-seed/seed-2.0-lite",
+      "display_name": "Seed 2.0 Lite",
       "type": "chat",
       "extra_capabilities": {
         "reasoning": {
