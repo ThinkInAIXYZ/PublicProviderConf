@@ -6,6 +6,73 @@
   "display_name": "superbot",
   "models": [
     {
+      "id": "superbot-fast",
+      "name": "superbot-fast",
+      "description": "Quick and cheap, for small jobs. Reasoning effort low or none, a 500k-token window.",
+      "family": "deepseek-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "none",
+            "low"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2025-05",
+      "release_date": "2026-09-10",
+      "last_updated": "2026-09-10",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": true,
+      "limit": {
+        "context": 500000,
+        "output": 131072
+      },
+      "experimental": {
+        "modes": {
+          "fast": {
+            "cost": {
+              "input": 2,
+              "output": 10,
+              "reasoning": 10,
+              "cache_read": 0.1,
+              "cache_write": 2.5
+            },
+            "provider": {
+              "body": {
+                "service_tier": "priority"
+              }
+            }
+          }
+        }
+      },
+      "cost": {
+        "input": 1,
+        "output": 5,
+        "reasoning": 5,
+        "cache_read": 0.05,
+        "cache_write": 1.25
+      },
+      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
+      "display_name": "superbot-fast",
+      "type": "chat"
+    },
+    {
       "id": "superbot",
       "name": "superbot",
       "description": "Your Superbot agent. Reasoning effort from none to max, a 1M-token window.",
@@ -72,73 +139,6 @@
       },
       "canonical_model_id": "deepseek/deepseek-v4.1-flash",
       "display_name": "superbot",
-      "type": "chat"
-    },
-    {
-      "id": "superbot-fast",
-      "name": "superbot-fast",
-      "description": "Quick and cheap, for small jobs. Reasoning effort low or none, a 500k-token window.",
-      "family": "deepseek-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2025-05",
-      "release_date": "2026-09-10",
-      "last_updated": "2026-09-10",
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 500000,
-        "output": 131072
-      },
-      "experimental": {
-        "modes": {
-          "fast": {
-            "cost": {
-              "input": 2,
-              "output": 10,
-              "reasoning": 10,
-              "cache_read": 0.1,
-              "cache_write": 2.5
-            },
-            "provider": {
-              "body": {
-                "service_tier": "priority"
-              }
-            }
-          }
-        }
-      },
-      "cost": {
-        "input": 1,
-        "output": 5,
-        "reasoning": 5,
-        "cache_read": 0.05,
-        "cache_write": 1.25
-      },
-      "canonical_model_id": "deepseek/deepseek-v4.1-flash",
-      "display_name": "superbot-fast",
       "type": "chat"
     }
   ]
