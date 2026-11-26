@@ -6,10 +6,10 @@
   "display_name": "UplinkSwitch",
   "models": [
     {
-      "id": "gemini-3.5-flash-lite",
-      "name": "Gemini 3.5 Flash Lite",
-      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
-      "family": "gemini-flash-lite",
+      "id": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "description": "OpenAI's most efficient model for focused, high-volume tasks",
+      "family": "gpt-luna",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -19,24 +19,24 @@
         {
           "type": "effort",
           "values": [
-            "minimal",
+            "none",
             "low",
             "medium",
-            "high"
+            "high",
+            "xhigh",
+            "max"
           ]
         }
       ],
       "tool_call": true,
       "temperature": true,
-      "knowledge": "2026-03",
-      "release_date": "2026-07-21",
-      "last_updated": "2026-07-21",
+      "knowledge": "2026-05-18",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
       "modalities": {
         "input": [
           "text",
           "image",
-          "video",
-          "audio",
           "pdf"
         ],
         "output": [
@@ -45,22 +45,18 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1048576,
-        "output": 65536
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
       },
       "cost": {
-        "input": 0.225,
-        "output": 1.875,
-        "cache_read": 0.0225
+        "input": 0.0625,
+        "output": 0.2,
+        "cache_read": 0.0125
       },
-      "canonical_model_id": "google/gemini-3.5-flash-lite",
-      "display_name": "Gemini 3.5 Flash Lite",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
+      "canonical_model_id": "openai/gpt-6-luna",
+      "display_name": "GPT-6 Luna",
+      "type": "chat"
     },
     {
       "id": "gpt-6.1-sol",
@@ -188,6 +184,63 @@
       }
     },
     {
+      "id": "gemini-3.5-flash-lite",
+      "name": "Gemini 3.5 Flash Lite",
+      "description": "Fast Gemini model balancing multimodal reasoning, tool use, and cost",
+      "family": "gemini-flash-lite",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "knowledge": "2026-03",
+      "release_date": "2026-07-21",
+      "last_updated": "2026-07-21",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.225,
+        "output": 1.875,
+        "cache_read": 0.0225
+      },
+      "canonical_model_id": "google/gemini-3.5-flash-lite",
+      "display_name": "Gemini 3.5 Flash Lite",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
+    },
+    {
       "id": "gpt-6-astra",
       "name": "GPT-6 Astra",
       "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
@@ -241,6 +294,75 @@
       "extra_capabilities": {
         "reasoning": {
           "supported": true
+        }
+      }
+    },
+    {
+      "id": "gemini-3.8-flash",
+      "name": "Gemini 3.8 Flash",
+      "description": "Google's most intelligent Flash model, engineered for long-horizon software engineering, autonomous agents, and complex enterprise workflows",
+      "family": "gemini-flash",
+      "attachment": true,
+      "reasoning": {
+        "supported": true,
+        "default": true
+      },
+      "reasoning_options": [
+        {
+          "type": "effort",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        }
+      ],
+      "tool_call": true,
+      "temperature": true,
+      "release_date": "2026-09-02",
+      "last_updated": "2026-09-02",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "open_weights": false,
+      "limit": {
+        "context": 1048576,
+        "output": 65536
+      },
+      "cost": {
+        "input": 0.492502,
+        "output": 2.25,
+        "cache_read": 0.049251
+      },
+      "canonical_model_id": "google/gemini-3.8-flash",
+      "display_name": "Gemini 3.8 Flash",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true,
+          "default_enabled": true,
+          "mode": "level",
+          "level": "high",
+          "level_options": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "summaries": true,
+          "visibility": "summary",
+          "continuation": [
+            "thought_signatures"
+          ]
         }
       }
     },
@@ -347,59 +469,6 @@
       "type": "chat"
     },
     {
-      "id": "gpt-6-sol",
-      "name": "GPT-6 Sol",
-      "description": "OpenAI model for complex coding and agentic workflows",
-      "family": "gpt-sol",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "none",
-            "low",
-            "medium",
-            "high",
-            "xhigh",
-            "max"
-          ]
-        }
-      ],
-      "tool_call": true,
-      "temperature": true,
-      "knowledge": "2026-04-20",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": false,
-      "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
-      },
-      "cost": {
-        "input": 0.6,
-        "output": 3,
-        "cache_read": 0.12
-      },
-      "canonical_model_id": "openai/gpt-6-sol",
-      "display_name": "GPT-6 Sol",
-      "type": "chat"
-    },
-    {
       "id": "gpt-5.3-codex",
       "name": "GPT-5.3 Codex",
       "description": "Coding-optimized GPT model for repository edits, reviews, and agentic software work",
@@ -473,10 +542,10 @@
       }
     },
     {
-      "id": "kimi-k3",
-      "name": "Kimi K3",
-      "description": "Multimodal Kimi model with 1M context and always-on thinking for long-horizon agent work",
-      "family": "kimi",
+      "id": "gpt-6-sol",
+      "name": "GPT-6 Sol",
+      "description": "OpenAI model for complex coding and agentic workflows",
+      "family": "gpt-sol",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -486,75 +555,24 @@
         {
           "type": "effort",
           "values": [
+            "none",
             "low",
+            "medium",
             "high",
+            "xhigh",
             "max"
           ]
         }
       ],
       "tool_call": true,
-      "temperature": false,
-      "release_date": "2026-07-16",
-      "last_updated": "2026-07-16",
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ]
-      },
-      "open_weights": true,
-      "limit": {
-        "context": 1048576,
-        "output": 1048576
-      },
-      "cost": {
-        "input": 0.9,
-        "output": 4.5,
-        "cache_read": 0.12
-      },
-      "canonical_model_id": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true
-        }
-      }
-    },
-    {
-      "id": "gemini-3.8-flash",
-      "name": "Gemini 3.8 Flash",
-      "description": "Google's most intelligent Flash model, engineered for long-horizon software engineering, autonomous agents, and complex enterprise workflows",
-      "family": "gemini-flash",
-      "attachment": true,
-      "reasoning": {
-        "supported": true,
-        "default": true
-      },
-      "reasoning_options": [
-        {
-          "type": "effort",
-          "values": [
-            "low",
-            "medium",
-            "high"
-          ]
-        }
-      ],
-      "tool_call": true,
       "temperature": true,
-      "release_date": "2026-09-02",
-      "last_updated": "2026-09-02",
+      "knowledge": "2026-04-20",
+      "release_date": "2026-09-22",
+      "last_updated": "2026-09-22",
       "modalities": {
         "input": [
           "text",
           "image",
-          "video",
-          "audio",
           "pdf"
         ],
         "output": [
@@ -563,36 +581,18 @@
       },
       "open_weights": false,
       "limit": {
-        "context": 1048576,
-        "output": 65536
+        "context": 1050000,
+        "input": 922000,
+        "output": 128000
       },
       "cost": {
-        "input": 0.492502,
-        "output": 2.25,
-        "cache_read": 0.049251
+        "input": 0.6,
+        "output": 3,
+        "cache_read": 0.12
       },
-      "canonical_model_id": "google/gemini-3.8-flash",
-      "display_name": "Gemini 3.8 Flash",
-      "type": "chat",
-      "extra_capabilities": {
-        "reasoning": {
-          "supported": true,
-          "default_enabled": true,
-          "mode": "level",
-          "level": "high",
-          "level_options": [
-            "minimal",
-            "low",
-            "medium",
-            "high"
-          ],
-          "summaries": true,
-          "visibility": "summary",
-          "continuation": [
-            "thought_signatures"
-          ]
-        }
-      }
+      "canonical_model_id": "openai/gpt-6-sol",
+      "display_name": "GPT-6 Sol",
+      "type": "chat"
     },
     {
       "id": "glm-5.3-flash",
@@ -649,10 +649,10 @@
       }
     },
     {
-      "id": "gpt-6-luna",
-      "name": "GPT-6 Luna",
-      "description": "OpenAI's most efficient model for focused, high-volume tasks",
-      "family": "gpt-luna",
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "description": "Multimodal Kimi model with 1M context and always-on thinking for long-horizon agent work",
+      "family": "kimi",
       "attachment": true,
       "reasoning": {
         "supported": true,
@@ -662,44 +662,44 @@
         {
           "type": "effort",
           "values": [
-            "none",
             "low",
-            "medium",
             "high",
-            "xhigh",
             "max"
           ]
         }
       ],
       "tool_call": true,
-      "temperature": true,
-      "knowledge": "2026-05-18",
-      "release_date": "2026-09-22",
-      "last_updated": "2026-09-22",
+      "temperature": false,
+      "release_date": "2026-07-16",
+      "last_updated": "2026-07-16",
       "modalities": {
         "input": [
           "text",
           "image",
-          "pdf"
+          "video"
         ],
         "output": [
           "text"
         ]
       },
-      "open_weights": false,
+      "open_weights": true,
       "limit": {
-        "context": 1050000,
-        "input": 922000,
-        "output": 128000
+        "context": 1048576,
+        "output": 1048576
       },
       "cost": {
-        "input": 0.0625,
-        "output": 0.2,
-        "cache_read": 0.0125
+        "input": 0.9,
+        "output": 4.5,
+        "cache_read": 0.12
       },
-      "canonical_model_id": "openai/gpt-6-luna",
-      "display_name": "GPT-6 Luna",
-      "type": "chat"
+      "canonical_model_id": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
+      "type": "chat",
+      "extra_capabilities": {
+        "reasoning": {
+          "supported": true
+        }
+      }
     }
   ]
 }
